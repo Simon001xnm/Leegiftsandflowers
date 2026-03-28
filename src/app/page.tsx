@@ -21,14 +21,14 @@ export default function Home() {
             <div className="max-w-3xl">
               <Badge variant="secondary" className="mb-6 py-1 px-4 text-primary font-semibold flex items-center gap-2 w-fit bg-white/50 backdrop-blur-sm">
                 <Sparkles className="w-4 h-4 text-accent" />
-                Bespoke Floral & Decor Artistry
+                Bespoke Floral & Decor Artistry in Nairobi
               </Badge>
               <h1 className="text-6xl lg:text-8xl font-bold text-primary mb-8 leading-tight font-headline">
                 Exquisite Beauty, <br />
                 <span className="text-accent italic">Perfectly Arranged.</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed">
-                From grand venue transformations to artisanal hand-tied bouquets, Lee Decors and Flowers brings floral elegance to every corner of your life.
+                From grand venue transformations to artisanal hand-tied bouquets, Lee Decors and Flowers brings floral elegance to Stall 16A, City Market.
               </p>
               <div className="flex flex-wrap gap-5">
                 <Link href="/shop">
@@ -58,7 +58,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">
               <div className="max-w-xl">
                 <h2 className="text-4xl font-bold font-headline text-primary mb-3">Our Boutique Shop</h2>
-                <p className="text-muted-foreground text-lg">Signature arrangements available for delivery. Each bouquet is a unique masterpiece from our Chelsea studio.</p>
+                <p className="text-muted-foreground text-lg">Signature arrangements available for delivery. Each bouquet is a unique masterpiece from our City Market studio.</p>
               </div>
               <Link href="/shop">
                 <Button variant="outline" className="rounded-full gap-2 border-primary/20 hover:border-primary">
@@ -75,7 +75,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors" />
                   </div>
                   <h3 className="text-xl font-bold font-headline text-primary mb-1 group-hover:text-accent transition-colors">{product.name}</h3>
-                  <p className="text-primary/70 font-bold">£{product.price}</p>
+                  <p className="text-primary/70 font-bold">KES {product.price.toLocaleString()}</p>
                 </Link>
               ))}
             </div>
@@ -88,7 +88,7 @@ export default function Home() {
             <div className="flex items-end justify-between mb-16">
               <div>
                 <h2 className="text-4xl font-bold font-headline text-primary mb-3">Exhibition Galleries</h2>
-                <p className="text-muted-foreground text-lg">Experience the artistry of Lee Decors at our upcoming events.</p>
+                <p className="text-muted-foreground text-lg">Experience the artistry of Lee Decors at our upcoming events in Nairobi.</p>
               </div>
               <Link href="/events" className="text-accent font-bold flex items-center gap-2 group hover:underline">
                 View all portfolios
@@ -125,12 +125,12 @@ export default function Home() {
                       </div>
                       <div className="flex items-center gap-3 text-sm text-muted-foreground">
                         <MapPin className="w-4 h-4 text-accent" />
-                        {event.location}
+                        {event.location.split(',')[0]}
                       </div>
                     </div>
                     <div className="mt-auto pt-6 border-t flex items-center justify-between">
                       <span className="text-2xl font-bold text-primary">
-                        {event.price === 0 ? 'Free Entry' : `From £${event.price}`}
+                        {event.price === 0 ? 'Free Entry' : `From KES ${event.price.toLocaleString()}`}
                       </span>
                       <Button variant="ghost" size="sm" className="rounded-full group-hover:bg-accent group-hover:text-white transition-all">
                         Details
@@ -148,7 +148,7 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-20">
               <h2 className="text-5xl font-bold font-headline mb-6">The Lee Experience</h2>
-              <p className="text-primary-foreground/70 text-xl leading-relaxed">We believe every space has a story to tell. Our mission is to narrate that story through the timeless elegance of flowers and bespoke decor.</p>
+              <p className="text-primary-foreground/70 text-xl leading-relaxed">Located at Stall 16A, City Market, we believe every space has a story to tell. Our mission is to narrate that story through the timeless elegance of flowers.</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-16">
@@ -196,7 +196,7 @@ export default function Home() {
                   Lee Decors
                 </span>
               </Link>
-              <p className="text-muted-foreground text-sm">Luxury Floral & Event Design Studio</p>
+              <p className="text-muted-foreground text-sm">Stall 16A, City Market, Nairobi</p>
             </div>
             <div className="flex flex-wrap justify-center gap-10 text-sm font-bold text-primary/70">
               <Link href="/shop" className="hover:text-accent transition-colors uppercase tracking-widest">Flower Shop</Link>
@@ -205,7 +205,7 @@ export default function Home() {
               <Link href="#" className="hover:text-accent transition-colors uppercase tracking-widest">Contact</Link>
             </div>
             <p className="text-xs text-muted-foreground font-medium">
-              © 2024 Lee Decors and Flowers. All rights reserved.
+              © 2024 Lee Decors and Flowers. Nairobi, Kenya.
             </p>
           </div>
         </div>

@@ -21,6 +21,12 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
   const ticketsLeft = event.ticketsTotal - event.ticketsSold;
   const selloutPercentage = (event.ticketsSold / event.ticketsTotal) * 100;
 
+  // Encode location for Google Maps iframe
+  const mapUrl = `https://www.google.com/maps/embed/v1/place?key=REPLACE_WITH_YOUR_API_KEY&q=${encodeURIComponent(event.location)}`;
+  // Note: For prototyping, we can use a direct search link or a placeholder if API key isn't present
+  // Here we'll use a standard search embed that often works for public locations
+  const searchEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(event.location)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navigation />
@@ -77,7 +83,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                 </h2>
                 <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
                   <p>{event.description}</p>
-                  <p className="mt-4">Join us for this incredible {event.category.toLowerCase()} event. Whether you're a seasoned enthusiast or just curious, there's something for everyone at {event.title}. Our team has meticulously planned every detail to ensure an unforgettable experience.</p>
+                  <p className="mt-4">Join us for this incredible {event.category.toLowerCase()} event in Nairobi. Whether you're a seasoned enthusiast or just curious, there's something for everyone at {event.title}. Our team has meticulously planned every detail to ensure an unforgettable experience.</p>
                 </div>
               </section>
 
@@ -114,7 +120,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                       <div>
                         <p className="text-sm text-muted-foreground mb-1 uppercase tracking-wider font-bold">Ticket Price</p>
                         <h3 className="text-3xl font-bold text-primary">
-                          {event.price === 0 ? 'Free' : `$${event.price}`}
+                          {event.price === 0 ? 'Free' : `KES ${event.price.toLocaleString()}`}
                         </h3>
                       </div>
                       <div className="flex gap-2">
@@ -155,10 +161,16 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                   <div className="bg-muted p-6 border-t">
                     <h4 className="font-bold text-sm text-primary mb-4">Location</h4>
                     <div className="aspect-video relative rounded-lg overflow-hidden bg-background border mb-4">
-                      {/* Static Map Mockup */}
-                      <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/50 italic text-xs">
-                        Map View Available Soon
-                      </div>
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        scrolling="no"
+                        marginHeight={0}
+                        marginWidth={0}
+                        src={searchEmbedUrl}
+                        className="grayscale hover:grayscale-0 transition-all duration-500"
+                      ></iframe>
                     </div>
                     <p className="text-sm text-muted-foreground flex items-start gap-2">
                       <MapPin className="w-4 h-4 shrink-0 text-accent" />
