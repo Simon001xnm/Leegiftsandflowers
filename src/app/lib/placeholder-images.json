@@ -1,35 +1,34 @@
-
 {
   "placeholderImages": [
     {
-      "id": "concert-1",
-      "description": "Live music concert stage",
-      "imageUrl": "https://picsum.photos/seed/concert1/1200/800",
-      "imageHint": "concert music"
+      "id": "flowers1",
+      "description": "Elegant wedding floral centerpiece",
+      "imageUrl": "https://picsum.photos/seed/flowers1/1200/800",
+      "imageHint": "wedding flowers"
     },
     {
-      "id": "workshop-1",
-      "description": "Collaborative workshop session",
-      "imageUrl": "https://picsum.photos/seed/workshop1/1200/800",
-      "imageHint": "workshop conference"
+      "id": "decor1",
+      "description": "Luxury ballroom event decor",
+      "imageUrl": "https://picsum.photos/seed/decor1/1200/800",
+      "imageHint": "event decor"
     },
     {
-      "id": "tech-conf",
-      "description": "Modern technology conference",
-      "imageUrl": "https://picsum.photos/seed/tech1/1200/800",
-      "imageHint": "technology conference"
+      "id": "flowers2",
+      "description": "Close up of seasonal roses",
+      "imageUrl": "https://picsum.photos/seed/flowers2/1200/800",
+      "imageHint": "roses flowers"
     },
     {
-      "id": "art-expo",
-      "description": "Art exhibition gallery",
-      "imageUrl": "https://picsum.photos/seed/art1/1200/800",
-      "imageHint": "art exhibition"
+      "id": "flowers3",
+      "description": "Immersive floral installation",
+      "imageUrl": "https://picsum.photos/seed/flowers3/1200/800",
+      "imageHint": "floral installation"
     },
     {
-      "id": "food-fest",
-      "description": "Outdoor food festival",
-      "imageUrl": "https://picsum.photos/seed/food1/1200/800",
-      "imageHint": "food festival"
+      "id": "flowers4",
+      "description": "Outdoor garden party setup",
+      "imageUrl": "https://picsum.photos/seed/flowers4/1200/800",
+      "imageHint": "garden party"
     }
   ]
 }

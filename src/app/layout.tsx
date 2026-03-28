@@ -1,11 +1,10 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Momentus Events | Premium Event Discovery & Management',
-  description: 'Organize and discover world-class events with ease.',
+  title: 'Lee Decors & Flowers | Luxury Floral & Event Design',
+  description: 'Exquisite floral arrangements and premium event decor services for your most precious moments.',
 };
 
 export default function RootLayout({
