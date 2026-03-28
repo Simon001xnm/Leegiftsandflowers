@@ -1,0 +1,35 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "concert-1",
+      "description": "Live music concert stage",
+      "imageUrl": "https://picsum.photos/seed/concert1/1200/800",
+      "imageHint": "concert music"
+    },
+    {
+      "id": "workshop-1",
+      "description": "Collaborative workshop session",
+      "imageUrl": "https://picsum.photos/seed/workshop1/1200/800",
+      "imageHint": "workshop conference"
+    },
+    {
+      "id": "tech-conf",
+      "description": "Modern technology conference",
+      "imageUrl": "https://picsum.photos/seed/tech1/1200/800",
+      "imageHint": "technology conference"
+    },
+    {
+      "id": "art-expo",
+      "description": "Art exhibition gallery",
+      "imageUrl": "https://picsum.photos/seed/art1/1200/800",
+      "imageHint": "art exhibition"
+    },
+    {
+      "id": "food-fest",
+      "description": "Outdoor food festival",
+      "imageUrl": "https://picsum.photos/seed/food1/1200/800",
+      "imageHint": "food festival"
+    }
+  ]
+}
