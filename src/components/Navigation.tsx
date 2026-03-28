@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Flower2, LayoutDashboard, Search, UserCircle, PlusCircle } from "lucide-react";
+import { Flower2, LayoutDashboard, Search, UserCircle, PlusCircle, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Navigation() {
@@ -11,6 +11,7 @@ export function Navigation() {
 
   const navLinks = [
     { href: "/events", label: "Discovery", icon: Search },
+    { href: "/shop", label: "Flower Shop", icon: ShoppingBag },
     { href: "/dashboard", label: "Manage", icon: LayoutDashboard },
   ];
 
@@ -30,7 +31,7 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
-              const isActive = pathname.startsWith(link.href);
+              const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
               return (
                 <Link
                   key={link.href}

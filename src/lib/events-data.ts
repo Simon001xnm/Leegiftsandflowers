@@ -15,6 +15,15 @@ export interface EventItem {
   tags: string[];
 }
 
+export interface ProductItem {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  category: string;
+}
+
 export const MOCK_EVENTS: EventItem[] = [
   {
     id: '1',
@@ -85,5 +94,40 @@ export const MOCK_EVENTS: EventItem[] = [
     ticketsTotal: 1000,
     ticketsSold: 450,
     tags: ['Outdoor', 'Garden', 'Party']
+  }
+];
+
+export const MOCK_PRODUCTS: ProductItem[] = [
+  {
+    id: 'p1',
+    name: 'Blushing Romance Bouquet',
+    price: 65,
+    description: 'A stunning mix of premium pastel roses and silver dollar eucalyptus.',
+    imageUrl: 'https://picsum.photos/seed/p1/600/600',
+    category: 'Bouquets'
+  },
+  {
+    id: 'p2',
+    name: 'Midnight Elegance',
+    price: 85,
+    description: 'Deep crimson ranunculus paired with dark foliage for a dramatic touch.',
+    imageUrl: 'https://picsum.photos/seed/p2/600/600',
+    category: 'Signature'
+  },
+  {
+    id: 'p3',
+    name: 'Wild Meadow Basket',
+    price: 55,
+    description: 'A charming collection of wildflowers and dried grasses in a rustic wicker basket.',
+    imageUrl: 'https://picsum.photos/seed/p3/600/600',
+    category: 'Baskets'
+  },
+  {
+    id: 'p4',
+    name: 'Classic White Lilies',
+    price: 45,
+    description: 'Timeless white oriental lilies with vibrant green stems.',
+    imageUrl: 'https://picsum.photos/seed/p4/600/600',
+    category: 'Bouquets'
   }
 ];
