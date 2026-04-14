@@ -6,7 +6,7 @@ import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_EVENTS } from "@/lib/events-data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, ArrowRight, Loader2, Calendar, MapPin, Ticket } from "lucide-react";
+import { CircleCheck, ArrowRight, Loader2, Calendar, MapPin, Ticket } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
@@ -62,7 +62,7 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
                 </div>
                 <div className="pt-4 border-t flex justify-between items-center">
                   <span className="text-xl font-bold text-primary">Total Price</span>
-                  <span className="text-2xl font-bold text-primary">${event.price}</span>
+                  <span className="text-2xl font-bold text-primary">KES {event.price.toLocaleString()}</span>
                 </div>
               </div>
             </CardContent>
@@ -72,14 +72,14 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
                 onClick={handleCheckout}
                 disabled={loading}
               >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <><CheckCircle2 className="w-5 h-5" /> Confirm Booking</>}
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <><CircleCheck className="w-5 h-5" /> Confirm Booking</>}
               </Button>
             </CardFooter>
           </Card>
         ) : (
           <div className="text-center space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="w-24 h-24 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mx-auto">
-              <CheckCircle2 className="w-12 h-12" />
+              <CircleCheck className="w-12 h-12" />
             </div>
             <div className="space-y-4">
               <h1 className="text-4xl font-bold font-headline text-primary">You're going!</h1>

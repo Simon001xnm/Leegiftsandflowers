@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Wand2, Sparkles, Loader2, Save, X, Tags } from "lucide-react";
+import { Wand2, Sparkles, Loader2, Save, X, Tags, CircleCheck } from "lucide-react";
 import { generateEventDescription } from "@/ai/flows/generate-event-description";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
@@ -226,15 +226,15 @@ export default function CreateEventPage() {
                 <h3 className="font-bold text-sm text-primary uppercase tracking-wider mb-4">Pro Tips</h3>
                 <ul className="space-y-3 text-sm text-muted-foreground">
                   <li className="flex gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                    <CircleCheck className="w-4 h-4 text-accent shrink-0" />
                     Be specific about the venue location.
                   </li>
                   <li className="flex gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                    <CircleCheck className="w-4 h-4 text-accent shrink-0" />
                     List exactly what the ticket includes.
                   </li>
                   <li className="flex gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                    <CircleCheck className="w-4 h-4 text-accent shrink-0" />
                     Use AI to refine your tone of voice.
                   </li>
                 </ul>

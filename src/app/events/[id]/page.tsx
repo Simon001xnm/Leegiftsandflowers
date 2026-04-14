@@ -1,3 +1,4 @@
+
 "use client";
 
 import { use } from "react";
@@ -6,7 +7,7 @@ import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_EVENTS } from "@/lib/events-data";
-import { Calendar, MapPin, Ticket, User, Share2, Heart, ArrowLeft, Info, CheckCircle2 } from "lucide-react";
+import { Calendar, MapPin, Ticket, User, Share2, Heart, ArrowLeft, Info, CircleCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -88,7 +89,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                 <ul className="grid md:grid-cols-2 gap-4">
                   {['Full Access Pass', 'Welcome Kit', 'Refreshments Included', 'Networking Session', 'Interactive Workshops', 'Digital Certification'].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-muted-foreground">
-                      <CheckCircle2 className="w-5 h-5 text-accent" />
+                      <CircleCheck className="w-5 h-5 text-accent" />
                       {item}
                     </li>
                   ))}
