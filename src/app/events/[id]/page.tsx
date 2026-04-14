@@ -1,4 +1,3 @@
-
 "use client";
 
 import { use } from "react";
@@ -16,15 +15,12 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
   const { id } = use(params);
   const event = MOCK_EVENTS.find(e => e.id === id);
 
-  if (!event) return <div>Event not found</div>;
+  if (!event) return <div className="p-20 text-center font-headline text-2xl">Event not found</div>;
 
   const ticketsLeft = event.ticketsTotal - event.ticketsSold;
   const selloutPercentage = (event.ticketsSold / event.ticketsTotal) * 100;
 
-  // Encode location for Google Maps iframe
-  const mapUrl = `https://www.google.com/maps/embed/v1/place?key=REPLACE_WITH_YOUR_API_KEY&q=${encodeURIComponent(event.location)}`;
-  // Note: For prototyping, we can use a direct search link or a placeholder if API key isn't present
-  // Here we'll use a standard search embed that often works for public locations
+  // Use a public Google Maps search embed which doesn't require a restricted API key for basic usage
   const searchEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(event.location)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   return (
@@ -139,7 +135,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                         <span className="font-medium">{ticketsLeft} tickets remaining</span>
                       </div>
                       <Progress value={selloutPercentage} className="h-2" />
-                      {ticketsLeft < 50 && (
+                      {ticketsLeft < 50 && ticketsLeft > 0 && (
                         <p className="text-destructive text-xs font-bold animate-pulse">
                           Selling fast! Almost sold out.
                         </p>
@@ -147,9 +143,9 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                     </div>
 
                     <Link href={`/booking/${event.id}`}>
-                      <Button className="w-full h-14 text-lg rounded-xl gap-3 shadow-lg shadow-primary/20 mt-4">
+                      <Button className="w-full h-14 text-lg rounded-xl gap-3 shadow-lg shadow-primary/20 mt-4" disabled={ticketsLeft <= 0}>
                         <Ticket className="w-5 h-5" />
-                        Secure Your Spot
+                        {ticketsLeft > 0 ? 'Secure Your Spot' : 'Sold Out'}
                       </Button>
                     </Link>
 
@@ -170,6 +166,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                         marginWidth={0}
                         src={searchEmbedUrl}
                         className="grayscale hover:grayscale-0 transition-all duration-500"
+                        title="Google Maps Location"
                       ></iframe>
                     </div>
                     <p className="text-sm text-muted-foreground flex items-start gap-2">

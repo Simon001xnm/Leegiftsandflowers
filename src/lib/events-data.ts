@@ -1,4 +1,3 @@
-
 export type EventCategory = 'Wedding' | 'Corporate' | 'Workshop' | 'Art' | 'Gala' | 'Private';
 
 export interface EventItem {
@@ -32,6 +31,7 @@ export interface GalleryItem {
   imageUrl: string;
 }
 
+// Encode image paths to handle spaces correctly in URLs
 const REAL_IMAGES = [
   "/WhatsApp Image 2026-04-07 at 11.35.12 AM.jpeg",
   "/WhatsApp Image 2026-04-07 at 11.40.39 AM.jpeg",
@@ -48,7 +48,7 @@ const REAL_IMAGES = [
   "/WhatsApp Image 2026-04-08 at 11.55.30 AM (1).jpeg",
   "/WhatsApp Image 2026-04-08 at 11.55.30 AM (2).jpeg",
   "/WhatsApp Image 2026-04-08 at 11.55.30 AM.jpeg"
-];
+].map(img => encodeURI(img));
 
 export const MOCK_EVENTS: EventItem[] = [
   {

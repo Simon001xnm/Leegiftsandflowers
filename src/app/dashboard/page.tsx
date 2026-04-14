@@ -1,10 +1,10 @@
-
 "use client";
 
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { MOCK_EVENTS } from "@/lib/events-data";
+import Image from "next/image";
 import { 
   Users, 
   Ticket, 
@@ -99,7 +99,7 @@ export default function OrganizerDashboard() {
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-lg bg-muted relative overflow-hidden shrink-0">
-                              <Image src={event.imageUrl} alt="" fill className="object-cover" />
+                              <Image src={event.imageUrl} alt={event.title} fill className="object-cover" />
                             </div>
                             <div>
                               <p className="font-bold text-primary line-clamp-1 group-hover:text-accent transition-colors">{event.title}</p>
