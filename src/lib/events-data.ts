@@ -32,6 +32,24 @@ export interface GalleryItem {
   imageUrl: string;
 }
 
+const REAL_IMAGES = [
+  "/WhatsApp Image 2026-04-07 at 11.35.12 AM.jpeg",
+  "/WhatsApp Image 2026-04-07 at 11.40.39 AM.jpeg",
+  "/WhatsApp Image 2026-04-07 at 11.45.36 AM.jpeg",
+  "/WhatsApp Image 2026-04-07 at 12.44.38 PM.jpeg",
+  "/WhatsApp Image 2026-04-07 at 12.48.05 PM.jpeg",
+  "/WhatsApp Image 2026-04-07 at 12.52.42 PM.jpeg",
+  "/WhatsApp Image 2026-04-07 at 12.56.38 PM.jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.27 AM (1).jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.27 AM.jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.29 AM (1).jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.29 AM (2).jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.29 AM.jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.30 AM (1).jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.30 AM (2).jpeg",
+  "/WhatsApp Image 2026-04-08 at 11.55.30 AM.jpeg"
+];
+
 export const MOCK_EVENTS: EventItem[] = [
   {
     id: '1',
@@ -41,7 +59,7 @@ export const MOCK_EVENTS: EventItem[] = [
     location: 'Stall 16A, City Market, Koinange Street, Nairobi',
     price: 4500,
     description: 'An exclusive viewing of our latest luxury wedding floral collections and grand ballroom transformations in the heart of Nairobi.',
-    imageUrl: 'https://picsum.photos/seed/flowers1/1200/800',
+    imageUrl: REAL_IMAGES[0],
     organizer: 'Lee Decors',
     ticketsTotal: 200,
     ticketsSold: 185,
@@ -55,7 +73,7 @@ export const MOCK_EVENTS: EventItem[] = [
     location: 'KICC, Nairobi Central',
     price: 0,
     description: 'Discover how we elevate corporate events with sophisticated floral designs and minimalist decor.',
-    imageUrl: 'https://picsum.photos/seed/decor1/1200/800',
+    imageUrl: REAL_IMAGES[1],
     organizer: 'Lee Decors',
     ticketsTotal: 500,
     ticketsSold: 310,
@@ -69,7 +87,7 @@ export const MOCK_EVENTS: EventItem[] = [
     location: 'Stall 16A, City Market, Koinange Street, Nairobi',
     price: 3500,
     description: 'A hands-on masterclass in our Nairobi studio creating the perfect centerpiece using seasonal tropical blooms.',
-    imageUrl: 'https://picsum.photos/seed/flowers2/1200/800',
+    imageUrl: REAL_IMAGES[2],
     organizer: 'Lee Decors',
     ticketsTotal: 15,
     ticketsSold: 12,
@@ -83,7 +101,7 @@ export const MOCK_EVENTS: EventItem[] = [
     location: 'Villa Rosa Kempinski, Nairobi',
     price: 15000,
     description: 'Step into a world of magic featuring our signature immersive floral installations.',
-    imageUrl: 'https://picsum.photos/seed/flowers3/1200/800',
+    imageUrl: REAL_IMAGES[3],
     organizer: 'Lee Decors',
     ticketsTotal: 400,
     ticketsSold: 380,
@@ -97,7 +115,7 @@ export const MOCK_EVENTS: EventItem[] = [
     location: 'Karura Forest, Nairobi',
     price: 0,
     description: 'Preview our outdoor collection featuring weather-resistant florals and elegant garden furniture.',
-    imageUrl: 'https://picsum.photos/seed/flowers4/1200/800',
+    imageUrl: REAL_IMAGES[4],
     organizer: 'Lee Decors',
     ticketsTotal: 1000,
     ticketsSold: 450,
@@ -105,76 +123,33 @@ export const MOCK_EVENTS: EventItem[] = [
   }
 ];
 
-export const MOCK_PRODUCTS: ProductItem[] = [
-  {
-    id: 'p1',
-    name: 'Blushing Romance Bouquet',
-    price: 2500,
-    description: 'A stunning mix of premium local roses and silver dollar eucalyptus.',
-    imageUrl: 'https://picsum.photos/seed/p1/600/600',
-    category: 'Bouquets'
-  },
-  {
-    id: 'p2',
-    name: 'Savannah Elegance',
-    price: 4500,
-    description: 'Deep crimson ranunculus paired with dark foliage for a dramatic touch.',
-    imageUrl: 'https://picsum.photos/seed/p2/600/600',
-    category: 'Signature'
-  },
-  {
-    id: 'p3',
-    name: 'Wild Market Basket',
-    price: 1800,
-    description: 'A charming collection of wildflowers and dried grasses inspired by City Market.',
-    imageUrl: 'https://picsum.photos/seed/p3/600/600',
-    category: 'Baskets'
-  },
-  {
-    id: 'p4',
-    name: 'Classic White Lilies',
-    price: 2200,
-    description: 'Timeless white oriental lilies with vibrant green stems.',
-    imageUrl: 'https://picsum.photos/seed/p4/600/600',
-    category: 'Bouquets'
-  }
+const productNames = [
+  "Blushing Romance", "Savannah Elegance", "City Market Fresh", "Nairobi Bloom", 
+  "Koinange Special", "Market Day Surprise", "Royal Orchid Mix", "Sunset Safari",
+  "Highland Lilies", "Rift Valley Roses", "Stall 16A Signature", "Tropical Bliss",
+  "Elegant Ivory", "Crimson Passion", "Velvet Petals", "Morning Dew",
+  "Golden Sunbeam", "Midnight Mystery", "Azure Dreams", "Lavender Whisper",
+  "Peppermint Fresh", "Summer Solstice", "Autumn Hearth", "Winter Frost",
+  "Spring Awakening", "Garden Party Mix", "Corporate Chic", "Bridal Glow",
+  "Classic Charm", "Modern Muse", "Rustic Roots", "Urban Jungle",
+  "Wildwood Wander", "Ocean Breeze", "Desert Rose", "Starlight Sparkle",
+  "Joyful Spirit", "Peaceful Haven", "Graceful Beauty", "Endless Love"
 ];
 
-export const MOCK_GALLERY: GalleryItem[] = [
-  {
-    id: 'g1',
-    title: 'Our Market Stall',
-    description: 'Stall 16A at the iconic City Market, Nairobi.',
-    imageUrl: 'https://picsum.photos/seed/stall1/800/800'
-  },
-  {
-    id: 'g2',
-    title: 'Bridal Perfection',
-    description: 'A delicate white orchid and rose bouquet.',
-    imageUrl: 'https://picsum.photos/seed/g2/800/800'
-  },
-  {
-    id: 'g3',
-    title: 'Grand Entrance',
-    description: 'Floral arch for a corporate gala at KICC.',
-    imageUrl: 'https://picsum.photos/seed/g3/800/800'
-  },
-  {
-    id: 'g4',
-    title: 'Table Artistry',
-    description: 'Bespoke centerpieces for a luxury private dinner.',
-    imageUrl: 'https://picsum.photos/seed/g4/800/800'
-  },
-  {
-    id: 'g5',
-    title: 'Seasonal Selection',
-    description: 'Fresh blooms arriving at City Market.',
-    imageUrl: 'https://picsum.photos/seed/g5/800/800'
-  },
-  {
-    id: 'g6',
-    title: 'Workshop Fun',
-    description: 'Attendees learning the art of floral design.',
-    imageUrl: 'https://picsum.photos/seed/g6/800/800'
-  }
-];
+const categories = ["Bouquets", "Signature", "Baskets", "Luxury"];
+
+export const MOCK_PRODUCTS: ProductItem[] = Array.from({ length: 40 }).map((_, i) => ({
+  id: `p${i + 1}`,
+  name: productNames[i % productNames.length],
+  price: 1500 + (Math.floor(Math.random() * 20) * 500),
+  description: `A beautiful hand-crafted arrangement from Lee Decors Stall 16A, featuring the freshest seasonal blooms available in Nairobi.`,
+  imageUrl: REAL_IMAGES[i % REAL_IMAGES.length],
+  category: categories[i % categories.length]
+}));
+
+export const MOCK_GALLERY: GalleryItem[] = REAL_IMAGES.map((img, i) => ({
+  id: `g${i + 1}`,
+  title: i === 0 ? 'Our Market Stall' : `Signature Work ${i}`,
+  description: i === 0 ? 'Stall 16A at the iconic City Market, Nairobi.' : 'Exquisite floral artistry from Lee Decors.',
+  imageUrl: img
+}));
