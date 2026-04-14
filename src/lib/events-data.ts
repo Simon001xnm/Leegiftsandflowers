@@ -1,3 +1,4 @@
+
 export type EventCategory = 'Wedding' | 'Corporate' | 'Workshop' | 'Art' | 'Gala' | 'Private';
 
 export interface EventItem {
@@ -22,6 +23,13 @@ export interface ProductItem {
   description: string;
   imageUrl: string;
   category: string;
+}
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
 }
 
 export const MOCK_EVENTS: EventItem[] = [
@@ -129,5 +137,44 @@ export const MOCK_PRODUCTS: ProductItem[] = [
     description: 'Timeless white oriental lilies with vibrant green stems.',
     imageUrl: 'https://picsum.photos/seed/p4/600/600',
     category: 'Bouquets'
+  }
+];
+
+export const MOCK_GALLERY: GalleryItem[] = [
+  {
+    id: 'g1',
+    title: 'Our Market Stall',
+    description: 'Stall 16A at the iconic City Market, Nairobi.',
+    imageUrl: 'https://picsum.photos/seed/stall1/800/800'
+  },
+  {
+    id: 'g2',
+    title: 'Bridal Perfection',
+    description: 'A delicate white orchid and rose bouquet.',
+    imageUrl: 'https://picsum.photos/seed/g2/800/800'
+  },
+  {
+    id: 'g3',
+    title: 'Grand Entrance',
+    description: 'Floral arch for a corporate gala at KICC.',
+    imageUrl: 'https://picsum.photos/seed/g3/800/800'
+  },
+  {
+    id: 'g4',
+    title: 'Table Artistry',
+    description: 'Bespoke centerpieces for a luxury private dinner.',
+    imageUrl: 'https://picsum.photos/seed/g4/800/800'
+  },
+  {
+    id: 'g5',
+    title: 'Seasonal Selection',
+    description: 'Fresh blooms arriving at City Market.',
+    imageUrl: 'https://picsum.photos/seed/g5/800/800'
+  },
+  {
+    id: 'g6',
+    title: 'Workshop Fun',
+    description: 'Attendees learning the art of floral design.',
+    imageUrl: 'https://picsum.photos/seed/g6/800/800'
   }
 ];

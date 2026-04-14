@@ -1,9 +1,10 @@
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Flower2, LayoutDashboard, Search, UserCircle, PlusCircle, ShoppingBag } from "lucide-react";
+import { Flower2, LayoutDashboard, Search, UserCircle, PlusCircle, ShoppingBag, Image as ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Navigation() {
@@ -12,6 +13,7 @@ export function Navigation() {
   const navLinks = [
     { href: "/events", label: "Discovery", icon: Search },
     { href: "/shop", label: "Flower Shop", icon: ShoppingBag },
+    { href: "/gallery", label: "Gallery", icon: ImageIcon },
     { href: "/dashboard", label: "Manage", icon: LayoutDashboard },
   ];
 

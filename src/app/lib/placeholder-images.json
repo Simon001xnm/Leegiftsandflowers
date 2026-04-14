@@ -1,3 +1,4 @@
+
 {
   "placeholderImages": [
     {
@@ -29,6 +30,12 @@
       "description": "Outdoor garden party setup",
       "imageUrl": "https://picsum.photos/seed/flowers4/1200/800",
       "imageHint": "garden party"
+    },
+    {
+      "id": "stall1",
+      "description": "Lee Decors Stall 16A at City Market",
+      "imageUrl": "https://picsum.photos/seed/stall1/1200/800",
+      "imageHint": "flower market stall"
     }
   ]
 }
