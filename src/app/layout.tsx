@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
+import { FirebaseClientProvider } from "@/firebase";
 
 export const metadata: Metadata = {
   title: 'Lee Eats | Fastest Food Delivery in Nairobi',
@@ -21,9 +22,11 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased bg-background text-foreground min-h-screen pb-20 md:pb-0">
-        {children}
-        <MobileBottomNav />
-        <Toaster />
+        <FirebaseClientProvider>
+          {children}
+          <MobileBottomNav />
+          <Toaster />
+        </FirebaseClientProvider>
       </body>
     </html>
   );
