@@ -45,17 +45,17 @@ export default function Home() {
                 <span className="text-accent italic">We've got you covered.</span>
               </h1>
               
-              <div className="bg-white p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 max-w-2xl border border-white/20 animate-in slide-in-from-bottom-4 duration-700">
+              <div className="bg-white/10 backdrop-blur-xl p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 max-w-2xl border border-white/20 animate-in slide-in-from-bottom-4 duration-700">
                 <div className="relative flex-grow">
-                  <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary" />
+                  <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-accent" />
                   <Input 
                     placeholder="Enter your delivery address" 
-                    className="h-14 pl-12 border-none focus-visible:ring-0 text-lg"
+                    className="h-14 pl-12 border-none focus-visible:ring-0 text-lg bg-transparent text-white placeholder:text-white/60"
                   />
                 </div>
                 <Button 
                   variant="ghost" 
-                  className="h-14 px-10 rounded-xl text-lg font-bold text-primary hover:bg-primary/5"
+                  className="h-14 px-10 rounded-xl text-lg font-bold text-accent hover:bg-white/10 hover:text-accent"
                 >
                   Find Food <ChevronRight className="ml-2 w-5 h-5" />
                 </Button>
