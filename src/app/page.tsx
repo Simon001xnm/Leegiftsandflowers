@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Search, MapPin, Star, Clock, ArrowRight, Utensils, Bike, Wallet, ChevronRight } from "lucide-react";
+import { MapPin, Star, Clock, ArrowRight, Bike, Wallet, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -24,7 +24,7 @@ export default function Home() {
     
     const interval = setInterval(() => {
       setCurrentBgIndex((prev) => (prev + 1) % heroImages.length);
-    }, 45000); // 45 seconds as requested
+    }, 45000); 
 
     return () => clearInterval(interval);
   }, [heroImages.length]);
@@ -35,7 +35,7 @@ export default function Home() {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-20 lg:py-32">
+        <section className="relative min-h-[90vh] flex items-end overflow-hidden pb-20 lg:pb-32">
           {/* Sliding Background Images */}
           <div className="absolute inset-0 z-0">
             {heroImages.map((img, index) => (
@@ -46,7 +46,6 @@ export default function Home() {
                   index === currentBgIndex ? "opacity-100" : "opacity-0"
                 )}
               >
-                {/* Inner div for the slow "slide and slide down" effect */}
                 <div 
                   className={cn(
                     "absolute inset-0 transition-transform ease-linear",
@@ -67,7 +66,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
           </div>
 
           <div className="container mx-auto px-4 relative z-20">
@@ -92,12 +91,31 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="mt-10 flex flex-wrap gap-8 text-sm font-bold text-white/90">
-                <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
-                  <Bike className="w-5 h-5 text-accent" /> 30 Min Delivery
+              <div className="mt-10 flex items-center justify-between flex-wrap gap-6">
+                <div className="flex gap-4 text-sm font-bold text-white/90">
+                  <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
+                    <Bike className="w-5 h-5 text-accent" /> 30 Min Delivery
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
+                    <Wallet className="w-5 h-5 text-accent" /> Best Prices
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
-                  <Wallet className="w-5 h-5 text-accent" /> Best Prices
+
+                {/* Slide Navigation */}
+                <div className="flex gap-3">
+                  {heroImages.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentBgIndex(i)}
+                      className={cn(
+                        "w-3 h-3 rounded-full transition-all duration-300",
+                        currentBgIndex === i 
+                          ? "bg-accent scale-125 ring-4 ring-accent/20" 
+                          : "bg-white/30 hover:bg-white/60"
+                      )}
+                      aria-label={`Go to slide ${i + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
