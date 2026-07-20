@@ -7,8 +7,8 @@ import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Smartphone, LogIn, ShoppingBag } from "lucide-react";
-import Link from "next/link";
+import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Smartphone, LogIn, ShoppingBag, Navigation as NavIcon } from "lucide-react";
+import Link from "link/navigation";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useUser, useFirestore } from "@/firebase";
@@ -25,6 +25,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
   const [step, setStep] = useState<'checkout' | 'success'>('checkout');
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
+  const [lastOrderId, setLastOrderId] = useState<string>("");
 
   const orderItems = [
     { name: "Classic Cheeseburger", price: 850, quantity: 2 },
@@ -43,6 +44,8 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
     
     setLoading(true);
     const orderId = `LEE-${Math.floor(100000 + Math.random() * 900000)}`;
+    setLastOrderId(orderId);
+
     const orderData = {
       id: orderId,
       customerId: user.uid,
@@ -62,12 +65,17 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       })
       .catch(async (error) => {
         setLoading(false);
-        const permissionError = new FirestorePermissionError({
-          path: orderRef.path,
-          operation: 'create',
-          requestResourceData: orderData,
-        });
-        errorEmitter.emit('permission-error', permissionError);
+        // Handle potential permission error or if Firebase is missing
+        if (user.uid.startsWith('demo-')) {
+           setStep('success');
+        } else {
+          const permissionError = new FirestorePermissionError({
+            path: orderRef.path,
+            operation: 'create',
+            requestResourceData: orderData,
+          });
+          errorEmitter.emit('permission-error', permissionError);
+        }
       });
   };
 
@@ -88,11 +96,9 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                       <p className="font-bold text-primary">Signed out</p>
                       <p className="text-sm text-muted-foreground">Log in to track your order and earn points.</p>
                     </div>
-                    <Link href={`/login?redirect=/checkout/${id}`}>
-                      <Button variant="outline" size="sm" className="gap-2 border-primary text-primary">
-                        <LogIn className="w-4 h-4" /> Sign In
-                      </Button>
-                    </Link>
+                    <Button variant="outline" size="sm" className="gap-2 border-primary text-primary" onClick={() => router.push(`/login?redirect=/checkout/${id}`)}>
+                      <LogIn className="w-4 h-4" /> Sign In
+                    </Button>
                   </CardContent>
                 </Card>
               )}
@@ -210,16 +216,19 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Link href="/restaurants">
-                <Button variant="outline" className="h-12 px-8 rounded-xl">
-                  Order Again
-                </Button>
-              </Link>
-              <Link href="/dashboard/customer">
-                <Button className="h-12 px-8 rounded-xl gap-2">
-                  Track My Food <Bike className="w-4 h-4" />
-                </Button>
-              </Link>
+              <Button 
+                className="h-14 px-10 rounded-2xl gap-2 shadow-lg shadow-primary/20 text-lg"
+                onClick={() => router.push(`/track/${lastOrderId}`)}
+              >
+                View Live Tracking Map <NavIcon className="w-5 h-5" />
+              </Button>
+              <Button 
+                variant="outline" 
+                className="h-14 px-10 rounded-2xl text-lg"
+                onClick={() => router.push("/dashboard/customer")}
+              >
+                Go to Dashboard
+              </Button>
             </div>
           </div>
         )}
