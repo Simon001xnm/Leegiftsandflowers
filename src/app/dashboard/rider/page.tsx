@@ -1,14 +1,14 @@
+
 "use client";
 
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { MOCK_ORDERS } from "@/lib/food-data";
 import { 
   Bike, 
   MapPin, 
-  Clock, 
   TrendingUp, 
   Star, 
   CircleCheck, 
@@ -19,6 +19,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 export default function RiderDashboard() {
   const [isOnline, setIsOnline] = useState(true);
@@ -30,6 +31,14 @@ export default function RiderDashboard() {
     { label: "Rating", value: "4.9", icon: Star, color: "text-accent" },
   ];
 
+  const handleOpenNavigation = () => {
+    if (!activeTask) return;
+    // Open Google Maps directions from current location to delivery address
+    const destination = encodeURIComponent(activeTask.deliveryAddress);
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=bicycling`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navigation />
@@ -40,7 +49,7 @@ export default function RiderDashboard() {
             <h1 className="text-4xl font-bold font-headline text-primary mb-2">Courier Center</h1>
             <p className="text-muted-foreground">You are currently {isOnline ? 'Online' : 'Offline'}.</p>
           </div>
-          <Card className="p-4 flex items-center gap-4 bg-muted/30">
+          <Card className="p-4 flex items-center gap-4 bg-muted/30 rounded-2xl border-none">
             <div className="flex items-center gap-2">
               <Power className={cn("w-4 h-4", isOnline ? "text-emerald-500" : "text-muted-foreground")} />
               <Label htmlFor="online-status" className="font-bold text-sm">Accepting Orders</Label>
@@ -56,7 +65,7 @@ export default function RiderDashboard() {
         {/* Earnings Stats */}
         <div className="grid sm:grid-cols-3 gap-6 mb-12">
           {stats.map((stat) => (
-            <Card key={stat.label} className="border-none shadow-sm">
+            <Card key={stat.label} className="border-none shadow-sm rounded-3xl">
               <CardContent className="p-6">
                 <p className="text-sm text-muted-foreground font-medium mb-2">{stat.label}</p>
                 <div className="flex items-center justify-between">
@@ -73,7 +82,7 @@ export default function RiderDashboard() {
           <div className="lg:col-span-2 space-y-6">
             <h2 className="text-2xl font-bold font-headline text-primary">Active Delivery</h2>
             {activeTask ? (
-              <Card className="border-2 border-primary/20 shadow-xl overflow-hidden">
+              <Card className="border-2 border-primary/20 shadow-xl overflow-hidden rounded-[2.5rem]">
                 <div className="bg-primary p-6 text-primary-foreground flex justify-between items-center">
                   <div className="flex items-center gap-3">
                     <Bike className="w-8 h-8" />
@@ -110,30 +119,33 @@ export default function RiderDashboard() {
                   </div>
 
                   <div className="flex gap-3">
-                    <Button className="flex-grow h-14 rounded-xl gap-2 shadow-lg shadow-primary/20">
-                      <NavIcon className="w-5 h-5" /> Open Navigation
+                    <Button 
+                      onClick={handleOpenNavigation}
+                      className="flex-grow h-14 rounded-xl gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
+                    >
+                      <NavIcon className="w-5 h-5" /> Open Navigation Map
                     </Button>
                     <Button variant="secondary" size="icon" className="h-14 w-14 rounded-xl">
                       <Phone className="w-5 h-5" />
                     </Button>
                   </div>
                   
-                  <Button variant="outline" className="w-full h-14 rounded-xl text-emerald-600 hover:bg-emerald-50 border-emerald-200">
-                    Mark as Delivered
+                  <Button variant="outline" className="w-full h-14 rounded-xl text-emerald-600 hover:bg-emerald-50 border-emerald-200 font-bold">
+                    Confirm Delivery Completion
                   </Button>
                 </CardContent>
               </Card>
             ) : (
-              <Card className="border-dashed border-2 py-20 flex flex-col items-center justify-center text-center">
+              <Card className="border-dashed border-2 py-20 flex flex-col items-center justify-center text-center rounded-[2.5rem]">
                 <Bike className="w-12 h-12 text-muted-foreground/30 mb-4" />
-                <p className="text-muted-foreground">Waiting for new delivery requests...</p>
+                <p className="text-muted-foreground font-medium">Waiting for new delivery requests...</p>
               </Card>
             )}
           </div>
 
           <div className="space-y-6">
             <h2 className="text-2xl font-bold font-headline text-primary">Daily Log</h2>
-            <Card>
+            <Card className="rounded-[2rem] overflow-hidden">
               <CardContent className="p-4 space-y-4">
                 {[1, 2, 3].map(i => (
                   <div key={i} className="flex justify-between items-center py-3 border-b last:border-none">
@@ -149,7 +161,9 @@ export default function RiderDashboard() {
                     <p className="text-sm font-bold text-primary">+KES 180</p>
                   </div>
                 ))}
-                <Button variant="ghost" className="w-full text-xs text-muted-foreground">View Full History</Button>
+                <Button variant="ghost" className="w-full text-xs text-muted-foreground hover:bg-transparent hover:text-primary">
+                  View Full History
+                </Button>
               </CardContent>
             </Card>
           </div>
@@ -157,8 +171,4 @@ export default function RiderDashboard() {
       </main>
     </div>
   );
-}
-
-function cn(...inputs: any[]) {
-  return inputs.filter(Boolean).join(' ');
 }
