@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function Home() {
-  // Show more restaurants on the landing page as requested
   const popularRestaurants = MOCK_RESTAURANTS.slice(0, 9);
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-rider');
 
@@ -19,7 +19,7 @@ export default function Home() {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative min-h-[80vh] flex items-center overflow-hidden py-20 lg:py-32">
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden py-20 lg:py-32">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
             {heroImage && (
@@ -32,7 +32,7 @@ export default function Home() {
                 data-ai-hint={heroImage.imageHint}
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
