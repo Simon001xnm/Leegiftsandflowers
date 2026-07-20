@@ -2,40 +2,28 @@
 {
   "placeholderImages": [
     {
-      "id": "flowers1",
-      "description": "Elegant wedding floral centerpiece",
-      "imageUrl": "https://picsum.photos/seed/flowers1/1200/800",
-      "imageHint": "wedding flowers"
+      "id": "hero-rider",
+      "description": "Delivery rider on a scooter in the city",
+      "imageUrl": "https://picsum.photos/seed/rider1/1920/1080",
+      "imageHint": "delivery rider"
     },
     {
-      "id": "decor1",
-      "description": "Luxury ballroom event decor",
-      "imageUrl": "https://picsum.photos/seed/decor1/1200/800",
-      "imageHint": "event decor"
+      "id": "burger-hero",
+      "description": "Delicious juicy burger with fries",
+      "imageUrl": "https://picsum.photos/seed/burger1/800/600",
+      "imageHint": "burger"
     },
     {
-      "id": "flowers2",
-      "description": "Close up of seasonal roses",
-      "imageUrl": "https://picsum.photos/seed/flowers2/1200/800",
-      "imageHint": "roses flowers"
+      "id": "pizza-hero",
+      "description": "Hot pepperoni pizza being sliced",
+      "imageUrl": "https://picsum.photos/seed/pizza1/800/600",
+      "imageHint": "pizza"
     },
     {
-      "id": "flowers3",
-      "description": "Immersive floral installation",
-      "imageUrl": "https://picsum.photos/seed/flowers3/1200/800",
-      "imageHint": "floral installation"
-    },
-    {
-      "id": "flowers4",
-      "description": "Outdoor garden party setup",
-      "imageUrl": "https://picsum.photos/seed/flowers4/1200/800",
-      "imageHint": "garden party"
-    },
-    {
-      "id": "stall1",
-      "description": "Lee Decors Stall 16A at City Market",
-      "imageUrl": "https://picsum.photos/seed/stall1/1200/800",
-      "imageHint": "flower market stall"
+      "id": "sushi-hero",
+      "description": "Fresh sushi platter set",
+      "imageUrl": "https://picsum.photos/seed/sushi1/800/600",
+      "imageHint": "sushi"
     }
   ]
 }
