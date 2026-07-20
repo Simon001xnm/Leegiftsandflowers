@@ -43,21 +43,28 @@ export default function Home() {
                 key={img.id}
                 className={cn(
                   "absolute inset-0 transition-opacity duration-[3000ms] ease-in-out",
-                  index === currentBgIndex ? "opacity-100 scale-110 translate-y-4" : "opacity-0 scale-100 translate-y-0"
+                  index === currentBgIndex ? "opacity-100" : "opacity-0"
                 )}
-                style={{
-                  transitionProperty: 'opacity, transform',
-                  transitionDuration: index === currentBgIndex ? '45000ms' : '3000ms'
-                }}
               >
-                <Image 
-                  src={img.imageUrl} 
-                  alt={img.description}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                  data-ai-hint={img.imageHint}
-                />
+                {/* Inner div for the slow "slide and slide down" effect */}
+                <div 
+                  className={cn(
+                    "absolute inset-0 transition-transform ease-linear",
+                    index === currentBgIndex ? "scale-110 translate-y-8" : "scale-100 translate-y-0"
+                  )}
+                  style={{
+                    transitionDuration: index === currentBgIndex ? '45000ms' : '0ms'
+                  }}
+                >
+                  <Image 
+                    src={img.imageUrl} 
+                    alt={img.description}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                    data-ai-hint={img.imageHint}
+                  />
+                </div>
               </div>
             ))}
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10" />
@@ -68,8 +75,6 @@ export default function Home() {
               <Badge variant="secondary" className="mb-6 py-1.5 px-4 text-white font-semibold bg-primary/90 backdrop-blur-sm border-none">
                 Fastest Delivery in Nairobi
               </Badge>
-              
-              {/* Removed "Hungry? We've got you covered." headline */}
               
               <div className="bg-white/10 backdrop-blur-xl p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 max-w-2xl border border-white/20 animate-in slide-in-from-bottom-4 duration-700">
                 <div className="relative flex-grow">
