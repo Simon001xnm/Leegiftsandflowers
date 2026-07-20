@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { MapPin, Star, Clock, ArrowRight, Bike, Wallet, ChevronRight } from "lucide-react";
+import { MapPin, Star, Clock, ArrowRight, Bike, Wallet, ChevronRight, Heart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -93,7 +93,7 @@ export default function Home() {
                 <Link 
                   key={restaurant.id} 
                   href={`/restaurants/${restaurant.id}`}
-                  className="group bg-card rounded-[2.5rem] overflow-hidden border shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3"
+                  className="group bg-card rounded-[2.5rem] overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-3"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image 
@@ -132,9 +132,40 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-primary text-primary-foreground py-24">
+      <footer className="bg-primary text-primary-foreground py-16">
         <div className="container mx-auto px-4 text-center">
-           <p>© 2024 ABC. Proudly serving Nairobi, Kenya.</p>
+           <div className="relative mx-auto w-fit mb-4">
+              <span className="font-headline text-3xl font-bold tracking-tight">ABC</span>
+              <svg 
+                className="absolute -bottom-2 left-0 w-full h-3 text-white" 
+                viewBox="0 0 40 10" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path 
+                  d="M2 2C10 8 30 8 38 2" 
+                  stroke="currentColor" 
+                  strokeWidth="3" 
+                  strokeLinecap="round"
+                />
+              </svg>
+           </div>
+           <p className="mb-6 opacity-90">© 2024 ABC. Proudly serving Nairobi, Kenya.</p>
+           
+           <div className="pt-8 border-t border-white/10 flex flex-col items-center gap-2">
+              <p className="text-sm font-medium opacity-80 flex items-center gap-1.5">
+                Created with <Heart className="w-3.5 h-3.5 fill-current text-white animate-pulse" /> by{" "}
+                <Link 
+                  href="https://simonstyles.co.ke" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="underline hover:text-accent transition-colors decoration-accent underline-offset-4"
+                >
+                  Simon Styles Technologies Limited
+                </Link>
+              </p>
+              <p className="text-[10px] opacity-50 uppercase tracking-widest font-bold">simonstyles.co.ke</p>
+           </div>
         </div>
       </footer>
     </div>
