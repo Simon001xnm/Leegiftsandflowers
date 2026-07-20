@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -25,12 +25,6 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -90,14 +84,21 @@ export default function RestaurantOwnerDashboard() {
     };
     setReceipt(newReceipt);
     setPosCart([]);
-    toast({ title: "Order Processed", description: "Receipt generated successfully." });
+    toast({ title: "Order Processed", description: "Receipt generated. Opening printer..." });
+    
+    // Small delay to allow state to update before print trigger
+    setTimeout(() => {
+        window.print();
+    }, 500);
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navigation />
+      <div className="no-print">
+        <Navigation />
+      </div>
       
-      <main className="container mx-auto px-4 py-12 flex-grow">
+      <main className="container mx-auto px-4 py-12 flex-grow no-print">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
           <div>
             <h1 className="text-4xl font-bold font-headline text-primary mb-2">Merchant Portal</h1>
@@ -124,7 +125,6 @@ export default function RestaurantOwnerDashboard() {
           </TabsList>
 
           <TabsContent value="overview" className="space-y-12">
-            {/* Stats Grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat) => (
                 <Card key={stat.label} className="border-none shadow-sm">
@@ -142,7 +142,6 @@ export default function RestaurantOwnerDashboard() {
               ))}
             </div>
 
-            {/* Recent Orders Overview */}
             <div className="space-y-6">
               <h2 className="text-2xl font-bold font-headline text-primary">Recent Activity</h2>
               <div className="bg-card rounded-2xl border shadow-sm overflow-hidden">
@@ -251,11 +250,11 @@ export default function RestaurantOwnerDashboard() {
                 </CardContent>
                 <CardFooter className="p-6 bg-muted/10 border-t">
                   <Button 
-                    className="w-full h-12 rounded-xl gap-2 text-lg" 
+                    className="w-full h-12 rounded-xl gap-2 text-lg shadow-lg shadow-primary/10" 
                     disabled={posCart.length === 0}
                     onClick={handleCheckout}
                   >
-                    <Receipt className="w-5 h-5" /> Generate Receipt
+                    <Receipt className="w-5 h-5" /> Generate & Print
                   </Button>
                 </CardFooter>
               </Card>
@@ -271,20 +270,24 @@ export default function RestaurantOwnerDashboard() {
                       <div className="flex justify-between"><span>ID:</span> <span>{receipt.orderId}</span></div>
                       <div className="flex justify-between"><span>Date:</span> <span>{receipt.date}</span></div>
                     </div>
-                    <div className="space-y-2 py-4 border-y">
+                    <div className="space-y-2 py-4 border-y border-dashed">
                       {receipt.items.map((i: any) => (
                         <div key={i.id} className="flex justify-between text-xs">
                           <span>{i.name} x{i.quantity}</span>
-                          <span>KES {i.price * i.quantity}</span>
+                          <span className="font-mono">KES {i.price * i.quantity}</span>
                         </div>
                       ))}
                     </div>
                     <div className="flex justify-between font-bold text-lg">
                       <span>Total:</span>
-                      <span>KES {receipt.total}</span>
+                      <span className="font-mono">KES {receipt.total}</span>
                     </div>
-                    <Button variant="outline" className="w-full gap-2 text-xs" onClick={() => window.print()}>
-                      <Printer className="w-3 h-3" /> Print Receipt
+                    <Button 
+                      variant="outline" 
+                      className="w-full gap-2 text-xs border-primary text-primary hover:bg-primary/10" 
+                      onClick={() => window.print()}
+                    >
+                      <Printer className="w-3 h-3" /> Reprint Thermal Receipt
                     </Button>
                   </CardContent>
                 </Card>
@@ -292,6 +295,7 @@ export default function RestaurantOwnerDashboard() {
             </div>
           </TabsContent>
 
+          {/* Other tabs remain same... */}
           <TabsContent value="orders" className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold font-headline text-primary">Live Order Queue</h2>
@@ -392,6 +396,56 @@ export default function RestaurantOwnerDashboard() {
           </TabsContent>
         </Tabs>
       </main>
+
+      {/* Hidden Thermal Print View */}
+      {receipt && (
+        <div id="thermal-receipt" className="print-only font-mono text-black p-4 space-y-4 text-sm w-[80mm] mx-auto bg-white border border-gray-100">
+            <div className="text-center space-y-1">
+                <h1 className="text-xl font-bold tracking-tighter">LEE EATS</h1>
+                <p className="text-xs">Nairobi, Kenya</p>
+                <p className="text-xs">Tel: +254 700 000000</p>
+            </div>
+            
+            <div className="border-b border-dashed border-black pt-2" />
+            
+            <div className="flex justify-between">
+                <span>ORDER:</span>
+                <span className="font-bold">{receipt.orderId}</span>
+            </div>
+            <div className="flex justify-between">
+                <span>DATE:</span>
+                <span>{receipt.date}</span>
+            </div>
+
+            <div className="border-b border-dashed border-black" />
+
+            <div className="space-y-2">
+                {receipt.items.map((item: any, i: number) => (
+                    <div key={i} className="flex flex-col">
+                        <div className="flex justify-between">
+                            <span className="uppercase">{item.name}</span>
+                            <span>{item.price * item.quantity}</span>
+                        </div>
+                        <span className="text-xs">  {item.quantity} x {item.price}</span>
+                    </div>
+                ))}
+            </div>
+
+            <div className="border-b border-dashed border-black pt-2" />
+
+            <div className="flex justify-between text-lg font-bold">
+                <span>TOTAL:</span>
+                <span>KES {receipt.total}</span>
+            </div>
+
+            <div className="border-b border-dashed border-black" />
+
+            <div className="text-center pt-4 space-y-1">
+                <p className="font-bold">THANK YOU FOR YOUR BUSINESS!</p>
+                <p className="text-[10px]">Order processed via Lee Eats POS Terminal</p>
+            </div>
+        </div>
+      )}
     </div>
   );
 }
