@@ -31,7 +31,7 @@ export default function Home() {
               playsInline
               className="absolute inset-0 w-full h-full object-cover animate-slow-zoom"
             >
-              <source src="/Klickpin.com- 13933080092165366-pin-id-13933080092165366.mp4" type="video/mp4" />
+              <source src="/From%20Klickpin.com-%2013933080092165366-pin-id-13933080092165366.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
           </div>
