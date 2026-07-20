@@ -10,25 +10,11 @@ import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { MapPin, Star, Clock, ArrowRight, Bike, Wallet, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
-  const [currentBgIndex, setCurrentBgIndex] = useState(0);
   const popularRestaurants = MOCK_RESTAURANTS.slice(0, 9);
   
-  const heroImages = PlaceHolderImages.filter(img => img.id.startsWith('hero-rider'));
-
-  useEffect(() => {
-    if (heroImages.length <= 1) return;
-    
-    const interval = setInterval(() => {
-      setCurrentBgIndex((prev) => (prev + 1) % heroImages.length);
-    }, 45000); 
-
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
-
   return (
     <div className="flex flex-col min-h-screen">
       <Navigation />
@@ -36,36 +22,17 @@ export default function Home() {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative min-h-[90vh] flex items-end overflow-hidden pb-20 lg:pb-32">
-          {/* Sliding Background Images */}
-          <div className="absolute inset-0 z-0">
-            {heroImages.map((img, index) => (
-              <div
-                key={img.id}
-                className={cn(
-                  "absolute inset-0 transition-opacity duration-[3000ms] ease-in-out",
-                  index === currentBgIndex ? "opacity-100" : "opacity-0"
-                )}
-              >
-                <div 
-                  className={cn(
-                    "absolute inset-0 transition-transform ease-linear",
-                    index === currentBgIndex ? "scale-110 translate-y-8" : "scale-100 translate-y-0"
-                  )}
-                  style={{
-                    transitionDuration: index === currentBgIndex ? '45000ms' : '0ms'
-                  }}
-                >
-                  <Image 
-                    src={img.imageUrl} 
-                    alt={img.description}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                    data-ai-hint={img.imageHint}
-                  />
-                </div>
-              </div>
-            ))}
+          {/* Hero Video Background */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover animate-slow-zoom"
+            >
+              <source src="/Klickpin.com- 13933080092165366-pin-id-13933080092165366.mp4" type="video/mp4" />
+            </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
           </div>
 
@@ -99,23 +66,6 @@ export default function Home() {
                   <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
                     <Wallet className="w-5 h-5 text-accent" /> Best Prices
                   </div>
-                </div>
-
-                {/* Slide Navigation */}
-                <div className="flex gap-3">
-                  {heroImages.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentBgIndex(i)}
-                      className={cn(
-                        "w-3 h-3 rounded-full transition-all duration-300",
-                        currentBgIndex === i 
-                          ? "bg-accent scale-125 ring-4 ring-accent/20" 
-                          : "bg-white/30 hover:bg-white/60"
-                      )}
-                      aria-label={`Go to slide ${i + 1}`}
-                    />
-                  ))}
                 </div>
               </div>
             </div>
