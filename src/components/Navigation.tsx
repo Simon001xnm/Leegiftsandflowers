@@ -11,7 +11,8 @@ import {
   ShoppingCart, 
   Bike,
   User,
-  Store
+  Store,
+  Menu
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -20,12 +21,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function Navigation() {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: "/restaurants", label: "Restaurants", icon: Search },
+    { href: "/restaurants", label: "Explore", icon: Search },
+  ];
+
+  const dashLinks = [
+    { href: "/dashboard/customer", label: "Customer Portal", icon: User },
+    { href: "/dashboard", label: "Merchant Portal", icon: Store },
+    { href: "/dashboard/rider", label: "Courier Center", icon: Bike },
   ];
 
   return (
@@ -33,10 +47,10 @@ export function Navigation() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground">
+            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform">
               <UtensilsCrossed className="w-6 h-6" />
             </div>
-            <span className="font-headline text-2xl font-bold tracking-tight text-primary">
+            <span className="font-headline text-2xl font-bold tracking-tight text-primary hidden sm:block">
               Lee Eats
             </span>
           </Link>
@@ -50,9 +64,9 @@ export function Navigation() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-4 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-2",
+                    "px-4 py-2 text-sm font-bold rounded-xl transition-all flex items-center gap-2",
                     isActive 
-                      ? "text-primary bg-secondary" 
+                      ? "text-primary bg-primary/10" 
                       : "text-muted-foreground hover:text-primary hover:bg-muted"
                   )}
                 >
@@ -64,41 +78,68 @@ export function Navigation() {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground">
-                  <LayoutDashboard className="w-4 h-4" /> Dashboards
+                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground font-bold hover:text-primary">
+                  <LayoutDashboard className="w-4 h-4" /> Portals
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-48">
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard/customer" className="gap-2">
-                    <User className="w-4 h-4" /> Customer Portal
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard" className="gap-2">
-                    <Store className="w-4 h-4" /> Merchant Portal
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard/rider" className="gap-2">
-                    <Bike className="w-4 h-4" /> Courier Center
-                  </Link>
-                </DropdownMenuItem>
+              <DropdownMenuContent align="start" className="w-56 rounded-2xl p-2">
+                {dashLinks.map(link => (
+                  <DropdownMenuItem key={link.href} asChild className="rounded-xl p-3 cursor-pointer">
+                    <Link href={link.href} className="flex items-center gap-3">
+                      <link.icon className="w-4 h-4 text-primary" /> 
+                      <span className="font-bold">{link.label}</span>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <Button variant="outline" size="icon" className="rounded-full relative">
-            <ShoppingCart className="w-5 h-5 text-primary" />
-            <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
-          </Button>
-          <Link href="/profile">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <UserCircle className="w-6 h-6 text-primary" />
+        <div className="flex items-center gap-2">
+          <div className="flex items-center bg-muted/50 rounded-full p-1 border">
+             <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-background h-10 w-10">
+              <ShoppingCart className="w-5 h-5 text-primary" />
+              <span className="absolute top-1 right-1 bg-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ring-background">0</span>
             </Button>
-          </Link>
+            <Link href="/profile" className="hidden sm:block">
+              <Button variant="ghost" size="icon" className="rounded-full hover:bg-background h-10 w-10">
+                <UserCircle className="w-6 h-6 text-primary" />
+              </Button>
+            </Link>
+          </div>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden rounded-xl">
+                <Menu className="w-6 h-6 text-primary" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="rounded-l-3xl p-6">
+              <SheetHeader className="mb-8">
+                <SheetTitle className="text-left font-headline text-2xl text-primary">Lee Eats Menu</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col gap-4">
+                <Link href="/" className="flex items-center gap-4 p-4 rounded-2xl bg-muted/50 font-bold">
+                  Home
+                </Link>
+                {navLinks.map((link) => (
+                  <Link key={link.href} href={link.href} className="flex items-center gap-4 p-4 rounded-2xl border font-bold">
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="pt-4 border-t mt-4">
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 ml-4">Management</p>
+                  {dashLinks.map((link) => (
+                    <Link key={link.href} href={link.href} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-primary/5 transition-colors mb-2">
+                      <link.icon className="w-5 h-5 text-primary" />
+                      <span className="font-bold">{link.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>
