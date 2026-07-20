@@ -3,18 +3,17 @@
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MOCK_EVENTS } from "@/lib/events-data";
-import Image from "next/image";
+import { MOCK_ORDERS } from "@/lib/food-data";
 import { 
   Users, 
-  Ticket, 
   TrendingUp, 
   Calendar, 
   MoreHorizontal, 
   Edit3, 
   Trash2, 
-  ExternalLink,
-  Plus
+  Plus,
+  ShoppingBag,
+  ChefHat
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -25,12 +24,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function OrganizerDashboard() {
+export default function RestaurantOwnerDashboard() {
   const stats = [
-    { label: "Total Revenue", value: "$45,280", icon: TrendingUp, color: "text-emerald-500", bg: "bg-emerald-50" },
-    { label: "Active Events", value: "8", icon: Calendar, color: "text-primary", bg: "bg-primary/5" },
-    { label: "Total Tickets Sold", value: "1,240", icon: Ticket, color: "text-accent", bg: "bg-accent/5" },
-    { label: "Total Attendees", value: "3,890", icon: Users, color: "text-orange-500", bg: "bg-orange-50" },
+    { label: "Total Revenue", value: "KES 145,280", icon: TrendingUp, color: "text-emerald-500", bg: "bg-emerald-50" },
+    { label: "Active Orders", value: "12", icon: ChefHat, color: "text-primary", bg: "bg-primary/5" },
+    { label: "Orders Today", value: "48", icon: ShoppingBag, color: "text-accent", bg: "bg-accent/5" },
+    { label: "Total Customers", value: "890", icon: Users, color: "text-orange-500", bg: "bg-orange-50" },
   ];
 
   return (
@@ -40,14 +39,19 @@ export default function OrganizerDashboard() {
       <main className="container mx-auto px-4 py-12 flex-grow">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
           <div>
-            <h1 className="text-4xl font-bold font-headline text-primary mb-2">Organizer Dashboard</h1>
-            <p className="text-muted-foreground">Manage your events, track sales, and connect with attendees.</p>
+            <h1 className="text-4xl font-bold font-headline text-primary mb-2">Merchant Portal</h1>
+            <p className="text-muted-foreground">Manage your kitchen, monitor sales, and grow your restaurant.</p>
           </div>
-          <Link href="/dashboard/create">
+          <div className="flex gap-4">
+             <Link href="/dashboard/create">
+              <Button variant="outline" className="h-12 px-6 rounded-xl gap-2">
+                <Plus className="w-5 h-5" /> Add Menu Item
+              </Button>
+            </Link>
             <Button className="h-12 px-6 rounded-xl gap-2 shadow-lg shadow-primary/20">
-              <Plus className="w-5 h-5" /> New Event
+              Kitchen View
             </Button>
-          </Link>
+          </div>
         </div>
 
         {/* Stats Grid */}
@@ -59,22 +63,22 @@ export default function OrganizerDashboard() {
                   <div className={`w-12 h-12 rounded-xl ${stat.bg} flex items-center justify-center ${stat.color}`}>
                     <stat.icon className="w-6 h-6" />
                   </div>
-                  <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-none">+12%</Badge>
+                  <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-none">+18%</Badge>
                 </div>
-                <h3 className="text-3xl font-bold text-primary mb-1">{stat.value}</h3>
+                <h3 className="text-2xl font-bold text-primary mb-1">{stat.value}</h3>
                 <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* Events Table/List */}
+        {/* Orders Table */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold font-headline text-primary">Your Events</h2>
+            <h2 className="text-2xl font-bold font-headline text-primary">Recent Orders</h2>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm">Active</Button>
-              <Button variant="ghost" size="sm">Past</Button>
+              <Button variant="outline" size="sm">New</Button>
+              <Button variant="ghost" size="sm">Completed</Button>
             </div>
           </div>
 
@@ -83,80 +87,53 @@ export default function OrganizerDashboard() {
               <table className="w-full text-left">
                 <thead className="bg-muted/50 border-b">
                   <tr>
-                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Event Details</th>
-                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Date</th>
-                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Sales</th>
-                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Revenue</th>
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Order ID</th>
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Customer</th>
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Items</th>
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Total</th>
                     <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Status</th>
                     <th className="px-6 py-4 text-right"></th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
-                  {MOCK_EVENTS.map((event) => {
-                    const progress = (event.ticketsSold / event.ticketsTotal) * 100;
-                    return (
-                      <tr key={event.id} className="hover:bg-muted/20 transition-colors group">
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-lg bg-muted relative overflow-hidden shrink-0">
-                              <Image src={event.imageUrl} alt={event.title} fill className="object-cover" />
-                            </div>
-                            <div>
-                              <p className="font-bold text-primary line-clamp-1 group-hover:text-accent transition-colors">{event.title}</p>
-                              <p className="text-xs text-muted-foreground">{event.category} • {event.location.split(',')[0]}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
-                          {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="w-32 space-y-1">
-                            <div className="flex justify-between text-[10px] font-bold text-muted-foreground">
-                              <span>{event.ticketsSold} SOLD</span>
-                              <span>{Math.round(progress)}%</span>
-                            </div>
-                            <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-                              <div className="h-full bg-accent rounded-full" style={{ width: `${progress}%` }} />
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 font-bold text-primary">
-                          ${(event.ticketsSold * event.price).toLocaleString()}
-                        </td>
-                        <td className="px-6 py-4">
-                          <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 border-none capitalize">
-                            Live
-                          </Badge>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="icon">
-                                <MoreHorizontal className="w-5 h-5" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-48">
-                              <DropdownMenuItem className="gap-2">
-                                <Edit3 className="w-4 h-4" /> Edit Event
-                              </DropdownMenuItem>
-                              <DropdownMenuItem className="gap-2">
-                                <Users className="w-4 h-4" /> View Attendees
-                              </DropdownMenuItem>
-                              <DropdownMenuItem className="gap-2" asChild>
-                                <Link href={`/events/${event.id}`}>
-                                  <ExternalLink className="w-4 h-4" /> View Live Page
-                                </Link>
-                              </DropdownMenuItem>
-                              <DropdownMenuItem className="gap-2 text-destructive">
-                                <Trash2 className="w-4 h-4" /> Delete
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {MOCK_ORDERS.map((order) => (
+                    <tr key={order.id} className="hover:bg-muted/10 transition-colors group">
+                      <td className="px-6 py-4 font-bold text-primary">{order.id}</td>
+                      <td className="px-6 py-4 text-sm font-medium">{order.customerName}</td>
+                      <td className="px-6 py-4 text-sm text-muted-foreground">
+                        {order.items.join(', ')}
+                      </td>
+                      <td className="px-6 py-4 font-bold text-primary">KES {order.total.toLocaleString()}</td>
+                      <td className="px-6 py-4">
+                        <Badge 
+                          variant="secondary" 
+                          className={cn(
+                            "border-none",
+                            order.status === 'Delivered' ? "bg-emerald-50 text-emerald-700" : "bg-primary/10 text-primary"
+                          )}
+                        >
+                          {order.status}
+                        </Badge>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="w-5 h-5" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="w-48">
+                            <DropdownMenuItem className="gap-2">
+                              <Edit3 className="w-4 h-4" /> Manage Order
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="gap-2 text-destructive">
+                              <Trash2 className="w-4 h-4" /> Cancel Order
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -165,4 +142,8 @@ export default function OrganizerDashboard() {
       </main>
     </div>
   );
+}
+
+function cn(...inputs: any[]) {
+  return inputs.filter(Boolean).join(' ');
 }

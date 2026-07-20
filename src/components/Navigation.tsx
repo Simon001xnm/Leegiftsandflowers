@@ -3,16 +3,29 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { UtensilsCrossed, LayoutDashboard, Search, UserCircle, ShoppingCart, Clock } from "lucide-react";
+import { 
+  UtensilsCrossed, 
+  LayoutDashboard, 
+  Search, 
+  UserCircle, 
+  ShoppingCart, 
+  Bike,
+  User,
+  Store
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function Navigation() {
   const pathname = usePathname();
 
   const navLinks = [
     { href: "/restaurants", label: "Restaurants", icon: Search },
-    { href: "/orders", label: "My Orders", icon: Clock },
-    { href: "/dashboard", label: "Partner", icon: LayoutDashboard },
   ];
 
   return (
@@ -48,6 +61,31 @@ export function Navigation() {
                 </Link>
               );
             })}
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground">
+                  <LayoutDashboard className="w-4 h-4" /> Dashboards
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard/customer" className="gap-2">
+                    <User className="w-4 h-4" /> Customer Portal
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="gap-2">
+                    <Store className="w-4 h-4" /> Merchant Portal
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard/rider" className="gap-2">
+                    <Bike className="w-4 h-4" /> Courier Center
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 

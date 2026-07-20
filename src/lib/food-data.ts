@@ -1,4 +1,5 @@
 export type FoodCategory = 'Burger' | 'Pizza' | 'Sushi' | 'Coffee' | 'Healthy' | 'Dessert';
+export type OrderStatus = 'Pending' | 'Preparing' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
 
 export interface Restaurant {
   id: string;
@@ -20,6 +21,17 @@ export interface MenuItem {
   description: string;
   imageUrl: string;
   category: string;
+}
+
+export interface Order {
+  id: string;
+  customerName: string;
+  restaurantName: string;
+  items: string[];
+  total: number;
+  status: OrderStatus;
+  date: string;
+  deliveryAddress: string;
 }
 
 const FOOD_IMAGES = [
@@ -64,28 +76,39 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
     imageUrl: FOOD_IMAGES[2],
     description: 'Freshly prepared sushi and sashimi by master chefs.',
     location: 'Lavington, Nairobi'
+  }
+];
+
+export const MOCK_ORDERS: Order[] = [
+  {
+    id: 'ORD-101',
+    customerName: 'Alex Johnson',
+    restaurantName: 'Burger Haven',
+    items: ['Double Cheese Burger', 'Fries'],
+    total: 1250,
+    status: 'Delivered',
+    date: '2024-05-10',
+    deliveryAddress: 'State House Rd, Nairobi'
   },
   {
-    id: 'r4',
-    name: 'Brew & Beans',
-    category: 'Coffee',
-    rating: 4.7,
-    deliveryTime: '15-25 min',
-    deliveryFee: 100,
-    imageUrl: FOOD_IMAGES[3],
-    description: 'Artisanal coffee and fresh pastries delivered to your door.',
-    location: 'CBD, Nairobi'
+    id: 'ORD-102',
+    customerName: 'Alex Johnson',
+    restaurantName: 'Pizza Pros',
+    items: ['Large Margherita', 'Coke 2L'],
+    total: 1800,
+    status: 'Out for Delivery',
+    date: '2024-05-11',
+    deliveryAddress: 'State House Rd, Nairobi'
   },
   {
-    id: 'r5',
-    name: 'Green Leaf',
-    category: 'Healthy',
-    rating: 4.5,
-    deliveryTime: '25-35 min',
-    deliveryFee: 180,
-    imageUrl: FOOD_IMAGES[4],
-    description: 'Fresh salads, grain bowls, and cold-pressed juices.',
-    location: 'Gigiri, Nairobi'
+    id: 'ORD-103',
+    customerName: 'Jane Smith',
+    restaurantName: 'Sushi Zen',
+    items: ['Salmon Nigiri Set'],
+    total: 2100,
+    status: 'Preparing',
+    date: '2024-05-11',
+    deliveryAddress: 'Gigiri, Nairobi'
   }
 ];
 
@@ -98,23 +121,5 @@ export const MOCK_MENU: MenuItem[] = [
     description: 'Beef patty, cheddar, lettuce, tomato, and our secret sauce.',
     imageUrl: FOOD_IMAGES[0],
     category: 'Mains'
-  },
-  {
-    id: 'm2',
-    restaurantId: 'r2',
-    name: 'Margherita Pizza',
-    price: 1200,
-    description: 'San Marzano tomatoes, fresh mozzarella, basil, and olive oil.',
-    imageUrl: FOOD_IMAGES[1],
-    category: 'Pizza'
-  },
-  {
-    id: 'm3',
-    restaurantId: 'r3',
-    name: 'Salmon Nigiri Set',
-    price: 1800,
-    description: '8 pieces of fresh salmon nigiri with wasabi and ginger.',
-    imageUrl: FOOD_IMAGES[2],
-    category: 'Sushi'
   }
 ];
