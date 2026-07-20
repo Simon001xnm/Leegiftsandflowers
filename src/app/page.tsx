@@ -53,7 +53,10 @@ export default function Home() {
                     className="h-14 pl-12 border-none focus-visible:ring-0 text-lg"
                   />
                 </div>
-                <Button className="h-14 px-10 rounded-xl text-lg font-bold shadow-lg shadow-primary/30">
+                <Button 
+                  variant="ghost" 
+                  className="h-14 px-10 rounded-xl text-lg font-bold text-primary hover:bg-primary/5"
+                >
                   Find Food <ChevronRight className="ml-2 w-5 h-5" />
                 </Button>
               </div>
