@@ -68,10 +68,8 @@ export default function Home() {
               <Badge variant="secondary" className="mb-6 py-1.5 px-4 text-white font-semibold bg-primary/90 backdrop-blur-sm border-none">
                 Fastest Delivery in Nairobi
               </Badge>
-              <h1 className="text-6xl lg:text-8xl font-bold text-white mb-8 leading-tight font-headline">
-                Hungry? <br />
-                <span className="text-accent italic">We've got you covered.</span>
-              </h1>
+              
+              {/* Removed "Hungry? We've got you covered." headline */}
               
               <div className="bg-white/10 backdrop-blur-xl p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 max-w-2xl border border-white/20 animate-in slide-in-from-bottom-4 duration-700">
                 <div className="relative flex-grow">
