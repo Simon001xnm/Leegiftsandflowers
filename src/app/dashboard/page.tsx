@@ -263,7 +263,7 @@ export default function RestaurantOwnerDashboard() {
                 <Card className="border-dashed border-2 bg-accent/5 border-accent animate-in zoom-in-95 duration-300">
                   <CardContent className="p-6 space-y-4">
                     <div className="text-center border-b pb-4">
-                      <h3 className="font-bold text-lg uppercase tracking-tighter">LEE EATS</h3>
+                      <h3 className="font-bold text-lg uppercase tracking-tighter">ABC</h3>
                       <p className="text-[10px] text-muted-foreground">OFFICIAL RECEIPT</p>
                     </div>
                     <div className="text-xs space-y-1">
@@ -401,7 +401,7 @@ export default function RestaurantOwnerDashboard() {
       {receipt && (
         <div id="thermal-receipt" className="print-only font-mono text-black p-4 space-y-4 text-sm w-[80mm] mx-auto bg-white border border-gray-100">
             <div className="text-center space-y-1">
-                <h1 className="text-xl font-bold tracking-tighter">LEE EATS</h1>
+                <h1 className="text-xl font-bold tracking-tighter">ABC</h1>
                 <p className="text-xs">Nairobi, Kenya</p>
                 <p className="text-xs">Tel: +254 700 000000</p>
             </div>
@@ -442,7 +442,7 @@ export default function RestaurantOwnerDashboard() {
 
             <div className="text-center pt-4 space-y-1">
                 <p className="font-bold">THANK YOU FOR YOUR BUSINESS!</p>
-                <p className="text-[10px]">Order processed via Lee Eats POS Terminal</p>
+                <p className="text-[10px]">Order processed via ABC POS Terminal</p>
             </div>
         </div>
       )}

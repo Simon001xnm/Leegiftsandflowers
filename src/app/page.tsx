@@ -72,7 +72,7 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-20">
             <div className="max-w-3xl">
               <Badge variant="secondary" className="mb-6 py-1.5 px-4 text-white font-semibold bg-primary/90 backdrop-blur-sm border-none">
-                Fastest Delivery in Nairobi
+                ABC Delivery - Fastest in Nairobi
               </Badge>
               
               <div className="bg-white/10 backdrop-blur-xl p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 max-w-2xl border border-white/20 animate-in slide-in-from-bottom-4 duration-700">
@@ -184,7 +184,7 @@ export default function Home() {
 
       <footer className="bg-primary text-primary-foreground py-24">
         <div className="container mx-auto px-4 text-center">
-           <p>© 2024 Lee Eats. Proudly serving Nairobi, Kenya.</p>
+           <p>© 2024 ABC. Proudly serving Nairobi, Kenya.</p>
         </div>
       </footer>
     </div>

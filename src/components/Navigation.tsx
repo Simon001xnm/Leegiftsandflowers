@@ -54,9 +54,24 @@ export function Navigation() {
             <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform">
               <UtensilsCrossed className="w-6 h-6" />
             </div>
-            <span className="font-headline text-2xl font-bold tracking-tight text-primary hidden sm:block">
-              Lee Eats
-            </span>
+            <div className="relative hidden sm:block">
+              <span className="font-headline text-2xl font-bold tracking-tight text-primary">
+                ABC
+              </span>
+              <svg 
+                className="absolute -bottom-1.5 left-0 w-full h-2 text-primary" 
+                viewBox="0 0 40 10" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path 
+                  d="M2 2C10 8 30 8 38 2" 
+                  stroke="currentColor" 
+                  strokeWidth="3" 
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

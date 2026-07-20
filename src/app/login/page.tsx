@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState } from "泡";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
@@ -61,7 +61,7 @@ export default function LoginPage() {
             errorEmitter.emit('permission-error', permissionError);
           });
 
-        toast({ title: "Account created!", description: `Welcome to Lee Eats, ${name}.` });
+        toast({ title: "Account created!", description: `Welcome to ABC, ${name}.` });
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         toast({ title: "Welcome back!", description: "Logged in successfully." });
@@ -85,7 +85,22 @@ export default function LoginPage() {
       <main className="flex-grow flex items-center justify-center p-4">
         <Card className="w-full max-w-md border-2 shadow-2xl rounded-[2.5rem] overflow-hidden bg-background">
           <CardHeader className="bg-primary text-primary-foreground text-center pb-8 pt-10">
-            <CardTitle className="text-3xl font-headline font-bold">Lee Eats</CardTitle>
+            <div className="relative mx-auto w-fit mb-2">
+              <CardTitle className="text-4xl font-headline font-bold">ABC</CardTitle>
+              <svg 
+                className="absolute -bottom-2 left-0 w-full h-3 text-white" 
+                viewBox="0 0 40 10" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path 
+                  d="M2 2C10 8 30 8 38 2" 
+                  stroke="currentColor" 
+                  strokeWidth="3" 
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
             <CardDescription className="text-primary-foreground/70">Secure access to Nairobi's best food</CardDescription>
           </CardHeader>
           
@@ -179,7 +194,7 @@ export default function LoginPage() {
             </Tabs>
           </CardContent>
           <CardFooter className="bg-muted/50 p-6 flex flex-col gap-4 text-center">
-             <p className="text-xs text-muted-foreground">By continuing, you agree to Lee Eats Terms of Service and Privacy Policy.</p>
+             <p className="text-xs text-muted-foreground">By continuing, you agree to ABC Terms of Service and Privacy Policy.</p>
           </CardFooter>
         </Card>
       </main>
