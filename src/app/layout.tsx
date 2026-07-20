@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Lee Decors & Flowers | Luxury Floral & Event Design',
-  description: 'Exquisite floral arrangements and premium event decor services for your most precious moments.',
+  title: 'Lee Eats | Fastest Food Delivery in Nairobi',
+  description: 'Order from the best local restaurants in Nairobi with Lee Eats. Fast delivery, fresh food, and great prices.',
 };
 
 export default function RootLayout({
