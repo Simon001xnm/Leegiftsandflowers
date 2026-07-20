@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function Home() {
-  const popularRestaurants = MOCK_RESTAURANTS.slice(0, 3);
+  // Show more restaurants on the landing page as requested
+  const popularRestaurants = MOCK_RESTAURANTS.slice(0, 9);
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-rider');
 
   return (

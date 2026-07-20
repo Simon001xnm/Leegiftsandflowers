@@ -178,6 +178,83 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
     imageUrl: "https://images.unsplash.com/photo-1525755662778-989d0524087e?q=80&w=600&h=400&auto=format&fit=crop",
     description: 'Fast, fresh, and fiery Chinese take-out favorites.',
     location: 'Kileleshwa, Nairobi'
+  },
+  {
+    id: 'r13',
+    name: 'Urban Taps',
+    category: 'Burger',
+    rating: 4.7,
+    deliveryTime: '25-35 min',
+    deliveryFee: 140,
+    imageUrl: "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=600&h=400&auto=format&fit=crop",
+    description: 'Craft burgers and unique sides in the heart of the city.',
+    location: 'Central, Nairobi'
+  },
+  {
+    id: 'r14',
+    name: 'Kuku Choma Spot',
+    category: 'Local',
+    rating: 4.5,
+    deliveryTime: '30-45 min',
+    deliveryFee: 100,
+    imageUrl: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=600&h=400&auto=format&fit=crop",
+    description: 'The best charcoal grilled chicken in Nairobi.',
+    location: 'Embakasi, Nairobi'
+  },
+  {
+    id: 'r15',
+    name: 'Pasta & Beyond',
+    category: 'Healthy',
+    rating: 4.4,
+    deliveryTime: '35-50 min',
+    deliveryFee: 180,
+    imageUrl: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?q=80&w=600&h=400&auto=format&fit=crop",
+    description: 'Authentic Italian pasta made fresh daily.',
+    location: 'Ridgeways, Nairobi'
+  },
+  {
+    id: 'r16',
+    name: 'Berry Bliss',
+    category: 'Dessert',
+    rating: 4.8,
+    deliveryTime: '15-25 min',
+    deliveryFee: 120,
+    imageUrl: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=600&h=400&auto=format&fit=crop",
+    description: 'Healthy desserts and frozen yogurt treats.',
+    location: 'Muthaiga, Nairobi'
+  },
+  {
+    id: 'r17',
+    name: 'Waffle House',
+    category: 'Dessert',
+    rating: 4.6,
+    deliveryTime: '20-30 min',
+    deliveryFee: 150,
+    imageUrl: "https://images.unsplash.com/photo-1573335012937-db414bee01d4?q=80&w=600&h=400&auto=format&fit=crop",
+    description: 'Belgian waffles with all your favorite toppings.',
+    location: 'Westlands, Nairobi'
+  },
+  {
+    id: 'r18',
+    name: 'Thai Orchid',
+    category: 'Chinese',
+    rating: 4.7,
+    deliveryTime: '30-45 min',
+    deliveryFee: 200,
+    imageUrl: "https://images.unsplash.com/photo-1559311648-d46f4d8593d8?q=80&w=600&h=400&auto=format&fit=crop",
+    description: 'Exotic Thai flavors and spicy traditional dishes.',
+    location: 'Lavington, Nairobi'
+  },
+  {
+    id: 'r19',
+    name: 'Brew Master',
+    category: 'Coffee',
+    rating: 4.5,
+    deliveryTime: '10-20 min',
+    deliveryFee: 90,
+    imageUrl: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=600&h=400&auto=format&fit=crop",
+    description: 'Specialty coffee roasting and delicious pastries.',
+    location: 'Kilimani, Nairobi'
   }
 ];
 
