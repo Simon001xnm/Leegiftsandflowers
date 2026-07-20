@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Navigation } from "@/components/Navigation";
@@ -124,7 +125,9 @@ export default function CustomerDashboard() {
 
                       <div className="pt-4 border-t flex justify-between items-center">
                         <p className="text-sm text-muted-foreground">{order.items.join(', ')}</p>
-                        <Button variant="link" className="text-primary font-bold">Track Map</Button>
+                        <Link href={`/track/${order.id}`}>
+                          <Button variant="link" className="text-primary font-bold">Open Tracking Map</Button>
+                        </Link>
                       </div>
                     </CardContent>
                   </Card>

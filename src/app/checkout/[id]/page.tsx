@@ -19,8 +19,8 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
   const [step, setStep] = useState<'checkout' | 'success'>('checkout');
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
+  const [orderId] = useState(`LEE-${Math.floor(100000 + Math.random() * 900000)}`);
 
-  // Mock data for checkout items (In a real app, this would come from state management)
   const orderItems = [
     { name: "Classic Cheeseburger", price: 850, quantity: 2 },
     { name: "Truffle Fries", price: 450, quantity: 1 }
@@ -184,7 +184,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                 <div className="flex items-center justify-between mb-4">
                   <div className="text-left">
                     <p className="text-xs font-bold text-emerald-700 uppercase">Order Tracking ID</p>
-                    <p className="text-xl font-bold text-primary">LEE-{Math.floor(100000 + Math.random() * 900000)}</p>
+                    <p className="text-xl font-bold text-primary">{orderId}</p>
                   </div>
                   <Badge className="bg-emerald-100 text-emerald-700">Preparing</Badge>
                 </div>
@@ -200,7 +200,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                   Order more
                 </Button>
               </Link>
-              <Link href="/dashboard/customer">
+              <Link href={`/track/${orderId}`}>
                 <Button className="h-12 px-8 rounded-xl gap-2">
                   Track in Real-time <Bike className="w-4 h-4" />
                 </Button>
