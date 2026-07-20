@@ -7,22 +7,24 @@ import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Wallet, Smartphone, LogIn } from "lucide-react";
+import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Smartphone, LogIn, ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { useUser } from "@/firebase";
+import { useUser, useFirestore } from "@/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 export default function CheckoutPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
   const { user, loading: authLoading } = useUser();
+  const firestore = useFirestore();
   const restaurant = MOCK_RESTAURANTS.find(r => r.id === id);
   const [step, setStep] = useState<'checkout' | 'success'>('checkout');
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
-  const [orderId] = useState(`LEE-${Math.floor(100000 + Math.random() * 900000)}`);
 
   const orderItems = [
     { name: "Classic Cheeseburger", price: 850, quantity: 2 },
@@ -33,21 +35,40 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
   const deliveryFee = restaurant?.deliveryFee || 150;
   const total = subtotal + deliveryFee;
 
-  useEffect(() => {
-    // If auth is loaded and no user, we could optionally show a guest message 
-    // but per requirements, we will nudge them to sign in at the checkout action
-  }, [user, authLoading]);
-
   const handleCheckout = () => {
     if (!user) {
       router.push(`/login?redirect=/checkout/${id}`);
       return;
     }
+    
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setStep('success');
-    }, 2000);
+    const orderId = `LEE-${Math.floor(100000 + Math.random() * 900000)}`;
+    const orderData = {
+      id: orderId,
+      customerId: user.uid,
+      restaurantId: id,
+      items: orderItems,
+      total: total,
+      status: "pending",
+      deliveryAddress: "Apartment 4B, Silver Heights, Kileleshwa, Nairobi",
+      createdAt: new Date().toISOString()
+    };
+
+    const orderRef = doc(firestore, "orders", orderId);
+    setDoc(orderRef, orderData)
+      .then(() => {
+        setLoading(false);
+        setStep('success');
+      })
+      .catch(async (error) => {
+        setLoading(false);
+        const permissionError = new FirestorePermissionError({
+          path: orderRef.path,
+          operation: 'create',
+          requestResourceData: orderData,
+        });
+        errorEmitter.emit('permission-error', permissionError);
+      });
   };
 
   if (!restaurant) return <div>Restaurant not found</div>;
@@ -64,11 +85,11 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                 <Card className="border-accent bg-accent/5 border-dashed">
                   <CardContent className="p-6 flex items-center justify-between">
                     <div>
-                      <p className="font-bold text-primary">Almost there!</p>
-                      <p className="text-sm text-muted-foreground">Sign in to earn loyalty points on this order.</p>
+                      <p className="font-bold text-primary">Signed out</p>
+                      <p className="text-sm text-muted-foreground">Log in to track your order and earn points.</p>
                     </div>
                     <Link href={`/login?redirect=/checkout/${id}`}>
-                      <Button variant="outline" size="sm" className="gap-2">
+                      <Button variant="outline" size="sm" className="gap-2 border-primary text-primary">
                         <LogIn className="w-4 h-4" /> Sign In
                       </Button>
                     </Link>
@@ -76,30 +97,29 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                 </Card>
               )}
 
-              <Card className="border-2">
+              <Card className="border-2 rounded-[2rem] overflow-hidden">
                 <CardHeader>
-                  <CardTitle className="font-headline">Delivery Address</CardTitle>
-                  <CardDescription>Where should we bring your food?</CardDescription>
+                  <CardTitle className="font-headline flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-primary" /> Delivery Details
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-4 p-4 rounded-xl bg-muted/50 border">
-                    <MapPin className="w-5 h-5 text-primary mt-1" />
                     <div className="flex-grow">
-                      <p className="font-bold">Home</p>
+                      <p className="font-bold">Home Address</p>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         Apartment 4B, Silver Heights,<br />
                         Kileleshwa, Nairobi, Kenya
                       </p>
                     </div>
-                    <Button variant="ghost" size="sm" className="text-primary font-bold">Change</Button>
+                    <Button variant="ghost" size="sm" className="text-primary font-bold">Edit</Button>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-2">
+              <Card className="border-2 rounded-[2rem] overflow-hidden">
                 <CardHeader>
-                  <CardTitle className="font-headline">Payment Method</CardTitle>
-                  <CardDescription>Select your preferred way to pay</CardDescription>
+                  <CardTitle className="font-headline">Payment Choice</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid gap-4">
@@ -111,7 +131,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                         <Smartphone className="w-5 h-5 text-primary" />
                         <div className="space-y-0.5">
                           <p className="font-bold">M-Pesa</p>
-                          <p className="text-xs text-muted-foreground">Secure mobile payment</p>
+                          <p className="text-xs text-muted-foreground">Instant mobile checkout</p>
                         </div>
                       </div>
                       <RadioGroupItem value="mpesa" id="mpesa" />
@@ -124,8 +144,8 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                       <div className="flex items-center gap-3">
                         <CreditCard className="w-5 h-5 text-primary" />
                         <div className="space-y-0.5">
-                          <p className="font-bold">Credit/Debit Card</p>
-                          <p className="text-xs text-muted-foreground">Visa, Mastercard</p>
+                          <p className="font-bold">Card</p>
+                          <p className="text-xs text-muted-foreground">Visa / Mastercard</p>
                         </div>
                       </div>
                       <RadioGroupItem value="card" id="card" />
@@ -136,9 +156,9 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
             </div>
 
             <div className="lg:col-span-2">
-              <Card className="border-2 shadow-xl sticky top-24 overflow-hidden rounded-[2rem]">
+              <Card className="border-2 shadow-xl sticky top-24 overflow-hidden rounded-[2.5rem]">
                 <CardHeader className="bg-primary text-primary-foreground">
-                  <CardTitle className="font-headline">Order Summary</CardTitle>
+                  <CardTitle className="font-headline">Order Total</CardTitle>
                   <p className="text-sm opacity-80">{restaurant.name}</p>
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
@@ -156,15 +176,11 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
 
                   <div className="pt-6 border-t space-y-3">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Subtotal</span>
-                      <span className="font-bold">KES {subtotal.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Delivery Fee</span>
+                      <span className="text-muted-foreground">Delivery</span>
                       <span className="font-bold">KES {deliveryFee.toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-xl font-bold text-primary pt-4 border-t">
-                      <span>Total Price</span>
+                    <div className="flex justify-between text-2xl font-bold text-primary pt-4 border-t">
+                      <span>Total</span>
                       <span>KES {total.toLocaleString()}</span>
                     </div>
                   </div>
@@ -173,9 +189,9 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                   <Button 
                     className="w-full h-14 text-lg rounded-2xl gap-2 shadow-lg shadow-primary/20" 
                     onClick={handleCheckout}
-                    disabled={loading}
+                    disabled={loading || authLoading}
                   >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>{!user ? 'Sign in to Place Order' : 'Place Order'} <ArrowRight className="w-5 h-5" /></>}
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>{!user ? 'Sign in to Pay' : 'Confirm Order'} <ArrowRight className="w-5 h-5" /></>}
                   </Button>
                 </CardFooter>
               </Card>
@@ -187,21 +203,21 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
               <CircleCheck className="w-12 h-12" />
             </div>
             <div className="space-y-4">
-              <h1 className="text-4xl font-bold font-headline text-primary">Your order is placed!</h1>
+              <h1 className="text-4xl font-bold font-headline text-primary">Payment Received!</h1>
               <p className="text-muted-foreground text-lg">
-                Your food from {restaurant.name} is being prepared and will be delivered within {restaurant.deliveryTime}.
+                Success! Your meal from {restaurant.name} is now being prepared.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link href="/restaurants">
-                <Button variant="outline" className="h-12 px-8 rounded-xl gap-2">
-                  Order more
+                <Button variant="outline" className="h-12 px-8 rounded-xl">
+                  Order Again
                 </Button>
               </Link>
-              <Link href={`/track/${orderId}`}>
+              <Link href="/dashboard/customer">
                 <Button className="h-12 px-8 rounded-xl gap-2">
-                  Track in Real-time <Bike className="w-4 h-4" />
+                  Track My Food <Bike className="w-4 h-4" />
                 </Button>
               </Link>
             </div>

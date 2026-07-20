@@ -9,17 +9,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Store, Bike, Mail, Lock, Loader2, ArrowRight } from "lucide-react";
+import { User, Store, Bike, Mail, Lock, Loader2, UserPlus, LogIn } from "lucide-react";
 import { useAuth, useFirestore } from "@/firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { auth } = useAuth();
-  const { firestore } = useFirestore();
+  const auth = useAuth();
+  const firestore = useFirestore();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState<'customer' | 'merchant' | 'rider'>('customer');
@@ -40,14 +42,24 @@ export default function LoginPage() {
         const userCred = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCred.user, { displayName: name });
         
-        // Create user profile in Firestore
-        await setDoc(doc(firestore, "users", userCred.user.uid), {
+        const userProfile = {
           uid: userCred.user.uid,
           name,
           email,
           role,
           createdAt: new Date().toISOString(),
-        });
+        };
+
+        const userDocRef = doc(firestore, "users", userCred.user.uid);
+        setDoc(userDocRef, userProfile)
+          .catch(async (error) => {
+            const permissionError = new FirestorePermissionError({
+              path: userDocRef.path,
+              operation: 'create',
+              requestResourceData: userProfile,
+            });
+            errorEmitter.emit('permission-error', permissionError);
+          });
 
         toast({ title: "Account created!", description: `Welcome to Lee Eats, ${name}.` });
       } else {
@@ -71,17 +83,21 @@ export default function LoginPage() {
       <Navigation />
       
       <main className="flex-grow flex items-center justify-center p-4">
-        <Card className="w-full max-w-md border-2 shadow-2xl rounded-[2.5rem] overflow-hidden">
+        <Card className="w-full max-w-md border-2 shadow-2xl rounded-[2.5rem] overflow-hidden bg-background">
           <CardHeader className="bg-primary text-primary-foreground text-center pb-8 pt-10">
             <CardTitle className="text-3xl font-headline font-bold">Lee Eats</CardTitle>
-            <CardDescription className="text-primary-foreground/70">Nairobi's favorite food companion</CardDescription>
+            <CardDescription className="text-primary-foreground/70">Secure access to Nairobi's best food</CardDescription>
           </CardHeader>
           
           <CardContent className="p-8">
             <Tabs defaultValue="login" className="space-y-6">
               <TabsList className="grid w-full grid-cols-2 rounded-xl h-12">
-                <TabsTrigger value="login" className="rounded-lg font-bold">Login</TabsTrigger>
-                <TabsTrigger value="signup" className="rounded-lg font-bold">Sign Up</TabsTrigger>
+                <TabsTrigger value="login" className="rounded-lg font-bold flex items-center gap-2">
+                  <LogIn className="w-4 h-4" /> Login
+                </TabsTrigger>
+                <TabsTrigger value="signup" className="rounded-lg font-bold flex items-center gap-2">
+                  <UserPlus className="w-4 h-4" /> Sign Up
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="login">
@@ -109,9 +125,10 @@ export default function LoginPage() {
               <TabsContent value="signup">
                 <div className="space-y-6">
                   <div className="space-y-3">
-                    <Label className="text-xs uppercase font-bold text-muted-foreground tracking-widest">Choose Your Persona</Label>
+                    <Label className="text-xs uppercase font-bold text-muted-foreground tracking-widest">Choose Your Account Type</Label>
                     <div className="grid grid-cols-3 gap-2">
                       <Button 
+                        type="button"
                         variant={role === 'customer' ? 'default' : 'outline'} 
                         className="flex-col h-20 gap-1 rounded-xl"
                         onClick={() => setRole('customer')}
@@ -120,6 +137,7 @@ export default function LoginPage() {
                         <span className="text-[10px]">Customer</span>
                       </Button>
                       <Button 
+                        type="button"
                         variant={role === 'merchant' ? 'default' : 'outline'} 
                         className="flex-col h-20 gap-1 rounded-xl"
                         onClick={() => setRole('merchant')}
@@ -128,6 +146,7 @@ export default function LoginPage() {
                         <span className="text-[10px]">Merchant</span>
                       </Button>
                       <Button 
+                        type="button"
                         variant={role === 'rider' ? 'default' : 'outline'} 
                         className="flex-col h-20 gap-1 rounded-xl"
                         onClick={() => setRole('rider')}

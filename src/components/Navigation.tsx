@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -12,9 +13,11 @@ import {
   Bike,
   User,
   Store,
-  Menu
+  Menu,
+  LogIn
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useUser } from "@/firebase";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,15 +34,16 @@ import {
 
 export function Navigation() {
   const pathname = usePathname();
+  const { user } = useUser();
 
   const navLinks = [
     { href: "/restaurants", label: "Explore", icon: Search },
   ];
 
   const dashLinks = [
-    { href: "/dashboard/customer", label: "Customer Portal", icon: User },
-    { href: "/dashboard", label: "Merchant Portal", icon: Store },
-    { href: "/dashboard/rider", label: "Courier Center", icon: Bike },
+    { href: "/dashboard/customer", label: "My Orders", icon: User },
+    { href: "/dashboard", label: "Restaurant", icon: Store },
+    { href: "/dashboard/rider", label: "Courier", icon: Bike },
   ];
 
   return (
@@ -79,7 +83,7 @@ export function Navigation() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground font-bold hover:text-primary">
-                  <LayoutDashboard className="w-4 h-4" /> Portals
+                  <LayoutDashboard className="w-4 h-4" /> Management
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56 rounded-2xl p-2">
@@ -98,15 +102,24 @@ export function Navigation() {
 
         <div className="flex items-center gap-2">
           <div className="flex items-center bg-muted/50 rounded-full p-1 border">
-             <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-background h-10 w-10">
+            <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-background h-10 w-10">
               <ShoppingCart className="w-5 h-5 text-primary" />
-              <span className="absolute top-1 right-1 bg-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ring-background">0</span>
+              <span className="absolute top-1 right-1 bg-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ring-background">2</span>
             </Button>
-            <Link href="/profile" className="hidden sm:block">
-              <Button variant="ghost" size="icon" className="rounded-full hover:bg-background h-10 w-10">
-                <UserCircle className="w-6 h-6 text-primary" />
-              </Button>
-            </Link>
+            
+            {user ? (
+              <Link href="/profile">
+                <Button variant="ghost" size="icon" className="rounded-full hover:bg-background h-10 w-10">
+                  <UserCircle className="w-6 h-6 text-primary" />
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-2 font-bold text-primary">
+                  <LogIn className="w-4 h-4" /> Sign In
+                </Button>
+              </Link>
+            )}
           </div>
 
           <Sheet>
@@ -115,9 +128,9 @@ export function Navigation() {
                 <Menu className="w-6 h-6 text-primary" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="rounded-l-3xl p-6">
+            <SheetContent side="right" className="rounded-l-[2rem] p-6">
               <SheetHeader className="mb-8">
-                <SheetTitle className="text-left font-headline text-2xl text-primary">Lee Eats Menu</SheetTitle>
+                <SheetTitle className="text-left font-headline text-2xl text-primary">Main Menu</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-4">
                 <Link href="/" className="flex items-center gap-4 p-4 rounded-2xl bg-muted/50 font-bold">
@@ -128,8 +141,13 @@ export function Navigation() {
                     {link.label}
                   </Link>
                 ))}
+                {!user && (
+                  <Link href="/login" className="flex items-center gap-4 p-4 rounded-2xl bg-primary text-white font-bold">
+                    <LogIn className="w-5 h-5" /> Sign In
+                  </Link>
+                )}
                 <div className="pt-4 border-t mt-4">
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 ml-4">Management</p>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 ml-4">Portals</p>
                   {dashLinks.map((link) => (
                     <Link key={link.href} href={link.href} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-primary/5 transition-colors mb-2">
                       <link.icon className="w-5 h-5 text-primary" />
