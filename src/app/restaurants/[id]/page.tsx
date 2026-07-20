@@ -1,3 +1,4 @@
+
 "use client";
 
 import { use, useState, useMemo } from "react";
@@ -6,7 +7,7 @@ import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, MOCK_MENU, MenuItem } from "@/lib/food-data";
-import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Info, Trash2, Utensils, X } from "lucide-react";
+import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Info, Trash2, Utensils, X, CreditCard } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -104,76 +105,16 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
         </div>
 
         <div className="container mx-auto px-4 py-12">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Menu Sections */}
-            <div className="lg:col-span-2 space-y-12">
-              <Tabs defaultValue="Mains" className="w-full">
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-3xl font-bold font-headline text-primary">Menu</h2>
-                  <TabsList className="bg-muted p-1 h-12 rounded-xl">
-                    {categories.map(cat => (
-                      <TabsTrigger key={cat} value={cat} className="rounded-lg px-6 font-bold">{cat}</TabsTrigger>
-                    ))}
-                  </TabsList>
-                </div>
-                
-                {categories.map(cat => (
-                  <TabsContent key={cat} value={cat} className="mt-0">
-                    <div className="grid sm:grid-cols-2 gap-6">
-                      {menuItems.filter(item => item.category === cat).map((item) => (
-                        <Card key={item.id} className="overflow-hidden border-none shadow-sm hover:shadow-md transition-shadow group">
-                          <div className="flex h-32">
-                            <div className="p-4 flex-grow space-y-2">
-                              <h3 className="font-bold text-lg text-primary">{item.name}</h3>
-                              <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{item.description}</p>
-                              <div className="flex items-center justify-between pt-1">
-                                <span className="font-bold text-primary">KES {item.price}</span>
-                                <Button size="icon" className="w-8 h-8 rounded-full shadow-lg hover:scale-110 transition-transform" onClick={() => addToCart(item)}>
-                                  <Plus className="w-4 h-4" />
-                                </Button>
-                              </div>
-                            </div>
-                            <div className="w-32 h-full relative shrink-0 overflow-hidden">
-                              <Image src={item.imageUrl} alt={item.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                            </div>
-                          </div>
-                        </Card>
-                      ))}
-                      {menuItems.filter(item => item.category === cat).length === 0 && (
-                        <div className="col-span-2 py-12 text-center text-muted-foreground bg-muted/30 rounded-2xl">
-                          No items found in this category.
-                        </div>
-                      )}
-                    </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
-
-              <section className="bg-secondary/30 rounded-3xl p-8 border border-primary/5">
-                <h2 className="text-2xl font-bold font-headline text-primary mb-4 flex items-center gap-2">
-                  <Info className="w-6 h-6" /> Restaurant Info
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  {restaurant.description} We take pride in sourcing the freshest ingredients from local farmers in Kenya. Our kitchen maintains the highest standards of hygiene and quality.
-                </p>
-                <div className="grid md:grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center gap-3">
-                    <Bike className="w-5 h-5 text-primary" /> Delivery fee: KES {restaurant.deliveryFee}
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Star className="w-5 h-5 text-accent fill-accent" /> Rating: {restaurant.rating} (500+ reviews)
-                  </div>
-                </div>
-              </section>
-            </div>
-
-            {/* Sticky Sidebar / Cart Summary */}
-            <div className="space-y-6">
-              <Card className="sticky top-24 border-2 border-primary/10 shadow-xl overflow-hidden rounded-[2.5rem] bg-card">
+          {/* Main Grid: Swapped to put Checkout/Cart FIRST */}
+          <div className="grid lg:grid-cols-3 gap-12 items-start">
+            
+            {/* Sidebar / Checkout Summary - NOW ON TOP/LEFT */}
+            <div className="space-y-6 lg:order-1 order-1">
+              <Card className="border-2 border-primary/10 shadow-xl overflow-hidden rounded-[2.5rem] bg-card">
                 <CardHeader className="bg-primary/5 pb-6">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-2xl flex items-center gap-2 text-primary">
-                      <ShoppingCart className="w-6 h-6" /> Your Order
+                      <ShoppingCart className="w-6 h-6" /> Order Summary
                     </CardTitle>
                     {cart.length > 0 && (
                       <Badge variant="secondary" className="rounded-full bg-primary text-white">
@@ -189,8 +130,8 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                       <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
                         <Utensils className="w-10 h-10 text-muted-foreground/40" />
                       </div>
-                      <p className="text-muted-foreground font-bold">Hungry? Fill your cart!</p>
-                      <p className="text-xs text-muted-foreground max-w-[200px] mx-auto">Browse our delicious menu and add items to start your delivery.</p>
+                      <p className="text-muted-foreground font-bold font-headline text-lg">Your basket is empty</p>
+                      <p className="text-xs text-muted-foreground max-w-[200px] mx-auto">Discover delicious items from our menu below to start your order.</p>
                     </div>
                   ) : (
                     <div className="space-y-6 max-h-[40vh] overflow-auto pr-2 no-scrollbar">
@@ -251,12 +192,100 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                       className="w-full h-14 text-lg rounded-2xl gap-3 shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" 
                       disabled={cart.length === 0}
                     >
-                      Go to Checkout <ShoppingCart className="w-5 h-5" />
+                      Continue to Checkout <ArrowLeft className="w-5 h-5 rotate-180" />
                     </Button>
                   </Link>
                 </CardFooter>
               </Card>
+
+              {/* Promo / Info Badge */}
+              <div className="bg-primary/5 rounded-3xl p-6 border border-primary/10 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shrink-0">
+                  <CreditCard className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="font-bold text-primary text-sm">Safe & Secure Payments</p>
+                  <p className="text-xs text-muted-foreground">M-Pesa, Visa, and Mastercard accepted.</p>
+                </div>
+              </div>
             </div>
+
+            {/* Menu Items / Products - NOW BELOW CHECKOUT ON MOBILE */}
+            <div className="lg:col-span-2 space-y-12 lg:order-2 order-2">
+              <Tabs defaultValue="Mains" className="w-full">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+                  <h2 className="text-3xl font-bold font-headline text-primary">Select Products</h2>
+                  <TabsList className="bg-muted p-1 h-12 rounded-xl flex-wrap">
+                    {categories.map(cat => (
+                      <TabsTrigger key={cat} value={cat} className="rounded-lg px-6 font-bold flex-grow md:flex-grow-0">{cat}</TabsTrigger>
+                    ))}
+                  </TabsList>
+                </div>
+                
+                {categories.map(cat => (
+                  <TabsContent key={cat} value={cat} className="mt-0 outline-none">
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      {menuItems.filter(item => item.category === cat).map((item) => (
+                        <Card key={item.id} className="overflow-hidden border-none shadow-sm hover:shadow-md transition-shadow group rounded-2xl">
+                          <div className="flex h-36">
+                            <div className="p-4 flex-grow space-y-2 flex flex-col justify-center">
+                              <h3 className="font-bold text-lg text-primary line-clamp-1">{item.name}</h3>
+                              <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed h-8">{item.description}</p>
+                              <div className="flex items-center justify-between pt-2">
+                                <span className="font-bold text-primary">KES {item.price}</span>
+                                <Button size="icon" className="w-10 h-10 rounded-xl shadow-lg hover:scale-110 transition-all bg-primary hover:bg-primary/90" onClick={() => addToCart(item)}>
+                                  <Plus className="w-5 h-5" />
+                                </Button>
+                              </div>
+                            </div>
+                            <div className="w-36 h-full relative shrink-0 overflow-hidden bg-muted">
+                              <Image 
+                                src={item.imageUrl} 
+                                alt={item.name} 
+                                fill 
+                                className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                              />
+                            </div>
+                          </div>
+                        </Card>
+                      ))}
+                      {menuItems.filter(item => item.category === cat).length === 0 && (
+                        <div className="col-span-2 py-16 text-center text-muted-foreground bg-muted/20 rounded-[2rem] border-2 border-dashed">
+                          <Utensils className="w-8 h-8 mx-auto mb-2 opacity-20" />
+                          <p>No products found in this category.</p>
+                        </div>
+                      )}
+                    </div>
+                  </TabsContent>
+                ))}
+              </Tabs>
+
+              <section className="bg-secondary/30 rounded-[2.5rem] p-10 border border-primary/5">
+                <h2 className="text-2xl font-bold font-headline text-primary mb-4 flex items-center gap-2">
+                  <Info className="w-6 h-6 text-primary" /> About {restaurant.name}
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
+                  {restaurant.description} We take pride in sourcing the freshest ingredients from local farmers in Kenya. Our kitchen maintains the highest standards of hygiene and quality.
+                </p>
+                <div className="grid md:grid-cols-2 gap-6 text-sm">
+                  <div className="flex items-center gap-3 p-4 bg-white rounded-2xl shadow-sm">
+                    <Bike className="w-6 h-6 text-primary" /> 
+                    <div>
+                      <p className="font-bold text-primary">Standard Delivery</p>
+                      <p className="text-muted-foreground">KES {restaurant.deliveryFee} • {restaurant.deliveryTime}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-4 bg-white rounded-2xl shadow-sm">
+                    <Star className="w-6 h-6 text-accent fill-accent" /> 
+                    <div>
+                      <p className="font-bold text-primary">Highest Rated</p>
+                      <p className="text-muted-foreground">{restaurant.rating} (500+ Local Reviews)</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
           </div>
         </div>
       </main>
