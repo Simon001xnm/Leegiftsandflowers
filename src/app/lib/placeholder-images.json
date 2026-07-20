@@ -14,6 +14,18 @@
       "imageHint": "food delivery"
     },
     {
+      "id": "hero-rider-3",
+      "description": "Delivery courier in Nairobi",
+      "imageUrl": "/Klickpin.com-%20710794753726664890-pin-id-710794753726664890.jpg",
+      "imageHint": "delivery rider"
+    },
+    {
+      "id": "hero-rider-4",
+      "description": "Fast food delivery personnel",
+      "imageUrl": "/From%20Klickpin.com-%201072067886316355785-pin-id-1072067886316355785-story-1.jpg",
+      "imageHint": "food courier"
+    },
+    {
       "id": "burger-hero",
       "description": "Delicious juicy burger with fries",
       "imageUrl": "https://picsum.photos/seed/burger1/800/600",
