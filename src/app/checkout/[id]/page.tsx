@@ -2,19 +2,22 @@
 "use client";
 
 import { use, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Wallet, Smartphone } from "lucide-react";
+import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Wallet, Smartphone, LogIn } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { useUser } from "@/firebase";
 
 export default function CheckoutPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const router = useRouter();
+  const { user, loading: authLoading } = useUser();
   const restaurant = MOCK_RESTAURANTS.find(r => r.id === id);
   const [step, setStep] = useState<'checkout' | 'success'>('checkout');
   const [loading, setLoading] = useState(false);
@@ -30,7 +33,16 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
   const deliveryFee = restaurant?.deliveryFee || 150;
   const total = subtotal + deliveryFee;
 
+  useEffect(() => {
+    // If auth is loaded and no user, we could optionally show a guest message 
+    // but per requirements, we will nudge them to sign in at the checkout action
+  }, [user, authLoading]);
+
   const handleCheckout = () => {
+    if (!user) {
+      router.push(`/login?redirect=/checkout/${id}`);
+      return;
+    }
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -48,6 +60,22 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
         {step === 'checkout' ? (
           <div className="grid lg:grid-cols-5 gap-8">
             <div className="lg:col-span-3 space-y-6">
+              {!user && !authLoading && (
+                <Card className="border-accent bg-accent/5 border-dashed">
+                  <CardContent className="p-6 flex items-center justify-between">
+                    <div>
+                      <p className="font-bold text-primary">Almost there!</p>
+                      <p className="text-sm text-muted-foreground">Sign in to earn loyalty points on this order.</p>
+                    </div>
+                    <Link href={`/login?redirect=/checkout/${id}`}>
+                      <Button variant="outline" size="sm" className="gap-2">
+                        <LogIn className="w-4 h-4" /> Sign In
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              )}
+
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle className="font-headline">Delivery Address</CardTitle>
@@ -102,20 +130,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                       </div>
                       <RadioGroupItem value="card" id="card" />
                     </Label>
-
-                    <Label
-                      htmlFor="cash"
-                      className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'cash' ? 'border-primary bg-primary/5' : 'hover:bg-muted'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <Wallet className="w-5 h-5 text-primary" />
-                        <div className="space-y-0.5">
-                          <p className="font-bold">Cash on Delivery</p>
-                          <p className="text-xs text-muted-foreground">Pay when you receive</p>
-                        </div>
-                      </div>
-                      <RadioGroupItem value="cash" id="cash" />
-                    </Label>
                   </RadioGroup>
                 </CardContent>
               </Card>
@@ -161,7 +175,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                     onClick={handleCheckout}
                     disabled={loading}
                   >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Place Order <ArrowRight className="w-5 h-5" /></>}
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>{!user ? 'Sign in to Place Order' : 'Place Order'} <ArrowRight className="w-5 h-5" /></>}
                   </Button>
                 </CardFooter>
               </Card>
@@ -178,21 +192,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                 Your food from {restaurant.name} is being prepared and will be delivered within {restaurant.deliveryTime}.
               </p>
             </div>
-
-            <Card className="border-2 border-emerald-100 bg-emerald-50/30">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-left">
-                    <p className="text-xs font-bold text-emerald-700 uppercase">Order Tracking ID</p>
-                    <p className="text-xl font-bold text-primary">{orderId}</p>
-                  </div>
-                  <Badge className="bg-emerald-100 text-emerald-700">Preparing</Badge>
-                </div>
-                <div className="h-2 w-full bg-emerald-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-emerald-500 w-1/4 animate-pulse rounded-full" />
-                </div>
-              </CardContent>
-            </Card>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link href="/restaurants">

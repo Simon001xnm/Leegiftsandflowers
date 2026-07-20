@@ -1,10 +1,17 @@
+
 {
   "placeholderImages": [
     {
-      "id": "hero-rider",
+      "id": "hero-rider-1",
       "description": "Professional delivery rider on a scooter",
       "imageUrl": "/4eb2df709a9485b9045e3b464e1caef0.jpg",
       "imageHint": "delivery rider"
+    },
+    {
+      "id": "hero-rider-2",
+      "description": "Nairobi food delivery service",
+      "imageUrl": "/5aea2e51aa48601c2c82b82cbc7e5b20.jpg",
+      "imageHint": "food delivery"
     },
     {
       "id": "burger-hero",
@@ -17,12 +24,6 @@
       "description": "Hot pepperoni pizza being sliced",
       "imageUrl": "https://picsum.photos/seed/pizza1/800/600",
       "imageHint": "pizza"
-    },
-    {
-      "id": "sushi-hero",
-      "description": "Fresh sushi platter set",
-      "imageUrl": "https://picsum.photos/seed/sushi1/800/600",
-      "imageHint": "sushi"
     }
   ]
 }

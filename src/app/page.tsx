@@ -1,4 +1,7 @@
 
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -8,10 +11,23 @@ import { Search, MapPin, Star, Clock, ArrowRight, Utensils, Bike, Wallet, Chevro
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
+  const [currentBgIndex, setCurrentBgIndex] = useState(0);
   const popularRestaurants = MOCK_RESTAURANTS.slice(0, 9);
-  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-rider');
+  
+  const heroImages = PlaceHolderImages.filter(img => img.id.startsWith('hero-rider'));
+
+  useEffect(() => {
+    if (heroImages.length <= 1) return;
+    
+    const interval = setInterval(() => {
+      setCurrentBgIndex((prev) => (prev + 1) % heroImages.length);
+    }, 45000); // 45 seconds as requested
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -20,22 +36,34 @@ export default function Home() {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative min-h-[85vh] flex items-center overflow-hidden py-20 lg:py-32">
-          {/* Background Image with Overlay */}
+          {/* Sliding Background Images */}
           <div className="absolute inset-0 z-0">
-            {heroImage && (
-              <Image 
-                src={heroImage.imageUrl} 
-                alt={heroImage.description}
-                fill
-                className="object-cover"
-                priority
-                data-ai-hint={heroImage.imageHint}
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
+            {heroImages.map((img, index) => (
+              <div
+                key={img.id}
+                className={cn(
+                  "absolute inset-0 transition-opacity duration-[3000ms] ease-in-out",
+                  index === currentBgIndex ? "opacity-100 scale-110 translate-y-4" : "opacity-0 scale-100 translate-y-0"
+                )}
+                style={{
+                  transitionProperty: 'opacity, transform',
+                  transitionDuration: index === currentBgIndex ? '45000ms' : '3000ms'
+                }}
+              >
+                <Image 
+                  src={img.imageUrl} 
+                  alt={img.description}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                  data-ai-hint={img.imageHint}
+                />
+              </div>
+            ))}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10" />
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 relative z-20">
             <div className="max-w-3xl">
               <Badge variant="secondary" className="mb-6 py-1.5 px-4 text-white font-semibold bg-primary/90 backdrop-blur-sm border-none">
                 Fastest Delivery in Nairobi
@@ -131,95 +159,11 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Why Choose Us */}
-        <section className="py-24 bg-secondary/20 rounded-[4rem] mx-4 lg:mx-8 mb-24 overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold font-headline text-primary mb-6">Why Lee Eats?</h2>
-              <p className="text-muted-foreground text-lg italic">"Connecting Nairobi's best kitchens to your dining table with speed and care."</p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-16">
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="w-20 h-20 bg-primary rounded-[2rem] flex items-center justify-center text-white shadow-xl shadow-primary/20 rotate-3 group-hover:rotate-0 transition-transform">
-                  <Bike className="w-10 h-10" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">Lightning Fast</h3>
-                  <p className="text-muted-foreground leading-relaxed">Average delivery time is under 30 minutes. Hot food, guaranteed from kitchen to door.</p>
-                </div>
-              </div>
-              
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="w-20 h-20 bg-accent rounded-[2rem] flex items-center justify-center text-white shadow-xl shadow-accent/20 -rotate-3 group-hover:rotate-0 transition-transform">
-                  <Star className="w-10 h-10" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">Top Rated</h3>
-                  <p className="text-muted-foreground leading-relaxed">We curate our partners. Only the best-rated restaurants in the city make it onto Lee Eats.</p>
-                </div>
-              </div>
-              
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="w-20 h-20 bg-primary rounded-[2rem] flex items-center justify-center text-white shadow-xl shadow-primary/20 rotate-6 group-hover:rotate-0 transition-transform">
-                  <Wallet className="w-10 h-10" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-primary mb-3">Best Value</h3>
-                  <p className="text-muted-foreground leading-relaxed">No hidden fees, no surge pricing. Earn exclusive rewards with every meal you order.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="bg-primary text-primary-foreground py-24">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-12 mb-20">
-            <div className="col-span-2 space-y-6">
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-primary shadow-xl">
-                  <Utensils className="w-7 h-7" />
-                </div>
-                <span className="font-headline text-3xl font-bold tracking-tight text-white">
-                  Lee Eats
-                </span>
-              </Link>
-              <p className="text-primary-foreground/70 text-lg max-w-sm">
-                Nairobi's favorite food delivery app. Fresh, fast, and always delicious.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h4 className="font-bold text-xl mb-6 text-accent">Quick Links</h4>
-              <nav className="flex flex-col gap-4">
-                <Link href="/restaurants" className="hover:text-accent transition-colors font-medium">Browse All Spots</Link>
-                <Link href="/dashboard" className="hover:text-accent transition-colors font-medium">Become a Partner</Link>
-                <Link href="/dashboard/rider" className="hover:text-accent transition-colors font-medium">Join the Rider Crew</Link>
-              </nav>
-            </div>
-            <div className="space-y-4">
-              <h4 className="font-bold text-xl mb-6 text-accent">Support</h4>
-              <nav className="flex flex-col gap-4">
-                <Link href="#" className="hover:text-accent transition-colors font-medium">Help Center</Link>
-                <Link href="#" className="hover:text-accent transition-colors font-medium">Contact Us</Link>
-                <Link href="#" className="hover:text-accent transition-colors font-medium">Privacy Policy</Link>
-              </nav>
-            </div>
-          </div>
-          
-          <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-medium text-primary-foreground/50">
-            <p>© 2024 Lee Eats. Proudly serving Nairobi, Kenya.</p>
-            <div className="flex gap-10">
-              <span className="hover:text-white transition-colors cursor-pointer">Instagram</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Twitter</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Facebook</span>
-            </div>
-          </div>
+        <div className="container mx-auto px-4 text-center">
+           <p>© 2024 Lee Eats. Proudly serving Nairobi, Kenya.</p>
         </div>
       </footer>
     </div>
