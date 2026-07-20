@@ -40,6 +40,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       return;
     }
     
+    // Optimistic UI: Set loading for a split second but redirect immediately
     setLoading(true);
     const orderId = `LEE-${Math.floor(100000 + Math.random() * 900000)}`;
 
@@ -56,18 +57,11 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
 
     const orderRef = doc(firestore, "orders", orderId);
     
-    // Attempt real write
+    // Initiate write in background without awaiting (Optimistic Mutation)
     setDoc(orderRef, orderData)
-      .then(() => {
-        // Direct redirect on success
-        router.push(`/track/${orderId}`);
-      })
       .catch(async (error) => {
-        // If in Demo mode or Firebase fails, bypass to tracking for testing
-        if (user?.uid?.startsWith('demo-')) {
-           router.push(`/track/${orderId}`);
-        } else {
-          setLoading(false);
+        // Only handle real permission errors. Demo users won't see this interrupt the UX.
+        if (!user?.uid?.startsWith('demo-')) {
           const permissionError = new FirestorePermissionError({
             path: orderRef.path,
             operation: 'create',
@@ -76,6 +70,9 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
           errorEmitter.emit('permission-error', permissionError);
         }
       });
+
+    // REDIRECT IMMEDIATELY - No waiting for the server
+    router.push(`/track/${orderId}`);
   };
 
   if (!restaurant) return <div className="p-20 text-center font-headline text-2xl">Restaurant not found</div>;
@@ -197,7 +194,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">
-                      <Loader2 className="w-5 h-5 animate-spin" /> Processing...
+                      <Loader2 className="w-5 h-5 animate-spin" /> Instant Checkout...
                     </div>
                   ) : (
                     <>{!user ? 'Sign in to Pay' : 'Confirm & Track Order'} <ArrowRight className="w-5 h-5" /></>
