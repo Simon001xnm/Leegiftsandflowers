@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { 
-  Flame, 
   LayoutDashboard, 
   Search, 
   UserCircle, 
@@ -37,47 +36,47 @@ export function Navigation() {
   const { user } = useUser();
 
   const navLinks = [
-    { href: "/restaurants", label: "Meat Shop", icon: Search },
+    { href: "/restaurants", label: "Discovery", icon: Search },
   ];
 
   const dashLinks = [
     { href: "/dashboard/customer", label: "My Orders", icon: User },
-    { href: "/dashboard", label: "Merchant Portal", icon: Store },
-    { href: "/dashboard/rider", label: "Courier Center", icon: Bike },
+    { href: "/dashboard", label: "Merchant", icon: Store },
+    { href: "/dashboard/rider", label: "Courier", icon: Bike },
   ];
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform">
-              <Beef className="w-6 h-6" />
+    <nav className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur-md">
+      <div className="container mx-auto px-4 h-14 flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-1.5 group">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground shadow-md transition-transform group-hover:-rotate-6">
+              <Beef className="w-5 h-5" />
             </div>
             <div className="relative">
-              <span className="font-headline text-xl font-bold tracking-tight text-primary uppercase">
+              <span className="font-headline text-lg font-bold tracking-tighter text-primary uppercase">
                 Steak West
               </span>
-              <div className="absolute -bottom-1 left-0 w-full h-1 bg-primary rounded-full transform scale-x-75 origin-left" />
+              <svg className="absolute -bottom-1 left-0 w-full h-1 text-primary opacity-30" viewBox="0 0 40 10" fill="none">
+                <path d="M2 2C10 8 30 8 38 2" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
             </div>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+              const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-4 py-2 text-sm font-bold rounded-xl transition-all flex items-center gap-2",
+                    "px-3 py-1.5 text-xs font-bold rounded-lg transition-all",
                     isActive 
-                      ? "text-primary bg-primary/10" 
+                      ? "text-primary bg-primary/5" 
                       : "text-muted-foreground hover:text-primary hover:bg-muted"
                   )}
                 >
-                  <Icon className="w-4 h-4" />
                   {link.label}
                 </Link>
               );
@@ -85,16 +84,16 @@ export function Navigation() {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground font-bold hover:text-primary">
-                  <LayoutDashboard className="w-4 h-4" /> Portals
+                <Button variant="ghost" size="sm" className="h-8 px-3 text-xs text-muted-foreground font-bold hover:text-primary">
+                  Portals
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-56 rounded-2xl p-2">
+              <DropdownMenuContent align="start" className="w-48 rounded-xl p-1 shadow-xl">
                 {dashLinks.map(link => (
-                  <DropdownMenuItem key={link.href} asChild className="rounded-xl p-3 cursor-pointer">
-                    <Link href={link.href} className="flex items-center gap-3">
-                      <link.icon className="w-4 h-4 text-primary" /> 
-                      <span className="font-bold">{link.label}</span>
+                  <DropdownMenuItem key={link.href} asChild className="rounded-lg p-2.5 cursor-pointer">
+                    <Link href={link.href} className="flex items-center gap-2">
+                      <link.icon className="w-3.5 h-3.5 text-primary" /> 
+                      <span className="text-xs font-bold">{link.label}</span>
                     </Link>
                   </DropdownMenuItem>
                 ))}
@@ -103,23 +102,25 @@ export function Navigation() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex items-center bg-muted/50 rounded-full p-1 border">
-            <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-background h-10 w-10">
-              <ShoppingCart className="w-5 h-5 text-primary" />
-              <span className="absolute top-1 right-1 bg-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ring-background">1</span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center bg-muted/50 rounded-lg p-0.5 border">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-md relative">
+              <ShoppingCart className="w-4 h-4 text-primary" />
+              <span className="absolute -top-1 -right-1 bg-accent text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold">1</span>
             </Button>
             
+            <Separator orientation="vertical" className="h-4 mx-1" />
+
             {user ? (
               <Link href="/profile">
-                <Button variant="ghost" size="icon" className="rounded-full hover:bg-background h-10 w-10">
-                  <UserCircle className="w-6 h-6 text-primary" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-md">
+                  <UserCircle className="w-5 h-5 text-primary" />
                 </Button>
               </Link>
             ) : (
               <Link href="/login">
-                <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-2 font-bold text-primary">
-                  <LogIn className="w-4 h-4" /> Sign In
+                <Button variant="ghost" size="sm" className="hidden sm:flex h-8 px-3 text-xs font-bold text-primary">
+                  Sign In
                 </Button>
               </Link>
             )}
@@ -127,34 +128,27 @@ export function Navigation() {
 
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden rounded-xl">
-                <Menu className="w-6 h-6 text-primary" />
+              <Button variant="ghost" size="icon" className="md:hidden h-9 w-9 rounded-lg">
+                <Menu className="w-5 h-5 text-primary" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="rounded-l-[2rem] p-6">
-              <SheetHeader className="mb-8">
-                <SheetTitle className="text-left font-headline text-2xl text-primary">Explore Shop</SheetTitle>
+            <SheetContent side="right" className="w-[80%] rounded-l-2xl p-6">
+              <SheetHeader className="mb-6">
+                <SheetTitle className="text-left font-headline text-xl text-primary">Menu</SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-4">
-                <Link href="/" className="flex items-center gap-4 p-4 rounded-2xl bg-muted/50 font-bold">
-                  Home
-                </Link>
+              <div className="flex flex-col gap-2">
+                <Link href="/" className="p-3 text-sm font-bold rounded-lg bg-muted/50">Home</Link>
                 {navLinks.map((link) => (
-                  <Link key={link.href} href={link.href} className="flex items-center gap-4 p-4 rounded-2xl border font-bold">
-                    {link.label}
-                  </Link>
+                  <Link key={link.href} href={link.href} className="p-3 text-sm font-bold border rounded-lg">{link.label}</Link>
                 ))}
                 {!user && (
-                  <Link href="/login" className="flex items-center gap-4 p-4 rounded-2xl bg-primary text-white font-bold">
-                    <LogIn className="w-5 h-5" /> Sign In
-                  </Link>
+                  <Link href="/login" className="p-3 text-sm font-bold bg-primary text-white rounded-lg text-center">Sign In</Link>
                 )}
-                <div className="pt-4 border-t mt-4">
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 ml-4">Services</p>
+                <div className="mt-4 pt-4 border-t">
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-2 px-2">Portals</p>
                   {dashLinks.map((link) => (
-                    <Link key={link.href} href={link.href} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-primary/5 transition-colors mb-2">
-                      <link.icon className="w-5 h-5 text-primary" />
-                      <span className="font-bold">{link.label}</span>
+                    <Link key={link.href} href={link.href} className="flex items-center gap-3 p-3 rounded-lg hover:bg-primary/5 text-sm font-bold">
+                      <link.icon className="w-4 h-4 text-primary" /> {link.label}
                     </Link>
                   ))}
                 </div>
