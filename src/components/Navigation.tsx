@@ -1,11 +1,10 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { 
-  UtensilsCrossed, 
+  Flame, 
   LayoutDashboard, 
   Search, 
   UserCircle, 
@@ -14,7 +13,8 @@ import {
   User,
   Store,
   Menu,
-  LogIn
+  LogIn,
+  Beef
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUser } from "@/firebase";
@@ -37,13 +37,13 @@ export function Navigation() {
   const { user } = useUser();
 
   const navLinks = [
-    { href: "/restaurants", label: "Explore", icon: Search },
+    { href: "/restaurants", label: "Meat Shop", icon: Search },
   ];
 
   const dashLinks = [
     { href: "/dashboard/customer", label: "My Orders", icon: User },
-    { href: "/dashboard", label: "Restaurant", icon: Store },
-    { href: "/dashboard/rider", label: "Courier", icon: Bike },
+    { href: "/dashboard", label: "Merchant Portal", icon: Store },
+    { href: "/dashboard/rider", label: "Courier Center", icon: Bike },
   ];
 
   return (
@@ -52,25 +52,13 @@ export function Navigation() {
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform">
-              <UtensilsCrossed className="w-6 h-6" />
+              <Beef className="w-6 h-6" />
             </div>
-            <div className="relative hidden sm:block">
-              <span className="font-headline text-2xl font-bold tracking-tight text-primary">
-                ABC
+            <div className="relative">
+              <span className="font-headline text-xl font-bold tracking-tight text-primary uppercase">
+                Steak West
               </span>
-              <svg 
-                className="absolute -bottom-1.5 left-0 w-full h-2 text-primary" 
-                viewBox="0 0 40 10" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path 
-                  d="M2 2C10 8 30 8 38 2" 
-                  stroke="currentColor" 
-                  strokeWidth="3" 
-                  strokeLinecap="round"
-                />
-              </svg>
+              <div className="absolute -bottom-1 left-0 w-full h-1 bg-primary rounded-full transform scale-x-75 origin-left" />
             </div>
           </Link>
 
@@ -98,7 +86,7 @@ export function Navigation() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground font-bold hover:text-primary">
-                  <LayoutDashboard className="w-4 h-4" /> Management
+                  <LayoutDashboard className="w-4 h-4" /> Portals
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56 rounded-2xl p-2">
@@ -119,7 +107,7 @@ export function Navigation() {
           <div className="flex items-center bg-muted/50 rounded-full p-1 border">
             <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-background h-10 w-10">
               <ShoppingCart className="w-5 h-5 text-primary" />
-              <span className="absolute top-1 right-1 bg-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ring-background">2</span>
+              <span className="absolute top-1 right-1 bg-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold ring-2 ring-background">1</span>
             </Button>
             
             {user ? (
@@ -145,7 +133,7 @@ export function Navigation() {
             </SheetTrigger>
             <SheetContent side="right" className="rounded-l-[2rem] p-6">
               <SheetHeader className="mb-8">
-                <SheetTitle className="text-left font-headline text-2xl text-primary">Main Menu</SheetTitle>
+                <SheetTitle className="text-left font-headline text-2xl text-primary">Explore Shop</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-4">
                 <Link href="/" className="flex items-center gap-4 p-4 rounded-2xl bg-muted/50 font-bold">
@@ -162,7 +150,7 @@ export function Navigation() {
                   </Link>
                 )}
                 <div className="pt-4 border-t mt-4">
-                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 ml-4">Portals</p>
+                  <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4 ml-4">Services</p>
                   {dashLinks.map((link) => (
                     <Link key={link.href} href={link.href} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-primary/5 transition-colors mb-2">
                       <link.icon className="w-5 h-5 text-primary" />

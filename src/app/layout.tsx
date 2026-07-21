@@ -1,4 +1,3 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -6,8 +5,8 @@ import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { FirebaseClientProvider } from "@/firebase";
 
 export const metadata: Metadata = {
-  title: 'ABC | Fastest Delivery with a Smile',
-  description: 'Order from the best local restaurants in Nairobi with ABC. Fast delivery, fresh food, and great prices.',
+  title: 'Steak West Butchery | Premium Meat & Choma Delivery',
+  description: 'Order fresh raw meat, Nyama Choma, Mutura, and local Kenyan delicacies in Nairobi. Fastest delivery from Steak West Butchery.',
 };
 
 export default function RootLayout({

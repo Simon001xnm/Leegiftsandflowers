@@ -1,4 +1,4 @@
-export type FoodCategory = 'Burger' | 'Pizza' | 'Sushi' | 'Coffee' | 'Healthy' | 'Dessert' | 'Local' | 'Chinese' | 'Indian';
+export type FoodCategory = 'Raw Meat' | 'Nyama Choma' | 'Delicacies' | 'Cooked' | 'Sides' | 'Drinks';
 export type OrderStatus = 'Pending' | 'Preparing' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
 
 export interface Restaurant {
@@ -34,192 +34,102 @@ export interface Order {
   deliveryAddress: string;
 }
 
-const FOOD_IMAGES = {
-  burger: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&h=400&auto=format&fit=crop",
-  pizza: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&h=400&auto=format&fit=crop",
-  sushi: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=600&h=400&auto=format&fit=crop",
-  coffee: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=600&h=400&auto=format&fit=crop",
-  healthy: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&h=400&auto=format&fit=crop",
-  dessert: "https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=600&h=400&auto=format&fit=crop",
-  local: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=600&h=400&auto=format&fit=crop",
-  chinese: "https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=600&h=400&auto=format&fit=crop",
-  indian: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?q=80&w=600&h=400&auto=format&fit=crop",
-  drinks: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&h=400&auto=format&fit=crop"
+const MEAT_IMAGES = {
+  choma: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=800&h=600&auto=format&fit=crop",
+  raw: "https://images.unsplash.com/photo-1544022613-e879a7998d2f?q=80&w=800&h=600&auto=format&fit=crop",
+  mutura: "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?q=80&w=800&h=600&auto=format&fit=crop",
+  supu: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=800&h=600&auto=format&fit=crop",
+  matumbo: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=800&h=600&auto=format&fit=crop",
+  steak: "https://images.unsplash.com/photo-1603048297172-c92544798d5e?q=80&w=800&h=600&auto=format&fit=crop"
 };
 
 export const MOCK_RESTAURANTS: Restaurant[] = [
   {
     id: 'r1',
-    name: 'Burger Haven',
-    category: 'Burger',
-    rating: 4.8,
-    deliveryTime: '20-30 min',
-    deliveryFee: 150,
-    imageUrl: FOOD_IMAGES.burger,
-    description: 'The juiciest burgers in Nairobi, made with 100% grass-fed beef.',
+    name: 'Steak West Butchery',
+    category: 'Raw Meat',
+    rating: 4.9,
+    deliveryTime: '15-25 min',
+    deliveryFee: 100,
+    imageUrl: MEAT_IMAGES.raw,
+    description: 'Nairobi\'s finest selection of premium beef, goat, and pork. Fresh from the farm.',
     location: 'Westlands, Nairobi'
   },
   {
     id: 'r2',
-    name: 'Pizza Pros',
-    category: 'Pizza',
-    rating: 4.6,
+    name: 'City Market Choma Grill',
+    category: 'Nyama Choma',
+    rating: 4.8,
     deliveryTime: '30-45 min',
-    deliveryFee: 200,
-    imageUrl: FOOD_IMAGES.pizza,
-    description: 'Authentic wood-fired pizzas with premium local toppings.',
-    location: 'Kilimani, Nairobi'
+    deliveryFee: 150,
+    imageUrl: MEAT_IMAGES.choma,
+    description: 'Expertly grilled Nyama Choma, served hot with legendary kachumbari.',
+    location: 'Koinange St, Nairobi'
   },
   {
     id: 'r3',
-    name: 'Sushi Zen',
-    category: 'Sushi',
-    rating: 4.9,
-    deliveryTime: '40-55 min',
-    deliveryFee: 300,
-    imageUrl: FOOD_IMAGES.sushi,
-    description: 'Freshly prepared sushi and sashimi by master chefs.',
-    location: 'Lavington, Nairobi'
+    name: 'The Mutura Hub',
+    category: 'Delicacies',
+    rating: 4.7,
+    deliveryTime: '20-30 min',
+    deliveryFee: 80,
+    imageUrl: MEAT_IMAGES.mutura,
+    description: 'Authentic African sausage (Mutura) and Supu delicacies.',
+    location: 'Pangani, Nairobi'
   },
   {
     id: 'r4',
-    name: 'Nairobi Nyama Choma',
-    category: 'Local',
-    rating: 4.7,
-    deliveryTime: '35-50 min',
-    deliveryFee: 100,
-    imageUrl: FOOD_IMAGES.local,
-    description: 'The best authentic Kenyan grilled meat and sides.',
-    location: 'Nairobi Central, Nairobi'
-  },
-  {
-    id: 'r5',
-    name: 'Golden Wok',
-    category: 'Chinese',
-    rating: 4.5,
-    deliveryTime: '25-40 min',
-    deliveryFee: 180,
-    imageUrl: FOOD_IMAGES.chinese,
-    description: 'Classic Chinese stir-fry and dim sum specialties.',
-    location: 'Parklands, Nairobi'
-  },
-  {
-    id: 'r6',
-    name: 'Spice Route',
-    category: 'Indian',
-    rating: 4.8,
-    deliveryTime: '30-45 min',
-    deliveryFee: 220,
-    imageUrl: FOOD_IMAGES.indian,
-    description: 'Flavorful Indian curries, tandoori, and fresh naans.',
-    location: 'Karen, Nairobi'
-  },
-  {
-    id: 'r7',
-    name: 'Green Leaf Cafe',
-    category: 'Healthy',
+    name: 'Matumbo Master',
+    category: 'Cooked',
     rating: 4.6,
-    deliveryTime: '15-25 min',
+    deliveryTime: '25-40 min',
     deliveryFee: 120,
-    imageUrl: FOOD_IMAGES.healthy,
-    description: 'Fresh salads, grain bowls, and cold-pressed juices.',
-    location: 'Hurlingham, Nairobi'
-  },
-  {
-    id: 'r8',
-    name: 'Sweet Tooth Bakery',
-    category: 'Dessert',
-    rating: 4.9,
-    deliveryTime: '20-35 min',
-    deliveryFee: 150,
-    imageUrl: FOOD_IMAGES.dessert,
-    description: 'Artisanal cakes, pastries, and decadent desserts.',
-    location: 'Gigiri, Nairobi'
-  },
-  {
-    id: 'r9',
-    name: 'Java Jive',
-    category: 'Coffee',
-    rating: 4.4,
-    deliveryTime: '10-20 min',
-    deliveryFee: 80,
-    imageUrl: FOOD_IMAGES.coffee,
-    description: 'Premium Kenyan coffee and quick breakfast snacks.',
-    location: 'CBD, Nairobi'
+    imageUrl: MEAT_IMAGES.matumbo,
+    description: 'The best Matumbo fry and stew in town, just like home.',
+    location: 'Kilimani, Nairobi'
   }
 ];
 
 export const MOCK_MENU: MenuItem[] = [
-  // Burger Haven (r1)
-  { id: 'm1', restaurantId: 'r1', name: 'Classic Cheeseburger', price: 850, description: 'Beef patty, cheddar, lettuce, tomato, and secret sauce.', imageUrl: FOOD_IMAGES.burger, category: 'Mains' },
-  { id: 'm2', restaurantId: 'r1', name: 'BBQ Bacon Burger', price: 1100, description: 'Smoky BBQ sauce, crispy bacon, and onion rings.', imageUrl: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=600&h=400&auto=format&fit=crop", category: 'Mains' },
-  { id: 'm3', restaurantId: 'r1', name: 'Truffle Fries', price: 450, description: 'Hand-cut fries tossed in truffle oil and parmesan.', imageUrl: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600&h=400&auto=format&fit=crop", category: 'Sides' },
-  
-  // Sodas for Burger Haven
-  { id: 's1', restaurantId: 'r1', name: 'Coca-Cola (500ml)', price: 150, description: 'Classic refreshing Coca-Cola.', imageUrl: "https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=600&h=400&auto=format&fit=crop", category: 'Drinks' },
-  { id: 's2', restaurantId: 'r1', name: 'Pepsi (500ml)', price: 150, description: 'Crisp and refreshing Pepsi.', imageUrl: "https://images.unsplash.com/photo-1543258103-a62bdc069871?q=80&w=600&h=400&auto=format&fit=crop", category: 'Drinks' },
-  { id: 's3', restaurantId: 'r1', name: 'Sprite (500ml)', price: 150, description: 'Lemon-lime sparkling soda.', imageUrl: "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?q=80&w=600&h=400&auto=format&fit=crop", category: 'Drinks' },
-  { id: 's4', restaurantId: 'r1', name: 'Fanta Orange (500ml)', price: 150, description: 'Bright and bubbly orange soda.', imageUrl: "https://images.unsplash.com/photo-1624517452488-04869289c4ca?q=80&w=600&h=400&auto=format&fit=crop", category: 'Drinks' },
-  { id: 's5', restaurantId: 'r1', name: 'Stoney Tangawizi (500ml)', price: 150, description: 'Extra strong ginger beer.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' },
-  { id: 's6', restaurantId: 'r1', name: 'Krest Bitter Lemon (500ml)', price: 150, description: 'Refreshing bitter lemon soda.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' },
-  { id: 's7', restaurantId: 'r1', name: 'Mountain Dew (500ml)', price: 150, description: 'Citrus-flavored soda.', imageUrl: "https://images.unsplash.com/photo-1565063578503-490055e16282?q=80&w=600&h=400&auto=format&fit=crop", category: 'Drinks' },
+  // Steak West Butchery (Raw)
+  { id: 'm1', restaurantId: 'r1', name: 'Premium Beef Steak (1kg)', price: 950, description: 'Fresh, lean beef steak ideal for grilling or pan-frying.', imageUrl: MEAT_IMAGES.steak, category: 'Raw Meat' },
+  { id: 'm2', restaurantId: 'r1', name: 'Goat Meat / Mbuzi (1kg)', price: 1100, description: 'Tender goat meat, perfect for stews or roasting.', imageUrl: MEAT_IMAGES.raw, category: 'Raw Meat' },
+  { id: 'm3', restaurantId: 'r1', name: 'Pork Chops (1kg)', price: 850, description: 'Succulent farm-fresh pork chops.', imageUrl: MEAT_IMAGES.raw, category: 'Raw Meat' },
 
-  // Pizza Pros (r2)
-  { id: 'm4', restaurantId: 'r2', name: 'Margherita', price: 950, description: 'Fresh mozzarella, basil, and San Marzano tomatoes.', imageUrl: FOOD_IMAGES.pizza, category: 'Mains' },
-  { id: 'm5', restaurantId: 'r2', name: 'Pepperoni Feast', price: 1200, description: 'Loaded with spicy pepperoni and extra cheese.', imageUrl: "https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=600&h=400&auto=format&fit=crop", category: 'Mains' },
-  
-  // Sodas for Pizza Pros
-  { id: 's8', restaurantId: 'r2', name: 'Coca-Cola Zero (500ml)', price: 150, description: 'Zero sugar Coca-Cola.', imageUrl: "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?q=80&w=600&h=400&auto=format&fit=crop", category: 'Drinks' },
-  { id: 's9', restaurantId: 'r2', name: 'Fanta Passion (500ml)', price: 150, description: 'Passion fruit flavored soda.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' },
-  { id: 's10', restaurantId: 'r2', name: 'Seven Up (500ml)', price: 150, description: 'Clear lemon-lime soda.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' },
+  // City Market Choma Grill (Cooked)
+  { id: 'm4', restaurantId: 'r2', name: 'Mbuzi Choma (Full)', price: 2800, description: 'Whole goat leg, slow-roasted to perfection.', imageUrl: MEAT_IMAGES.choma, category: 'Nyama Choma' },
+  { id: 'm5', restaurantId: 'r2', name: 'Beef Choma (1kg)', price: 1500, description: 'Traditional Kenyan grilled beef.', imageUrl: MEAT_IMAGES.choma, category: 'Nyama Choma' },
+  { id: 'm6', restaurantId: 'r2', name: 'Kachumbari Special', price: 150, description: 'Fresh onion, tomato, and chili salad.', imageUrl: MEAT_IMAGES.choma, category: 'Sides' },
 
-  // Sushi Zen (r3)
-  { id: 'm6', restaurantId: 'r3', name: 'Salmon Nigiri Set', price: 2100, description: '8 pieces of fresh salmon on seasoned rice.', imageUrl: FOOD_IMAGES.sushi, category: 'Mains' },
-  { id: 'm7', restaurantId: 'r3', name: 'Dragon Roll', price: 1800, description: 'Tempura shrimp, avocado, and unagi sauce.', imageUrl: "https://images.unsplash.com/photo-1559466273-d95e72debaf8?q=80&w=600&h=400&auto=format&fit=crop", category: 'Mains' },
-  
-  // Drinks for Sushi Zen
-  { id: 'm104', restaurantId: 'r3', name: 'Green Tea', price: 150, description: 'Premium Japanese matcha green tea.', imageUrl: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?q=80&w=600&h=400&auto=format&fit=crop", category: 'Drinks' },
-  { id: 's11', restaurantId: 'r3', name: 'Ramune Soda', price: 400, description: 'Classic Japanese marble soda.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' },
+  // The Mutura Hub (Delicacies)
+  { id: 'm7', restaurantId: 'r3', name: 'Authentic Mutura', price: 200, description: 'Traditional Kenyan sausage, spicy and rich.', imageUrl: MEAT_IMAGES.mutura, category: 'Delicacies' },
+  { id: 'm8', restaurantId: 'r3', name: 'Supu ya Kichwa', price: 300, description: 'Traditional head soup, highly nutritious and tasty.', imageUrl: MEAT_IMAGES.supu, category: 'Delicacies' },
+  { id: 'm9', restaurantId: 'r3', name: 'Kichwa ya Ng\'ombe (Boiled)', price: 1200, description: 'Soft, well-seasoned cow head meat.', imageUrl: MEAT_IMAGES.supu, category: 'Delicacies' },
 
-  // Nairobi Nyama Choma (r4)
-  { id: 'm8', restaurantId: 'r4', name: 'Grilled Goat (1kg)', price: 1800, description: 'Slow-grilled tender goat meat served with kachumbari.', imageUrl: FOOD_IMAGES.local, category: 'Mains' },
-  { id: 'm9', restaurantId: 'r4', name: 'Ugali & Sukuma', price: 350, description: 'Traditional Kenyan cornmeal cake with sautéed greens.', imageUrl: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=600&h=400&auto=format&fit=crop", category: 'Sides' },
-  
-  // Drinks for Nyama Choma
-  { id: 'm105', restaurantId: 'r4', name: 'Tusker Cider', price: 400, description: 'Chilled local apple cider.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' },
-  { id: 's12', restaurantId: 'r4', name: 'Coca-Cola (300ml Glass)', price: 100, description: 'Classic Coke in a glass bottle.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' },
-  { id: 's13', restaurantId: 'r4', name: 'Stoney (300ml Glass)', price: 100, description: 'Strong ginger beer in a glass bottle.', imageUrl: FOOD_IMAGES.drinks, category: 'Drinks' }
+  // Matumbo Master
+  { id: 'm10', restaurantId: 'r4', name: 'Matumbo Fry', price: 450, description: 'Deep-fried tripe with onions and spices.', imageUrl: MEAT_IMAGES.matumbo, category: 'Cooked' },
+  { id: 'm11', restaurantId: 'r4', name: 'Ugali Portion', price: 100, description: 'Classic white cornmeal cake.', imageUrl: MEAT_IMAGES.choma, category: 'Sides' }
 ];
 
 export const MOCK_ORDERS: Order[] = [
   {
-    id: 'ORD-101',
+    id: 'ORD-WEST-001',
     customerName: 'Alex Johnson',
-    restaurantName: 'Burger Haven',
-    items: ['Double Cheese Burger', 'Fries'],
-    total: 1250,
+    restaurantName: 'Steak West Butchery',
+    items: ['Beef Steak (1kg)', 'Mutura'],
+    total: 1150,
     status: 'Delivered',
-    date: '2024-05-10',
-    deliveryAddress: 'State House Rd, Nairobi'
+    date: '2024-05-15',
+    deliveryAddress: 'Riverside Dr, Nairobi'
   },
   {
-    id: 'ORD-102',
-    customerName: 'Alex Johnson',
-    restaurantName: 'Pizza Pros',
-    items: ['Large Margherita', 'Coke 2L'],
-    total: 1800,
+    id: 'ORD-WEST-002',
+    customerName: 'Jane Doe',
+    restaurantName: 'The Mutura Hub',
+    items: ['Supu ya Kichwa', 'Mutura'],
+    total: 500,
     status: 'Out for Delivery',
-    date: '2024-05-11',
-    deliveryAddress: 'State House Rd, Nairobi'
-  },
-  {
-    id: 'ORD-103',
-    customerName: 'Jane Smith',
-    restaurantName: 'Sushi Zen',
-    items: ['Salmon Nigiri Set'],
-    total: 2100,
-    status: 'Preparing',
-    date: '2024-05-11',
-    deliveryAddress: 'Gigiri, Nairobi'
+    date: '2024-05-16',
+    deliveryAddress: 'Kileleshwa, Nairobi'
   }
 ];

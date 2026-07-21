@@ -7,12 +7,12 @@ import { Navigation } from "@/components/Navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, FoodCategory } from "@/lib/food-data";
-import { Search, Star, Clock, Filter, SlidersHorizontal, MapPin } from "lucide-react";
+import { Search, Star, Clock, Filter, SlidersHorizontal, MapPin, Beef } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-const CATEGORIES: FoodCategory[] = ['Burger', 'Pizza', 'Sushi', 'Coffee', 'Healthy', 'Dessert'];
+const CATEGORIES: FoodCategory[] = ['Raw Meat', 'Nyama Choma', 'Delicacies', 'Cooked', 'Sides'];
 
-export default function RestaurantsDiscovery() {
+export default function MeatDiscovery() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<FoodCategory | 'All'>('All');
 
@@ -29,8 +29,9 @@ export default function RestaurantsDiscovery() {
       
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="max-w-4xl mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold font-headline text-primary mb-4">Restaurants in Nairobi</h1>
-          <p className="text-muted-foreground text-lg">Find the best food in your neighborhood.</p>
+          <Badge className="mb-4 bg-primary/10 text-primary border-none px-4 py-1">Nairobi Fresh</Badge>
+          <h1 className="text-5xl font-bold font-headline text-primary mb-4 uppercase">The Meat Shop</h1>
+          <p className="text-muted-foreground text-lg">Premium raw meat, grilled choma, and authentic Nairobi delicacies.</p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-10">
@@ -38,7 +39,7 @@ export default function RestaurantsDiscovery() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input 
               className="pl-12 h-14 rounded-2xl border-2 border-muted" 
-              placeholder="Search for restaurants or dishes..." 
+              placeholder="Search for Nyama Choma, Mutura, or Beef..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -46,7 +47,7 @@ export default function RestaurantsDiscovery() {
           <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
             <Button 
               variant={category === 'All' ? 'default' : 'outline'} 
-              className="h-14 rounded-2xl px-6 shrink-0"
+              className="h-14 rounded-2xl px-6 shrink-0 font-bold"
               onClick={() => setCategory('All')}
             >
               All
@@ -55,7 +56,7 @@ export default function RestaurantsDiscovery() {
               <Button 
                 key={cat}
                 variant={category === cat ? 'default' : 'outline'} 
-                className="h-14 rounded-2xl px-6 shrink-0"
+                className="h-14 rounded-2xl px-6 shrink-0 font-bold"
                 onClick={() => setCategory(cat)}
               >
                 {cat}
@@ -66,10 +67,10 @@ export default function RestaurantsDiscovery() {
 
         <div className="flex items-center justify-between mb-8 pb-4 border-b">
           <span className="text-sm font-medium text-muted-foreground">
-            Found <span className="text-primary font-bold">{filteredRestaurants.length}</span> restaurants
+            Found <span className="text-primary font-bold">{filteredRestaurants.length}</span> specialty vendors
           </span>
           <Button variant="ghost" size="sm" className="gap-2">
-            <SlidersHorizontal className="w-4 h-4" /> Sort by: Rating
+            <SlidersHorizontal className="w-4 h-4" /> Sort by: Nearest
           </Button>
         </div>
 
@@ -79,7 +80,7 @@ export default function RestaurantsDiscovery() {
               <Link 
                 key={restaurant.id} 
                 href={`/restaurants/${restaurant.id}`}
-                className="group flex flex-col bg-card rounded-3xl overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col bg-card rounded-[2rem] overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image 
@@ -88,7 +89,7 @@ export default function RestaurantsDiscovery() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <Badge className="absolute top-4 left-4 shadow-sm bg-white/95 text-primary">
+                  <Badge className="absolute top-4 left-4 shadow-sm bg-white text-primary font-bold">
                     {restaurant.category}
                   </Badge>
                 </div>
@@ -111,12 +112,12 @@ export default function RestaurantsDiscovery() {
                         <Clock className="w-4 h-4" /> {restaurant.deliveryTime}
                       </div>
                       <div className="font-bold text-primary">
-                        KES {restaurant.deliveryFee} fee
+                        KES {restaurant.deliveryFee}
                       </div>
                     </div>
                   </div>
-                  <Button className="mt-auto w-full group-hover:bg-primary/90 transition-colors">
-                    Order Now
+                  <Button className="mt-auto w-full group-hover:bg-primary/90 transition-all h-12 rounded-xl font-bold">
+                    View Selection
                   </Button>
                 </div>
               </Link>
@@ -125,10 +126,10 @@ export default function RestaurantsDiscovery() {
         ) : (
           <div className="py-20 flex flex-col items-center text-center">
             <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mb-6">
-              <Search className="w-10 h-10 text-muted-foreground/50" />
+              <Beef className="w-10 h-10 text-muted-foreground/50" />
             </div>
-            <h3 className="text-2xl font-bold font-headline text-primary mb-2">No restaurants found</h3>
-            <p className="text-muted-foreground">Try adjusting your filters or search query.</p>
+            <h3 className="text-2xl font-bold font-headline text-primary mb-2">No meat found</h3>
+            <p className="text-muted-foreground">Try searching for 'Choma' or 'Beef'.</p>
           </div>
         )}
       </main>

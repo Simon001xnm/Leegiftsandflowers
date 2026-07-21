@@ -1,51 +1,29 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
+    --background: 0 0% 100%;
     --foreground: 20 14% 4%;
     --card: 0 0% 100%;
     --card-foreground: 20 14% 4%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14% 4%;
-    --primary: 24 95% 53%;
+    --primary: 0 84% 35%; /* Deep Meat Red */
     --primary-foreground: 0 0% 100%;
     --secondary: 40 100% 95%;
-    --secondary-foreground: 24 95% 20%;
+    --secondary-foreground: 0 84% 15%;
     --muted: 20 10% 94%;
     --muted-foreground: 20 10% 45%;
-    --accent: 47 95% 50%;
-    --accent-foreground: 24 95% 10%;
+    --accent: 47 95% 50%; /* Mustard/Yellow for contrast like Uber/Glovo */
+    --accent-foreground: 0 84% 5%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 20 15% 90%;
     --input: 20 15% 90%;
-    --ring: 24 95% 53%;
+    --ring: 0 84% 35%;
     --radius: 1.5rem;
-  }
-  .dark {
-    --background: 20 20% 4%;
-    --foreground: 0 0% 98%;
-    --card: 20 20% 8%;
-    --card-foreground: 0 0% 98%;
-    --popover: 20 20% 8%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 24 95% 53%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 20 20% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 20 15% 15%;
-    --muted-foreground: 20 10% 65%;
-    --accent: 47 95% 50%;
-    --accent-foreground: 24 95% 10%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 20 20% 18%;
-    --input: 20 20% 18%;
-    --ring: 24 95% 53%;
   }
 }
 
@@ -73,7 +51,6 @@
     scrollbar-width: none;
   }
   
-  /* Print Utilities */
   @media print {
     .no-print {
       display: none !important;
@@ -94,5 +71,14 @@
   
   .print-only {
     display: none;
+  }
+  
+  .animate-slow-zoom {
+    animation: slow-zoom 20s infinite ease-in-out;
+  }
+  
+  @keyframes slow-zoom {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
   }
 }
