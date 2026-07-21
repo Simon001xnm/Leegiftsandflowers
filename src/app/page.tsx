@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -27,7 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Custom walking icon to replace hallucinated 'Walk' icon
+// Custom walking icon
 const WalkingIcon = ({ className }: { className?: string }) => (
   <svg 
     className={className}
@@ -43,6 +44,39 @@ const WalkingIcon = ({ className }: { className?: string }) => (
     <path d="m13 12 2 1.5 3-1" />
     <path d="m13 12-4-2.5-1-6" />
     <path d="m9 20-2-3" />
+  </svg>
+);
+
+// Custom Bull Head with Knives Logo
+const ButcheryLogo = ({ className }: { className?: string }) => (
+  <svg 
+    className={className}
+    viewBox="0 0 100 100" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Bull Head */}
+    <path 
+      d="M30 20C25 20 20 25 20 35C20 45 30 55 50 65C70 55 80 45 80 35C80 25 75 20 70 20C65 20 60 25 55 30C52 33 48 33 45 30C40 25 35 20 30 20Z" 
+      fill="currentColor"
+    />
+    <path 
+      d="M20 35C10 30 5 20 5 15C15 15 20 25 20 35Z" 
+      fill="currentColor"
+    />
+    <path 
+      d="M80 35C90 30 95 20 95 15C85 15 80 25 80 35Z" 
+      fill="currentColor"
+    />
+    {/* Crossed Knives Below Neck */}
+    <path 
+      d="M20 80L80 60M80 80L20 60" 
+      stroke="currentColor" 
+      strokeWidth="6" 
+      strokeLinecap="round"
+    />
+    <rect x="15" y="75" width="10" height="15" rx="2" fill="currentColor" transform="rotate(-20 15 75)" />
+    <rect x="75" y="75" width="10" height="15" rx="2" fill="currentColor" transform="rotate(20 75 75)" />
   </svg>
 );
 
@@ -83,36 +117,51 @@ export default function Home() {
         <SidebarNav />
         
         <main className="flex-grow lg:ml-64 p-4 lg:p-8 space-y-10">
-          {/* Hero Video Section with Forever Motion */}
-          <div className="relative h-[400px] w-full rounded-2xl overflow-hidden bg-black group">
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-80 animate-slow-zoom"
-            >
-              <source src="/From Klickpin.com- 13933080092165366-pin-id-13933080092165366.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex flex-col justify-center px-12 space-y-4">
-              <Badge className="w-fit bg-primary text-white border-none px-4 py-1.5 text-xs font-bold uppercase tracking-widest">
-                Premium Selection
+          {/* New Split Hero Section */}
+          <div className="relative min-h-[450px] w-full rounded-3xl overflow-hidden bg-gray-50 border flex flex-col lg:flex-row">
+            {/* Left Content */}
+            <div className="flex-1 p-8 lg:p-16 flex flex-col justify-center items-start space-y-6 z-10 bg-white">
+              <Badge className="bg-primary text-white border-none px-4 py-1.5 text-[10px] font-black uppercase tracking-widest">
+                Premium Butchery
               </Badge>
-              <h1 className="text-5xl lg:text-7xl font-black font-headline text-white mb-1 tracking-tighter uppercase leading-none">
-                Crave it?<br />
-                Get it.
-              </h1>
-              <p className="text-white/80 text-lg font-bold max-w-md leading-tight">
-                Premium raw meat, grilled choma, and authentic Nairobi delicacies delivered to your doorstep.
-              </p>
-              <div className="flex gap-4 pt-4">
-                <Button className="h-12 px-8 rounded-full bg-white text-black hover:bg-white/90 font-bold shadow-xl">
+              <div className="space-y-2">
+                <h1 className="text-4xl lg:text-6xl font-black font-headline text-black tracking-tighter uppercase leading-[0.9]">
+                  Crave it?<br />
+                  <span className="text-primary">Order it.</span>
+                </h1>
+                <p className="text-gray-500 text-lg font-bold max-w-sm leading-tight">
+                  Authentic Nairobi delicacies and farm-fresh meat cuts delivered in minutes.
+                </p>
+              </div>
+
+              {/* Bull Head Logo with Knives */}
+              <div className="flex flex-col items-center pt-4">
+                <ButcheryLogo className="w-24 h-24 text-black mb-2" />
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Superior Quality</span>
+              </div>
+
+              <div className="flex gap-4 pt-6">
+                <Button className="h-14 px-10 rounded-full bg-black text-white hover:bg-black/90 font-black shadow-2xl transition-transform active:scale-95">
                   Order Now
                 </Button>
-                <Button variant="outline" className="h-12 px-8 rounded-full border-white text-white hover:bg-white hover:text-black font-bold">
-                  View Menu
+                <Button variant="outline" className="h-14 px-10 rounded-full border-2 border-black text-black hover:bg-black hover:text-white font-black transition-colors">
+                  Browse Menu
                 </Button>
               </div>
+            </div>
+
+            {/* Right Video Content */}
+            <div className="flex-1 relative min-h-[300px] lg:min-h-full bg-black">
+              <video 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover opacity-90 animate-slow-zoom"
+              >
+                <source src="/From Klickpin.com- 833517843581501058-pin-id-833517843581501058 (1).mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent hidden lg:block" />
             </div>
           </div>
 
