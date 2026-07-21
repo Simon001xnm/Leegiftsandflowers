@@ -40,7 +40,9 @@ const MEAT_IMAGES = {
   mutura: "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?q=80&w=800&h=600&auto=format&fit=crop",
   supu: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=800&h=600&auto=format&fit=crop",
   matumbo: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=800&h=600&auto=format&fit=crop",
-  steak: "https://images.unsplash.com/photo-1603048297172-c92544798d5e?q=80&w=800&h=600&auto=format&fit=crop"
+  steak: "https://images.unsplash.com/photo-1603048297172-c92544798d5e?q=80&w=800&h=600&auto=format&fit=crop",
+  mbuzi: "https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=800&h=600&auto=format&fit=crop",
+  kichwa: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?q=80&w=800&h=600&auto=format&fit=crop"
 };
 
 export const MOCK_RESTAURANTS: Restaurant[] = [
@@ -87,6 +89,28 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
     imageUrl: MEAT_IMAGES.matumbo,
     description: 'The best Matumbo fry and stew in town, just like home.',
     location: 'Kilimani, Nairobi'
+  },
+  {
+    id: 'r5',
+    name: 'Prime Cuts Prime',
+    category: 'Raw Meat',
+    rating: 4.9,
+    deliveryTime: '20-30 min',
+    deliveryFee: 100,
+    imageUrl: MEAT_IMAGES.steak,
+    description: 'Specializing in aged beef and premium cuts for the discerning kitchen.',
+    location: 'Lavington, Nairobi'
+  },
+  {
+    id: 'r6',
+    name: 'Kichwa Delights',
+    category: 'Delicacies',
+    rating: 4.5,
+    deliveryTime: '15-25 min',
+    deliveryFee: 90,
+    imageUrl: MEAT_IMAGES.kichwa,
+    description: 'Nairobi\'s most famous Supu ya Kichwa and boiled head delicacies.',
+    location: 'Eastleigh, Nairobi'
   }
 ];
 
