@@ -1,9 +1,11 @@
+
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
+import { PromotionalPopup } from "@/components/PromotionalPopup";
 import { MOCK_RESTAURANTS, MOCK_MENU } from "@/lib/food-data";
 import { 
   MapPin, 
@@ -38,6 +40,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navigation />
+      <PromotionalPopup />
       
       <main className="flex-grow">
         {/* Hero Section - Optimized height */}
