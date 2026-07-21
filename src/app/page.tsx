@@ -15,7 +15,13 @@ import {
   ChevronRight, 
   ChevronLeft,
   Star,
-  ShoppingBag
+  ShoppingBag,
+  Facebook,
+  Twitter,
+  Instagram,
+  Globe,
+  Landmark,
+  CreditCard
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -55,6 +61,16 @@ const CATEGORIES = [
 
 const FILTER_PILLS = [
   "Offers", "Delivery fee", "Under 30 min", "Highest rated", "Rating", "Sort"
+];
+
+const PAYMENT_METHODS = [
+  { name: 'M-Pesa', color: 'bg-[#4fb948]' },
+  { name: 'Airtel Money', color: 'bg-[#e40000]' },
+  { name: 'T-Kash', color: 'bg-[#003366]' },
+  { name: 'PayPal', icon: CreditCard },
+  { name: 'Bank', icon: Landmark },
+  { name: 'Visa', icon: CreditCard },
+  { name: 'Mastercard', icon: CreditCard },
 ];
 
 export default function Home() {
@@ -241,29 +257,93 @@ export default function Home() {
             ))}
           </div>
 
-          {/* High-Density Footer */}
-          <footer className="pt-20 pb-10 border-t mt-20 text-center space-y-6">
-             <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="font-headline text-3xl font-black tracking-tighter text-black uppercase">
-                  Steak West
-                </span>
-                <div className="w-12 h-1.5 bg-primary rounded-full" />
-             </div>
-             
-             <div className="flex flex-col items-center gap-2">
+          {/* High-Density Uber Eats Style Footer */}
+          <footer className="pt-16 pb-12 border-t mt-20 space-y-12">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
+              {/* Logo & Apps */}
+              <div className="space-y-8">
+                <Link href="/" className="inline-block">
+                  <span className="font-headline text-3xl font-black tracking-tighter text-black uppercase">
+                    Steak West
+                  </span>
+                </Link>
+                <div className="flex flex-col gap-3">
+                  <Link href="#" className="w-32 h-10 bg-black rounded-lg flex items-center justify-center text-white text-[10px] font-bold border border-gray-800">
+                    Download on the<br />App Store
+                  </Link>
+                  <Link href="#" className="w-32 h-10 bg-black rounded-lg flex items-center justify-center text-white text-[10px] font-bold border border-gray-800">
+                    GET IT ON<br />Google Play
+                  </Link>
+                </div>
+              </div>
+
+              {/* Links Column 1 */}
+              <div className="space-y-4">
+                <Link href="#" className="block text-sm font-medium hover:underline">Get Help</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">Add your restaurant</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">Sign up to deliver</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">Create a business account</Link>
+              </div>
+
+              {/* Links Column 2 */}
+              <div className="space-y-4">
+                <Link href="#" className="block text-sm font-medium hover:underline">Restaurants near me</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">View all cities</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">View all countries</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">Pickup near me</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">About Steak West</Link>
+                <Link href="#" className="block text-sm font-medium hover:underline">Shop groceries</Link>
+                <div className="flex items-center gap-2 pt-2 cursor-pointer hover:underline">
+                  <Globe className="w-4 h-4" />
+                  <span className="text-sm font-medium">English</span>
+                </div>
+              </div>
+
+              {/* Accepted Payments Section */}
+              <div className="space-y-6">
+                <h4 className="text-xs font-black uppercase tracking-widest text-gray-400">Accepted Payments</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {PAYMENT_METHODS.map((payment) => (
+                    <div key={payment.name} className="flex items-center gap-2 bg-gray-50 p-2 rounded-lg border border-gray-100">
+                      {payment.icon ? (
+                        <payment.icon className="w-4 h-4 text-primary" />
+                      ) : (
+                        <div className={cn("w-2 h-2 rounded-full", payment.color)} />
+                      )}
+                      <span className="text-[10px] font-bold whitespace-nowrap">{payment.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-8">
+              {/* Socials */}
+              <div className="flex gap-6">
+                <Link href="#"><Facebook className="w-5 h-5 hover:text-primary transition-colors" /></Link>
+                <Link href="#"><Twitter className="w-5 h-5 hover:text-primary transition-colors" /></Link>
+                <Link href="#"><Instagram className="w-5 h-5 hover:text-primary transition-colors" /></Link>
+              </div>
+
+              {/* Attribution */}
+              <div className="text-center md:text-left space-y-1">
                 <p className="text-sm text-muted-foreground font-medium">
                   Created with love by <Link href="https://simonstyles.co.ke" target="_blank" className="text-black font-extrabold hover:underline">Simon Styles Technologies Limited</Link>
                 </p>
-                <Link href="https://simonstyles.co.ke" target="_blank" className="text-[10px] text-primary font-bold hover:underline tracking-widest uppercase">
+                <Link href="https://simonstyles.co.ke" target="_blank" className="block text-[10px] text-primary font-bold hover:underline tracking-widest uppercase">
                   simonstyles.co.ke
                 </Link>
-             </div>
+              </div>
 
-             <div className="w-16 h-px bg-muted mx-auto" />
-
-             <p className="text-[10px] text-muted-foreground uppercase tracking-widest opacity-60">
-                © {new Date().getFullYear()} Steak West Butchery. All rights reserved.
-             </p>
+              {/* Legal Links */}
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-medium">
+                <Link href="#" className="hover:underline">Privacy Policy</Link>
+                <Link href="#" className="hover:underline">Terms</Link>
+                <Link href="#" className="hover:underline">Pricing</Link>
+                <Link href="#" className="hover:underline hidden lg:block">Do not sell or share my personal information</Link>
+                <p className="text-gray-400 opacity-80">© {new Date().getFullYear()} Steak West Butchery</p>
+              </div>
+            </div>
           </footer>
         </main>
       </div>
