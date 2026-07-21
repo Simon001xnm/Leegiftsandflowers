@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,25 +6,25 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 20 14% 4%;
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 20 14% 4%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14% 4%;
-    --primary: 0 84% 35%; /* Deep Meat Red */
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 84% 35%; 
     --primary-foreground: 0 0% 100%;
-    --secondary: 40 100% 98%;
-    --secondary-foreground: 0 84% 15%;
-    --muted: 20 10% 96%;
-    --muted-foreground: 20 10% 45%;
-    --accent: 47 95% 50%; /* Mustard/Yellow */
-    --accent-foreground: 0 84% 5%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 47 95% 50%; 
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 20 15% 92%;
-    --input: 20 15% 92%;
-    --ring: 0 84% 35%;
-    --radius: 1rem;
+    --border: 0 0% 92%;
+    --input: 0 0% 92%;
+    --ring: 0 0% 0%;
+    --radius: 0.5rem;
   }
 }
 
@@ -35,7 +36,7 @@
     @apply bg-background text-foreground font-body antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline tracking-tight;
+    @apply font-headline tracking-tight text-black;
   }
 }
 
@@ -49,36 +50,5 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
-  }
-  
-  @media print {
-    .no-print {
-      display: none !important;
-    }
-    .print-only {
-      display: block !important;
-    }
-    body {
-      background: white !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-    @page {
-      margin: 0;
-      size: auto;
-    }
-  }
-  
-  .print-only {
-    display: none;
-  }
-  
-  .animate-slow-zoom {
-    animation: slow-zoom 20s infinite ease-in-out;
-  }
-  
-  @keyframes slow-zoom {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
   }
 }
