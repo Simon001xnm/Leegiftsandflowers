@@ -21,14 +21,14 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 /**
- * Robust CartProvider designed to handle Next.js HMR gracefully.
+ * Stable CartProvider to resolve HMR "Module factory not available" error.
  */
-export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('steak_west_basket_v9');
+    const saved = localStorage.getItem('steak_west_basket_v10');
     if (saved) {
       try {
         setCart(JSON.parse(saved));
@@ -41,7 +41,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem('steak_west_basket_v9', JSON.stringify(cart));
+      localStorage.setItem('steak_west_basket_v10', JSON.stringify(cart));
     }
   }, [cart, isLoaded]);
 
@@ -89,12 +89,12 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }), [cart, subtotal, itemCount]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-};
+}
 
-export const useCart = () => {
+export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
-};
+}
