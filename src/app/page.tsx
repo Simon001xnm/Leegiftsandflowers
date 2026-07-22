@@ -35,7 +35,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Custom walking icon for native feel
+const ButcheryLogo = ({ className }: { className?: string }) => (
+  <div className={cn("relative overflow-hidden shrink-0", className)}>
+    <Image 
+      src="/WhatsApp Image 2026-07-22 at 10.09.53.jpeg" 
+      alt="Steak West Logo" 
+      fill 
+      className="object-contain"
+      priority
+    />
+  </div>
+);
+
 const WalkingIcon = ({ className }: { className?: string }) => (
   <svg 
     className={className}
@@ -51,22 +62,6 @@ const WalkingIcon = ({ className }: { className?: string }) => (
     <path d="m13 12 2 1.5 3-1" />
     <path d="m13 12-4-2.5-1-6" />
     <path d="m9 20-2-3" />
-  </svg>
-);
-
-// High-impact Butchery Logo: Bull head with crossed knives
-const ButcheryLogo = ({ className }: { className?: string }) => (
-  <svg 
-    className={className}
-    viewBox="0 0 100 100" 
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="50" cy="50" r="48" fill="black" />
-    <circle cx="50" cy="50" r="44" fill="white" />
-    <path d="M30 35 L40 30 Q50 25 60 30 L70 35 L70 50 Q50 60 30 50 Z" fill="black" />
-    <path d="M40 30 Q30 20 20 25 M60 30 Q70 20 80 25" stroke="black" strokeWidth="5" strokeLinecap="round" />
-    <path d="M25 70 L75 55 M25 55 L75 70" stroke="#E30613" strokeWidth="7" strokeLinecap="round" />
   </svg>
 );
 
@@ -105,51 +100,50 @@ export default function Home() {
       <div className="flex flex-grow relative">
         <SidebarNav />
         
-        <main className="flex-grow lg:ml-64 p-2 md:p-3 lg:p-4 space-y-4 md:space-y-6 pb-20">
+        <main className="flex-grow lg:ml-64 p-2 md:p-3 lg:p-4 space-y-4 md:space-y-6 pb-4">
           
-          {/* Hero Section - Video Background */}
-          <div className="relative h-[400px] md:h-[500px] w-full rounded-2xl md:rounded-[2.5rem] overflow-hidden bg-black shadow-2xl border border-white/5 group">
+          {/* Hero Section - Redesigned with Video Background */}
+          <div className="relative h-[350px] md:h-[450px] w-full rounded-2xl md:rounded-[2.5rem] overflow-hidden bg-black shadow-xl group">
             <video 
               autoPlay 
               muted 
               loop 
               playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-70 animate-slow-zoom"
+              className="absolute inset-0 w-full h-full object-cover opacity-60 animate-slow-zoom"
             >
               <source src="/From Klickpin.com- 833517843581501058-pin-id-833517843581501058 (1).mp4" type="video/mp4" />
             </video>
             
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
 
-            <div className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 lg:px-16 space-y-4 md:space-y-6 max-w-2xl">
-              <div className="flex items-center gap-3 animate-in slide-in-from-left duration-700">
-                <ButcheryLogo className="w-12 h-12 md:w-16 md:h-16 shadow-2xl" />
-                <div className="space-y-0.5">
-                  <Badge className="bg-primary text-white border-none px-2 py-0.5 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em]">
-                    Super ya Nyama
-                  </Badge>
-                  <h2 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white">Steak West</h2>
+            <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-between px-6 md:px-12 lg:px-16 py-8">
+              <div className="flex flex-col space-y-4 md:space-y-6 max-w-lg">
+                <div className="flex items-center gap-3">
+                  <ButcheryLogo className="w-14 h-14 md:w-20 md:h-20" />
+                  <div className="flex flex-col">
+                    <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter text-white">Steak West</h2>
+                    <Badge className="bg-primary text-white border-none px-2 py-0.5 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] w-fit">
+                      Super ya Nyama
+                    </Badge>
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-2 animate-in slide-in-from-left duration-1000 delay-200">
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black font-headline text-white tracking-tighter uppercase leading-[0.9] drop-shadow-2xl">
-                  Premium <br />
-                  <span className="text-primary italic">Cuts.</span><br />
-                  <span className="text-white/80 text-[0.7em] tracking-normal font-medium normal-case">Delivered in 20 Mins.</span>
-                </h1>
-                <p className="text-white/70 text-xs md:text-lg font-bold max-w-lg leading-tight">
-                  Taste the difference of farm-fresh precision. Nairobi's top-rated butchery experience, now at your doorstep.
-                </p>
-              </div>
+                <div className="space-y-2">
+                  <h1 className="text-2xl md:text-4xl lg:text-5xl font-black font-headline text-white tracking-tighter uppercase leading-[0.95]">
+                    Premium Cuts.<br />
+                    <span className="text-primary italic">Fast. Fresh.</span><br />
+                    <span className="text-white/80 text-[0.6em] tracking-normal font-medium normal-case">Delivered in under 20 mins across Nairobi.</span>
+                  </h1>
+                </div>
 
-              <div className="flex flex-row gap-3 pt-2 w-full md:w-fit animate-in slide-in-from-bottom duration-1000 delay-500">
-                <Button className="h-12 md:h-14 px-6 md:px-10 rounded-xl bg-primary text-white hover:bg-primary/90 font-black shadow-xl transition-all active:scale-95 text-xs md:text-base uppercase tracking-widest">
-                  Order Now
-                </Button>
-                <Button variant="outline" className="h-12 md:h-14 px-6 md:px-10 rounded-xl border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-xs md:text-base uppercase tracking-widest bg-transparent">
-                  Browse Deals
-                </Button>
+                <div className="flex gap-3 pt-2">
+                  <Button className="h-10 md:h-12 px-6 md:px-8 rounded-xl bg-primary text-white hover:bg-primary/90 font-black shadow-lg transition-all active:scale-95 text-[10px] md:text-sm uppercase tracking-widest">
+                    Get it Delivered
+                  </Button>
+                  <Button variant="outline" className="h-10 md:h-12 px-6 md:px-8 rounded-xl border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[10px] md:text-sm uppercase tracking-widest bg-transparent">
+                    Browse Deals
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -204,21 +198,21 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Aggressively Congested Footer */}
+          {/* Ultra-Congested App-Like Footer */}
           <footer className="pt-6 border-t border-primary/10 bg-white">
             <div className="container mx-auto px-2">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
                 <div className="col-span-2 md:col-span-1 space-y-1">
                   <div className="flex items-center gap-1">
-                    <ButcheryLogo className="w-4 h-4" />
-                    <span className="font-headline text-base font-black tracking-tighter text-black uppercase">Steak West</span>
+                    <ButcheryLogo className="w-6 h-6" />
+                    <span className="font-headline text-sm font-black tracking-tighter text-black uppercase">Steak West</span>
                   </div>
                   <p className="text-[7px] font-bold text-gray-400 uppercase leading-tight max-w-[120px]">
                     Nairobi's trusted meat source. Super ya Nyama.
                   </p>
-                  <div className="flex gap-1.5">
-                    {[Facebook, Twitter, Instagram].map((Icon, i) => (
-                      <Link key={i} href="#" className="w-4 h-4 bg-gray-50 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                  <div className="flex gap-1.5 pt-1">
+                    {[Facebook, Twitter, Instagram, Youtube, Linkedin].map((Icon, i) => (
+                      <Link key={i} href="#" className="w-4 h-4 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                         <Icon className="w-2 h-2" />
                       </Link>
                     ))}
@@ -226,65 +220,63 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-0.5">
-                  <h4 className="text-[6px] font-black uppercase text-primary">Company</h4>
-                  {['About', 'Careers', 'Blog'].map(l => (
-                    <Link key={l} href="#" className="block text-[8px] font-bold text-gray-500 uppercase tracking-tighter">{l}</Link>
+                  <h4 className="text-[7px] font-black uppercase text-primary">Company</h4>
+                  {['About', 'Careers', 'Blog', 'Support'].map(l => (
+                    <Link key={l} href="#" className="block text-[8px] font-bold text-gray-500 uppercase tracking-tighter hover:text-black">{l}</Link>
                   ))}
                 </div>
 
                 <div className="space-y-0.5">
-                  <h4 className="text-[6px] font-black uppercase text-primary">Explore</h4>
-                  {['Beef', 'Choma', 'Mutura'].map(l => (
-                    <Link key={l} href="#" className="block text-[8px] font-bold text-gray-500 uppercase tracking-tighter">{l}</Link>
+                  <h4 className="text-[7px] font-black uppercase text-primary">Explore</h4>
+                  {['Beef', 'Nyama Choma', 'Mutura Special', 'Grocery'].map(l => (
+                    <Link key={l} href="#" className="block text-[8px] font-bold text-gray-500 uppercase tracking-tighter hover:text-black">{l}</Link>
                   ))}
                 </div>
 
                 <div className="space-y-0.5">
-                  <h4 className="text-[6px] font-black uppercase text-primary">Legal</h4>
-                  {['Privacy', 'Terms', 'Safety'].map(l => (
-                    <Link key={l} href="#" className="block text-[8px] font-bold text-gray-500 uppercase tracking-tighter">{l}</Link>
+                  <h4 className="text-[7px] font-black uppercase text-primary">Legal</h4>
+                  {['Privacy Policy', 'Terms of Use', 'Safety Info'].map(l => (
+                    <Link key={l} href="#" className="block text-[8px] font-bold text-gray-500 uppercase tracking-tighter hover:text-black">{l}</Link>
                   ))}
                 </div>
 
-                <div className="col-span-2 md:col-span-1 space-y-1">
-                  <div className="flex gap-1 md:flex-col">
-                    <Button className="h-5 flex-1 bg-black text-white text-[6px] font-black uppercase rounded">App Store</Button>
-                    <Button className="h-5 flex-1 bg-black text-white text-[6px] font-black uppercase rounded">Play Store</Button>
-                  </div>
+                <div className="col-span-2 md:col-span-1 space-y-1 flex flex-col md:items-end">
+                   <Button className="h-6 w-full max-w-[100px] bg-black text-white text-[6px] font-black uppercase rounded">App Store</Button>
+                   <Button className="h-6 w-full max-w-[100px] bg-black text-white text-[6px] font-black uppercase rounded">Play Store</Button>
                 </div>
               </div>
 
-              {/* The Last Pad - Ultra Tight */}
-              <div className="border-t pt-2 space-y-2">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-2">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1.5">
-                      <Landmark className="w-2.5 h-2.5 text-black" />
-                      <span className="text-[6px] font-black uppercase text-gray-700">Equity Bank: 1234567890</span>
+              {/* The Last Pad - Ultra Compact */}
+              <div className="border-t pt-3 pb-2 space-y-3">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+                    <div className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded border">
+                      <Landmark className="w-3 h-3 text-black" />
+                      <span className="text-[7px] font-black uppercase text-gray-700">Equity Bank: 1234567890</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex flex-wrap items-center justify-center gap-1">
                       {PAYMENT_METHODS.map((payment) => (
-                        <div key={payment.name} className="flex items-center gap-0.5 bg-gray-50 px-1 py-0.5 rounded border border-gray-100">
+                        <div key={payment.name} className="flex items-center gap-0.5 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-100">
                           {payment.color ? (
-                            <div className={cn("w-1 h-1 rounded-full", payment.color)} />
+                            <div className={cn("w-1.5 h-1.5 rounded-full", payment.color)} />
                           ) : (
-                            <payment.icon className="w-1.5 h-1.5 text-gray-400" />
+                            <payment.icon className="w-2 h-2 text-gray-400" />
                           )}
-                          <span className="text-[4px] font-black uppercase text-gray-500">{payment.name}</span>
+                          <span className="text-[5px] font-black uppercase text-gray-500">{payment.name}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center lg:items-end leading-none">
-                    <span className="text-[5px] font-black text-gray-400 uppercase tracking-widest">Partner</span>
-                    <Link href="https://simonstyles.co.ke" target="_blank" className="text-[7px] font-black text-black uppercase group hover:text-primary">
+                  <div className="flex flex-col items-center md:items-end leading-none">
+                    <span className="text-[5px] font-black text-gray-400 uppercase tracking-widest">Developed by</span>
+                    <Link href="https://simonstyles.co.ke" target="_blank" className="text-[8px] font-black text-black uppercase group hover:text-primary transition-colors">
                       Simon Styles Technologies Limited
                     </Link>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pb-2">
+                <div className="flex items-center justify-between pb-4">
                   <p className="text-[6px] text-gray-400 font-black uppercase tracking-widest">
                     © {new Date().getFullYear()} Steak West Butchery. Super ya Nyama.
                   </p>

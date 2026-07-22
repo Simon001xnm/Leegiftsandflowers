@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { 
   Menu, 
   Search, 
@@ -14,17 +15,17 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-// Butchery Logo matching brand guidelines
+// Butchery Logo using the official brand image
 const ButcheryLogo = ({ className }: { className?: string }) => (
-  <svg 
-    className={className}
-    viewBox="0 0 100 100" 
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M50 5 C30 5 15 15 10 35 C10 60 30 85 50 95 C70 85 90 60 90 35 C85 15 70 5 50 5Z" fill="#E30613" />
-    <path d="M50 15 L55 35 L75 35 L60 45 L65 65 L50 55 L35 65 L40 45 L25 35 L45 35 Z" fill="white" />
-  </svg>
+  <div className={cn("relative overflow-hidden shrink-0", className)}>
+    <Image 
+      src="/WhatsApp Image 2026-07-22 at 10.09.53.jpeg" 
+      alt="Steak West Logo" 
+      fill 
+      className="object-contain"
+      priority
+    />
+  </div>
 );
 
 export function Navigation() {
@@ -38,7 +39,7 @@ export function Navigation() {
           <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
         </Button>
         <Link href="/" className="flex items-center gap-2 group">
-          <ButcheryLogo className="w-6 h-6 md:w-8 md:h-8 transition-transform group-hover:scale-110" />
+          <ButcheryLogo className="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:scale-110" />
           <div className="flex flex-col -space-y-1">
             <span className="font-headline text-lg md:text-2xl font-black tracking-tighter text-black uppercase leading-none">
               Steak West
