@@ -28,12 +28,12 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
-  <div className={cn("relative overflow-hidden shrink-0", className)}>
+  <div className={cn("relative shrink-0 flex items-center justify-center", className)}>
     <Image 
       src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
       alt="Steak West Logo" 
       fill 
-      className="object-contain"
+      className="object-contain object-center"
       priority
     />
   </div>
@@ -71,7 +71,6 @@ export default function Home() {
       
       <main className="flex-grow p-0 space-y-0 pb-4">
         
-        {/* Responsive Hero Section */}
         <div className="relative min-h-[450px] md:h-[600px] w-full overflow-hidden bg-black flex items-center">
           <video 
             autoPlay 
@@ -119,7 +118,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Quick Categories */}
         <section className="space-y-4 p-6">
           <h2 className="text-[14px] font-black text-black uppercase tracking-tighter">Shop Categories</h2>
           <div className="flex gap-0 overflow-x-auto no-scrollbar pb-4 border-l border-t border-b">
@@ -134,7 +132,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Featured Sections - Seamless Grid */}
         <section className="bg-primary/5 p-0 border-y border-primary/10">
           <div className="flex justify-between items-end p-6 bg-white border-b">
             <div className="space-y-2">
@@ -168,7 +165,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="mt-20 pt-16 border-t border-primary/5 bg-white pb-32 md:pb-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 mb-12">
@@ -257,9 +253,7 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
   };
 
   return (
-    <div 
-      className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white rounded-none"
-    >
+    <div className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white rounded-none">
       <Link href={`/products/${item.id}`} className="relative aspect-square overflow-hidden bg-gray-50 block">
         <Image 
           src={item.imageUrl} 
