@@ -33,7 +33,7 @@
   }
   
   html {
-    font-size: 15px;
+    font-size: 15px; /* REQUESTED BASE FONT */
   }
 
   body {
@@ -74,7 +74,6 @@
     animation: heartbeat 0.8s ease-in-out infinite;
   }
 
-  /* Uber Eats Style Scrollbar Hide */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

@@ -17,7 +17,8 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
 /**
- * High-impact landing page with ultra-high density 4-column mobile grid.
+ * Ultra-high density landing page with strict 4-column mobile grid.
+ * Fixed HMR module factory stability.
  */
 export default function Home() {
   const { addToCart } = useCart();
@@ -72,12 +73,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Dynamic Market Strip - 4 Columns MINIMUM on Mobile */}
+        {/* Dynamic Market Strip - STRICT 4 COLUMNS ON MOBILE */}
         <section className="py-8 md:py-16 bg-white px-2 md:px-12 container mx-auto">
           <div className="flex items-end justify-between mb-6 px-2">
             <div className="space-y-0.5">
               <h2 className="text-sm md:text-3xl font-black text-black leading-tight uppercase tracking-tighter">PREMIUM SELECTIONS</h2>
-              <p className="text-gray-400 font-bold text-[8px] md:text-[10px] uppercase tracking-widest">Available for immediate dispatch</p>
+              <p className="text-gray-400 font-bold text-[8px] md:text-[10px] uppercase tracking-widest">Immediate dispatch nodes active</p>
             </div>
             <Link href="/restaurants">
                <Button variant="link" className="font-black text-black p-0 gap-1 text-[9px] md:text-[12px] uppercase tracking-widest">SEE ALL <ChevronRight className="w-2.5 h-2.5" /></Button>
@@ -153,23 +154,24 @@ function ProductCard({ item, onAdd }: { item: MenuItem; onAdd: () => void }) {
           alt={item.name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
+          data-ai-hint="raw meat"
         />
-        <div className="absolute top-1 right-1 md:top-3 md:right-3">
-          <Button size="icon" variant="ghost" className="rounded-full bg-white/90 backdrop-blur-md h-4 w-4 md:h-8 md:w-8 shadow-sm text-black">
+        <div className="absolute top-0.5 right-0.5 md:top-3 md:right-3">
+          <Button size="icon" variant="ghost" className="rounded-full bg-white/90 backdrop-blur-md h-3.5 w-3.5 md:h-8 md:w-8 shadow-sm text-black">
             <Heart className="w-2 h-2 md:w-4 md:h-4" />
           </Button>
         </div>
       </div>
       <div className="space-y-0.5 md:space-y-1.5 px-0.5">
-        <h3 className="text-[8px] md:text-[13px] font-black truncate group-hover:text-primary transition-colors leading-tight uppercase tracking-tight">{item.name}</h3>
+        <h3 className="text-[7px] md:text-[13px] font-black truncate group-hover:text-primary transition-colors leading-tight uppercase tracking-tight">{item.name}</h3>
         <div className="flex items-center justify-between pt-0.5">
-          <span className="text-[8px] md:text-[14px] font-black">KES {item.price.toLocaleString()}</span>
-          <Button 
+          <span className="text-[7px] md:text-[14px] font-black">KES {item.price.toLocaleString()}</span>
+          <button 
             onClick={(e) => { e.preventDefault(); onAdd(); }}
-            className="rounded-full bg-black text-white hover:bg-primary transition-all px-1.5 md:px-4 h-4 md:h-8 font-black text-[6px] md:text-[9px] uppercase tracking-widest"
+            className="rounded-full bg-black text-white hover:bg-primary transition-all px-1 md:px-4 h-3.5 md:h-8 font-black text-[5px] md:text-[9px] uppercase tracking-widest"
           >
             ADD
-          </Button>
+          </button>
         </div>
       </div>
     </div>
