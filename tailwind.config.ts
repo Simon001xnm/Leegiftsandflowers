@@ -68,9 +68,9 @@ export default {
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        lg: '0px',
+        md: '0px',
+        sm: '0px',
       },
       keyframes: {
         'accordion-down': {
@@ -89,15 +89,15 @@ export default {
             height: '0',
           },
         },
-        'slow-zoom': {
+        'heartbeat': {
           '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.1)' },
+          '50%': { transform: 'scale(1.02)' },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'slow-zoom': 'slow-zoom 20s infinite ease-in-out',
+        'heartbeat': 'heartbeat 0.8s ease-in-out infinite',
       },
     },
   },

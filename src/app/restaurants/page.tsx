@@ -36,7 +36,7 @@ function DiscoveryContent() {
   return (
     <main className="flex-grow container mx-auto px-4 py-12">
       <div className="max-w-4xl mb-12">
-        <Badge className="mb-4 bg-primary/10 text-primary border-none px-4 py-1 text-[14px] font-bold">Nairobi Fresh</Badge>
+        <Badge className="mb-4 bg-primary/10 text-primary border-none px-4 py-1 text-[14px] font-bold rounded-none">Nairobi Fresh</Badge>
         <h1 className="text-4xl md:text-5xl font-black font-headline text-primary mb-4 uppercase tracking-tighter">The Meat Shop</h1>
         <p className="text-muted-foreground text-[14px] md:text-base font-medium">Premium raw meat, grilled choma, and authentic Nairobi delicacies.</p>
       </div>
@@ -82,12 +82,12 @@ function DiscoveryContent() {
       </div>
 
       {filteredRestaurants.length > 0 ? (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t">
           {filteredRestaurants.map((restaurant) => (
             <Link 
               key={restaurant.id} 
               href={`/restaurants/${restaurant.id}`}
-              className="group flex flex-col bg-card rounded-none overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col bg-card rounded-none overflow-hidden border-r border-b shadow-none hover:z-10 hover:animate-heartbeat transition-all"
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image 
@@ -96,7 +96,7 @@ function DiscoveryContent() {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <Badge className="absolute top-4 left-4 shadow-sm bg-white text-primary font-black text-[14px] uppercase tracking-widest">
+                <Badge className="absolute top-4 left-4 shadow-sm bg-white text-primary font-black text-[14px] uppercase tracking-widest rounded-none">
                   {restaurant.category}
                 </Badge>
               </div>
@@ -132,7 +132,7 @@ function DiscoveryContent() {
         </div>
       ) : (
         <div className="py-20 flex flex-col items-center text-center">
-          <div className="w-24 h-24 rounded-full bg-muted flex items-center justify-center mb-8">
+          <div className="w-24 h-24 rounded-none bg-muted flex items-center justify-center mb-8">
             <Beef className="w-12 h-12 text-muted-foreground/30" />
           </div>
           <h3 className="text-2xl md:text-3xl font-black font-headline text-primary mb-3 uppercase tracking-tighter">No meat found</h3>

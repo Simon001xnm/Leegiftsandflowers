@@ -24,13 +24,13 @@
     --border: 0 0% 92%;
     --input: 0 0% 92%;
     --ring: 0 100% 50%;
-    --radius: 0.5rem;
+    --radius: 0rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border rounded-none;
   }
   body {
     @apply bg-background text-foreground font-body antialiased;

@@ -39,7 +39,7 @@ export function SidebarNav() {
             key={item.label}
             href={item.href}
             className={cn(
-              "flex items-center gap-4 px-4 py-3 rounded-xl transition-all font-black text-sm uppercase tracking-tighter",
+              "flex items-center gap-4 px-4 py-3 rounded-none transition-all font-black text-[14px] uppercase tracking-tighter",
               isActive 
                 ? "bg-primary/10 text-primary" 
                 : "text-gray-500 hover:bg-gray-50 hover:text-black"

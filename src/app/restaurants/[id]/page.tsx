@@ -100,7 +100,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                 Marketplace
               </Link>
               <div className="max-w-4xl">
-                <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest">{restaurant.category}</Badge>
+                <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest rounded-none">{restaurant.category}</Badge>
                 <h1 className="text-3xl lg:text-6xl font-black font-headline text-white mb-2 uppercase tracking-tighter">{restaurant.name}</h1>
                 <div className="flex flex-wrap items-center gap-4 text-white/90 text-[14px] font-bold uppercase tracking-widest">
                   <div className="flex items-center gap-2"><Star className="w-4 h-4 text-accent fill-accent" /> {restaurant.rating}</div>
@@ -117,7 +117,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
         <div className="container mx-auto px-4 py-8 md:py-12">
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
             
-            {/* Menu Sections - High Density Marketplace Feed */}
+            {/* Menu Sections - High Density Seamless Grid */}
             <div className="lg:col-span-8 space-y-16">
               <Tabs defaultValue={vendorCategories[0]} className="w-full">
                 <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
@@ -130,7 +130,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                 
                 {vendorCategories.map(cat => (
                   <TabsContent key={cat} value={cat} className="mt-0 outline-none">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t">
                       {vendorItems.filter(item => (item.category || 'Mains') === cat).map((item) => (
                         <HighDensityProductCard key={item.id} item={item} onAdd={() => addToCart(item)} />
                       ))}
@@ -146,7 +146,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                     <h2 className="text-lg md:text-3xl font-black text-black uppercase tracking-tighter">You might also like</h2>
                     <Link href="/restaurants" className="text-[14px] font-black text-primary hover:underline uppercase tracking-widest">Explore All</Link>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 border-l border-t">
                     {relatedItems.map((item) => (
                       <HighDensityProductCard key={item.id} item={item} onAdd={() => addToCart(item)} isSmall />
                     ))}
@@ -237,12 +237,12 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAdd: () => void; isSmall?: boolean }) {
   return (
     <Card className={cn(
-      "overflow-hidden border shadow-sm hover:shadow-xl transition-all group rounded-none",
+      "overflow-hidden border-r border-b shadow-none hover:z-10 hover:animate-heartbeat transition-all rounded-none",
       isSmall && "flex-col"
     )}>
       <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-36 md:h-44")}>
         {!isSmall && (
-          <div className="p-4 flex-grow space-y-2 flex flex-col justify-center">
+          <div className="p-4 flex-grow space-y-2 flex flex-col justify-center bg-white">
             <div className="flex flex-col">
               <h3 className="font-black text-[14px] md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
               {item.isPopular && <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
@@ -286,7 +286,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         </div>
         
         {isSmall && (
-          <div className="p-4 space-y-2">
+          <div className="p-4 space-y-2 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
             <Button className="w-full h-10 rounded-none bg-black text-[14px] font-black uppercase tracking-widest" onClick={onAdd}>
               Add to Basket
