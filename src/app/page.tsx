@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from "next/link";
@@ -19,7 +20,8 @@ import {
   Youtube,
   Linkedin,
   CreditCard,
-  Landmark
+  Landmark,
+  Plus
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -46,20 +48,6 @@ const CATEGORIES = [
   { label: 'Cooked', icon: Utensils, href: '/restaurants?cat=Cooked' },
   { label: 'Groceries', icon: ShoppingBag, href: '/restaurants?cat=Grocery' },
   { label: 'Offers', icon: Award, href: '#' },
-];
-
-const FILTER_PILLS = [
-  "Top Rated", "Under 30 min", "Offers", "Nyama Choma", "Raw Cuts", "Mutura Special"
-];
-
-const PAYMENT_METHODS = [
-  { name: 'M-Pesa', color: 'bg-[#4fb948]' },
-  { name: 'Airtel Money', color: 'bg-[#e40000]' },
-  { name: 'T-Kash', color: 'bg-[#003366]' },
-  { name: 'PayPal', icon: CreditCard },
-  { name: 'Bank Transfer', icon: Landmark },
-  { name: 'Visa', icon: CreditCard },
-  { name: 'Mastercard', icon: CreditCard },
 ];
 
 export default function Home() {
@@ -110,9 +98,11 @@ export default function Home() {
                     Pick it up
                   </Button>
                 </Link>
-                <Button variant="outline" className="h-12 md:h-16 px-8 md:px-12 border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full sm:w-auto rounded-none">
-                  Browse Deals
-                </Button>
+                <Link href="/dashboard/analytics" className="w-full sm:w-auto">
+                  <Button variant="outline" className="h-12 md:h-16 px-8 md:px-12 border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full rounded-none">
+                    View Insights
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -123,7 +113,7 @@ export default function Home() {
           <h2 className="text-[14px] font-black text-black uppercase tracking-tighter">Shop Categories</h2>
           <div className="flex gap-0 overflow-x-auto no-scrollbar pb-4 border-l border-t border-b">
             {CATEGORIES.map((cat) => (
-              <Link key={cat.label} href={cat.href} className="flex flex-col items-center gap-2 group shrink-0 w-24 md:w-32 border-r p-3 md:p-6 bg-white hover-heartbeat">
+              <Link key={cat.label} href={cat.href} className="flex flex-col items-center gap-2 group shrink-0 w-24 md:w-32 border-r p-3 md:p-6 bg-white hover:bg-gray-50">
                 <div className="w-10 h-10 md:w-16 md:h-16 bg-gray-50 flex items-center justify-center transition-all group-hover:bg-primary/5">
                   <cat.icon className="w-5 h-5 md:w-8 md:h-8 text-black group-hover:text-primary transition-colors" />
                 </div>
@@ -153,13 +143,6 @@ export default function Home() {
         <section className="space-y-0">
           <div className="flex flex-col gap-0 p-6">
             <h2 className="text-lg md:text-3xl font-black text-black uppercase tracking-tighter leading-none mb-4">Fresh Market</h2>
-            <div className="flex gap-2 overflow-x-auto no-scrollbar py-2">
-              {FILTER_PILLS.map((pill) => (
-                <Button key={pill} variant="outline" className="bg-gray-50 border-none text-[14px] font-black px-4 md:px-6 h-8 md:h-10 shrink-0 uppercase tracking-widest rounded-none">
-                  {pill}
-                </Button>
-              ))}
-            </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-t border-l">
             {allMeatProducts.map((item, idx) => (
@@ -180,60 +163,12 @@ export default function Home() {
                 <p className="text-[10px] md:text-[12px] font-bold text-gray-400 uppercase leading-relaxed max-w-[280px]">
                   Nairobi's Trusted Meat Source. Super ya Nyama.
                 </p>
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {[Facebook, Twitter, Instagram, Youtube, Linkedin].map((Icon, i) => (
-                    <Link key={i} href="#" className="w-8 h-8 md:w-10 md:h-10 bg-gray-50 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-                      <Icon className="w-4 h-4 md:w-5 md:h-5" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="text-[12px] font-black uppercase text-primary tracking-widest">Company</h4>
-                {['About', 'Support', 'Carriers'].map(l => (
-                  <Link key={l} href="#" className="block text-[12px] md:text-[14px] font-bold text-gray-500 uppercase tracking-tighter hover:text-black">{l}</Link>
-                ))}
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="text-[12px] font-black uppercase text-primary tracking-widest">Explore</h4>
-                {['Beef', 'Choma', 'Mutura', 'Supu'].map(l => (
-                  <Link key={l} href="#" className="block text-[12px] md:text-[14px] font-bold text-gray-500 uppercase tracking-tighter hover:text-black">{l}</Link>
-                ))}
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="text-[12px] font-black uppercase text-primary tracking-widest">Legal</h4>
-                {['Privacy Policy', 'Terms', 'Access'].map(l => (
-                  <Link key={l} href="#" className="block text-[12px] md:text-[14px] font-bold text-gray-500 uppercase tracking-tighter hover:text-black">{l}</Link>
-                ))}
               </div>
             </div>
-
-            <div className="border-t border-dashed pt-8 space-y-6">
-              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-                {PAYMENT_METHODS.map((payment) => (
-                  <div key={payment.name} className="flex items-center gap-2 bg-gray-50 px-2 py-1.5 md:px-3 md:py-2 border border-gray-100">
-                    {payment.color ? (
-                      <div className={cn("w-2 h-2 rounded-full", payment.color)} />
-                    ) : (
-                      <payment.icon className="w-3 h-3 text-gray-400" />
-                    )}
-                    <span className="text-[12px] font-black uppercase text-gray-500">{payment.name}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-between opacity-60 pb-8 gap-4 border-t pt-6">
-                <p className="text-[12px] text-gray-400 font-black uppercase tracking-widest text-center sm:text-left">
-                  © 2026 Steak West. Super ya Nyama.
-                </p>
-                <div className="flex gap-4 text-[12px] font-black text-gray-400 uppercase">
-                  <Link href="#">Privacy</Link>
-                  <Link href="#">Terms</Link>
-                </div>
-              </div>
+            <div className="flex flex-col sm:flex-row items-center justify-between opacity-60 pb-8 gap-4 border-t pt-6">
+              <p className="text-[12px] text-gray-400 font-black uppercase tracking-widest text-center sm:text-left">
+                © 2026 Steak West. Super ya Nyama.
+              </p>
             </div>
           </div>
         </footer>
@@ -257,7 +192,7 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
   };
 
   return (
-    <div className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white rounded-none">
+    <div className="group flex flex-col space-y-0 border-r border-b bg-white rounded-none hover:bg-gray-50 transition-colors">
       <Link href={`/products/${item.id}`} className="relative aspect-square overflow-hidden bg-gray-50 block">
         <Image 
           src={item.imageUrl} 
@@ -265,26 +200,10 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        
-        <div className="absolute top-2 left-2 z-30 w-8 h-8 md:w-10 md:h-10 opacity-90 group-hover:opacity-100 transition-opacity">
-          <Image 
-            src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
-            alt="Steak West" 
-            width={40} 
-            height={40} 
-            className="object-contain"
-          />
-        </div>
-
-        <div className="absolute top-2 right-2 md:top-3 md:right-3 z-10 flex flex-col gap-1">
+        <div className="absolute top-2 right-2 z-10 flex flex-col gap-1">
           <Badge className="bg-white/95 text-black border-none px-2 py-0.5 font-black text-[12px] uppercase tracking-widest rounded-none">
             {idx % 3 === 0 ? "Premium" : "Fresh"}
           </Badge>
-          {item.isPopular && (
-            <Badge className="bg-primary text-white border-none px-2 py-0.5 font-black text-[12px] uppercase tracking-widest rounded-none">
-              Hot
-            </Badge>
-          )}
         </div>
       </Link>
 

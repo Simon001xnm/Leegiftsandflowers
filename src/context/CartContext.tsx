@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
@@ -26,19 +27,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('steak_west_basket_final');
+      const saved = localStorage.getItem('steak_west_basket_v3');
       if (saved) {
         setCart(JSON.parse(saved));
       }
     } catch (e) {
-      console.warn('Cart sync paused');
+      console.warn('Basket sync paused');
     }
     setIsInitialized(true);
   }, []);
 
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem('steak_west_basket_final', JSON.stringify(cart));
+      localStorage.setItem('steak_west_basket_v3', JSON.stringify(cart));
     }
   }, [cart, isInitialized]);
 
