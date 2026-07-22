@@ -16,7 +16,6 @@ import {
   Instagram,
   TrendingUp,
   Clock,
-  Plus,
   Youtube,
   Linkedin,
   CreditCard,
@@ -281,30 +280,25 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
             </Badge>
           )}
         </div>
+      </div>
 
-        {/* Hover Overlay with Rounded Green Background */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
-          <div className="bg-emerald-500 rounded-full-important px-8 py-4 flex items-center gap-3 shadow-xl transform scale-90 group-hover:scale-100 transition-transform">
-            <Plus className="w-5 h-5 text-white" />
-            <span className="text-[14px] font-black text-white uppercase tracking-widest">Add</span>
+      <div className="p-4 space-y-3 bg-white">
+        <div>
+          <h3 className="font-black text-[14px] sm:text-xl text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
+            {item.name}
+          </h3>
+          <div className="flex items-center gap-3 text-[14px] text-gray-400 font-bold uppercase tracking-widest mt-1">
+            <span className="flex items-center gap-1.5 text-emerald-600"><TrendingUp className="w-4 h-4" /> Trending</span>
+            <span>•</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> 20m</span>
           </div>
         </div>
 
-        <div className="absolute bottom-4 left-4 z-10">
-           <div className="bg-black/90 text-white text-lg sm:text-xl font-black px-4 py-2 uppercase tracking-tighter rounded-none">
-              KES {item.price.toLocaleString()}
-           </div>
-        </div>
-      </div>
-
-      <div className="p-4 space-y-1.5 bg-white">
-        <h3 className="font-black text-[14px] sm:text-xl text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
-          {item.name}
-        </h3>
-        <div className="flex items-center gap-3 text-[14px] text-gray-400 font-bold uppercase tracking-widest">
-          <span className="flex items-center gap-1.5 text-emerald-600"><TrendingUp className="w-4 h-4" /> Trending</span>
-          <span>•</span>
-          <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> 20m</span>
+        <div className="flex items-center justify-between pt-2 border-t">
+          <span className="font-black text-lg text-black">KES {item.price.toLocaleString()}</span>
+          <Button className="h-10 px-6 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors">
+            Add To Cart
+          </Button>
         </div>
       </div>
     </Link>

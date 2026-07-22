@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, MOCK_MENU, MenuItem } from "@/lib/food-data";
-import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Utensils, X } from "lucide-react";
+import { Star, Clock, MapPin, Bike, ArrowLeft, ShoppingCart, Utensils, X, Minus, Plus, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -214,23 +214,21 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
       "overflow-hidden border-r border-b shadow-none hover-heartbeat bg-white rounded-none",
       isSmall && "flex-col"
     )}>
-      <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-36 md:h-44")}>
+      <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-40 md:h-48")}>
         {!isSmall && (
-          <div className="p-4 flex-grow space-y-2 flex flex-col justify-center bg-white">
+          <div className="p-4 flex-grow space-y-3 flex flex-col justify-center bg-white">
             <div className="flex flex-col">
               <h3 className="font-black text-[14px] md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
               {item.isPopular && <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
             </div>
-            <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
-            <div className="flex items-center justify-between pt-2">
+            <p className="text-[12px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
+            <div className="flex items-center justify-between pt-3 border-t">
               <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
-              {/* Rounded Green Background Trigger */}
               <Button 
-                size="icon" 
-                className="w-10 h-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full-important shadow-lg transition-transform active:scale-95" 
+                className="h-10 px-6 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all active:scale-95" 
                 onClick={onAdd}
               >
-                <Plus className="w-5 h-5" />
+                Add
               </Button>
             </div>
           </div>
@@ -247,28 +245,17 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
               className="object-contain"
             />
           </div>
-
-          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-             <div className="bg-emerald-500 rounded-full-important p-3 shadow-2xl scale-75 group-hover:scale-100 transition-transform">
-                <Plus className="w-6 h-6 text-white" />
-             </div>
-          </div>
-
-          {isSmall && (
-             <div className="absolute bottom-2 left-2 z-10">
-                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1 rounded-none">
-                   KES {item.price.toLocaleString()}
-                </div>
-             </div>
-          )}
         </div>
         
         {isSmall && (
-          <div className="p-4 space-y-2 bg-white">
+          <div className="p-4 space-y-3 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <Button className="w-full h-10 bg-emerald-500 hover:bg-emerald-600 text-white text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2 rounded-full-important" onClick={onAdd}>
-              <Plus className="w-4 h-4" /> Add
-            </Button>
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-black text-[14px] text-black">KES {item.price.toLocaleString()}</span>
+              <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors" onClick={onAdd}>
+                Add
+              </Button>
+            </div>
           </div>
         )}
       </div>
