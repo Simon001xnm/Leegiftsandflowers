@@ -1,7 +1,8 @@
+
 {
   "name": "Steak West Butchery",
   "short_name": "Steak West",
-  "description": "Nairobi's Premium Meat & Choma Marketplace",
+  "description": "Nairobi's Premium Meat & Choma Delivery",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -18,20 +19,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "orientation": "portrait-primary",
-  "prefer_related_applications": false,
-  "shortcuts": [
-    {
-      "name": "Order Now",
-      "url": "/restaurants",
-      "description": "Order fresh meat and choma"
-    },
-    {
-      "name": "Track Order",
-      "url": "/dashboard/customer",
-      "description": "Track your active deliveries"
     }
   ]
 }

@@ -1,8 +1,10 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { FirebaseClientProvider } from "@/firebase";
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Steak West Butchery | Premium Meat & Choma Delivery',
@@ -42,6 +44,19 @@ export default function RootLayout({
           <MobileBottomNav />
           <Toaster />
         </FirebaseClientProvider>
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                  console.log('Software ServiceWorker registration successful');
+                }, function(err) {
+                  console.log('Software ServiceWorker registration failed: ', err);
+                });
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );
