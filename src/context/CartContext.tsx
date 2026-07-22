@@ -24,6 +24,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // Load cart from local storage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem('steak_west_cart');
     if (savedCart) {
@@ -36,6 +37,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsInitialized(true);
   }, []);
 
+  // Persist cart to local storage on changes
   useEffect(() => {
     if (isInitialized) {
       localStorage.setItem('steak_west_cart', JSON.stringify(cart));
@@ -75,7 +77,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const subtotal = useMemo(() => cart.reduce((acc, curr) => acc + curr.item.price * curr.quantity, 0), [cart]);
   const itemCount = useMemo(() => cart.reduce((acc, curr) => acc + curr.quantity, 0), [cart]);
 
-  const value = useMemo(() => ({
+  const contextValue = useMemo(() => ({
     cart,
     addToCart,
     removeFromCart,
@@ -86,7 +88,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }), [cart, subtotal, itemCount]);
 
   return (
-    <CartContext.Provider value={value}>
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   );
