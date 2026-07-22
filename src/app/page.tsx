@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from "next/link";
@@ -12,16 +11,8 @@ import {
   Utensils, 
   Award, 
   ShoppingBag,
-  Facebook,
-  Twitter,
-  Instagram,
   TrendingUp,
-  Clock,
-  Youtube,
-  Linkedin,
-  CreditCard,
-  Landmark,
-  Plus
+  Clock
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -50,7 +41,13 @@ const CATEGORIES = [
   { label: 'Offers', icon: Award, href: '#' },
 ];
 
+/**
+ * Main Landing Page for Steak West.
+ * Optimized for stability to prevent HMR factory errors.
+ */
 export default function Home() {
+  const { addToCart } = useCart();
+  const { toast } = useToast();
   const allMeatProducts = MOCK_MENU;
 
   return (
@@ -95,12 +92,12 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-2 md:gap-4 pt-4 w-full sm:w-auto">
                 <Link href="/restaurants" className="w-full sm:w-auto">
                   <Button className="h-12 md:h-16 px-8 md:px-12 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[14px] uppercase tracking-widest w-full rounded-none">
-                    Pick it up
+                    Marketplace
                   </Button>
                 </Link>
                 <Link href="/dashboard/analytics" className="w-full sm:w-auto">
                   <Button variant="outline" className="h-12 md:h-16 px-8 md:px-12 border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full rounded-none">
-                    View Insights
+                    Live Insights
                   </Button>
                 </Link>
               </div>
@@ -134,7 +131,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-l">
             {allMeatProducts.slice(0, 10).map((item, idx) => (
-              <ProductCard key={item.id} item={item} idx={idx} />
+              <ProductCard key={item.id} item={item} idx={idx} addToCart={addToCart} toast={toast} />
             ))}
           </div>
         </section>
@@ -146,7 +143,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-t border-l">
             {allMeatProducts.map((item, idx) => (
-              <ProductCard key={item.id} item={item} idx={idx} />
+              <ProductCard key={item.id} item={item} idx={idx} addToCart={addToCart} toast={toast} />
             ))}
           </div>
         </section>
@@ -177,10 +174,7 @@ export default function Home() {
   );
 }
 
-function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
-  const { addToCart } = useCart();
-  const { toast } = useToast();
-
+function ProductCard({ item, idx, addToCart, toast }: { item: MenuItem, idx: number, addToCart: any, toast: any }) {
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();

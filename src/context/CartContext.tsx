@@ -21,64 +21,63 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 /**
- * Stable CartProvider that handles basket persistence and global state.
- * Refactored to prevent HMR factory instantiation errors.
+ * Optimized CartProvider to prevent HMR factory instantiation errors.
  */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
-  // Hydrate cart from localStorage on mount
+  // Initialize from storage once
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('steak_west_basket_v5');
-      if (saved) {
+    const saved = localStorage.getItem('steak_west_v10');
+    if (saved) {
+      try {
         setCart(JSON.parse(saved));
+      } catch (e) {
+        console.error('Failed to parse basket');
       }
-    } catch (e) {
-      console.warn('Basket hydration failed');
     }
-    setIsInitialized(true);
+    setIsReady(true);
   }, []);
 
-  // Persist cart changes
+  // Save to storage on change
   useEffect(() => {
-    if (isInitialized) {
-      localStorage.setItem('steak_west_basket_v5', JSON.stringify(cart));
+    if (isReady) {
+      localStorage.setItem('steak_west_v10', JSON.stringify(cart));
     }
-  }, [cart, isInitialized]);
+  }, [cart, isReady]);
 
   const addToCart = useCallback((item: MenuItem) => {
-    setCart((current) => {
-      const idx = current.findIndex((i) => i.item.id === item.id);
-      if (idx > -1) {
-        const next = [...current];
-        next[idx] = { ...next[idx], quantity: next[idx].quantity + 1 };
+    setCart((curr) => {
+      const existingIdx = curr.findIndex((i) => i.item.id === item.id);
+      if (existingIdx > -1) {
+        const next = [...curr];
+        next[existingIdx] = { ...next[existingIdx], quantity: next[existingIdx].quantity + 1 };
         return next;
       }
-      return [...current, { item, quantity: 1 }];
+      return [...curr, { item, quantity: 1 }];
     });
   }, []);
 
   const removeFromCart = useCallback((itemId: string) => {
-    setCart((current) => {
-      const idx = current.findIndex((i) => i.item.id === itemId);
-      if (idx > -1 && current[idx].quantity > 1) {
-        const next = [...current];
+    setCart((curr) => {
+      const idx = curr.findIndex((i) => i.item.id === itemId);
+      if (idx > -1 && curr[idx].quantity > 1) {
+        const next = [...curr];
         next[idx] = { ...next[idx], quantity: next[idx].quantity - 1 };
         return next;
       }
-      return current.filter((i) => i.item.id !== itemId);
+      return curr.filter((i) => i.item.id !== itemId);
     });
   }, []);
 
   const clearItem = useCallback((itemId: string) => {
-    setCart((current) => current.filter((i) => i.item.id !== itemId));
+    setCart((curr) => curr.filter((i) => i.item.id !== itemId));
   }, []);
 
   const clearCart = useCallback(() => setCart([]), []);
 
-  const subtotal = useMemo(() => cart.reduce((acc, c) => acc + c.item.price * c.quantity, 0), [cart]);
+  const subtotal = useMemo(() => cart.reduce((acc, c) => acc + (c.item.price * c.quantity), 0), [cart]);
   const itemCount = useMemo(() => cart.reduce((acc, c) => acc + c.quantity, 0), [cart]);
 
   const value = useMemo(() => ({

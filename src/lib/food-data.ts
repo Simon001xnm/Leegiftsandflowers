@@ -29,7 +29,7 @@ export interface Order {
   id: string;
   customerName: string;
   restaurantName: string;
-  items: string[];
+  items: any[];
   total: number;
   status: OrderStatus;
   date: string;

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   ArrowRight, 
   Loader2, 
@@ -21,12 +21,16 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useUser, useFirestore } from "@/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { errorEmitter } from '@/firebase/error-emitter';
 import { FirestorePermissionError } from '@/firebase/errors';
 import Link from "next/link";
 import Image from "next/image";
 
+/**
+ * Global Checkout Page connected to Firebase Firestore.
+ * Saves real order data to the system.
+ */
 export default function GlobalCheckoutPage() {
   const router = useRouter();
   const { cart, addToCart, removeFromCart, clearItem, subtotal, clearCart } = useCart();
@@ -50,42 +54,50 @@ export default function GlobalCheckoutPage() {
     const orderData = {
       id: orderId,
       customerId: user.uid,
-      items: cart.map(i => ({ name: i.item.name, quantity: i.quantity, price: i.item.price })),
+      customerName: user.displayName || user.email || 'Guest User',
+      items: cart.map(i => ({ 
+        id: i.item.id,
+        name: i.item.name, 
+        quantity: i.quantity, 
+        price: i.item.price 
+      })),
       total: total,
       status: "pending",
       deliveryAddress: "Silver Heights, Nairobi, Kenya",
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      serverTimestamp: serverTimestamp()
     };
 
     const orderRef = doc(firestore, "orders", orderId);
     
+    // Non-blocking Firestore Write
     setDoc(orderRef, orderData)
+      .then(() => {
+        setTimeout(() => {
+          clearCart();
+          router.push(`/track/${orderId}`);
+        }, 800);
+      })
       .catch(async (error) => {
-        if (!user?.uid?.startsWith('demo-')) {
-          const permissionError = new FirestorePermissionError({
-            path: orderRef.path,
-            operation: 'create',
-            requestResourceData: orderData,
-          });
-          errorEmitter.emit('permission-error', permissionError);
-        }
+        const permissionError = new FirestorePermissionError({
+          path: orderRef.path,
+          operation: 'create',
+          requestResourceData: orderData,
+        });
+        errorEmitter.emit('permission-error', permissionError);
+        setLoading(false);
       });
-
-    setTimeout(() => {
-      clearCart();
-      router.push(`/track/${orderId}`);
-    }, 1000);
   };
 
   if (cart.length === 0 && !loading) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
         <main className="container mx-auto px-4 py-20 flex flex-col items-center justify-center text-center">
-          <div className="w-20 h-20 bg-gray-50 flex items-center justify-center mb-6">
-            <ShoppingBag className="w-10 h-10 text-gray-300" />
+          <div className="w-20 h-20 bg-gray-50 border-2 border-dashed flex items-center justify-center mb-6">
+            <ShoppingBag className="w-10 h-10 text-gray-200" />
           </div>
           <h1 className="text-3xl font-black font-headline text-black uppercase tracking-tighter mb-4">Your Basket is Empty</h1>
-          <p className="text-muted-foreground mb-8 max-w-sm">Looks like you haven't added any premium cuts to your basket yet.</p>
+          <p className="text-muted-foreground mb-8 max-w-sm font-bold uppercase tracking-widest text-[12px]">Looks like you haven't added any premium cuts to your basket yet.</p>
           <Link href="/restaurants">
             <Button className="h-14 px-10 rounded-none font-black text-[14px] uppercase tracking-widest shadow-xl shadow-primary/10">
               Start Shopping
@@ -104,7 +116,7 @@ export default function GlobalCheckoutPage() {
             <ChevronLeft className="w-4 h-4" /> Back to Market
           </Button>
           <div className="flex items-center gap-2 text-primary font-black text-[14px] uppercase tracking-widest">
-            <ShieldCheck className="w-4 h-4" /> Secure Checkout
+            <ShieldCheck className="w-4 h-4" /> Secure Order Entry
           </div>
         </div>
 
@@ -112,7 +124,7 @@ export default function GlobalCheckoutPage() {
           <div className="lg:col-span-7 space-y-10">
             <section className="space-y-6">
               <h2 className="text-2xl font-black font-headline text-black uppercase tracking-tighter flex items-center gap-3">
-                <ShoppingBag className="w-6 h-6 text-primary" /> Review Items ({cart.length})
+                <ShoppingBag className="w-6 h-6 text-primary" /> Review Selection ({cart.length})
               </h2>
               <div className="border-t border-l">
                 {cart.map((cartItem) => (
@@ -142,7 +154,7 @@ export default function GlobalCheckoutPage() {
 
             <section className="space-y-6">
               <h2 className="text-2xl font-black font-headline text-black uppercase tracking-tighter flex items-center gap-3">
-                <MapPin className="w-6 h-6 text-primary" /> Delivery Details
+                <MapPin className="w-6 h-6 text-primary" /> Delivery Node
               </h2>
               <Card className="rounded-none border shadow-none bg-gray-50">
                 <CardContent className="p-6 flex items-center justify-between">
@@ -150,7 +162,7 @@ export default function GlobalCheckoutPage() {
                     <p className="font-black text-[14px] uppercase tracking-widest">Home Address</p>
                     <p className="text-[14px] font-medium text-muted-foreground">Silver Heights, Nairobi, Kenya</p>
                   </div>
-                  <Button variant="outline" className="rounded-none border-2 font-black text-[12px] uppercase tracking-widest">Change</Button>
+                  <Button variant="outline" className="rounded-none border-2 font-black text-[12px] uppercase tracking-widest">Edit</Button>
                 </CardContent>
               </Card>
             </section>
@@ -160,7 +172,7 @@ export default function GlobalCheckoutPage() {
             <div className="sticky top-24 space-y-8">
               <Card className="rounded-none border shadow-2xl overflow-hidden">
                 <CardHeader className="bg-black text-white py-6">
-                  <CardTitle className="text-[14px] font-black uppercase tracking-widest">Payment Method</CardTitle>
+                  <CardTitle className="text-[14px] font-black uppercase tracking-widest">Transaction Method</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid gap-4">
@@ -221,17 +233,17 @@ export default function GlobalCheckoutPage() {
                   >
                     {loading ? (
                       <div className="flex items-center gap-2">
-                        <Loader2 className="w-5 h-5 animate-spin" /> Processing Payment...
+                        <Loader2 className="w-5 h-5 animate-spin" /> Committing to DB...
                       </div>
                     ) : (
-                      <>{!user ? 'Sign in to Pay' : `Pay KES ${total.toLocaleString()}`} <ArrowRight className="w-5 h-5 ml-2" /></>
+                      <>{!user ? 'Sign in to Commit' : `Commit Order KES ${total.toLocaleString()}`} <ArrowRight className="w-5 h-5 ml-2" /></>
                     )}
                   </Button>
                 </CardContent>
               </Card>
 
               <div className="flex items-center justify-center gap-3 text-muted-foreground opacity-50 font-bold uppercase tracking-widest text-[10px]">
-                <ShieldCheck className="w-4 h-4" /> 100% Encrypted & Secure Checkout
+                <ShieldCheck className="w-4 h-4" /> 100% Encrypted & Authenticated
               </div>
             </div>
           </div>
