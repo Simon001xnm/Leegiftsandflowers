@@ -6,27 +6,60 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, FoodCategory } from "@/lib/food-data";
-import { Search, Star, Clock, SlidersHorizontal, MapPin, Beef, Utensils, Zap, ShoppingBag, ChevronRight, Heart } from "lucide-react";
+import { 
+  Search, 
+  Star, 
+  Clock, 
+  SlidersHorizontal, 
+  MapPin, 
+  Beef, 
+  Utensils, 
+  Zap, 
+  ShoppingBag, 
+  ChevronRight, 
+  Heart,
+  Tag,
+  CirclePercent,
+  Timer,
+  ArrowRight
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const CATEGORIES: { label: FoodCategory; icon: any }[] = [
-  { label: 'Raw Meat', icon: Beef },
-  { label: 'Nyama Choma', icon: Utensils },
-  { label: 'Cooked', icon: Utensils },
-  { label: 'Delicacies', icon: Zap },
+const CATEGORIES: { label: string; icon: any }[] = [
   { label: 'Grocery', icon: ShoppingBag },
+  { label: 'Raw Meat', icon: Beef },
+  { label: 'Choma', icon: Utensils },
+  { label: 'Grills', icon: Zap },
+  { label: 'Chicken', icon: Utensils },
+  { label: 'Cooked', icon: Utensils },
   { label: 'Sides', icon: ShoppingBag },
+  { label: 'Drinks', icon: Zap },
 ];
+
+const FILTERS = [
+  { label: 'Offers', icon: Tag },
+  { label: 'Delivery fee', icon: ChevronDown },
+  { label: 'Under 30 min', icon: Timer },
+  { label: 'Highest rated', icon: Star },
+];
+
+function ChevronDown(props: any) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  );
+}
 
 function DiscoveryContent() {
   const searchParams = useSearchParams();
-  const [category, setCategory] = useState<FoodCategory | 'All'>('All');
+  const [category, setCategory] = useState<string | 'All'>('All');
 
   useEffect(() => {
     const cat = searchParams.get('cat');
-    if (cat && (CATEGORIES.some(c => c.label === cat) || cat === 'All')) {
-      setCategory(cat as FoodCategory | 'All');
+    if (cat) {
+      setCategory(cat);
     }
   }, [searchParams]);
 
@@ -37,20 +70,8 @@ function DiscoveryContent() {
   return (
     <main className="flex-grow bg-white pb-20">
       {/* Category Strip */}
-      <div className="sticky top-16 z-40 bg-white border-b overflow-x-auto no-scrollbar py-4 px-4 md:px-8">
-        <div className="flex items-center gap-8 min-w-max">
-          <button 
-            onClick={() => setCategory('All')}
-            className={cn(
-              "flex flex-col items-center gap-2 group transition-all",
-              category === 'All' ? "opacity-100 scale-105" : "opacity-60 hover:opacity-100"
-            )}
-          >
-            <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center bg-gray-50 border-2 transition-all", category === 'All' && "border-black bg-white")}>
-              <Beef className="w-7 h-7" />
-            </div>
-            <span className="text-[11px] font-bold">All</span>
-          </button>
+      <div className="sticky top-16 z-40 bg-white border-b overflow-x-auto no-scrollbar py-6 px-4 md:px-8">
+        <div className="flex items-center gap-10 min-w-max container mx-auto">
           {CATEGORIES.map((cat) => (
             <button 
               key={cat.label}
@@ -60,67 +81,112 @@ function DiscoveryContent() {
                 category === cat.label ? "opacity-100 scale-105" : "opacity-60 hover:opacity-100"
               )}
             >
-              <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center bg-gray-50 border-2 transition-all", category === cat.label && "border-black bg-white")}>
-                <cat.icon className="w-7 h-7" />
+              <div className="w-10 h-10 rounded-full flex items-center justify-center transition-all">
+                <cat.icon className="w-8 h-8 text-black" />
               </div>
-              <span className="text-[11px] font-bold">{cat.label}</span>
+              <span className="text-[12px] font-bold text-black">{cat.label}</span>
             </button>
           ))}
         </div>
       </div>
 
+      {/* Filter Pill Strip */}
+      <div className="bg-white border-b py-3 px-4 md:px-8 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-3 container mx-auto">
+          {FILTERS.map((f) => (
+            <Button key={f.label} variant="outline" size="sm" className="rounded-full gap-2 font-bold text-xs bg-gray-100 border-none px-4 h-9">
+              <f.icon className="w-3 h-3" /> {f.label}
+            </Button>
+          ))}
+          <Button variant="outline" size="sm" className="rounded-full gap-2 font-bold text-xs bg-gray-100 border-none px-4 h-9">
+            Sort <ChevronDown className="w-3 h-3" />
+          </Button>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 md:px-8 space-y-12 py-8">
+        {/* Promo Banners */}
+        <section className="flex gap-4 overflow-x-auto no-scrollbar mask-fade-right">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className={cn(
+              "min-w-[320px] md:min-w-[450px] h-44 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden",
+              i === 1 ? "bg-orange-100" : i === 2 ? "bg-blue-50" : "bg-red-50"
+            )}>
+              <div className="relative z-10 space-y-1">
+                <p className="text-[10px] font-black uppercase tracking-widest text-primary">Member Special</p>
+                <h3 className="text-xl font-black max-w-[200px] leading-tight">Steak West Prime free for 4 weeks</h3>
+                <p className="text-xs font-bold text-gray-500">Limited time only</p>
+              </div>
+              <Button size="sm" className="w-fit rounded-full px-4 h-8 text-xs font-black bg-black text-white">Order Now</Button>
+              <div className="absolute right-[-20px] bottom-[-20px] w-40 h-40 bg-white/20 rounded-full" />
+            </div>
+          ))}
+        </section>
+
         {/* Featured Section */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between px-2">
-            <h2 className="text-xl md:text-2xl font-bold">Featured on Steak West</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-black tracking-tighter">Featured on Steak West</h2>
             <div className="flex gap-2">
+               <Link href="/restaurants">
+                 <span className="text-sm font-bold text-black mr-4">See all</span>
+               </Link>
                <Button variant="ghost" size="icon" className="rounded-full h-8 w-8 bg-gray-100"><ChevronRight className="w-4 h-4 rotate-180" /></Button>
                <Button variant="ghost" size="icon" className="rounded-full h-8 w-8 bg-gray-100"><ChevronRight className="w-4 h-4" /></Button>
             </div>
           </div>
           <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 mask-fade-right">
             {MOCK_RESTAURANTS.map((r) => (
-              <StoreCard key={r.id} restaurant={r} className="min-w-[280px] md:min-w-[320px]" />
+              <StoreCard key={r.id} restaurant={r} className="min-w-[300px] md:min-w-[350px]" showBadge />
+            ))}
+          </div>
+        </section>
+
+        {/* Today's Offers */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-black tracking-tighter">Today's offers</h2>
+            <Link href="/restaurants"><span className="text-sm font-bold text-black">See all</span></Link>
+          </div>
+          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 mask-fade-right">
+            {MOCK_RESTAURANTS.map((r) => (
+              <StoreCard key={r.id} restaurant={r} className="min-w-[300px] md:min-w-[350px]" isOffer />
             ))}
           </div>
         </section>
 
         {/* Circular Brand Section */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between px-2">
-            <h2 className="text-xl md:text-2xl font-bold">Sections near you</h2>
-            <Button variant="link" className="text-sm font-bold text-black p-0">See all</Button>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-black tracking-tighter">Stores near you</h2>
+            <Link href="/restaurants"><span className="text-sm font-bold text-black">See all</span></Link>
           </div>
-          <div className="flex gap-6 overflow-x-auto no-scrollbar pb-4">
+          <div className="flex gap-8 overflow-x-auto no-scrollbar py-4 justify-between">
             {['Steak West', 'Choma Grill', 'Butchery', 'Kachumbari', 'Drinks', 'Grocery'].map((brand, i) => (
-              <div key={brand} className="flex flex-col items-center gap-2 group cursor-pointer shrink-0">
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-gray-100 flex items-center justify-center bg-white shadow-sm overflow-hidden group-hover:scale-105 transition-all">
+              <div key={brand} className="flex flex-col items-center gap-3 group cursor-pointer shrink-0">
+                <div className="w-24 h-24 md:w-28 md:h-24 rounded-full border border-gray-100 flex items-center justify-center bg-white shadow-sm overflow-hidden group-hover:ring-2 ring-black transition-all">
                   <Image 
                     src={MOCK_RESTAURANTS[i % 2].imageUrl} 
                     alt={brand} 
-                    width={100} 
-                    height={100} 
+                    width={112} 
+                    height={112} 
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <span className="text-[11px] font-bold text-center">{brand}</span>
+                <span className="text-[13px] font-bold text-center">{brand}</span>
+                <span className="text-[10px] text-gray-400 font-bold uppercase">10 min</span>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Main Grid Section */}
+        {/* Popular Section */}
         <section className="space-y-6">
-          <div className="flex items-center justify-between px-2">
-            <h2 className="text-xl md:text-2xl font-bold">Popular in your area</h2>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="rounded-full gap-2 font-bold text-xs">
-                <SlidersHorizontal className="w-3 h-3" /> Filters
-              </Button>
-            </div>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-black tracking-tighter">Popular in your area</h2>
+            <Link href="/restaurants"><span className="text-sm font-bold text-black">See all</span></Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
             {filteredRestaurants.map((r) => (
               <StoreCard key={r.id} restaurant={r} />
             ))}
@@ -131,10 +197,10 @@ function DiscoveryContent() {
   );
 }
 
-function StoreCard({ restaurant, className }: { restaurant: any; className?: string }) {
+function StoreCard({ restaurant, className, showBadge, isOffer }: { restaurant: any; className?: string; showBadge?: boolean; isOffer?: boolean }) {
   return (
     <Link href={`/restaurants/${restaurant.id}`} className={cn("group flex flex-col gap-3", className)}>
-      <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-sm">
+      <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-gray-100">
         <Image 
           src={restaurant.imageUrl} 
           alt={restaurant.name}
@@ -146,27 +212,47 @@ function StoreCard({ restaurant, className }: { restaurant: any; className?: str
             <Heart className="w-4 h-4" />
           </Button>
         </div>
-        {restaurant.isFeatured && (
+        
+        {isOffer && (
           <div className="absolute top-3 left-3">
-             <Badge className="bg-primary text-white border-none text-[10px] font-black tracking-widest rounded-md py-1 px-3">
-               BEST VALUE
+             <Badge className="bg-primary text-white border-none text-[10px] font-black tracking-widest rounded-md py-1.5 px-3">
+               BUY 1, GET 1 FREE
+             </Badge>
+          </div>
+        )}
+
+        {showBadge && !isOffer && (
+          <div className="absolute top-3 left-3">
+             <Badge className="bg-emerald-500 text-white border-none text-[10px] font-black tracking-widest rounded-md py-1.5 px-3">
+               KES 121 OFF SELECT ITEMS
              </Badge>
           </div>
         )}
       </div>
       <div className="space-y-1 px-1">
         <div className="flex justify-between items-start">
-          <h3 className="text-base md:text-lg font-bold truncate leading-tight">{restaurant.name}</h3>
-          <div className="flex items-center gap-1 bg-gray-100 px-2 py-0.5 rounded-full shrink-0">
-             <span className="text-[11px] font-bold">{restaurant.rating}</span>
-             <Star className="w-3 h-3 fill-black text-black" />
-          </div>
+          <h3 className="text-lg font-black truncate leading-tight tracking-tight uppercase">{restaurant.name}</h3>
         </div>
-        <div className="flex items-center gap-2 text-[12px] font-medium text-gray-500">
-           <span>KES {restaurant.deliveryFee} Delivery Fee</span>
+        <div className="flex items-center gap-2 text-[13px] font-bold text-gray-500">
+           <div className="flex items-center gap-1">
+             <CirclePercent className="w-3 h-3 text-emerald-600" />
+             <span>KES {restaurant.deliveryFee} Delivery Fee</span>
+           </div>
            <span>•</span>
-           <span>{restaurant.deliveryTime}</span>
+           <div className="flex items-center gap-1">
+             <span>{restaurant.deliveryTime}</span>
+           </div>
+           <span>•</span>
+           <div className="flex items-center gap-1">
+             <Star className="w-3 h-3 fill-black text-black" />
+             <span className="text-black">{restaurant.rating} (500+)</span>
+           </div>
         </div>
+        {restaurant.isFeatured && (
+          <Badge className="bg-gray-100 text-gray-600 hover:bg-gray-100 border-none text-[10px] font-black uppercase rounded-sm h-6 px-2 mt-2">
+            Great value
+          </Badge>
+        )}
       </div>
     </Link>
   );

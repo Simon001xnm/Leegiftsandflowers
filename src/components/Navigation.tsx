@@ -67,7 +67,7 @@ export function Navigation() {
 
         <div className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-full cursor-pointer transition-all border border-transparent hover:border-gray-100">
           <MapPin className="w-4 h-4 text-black" />
-          <span className="text-sm font-bold truncate max-w-[150px]">Utalii St • ASAP</span>
+          <span className="text-sm font-bold truncate max-w-[150px]">Utalii St • Now</span>
           <ChevronDown className="w-4 h-4 text-gray-400" />
         </div>
 
@@ -98,7 +98,12 @@ export function Navigation() {
         <Link href="/checkout">
           <Button variant="default" size="sm" className="relative bg-black text-white hover:bg-gray-800 h-10 px-4 rounded-full font-bold transition-all active:scale-95">
             <ShoppingCart className="w-4 h-4 mr-2" />
-            <span>{itemCount}</span>
+            <span className="hidden sm:inline">{itemCount}</span>
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-emerald-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-white sm:hidden">
+                {itemCount}
+              </span>
+            )}
           </Button>
         </Link>
       </div>
