@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -29,7 +30,7 @@ export default function MeatDiscovery() {
       
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="max-w-4xl mb-12">
-          <Badge className="mb-4 bg-primary/10 text-primary border-none px-4 py-1">Nairobi Fresh</Badge>
+          <Badge className="mb-4 bg-primary/10 text-primary border-none px-4 py-1 text-sm">Nairobi Fresh</Badge>
           <h1 className="text-5xl font-bold font-headline text-primary mb-4 uppercase">The Meat Shop</h1>
           <p className="text-muted-foreground text-lg">Premium raw meat, grilled choma, and authentic Nairobi delicacies.</p>
         </div>
@@ -38,7 +39,7 @@ export default function MeatDiscovery() {
           <div className="relative flex-grow">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input 
-              className="pl-12 h-14 rounded-2xl border-2 border-muted" 
+              className="pl-12 h-14 rounded-2xl border-2 border-muted text-sm font-bold" 
               placeholder="Search for Nyama Choma, Mutura, or Beef..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -47,7 +48,7 @@ export default function MeatDiscovery() {
           <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
             <Button 
               variant={category === 'All' ? 'default' : 'outline'} 
-              className="h-14 rounded-2xl px-6 shrink-0 font-bold"
+              className="h-14 rounded-2xl px-6 shrink-0 font-bold text-sm"
               onClick={() => setCategory('All')}
             >
               All
@@ -56,7 +57,7 @@ export default function MeatDiscovery() {
               <Button 
                 key={cat}
                 variant={category === cat ? 'default' : 'outline'} 
-                className="h-14 rounded-2xl px-6 shrink-0 font-bold"
+                className="h-14 rounded-2xl px-6 shrink-0 font-bold text-sm"
                 onClick={() => setCategory(cat)}
               >
                 {cat}
@@ -69,7 +70,7 @@ export default function MeatDiscovery() {
           <span className="text-sm font-medium text-muted-foreground">
             Found <span className="text-primary font-bold">{filteredRestaurants.length}</span> specialty vendors
           </span>
-          <Button variant="ghost" size="sm" className="gap-2">
+          <Button variant="ghost" size="sm" className="gap-2 text-sm">
             <SlidersHorizontal className="w-4 h-4" /> Sort by: Nearest
           </Button>
         </div>
@@ -80,7 +81,7 @@ export default function MeatDiscovery() {
               <Link 
                 key={restaurant.id} 
                 href={`/restaurants/${restaurant.id}`}
-                className="group flex flex-col bg-card rounded-[2rem] overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col bg-card rounded-[2.5rem] overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image 
@@ -89,20 +90,20 @@ export default function MeatDiscovery() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <Badge className="absolute top-4 left-4 shadow-sm bg-white text-primary font-bold">
+                  <Badge className="absolute top-4 left-4 shadow-sm bg-white text-primary font-bold text-sm">
                     {restaurant.category}
                   </Badge>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold font-headline text-primary">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-bold font-headline text-primary">
                       {restaurant.name}
                     </h3>
-                    <div className="flex items-center gap-1 text-primary font-bold">
+                    <div className="flex items-center gap-1 text-primary font-bold text-sm">
                       <Star className="w-4 h-4 fill-primary" /> {restaurant.rating}
                     </div>
                   </div>
-                  <div className="space-y-2 mb-6">
+                  <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <MapPin className="w-4 h-4" />
                       {restaurant.location}
@@ -116,8 +117,8 @@ export default function MeatDiscovery() {
                       </div>
                     </div>
                   </div>
-                  <Button className="mt-auto w-full group-hover:bg-primary/90 transition-all h-12 rounded-xl font-bold">
-                    View Selection
+                  <Button className="mt-auto w-full group-hover:bg-primary/90 transition-all h-14 rounded-2xl font-black text-sm uppercase tracking-widest">
+                    Pick it up
                   </Button>
                 </div>
               </Link>
@@ -125,11 +126,11 @@ export default function MeatDiscovery() {
           </div>
         ) : (
           <div className="py-20 flex flex-col items-center text-center">
-            <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mb-6">
-              <Beef className="w-10 h-10 text-muted-foreground/50" />
+            <div className="w-24 h-24 rounded-full bg-muted flex items-center justify-center mb-8">
+              <Beef className="w-12 h-12 text-muted-foreground/50" />
             </div>
-            <h3 className="text-2xl font-bold font-headline text-primary mb-2">No meat found</h3>
-            <p className="text-muted-foreground">Try searching for 'Choma' or 'Beef'.</p>
+            <h3 className="text-3xl font-bold font-headline text-primary mb-3">No meat found</h3>
+            <p className="text-muted-foreground text-lg">Try searching for 'Choma' or 'Beef'.</p>
           </div>
         )}
       </main>
