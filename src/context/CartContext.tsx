@@ -18,17 +18,19 @@ interface CartContextType {
   itemCount: number;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<CartContextType | null>(null);
 
 /**
- * Stable CartProvider to resolve HMR "Module factory not available" error.
+ * Robust CartProvider refactored to prevent HMR module factory errors.
+ * Uses a stable, clean export pattern for Next.js Turbopack.
  */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Initialize from storage once
   useEffect(() => {
-    const saved = localStorage.getItem('steak_west_basket_v10');
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('steak_west_basket_v1.1') : null;
     if (saved) {
       try {
         setCart(JSON.parse(saved));
@@ -39,9 +41,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsLoaded(true);
   }, []);
 
+  // Sync back to storage on changes
   useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem('steak_west_basket_v10', JSON.stringify(cart));
+    if (isLoaded && typeof window !== 'undefined') {
+      localStorage.setItem('steak_west_basket_v1.1', JSON.stringify(cart));
     }
   }, [cart, isLoaded]);
 
@@ -93,7 +96,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  if (context === undefined) {
+  if (context === null) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
