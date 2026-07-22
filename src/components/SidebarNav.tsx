@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -26,7 +27,7 @@ export function SidebarNav() {
   const currentCat = searchParams.get('cat');
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 fixed left-0 top-16 bottom-0 bg-white border-r overflow-y-auto pt-6 px-4 space-y-2 no-scrollbar">
+    <aside className="hidden lg:flex flex-col w-64 fixed left-0 top-24 md:top-28 bottom-0 bg-white border-r overflow-y-auto pt-6 px-4 space-y-2 no-scrollbar">
       {SIDEBAR_ITEMS.map((item) => {
         const Icon = item.icon;
         const isPathActive = pathname === item.href.split('?')[0];

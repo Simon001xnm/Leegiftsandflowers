@@ -1,3 +1,4 @@
+
 "use client";
 
 import { use, useState, useMemo } from "react";
@@ -96,7 +97,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
             
             <div className="lg:col-span-8 space-y-16">
               <Tabs defaultValue={vendorCategories[0]} className="w-full">
-                <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
+                <div className="sticky top-24 md:top-28 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
                   <TabsList className="bg-gray-100 p-1.5 h-11 rounded-none">
                     {vendorCategories.map(cat => (
                       <TabsTrigger key={cat} value={cat} className="px-5 font-black text-[14px] uppercase tracking-widest rounded-none">{cat}</TabsTrigger>
@@ -131,7 +132,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
             </div>
 
             {/* Sticky Basket */}
-            <div className="lg:col-span-4 sticky top-20 lg:top-24 space-y-6">
+            <div className="lg:col-span-4 sticky top-24 lg:top-28 space-y-6">
               <Card className="border shadow-2xl bg-white rounded-none">
                 <CardHeader className="bg-gray-50 py-5 px-8 border-b">
                   <div className="flex items-center justify-between">
@@ -223,7 +224,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             </div>
             <p className="text-[12px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-3 border-t gap-2">
-              <span className="font-black text-[13px] md:text-[14px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+              <span className="font-black text-[11px] md:text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
               <Button 
                 className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all active:scale-95 shrink-0" 
                 onClick={onAdd}
@@ -251,7 +252,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
           <div className="p-4 space-y-3 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
             <div className="flex items-center justify-between gap-2 pt-2 border-t">
-              <span className="font-black text-[13px] md:text-[14px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+              <span className="font-black text-[11px] md:text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
               <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0" onClick={onAdd}>
                 Add
               </Button>

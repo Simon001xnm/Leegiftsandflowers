@@ -32,18 +32,18 @@ export function Navigation() {
   const [toggle, setToggle] = useState<'delivery' | 'pickup'>('delivery');
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-16 md:h-20 flex items-center gap-2 md:gap-4 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-24 md:h-28 flex items-center gap-2 md:gap-4 shadow-sm">
       <div className="flex items-center gap-2 md:gap-3 shrink-0">
         <Button variant="ghost" size="icon" className="h-9 w-9 md:h-11 md:w-11 hover:bg-primary/5">
           <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
         </Button>
         <Link href="/" className="flex items-center gap-1.5 md:gap-2.5 group">
-          <ButcheryLogo className="w-10 h-10 md:w-14 md:h-14 transition-transform group-hover:scale-105" />
+          <ButcheryLogo className="w-14 h-14 md:w-20 md:h-20 transition-transform group-hover:scale-105" />
           <div className="flex flex-col -space-y-0.5 md:-space-y-1">
-            <span className="font-headline text-sm md:text-lg font-black tracking-tighter text-black uppercase leading-none whitespace-nowrap">
+            <span className="font-headline text-sm md:text-xl font-black tracking-tighter text-black uppercase leading-none whitespace-nowrap">
               Steak West
             </span>
-            <span className="text-[8px] md:text-[10px] font-black text-primary uppercase tracking-widest whitespace-nowrap">Super ya Nyama</span>
+            <span className="text-[8px] md:text-[12px] font-black text-primary uppercase tracking-widest whitespace-nowrap">Super ya Nyama</span>
           </div>
         </Link>
       </div>
