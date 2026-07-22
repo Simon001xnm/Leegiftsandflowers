@@ -25,7 +25,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const savedCart = localStorage.getItem('steak_west_cart_v2');
+    const savedCart = localStorage.getItem('steak_west_cart_v3');
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
@@ -38,7 +38,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem('steak_west_cart_v2', JSON.stringify(cart));
+      localStorage.setItem('steak_west_cart_v3', JSON.stringify(cart));
     }
   }, [cart, isInitialized]);
 
