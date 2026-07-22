@@ -255,6 +255,18 @@ function HighDensityProductCard({ item, onAdd }: { item: MenuItem; onAdd: () => 
         </div>
         <div className="w-24 md:w-28 h-full relative shrink-0 overflow-hidden bg-gray-100">
           <Image src={item.imageUrl} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform" />
+          
+          {/* Small branding logo in top left corner of the product image */}
+          <div className="absolute top-1 left-1 z-30 w-4 h-4 md:w-6 md:h-6 opacity-80 group-hover:opacity-100 transition-opacity">
+            <Image 
+              src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
+              alt="Steak West" 
+              width={24} 
+              height={24} 
+              className="object-contain"
+            />
+          </div>
+
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
              <div className="bg-white/90 rounded-full p-1.5 shadow-xl">
                 <WalkingIcon className="w-3 h-3 text-black" />
