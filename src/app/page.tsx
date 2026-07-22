@@ -70,6 +70,7 @@ export default function Home() {
       <PromotionalPopup />
       
       <main className="flex-grow p-0 space-y-0 pb-4">
+        {/* Hero Section */}
         <div className="relative min-h-[450px] md:h-[600px] w-full overflow-hidden bg-black flex items-center">
           <video 
             autoPlay 
@@ -117,6 +118,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Categories Section */}
         <section className="space-y-4 p-6">
           <h2 className="text-[14px] font-black text-black uppercase tracking-tighter">Shop Categories</h2>
           <div className="flex gap-0 overflow-x-auto no-scrollbar pb-4 border-l border-t border-b">
@@ -131,6 +133,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Top Sellers */}
         <section className="bg-primary/5 p-0 border-y border-primary/10">
           <div className="flex justify-between items-end p-6 bg-white border-b">
             <div className="space-y-2">
@@ -146,6 +149,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Fresh Market */}
         <section className="space-y-0">
           <div className="flex flex-col gap-0 p-6">
             <h2 className="text-lg md:text-3xl font-black text-black uppercase tracking-tighter leading-none mb-4">Fresh Market</h2>
@@ -164,6 +168,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Footer */}
         <footer className="mt-20 pt-16 border-t border-primary/5 bg-white pb-32 md:pb-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 mb-12">

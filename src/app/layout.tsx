@@ -4,7 +4,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { FirebaseClientProvider } from "@/firebase";
 import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
-import { Navigation } from '@/components/Navigation';
 import { CartProvider } from '@/context/CartContext';
 import Script from 'next/script';
 
@@ -22,11 +21,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png' },
-      { url: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png', sizes: '32x32', type: 'image/png' },
-      { url: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png', sizes: '16x16', type: 'image/png' },
     ],
     apple: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
-    shortcut: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
   },
 };
 
@@ -44,7 +40,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <link rel="icon" href="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" />
-        <link rel="shortcut icon" href="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" />
         <link rel="apple-touch-icon" href="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ff0000" />
@@ -52,7 +47,6 @@ export default function RootLayout({
       <body className="font-body antialiased bg-background text-foreground min-h-screen pb-20 md:pb-0">
         <FirebaseClientProvider>
           <CartProvider>
-            <Navigation />
             <AppLayoutWrapper>
               {children}
             </AppLayoutWrapper>
@@ -65,9 +59,9 @@ export default function RootLayout({
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                  console.log('Software ServiceWorker registration successful');
+                  console.log('SW registration successful');
                 }, function(err) {
-                  console.log('Software ServiceWorker registration failed: ', err);
+                  console.log('SW registration failed: ', err);
                 });
               });
             }

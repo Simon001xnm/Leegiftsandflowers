@@ -24,10 +24,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Initial load
+  // Load from local storage on mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('steak_west_basket_v5');
+      const saved = localStorage.getItem('steak_west_basket_v6');
       if (saved) {
         setCart(JSON.parse(saved));
       }
@@ -37,10 +37,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsInitialized(true);
   }, []);
 
-  // Persist
+  // Save to local storage on changes
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem('steak_west_basket_v5', JSON.stringify(cart));
+      localStorage.setItem('steak_west_basket_v6', JSON.stringify(cart));
     }
   }, [cart, isInitialized]);
 
@@ -98,7 +98,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart error: Factory not available in current scope');
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }
