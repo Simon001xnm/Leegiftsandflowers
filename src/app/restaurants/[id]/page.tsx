@@ -1,12 +1,12 @@
+
 "use client";
 
 import { use, useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, MOCK_MENU, MenuItem } from "@/lib/food-data";
-import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Utensils, X, TrendingUp } from "lucide-react";
+import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Utensils, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -88,8 +88,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Navigation />
-      
       <main className="flex-grow">
         {/* Marketplace Header */}
         <div className="relative h-[25vh] lg:h-[35vh] overflow-hidden">

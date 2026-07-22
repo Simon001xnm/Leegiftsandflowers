@@ -1,7 +1,8 @@
+
 {
   "name": "Steak West Butchery",
   "short_name": "Steak West",
-  "description": "Nairobi's Premium Meat & Choma Delivery",
+  "description": "Premium Meat & Nyama Choma Delivery in Nairobi",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -10,14 +11,12 @@
     {
       "src": "/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
 }

@@ -1,6 +1,6 @@
-// Software engine for Steak West PWA
+
 const CACHE_NAME = 'steak-west-v1';
-const ASSETS = [
+const ASSETS_TO_CACHE = [
   '/',
   '/manifest.json',
   '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png'
@@ -9,7 +9,7 @@ const ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
+      return cache.addAll(ASSETS_TO_CACHE);
     })
   );
 });
