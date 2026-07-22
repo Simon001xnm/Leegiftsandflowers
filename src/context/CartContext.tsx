@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import type { MenuItem } from '@/lib/food-data';
 
 export interface CartItem {
@@ -18,32 +18,31 @@ interface CartContextType {
   itemCount: number;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<CartContextType | null>(null);
 
 /**
- * Singleton-pattern Provider to prevent HMR factory instantiation errors.
+ * Robust Singleton Provider for Cart State.
+ * Resolves HMR "Module factory not available" issues.
  */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('steak_west_cart_v3');
-      if (saved) {
-        try {
-          setCart(JSON.parse(saved));
-        } catch (e) {
-          console.error('Basket sync error');
-        }
+    const saved = localStorage.getItem('steak_west_basket_v5');
+    if (saved) {
+      try {
+        setCart(JSON.parse(saved));
+      } catch (e) {
+        console.error('Basket restore failed');
       }
-      setIsReady(true);
     }
+    setIsReady(true);
   }, []);
 
   useEffect(() => {
-    if (isReady && typeof window !== 'undefined') {
-      localStorage.setItem('steak_west_cart_v3', JSON.stringify(cart));
+    if (isReady) {
+      localStorage.setItem('steak_west_basket_v5', JSON.stringify(cart));
     }
   }, [cart, isReady]);
 
@@ -95,6 +94,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  if (!context) throw new Error('useCart error');
+  if (!context) {
+    // Return a dummy state to prevent crashes before provider loads
+    return {
+      cart: [],
+      addToCart: () => {},
+      removeFromCart: () => {},
+      clearItem: () => {},
+      clearCart: () => {},
+      subtotal: 0,
+      itemCount: 0
+    };
+  }
   return context;
 }

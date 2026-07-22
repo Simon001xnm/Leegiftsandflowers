@@ -21,7 +21,7 @@ export default function LoginPage() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState<AppRole>('customer');
-  const redirectPath = searchParams.get("redirect") || "/";
+  const redirectPath = searchParams.get("redirect") || "/profile";
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>, mode: 'login' | 'signup') => {
     e.preventDefault();
@@ -47,18 +47,18 @@ export default function LoginPage() {
 
         if (error) throw error;
         
-        // Sync profile table
+        // Profiles are usually handled by database triggers, but we'll try a manual sync here too
         if (data.user) {
           await supabase.from('profiles').upsert([
             { id: data.user.id, name, email, role, created_at: new Date().toISOString() }
           ]);
         }
 
-        toast({ title: "Welcome to Steak West!", description: "Account registered successfully." });
+        toast({ title: "Welcome to Steak West!", description: "Identity registered and role assigned." });
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        toast({ title: "Authorized", description: "Identity verified." });
+        toast({ title: "Authorized", description: "Identity verified. Synchronizing node..." });
       }
       
       router.push(redirectPath);
@@ -118,7 +118,7 @@ export default function LoginPage() {
               <TabsContent value="signup">
                 <div className="space-y-6">
                   <div className="space-y-3">
-                    <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-[0.2em]">Assign Entity Role</Label>
+                    <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-[0.2em]">Select Entity Role</Label>
                     <div className="grid grid-cols-3 gap-0 border-2 border-black">
                       {[
                         { id: 'customer', label: 'Customer', icon: User },
@@ -165,7 +165,7 @@ export default function LoginPage() {
           </CardContent>
           <CardFooter className="bg-muted/50 p-6 flex flex-col gap-2 text-center border-t-2 border-black">
              <div className="flex items-center justify-center gap-2 text-muted-foreground opacity-70 font-black text-[10px] uppercase tracking-widest">
-               <ShieldCheck className="w-4 h-4 text-emerald-600" /> Supabase Data Vault Active
+               <ShieldCheck className="w-4 h-4 text-emerald-600" /> Supabase Data Encryption Active
              </div>
           </CardFooter>
         </Card>

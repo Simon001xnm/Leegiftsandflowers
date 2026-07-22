@@ -26,8 +26,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 /**
- * Global Checkout Page migrated to Supabase.
- * Saves order data to the Supabase 'orders' table.
+ * Global Checkout Page - Wire to Supabase.
  */
 export default function GlobalCheckoutPage() {
   const router = useRouter();
@@ -52,7 +51,6 @@ export default function GlobalCheckoutPage() {
     const orderData = {
       id: orderId,
       customer_id: user.id,
-      customer_name: user.user_metadata?.full_name || user.email || 'Guest User',
       items: cart.map(i => ({ 
         id: i.item.id,
         name: i.item.name, 
@@ -65,22 +63,23 @@ export default function GlobalCheckoutPage() {
       created_at: new Date().toISOString()
     };
 
-    // Commit to Supabase
+    // Commit to Supabase 'orders' table
     const { error } = await supabase
       .from('orders')
       .insert([orderData]);
 
     if (error) {
-      console.error('Supabase Insert Error:', error);
-      // Fallback for demo/missing tables
+      console.error('Supabase Error:', error);
+      // Fail gracefully for demo purposes if table doesn't exist
       if (user.id?.startsWith('demo-')) {
-        console.log('Demo mode order successful');
+         console.log('Demo mode bypass');
       } else {
         setLoading(false);
         return;
       }
     }
 
+    // Success flow
     setTimeout(() => {
       clearCart();
       router.push(`/track/${orderId}`);
