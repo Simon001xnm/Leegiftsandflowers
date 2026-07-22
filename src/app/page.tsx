@@ -54,7 +54,7 @@ const WalkingIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Custom Bull Head with Knives Logo matching the provided branding
+// Custom Bull Head with Knives Logo matching the brand guidelines
 const ButcheryLogo = ({ className }: { className?: string }) => (
   <svg 
     className={className}
@@ -110,9 +110,10 @@ export default function Home() {
       <div className="flex flex-grow relative">
         <SidebarNav />
         
-        <main className="flex-grow lg:ml-64 p-1.5 md:p-4 lg:p-6 space-y-4 md:space-y-8 pb-20 md:pb-8">
+        {/* Main content with minimized bottom padding as layout.tsx handles mobile nav spacing */}
+        <main className="flex-grow lg:ml-64 p-1.5 md:p-4 lg:p-6 space-y-4 md:space-y-8 pb-4 md:pb-8">
           
-          {/* Hero Section - Red/Black/White Theme */}
+          {/* Hero Section */}
           <div className="relative min-h-[300px] md:min-h-[450px] w-full rounded-xl md:rounded-[2.5rem] overflow-hidden bg-black flex flex-col lg:flex-row shadow-2xl border border-white/5">
             <div className="flex-1 p-6 md:p-12 lg:p-16 flex flex-col justify-center items-start space-y-4 md:space-y-8 z-10 bg-white order-2 lg:order-1 relative">
               <div className="flex items-center gap-3">
@@ -127,8 +128,8 @@ export default function Home() {
 
               <div className="space-y-1 md:space-y-3">
                 <h1 className="text-3xl md:text-6xl lg:text-7xl font-black font-headline text-black tracking-tighter uppercase leading-[0.85]">
-                  Premium <span className="text-primary shadow-red-500/10">Cuts.</span><br />
-                  <span className="text-gray-400 italic">Fast Delivery.</span>
+                  Premium <span className="text-primary">Cuts.</span><br />
+                  <span className="text-gray-400 italic text-[0.8em]">Fast Delivery.</span>
                 </h1>
                 <p className="text-gray-500 text-xs md:text-xl font-bold max-w-md leading-tight">
                   Nairobi's ultimate butchery experience. Freshness you can taste, speed you can trust.
@@ -139,7 +140,7 @@ export default function Home() {
                 <Button className="h-10 md:h-16 flex-1 md:flex-none md:px-12 rounded-xl bg-primary text-white hover:bg-primary/90 font-black shadow-xl transition-all active:scale-95 text-[10px] md:text-lg">
                   Order Now
                 </Button>
-                <Button variant="outline" className="h-10 md:h-16 flex-1 md:flex-none md:px-12 rounded-xl border-3 border-black text-black hover:bg-black hover:text-white font-black transition-all text-[10px] md:text-lg">
+                <Button variant="outline" className="h-10 md:h-16 flex-1 md:flex-none md:px-12 rounded-xl border-2 border-black text-black hover:bg-black hover:text-white font-black transition-all text-[10px] md:text-lg">
                   Explore Menu
                 </Button>
               </div>
@@ -193,7 +194,7 @@ export default function Home() {
           </section>
 
           {/* High Density Delicacy Section */}
-          <section className="space-y-4 md:space-y-8 bg-primary/5 -mx-1.5 md:-mx-4 p-4 md:p-12 rounded-2xl md:rounded-[3rem] border border-primary/10">
+          <section className="space-y-4 md:space-y-8 bg-primary/5 -mx-1.5 md:-mx-4 p-4 md:p-8 rounded-2xl md:rounded-[3rem] border border-primary/10">
             <div className="space-y-1">
               <Badge className="bg-primary text-white font-black uppercase tracking-widest text-[8px] md:text-[10px]">Super ya Nyama</Badge>
               <h2 className="text-lg md:text-4xl font-black text-black uppercase tracking-tighter leading-none">Nairobi Originals</h2>
@@ -224,104 +225,96 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Ultra-Congested High-Density Footer */}
-          <footer className="pt-10 md:pt-16 border-t-4 border-primary/20 mt-12 md:mt-20 bg-white">
+          {/* Ultra-Congested High-Density Footer - Minimized margins/padding to reduce gap to Mobile Nav */}
+          <footer className="pt-6 md:pt-10 border-t-2 border-primary/10 mt-6 md:mt-10 bg-white">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-10 mb-10">
-                <div className="col-span-2 md:col-span-4 lg:col-span-1 space-y-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8 mb-6">
+                <div className="col-span-2 md:col-span-4 lg:col-span-1 space-y-2">
                   <div className="flex items-center gap-2">
-                    <ButcheryLogo className="w-8 h-8" />
-                    <span className="font-headline text-2xl font-black tracking-tighter text-black uppercase">Steak West</span>
+                    <ButcheryLogo className="w-6 h-6" />
+                    <span className="font-headline text-xl font-black tracking-tighter text-black uppercase">Steak West</span>
                   </div>
-                  <p className="text-[10px] font-bold text-gray-500 uppercase leading-relaxed">
-                    Premium butchery marketplace. Nairobi's trusted source for quality meat since 2024.
+                  <p className="text-[9px] font-bold text-gray-500 uppercase leading-relaxed max-w-[200px]">
+                    Nairobi's trusted source for quality meat. Super ya Nyama.
                   </p>
-                  <div className="flex gap-3">
-                    <Link href="#" className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-                      <Facebook className="w-4 h-4" />
-                    </Link>
-                    <Link href="#" className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-                      <Twitter className="w-4 h-4" />
-                    </Link>
-                    <Link href="#" className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-                      <Instagram className="w-4 h-4" />
-                    </Link>
+                  <div className="flex gap-2">
+                    {[Facebook, Twitter, Instagram].map((Icon, i) => (
+                      <Link key={i} href="#" className="w-6 h-6 bg-primary/5 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                        <Icon className="w-3 h-3" />
+                      </Link>
+                    ))}
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">Company</h4>
-                  <ul className="space-y-2">
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">About Us</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Careers</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Store Locations</Link></li>
+                <div className="space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-primary">Company</h4>
+                  <ul className="space-y-1">
+                    {['About Us', 'Careers', 'Locations'].map(l => (
+                      <li key={l}><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">{l}</Link></li>
+                    ))}
                   </ul>
                 </div>
 
-                <div className="space-y-3">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">Marketplace</h4>
-                  <ul className="space-y-2">
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Beef Cuts</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Nyama Choma</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Special Mutura</Link></li>
+                <div className="space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-primary">Market</h4>
+                  <ul className="space-y-1">
+                    {['Beef Cuts', 'Nyama Choma', 'Mutura'].map(l => (
+                      <li key={l}><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">{l}</Link></li>
+                    ))}
                   </ul>
                 </div>
 
-                <div className="space-y-3">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">Support</h4>
-                  <ul className="space-y-2">
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Help Center</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Delivery Info</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">Refund Policy</Link></li>
+                <div className="space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-primary">Support</h4>
+                  <ul className="space-y-1">
+                    {['Help Center', 'Delivery', 'Refunds'].map(l => (
+                      <li key={l}><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-primary uppercase tracking-tighter">{l}</Link></li>
+                    ))}
                   </ul>
                 </div>
 
-                <div className="col-span-2 md:col-span-1 lg:col-span-1 space-y-4">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">Mobile App</h4>
-                  <div className="flex flex-col gap-2">
-                    <Button variant="outline" className="h-10 w-full rounded-xl bg-black text-white border-none hover:bg-black/90 text-[10px] font-black p-0 uppercase tracking-widest">
+                <div className="col-span-2 md:col-span-1 lg:col-span-1 space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-primary">Get App</h4>
+                  <div className="flex flex-col gap-1.5">
+                    <Button variant="outline" className="h-8 w-full rounded-lg bg-black text-white border-none text-[8px] font-black uppercase tracking-widest">
                       App Store
                     </Button>
-                    <Button variant="outline" className="h-10 w-full rounded-xl bg-black text-white border-none hover:bg-black/90 text-[10px] font-black p-0 uppercase tracking-widest">
+                    <Button variant="outline" className="h-8 w-full rounded-lg bg-black text-white border-none text-[8px] font-black uppercase tracking-widest">
                       Play Store
                     </Button>
                   </div>
                 </div>
               </div>
 
-              {/* Congested "Last Pad" */}
-              <div className="border-t pt-6 space-y-6">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-                  <div className="flex flex-col md:flex-row items-center gap-6 lg:gap-12">
-                    <div className="text-left space-y-1">
-                      <h4 className="text-[8px] font-black uppercase tracking-[0.3em] text-primary">Banking Partner</h4>
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                          <Landmark className="w-4 h-4 text-black" />
-                          <div className="text-[9px] font-black uppercase">
-                            <span className="text-gray-400">Bank:</span> Equity Bank Kenya
-                          </div>
+              {/* Congested "Last Pad" - Tightened even further */}
+              <div className="border-t pt-4 space-y-4">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+                  <div className="flex flex-col md:flex-row items-center gap-4 lg:gap-8">
+                    <div className="text-left space-y-0.5">
+                      <h4 className="text-[7px] font-black uppercase tracking-[0.2em] text-primary">Banking</h4>
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1.5">
+                          <Landmark className="w-3 h-3 text-black" />
+                          <span className="text-[8px] font-black uppercase text-gray-700">Equity Bank Kenya</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <CreditCard className="w-4 h-4 text-black" />
-                          <div className="text-[9px] font-black uppercase">
-                            <span className="text-gray-400">Acc:</span> 1234567890123
-                          </div>
+                        <div className="flex items-center gap-1.5">
+                          <CreditCard className="w-3 h-3 text-black" />
+                          <span className="text-[8px] font-black uppercase text-gray-700">1234567890123</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="text-left space-y-1">
-                      <h4 className="text-[8px] font-black uppercase tracking-[0.3em] text-primary">Accepted Payments</h4>
-                      <div className="grid grid-cols-4 md:flex items-center gap-2">
+                    <div className="text-left space-y-0.5">
+                      <h4 className="text-[7px] font-black uppercase tracking-[0.2em] text-primary">Payments</h4>
+                      <div className="grid grid-cols-4 md:flex items-center gap-1.5">
                         {PAYMENT_METHODS.map((payment) => (
-                          <div key={payment.name} className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100 cursor-default">
+                          <div key={payment.name} className="flex items-center gap-1 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-100">
                             {payment.color ? (
-                              <div className={cn("w-2 h-2 rounded-full", payment.color)} />
+                              <div className={cn("w-1.5 h-1.5 rounded-full", payment.color)} />
                             ) : (
-                              <payment.icon className="w-2.5 h-2.5 text-gray-400" />
+                              <payment.icon className="w-2 h-2 text-gray-400" />
                             )}
-                            <span className="text-[7px] font-black uppercase text-gray-500 tracking-tighter">{payment.name}</span>
+                            <span className="text-[6px] font-black uppercase text-gray-500">{payment.name}</span>
                           </div>
                         ))}
                       </div>
@@ -329,25 +322,25 @@ export default function Home() {
                   </div>
 
                   <div className="flex flex-col items-center lg:items-end text-center lg:text-right">
-                    <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">
-                      Engineered for scale by
+                    <p className="text-[7px] font-black text-gray-400 uppercase tracking-widest mb-0.5">
+                      Engineering Partner
                     </p>
                     <Link href="https://simonstyles.co.ke" target="_blank" className="group flex flex-col items-center lg:items-end">
-                      <span className="text-[11px] font-black text-black uppercase tracking-tighter group-hover:text-primary transition-colors">
+                      <span className="text-[10px] font-black text-black uppercase tracking-tighter group-hover:text-primary">
                         Simon Styles Technologies Limited
                       </span>
-                      <span className="text-[8px] font-bold text-primary group-hover:underline uppercase tracking-widest">www.simonstyles.co.ke</span>
+                      <span className="text-[7px] font-bold text-primary group-hover:underline">www.simonstyles.co.ke</span>
                     </Link>
                   </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t border-dashed">
-                  <div className="flex items-center gap-6 text-[8px] font-black text-gray-400 uppercase tracking-widest">
-                    <Link href="#" className="hover:text-black">Privacy Policy</Link>
-                    <Link href="#" className="hover:text-black">Terms of Service</Link>
+                <div className="flex items-center justify-between pt-4 border-t border-dashed">
+                  <div className="flex items-center gap-4 text-[7px] font-black text-gray-400 uppercase tracking-widest">
+                    <Link href="#" className="hover:text-black">Privacy</Link>
+                    <Link href="#" className="hover:text-black">Terms</Link>
                   </div>
-                  <p className="text-[8px] text-gray-400 font-black uppercase tracking-[0.4em]">
-                    © {new Date().getFullYear()} Steak West Butchery. Super ya Nyama.
+                  <p className="text-[7px] text-gray-400 font-black uppercase tracking-[0.3em]">
+                    © {new Date().getFullYear()} Steak West Butchery
                   </p>
                 </div>
               </div>
@@ -359,54 +352,53 @@ export default function Home() {
   );
 }
 
-// Ultra-Compact High-Density Product Card
+// Ultra-Compact Product Card
 function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
   return (
     <Link 
       href={`/restaurants/${item.restaurantId}`}
-      className="group flex flex-col space-y-1.5"
+      className="group flex flex-col space-y-1"
     >
-      <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-100 shadow-md border-2 border-transparent group-hover:border-primary/20 transition-all">
+      <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-100 shadow-sm border-2 border-transparent group-hover:border-primary/20 transition-all">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
           data-ai-hint="butchery item"
         />
         
-        {/* Dynamic Overlays */}
-        <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
-          <Badge className="bg-white/95 backdrop-blur shadow-sm text-black border-none px-2 py-0.5 font-black text-[7px] md:text-[8px] uppercase tracking-widest">
+        <div className="absolute top-1.5 left-1.5 z-10 flex flex-col gap-0.5">
+          <Badge className="bg-white/95 text-black border-none px-1.5 py-0 font-black text-[7px] uppercase tracking-widest">
             {idx % 3 === 0 ? "Premium" : "Fresh"}
           </Badge>
           {item.isPopular && (
-            <Badge className="bg-primary text-white border-none px-2 py-0.5 font-black text-[7px] md:text-[8px] uppercase tracking-widest">
-              Best Seller
+            <Badge className="bg-primary text-white border-none px-1.5 py-0 font-black text-[7px] uppercase tracking-widest">
+              Best
             </Badge>
           )}
         </div>
 
-        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/20 backdrop-blur-[1px]">
-          <div className="bg-white rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-2xl scale-90 group-hover:scale-100 transition-transform">
-            <WalkingIcon className="w-3 h-3 text-black" />
-            <span className="text-[8px] font-black text-black uppercase tracking-widest">Quick Look</span>
+        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[1px]">
+          <div className="bg-white rounded-full px-2 py-1 flex items-center gap-1 shadow-xl">
+            <WalkingIcon className="w-2.5 h-2.5 text-black" />
+            <span className="text-[7px] font-black text-black uppercase tracking-widest">View</span>
           </div>
         </div>
 
-        <div className="absolute bottom-2 left-2 z-10">
-           <div className="bg-black/95 text-white text-[9px] md:text-[11px] font-black px-2.5 py-1 rounded-lg shadow-2xl uppercase tracking-tighter backdrop-blur-sm border border-white/10">
+        <div className="absolute bottom-1.5 left-1.5 z-10">
+           <div className="bg-black/95 text-white text-[9px] font-black px-2 py-0.5 rounded shadow-2xl uppercase tracking-tighter border border-white/5">
               KES {item.price.toLocaleString()}
            </div>
         </div>
       </div>
 
-      <div className="space-y-0.5 px-1">
-        <h3 className="font-black text-[10px] md:text-[13px] text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
+      <div className="px-0.5">
+        <h3 className="font-black text-[10px] text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
           {item.name}
         </h3>
-        <div className="flex items-center gap-1.5 text-[7px] md:text-[9px] text-gray-500 font-bold uppercase tracking-widest">
-          <span className="flex items-center gap-0.5"><TrendingUp className="w-2 h-2 text-emerald-500" /> High Demand</span>
+        <div className="flex items-center gap-1 text-[7px] text-gray-500 font-bold uppercase tracking-widest">
+          <span className="flex items-center gap-0.5"><TrendingUp className="w-1.5 h-1.5 text-emerald-500" /> Hot</span>
           <span>•</span>
           <span>{((idx + 1) * 0.5).toFixed(1)} km</span>
         </div>
