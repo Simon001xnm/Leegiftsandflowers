@@ -24,7 +24,8 @@ import {
   Youtube,
   Linkedin,
   Clock,
-  ArrowRight
+  ArrowRight,
+  Truck
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -40,24 +41,6 @@ const ButcheryLogo = ({ className }: { className?: string }) => (
       priority
     />
   </div>
-);
-
-const WalkingIcon = ({ className }: { className?: string }) => (
-  <svg 
-    className={className}
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2.5" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <circle cx="13" cy="4" r="1" />
-    <path d="m9 20 3-3.5 1-4.5 -2-2.5 -3 1.5" />
-    <path d="m13 12 2 1.5 3-1" />
-    <path d="m13 12-4-2.5-1-6" />
-    <path d="m9 20-2-3" />
-  </svg>
 );
 
 const CATEGORIES = [
@@ -94,7 +77,7 @@ export default function Home() {
       <main className="flex-grow p-0 space-y-0 pb-4">
         
         {/* Responsive Hero Section */}
-        <div className="relative min-h-[450px] md:h-[600px] w-full rounded-none overflow-hidden bg-black shadow-none group flex items-center">
+        <div className="relative min-h-[500px] md:h-[650px] w-full rounded-none overflow-hidden bg-black shadow-none group flex items-center">
           <video 
             autoPlay 
             muted 
@@ -105,33 +88,33 @@ export default function Home() {
             <source src="/From Klickpin.com- 833517843581501058-pin-id-833517843581501058 (1).mp4" type="video/mp4" />
           </video>
           
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
 
           <div className="relative z-10 w-full px-6 sm:px-10 md:px-16 py-12">
-            <div className="flex flex-col space-y-6 max-w-2xl">
-              <div className="flex items-center gap-4">
-                <ButcheryLogo className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36" />
+            <div className="flex flex-col space-y-8 max-w-3xl">
+              <div className="flex items-center gap-6">
+                <ButcheryLogo className="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44" />
                 <div className="flex flex-col">
-                  <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tighter text-white">Steak West</h2>
-                  <Badge className="bg-primary text-white border-none px-4 py-1.5 text-sm md:text-base font-black uppercase tracking-[0.2em] w-fit rounded-none">
+                  <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">Steak West</h2>
+                  <Badge className="bg-primary text-white border-none px-5 py-2 text-sm md:text-lg font-black uppercase tracking-[0.2em] w-fit rounded-none">
                     Super ya Nyama
                   </Badge>
                 </div>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-black font-headline text-white tracking-tighter uppercase leading-[1.05]">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-headline text-white tracking-tighter uppercase leading-[0.95]">
                 Premium Cuts.<br />
                 <span className="text-primary italic">Fast. Fresh.</span><br />
-                <span className="text-white/80 text-base md:text-xl tracking-normal font-medium normal-case block mt-4">
-                  Nairobi's Best Delivered in 20 Mins.
+                <span className="text-white/90 text-sm sm:text-lg md:text-2xl tracking-normal font-medium normal-case block mt-6 max-w-xl">
+                  Nairobi's Best Butchery & Grills Delivered to your doorstep in 20 Mins.
                 </span>
               </h1>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 w-full sm:w-auto">
-                <Button className="h-14 sm:h-16 px-10 sm:px-12 rounded-none bg-primary text-white hover:bg-primary/90 font-black shadow-lg transition-all active:scale-95 text-[14px] sm:text-base uppercase tracking-widest w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-5 pt-4 w-full sm:w-auto">
+                <Button className="h-16 md:h-20 px-12 md:px-16 rounded-none bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[16px] uppercase tracking-widest w-full sm:w-auto">
                   Pick it up
                 </Button>
-                <Button variant="outline" className="h-14 sm:h-16 px-10 sm:px-12 rounded-none border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] sm:text-base uppercase tracking-widest bg-transparent w-full sm:w-auto">
+                <Button variant="outline" className="h-16 md:h-20 px-12 md:px-16 rounded-none border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[16px] uppercase tracking-widest bg-transparent w-full sm:w-auto">
                   Browse Deals
                 </Button>
               </div>
@@ -193,9 +176,9 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-16 mb-16">
               <div className="col-span-2 md:col-span-1 space-y-8">
-                <div className="flex items-center gap-4">
-                  <ButcheryLogo className="w-24 h-24" />
-                  <span className="font-headline text-2xl md:text-4xl font-black tracking-tighter text-black uppercase">Steak West</span>
+                <div className="flex items-center gap-6">
+                  <ButcheryLogo className="w-32 h-32" />
+                  <span className="font-headline text-3xl md:text-4xl font-black tracking-tighter text-black uppercase">Steak West</span>
                 </div>
                 <p className="text-[14px] font-bold text-gray-400 uppercase leading-relaxed max-w-[240px]">
                   Nairobi's Trusted Meat Source. Super ya Nyama.
@@ -304,10 +287,11 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
           )}
         </div>
 
+        {/* Updated Hover Overlay with Delivery Truck Icon */}
         <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
           <div className="bg-white rounded-none px-6 py-3 flex items-center gap-3 shadow-xl">
-            <WalkingIcon className="w-5 h-5 text-black" />
-            <span className="text-[14px] font-black text-black uppercase tracking-widest">Pick it up</span>
+            <Truck className="w-6 h-6 text-black" />
+            <span className="text-[14px] font-black text-black uppercase tracking-widest">Express Delivery</span>
           </div>
         </div>
 

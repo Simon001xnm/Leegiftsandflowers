@@ -6,32 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, MOCK_MENU, MenuItem } from "@/lib/food-data";
-import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Utensils, X } from "lucide-react";
+import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Utensils, X, Truck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-
-// Custom walking icon for native feel
-const WalkingIcon = ({ className }: { className?: string }) => (
-  <svg 
-    className={className}
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2.5" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <circle cx="13" cy="4" r="1" />
-    <path d="m9 20 3-3.5 1-4.5 -2-2.5 -3 1.5" />
-    <path d="m13 12 2 1.5 3-1" />
-    <path d="m13 12-4-2.5-1-6" />
-    <path d="m9 20-2-3" />
-  </svg>
-);
 
 export default function RestaurantDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { toast } = useToast();
@@ -250,8 +231,9 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-2">
               <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
+              {/* Updated Price Button with Delivery Truck Icon */}
               <Button size="icon" className="w-10 h-10 rounded-none bg-black hover:bg-black/90 text-white" onClick={onAdd}>
-                <Plus className="w-5 h-5" />
+                <Truck className="w-5 h-5" />
               </Button>
             </div>
           </div>
@@ -259,7 +241,6 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         <div className={cn("relative overflow-hidden bg-gray-100", isSmall ? "aspect-square w-full" : "w-36 md:w-48 h-full shrink-0")}>
           <Image src={item.imageUrl} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform" />
           
-          {/* Small branding logo in top left corner of the product image */}
           <div className="absolute top-2 left-2 z-30 w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
@@ -272,7 +253,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
 
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
              <div className="bg-white/90 rounded-none p-2 shadow-2xl">
-                <WalkingIcon className="w-5 h-5 text-black" />
+                <Truck className="w-6 h-6 text-black" />
              </div>
           </div>
 
@@ -288,8 +269,8 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         {isSmall && (
           <div className="p-4 space-y-2 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <Button className="w-full h-10 rounded-none bg-black text-[14px] font-black uppercase tracking-widest" onClick={onAdd}>
-              Add to Basket
+            <Button className="w-full h-10 rounded-none bg-black text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2" onClick={onAdd}>
+              <Truck className="w-4 h-4" /> Order Now
             </Button>
           </div>
         )}
