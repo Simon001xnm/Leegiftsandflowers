@@ -1,4 +1,3 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -35,6 +34,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#ff0000" />
       </head>
       <body className="font-body antialiased bg-background text-foreground min-h-screen pb-20 md:pb-0">
         <FirebaseClientProvider>

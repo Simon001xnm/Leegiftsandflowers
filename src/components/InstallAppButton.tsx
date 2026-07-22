@@ -1,8 +1,7 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
-import { Download, Monitor } from "lucide-react";
+import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -22,6 +21,14 @@ export function InstallAppButton() {
 
     window.addEventListener("beforeinstallprompt", handler);
 
+    // Check if the app is already installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsVisible(false);
+    } else {
+      // For testing purposes, we show it if the browser doesn't block it
+      setIsVisible(true);
+    }
+
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
     };
@@ -30,8 +37,8 @@ export function InstallAppButton() {
   const handleInstall = async () => {
     if (!deferredPrompt) {
       toast({
-        title: "Installation Note",
-        description: "To install on this device, use your browser's 'Add to Home Screen' or 'Install' menu option.",
+        title: "Installation Guide",
+        description: "To save this as a desktop app: click the 'Install' icon in your browser address bar (top right) or use 'Add to Home Screen'.",
       });
       return;
     }
@@ -57,10 +64,10 @@ export function InstallAppButton() {
       onClick={handleInstall}
       variant="outline" 
       size="sm" 
-      className="hidden md:flex items-center gap-2 bg-primary/10 border-primary/20 text-primary hover:bg-primary/20 rounded-full font-black text-[10px] uppercase tracking-widest h-9 px-4 transition-all animate-pulse"
+      className="flex items-center gap-2 bg-primary text-white border-none hover:bg-primary/90 rounded-full font-black text-[10px] uppercase tracking-widest h-9 px-4 transition-all shadow-lg animate-pulse"
     >
       <Download className="w-3.5 h-3.5" />
-      Download App
+      Install Software
     </Button>
   );
 }
