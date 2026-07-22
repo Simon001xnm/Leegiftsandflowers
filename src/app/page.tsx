@@ -294,9 +294,9 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t">
-          <span className="font-black text-lg text-black">KES {item.price.toLocaleString()}</span>
-          <Button className="h-10 px-6 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors">
+        <div className="flex items-center justify-between pt-2 border-t gap-2">
+          <span className="font-black text-[13px] md:text-[14px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+          <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0">
             Add To Cart
           </Button>
         </div>

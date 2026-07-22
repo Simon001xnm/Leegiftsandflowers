@@ -222,10 +222,10 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
               {item.isPopular && <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
             </div>
             <p className="text-[12px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
-            <div className="flex items-center justify-between pt-3 border-t">
-              <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
+            <div className="flex items-center justify-between pt-3 border-t gap-2">
+              <span className="font-black text-[13px] md:text-[14px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
               <Button 
-                className="h-10 px-6 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all active:scale-95" 
+                className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all active:scale-95 shrink-0" 
                 onClick={onAdd}
               >
                 Add
@@ -250,9 +250,9 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         {isSmall && (
           <div className="p-4 space-y-3 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <div className="flex items-center justify-between gap-2">
-              <span className="font-black text-[14px] text-black">KES {item.price.toLocaleString()}</span>
-              <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors" onClick={onAdd}>
+            <div className="flex items-center justify-between gap-2 pt-2 border-t">
+              <span className="font-black text-[13px] md:text-[14px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+              <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0" onClick={onAdd}>
                 Add
               </Button>
             </div>
