@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import type { MenuItem } from '@/lib/food-data';
 
 export interface CartItem {
@@ -18,34 +18,31 @@ interface CartContextType {
   itemCount: number;
 }
 
-const Context = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
-/**
- * Stable CartProvider - Optimized for Next.js 15 / Turbopack HMR.
- */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [isReady, setIsReady] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('steak_west_v7_basket');
+    const saved = localStorage.getItem('steak_west_basket_v8');
     if (saved) {
       try {
         setCart(JSON.parse(saved));
       } catch (e) {
-        console.warn('Basket recovery failed, resetting node.');
+        console.error('Basket recovery failed');
       }
     }
-    setIsReady(true);
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
-    if (isReady) {
-      localStorage.setItem('steak_west_v7_basket', JSON.stringify(cart));
+    if (isLoaded) {
+      localStorage.setItem('steak_west_basket_v8', JSON.stringify(cart));
     }
-  }, [cart, isReady]);
+  }, [cart, isLoaded]);
 
-  const addToCart = useCallback((item: MenuItem) => {
+  const addToCart = (item: MenuItem) => {
     setCart((curr) => {
       const idx = curr.findIndex((i) => i.item.id === item.id);
       if (idx > -1) {
@@ -55,9 +52,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...curr, { item, quantity: 1 }];
     });
-  }, []);
+  };
 
-  const removeFromCart = useCallback((itemId: string) => {
+  const removeFromCart = (itemId: string) => {
     setCart((curr) => {
       const idx = curr.findIndex((i) => i.item.id === itemId);
       if (idx > -1 && curr[idx].quantity > 1) {
@@ -67,13 +64,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return curr.filter((i) => i.item.id !== itemId);
     });
-  }, []);
+  };
 
-  const clearItem = useCallback((itemId: string) => {
+  const clearItem = (itemId: string) => {
     setCart((curr) => curr.filter((i) => i.item.id !== itemId));
-  }, []);
+  };
 
-  const clearCart = useCallback(() => setCart([]), []);
+  const clearCart = () => setCart([]);
 
   const subtotal = useMemo(() => cart.reduce((acc, c) => acc + (c.item.price * c.quantity), 0), [cart]);
   const itemCount = useMemo(() => cart.reduce((acc, c) => acc + c.quantity, 0), [cart]);
@@ -86,24 +83,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     clearCart,
     subtotal,
     itemCount
-  }), [cart, addToCart, removeFromCart, clearItem, clearCart, subtotal, itemCount]);
+  }), [cart, subtotal, itemCount]);
 
-  return <Context.Provider value={value}>{children}</Context.Provider>;
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {
-  const context = useContext(Context);
+  const context = useContext(CartContext);
   if (context === undefined) {
-    // Return safe defaults if used outside provider
-    return {
-      cart: [],
-      addToCart: () => {},
-      removeFromCart: () => {},
-      clearItem: () => {},
-      clearCart: () => {},
-      subtotal: 0,
-      itemCount: 0
-    };
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }
