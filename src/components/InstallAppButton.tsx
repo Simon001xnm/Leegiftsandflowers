@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -63,14 +64,14 @@ export function InstallAppButton() {
     <Button 
       onClick={handleInstall}
       disabled={isInstalling}
-      className="flex items-center gap-2 bg-primary text-white border-none hover:bg-primary/90 rounded-full font-black text-[10px] uppercase tracking-widest h-10 px-6 transition-all shadow-xl animate-pulse"
+      className="flex items-center gap-3 bg-primary text-white border-none hover:bg-primary/90 rounded-full font-black text-xs uppercase tracking-widest h-12 px-8 transition-all shadow-2xl animate-pulse"
     >
       {isInstalling ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
+        <Loader2 className="w-5 h-5 animate-spin" />
       ) : (
-        <Download className="w-4 h-4" />
+        <Download className="w-5 h-5" />
       )}
-      {isInstalling ? "Downloading..." : "Download Software"}
+      {isInstalling ? "Downloading..." : "Install Software"}
     </Button>
   );
 }

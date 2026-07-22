@@ -92,47 +92,47 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
       
       <main className="flex-grow">
         {/* Marketplace Header */}
-        <div className="relative h-[20vh] lg:h-[30vh] overflow-hidden">
+        <div className="relative h-[25vh] lg:h-[35vh] overflow-hidden">
           <Image src={restaurant.imageUrl} alt={restaurant.name} fill className="object-cover" priority />
           <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute bottom-0 left-0 w-full p-4 lg:p-8">
+          <div className="absolute bottom-0 left-0 w-full p-6 lg:p-10">
             <div className="container mx-auto">
-              <Link href="/" className="inline-flex items-center gap-1.5 text-white/90 hover:text-white mb-2 text-[10px] font-black uppercase tracking-widest group">
-                <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
+              <Link href="/" className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-3 text-xs font-black uppercase tracking-widest group">
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Marketplace
               </Link>
               <div className="max-w-4xl">
-                <Badge className="mb-2 bg-primary text-white border-none text-[8px] uppercase font-black tracking-widest">{restaurant.category}</Badge>
-                <h1 className="text-2xl lg:text-5xl font-black font-headline text-white mb-1 uppercase tracking-tighter">{restaurant.name}</h1>
-                <div className="flex flex-wrap items-center gap-3 text-white/90 text-[10px] font-bold uppercase tracking-widest">
-                  <div className="flex items-center gap-1"><Star className="w-3 h-3 text-accent fill-accent" /> {restaurant.rating}</div>
-                  <div className="flex items-center gap-1 opacity-60">•</div>
-                  <div className="flex items-center gap-1"><Clock className="w-3 h-3" /> {restaurant.deliveryTime}</div>
-                  <div className="flex items-center gap-1 opacity-60">•</div>
-                  <div className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {restaurant.location}</div>
+                <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest">{restaurant.category}</Badge>
+                <h1 className="text-3xl lg:text-6xl font-black font-headline text-white mb-2 uppercase tracking-tighter">{restaurant.name}</h1>
+                <div className="flex flex-wrap items-center gap-4 text-white/90 text-sm font-bold uppercase tracking-widest">
+                  <div className="flex items-center gap-2"><Star className="w-4 h-4 text-accent fill-accent" /> {restaurant.rating}</div>
+                  <div className="flex items-center gap-2 opacity-60">•</div>
+                  <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> {restaurant.deliveryTime}</div>
+                  <div className="flex items-center gap-2 opacity-60">•</div>
+                  <div className="flex items-center gap-2"><MapPin className="w-4 h-4" /> {restaurant.location}</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="container mx-auto px-2 md:px-4 py-6 md:py-10">
-          <div className="grid lg:grid-cols-12 gap-4 lg:gap-8 items-start">
+        <div className="container mx-auto px-4 py-8 md:py-12">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
             
             {/* Menu Sections - High Density Marketplace Feed */}
-            <div className="lg:col-span-8 space-y-12">
+            <div className="lg:col-span-8 space-y-16">
               <Tabs defaultValue={vendorCategories[0]} className="w-full">
-                <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-2 border-b mb-6 flex items-center justify-between no-scrollbar overflow-x-auto">
-                  <TabsList className="bg-gray-100 p-1 h-9 rounded-lg">
+                <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
+                  <TabsList className="bg-gray-100 p-1.5 h-11 rounded-xl">
                     {vendorCategories.map(cat => (
-                      <TabsTrigger key={cat} value={cat} className="rounded-md px-3 font-black text-[10px] uppercase tracking-widest">{cat}</TabsTrigger>
+                      <TabsTrigger key={cat} value={cat} className="rounded-lg px-5 font-black text-xs uppercase tracking-widest">{cat}</TabsTrigger>
                     ))}
                   </TabsList>
                 </div>
                 
                 {vendorCategories.map(cat => (
                   <TabsContent key={cat} value={cat} className="mt-0 outline-none">
-                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-2 md:gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                       {vendorItems.filter(item => (item.category || 'Mains') === cat).map((item) => (
                         <HighDensityProductCard key={item.id} item={item} onAdd={() => addToCart(item)} />
                       ))}
@@ -143,14 +143,14 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
               {/* Related Marketplace Products Section */}
               {relatedItems.length > 0 && (
-                <section className="pt-10 space-y-6">
+                <section className="pt-12 space-y-8">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm md:text-2xl font-black text-black uppercase tracking-tighter">You might also like</h2>
-                    <Link href="/restaurants" className="text-[10px] font-black text-primary hover:underline uppercase tracking-widest">Explore All</Link>
+                    <h2 className="text-lg md:text-3xl font-black text-black uppercase tracking-tighter">You might also like</h2>
+                    <Link href="/restaurants" className="text-xs font-black text-primary hover:underline uppercase tracking-widest">Explore All</Link>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                     {relatedItems.map((item) => (
-                      <HighDensityProductCard key={item.id} item={item} onAdd={() => addToCart(item)} />
+                      <HighDensityProductCard key={item.id} item={item} onAdd={() => addToCart(item)} isSmall />
                     ))}
                   </div>
                 </section>
@@ -158,40 +158,40 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
             </div>
 
             {/* Sticky Basket - High Density POS Style */}
-            <div className="lg:col-span-4 sticky top-20 lg:top-24 space-y-4">
-              <Card className="border shadow-lg rounded-2xl overflow-hidden bg-white">
-                <CardHeader className="bg-gray-50 py-4 px-6 border-b">
+            <div className="lg:col-span-4 sticky top-20 lg:top-24 space-y-6">
+              <Card className="border shadow-2xl rounded-[2rem] overflow-hidden bg-white">
+                <CardHeader className="bg-gray-50 py-5 px-8 border-b">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2 text-black">
-                      <ShoppingCart className="w-4 h-4" /> Basket
+                    <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-3 text-black">
+                      <ShoppingCart className="w-5 h-5" /> Your Basket
                     </CardTitle>
-                    {cart.length > 0 && <Badge className="rounded-full bg-primary text-white text-[10px] h-5 w-5 flex items-center justify-center p-0">{cart.length}</Badge>}
+                    {cart.length > 0 && <Badge className="rounded-full bg-primary text-white text-xs h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
                   </div>
                 </CardHeader>
                 
-                <CardContent className="p-4 md:p-6">
+                <CardContent className="p-6">
                   {cart.length === 0 ? (
-                    <div className="py-10 text-center space-y-2">
-                      <Utensils className="w-8 h-8 mx-auto text-gray-200" />
-                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Select items to start</p>
+                    <div className="py-14 text-center space-y-3">
+                      <Utensils className="w-12 h-12 mx-auto text-gray-200" />
+                      <p className="text-sm font-black text-gray-400 uppercase tracking-widest">Select items to start</p>
                     </div>
                   ) : (
-                    <div className="space-y-4 max-h-[40vh] overflow-auto pr-1 no-scrollbar">
+                    <div className="space-y-6 max-h-[50vh] overflow-auto pr-2 no-scrollbar">
                       {cart.map((cartItem) => (
-                        <div key={cartItem.item.id} className="flex flex-col gap-1 border-b pb-3 last:border-0 last:pb-0 group">
-                          <div className="flex justify-between items-start gap-2">
-                            <p className="text-[11px] font-black text-black uppercase tracking-tighter truncate flex-grow">{cartItem.item.name}</p>
-                            <Button variant="ghost" size="icon" className="h-5 w-5 text-gray-400 opacity-0 group-hover:opacity-100" onClick={() => clearCartItem(cartItem.item.id)}>
-                              <X className="w-3 h-3" />
+                        <div key={cartItem.item.id} className="flex flex-col gap-2 border-b pb-4 last:border-0 last:pb-0 group">
+                          <div className="flex justify-between items-start gap-3">
+                            <p className="text-sm font-black text-black uppercase tracking-tighter truncate flex-grow">{cartItem.item.name}</p>
+                            <Button variant="ghost" size="icon" className="h-6 w-6 text-gray-400 opacity-0 group-hover:opacity-100" onClick={() => clearCartItem(cartItem.item.id)}>
+                              <X className="w-4 h-4" />
                             </Button>
                           </div>
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3 bg-gray-100 rounded-lg px-2 py-1">
-                              <button onClick={() => removeFromCart(cartItem.item.id)} className="text-black hover:scale-110"><Minus className="w-3 h-3" /></button>
-                              <span className="text-[10px] font-black min-w-[20px] text-center">{cartItem.quantity}</span>
-                              <button onClick={() => addToCart(cartItem.item)} className="text-black hover:scale-110"><Plus className="w-3 h-3" /></button>
+                            <div className="flex items-center gap-4 bg-gray-100 rounded-xl px-3 py-1.5">
+                              <button onClick={() => removeFromCart(cartItem.item.id)} className="text-black hover:scale-110"><Minus className="w-4 h-4" /></button>
+                              <span className="text-sm font-black min-w-[24px] text-center">{cartItem.quantity}</span>
+                              <button onClick={() => addToCart(cartItem.item)} className="text-black hover:scale-110"><Plus className="w-4 h-4" /></button>
                             </div>
-                            <span className="font-black text-[11px]">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</span>
+                            <span className="font-black text-sm">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</span>
                           </div>
                         </div>
                       ))}
@@ -199,30 +199,30 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                   )}
 
                   {subtotal > 0 && (
-                    <div className="mt-6 space-y-2 pt-4 border-t border-dashed">
-                      <div className="flex justify-between text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                    <div className="mt-8 space-y-3 pt-6 border-t border-dashed">
+                      <div className="flex justify-between text-xs font-bold text-gray-500 uppercase tracking-widest">
                         <span>Subtotal</span>
                         <span>KES {subtotal.toLocaleString()}</span>
                       </div>
-                      <div className="flex justify-between text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                        <span className="flex items-center gap-1"><Bike className="w-3 h-3" /> Delivery</span>
+                      <div className="flex justify-between text-xs font-bold text-gray-500 uppercase tracking-widest">
+                        <span className="flex items-center gap-2"><Bike className="w-4 h-4" /> Delivery</span>
                         <span>KES {deliveryFee.toLocaleString()}</span>
                       </div>
-                      <Separator className="my-2" />
-                      <div className="flex justify-between items-end pt-1">
-                        <div className="space-y-0.5">
-                          <p className="text-[9px] text-gray-400 uppercase font-black tracking-widest">Total Bill</p>
-                          <p className="text-xl font-black text-black">KES {total.toLocaleString()}</p>
+                      <Separator className="my-4" />
+                      <div className="flex justify-between items-end pt-2">
+                        <div className="space-y-1">
+                          <p className="text-[10px] text-gray-400 uppercase font-black tracking-widest">Total Bill</p>
+                          <p className="text-3xl font-black text-black">KES {total.toLocaleString()}</p>
                         </div>
                       </div>
                     </div>
                   )}
                 </CardContent>
 
-                <CardFooter className="p-4 md:p-6 pt-0">
+                <CardFooter className="p-6 pt-0">
                   <Link href={`/checkout/${restaurant.id}`} className="w-full">
-                    <Button className="w-full h-12 rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-primary/10" disabled={cart.length === 0}>
-                      Checkout Order <ArrowLeft className="w-3 h-3 rotate-180 ml-2" />
+                    <Button className="w-full h-14 rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
+                      Checkout Order <ArrowLeft className="w-4 h-4 rotate-180 ml-3" />
                     </Button>
                   </Link>
                 </CardFooter>
@@ -236,43 +236,65 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 }
 
 // Specialized High-Density Card for Marketplace Scaling
-function HighDensityProductCard({ item, onAdd }: { item: MenuItem; onAdd: () => void }) {
+function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAdd: () => void; isSmall?: boolean }) {
   return (
-    <Card className="overflow-hidden border shadow-sm hover:shadow-md transition-all group rounded-xl">
-      <div className="flex h-28 md:h-32">
-        <div className="p-2 md:p-3 flex-grow space-y-1 flex flex-col justify-center">
-          <div className="flex flex-col">
-            <h3 className="font-black text-[10px] md:text-xs text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
-            {item.isPopular && <span className="text-[8px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
+    <Card className={cn(
+      "overflow-hidden border shadow-sm hover:shadow-xl transition-all group rounded-2xl",
+      isSmall && "flex-col"
+    )}>
+      <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-36 md:h-44")}>
+        {!isSmall && (
+          <div className="p-4 flex-grow space-y-2 flex flex-col justify-center">
+            <div className="flex flex-col">
+              <h3 className="font-black text-sm md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
+              {item.isPopular && <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
+            </div>
+            <p className="text-xs text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
+            <div className="flex items-center justify-between pt-2">
+              <span className="font-black text-sm md:text-base text-black">KES {item.price.toLocaleString()}</span>
+              <Button size="icon" className="w-10 h-10 rounded-xl bg-black hover:bg-black/90 text-white" onClick={onAdd}>
+                <Plus className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
-          <p className="text-[8px] md:text-[9px] text-gray-400 line-clamp-2 leading-tight h-5 md:h-6">{item.description}</p>
-          <div className="flex items-center justify-between pt-1 md:pt-2">
-            <span className="font-black text-[10px] md:text-xs text-black">KES {item.price.toLocaleString()}</span>
-            <Button size="icon" className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-black hover:bg-black/90 text-white" onClick={onAdd}>
-              <Plus className="w-4 h-4" />
-            </Button>
-          </div>
-        </div>
-        <div className="w-24 md:w-28 h-full relative shrink-0 overflow-hidden bg-gray-100">
+        )}
+        <div className={cn("relative overflow-hidden bg-gray-100", isSmall ? "aspect-square w-full" : "w-36 md:w-48 h-full shrink-0")}>
           <Image src={item.imageUrl} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform" />
           
           {/* Small branding logo in top left corner of the product image */}
-          <div className="absolute top-1 left-1 z-30 w-4 h-4 md:w-6 md:h-6 opacity-80 group-hover:opacity-100 transition-opacity">
+          <div className="absolute top-2 left-2 z-30 w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West" 
-              width={24} 
-              height={24} 
+              width={32} 
+              height={32} 
               className="object-contain"
             />
           </div>
 
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-             <div className="bg-white/90 rounded-full p-1.5 shadow-xl">
-                <WalkingIcon className="w-3 h-3 text-black" />
+             <div className="bg-white/90 rounded-full p-2 shadow-2xl">
+                <WalkingIcon className="w-5 h-5 text-black" />
              </div>
           </div>
+
+          {isSmall && (
+             <div className="absolute bottom-2 left-2 z-10">
+                <div className="bg-black/90 text-white text-sm font-black px-2 py-1 rounded-lg">
+                   KES {item.price.toLocaleString()}
+                </div>
+             </div>
+          )}
         </div>
+        
+        {isSmall && (
+          <div className="p-4 space-y-2">
+            <h3 className="font-black text-sm text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
+            <Button className="w-full h-10 rounded-xl bg-black text-xs font-black uppercase tracking-widest" onClick={onAdd}>
+              Add to Basket
+            </Button>
+          </div>
+        )}
       </div>
     </Card>
   );

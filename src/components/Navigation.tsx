@@ -32,18 +32,18 @@ export function Navigation() {
   const [toggle, setToggle] = useState<'delivery' | 'pickup'>('delivery');
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-14 md:h-16 flex items-center gap-3 md:gap-6 shadow-sm">
-      <div className="flex items-center gap-2 md:gap-4 shrink-0">
-        <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 md:h-10 md:w-10 hover:bg-primary/5">
-          <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
+    <nav className="sticky top-0 z-50 w-full bg-white border-b px-4 md:px-8 h-16 md:h-20 flex items-center gap-4 md:gap-8 shadow-sm">
+      <div className="flex items-center gap-4 md:gap-6 shrink-0">
+        <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 md:h-12 md:w-12 hover:bg-primary/5">
+          <Menu className="w-6 h-6 md:w-7 md:h-7 text-black" />
         </Button>
-        <Link href="/" className="flex items-center gap-2 group">
-          <ButcheryLogo className="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:scale-110" />
+        <Link href="/" className="flex items-center gap-3 group">
+          <ButcheryLogo className="w-10 h-10 md:w-12 md:h-12 transition-transform group-hover:scale-110" />
           <div className="flex flex-col -space-y-1">
-            <span className="font-headline text-lg md:text-2xl font-black tracking-tighter text-black uppercase leading-none">
+            <span className="font-headline text-xl md:text-3xl font-black tracking-tighter text-black uppercase leading-none">
               Steak West
             </span>
-            <span className="text-[6px] md:text-[8px] font-black text-primary uppercase tracking-[0.2em]">Super ya Nyama</span>
+            <span className="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em]">Super ya Nyama</span>
           </div>
         </Link>
       </div>
@@ -52,7 +52,7 @@ export function Navigation() {
         <button
           onClick={() => setToggle('delivery')}
           className={cn(
-            "px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all",
+            "px-8 py-2.5 rounded-full text-sm font-black uppercase tracking-widest transition-all",
             toggle === 'delivery' ? "bg-black shadow-lg text-white" : "text-gray-500 hover:text-black"
           )}
         >
@@ -61,7 +61,7 @@ export function Navigation() {
         <button
           onClick={() => setToggle('pickup')}
           className={cn(
-            "px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all",
+            "px-8 py-2.5 rounded-full text-sm font-black uppercase tracking-widest transition-all",
             toggle === 'pickup' ? "bg-black shadow-lg text-white" : "text-gray-500 hover:text-black"
           )}
         >
@@ -69,25 +69,25 @@ export function Navigation() {
         </button>
       </div>
 
-      <div className="hidden xl:flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-full cursor-pointer shrink-0 border border-transparent hover:border-gray-100 transition-all">
-        <MapPin className="w-4 h-4 text-primary" />
-        <span className="text-xs font-black uppercase tracking-tighter whitespace-nowrap">Utalii St • ASAP</span>
-        <ChevronDown className="w-4 h-4 text-gray-400" />
+      <div className="hidden xl:flex items-center gap-3 px-5 py-2.5 hover:bg-gray-50 rounded-full cursor-pointer shrink-0 border border-transparent hover:border-gray-100 transition-all">
+        <MapPin className="w-5 h-5 text-primary" />
+        <span className="text-sm font-black uppercase tracking-tighter whitespace-nowrap">Utalii St • ASAP</span>
+        <ChevronDown className="w-5 h-5 text-gray-400" />
       </div>
 
-      <div className="flex-grow relative max-w-2xl group mx-2">
-        <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 md:w-4 md:h-4 text-gray-400 group-focus-within:text-primary transition-colors" />
+      <div className="flex-grow relative max-w-2xl group mx-4">
+        <Search className="absolute left-4 md:left-5 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
         <Input 
-          className="w-full bg-gray-100 border-none rounded-full h-9 md:h-11 pl-9 md:pl-12 text-xs md:text-sm font-bold placeholder:font-medium focus-visible:ring-2 focus-visible:ring-primary/20 transition-all"
+          className="w-full bg-gray-100 border-none rounded-full h-11 md:h-13 pl-12 md:pl-14 text-sm md:text-base font-bold placeholder:font-medium focus-visible:ring-2 focus-visible:ring-primary/20 transition-all"
           placeholder="Search for choma, mutura, or raw meat..."
         />
       </div>
 
-      <div className="flex items-center gap-2 md:gap-4 shrink-0">
+      <div className="flex items-center gap-4 md:gap-6 shrink-0">
         <InstallAppButton />
-        <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 rounded-full h-9 w-9 md:h-11 md:w-11 shadow-lg shadow-black/10 transition-transform active:scale-95">
-          <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
-          <span className="absolute -top-1 -right-1 bg-primary text-white text-[8px] md:text-[10px] w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center font-black border-2 border-white">
+        <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 rounded-full h-11 w-11 md:h-14 md:w-14 shadow-xl shadow-black/10 transition-transform active:scale-95">
+          <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
+          <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] md:text-xs w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center font-black border-2 border-white">
             0
           </span>
         </Button>
