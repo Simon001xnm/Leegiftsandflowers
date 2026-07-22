@@ -1,30 +1,33 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
-import { Download, Monitor, Smartphone } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
+/**
+ * A direct download/install button for the Steak West Software.
+ * It only appears when the system is ready to install.
+ */
 export function InstallAppButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [isInstalling, setIsInstalling] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     const handler = (e: any) => {
-      // Prevent the browser's default install prompt
+      // Prevent browser's default bar and store the event
       e.preventDefault();
-      // Stash the event so we can trigger it with our button
       setDeferredPrompt(e);
-      setIsVisible(true);
+      setIsReady(true);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
 
-    // Show button if not already in standalone mode
-    if (!window.matchMedia('(display-mode: standalone)').matches) {
-      setIsVisible(true);
+    // Hide button if already installed as software
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setIsReady(false);
     }
 
     return () => {
@@ -33,40 +36,41 @@ export function InstallAppButton() {
   }, []);
 
   const handleInstall = async () => {
-    if (!deferredPrompt) {
-      // Fallback: If the automated prompt hasn't fired, we guide them to the direct system install
-      toast({
-        title: "Software Installation",
-        description: "To install Steak West as software, please click the 'Install' icon in your browser's address bar or use the 'Add to Home Screen' option.",
-      });
-      return;
-    }
+    if (!deferredPrompt) return;
 
-    // Trigger the actual system installation dialog immediately
+    setIsInstalling(true);
+    
+    // Directly trigger the system's software installation dialog
     deferredPrompt.prompt();
     
-    // Wait for the user to respond to the prompt
     const { outcome } = await deferredPrompt.userChoice;
     
     if (outcome === "accepted") {
-      setIsVisible(false);
+      setIsReady(false);
       setDeferredPrompt(null);
       toast({
-        title: "Installation Started",
-        description: "Steak West is being added to your desktop as a standalone application.",
+        title: "Success",
+        description: "Steak West is now installed as software on your desktop.",
       });
     }
+    setIsInstalling(false);
   };
 
-  if (!isVisible) return null;
+  // Only show the button when the computer confirms it can be downloaded as software
+  if (!isReady) return null;
 
   return (
     <Button 
       onClick={handleInstall}
+      disabled={isInstalling}
       className="flex items-center gap-2 bg-primary text-white border-none hover:bg-primary/90 rounded-full font-black text-[10px] uppercase tracking-widest h-10 px-6 transition-all shadow-xl animate-pulse"
     >
-      <Download className="w-4 h-4" />
-      Download Software
+      {isInstalling ? (
+        <Loader2 className="w-4 h-4 animate-spin" />
+      ) : (
+        <Download className="w-4 h-4" />
+      )}
+      {isInstalling ? "Downloading..." : "Download Software"}
     </Button>
   );
 }
