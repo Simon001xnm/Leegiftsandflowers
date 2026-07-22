@@ -25,7 +25,7 @@ export function InstallAppButton() {
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setIsVisible(false);
     } else {
-      // For testing purposes, we show it if the browser doesn't block it
+      // For testing and better UX, we show the button if PWA is supported
       setIsVisible(true);
     }
 
@@ -37,8 +37,8 @@ export function InstallAppButton() {
   const handleInstall = async () => {
     if (!deferredPrompt) {
       toast({
-        title: "Installation Guide",
-        description: "To save this as a desktop app: click the 'Install' icon in your browser address bar (top right) or use 'Add to Home Screen'.",
+        title: "Software Installation",
+        description: "To download the software: Click the 'Install' or 'Download' icon in your browser's address bar (top right) to save Steak West to your desktop.",
       });
       return;
     }
@@ -50,7 +50,7 @@ export function InstallAppButton() {
     const { outcome } = await deferredPrompt.userChoice;
     
     if (outcome === "accepted") {
-      console.log("User accepted the install prompt");
+      console.log("User accepted the software download");
       setIsVisible(false);
     }
     
