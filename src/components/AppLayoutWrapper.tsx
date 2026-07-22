@@ -16,10 +16,12 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const isLogin = pathname?.startsWith('/login');
   const isCheckout = pathname?.startsWith('/checkout');
   
-  // The user requested that the Main Nav "remain in motion" even on checkout.
-  // We keep top nav visible on checkout, but hide the sidebar to focus the user.
+  // To match the Uber Eats high-density standard, we hide the sidebar on the main marketplace discovery page.
+  // This allows the category strips and grids to span the full width.
+  const isDiscovery = pathname === '/restaurants';
+  
   const isMinimal = isLogin;
-  const hideSidebar = isLogin || isCheckout;
+  const hideSidebar = isLogin || isCheckout || isDiscovery;
 
   return (
     <div className="flex flex-col min-h-screen">

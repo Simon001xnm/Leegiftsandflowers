@@ -68,4 +68,13 @@
   .hover-heartbeat:hover {
     animation: heartbeat 0.8s ease-in-out infinite;
   }
+
+  /* Uber Eats Style Scrollbar Hide */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
