@@ -6,7 +6,10 @@ import { MOCK_MENU, MenuItem } from "@/lib/food-data";
 import { 
   Award, 
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  Star,
+  Clock,
+  Heart
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,21 +17,17 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 
-/**
- * Main Landing Page - High-Conversion Eye-Catching Marketing
- */
 export default function Home() {
   const { addToCart } = useCart();
   const { toast } = useToast();
-  const allMeatProducts = MOCK_MENU;
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <PromotionalPopup />
       
-      <main className="flex-grow p-0 space-y-0 pb-4">
-        {/* Eye-Catching Hero Section */}
-        <div className="relative min-h-[600px] md:h-[750px] w-full overflow-hidden bg-black flex items-center">
+      <main className="flex-grow space-y-0">
+        {/* Eye-Catching Hero */}
+        <div className="relative h-[500px] md:h-[650px] w-full overflow-hidden bg-black flex items-center">
           <video 
             autoPlay 
             muted 
@@ -39,106 +38,92 @@ export default function Home() {
             <source src="/From Klickpin.com- 833517843581501058-pin-id-833517843581501058 (1).mp4" type="video/mp4" />
           </video>
           
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-          <div className="relative z-10 w-full px-8 md:px-20 py-12">
-            <div className="flex flex-col space-y-8 max-w-5xl">
-              <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-left-6 duration-1000">
-                <Badge className="bg-primary text-white border-none px-5 py-2 text-[12px] md:text-sm font-black uppercase tracking-[0.3em] w-fit rounded-none shadow-2xl">
-                  SYSTEM ACTIVE // NAIROBI
+          <div className="relative z-10 w-full px-6 md:px-12 py-12 container mx-auto">
+            <div className="flex flex-col space-y-6 max-w-4xl">
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                <Badge className="bg-primary text-white border-none px-4 py-1.5 text-xs font-black uppercase tracking-[0.2em] mb-4">
+                  NAIROBI'S #1 BUTCHERY
                 </Badge>
-                <h1 className="text-5xl sm:text-7xl md:text-9xl font-black font-headline text-white tracking-tighter uppercase leading-[0.85]">
+                <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.9] mb-6">
                   NAIROBI'S BEST<br />
                   <span className="text-primary italic">MEAT. FAST.</span>
                 </h1>
-              </div>
-
-              <div className="max-w-2xl border-l-8 border-primary pl-10 space-y-6 animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
-                <p className="text-white text-xl md:text-2xl font-bold leading-tight uppercase">
-                  Sourced daily. Delivered in 20 minutes. 100% Freshness Guaranteed.
+                <p className="text-lg md:text-xl text-white/90 font-medium max-w-lg mb-8">
+                  Sourced daily. Prepared expertly. Delivered in under 30 minutes.
                 </p>
-                <div className="flex items-center gap-6 text-white/40 font-black text-[10px] uppercase tracking-[0.5em]">
-                  <ShieldCheck className="w-5 h-5 text-emerald-500" /> SECURE_NETWORK
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/restaurants">
+                    <Button size="lg" className="h-16 px-10 bg-primary text-white hover:bg-white hover:text-black font-black text-lg rounded-full transition-all shadow-xl shadow-primary/20">
+                      ORDER NOW <ArrowRight className="ml-3 w-5 h-5" />
+                    </Button>
+                  </Link>
+                  <Link href="/dashboard/customer">
+                    <Button variant="outline" size="lg" className="h-16 px-10 border-2 border-white text-white hover:bg-white hover:text-black font-black text-lg rounded-full transition-all backdrop-blur-md bg-transparent">
+                      TRACK ORDERS
+                    </Button>
+                  </Link>
                 </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 md:gap-8 pt-10 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500">
-                <Link href="/restaurants" className="w-full sm:w-auto">
-                  <Button className="h-20 md:h-24 px-12 md:px-20 bg-primary text-white hover:bg-white hover:text-black font-black shadow-2xl transition-all active:scale-95 text-[20px] uppercase tracking-[0.2em] w-full rounded-none group">
-                    ORDER NOW <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-3 transition-transform" />
-                  </Button>
-                </Link>
-                <Link href="/dashboard/customer" className="w-full sm:w-auto">
-                  <Button variant="outline" className="h-20 md:h-24 px-12 md:px-16 border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[15px] uppercase tracking-widest bg-transparent w-full rounded-none backdrop-blur-md">
-                    TRACK ORDERS
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
         </div>
 
-        {/* High-Volume Market Grid */}
-        <section className="bg-white p-8 md:p-20">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-16 border-b-8 border-black pb-10">
-            <div className="space-y-4">
-              <Badge className="bg-black text-white font-black uppercase tracking-[0.4em] text-[11px] px-5 py-2 rounded-none">LIVE INVENTORY</Badge>
-              <h2 className="text-5xl md:text-8xl font-black text-black uppercase tracking-tighter leading-none">THE_MARKET</h2>
+        {/* Dynamic Market Strip */}
+        <section className="py-16 md:py-24 bg-white px-6 md:px-12 container mx-auto">
+          <div className="flex items-end justify-between mb-12">
+            <div className="space-y-2">
+              <h2 className="text-3xl md:text-5xl font-black text-black leading-tight">PREMIUM SELECTIONS</h2>
+              <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Available for immediate dispatch</p>
             </div>
-            <p className="text-[14px] font-bold text-gray-400 uppercase tracking-widest max-w-sm text-right">
-              FRESH CUTS FROM WESTLANDS. AVAILABLE FOR IMMEDIATE DISPATCH.
-            </p>
+            <Link href="/restaurants">
+               <Button variant="link" className="font-black text-black p-0 gap-2">SEE ALL <ChevronRight className="w-4 h-4" /></Button>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-l border-t border-black/5">
-            {allMeatProducts.map((item, idx) => (
-              <ProductCard key={item.id} item={item} idx={idx} addToCart={addToCart} toast={toast} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+            {MOCK_MENU.slice(0, 4).map((item) => (
+              <ProductCard key={item.id} item={item} onAdd={() => {
+                addToCart(item);
+                toast({ title: "Added to basket", description: `${item.name} ready.` });
+              }} />
             ))}
           </div>
         </section>
 
-        {/* Professional Branding Footer */}
-        <footer className="pt-32 border-t-8 border-black bg-black text-white pb-32">
-          <div className="container mx-auto px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-24">
-              <div className="col-span-2 space-y-10">
-                <div className="flex items-center gap-5">
-                  <div className="relative w-20 h-20 bg-white p-2">
-                    <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Logo" fill className="object-contain p-2" />
-                  </div>
-                  <div>
-                    <h4 className="text-3xl font-black tracking-tighter uppercase">Steak West</h4>
-                    <p className="text-primary font-black uppercase tracking-[0.4em] text-[10px]">Super ya Nyama</p>
-                  </div>
-                </div>
-                <p className="text-xl text-gray-500 font-bold uppercase leading-tight max-w-lg">
-                  NAIROBI'S TRUSTED MEAT SOURCE. LOGISTICS-FIRST BUTCHERY.
+        {/* High-Impact Brand Footer */}
+        <footer className="bg-black text-white pt-24 pb-32">
+          <div className="container mx-auto px-6 md:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20 border-b border-white/10 pb-20">
+              <div className="col-span-2 space-y-6">
+                <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West" width={120} height={40} className="h-12 w-auto mb-4" />
+                <p className="text-xl md:text-2xl font-bold text-gray-500 max-w-md">
+                  THE GOLD STANDARD IN NAIROBI MEAT LOGISTICS.
                 </p>
               </div>
-              <div className="space-y-8">
-                <h5 className="font-black text-[12px] uppercase tracking-[0.4em] text-gray-600">NETWORK</h5>
-                <ul className="space-y-4 text-[13px] font-black uppercase tracking-widest">
+              <div className="space-y-6">
+                <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest">PLATFORM</h4>
+                <ul className="space-y-4 text-sm font-bold uppercase tracking-tighter">
                   <li><Link href="/restaurants" className="hover:text-primary transition-colors">MARKETPLACE</Link></li>
-                  <li><Link href="/profile" className="hover:text-primary transition-colors">MY PROFILE</Link></li>
-                  <li><Link href="/checkout" className="hover:text-primary transition-colors">BASKET</Link></li>
+                  <li><Link href="/profile" className="hover:text-primary transition-colors">ACCOUNT</Link></li>
+                  <li><Link href="/checkout" className="hover:text-primary transition-colors">CART</Link></li>
                 </ul>
               </div>
-              <div className="space-y-8">
-                <h5 className="font-black text-[12px] uppercase tracking-[0.4em] text-gray-600">SECURITY</h5>
-                <ul className="space-y-4 text-[13px] font-black uppercase tracking-widest text-gray-400">
+              <div className="space-y-6">
+                <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest">SECURITY</h4>
+                <ul className="space-y-4 text-sm font-bold text-gray-500 uppercase tracking-tighter">
                   <li>SSL PROTECTION</li>
                   <li>PRIVACY NODE</li>
                   <li>TERMS OF SALE</li>
                 </ul>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/10 pt-16 gap-10">
-              <p className="text-[11px] text-gray-600 font-black uppercase tracking-[0.5em]">
-                © 2026 STEAK WEST GLOBAL LOGISTICS.
-              </p>
-              <div className="flex items-center gap-10 opacity-20 filter grayscale">
-                 <ShieldCheck className="w-8 h-8" />
-                 <Award className="w-8 h-8" />
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-gray-600 font-black text-[10px] uppercase tracking-widest">
+              <p>© 2026 STEAK WEST GLOBAL LOGISTICS.</p>
+              <div className="flex gap-8 opacity-40">
+                <ShieldCheck className="w-6 h-6" />
+                <Award className="w-6 h-6" />
               </div>
             </div>
           </div>
@@ -148,55 +133,48 @@ export default function Home() {
   );
 }
 
-function ProductCard({ item, idx, addToCart, toast }: { item: MenuItem, idx: number, addToCart: any, toast: any }) {
-  const handleAdd = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    addToCart(item);
-    toast({
-      title: "ADDED TO BASKET",
-      description: `${item.name} ready for checkout.`,
-    });
-  };
-
+function ProductCard({ item, onAdd }: { item: MenuItem; onAdd: () => void }) {
   return (
-    <div className="group flex flex-col space-y-0 border-r border-b border-black/10 bg-white rounded-none hover:z-10 transition-all relative">
-      <Link href={`/products/${item.id}`} className="relative aspect-square overflow-hidden bg-gray-50 block">
+    <div className="group flex flex-col gap-4">
+      <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gray-50 shadow-sm">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute top-4 right-4 z-10">
-          <Badge className="bg-black text-white border-none px-3 py-1 font-black text-[9px] uppercase tracking-widest rounded-none shadow-2xl">
-            {idx % 4 === 0 ? "PRIME CUT" : "FRESH DAILY"}
-          </Badge>
+        <div className="absolute top-4 right-4">
+          <Button size="icon" variant="ghost" className="rounded-full bg-white/90 backdrop-blur-md h-10 w-10 shadow-sm text-black">
+            <Heart className="w-5 h-5" />
+          </Button>
         </div>
-      </Link>
-
-      <div className="p-6 space-y-5 bg-white flex flex-col flex-grow group-hover:bg-gray-50 transition-colors">
-        <Link href={`/products/${item.id}`} className="block space-y-2">
-          <h3 className="font-black text-[16px] md:text-[18px] text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-none truncate">
-            {item.name}
-          </h3>
-          <div className="flex items-center gap-3 text-[10px] text-gray-400 font-black uppercase tracking-widest">
-            <span className="flex items-center gap-1 text-emerald-600">LIVE</span>
-            <span className="opacity-20">|</span>
-            <span className="flex items-center gap-1">20 MIN DELIVERY</span>
+      </div>
+      <div className="space-y-2 px-2">
+        <div className="flex justify-between items-start">
+          <h3 className="text-lg font-bold truncate group-hover:text-primary transition-colors leading-tight">{item.name}</h3>
+          <div className="flex items-center gap-1 bg-gray-100 px-2 py-0.5 rounded-full shrink-0">
+             <span className="text-xs font-bold">4.9</span>
+             <Star className="w-3 h-3 fill-black text-black" />
           </div>
-        </Link>
-
-        <div className="flex items-center justify-between pt-5 border-t border-black/10 gap-3 mt-auto">
-          <span className="font-black text-[15px] text-black">KES {item.price.toLocaleString()}</span>
+        </div>
+        <div className="flex items-center justify-between pt-2">
+          <span className="text-base font-black">KES {item.price.toLocaleString()}</span>
           <Button 
-            className="h-12 px-6 bg-black text-white text-[11px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all shadow-xl active:scale-90"
-            onClick={handleAdd}
+            onClick={(e) => { e.preventDefault(); onAdd(); }}
+            className="rounded-full bg-black text-white hover:bg-primary transition-all px-6 h-10 font-bold text-xs"
           >
-            ADD +
+            ADD
           </Button>
         </div>
       </div>
     </div>
+  );
+}
+
+function ChevronRight(props: any) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
   );
 }
