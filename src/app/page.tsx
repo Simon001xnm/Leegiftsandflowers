@@ -238,10 +238,6 @@ export default function Home() {
             <div className="border-t border-dashed pt-8 space-y-6">
               <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div className="flex flex-wrap items-center justify-center gap-4">
-                  <div className="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
-                    <Landmark className="w-5 h-5 text-black" />
-                    <span className="text-[14px] font-black uppercase text-gray-700">Equity Bank: 1234567890</span>
-                  </div>
                   <div className="flex flex-wrap gap-3">
                     {PAYMENT_METHODS.map((payment) => (
                       <div key={payment.name} className="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-xl border border-gray-100">
@@ -254,13 +250,6 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                </div>
-
-                <div className="flex flex-col items-center md:items-end leading-none">
-                  <span className="text-[14px] font-black text-gray-400 uppercase tracking-widest">Powered by</span>
-                  <Link href="https://simonstyles.co.ke" target="_blank" className="text-[14px] font-black text-black uppercase group hover:text-primary transition-colors">
-                    Simon Styles Technologies Limited
-                  </Link>
                 </div>
               </div>
 

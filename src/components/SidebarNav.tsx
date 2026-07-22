@@ -6,13 +6,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { 
   Home, 
   Zap, 
-  Wine, 
-  Heart, 
   Beef, 
   Utensils, 
-  Baby, 
-  Stethoscope, 
-  Cpu,
   ShoppingBag
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -24,11 +19,6 @@ const SIDEBAR_ITEMS = [
   { href: "/restaurants?cat=Delicacies", label: "Convenience", icon: Zap, cat: "Delicacies" },
   { href: "/restaurants?cat=Cooked", label: "Cooked", icon: Utensils, cat: "Cooked" },
   { href: "/restaurants?cat=Grocery", label: "Grocery", icon: ShoppingBag, cat: "Grocery" },
-  { href: "/restaurants?cat=Alcohol", label: "Alcohol", icon: Wine, cat: "Alcohol" },
-  { href: "/restaurants?cat=Health", label: "Health", icon: Heart, cat: "Health" },
-  { href: "/restaurants?cat=Baby", label: "Baby", icon: Baby, cat: "Baby" },
-  { href: "/profile", label: "Personal Care", icon: Stethoscope },
-  { href: "/dashboard", label: "Electronics", icon: Cpu },
 ];
 
 export function SidebarNav() {
