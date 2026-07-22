@@ -24,23 +24,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Load from local storage on mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('steak_west_basket_v6');
+      const saved = localStorage.getItem('steak_west_basket_final');
       if (saved) {
         setCart(JSON.parse(saved));
       }
     } catch (e) {
-      console.warn('Basket sync paused');
+      console.warn('Cart sync paused');
     }
     setIsInitialized(true);
   }, []);
 
-  // Save to local storage on changes
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem('steak_west_basket_v6', JSON.stringify(cart));
+      localStorage.setItem('steak_west_basket_final', JSON.stringify(cart));
     }
   }, [cart, isInitialized]);
 
@@ -74,10 +72,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = useCallback(() => setCart([]), []);
 
-  const totals = useMemo(() => ({
-    subtotal: cart.reduce((acc, c) => acc + c.item.price * c.quantity, 0),
-    itemCount: cart.reduce((acc, c) => acc + c.quantity, 0)
-  }), [cart]);
+  const subtotal = useMemo(() => cart.reduce((acc, c) => acc + c.item.price * c.quantity, 0), [cart]);
+  const itemCount = useMemo(() => cart.reduce((acc, c) => acc + c.quantity, 0), [cart]);
 
   const value = useMemo(() => ({
     cart,
@@ -85,8 +81,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     removeFromCart,
     clearItem,
     clearCart,
-    ...totals
-  }), [cart, addToCart, removeFromCart, clearItem, clearCart, totals]);
+    subtotal,
+    itemCount
+  }), [cart, addToCart, removeFromCart, clearItem, clearCart, subtotal, itemCount]);
 
   return (
     <CartContext.Provider value={value}>

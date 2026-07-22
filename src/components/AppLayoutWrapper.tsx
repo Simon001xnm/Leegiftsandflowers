@@ -12,10 +12,12 @@ import { cn } from '@/lib/utils';
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   
-  // High-density checkout and login are distraction-free (no nav/sidebar)
-  const isCheckout = pathname?.startsWith('/checkout');
+  // Hide global elements only on purely functional pages like login
   const isLogin = pathname?.startsWith('/login');
-  const isMinimal = isCheckout || isLogin;
+  
+  // The user requested that the Main Nav "remain in motion" even on checkout.
+  // We hide only for minimal auth flows.
+  const isMinimal = isLogin;
 
   return (
     <div className="flex flex-col min-h-screen">
