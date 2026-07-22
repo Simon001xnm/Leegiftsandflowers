@@ -3,28 +3,19 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { User as UserIcon, LogOut, Shield, Clock, LogIn, Settings, ShoppingBag, ShieldCheck } from "lucide-react";
+import { User as UserIcon, LogOut, Shield, Clock, LogIn, Settings, ShoppingBag, ShieldCheck, TrendingUp, Bike, Package } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useUser } from "@/firebase/auth/use-user";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
-/**
- * Merchant Hub and Profile page connected to Supabase.
- */
 export default function ProfilePage() {
   const { user, loading: authLoading } = useUser();
   const supabase = createClient();
   const router = useRouter();
   const [profile, setProfile] = useState<any>(null);
-  const [demoRole, setDemoRole] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setDemoRole(localStorage.getItem('abc_demo_role'));
-    }
-  }, []);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -41,14 +32,8 @@ export default function ProfilePage() {
   }, [user, supabase]);
 
   const handleSignOut = async () => {
-    if (user?.id?.startsWith('demo-')) {
-      localStorage.removeItem('abc_demo_user');
-      localStorage.removeItem('abc_demo_role');
-      window.location.href = '/';
-    } else {
-      await supabase.auth.signOut();
-      router.push("/");
-    }
+    await supabase.auth.signOut();
+    router.push("/");
   };
 
   if (authLoading) return (
@@ -66,7 +51,7 @@ export default function ProfilePage() {
           </div>
           <h2 className="text-3xl font-black font-headline mb-4 text-black uppercase tracking-tighter">Private Portal</h2>
           <p className="text-muted-foreground mb-10 text-[14px] font-bold uppercase tracking-widest leading-relaxed">
-            Please sign in to access your Supabase membership dashboard.
+            Please sign in to access your Steak West membership dashboard.
           </p>
           <div className="space-y-3">
             <Button 
@@ -84,24 +69,33 @@ export default function ProfilePage() {
             </Button>
           </div>
           <div className="mt-8 pt-8 border-t border-dashed flex items-center justify-center gap-2 text-muted-foreground opacity-50 font-black text-[10px] uppercase tracking-widest">
-            <ShieldCheck className="w-4 h-4" /> 100% Supabase Encrypted
+            <ShieldCheck className="w-4 h-4" /> Supabase Protected
           </div>
         </Card>
       </div>
     );
   }
 
-  const role = profile?.role || demoRole || "Guest";
+  const role = profile?.role || user.user_metadata?.role || "Guest";
 
   return (
     <main className="container mx-auto px-4 py-12 flex-grow max-w-6xl">
-      <div className="mb-10 flex items-center justify-between">
-        <h1 className="text-4xl md:text-5xl font-black font-headline text-black uppercase tracking-tighter leading-none">
-          Merchant Hub
-        </h1>
-        <Badge className="bg-primary text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-none">
-          {role} Node Active
-        </Badge>
+      <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h1 className="text-4xl md:text-6xl font-black font-headline text-black uppercase tracking-tighter leading-none mb-2">
+            Identity Terminal
+          </h1>
+          <Badge className="bg-primary text-white font-black text-[11px] uppercase tracking-[0.2em] px-4 py-2 rounded-none">
+            {role} // STATUS_ACTIVE
+          </Badge>
+        </div>
+        {role === 'merchant' && (
+          <Link href="/dashboard/analytics">
+            <Button className="h-14 px-8 rounded-none font-black text-[14px] uppercase tracking-widest shadow-xl shadow-primary/20">
+              <TrendingUp className="w-5 h-5 mr-3" /> Merchant Control Center
+            </Button>
+          </Link>
+        )}
       </div>
 
       <div className="grid lg:grid-cols-12 gap-10">
@@ -120,14 +114,14 @@ export default function ProfilePage() {
             <CardContent className="pt-16 pb-8 px-8 space-y-8">
               <div className="space-y-1">
                 <h2 className="text-2xl font-black font-headline text-black uppercase tracking-tighter">
-                  {user.user_metadata?.full_name || "Steak West User"}
+                  {user.user_metadata?.full_name || profile?.name || "Steak West User"}
                 </h2>
                 <p className="text-[12px] font-bold text-muted-foreground uppercase tracking-widest">{user.email}</p>
               </div>
               
               <div className="space-y-2">
                 <Button variant="outline" className="w-full justify-start gap-3 rounded-none h-14 border-2 font-black text-[12px] uppercase tracking-widest hover:bg-gray-50">
-                  <Settings className="w-4 h-4 text-black" /> Configuration
+                  <Settings className="w-4 h-4 text-black" /> Account Config
                 </Button>
                 <Button 
                   variant="ghost" 
@@ -144,21 +138,21 @@ export default function ProfilePage() {
         <div className="lg:col-span-8 space-y-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <Card className="p-8 border-2 border-black rounded-none shadow-none bg-white relative overflow-hidden group">
-              <Clock className="w-10 h-10 text-primary mb-6 transition-transform group-hover:scale-110" />
+              {role === 'rider' ? <Bike className="w-10 h-10 text-primary mb-6" /> : <Clock className="w-10 h-10 text-primary mb-6" />}
               <div className="space-y-1">
-                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Synchronization Start</p>
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Node Synchronization</p>
                 <p className="font-black text-2xl uppercase tracking-tighter">
-                  {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : "ACTIVE_NODE"}
+                  {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : "SECURE_ESTABLISHED"}
                 </p>
               </div>
             </Card>
 
             <Card className="p-8 border-2 border-black rounded-none shadow-none bg-white relative overflow-hidden group">
-              <ShoppingBag className="w-10 h-10 text-primary mb-6 transition-transform group-hover:scale-110" />
+              {role === 'customer' ? <Package className="w-10 h-10 text-primary mb-6" /> : <ShoppingBag className="w-10 h-10 text-primary mb-6" />}
               <div className="space-y-1">
-                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Merchant Authority</p>
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Access Priority</p>
                 <p className="font-black text-2xl uppercase tracking-tighter">
-                  LEVEL_01_ADMIN
+                  {role === 'merchant' ? 'TIER_01_ADMIN' : role === 'rider' ? 'COURIER_HUB' : 'ELITE_CUSTOMER'}
                 </p>
               </div>
             </Card>
@@ -169,7 +163,7 @@ export default function ProfilePage() {
               <Shield className="w-4 h-4 text-primary" /> Supabase Security Protocol
             </h3>
             <p className="text-[12px] font-bold text-muted-foreground uppercase tracking-widest leading-relaxed opacity-60">
-              Identity verified via Supabase Auth. All PostgreSQL operations are logged and audited. Hardware-level encryption active for session tokens.
+              Identity verified via Supabase Auth. Hardware-level encryption active for session tokens. All PostgreSQL transactions within the Steak West node are logged, audited, and strictly role-enforced.
             </p>
           </Card>
         </div>

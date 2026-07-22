@@ -21,41 +21,38 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 /**
- * Optimized CartProvider to prevent HMR factory instantiation errors.
- * Strictly decoupled from server components to maintain stability.
+ * Singleton-pattern Provider to prevent HMR factory instantiation errors.
  */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isReady, setIsReady] = useState(false);
 
-  // Initialize from storage once on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('steak_west_cart_v2');
+      const saved = localStorage.getItem('steak_west_cart_v3');
       if (saved) {
         try {
           setCart(JSON.parse(saved));
         } catch (e) {
-          console.error('Failed to parse basket');
+          console.error('Basket sync error');
         }
       }
       setIsReady(true);
     }
   }, []);
 
-  // Sync to storage on change
   useEffect(() => {
     if (isReady && typeof window !== 'undefined') {
-      localStorage.setItem('steak_west_cart_v2', JSON.stringify(cart));
+      localStorage.setItem('steak_west_cart_v3', JSON.stringify(cart));
     }
   }, [cart, isReady]);
 
   const addToCart = useCallback((item: MenuItem) => {
     setCart((curr) => {
-      const existingIdx = curr.findIndex((i) => i.item.id === item.id);
-      if (existingIdx > -1) {
+      const idx = curr.findIndex((i) => i.item.id === item.id);
+      if (idx > -1) {
         const next = [...curr];
-        next[existingIdx] = { ...next[existingIdx], quantity: next[existingIdx].quantity + 1 };
+        next[idx] = { ...next[idx], quantity: next[idx].quantity + 1 };
         return next;
       }
       return [...curr, { item, quantity: 1 }];
@@ -93,17 +90,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     itemCount
   }), [cart, addToCart, removeFromCart, clearItem, clearCart, subtotal, itemCount]);
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {
   const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
+  if (!context) throw new Error('useCart error');
   return context;
 }

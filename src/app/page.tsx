@@ -1,7 +1,8 @@
 'use client';
 
 import Link from "next/link";
-import Image from "next/image";
+import { Navigation } from "@/components/Navigation";
+import { SidebarNav } from "@/components/SidebarNav";
 import { PromotionalPopup } from "@/components/PromotionalPopup";
 import { MOCK_MENU, MenuItem } from "@/lib/food-data";
 import { 
@@ -19,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
   <div className={cn("relative shrink-0 flex items-center justify-center", className)}>
@@ -41,10 +43,6 @@ const CATEGORIES = [
   { label: 'Offers', icon: Award, href: '#' },
 ];
 
-/**
- * Main Landing Page for Steak West.
- * Optimized for stability to prevent HMR factory errors.
- */
 export default function Home() {
   const { addToCart } = useCart();
   const { toast } = useToast();
