@@ -15,14 +15,13 @@ import {
   Facebook,
   Twitter,
   Instagram,
-  Globe,
-  Landmark,
-  CreditCard,
   TrendingUp,
   Clock,
   Truck,
   Youtube,
-  Linkedin
+  Linkedin,
+  CreditCard,
+  Landmark
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -108,10 +107,10 @@ export default function Home() {
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-5 pt-4 w-full sm:w-auto">
-                <Button className="h-16 md:h-20 px-12 md:px-16 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[16px] uppercase tracking-widest w-full sm:w-auto">
+                <Button className="h-16 md:h-20 px-12 md:px-16 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[14px] uppercase tracking-widest w-full sm:w-auto">
                   Pick it up
                 </Button>
-                <Button variant="outline" className="h-16 md:h-20 px-12 md:px-16 border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[16px] uppercase tracking-widest bg-transparent w-full sm:w-auto">
+                <Button variant="outline" className="h-16 md:h-20 px-12 md:px-16 border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full sm:w-auto">
                   Browse Deals
                 </Button>
               </div>

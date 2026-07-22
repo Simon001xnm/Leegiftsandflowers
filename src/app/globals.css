@@ -66,6 +66,8 @@
 
   .hover-heartbeat:hover {
     animation: heartbeat 0.8s ease-in-out infinite;
+    position: relative;
     z-index: 10;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
   }
 }
