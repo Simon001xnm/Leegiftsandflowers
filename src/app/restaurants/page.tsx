@@ -74,97 +74,82 @@ function DiscoveryContent() {
     <main className="flex-grow bg-white pb-20">
       {/* 1. Category Strip - Ultra High Density */}
       <div className="sticky top-12 z-40 bg-white border-b overflow-x-auto no-scrollbar py-2 px-4 md:px-8">
-        <div className="flex items-center gap-6 min-w-max container mx-auto">
+        <div className="flex items-center gap-4 min-w-max container mx-auto">
           {CATEGORIES.map((cat) => (
             <button 
               key={cat.label}
               onClick={() => setCategory(cat.label)}
               className={cn(
-                "flex flex-col items-center gap-1 group transition-all shrink-0",
+                "flex flex-col items-center gap-0.5 group transition-all shrink-0",
                 category === cat.label ? "opacity-100 scale-105" : "opacity-60 hover:opacity-100"
               )}
             >
-              <div className="w-7 h-7 flex items-center justify-center transition-all">
-                <cat.icon className="w-5 h-5 text-black" />
+              <div className="w-6 h-6 flex items-center justify-center transition-all">
+                <cat.icon className="w-4 h-4 text-black" />
               </div>
-              <span className="text-[9px] font-black text-black tracking-tight uppercase">{cat.label}</span>
+              <span className="text-[7px] md:text-[9px] font-black text-black tracking-tight uppercase">{cat.label}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* 2. Filter Pill Strip - More Compact */}
-      <div className="bg-white border-b py-1.5 px-4 md:px-8 overflow-x-auto no-scrollbar">
-        <div className="flex items-center gap-2 container mx-auto">
+      <div className="bg-white border-b py-1 px-4 md:px-8 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-1.5 container mx-auto">
           {FILTERS.map((f) => (
-            <Button key={f.label} variant="outline" size="sm" className="rounded-full gap-1 font-black text-[10px] bg-gray-100 border-none px-3 h-7 uppercase tracking-tight">
-              <f.icon className="w-3 h-3" /> {f.label}
+            <Button key={f.label} variant="outline" size="sm" className="rounded-full gap-1 font-black text-[8px] md:text-[10px] bg-gray-100 border-none px-2 h-6 md:h-7 uppercase tracking-tight">
+              <f.icon className="w-2.5 h-2.5" /> {f.label}
             </Button>
           ))}
-          <Button variant="outline" size="sm" className="rounded-full gap-1 font-black text-[10px] bg-gray-100 border-none px-3 h-7 uppercase tracking-tight">
-            Sort <ChevronDown className="w-3 h-3" />
+          <Button variant="outline" size="sm" className="rounded-full gap-1 font-black text-[8px] md:text-[10px] bg-gray-100 border-none px-2 h-6 md:h-7 uppercase tracking-tight">
+            Sort <ChevronDown className="w-2.5 h-2.5" />
           </Button>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 space-y-10 py-6">
+      <div className="container mx-auto px-2 md:px-8 space-y-8 py-4">
         {/* 3. Promo Banners - Reduced height */}
-        <section className="flex gap-4 overflow-x-auto no-scrollbar mask-fade-right">
+        <section className="flex gap-3 overflow-x-auto no-scrollbar mask-fade-right">
           {[1, 2, 3].map((i) => (
             <div key={i} className={cn(
-              "min-w-[280px] md:min-w-[340px] h-32 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden",
+              "min-w-[220px] md:min-w-[340px] h-24 md:h-32 rounded-lg p-4 flex flex-col justify-between relative overflow-hidden",
               i === 1 ? "bg-orange-100" : i === 2 ? "bg-blue-50" : "bg-red-50"
             )}>
-              <div className="relative z-10 space-y-0.5">
-                <p className="text-[8px] font-black uppercase tracking-widest text-primary">Member Special</p>
-                <h3 className="text-base font-black max-w-[180px] leading-tight uppercase tracking-tighter">Steak West Prime free for 4 weeks</h3>
-                <p className="text-[9px] font-bold text-gray-500 uppercase">Limited time only</p>
+              <div className="relative z-10 space-y-0">
+                <p className="text-[7px] font-black uppercase tracking-widest text-primary">Member Special</p>
+                <h3 className="text-[11px] md:text-base font-black max-w-[140px] md:max-w-[180px] leading-tight uppercase tracking-tighter">Steak West Prime free for 4 weeks</h3>
               </div>
-              <Button size="sm" className="w-fit rounded-full px-4 h-7 text-[9px] font-black bg-black text-white uppercase tracking-widest">Order Now</Button>
-              <div className="absolute right-[-15px] bottom-[-15px] w-28 h-28 bg-white/20 rounded-full" />
+              <Button size="sm" className="w-fit rounded-full px-3 h-6 text-[7px] font-black bg-black text-white uppercase tracking-widest">Order Now</Button>
+              <div className="absolute right-[-10px] bottom-[-10px] w-20 h-20 bg-white/20 rounded-full" />
             </div>
           ))}
         </section>
 
         {/* 4. Featured Section - Tighter Spacing */}
-        <section className="space-y-4">
+        <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-black tracking-tighter uppercase">Featured on Steak West</h2>
-            <div className="flex gap-1.5">
-               <Button variant="ghost" size="icon" className="rounded-full h-7 w-7 bg-gray-100"><ChevronRight className="w-3.5 h-3.5 rotate-180" /></Button>
-               <Button variant="ghost" size="icon" className="rounded-full h-7 w-7 bg-gray-100"><ChevronRight className="w-3.5 h-3.5" /></Button>
+            <h2 className="text-sm md:text-lg font-black tracking-tighter uppercase">Featured</h2>
+            <div className="flex gap-1">
+               <Button variant="ghost" size="icon" className="rounded-full h-6 w-6 bg-gray-100"><ChevronRight className="w-3 h-3 rotate-180" /></Button>
+               <Button variant="ghost" size="icon" className="rounded-full h-6 w-6 bg-gray-100"><ChevronRight className="w-3 h-3" /></Button>
             </div>
           </div>
-          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+          <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
             {MOCK_RESTAURANTS.map((r) => (
-              <StoreCard key={r.id} restaurant={r} className="min-w-[240px] md:min-w-[280px]" showBadge />
+              <StoreCard key={r.id} restaurant={r} className="min-w-[160px] md:min-w-[280px]" showBadge />
             ))}
           </div>
         </section>
 
-        {/* 5. Today's Offers */}
-        <section className="space-y-4">
+        {/* 5. Circular Brand Section - High Density Circles */}
+        <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-black tracking-tighter uppercase">Today's offers</h2>
-            <Link href="/restaurants"><span className="text-[11px] font-black text-black hover:underline uppercase tracking-widest">See all</span></Link>
+            <h2 className="text-sm md:text-lg font-black tracking-tighter uppercase">Stores near you</h2>
           </div>
-          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
-            {MOCK_RESTAURANTS.map((r) => (
-              <StoreCard key={r.id} restaurant={r} className="min-w-[240px] md:min-w-[280px]" isOffer />
-            ))}
-          </div>
-        </section>
-
-        {/* 6. Circular Brand Section - High Density Circles */}
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-black tracking-tighter uppercase">Stores near you</h2>
-            <Link href="/restaurants"><span className="text-[11px] font-black text-black hover:underline uppercase tracking-widest">See all</span></Link>
-          </div>
-          <div className="flex gap-6 overflow-x-auto no-scrollbar py-2 justify-start">
+          <div className="flex gap-4 overflow-x-auto no-scrollbar py-1 justify-start">
             {['Steak West', 'Choma Grill', 'Butchery', 'Kachumbari', 'Drinks', 'Grocery', 'Bakery'].map((brand, i) => (
-              <div key={brand} className="flex flex-col items-center gap-2 group cursor-pointer shrink-0">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-gray-100 flex items-center justify-center bg-white shadow-sm overflow-hidden group-hover:ring-2 ring-black transition-all">
+              <div key={brand} className="flex flex-col items-center gap-1 group cursor-pointer shrink-0">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-gray-100 flex items-center justify-center bg-white shadow-sm overflow-hidden group-hover:ring-2 ring-black transition-all">
                   <Image 
                     src={MOCK_RESTAURANTS[i % 2].imageUrl} 
                     alt={brand} 
@@ -174,21 +159,21 @@ function DiscoveryContent() {
                   />
                 </div>
                 <div className="text-center space-y-0">
-                   <span className="text-[10px] font-black tracking-tight block uppercase">{brand}</span>
-                   <span className="text-[8px] text-gray-400 font-bold uppercase">10 min</span>
+                   <span className="text-[8px] md:text-[10px] font-black tracking-tight block uppercase">{brand}</span>
+                   <span className="text-[6px] md:text-[8px] text-gray-400 font-bold uppercase">10 min</span>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 7. Popular Section - High Density 4 Column Grid */}
-        <section className="space-y-6">
+        {/* 6. Popular Section - High Density 4 Column Grid */}
+        <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-black tracking-tighter uppercase">Popular in your area</h2>
-            <Link href="/restaurants"><span className="text-[11px] font-black text-black hover:underline uppercase tracking-widest">See all</span></Link>
+            <h2 className="text-sm md:text-lg font-black tracking-tighter uppercase">Popular in your area</h2>
+            <Link href="/restaurants"><span className="text-[9px] md:text-[11px] font-black text-black hover:underline uppercase tracking-widest">See all</span></Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-10">
+          <div className="grid grid-cols-4 gap-2 md:gap-6">
             {filteredRestaurants.map((r) => (
               <StoreCard key={r.id} restaurant={r} />
             ))}
@@ -201,54 +186,45 @@ function DiscoveryContent() {
 
 function StoreCard({ restaurant, className, showBadge, isOffer }: { restaurant: any; className?: string; showBadge?: boolean; isOffer?: boolean }) {
   return (
-    <Link href={`/restaurants/${restaurant.id}`} className={cn("group flex flex-col gap-2", className)}>
-      <div className="relative aspect-[16/9] rounded-lg overflow-hidden bg-gray-100 border border-gray-100">
+    <Link href={`/restaurants/${restaurant.id}`} className={cn("group flex flex-col gap-1.5", className)}>
+      <div className="relative aspect-[16/9] rounded-md overflow-hidden bg-gray-100 border border-gray-100">
         <Image 
           src={restaurant.imageUrl} 
           alt={restaurant.name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
-        <div className="absolute top-2 right-2">
-          <Button variant="ghost" size="icon" className="h-7 w-7 rounded-full bg-white/90 backdrop-blur-md shadow-sm hover:bg-white text-black">
-            <Heart className="w-3.5 h-3.5" />
+        <div className="absolute top-1 right-1">
+          <Button variant="ghost" size="icon" className="h-5 w-5 md:h-7 md:w-7 rounded-full bg-white/90 backdrop-blur-md shadow-sm hover:bg-white text-black">
+            <Heart className="w-2.5 h-2.5 md:w-3.5 md:h-3.5" />
           </Button>
         </div>
         
         {isOffer && (
-          <div className="absolute top-2 left-2">
-             <Badge className="bg-primary text-white border-none text-[8px] font-black tracking-widest rounded-md py-1 px-2 uppercase shadow-lg">
-               BUY 1, GET 1 FREE
+          <div className="absolute top-1 left-1">
+             <Badge className="bg-primary text-white border-none text-[6px] md:text-[8px] font-black tracking-widest rounded-sm py-0.5 px-1 uppercase shadow-lg">
+               BUY 1 GET 1
              </Badge>
           </div>
         )}
 
         {showBadge && !isOffer && (
-          <div className="absolute top-2 left-2">
-             <Badge className="bg-emerald-500 text-white border-none text-[8px] font-black tracking-widest rounded-md py-1 px-2 uppercase shadow-lg">
-               KES 121 OFF
+          <div className="absolute top-1 left-1">
+             <Badge className="bg-emerald-500 text-white border-none text-[6px] md:text-[8px] font-black tracking-widest rounded-sm py-0.5 px-1 uppercase shadow-lg">
+               OFFER
              </Badge>
           </div>
         )}
       </div>
-      <div className="space-y-0.5 px-0.5">
-        <div className="flex justify-between items-start">
-          <h3 className="text-[13px] font-black truncate leading-tight tracking-tight uppercase">{restaurant.name}</h3>
-        </div>
-        <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500">
+      <div className="space-y-0 px-0.5">
+        <h3 className="text-[9px] md:text-[13px] font-black truncate leading-tight tracking-tight uppercase">{restaurant.name}</h3>
+        <div className="flex items-center gap-1 text-[7px] md:text-[10px] font-bold text-gray-500">
            <div className="flex items-center gap-0.5">
-             <Star className="w-2.5 h-2.5 fill-black text-black" />
-             <span className="text-black">{restaurant.rating} (500+)</span>
+             <Star className="w-2 h-2 fill-black text-black" />
+             <span className="text-black">{restaurant.rating}</span>
            </div>
            <span className="opacity-30">•</span>
-           <div className="flex items-center gap-0.5">
-             <span>{restaurant.deliveryTime}</span>
-           </div>
-           <span className="opacity-30">•</span>
-           <div className="flex items-center gap-0.5">
-             <CirclePercent className="w-2.5 h-2.5 text-emerald-600" />
-             <span className="uppercase">KES {restaurant.deliveryFee}</span>
-           </div>
+           <span>{restaurant.deliveryTime}</span>
         </div>
       </div>
     </Link>
