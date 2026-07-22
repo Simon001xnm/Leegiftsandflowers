@@ -225,7 +225,6 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-2">
               <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
-              {/* Delivery Truck Price Button */}
               <Button size="icon" className="w-10 h-10 bg-black hover:bg-black/90 text-white" onClick={onAdd}>
                 <Truck className="w-5 h-5" />
               </Button>

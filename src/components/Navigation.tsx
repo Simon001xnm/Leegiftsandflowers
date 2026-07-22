@@ -38,7 +38,6 @@ export function Navigation() {
           <Menu className="w-6 h-6 md:w-7 md:h-7 text-black" />
         </Button>
         <Link href="/" className="flex items-center gap-3 group">
-          {/* Main Logo increased visibility */}
           <ButcheryLogo className="w-16 h-16 md:w-24 md:h-24 transition-transform group-hover:scale-110" />
           <div className="flex flex-col -space-y-1">
             <span className="font-headline text-xl md:text-3xl font-black tracking-tighter text-black uppercase leading-none">

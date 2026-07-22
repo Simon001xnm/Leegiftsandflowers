@@ -11,7 +11,6 @@ import {
   Zap, 
   Utensils, 
   Award, 
-  Star,
   ShoppingBag,
   Facebook,
   Twitter,
@@ -20,12 +19,10 @@ import {
   Landmark,
   CreditCard,
   TrendingUp,
-  Package,
-  Youtube,
-  Linkedin,
   Clock,
-  ArrowRight,
-  Truck
+  Truck,
+  Youtube,
+  Linkedin
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -93,7 +90,6 @@ export default function Home() {
           <div className="relative z-10 w-full px-6 sm:px-10 md:px-16 py-12">
             <div className="flex flex-col space-y-8 max-w-3xl">
               <div className="flex items-center gap-6">
-                {/* Large Logo visibility */}
                 <ButcheryLogo className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48" />
                 <div className="flex flex-col">
                   <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">Steak West</h2>
@@ -178,7 +174,6 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-16 mb-16">
               <div className="col-span-2 md:col-span-1 space-y-8">
                 <div className="flex items-center gap-6">
-                  {/* Footer logo increased visibility */}
                   <ButcheryLogo className="w-36 h-36" />
                   <span className="font-headline text-3xl md:text-4xl font-black tracking-tighter text-black uppercase">Steak West</span>
                 </div>
