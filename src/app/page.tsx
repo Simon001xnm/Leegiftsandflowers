@@ -105,9 +105,11 @@ export default function Home() {
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-2 md:gap-4 pt-4 w-full sm:w-auto">
-                <Button className="h-12 md:h-16 px-8 md:px-12 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[14px] uppercase tracking-widest w-full sm:w-auto rounded-none">
-                  Pick it up
-                </Button>
+                <Link href="/restaurants" className="w-full sm:w-auto">
+                  <Button className="h-12 md:h-16 px-8 md:px-12 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[14px] uppercase tracking-widest w-full rounded-none">
+                    Pick it up
+                  </Button>
+                </Link>
                 <Button variant="outline" className="h-12 md:h-16 px-8 md:px-12 border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full sm:w-auto rounded-none">
                   Browse Deals
                 </Button>
@@ -172,7 +174,7 @@ export default function Home() {
               <div className="col-span-2 md:col-span-2 space-y-4 md:space-y-6">
                 <div className="flex items-center gap-3 md:gap-4">
                   <ButcheryLogo className="w-12 h-12 md:w-16 md:h-16" />
-                  <span className="font-headline text-[14px] md:text-2xl font-black tracking-tighter text-black uppercase leading-tight">Steak West</span>
+                  <span className="font-headline text-[13px] md:text-[16px] font-black tracking-tighter text-black uppercase leading-tight">Steak West</span>
                 </div>
                 <p className="text-[12px] md:text-[14px] font-bold text-gray-400 uppercase leading-relaxed max-w-[280px]">
                   Nairobi's Trusted Meat Source. Super ya Nyama.
@@ -242,9 +244,9 @@ export default function Home() {
 function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
   return (
     <div 
-      className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white rounded-none cursor-pointer"
+      className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white rounded-none"
     >
-      <div className="relative aspect-square overflow-hidden bg-gray-50">
+      <Link href={`/products/${item.id}`} className="relative aspect-square overflow-hidden bg-gray-50 block">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
@@ -272,10 +274,10 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
             </Badge>
           )}
         </div>
-      </div>
+      </Link>
 
-      <div className="p-3 md:p-4 space-y-2 bg-white">
-        <div>
+      <div className="p-3 md:p-4 space-y-2 bg-white flex flex-col flex-grow">
+        <Link href={`/products/${item.id}`} className="block">
           <h3 className="font-black text-[14px] text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
             {item.name}
           </h3>
@@ -284,10 +286,10 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
             <span>•</span>
             <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> 20m</span>
           </div>
-        </div>
+        </Link>
 
-        <div className="flex items-center justify-between pt-2 border-t gap-2">
-          <span className="font-black text-[14px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+        <div className="flex items-center justify-between pt-2 border-t gap-2 mt-auto">
+          <span className="font-black text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
           <Button className="h-9 px-3 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0">
             Add
           </Button>

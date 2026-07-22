@@ -215,16 +215,16 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
       "overflow-hidden border-r border-b shadow-none hover-heartbeat bg-white rounded-none",
       isSmall && "flex-col"
     )}>
-      <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-40 md:h-48")}>
+      <div className={cn("flex h-full", isSmall ? "flex-col h-auto" : "h-40 md:h-48")}>
         {!isSmall && (
           <div className="p-4 flex-grow space-y-3 flex flex-col justify-center bg-white">
-            <div className="flex flex-col">
+            <Link href={`/products/${item.id}`} className="flex flex-col group">
               <h3 className="font-black text-[14px] md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
               {item.isPopular && <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
-            </div>
+            </Link>
             <p className="text-[12px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-3 border-t gap-2">
-              <span className="font-black text-[11px] md:text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+              <span className="font-black text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
               <Button 
                 className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all active:scale-95 shrink-0" 
                 onClick={onAdd}
@@ -234,8 +234,8 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             </div>
           </div>
         )}
-        <div className={cn("relative overflow-hidden bg-gray-100", isSmall ? "aspect-square w-full" : "w-36 md:w-48 h-full shrink-0")}>
-          <Image src={item.imageUrl} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform" />
+        <Link href={`/products/${item.id}`} className={cn("relative overflow-hidden bg-gray-100 block", isSmall ? "aspect-square w-full" : "w-36 md:w-48 h-full shrink-0")}>
+          <Image src={item.imageUrl} alt={item.name} fill className="object-cover transition-transform group-hover:scale-105" />
           
           <div className="absolute top-2 left-2 z-30 w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity">
             <Image 
@@ -246,13 +246,15 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
               className="object-contain"
             />
           </div>
-        </div>
+        </Link>
         
         {isSmall && (
           <div className="p-4 space-y-3 bg-white">
-            <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
+            <Link href={`/products/${item.id}`}>
+              <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1 hover:text-primary transition-colors">{item.name}</h3>
+            </Link>
             <div className="flex items-center justify-between gap-2 pt-2 border-t">
-              <span className="font-black text-[11px] md:text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+              <span className="font-black text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
               <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0" onClick={onAdd}>
                 Add
               </Button>
