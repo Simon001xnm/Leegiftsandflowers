@@ -21,20 +21,19 @@ interface CartContextType {
 const Context = createContext<CartContextType | undefined>(undefined);
 
 /**
- * CartProvider - High-stability state management.
- * Resolves Next.js HMR instantiation issues.
+ * Stable CartProvider - Optimized for Next.js 15 / Turbopack HMR.
  */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('steak_west_v6_basket');
+    const saved = localStorage.getItem('steak_west_v7_basket');
     if (saved) {
       try {
         setCart(JSON.parse(saved));
       } catch (e) {
-        console.warn('Basket corrupted, resetting.');
+        console.warn('Basket recovery failed, resetting node.');
       }
     }
     setIsReady(true);
@@ -42,7 +41,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (isReady) {
-      localStorage.setItem('steak_west_v6_basket', JSON.stringify(cart));
+      localStorage.setItem('steak_west_v7_basket', JSON.stringify(cart));
     }
   }, [cart, isReady]);
 
@@ -95,6 +94,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 export function useCart() {
   const context = useContext(Context);
   if (context === undefined) {
+    // Return safe defaults if used outside provider
     return {
       cart: [],
       addToCart: () => {},

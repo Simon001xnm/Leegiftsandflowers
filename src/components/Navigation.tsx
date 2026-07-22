@@ -7,7 +7,9 @@ import {
   Search, 
   MapPin, 
   ShoppingCart, 
-  ChevronDown 
+  ChevronDown,
+  User,
+  LogIn
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,9 +17,10 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { InstallAppButton } from "./InstallAppButton";
 import { useCart } from "@/context/CartContext";
+import { useUser } from "@/firebase/auth/use-user";
 
 const ButcheryLogo = () => (
-  <div className="relative shrink-0 flex items-center justify-center pt-2">
+  <div className="relative shrink-0 flex items-center justify-center py-2">
     <Image 
       src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
       alt="Steak West Logo" 
@@ -32,6 +35,7 @@ const ButcheryLogo = () => (
 export function Navigation() {
   const [toggle, setToggle] = useState<'delivery' | 'pickup'>('delivery');
   const { itemCount } = useCart();
+  const { user } = useUser();
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-16 md:h-20 flex items-center gap-2 md:gap-4 shadow-sm">
@@ -81,7 +85,7 @@ export function Navigation() {
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 group-focus-within:text-primary transition-colors" />
         <Input 
           className="w-full bg-gray-100 border-none h-9 pl-9 md:pl-10 text-[13px] font-bold placeholder:font-medium focus-visible:ring-2 focus-visible:ring-primary/20 transition-all rounded-none"
-          placeholder="Search items..."
+          placeholder="Search for your next meal..."
         />
       </div>
 
@@ -89,6 +93,21 @@ export function Navigation() {
         <div className="hidden md:block">
           <InstallAppButton />
         </div>
+        
+        <Link href={user ? "/profile" : "/login"}>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className={cn(
+              "h-9 w-9 md:h-10 md:w-10 rounded-none transition-all",
+              !user ? "bg-gray-100 hover:bg-black hover:text-white" : "bg-primary/5 text-primary hover:bg-primary/10"
+            )}
+            title={user ? "Profile" : "Sign In"}
+          >
+            {user ? <User className="w-4 h-4 md:w-5 md:h-5" /> : <LogIn className="w-4 h-4 md:w-5 md:h-5" />}
+          </Button>
+        </Link>
+
         <Link href="/checkout">
           <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 h-9 w-9 md:h-10 md:w-10 shadow-xl shadow-black/10 transition-transform active:scale-95 rounded-none">
             <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
