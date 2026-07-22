@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -13,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { InstallAppButton } from "./InstallAppButton";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
   <div className={cn("relative overflow-hidden shrink-0", className)}>
@@ -73,7 +75,7 @@ export function Navigation() {
         <ChevronDown className="w-4 h-4 text-gray-400" />
       </div>
 
-      <div className="flex-grow relative max-w-2xl group">
+      <div className="flex-grow relative max-w-2xl group mx-2">
         <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 md:w-4 md:h-4 text-gray-400 group-focus-within:text-primary transition-colors" />
         <Input 
           className="w-full bg-gray-100 border-none rounded-full h-9 md:h-11 pl-9 md:pl-12 text-xs md:text-sm font-bold placeholder:font-medium focus-visible:ring-2 focus-visible:ring-primary/20 transition-all"
@@ -81,7 +83,8 @@ export function Navigation() {
         />
       </div>
 
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-2 md:gap-4 shrink-0">
+        <InstallAppButton />
         <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 rounded-full h-9 w-9 md:h-11 md:w-11 shadow-lg shadow-black/10 transition-transform active:scale-95">
           <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
           <span className="absolute -top-1 -right-1 bg-primary text-white text-[8px] md:text-[10px] w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center font-black border-2 border-white">
