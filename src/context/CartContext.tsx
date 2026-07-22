@@ -21,30 +21,32 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | null>(null);
 
 /**
- * Robust CartProvider refactored to prevent HMR module factory errors.
- * Uses a stable, clean export pattern for Next.js Turbopack.
+ * Stable CartProvider to prevent HMR module factory errors.
+ * Uses a bulletproof, simplified export pattern for Turbopack.
  */
-export function CartProvider({ children }: { children: React.ReactNode }) {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Initialize from storage once
+  // Initialize from storage
   useEffect(() => {
-    const saved = typeof window !== 'undefined' ? localStorage.getItem('steak_west_basket_v1.1') : null;
-    if (saved) {
-      try {
-        setCart(JSON.parse(saved));
-      } catch (e) {
-        console.error('Basket recovery failed');
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('steak_west_v2');
+      if (saved) {
+        try {
+          setCart(JSON.parse(saved));
+        } catch (e) {
+          console.error('Basket recovery failed');
+        }
       }
+      setIsLoaded(true);
     }
-    setIsLoaded(true);
   }, []);
 
-  // Sync back to storage on changes
+  // Sync to storage
   useEffect(() => {
     if (isLoaded && typeof window !== 'undefined') {
-      localStorage.setItem('steak_west_basket_v1.1', JSON.stringify(cart));
+      localStorage.setItem('steak_west_v2', JSON.stringify(cart));
     }
   }, [cart, isLoaded]);
 
@@ -92,12 +94,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }), [cart, subtotal, itemCount]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
+};
 
-export function useCart() {
+export const useCart = () => {
   const context = useContext(CartContext);
   if (context === null) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
-}
+};

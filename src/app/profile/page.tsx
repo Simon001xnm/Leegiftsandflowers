@@ -31,8 +31,8 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
 /**
- * Compact high-density Profile Page.
- * Optimized for small screens with refined spacing and typography.
+ * Super-compact high-density Profile Page.
+ * Optimized for small screens with refined typography and micro-spacing.
  */
 export default function ProfilePage() {
   const { user, loading: authLoading } = useUser();
@@ -87,21 +87,21 @@ export default function ProfilePage() {
 
   if (authLoading) return (
     <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-        <Card className="max-w-sm w-full border-none shadow-xl rounded-[2rem] bg-white overflow-hidden">
-          <div className="p-8 text-center">
-            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-              <UserIcon className="w-8 h-8 text-gray-300" />
+        <Card className="max-w-[320px] w-full border-none shadow-xl rounded-[2rem] bg-white overflow-hidden">
+          <div className="p-6 text-center">
+            <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-3">
+              <UserIcon className="w-6 h-6 text-gray-300" />
             </div>
-            <h2 className="text-xl font-bold mb-1">Member Node</h2>
-            <p className="text-sm text-muted-foreground mb-6">Access restricted. Please authorize session.</p>
-            <Button className="w-full h-12 rounded-xl font-bold" onClick={() => router.push("/login")}>
+            <h2 className="text-lg font-bold mb-1">Member Node</h2>
+            <p className="text-[12px] text-muted-foreground mb-6">Access restricted. Please authorize session.</p>
+            <Button className="w-full h-10 rounded-xl font-bold text-xs" onClick={() => router.push("/login")}>
               Authorize Entry
             </Button>
           </div>
@@ -117,33 +117,33 @@ export default function ProfilePage() {
   if (!isEditing) {
     return (
       <div className="min-h-screen bg-white pb-6">
-        <header className="container mx-auto max-w-md px-4 py-4 flex items-center justify-between">
-          <button onClick={() => router.back()} className="p-1.5 hover:bg-gray-50 rounded-full transition-colors">
+        <header className="container mx-auto max-w-md px-4 py-3 flex items-center justify-between">
+          <button onClick={() => router.back()} className="p-1 hover:bg-gray-50 rounded-full">
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-lg font-bold font-headline">My Profile</h1>
-          <button className="p-1.5 hover:bg-gray-50 rounded-full transition-colors">
+          <h1 className="text-base font-bold font-headline">My Profile</h1>
+          <button className="p-1 hover:bg-gray-50 rounded-full">
             <Settings className="w-5 h-5" />
           </button>
         </header>
 
-        <main className="container mx-auto max-w-md px-4 space-y-6">
-          <section className="flex items-center gap-4">
+        <main className="container mx-auto max-w-md px-4 space-y-5">
+          <section className="flex items-center gap-3">
             <div className="relative">
-              <Avatar className="w-16 h-16 shadow-md">
+              <Avatar className="w-12 h-12 shadow-sm">
                 <AvatarImage src={user.user_metadata?.avatar_url} />
-                <AvatarFallback className="bg-gray-100 text-gray-400 text-xl font-bold">{initials}</AvatarFallback>
+                <AvatarFallback className="bg-gray-100 text-gray-400 text-base font-bold">{initials}</AvatarFallback>
               </Avatar>
-              <button className="absolute -bottom-1 -right-1 w-6 h-6 bg-black text-white rounded-full flex items-center justify-center border-2 border-white shadow-sm">
-                <Camera className="w-3 h-3" />
+              <button className="absolute -bottom-1 -right-1 w-5 h-5 bg-black text-white rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+                <Camera className="w-2.5 h-2.5" />
               </button>
             </div>
-            <div className="space-y-0.5 flex-grow">
-              <h2 className="text-xl font-bold font-headline leading-tight">{profile?.name || "Steak West User"}</h2>
-              <p className="text-muted-foreground font-medium text-xs">@{user.email?.split('@')[0]}</p>
+            <div className="space-y-0 flex-grow">
+              <h2 className="text-lg font-bold font-headline leading-none mb-0.5">{profile?.name || "Steak West User"}</h2>
+              <p className="text-muted-foreground font-medium text-[10px]">@{user.email?.split('@')[0]}</p>
               <Button 
                 variant="default" 
-                className="mt-2 h-8 px-4 rounded-lg font-bold text-xs bg-[#e63946] hover:bg-[#d62828] border-none"
+                className="mt-1.5 h-7 px-3 rounded-lg font-bold text-[10px] bg-primary hover:bg-primary/90"
                 onClick={() => setIsEditing(true)}
               >
                 Edit Profile
@@ -162,30 +162,29 @@ export default function ProfilePage() {
             <ProfileMenuItem icon={LogOut} label="Log out" onClick={handleSignOut} isDestructive />
           </section>
 
-          <section className="pt-6 border-t space-y-4">
-            <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">
+          <section className="pt-4 border-t space-y-3">
+            <div className="flex items-center justify-between text-[8px] font-black uppercase tracking-[0.2em] text-gray-400">
                <span>Identity Terminal</span>
                <span className="text-emerald-500">Guest // STATUS_ACTIVE</span>
             </div>
             
-            <div className="bg-gray-50 p-4 rounded-[1.5rem] space-y-3 border">
-              <div className="grid grid-cols-2 gap-3">
+            <div className="bg-gray-50 p-3 rounded-2xl space-y-2 border">
+              <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-0.5">
-                  <p className="text-[8px] font-black text-gray-400 uppercase">Node Sync</p>
-                  <p className="text-[10px] font-bold text-emerald-600">SECURE_ESTABLISHED</p>
+                  <p className="text-[7px] font-black text-gray-400 uppercase tracking-widest">Node Sync</p>
+                  <p className="text-[9px] font-bold text-emerald-600">SECURE_ESTABLISHED</p>
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-[8px] font-black text-gray-400 uppercase">Access Priority</p>
-                  <p className="text-[10px] font-bold text-primary">ELITE_{userRole.toUpperCase()}</p>
+                  <p className="text-[7px] font-black text-gray-400 uppercase tracking-widest">Access Priority</p>
+                  <p className="text-[9px] font-bold text-primary">ELITE_{userRole.toUpperCase()}</p>
                 </div>
               </div>
-              <div className="pt-3 border-t border-dashed">
-                <p className="text-[9px] font-bold flex items-center gap-1.5 mb-1.5">
-                   <Shield className="w-3 h-3 text-emerald-500" /> Supabase Security Protocol
+              <div className="pt-2 border-t border-dashed">
+                <p className="text-[8px] font-bold flex items-center gap-1 mb-0.5">
+                   <Shield className="w-2.5 h-2.5 text-emerald-500" /> Supabase Security Protocol
                 </p>
-                <p className="text-[9px] text-muted-foreground leading-relaxed">
-                  Identity verified via Supabase Auth. Hardware-level encryption active. 
-                  PostgreSQL transactions within the Steak West node are strictly role-enforced.
+                <p className="text-[8px] text-muted-foreground leading-tight">
+                  Identity verified via Supabase. Hardware-level encryption active. PostgreSQL transactions are strictly role-enforced.
                 </p>
               </div>
             </div>
@@ -198,80 +197,80 @@ export default function ProfilePage() {
   // EDIT MODE
   return (
     <div className="min-h-screen bg-white">
-      <header className="container mx-auto max-w-md px-4 py-4 flex items-center justify-between">
-        <button onClick={() => setIsEditing(false)} className="p-1.5 hover:bg-gray-50 rounded-full transition-colors">
+      <header className="container mx-auto max-w-md px-4 py-3 flex items-center justify-between">
+        <button onClick={() => setIsEditing(false)} className="p-1 hover:bg-gray-50 rounded-full">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-lg font-bold font-headline">Edit Profile</h1>
-        <button type="submit" form="edit-profile-form" className="p-1.5 text-emerald-500 hover:bg-emerald-50 rounded-full transition-colors">
-          <Check className="w-6 h-6" />
+        <h1 className="text-base font-bold font-headline">Edit Profile</h1>
+        <button type="submit" form="edit-profile-form" className="p-1 text-emerald-500 hover:bg-emerald-50 rounded-full">
+          <Check className="w-5 h-5" />
         </button>
       </header>
 
       <main className="container mx-auto max-w-md px-4 pb-12">
-        <div className="flex flex-col items-center mb-6 mt-2">
+        <div className="flex flex-col items-center mb-5 mt-2">
           <div className="relative">
-            <Avatar className="w-24 h-24 shadow-xl">
+            <Avatar className="w-20 h-20 shadow-lg">
               <AvatarImage src={user.user_metadata?.avatar_url} />
-              <AvatarFallback className="bg-gray-100 text-gray-400 text-2xl font-bold">{initials}</AvatarFallback>
+              <AvatarFallback className="bg-gray-100 text-gray-400 text-xl font-bold">{initials}</AvatarFallback>
             </Avatar>
-            <button className="absolute bottom-1 right-1 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center border-2 border-white shadow-lg">
-              <Camera className="w-4 h-4" />
+            <button className="absolute bottom-0 right-0 w-7 h-7 bg-black text-white rounded-full flex items-center justify-center border-2 border-white">
+              <Camera className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
-        <form id="edit-profile-form" onSubmit={handleUpdateProfile} className="space-y-5">
-          <div className="space-y-1.5">
-            <Label className="text-xs font-bold ml-1">Name</Label>
+        <form id="edit-profile-form" onSubmit={handleUpdateProfile} className="space-y-4">
+          <div className="space-y-1">
+            <Label className="text-[10px] font-bold ml-1 uppercase tracking-widest text-muted-foreground">Full Identity</Label>
             <Input 
               name="name" 
               defaultValue={profile?.name || ""} 
-              className="h-12 rounded-xl bg-gray-50 border-none px-4 font-medium text-sm"
+              className="h-10 rounded-xl bg-gray-50 border-none px-4 font-bold text-xs"
               placeholder="Your full name"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <Label className="text-xs font-bold ml-1">E mail address</Label>
+          <div className="space-y-1">
+            <Label className="text-[10px] font-bold ml-1 uppercase tracking-widest text-muted-foreground">E-Mail Address</Label>
             <div className="relative">
               <Input 
                 value={user.email || ""} 
                 disabled 
-                className="h-12 rounded-xl bg-gray-50 border-none px-4 font-medium text-sm opacity-60 cursor-not-allowed"
+                className="h-10 rounded-xl bg-gray-50 border-none px-4 font-bold text-xs opacity-60 cursor-not-allowed"
               />
-              <Badge variant="outline" className="absolute right-3 top-1/2 -translate-y-1/2 border-emerald-200 text-emerald-600 bg-emerald-50 text-[8px] rounded-full px-2">VERIFIED</Badge>
+              <Badge variant="outline" className="absolute right-2 top-1/2 -translate-y-1/2 border-emerald-200 text-emerald-600 bg-emerald-50 text-[7px] rounded-full px-1.5 h-4">VERIFIED</Badge>
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <Label className="text-xs font-bold ml-1">Password</Label>
+          <div className="space-y-1">
+            <Label className="text-[10px] font-bold ml-1 uppercase tracking-widest text-muted-foreground">Terminal Password</Label>
             <div className="relative">
               <Input 
                 type="password" 
                 value="••••••••••••" 
                 disabled 
-                className="h-12 rounded-xl bg-gray-50 border-none px-4 font-medium text-sm opacity-60"
+                className="h-10 rounded-xl bg-gray-50 border-none px-4 font-bold text-xs opacity-60"
               />
-              <Eye className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Eye className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <Label className="text-xs font-bold ml-1">Phone number</Label>
+          <div className="space-y-1">
+            <Label className="text-[10px] font-bold ml-1 uppercase tracking-widest text-muted-foreground">Secure Phone</Label>
             <div className="flex gap-2">
-              <div className="w-20 h-12 bg-gray-50 rounded-xl flex items-center justify-center gap-1.5 px-2 border-none">
-                 <img src="https://flagcdn.com/w20/ke.png" width="16" alt="Kenya" />
-                 <span className="text-xs font-bold">+254</span>
+              <div className="w-16 h-10 bg-gray-50 rounded-xl flex items-center justify-center gap-1 px-2">
+                 <img src="https://flagcdn.com/w20/ke.png" width="14" alt="Kenya" />
+                 <span className="text-[10px] font-bold">+254</span>
               </div>
               <Input 
                 placeholder="700 000 000" 
-                className="h-12 rounded-xl bg-gray-50 border-none px-4 font-medium text-sm flex-grow"
+                className="h-10 rounded-xl bg-gray-50 border-none px-4 font-bold text-xs flex-grow"
               />
             </div>
           </div>
 
-          <Button type="submit" className="w-full h-12 rounded-xl font-bold text-sm mt-2 shadow-lg" disabled={saving}>
+          <Button type="submit" className="w-full h-11 rounded-xl font-bold text-xs mt-2 shadow-lg" disabled={saving}>
             {saving ? "Synchronizing..." : "Save Identity Changes"}
           </Button>
         </form>
@@ -294,15 +293,15 @@ function ProfileMenuItem({
   return (
     <button 
       onClick={onClick}
-      className="w-full flex items-center justify-between p-3.5 hover:bg-gray-50 transition-colors group rounded-xl"
+      className="w-full flex items-center justify-between p-2.5 hover:bg-gray-50 transition-colors group rounded-lg"
     >
-      <div className="flex items-center gap-4">
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${isDestructive ? 'bg-red-50 text-[#e63946]' : 'bg-gray-50 text-gray-500 group-hover:bg-primary/5 group-hover:text-primary'}`}>
-          <Icon className="w-5 h-5" />
+      <div className="flex items-center gap-3">
+        <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isDestructive ? 'bg-red-50 text-primary' : 'bg-gray-50 text-gray-400 group-hover:bg-primary/5 group-hover:text-primary'}`}>
+          <Icon className="w-4 h-4" />
         </div>
-        <span className={`text-sm font-bold ${isDestructive ? 'text-[#e63946]' : 'text-gray-700'}`}>{label}</span>
+        <span className={`text-[13px] font-bold ${isDestructive ? 'text-primary' : 'text-gray-600'}`}>{label}</span>
       </div>
-      <ChevronRight className={`w-4 h-4 ${isDestructive ? 'text-red-200' : 'text-gray-300'} group-hover:translate-x-1 transition-transform`} />
+      <ChevronRight className={`w-3.5 h-3.5 ${isDestructive ? 'text-red-200' : 'text-gray-300'} group-hover:translate-x-1 transition-transform`} />
     </button>
   );
 }
