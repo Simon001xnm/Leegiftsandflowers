@@ -19,10 +19,8 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
   const { id } = use(params);
   const restaurant = MOCK_RESTAURANTS.find(r => r.id === id);
   
-  // High-density menu items for THIS vendor
   const vendorItems = MOCK_MENU.filter(m => m.restaurantId === id);
   
-  // Related items from the same category across the entire marketplace
   const relatedItems = MOCK_MENU.filter(m => 
     m.restaurantId !== id && 
     (m.category === restaurant?.category || restaurant?.category === 'Raw Meat')
@@ -62,7 +60,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
   const deliveryFee = restaurant?.deliveryFee || 100;
   const total = subtotal + (subtotal > 0 ? deliveryFee : 0);
 
-  // Group vendor items by category
   const vendorCategories = Array.from(new Set(vendorItems.map(item => item.category || 'Mains')));
 
   if (!restaurant) return <div className="p-20 text-center font-headline text-2xl">Vendor not found</div>;
@@ -70,18 +67,18 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <main className="flex-grow">
-        {/* Marketplace Header */}
+        {/* Header Section */}
         <div className="relative h-[25vh] lg:h-[35vh] overflow-hidden">
           <Image src={restaurant.imageUrl} alt={restaurant.name} fill className="object-cover" priority />
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute bottom-0 left-0 w-full p-6 lg:p-10">
             <div className="container mx-auto">
-              <Link href="/" className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-3 text-[14px] font-black uppercase tracking-widest group">
+              <Link href="/restaurants" className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-3 text-[14px] font-black uppercase tracking-widest group">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                Marketplace
+                Pick it up
               </Link>
               <div className="max-w-4xl">
-                <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest rounded-none">{restaurant.category}</Badge>
+                <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest">{restaurant.category}</Badge>
                 <h1 className="text-3xl lg:text-6xl font-black font-headline text-white mb-2 uppercase tracking-tighter">{restaurant.name}</h1>
                 <div className="flex flex-wrap items-center gap-4 text-white/90 text-[14px] font-bold uppercase tracking-widest">
                   <div className="flex items-center gap-2"><Star className="w-4 h-4 text-accent fill-accent" /> {restaurant.rating}</div>
@@ -98,13 +95,12 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
         <div className="container mx-auto px-4 py-8 md:py-12">
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
             
-            {/* Menu Sections - High Density Seamless Grid */}
             <div className="lg:col-span-8 space-y-16">
               <Tabs defaultValue={vendorCategories[0]} className="w-full">
                 <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
-                  <TabsList className="bg-gray-100 p-1.5 h-11 rounded-none">
+                  <TabsList className="bg-gray-100 p-1.5 h-11">
                     {vendorCategories.map(cat => (
-                      <TabsTrigger key={cat} value={cat} className="rounded-none px-5 font-black text-[14px] uppercase tracking-widest">{cat}</TabsTrigger>
+                      <TabsTrigger key={cat} value={cat} className="px-5 font-black text-[14px] uppercase tracking-widest">{cat}</TabsTrigger>
                     ))}
                   </TabsList>
                 </div>
@@ -120,7 +116,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                 ))}
               </Tabs>
 
-              {/* Related Marketplace Products Section */}
               {relatedItems.length > 0 && (
                 <section className="pt-12 space-y-8">
                   <div className="flex items-center justify-between">
@@ -136,15 +131,15 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
               )}
             </div>
 
-            {/* Sticky Basket - High Density POS Style */}
+            {/* Sticky Basket */}
             <div className="lg:col-span-4 sticky top-20 lg:top-24 space-y-6">
-              <Card className="border shadow-2xl rounded-none overflow-hidden bg-white">
+              <Card className="border shadow-2xl bg-white">
                 <CardHeader className="bg-gray-50 py-5 px-8 border-b">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3 text-black">
                       <ShoppingCart className="w-5 h-5" /> Your Basket
                     </CardTitle>
-                    {cart.length > 0 && <Badge className="rounded-none bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
+                    {cart.length > 0 && <Badge className="bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
                   </div>
                 </CardHeader>
                 
@@ -165,7 +160,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                             </Button>
                           </div>
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4 bg-gray-100 rounded-none px-3 py-1.5">
+                            <div className="flex items-center gap-4 bg-gray-100 px-3 py-1.5">
                               <button onClick={() => removeFromCart(cartItem.item.id)} className="text-black hover:scale-110"><Minus className="w-4 h-4" /></button>
                               <span className="text-[14px] font-black min-w-[24px] text-center">{cartItem.quantity}</span>
                               <button onClick={() => addToCart(cartItem.item)} className="text-black hover:scale-110"><Plus className="w-4 h-4" /></button>
@@ -200,7 +195,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
                 <CardFooter className="p-6 pt-0">
                   <Link href={`/checkout/${restaurant.id}`} className="w-full">
-                    <Button className="w-full h-14 rounded-none text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
+                    <Button className="w-full h-14 text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
                       Checkout Order <ArrowLeft className="w-4 h-4 rotate-180 ml-3" />
                     </Button>
                   </Link>
@@ -214,11 +209,10 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
   );
 }
 
-// Specialized High-Density Card for Marketplace Scaling
 function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAdd: () => void; isSmall?: boolean }) {
   return (
     <Card className={cn(
-      "overflow-hidden border-r border-b shadow-none hover:z-10 hover:animate-heartbeat transition-all rounded-none",
+      "overflow-hidden border-r border-b shadow-none hover-heartbeat bg-white",
       isSmall && "flex-col"
     )}>
       <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-36 md:h-44")}>
@@ -231,8 +225,8 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-2">
               <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
-              {/* Updated Price Button with Delivery Truck Icon */}
-              <Button size="icon" className="w-10 h-10 rounded-none bg-black hover:bg-black/90 text-white" onClick={onAdd}>
+              {/* Delivery Truck Price Button */}
+              <Button size="icon" className="w-10 h-10 bg-black hover:bg-black/90 text-white" onClick={onAdd}>
                 <Truck className="w-5 h-5" />
               </Button>
             </div>
@@ -252,14 +246,14 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
           </div>
 
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-             <div className="bg-white/90 rounded-none p-2 shadow-2xl">
+             <div className="bg-white/90 p-2 shadow-2xl">
                 <Truck className="w-6 h-6 text-black" />
              </div>
           </div>
 
           {isSmall && (
              <div className="absolute bottom-2 left-2 z-10">
-                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1 rounded-none">
+                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1">
                    KES {item.price.toLocaleString()}
                 </div>
              </div>
@@ -269,7 +263,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         {isSmall && (
           <div className="p-4 space-y-2 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <Button className="w-full h-10 rounded-none bg-black text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2" onClick={onAdd}>
+            <Button className="w-full h-10 bg-black text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2" onClick={onAdd}>
               <Truck className="w-4 h-4" /> Order Now
             </Button>
           </div>

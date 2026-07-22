@@ -77,7 +77,7 @@ export default function Home() {
       <main className="flex-grow p-0 space-y-0 pb-4">
         
         {/* Responsive Hero Section */}
-        <div className="relative min-h-[500px] md:h-[650px] w-full rounded-none overflow-hidden bg-black shadow-none group flex items-center">
+        <div className="relative min-h-[500px] md:h-[650px] w-full overflow-hidden bg-black flex items-center">
           <video 
             autoPlay 
             muted 
@@ -93,10 +93,11 @@ export default function Home() {
           <div className="relative z-10 w-full px-6 sm:px-10 md:px-16 py-12">
             <div className="flex flex-col space-y-8 max-w-3xl">
               <div className="flex items-center gap-6">
-                <ButcheryLogo className="w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44" />
+                {/* Large Logo visibility */}
+                <ButcheryLogo className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48" />
                 <div className="flex flex-col">
                   <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">Steak West</h2>
-                  <Badge className="bg-primary text-white border-none px-5 py-2 text-sm md:text-lg font-black uppercase tracking-[0.2em] w-fit rounded-none">
+                  <Badge className="bg-primary text-white border-none px-5 py-2 text-sm md:text-lg font-black uppercase tracking-[0.2em] w-fit">
                     Super ya Nyama
                   </Badge>
                 </div>
@@ -106,15 +107,15 @@ export default function Home() {
                 Premium Cuts.<br />
                 <span className="text-primary italic">Fast. Fresh.</span><br />
                 <span className="text-white/90 text-sm sm:text-lg md:text-2xl tracking-normal font-medium normal-case block mt-6 max-w-xl">
-                  Nairobi's Best Butchery & Grills Delivered to your doorstep in 20 Mins.
+                  Nairobi's Best Butchery & Grills Delivered in 20 Mins.
                 </span>
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-5 pt-4 w-full sm:w-auto">
-                <Button className="h-16 md:h-20 px-12 md:px-16 rounded-none bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[16px] uppercase tracking-widest w-full sm:w-auto">
+                <Button className="h-16 md:h-20 px-12 md:px-16 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[16px] uppercase tracking-widest w-full sm:w-auto">
                   Pick it up
                 </Button>
-                <Button variant="outline" className="h-16 md:h-20 px-12 md:px-16 rounded-none border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[16px] uppercase tracking-widest bg-transparent w-full sm:w-auto">
+                <Button variant="outline" className="h-16 md:h-20 px-12 md:px-16 border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[16px] uppercase tracking-widest bg-transparent w-full sm:w-auto">
                   Browse Deals
                 </Button>
               </div>
@@ -125,13 +126,13 @@ export default function Home() {
         {/* Quick Categories */}
         <section className="space-y-6 p-6">
           <h2 className="text-[14px] font-black text-black uppercase tracking-tighter">Shop Categories</h2>
-          <div className="flex gap-4 md:gap-8 overflow-x-auto no-scrollbar pb-4">
+          <div className="flex gap-0 overflow-x-auto no-scrollbar pb-4 border-l border-t border-b">
             {CATEGORIES.map((cat) => (
-              <Link key={cat.label} href={cat.href} className="flex flex-col items-center gap-4 group shrink-0 w-24 md:w-32">
-                <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-50 rounded-none border flex items-center justify-center transition-all group-hover:bg-primary/5 group-hover:border-primary/20 group-hover:animate-heartbeat">
-                  <cat.icon className="w-10 h-10 md:w-14 md:h-14 text-black group-hover:text-primary transition-colors" />
+              <Link key={cat.label} href={cat.href} className="flex flex-col items-center gap-4 group shrink-0 w-32 border-r p-6 bg-white hover-heartbeat">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-50 flex items-center justify-center transition-all group-hover:bg-primary/5">
+                  <cat.icon className="w-8 h-8 md:w-10 md:h-10 text-black group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-[14px] font-black text-gray-500 uppercase tracking-widest text-center">{cat.label}</span>
+                <span className="text-[12px] font-black text-gray-500 uppercase tracking-widest text-center">{cat.label}</span>
               </Link>
             ))}
           </div>
@@ -141,12 +142,12 @@ export default function Home() {
         <section className="bg-primary/5 p-0 border-y border-primary/10">
           <div className="flex justify-between items-end p-6 bg-white border-b">
             <div className="space-y-2">
-              <Badge className="bg-primary text-white font-black uppercase tracking-widest text-[14px] px-4 py-1 rounded-none">Top Sellers</Badge>
+              <Badge className="bg-primary text-white font-black uppercase tracking-widest text-[14px] px-4 py-1">Top Sellers</Badge>
               <h2 className="text-2xl md:text-5xl font-black text-black uppercase tracking-tighter leading-none">Nairobi Originals</h2>
             </div>
             <Link href="/restaurants" className="text-[14px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-l">
             {allDelicacies.slice(0, 10).map((item, idx) => (
               <ProductCard key={item.id} item={item} idx={idx} />
             ))}
@@ -158,13 +159,13 @@ export default function Home() {
             <h2 className="text-2xl md:text-5xl font-black text-black uppercase tracking-tighter leading-none mb-6">Fresh Market</h2>
             <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
               {FILTER_PILLS.map((pill) => (
-                <Button key={pill} variant="outline" className="rounded-none bg-gray-50 border-none text-[14px] font-black px-8 h-12 shrink-0 uppercase tracking-widest">
+                <Button key={pill} variant="outline" className="bg-gray-50 border-none text-[14px] font-black px-8 h-12 shrink-0 uppercase tracking-widest">
                   {pill}
                 </Button>
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-t">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-t border-l">
             {allMeatProducts.concat(allDelicacies.slice(10)).map((item, idx) => (
               <ProductCard key={item.id} item={item} idx={idx} />
             ))}
@@ -177,7 +178,8 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-16 mb-16">
               <div className="col-span-2 md:col-span-1 space-y-8">
                 <div className="flex items-center gap-6">
-                  <ButcheryLogo className="w-32 h-32" />
+                  {/* Footer logo increased visibility */}
+                  <ButcheryLogo className="w-36 h-36" />
                   <span className="font-headline text-3xl md:text-4xl font-black tracking-tighter text-black uppercase">Steak West</span>
                 </div>
                 <p className="text-[14px] font-bold text-gray-400 uppercase leading-relaxed max-w-[240px]">
@@ -185,7 +187,7 @@ export default function Home() {
                 </p>
                 <div className="flex gap-4 pt-4">
                   {[Facebook, Twitter, Instagram, Youtube, Linkedin].map((Icon, i) => (
-                    <Link key={i} href="#" className="w-12 h-12 bg-gray-50 rounded-none flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                    <Link key={i} href="#" className="w-12 h-12 bg-gray-50 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                       <Icon className="w-6 h-6" />
                     </Link>
                   ))}
@@ -214,8 +216,8 @@ export default function Home() {
               </div>
 
               <div className="col-span-2 md:col-span-1 space-y-4 flex md:flex-col items-center md:items-end justify-center gap-4">
-                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase rounded-none">App Store</Button>
-                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase rounded-none">Play Store</Button>
+                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase">App Store</Button>
+                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase">Play Store</Button>
               </div>
             </div>
 
@@ -223,7 +225,7 @@ export default function Home() {
               <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                 <div className="flex flex-wrap items-center justify-center gap-6">
                   {PAYMENT_METHODS.map((payment) => (
-                    <div key={payment.name} className="flex items-center gap-3 bg-gray-50 px-5 py-3 rounded-none border border-gray-100">
+                    <div key={payment.name} className="flex items-center gap-3 bg-gray-50 px-5 py-3 border border-gray-100">
                       {payment.color ? (
                         <div className={cn("w-3 h-3 rounded-full", payment.color)} />
                       ) : (
@@ -256,9 +258,9 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
   return (
     <Link 
       href={`/restaurants/${item.restaurantId}`}
-      className="group flex flex-col space-y-0 border-r border-b last:border-r-0 hover:z-10 hover:animate-heartbeat transition-all"
+      className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white"
     >
-      <div className="relative aspect-square rounded-none overflow-hidden bg-gray-50 border-none group-hover:border-primary/20 transition-all">
+      <div className="relative aspect-square overflow-hidden bg-gray-50">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
@@ -277,26 +279,26 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
         </div>
 
         <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
-          <Badge className="bg-white/95 text-black border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest rounded-none">
+          <Badge className="bg-white/95 text-black border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest">
             {idx % 3 === 0 ? "Premium" : "Fresh"}
           </Badge>
           {item.isPopular && (
-            <Badge className="bg-primary text-white border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest rounded-none">
+            <Badge className="bg-primary text-white border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest">
               Hot
             </Badge>
           )}
         </div>
 
-        {/* Updated Hover Overlay with Delivery Truck Icon */}
+        {/* Hover Overlay with Truck Icon */}
         <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
-          <div className="bg-white rounded-none px-6 py-3 flex items-center gap-3 shadow-xl">
+          <div className="bg-white px-6 py-3 flex items-center gap-3 shadow-xl">
             <Truck className="w-6 h-6 text-black" />
-            <span className="text-[14px] font-black text-black uppercase tracking-widest">Express Delivery</span>
+            <span className="text-[14px] font-black text-black uppercase tracking-widest">Express</span>
           </div>
         </div>
 
         <div className="absolute bottom-4 left-4 z-10">
-           <div className="bg-black/90 text-white text-lg sm:text-xl font-black px-4 py-2 rounded-none uppercase tracking-tighter">
+           <div className="bg-black/90 text-white text-lg sm:text-xl font-black px-4 py-2 uppercase tracking-tighter">
               KES {item.price.toLocaleString()}
            </div>
         </div>
