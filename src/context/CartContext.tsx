@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
 import { MenuItem } from '@/lib/food-data';
 
 interface CartItem {
@@ -22,6 +22,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const savedCart = localStorage.getItem('steak_west_cart');
@@ -32,11 +33,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
         console.error('Failed to parse cart', e);
       }
     }
+    setIsInitialized(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('steak_west_cart', JSON.stringify(cart));
-  }, [cart]);
+    if (isInitialized) {
+      localStorage.setItem('steak_west_cart', JSON.stringify(cart));
+    }
+  }, [cart, isInitialized]);
 
   const addToCart = (item: MenuItem) => {
     setCart((prev) => {
@@ -68,21 +72,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = () => setCart([]);
 
-  const subtotal = cart.reduce((acc, curr) => acc + curr.item.price * curr.quantity, 0);
-  const itemCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+  const subtotal = useMemo(() => cart.reduce((acc, curr) => acc + curr.item.price * curr.quantity, 0), [cart]);
+  const itemCount = useMemo(() => cart.reduce((acc, curr) => acc + curr.quantity, 0), [cart]);
+
+  const value = useMemo(() => ({
+    cart,
+    addToCart,
+    removeFromCart,
+    clearItem,
+    clearCart,
+    subtotal,
+    itemCount,
+  }), [cart, subtotal, itemCount]);
 
   return (
-    <CartContext.Provider
-      value={{
-        cart,
-        addToCart,
-        removeFromCart,
-        clearItem,
-        clearCart,
-        subtotal,
-        itemCount,
-      }}
-    >
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

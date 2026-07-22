@@ -36,14 +36,6 @@ export interface Order {
   deliveryAddress: string;
 }
 
-const MEAT_IMAGES = {
-  choma: "/BEEF%20CHOMA.jpg",
-  raw: "/BEEF%20TAKEAWAY.jpg",
-  mutura: "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?q=80&w=800&h=600&auto=format&fit=crop",
-  supu: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=800&h=600&auto=format&fit=crop",
-  grocery: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&h=600&auto=format&fit=crop"
-};
-
 export const MOCK_RESTAURANTS: Restaurant[] = [
   {
     id: 'r1',
@@ -100,17 +92,17 @@ export const MOCK_MENU: MenuItem[] = [
   { id: 'p14', restaurantId: 'r1', name: 'GOAT DYFRY 1KG', price: 1400, description: 'Spiced dry-fried goat.', imageUrl: '/BEEF%20DRY%20FRY.jpg', category: 'Cooked' },
   { id: 'p15', restaurantId: 'r1', name: 'GOAT FRY 1KG', price: 1400, description: 'Classic fried goat meat.', imageUrl: '/BEEF%20DRY%20FRY.jpg', category: 'Cooked' },
   { id: 'p16', restaurantId: 'r1', name: 'GOAT TAKEAWAY 1KG', price: 1100, description: 'Fresh goat meat for takeaway.', imageUrl: '/BEEF%20TAKEAWAY.jpg', category: 'Raw Meat' },
-  { id: 'p17', restaurantId: 'r1', name: 'GREENS KIENYEJI', price: 150, description: 'Traditional Kenyan greens.', imageUrl: MEAT_IMAGES.grocery, category: 'Sides' },
+  { id: 'p17', restaurantId: 'r1', name: 'GREENS KIENYEJI', price: 150, description: 'Traditional Kenyan greens.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
   { id: 'p18', restaurantId: 'r1', name: 'LIVER 1KG CHOMA', price: 1400, description: 'Expertly grilled liver.', imageUrl: '/BEEF%20CHOMA.jpg', category: 'Nyama Choma' },
   { id: 'p19', restaurantId: 'r1', name: 'LIVER 1KG DRY FRY', price: 1400, description: 'Savory dry-fried liver.', imageUrl: '/BEEF%20DRY%20FRY.jpg', category: 'Cooked' },
   { id: 'p20', restaurantId: 'r1', name: 'LIVER 1KG TAKE AWAY', price: 1100, description: 'Fresh liver for takeaway.', imageUrl: '/BEEF%20TAKEAWAY.jpg', category: 'Raw Meat' },
   { id: 'p21', restaurantId: 'r1', name: 'LIVER 1KG WET FRY', price: 1400, description: 'Delicious wet-fried liver.', imageUrl: '/BEEF%20DRY%20FRY.jpg', category: 'Cooked' },
   { id: 'p22', restaurantId: 'r1', name: 'MGUU GOAT', price: 50, description: 'Individual goat leg piece.', imageUrl: '/MGUU%20COW.jpg', category: 'Delicacies' },
-  { id: 'p23', restaurantId: 'r1', name: 'MUKIMO', price: 150, description: 'Traditional mashed delicacy.', imageUrl: MEAT_IMAGES.grocery, category: 'Sides' },
+  { id: 'p23', restaurantId: 'r1', name: 'MUKIMO', price: 150, description: 'Traditional mashed delicacy.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
   { id: 'p24', restaurantId: 'r1', name: 'MUTURA', price: 100, description: 'Authentic Nairobi sausage.', imageUrl: '/BEEF%20CHOMA.jpg', category: 'Delicacies', isPopular: true },
   { id: 'p25', restaurantId: 'r1', name: 'SOUP', price: 50, description: 'Rich, flavorful bone broth.', imageUrl: '/beef%20chemsha%20SMB.jpg', category: 'Delicacies' },
-  { id: 'p26', restaurantId: 'r1', name: 'SPINACH', price: 50, description: 'Freshly sautéed spinach.', imageUrl: MEAT_IMAGES.grocery, category: 'Sides' },
-  { id: 'p27', restaurantId: 'r1', name: 'UGALI', price: 50, description: 'A Kenyan staple side dish.', imageUrl: MEAT_IMAGES.grocery, category: 'Sides' }
+  { id: 'p26', restaurantId: 'r1', name: 'SPINACH', price: 50, description: 'Freshly sautéed spinach.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
+  { id: 'p27', restaurantId: 'r1', name: 'UGALI', price: 50, description: 'A Kenyan staple side dish.', imageUrl: '/CHIPS.jpg', category: 'Sides' }
 ];
 
 export const MOCK_ORDERS: Order[] = [
