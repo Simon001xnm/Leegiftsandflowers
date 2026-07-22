@@ -121,9 +121,9 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
             <div className="lg:col-span-8 space-y-16">
               <Tabs defaultValue={vendorCategories[0]} className="w-full">
                 <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
-                  <TabsList className="bg-gray-100 p-1.5 h-11 rounded-xl">
+                  <TabsList className="bg-gray-100 p-1.5 h-11 rounded-none">
                     {vendorCategories.map(cat => (
-                      <TabsTrigger key={cat} value={cat} className="rounded-lg px-5 font-black text-[14px] uppercase tracking-widest">{cat}</TabsTrigger>
+                      <TabsTrigger key={cat} value={cat} className="rounded-none px-5 font-black text-[14px] uppercase tracking-widest">{cat}</TabsTrigger>
                     ))}
                   </TabsList>
                 </div>
@@ -157,13 +157,13 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
             {/* Sticky Basket - High Density POS Style */}
             <div className="lg:col-span-4 sticky top-20 lg:top-24 space-y-6">
-              <Card className="border shadow-2xl rounded-[2rem] overflow-hidden bg-white">
+              <Card className="border shadow-2xl rounded-none overflow-hidden bg-white">
                 <CardHeader className="bg-gray-50 py-5 px-8 border-b">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3 text-black">
                       <ShoppingCart className="w-5 h-5" /> Your Basket
                     </CardTitle>
-                    {cart.length > 0 && <Badge className="rounded-full bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
+                    {cart.length > 0 && <Badge className="rounded-none bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
                   </div>
                 </CardHeader>
                 
@@ -184,7 +184,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                             </Button>
                           </div>
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4 bg-gray-100 rounded-xl px-3 py-1.5">
+                            <div className="flex items-center gap-4 bg-gray-100 rounded-none px-3 py-1.5">
                               <button onClick={() => removeFromCart(cartItem.item.id)} className="text-black hover:scale-110"><Minus className="w-4 h-4" /></button>
                               <span className="text-[14px] font-black min-w-[24px] text-center">{cartItem.quantity}</span>
                               <button onClick={() => addToCart(cartItem.item)} className="text-black hover:scale-110"><Plus className="w-4 h-4" /></button>
@@ -219,7 +219,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
                 <CardFooter className="p-6 pt-0">
                   <Link href={`/checkout/${restaurant.id}`} className="w-full">
-                    <Button className="w-full h-14 rounded-2xl text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
+                    <Button className="w-full h-14 rounded-none text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
                       Checkout Order <ArrowLeft className="w-4 h-4 rotate-180 ml-3" />
                     </Button>
                   </Link>
@@ -237,7 +237,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAdd: () => void; isSmall?: boolean }) {
   return (
     <Card className={cn(
-      "overflow-hidden border shadow-sm hover:shadow-xl transition-all group rounded-2xl",
+      "overflow-hidden border shadow-sm hover:shadow-xl transition-all group rounded-none",
       isSmall && "flex-col"
     )}>
       <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-36 md:h-44")}>
@@ -250,7 +250,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-2">
               <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
-              <Button size="icon" className="w-10 h-10 rounded-xl bg-black hover:bg-black/90 text-white" onClick={onAdd}>
+              <Button size="icon" className="w-10 h-10 rounded-none bg-black hover:bg-black/90 text-white" onClick={onAdd}>
                 <Plus className="w-5 h-5" />
               </Button>
             </div>
@@ -271,14 +271,14 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
           </div>
 
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-             <div className="bg-white/90 rounded-full p-2 shadow-2xl">
+             <div className="bg-white/90 rounded-none p-2 shadow-2xl">
                 <WalkingIcon className="w-5 h-5 text-black" />
              </div>
           </div>
 
           {isSmall && (
              <div className="absolute bottom-2 left-2 z-10">
-                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1 rounded-lg">
+                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1 rounded-none">
                    KES {item.price.toLocaleString()}
                 </div>
              </div>
@@ -288,7 +288,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         {isSmall && (
           <div className="p-4 space-y-2">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <Button className="w-full h-10 rounded-xl bg-black text-[14px] font-black uppercase tracking-widest" onClick={onAdd}>
+            <Button className="w-full h-10 rounded-none bg-black text-[14px] font-black uppercase tracking-widest" onClick={onAdd}>
               Add to Basket
             </Button>
           </div>

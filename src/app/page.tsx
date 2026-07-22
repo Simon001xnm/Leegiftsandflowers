@@ -94,7 +94,7 @@ export default function Home() {
       <main className="flex-grow p-2 sm:p-4 space-y-8 pb-4">
         
         {/* Responsive Hero Section */}
-        <div className="relative min-h-[500px] md:h-[600px] w-full rounded-[2rem] md:rounded-[3.5rem] overflow-hidden bg-black shadow-2xl group flex items-center">
+        <div className="relative min-h-[450px] md:h-[600px] w-full rounded-none overflow-hidden bg-black shadow-2xl group flex items-center">
           <video 
             autoPlay 
             muted 
@@ -122,16 +122,16 @@ export default function Home() {
               <h1 className="text-3xl sm:text-4xl md:text-6xl font-black font-headline text-white tracking-tighter uppercase leading-[1.05]">
                 Premium Cuts.<br />
                 <span className="text-primary italic">Fast. Fresh.</span><br />
-                <span className="text-white/80 text-base sm:text-lg md:text-xl tracking-normal font-medium normal-case block mt-4">
+                <span className="text-white/80 text-sm sm:text-base md:text-xl tracking-normal font-medium normal-case block mt-4">
                   Nairobi's Best Delivered in 20 Mins.
                 </span>
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-6 w-full sm:w-auto">
-                <Button className="h-14 sm:h-16 px-10 sm:px-12 rounded-2xl bg-primary text-white hover:bg-primary/90 font-black shadow-lg transition-all active:scale-95 text-sm sm:text-base uppercase tracking-widest w-full sm:w-auto">
+                <Button className="h-14 sm:h-16 px-10 sm:px-12 rounded-none bg-primary text-white hover:bg-primary/90 font-black shadow-lg transition-all active:scale-95 text-sm sm:text-base uppercase tracking-widest w-full sm:w-auto">
                   Pick it up
                 </Button>
-                <Button variant="outline" className="h-14 sm:h-16 px-10 sm:px-12 rounded-2xl border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-sm sm:text-base uppercase tracking-widest bg-transparent w-full sm:w-auto">
+                <Button variant="outline" className="h-14 sm:h-16 px-10 sm:px-12 rounded-none border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-sm sm:text-base uppercase tracking-widest bg-transparent w-full sm:w-auto">
                   Browse Deals
                 </Button>
               </div>
@@ -141,24 +141,24 @@ export default function Home() {
 
         {/* Quick Categories */}
         <section className="space-y-6">
-          <h2 className="text-base font-black text-black uppercase tracking-tighter px-0.5">Shop Categories</h2>
+          <h2 className="text-sm font-black text-black uppercase tracking-tighter px-0.5">Shop Categories</h2>
           <div className="flex gap-4 md:gap-8 overflow-x-auto no-scrollbar pb-4">
             {CATEGORIES.map((cat) => (
               <Link key={cat.label} href={cat.href} className="flex flex-col items-center gap-4 group shrink-0 w-24 md:w-32">
-                <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-50 rounded-[2rem] border flex items-center justify-center transition-all group-hover:bg-primary/5 group-hover:border-primary/20">
+                <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-50 rounded-none border flex items-center justify-center transition-all group-hover:bg-primary/5 group-hover:border-primary/20">
                   <cat.icon className="w-10 h-10 md:w-14 md:h-14 text-black group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-sm font-black text-gray-500 uppercase tracking-widest text-center">{cat.label}</span>
+                <span className="text-xs font-black text-gray-500 uppercase tracking-widest text-center">{cat.label}</span>
               </Link>
             ))}
           </div>
         </section>
 
         {/* Featured Sections */}
-        <section className="space-y-6 bg-primary/5 -mx-4 p-6 md:p-12 rounded-[3.5rem] border-y border-primary/10">
+        <section className="space-y-6 bg-primary/5 -mx-4 p-6 md:p-12 rounded-none border-y border-primary/10">
           <div className="flex justify-between items-end">
             <div className="space-y-3">
-              <Badge className="bg-primary text-white font-black uppercase tracking-widest text-sm px-4 py-1">Top Sellers</Badge>
+              <Badge className="bg-primary text-white font-black uppercase tracking-widest text-xs px-4 py-1">Top Sellers</Badge>
               <h2 className="text-2xl md:text-5xl font-black text-black uppercase tracking-tighter leading-none">Nairobi Originals</h2>
             </div>
             <Link href="/restaurants" className="text-sm font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
@@ -175,7 +175,7 @@ export default function Home() {
             <h2 className="text-2xl md:text-5xl font-black text-black uppercase tracking-tighter leading-none px-0.5">Fresh Market</h2>
             <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
               {FILTER_PILLS.map((pill) => (
-                <Button key={pill} variant="outline" className="rounded-full bg-gray-50 border-none text-sm font-black px-8 h-12 shrink-0 uppercase tracking-widest">
+                <Button key={pill} variant="outline" className="rounded-none bg-gray-50 border-none text-sm font-black px-8 h-12 shrink-0 uppercase tracking-widest">
                   {pill}
                 </Button>
               ))}
@@ -231,8 +231,8 @@ export default function Home() {
               </div>
 
               <div className="col-span-2 md:col-span-1 space-y-4 flex md:flex-col items-center md:items-end justify-center gap-4">
-                 <Button className="h-14 w-[160px] bg-black text-white text-sm font-black uppercase rounded-2xl">App Store</Button>
-                 <Button className="h-14 w-[160px] bg-black text-white text-sm font-black uppercase rounded-2xl">Play Store</Button>
+                 <Button className="h-14 w-[160px] bg-black text-white text-sm font-black uppercase rounded-none">App Store</Button>
+                 <Button className="h-14 w-[160px] bg-black text-white text-sm font-black uppercase rounded-none">Play Store</Button>
               </div>
             </div>
 
@@ -240,7 +240,7 @@ export default function Home() {
               <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                 <div className="flex flex-wrap items-center justify-center gap-6">
                   {PAYMENT_METHODS.map((payment) => (
-                    <div key={payment.name} className="flex items-center gap-3 bg-gray-50 px-5 py-3 rounded-2xl border border-gray-100">
+                    <div key={payment.name} className="flex items-center gap-3 bg-gray-50 px-5 py-3 rounded-none border border-gray-100">
                       {payment.color ? (
                         <div className={cn("w-3 h-3 rounded-full", payment.color)} />
                       ) : (
@@ -275,7 +275,7 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
       href={`/restaurants/${item.restaurantId}`}
       className="group flex flex-col space-y-4"
     >
-      <div className="relative aspect-square rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-gray-50 border shadow-sm group-hover:border-primary/20 transition-all">
+      <div className="relative aspect-square rounded-none overflow-hidden bg-gray-50 border shadow-sm group-hover:border-primary/20 transition-all">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
@@ -305,24 +305,24 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
         </div>
 
         <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
-          <div className="bg-white rounded-full px-6 py-3 flex items-center gap-3 shadow-xl">
+          <div className="bg-white rounded-none px-6 py-3 flex items-center gap-3 shadow-xl">
             <WalkingIcon className="w-5 h-5 text-black" />
             <span className="text-sm font-black text-black uppercase tracking-widest">Pick it up</span>
           </div>
         </div>
 
         <div className="absolute bottom-4 left-4 z-10">
-           <div className="bg-black/90 text-white text-base sm:text-xl font-black px-4 py-2 rounded-2xl uppercase tracking-tighter">
+           <div className="bg-black/90 text-white text-sm sm:text-xl font-black px-4 py-2 rounded-none uppercase tracking-tighter">
               KES {item.price.toLocaleString()}
            </div>
         </div>
       </div>
 
       <div className="px-2 space-y-1.5">
-        <h3 className="font-black text-base sm:text-xl text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
+        <h3 className="font-black text-sm sm:text-xl text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
           {item.name}
         </h3>
-        <div className="flex items-center gap-3 text-sm sm:text-base text-gray-400 font-bold uppercase tracking-widest">
+        <div className="flex items-center gap-3 text-xs sm:text-base text-gray-400 font-bold uppercase tracking-widest">
           <span className="flex items-center gap-1.5 text-emerald-600"><TrendingUp className="w-4 h-4" /> Trending</span>
           <span>•</span>
           <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> 20m</span>

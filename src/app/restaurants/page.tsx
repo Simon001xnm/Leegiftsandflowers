@@ -45,7 +45,7 @@ function DiscoveryContent() {
         <div className="relative flex-grow">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input 
-            className="pl-12 h-14 rounded-2xl border-2 border-muted text-[14px] font-bold focus-visible:ring-primary/20" 
+            className="pl-12 h-14 rounded-none border-2 border-muted text-[14px] font-bold focus-visible:ring-primary/20" 
             placeholder="Search for Nyama Choma, Mutura, or Beef..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -54,7 +54,7 @@ function DiscoveryContent() {
         <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
           <Button 
             variant={category === 'All' ? 'default' : 'outline'} 
-            className="h-14 rounded-2xl px-6 shrink-0 font-black text-[14px] uppercase tracking-widest"
+            className="h-14 rounded-none px-6 shrink-0 font-black text-[14px] uppercase tracking-widest"
             onClick={() => setCategory('All')}
           >
             All
@@ -63,7 +63,7 @@ function DiscoveryContent() {
             <Button 
               key={cat}
               variant={category === cat ? 'default' : 'outline'} 
-              className="h-14 rounded-2xl px-6 shrink-0 font-black text-[14px] uppercase tracking-widest"
+              className="h-14 rounded-none px-6 shrink-0 font-black text-[14px] uppercase tracking-widest"
               onClick={() => setCategory(cat)}
             >
               {cat}
@@ -87,7 +87,7 @@ function DiscoveryContent() {
             <Link 
               key={restaurant.id} 
               href={`/restaurants/${restaurant.id}`}
-              className="group flex flex-col bg-card rounded-[2.5rem] overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col bg-card rounded-none overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <Image 
@@ -123,7 +123,7 @@ function DiscoveryContent() {
                     </div>
                   </div>
                 </div>
-                <Button className="mt-auto w-full group-hover:bg-primary/90 transition-all h-14 rounded-2xl font-black text-[14px] uppercase tracking-widest">
+                <Button className="mt-auto w-full group-hover:bg-primary/90 transition-all h-14 rounded-none font-black text-[14px] uppercase tracking-widest">
                   Pick it up
                 </Button>
               </div>
