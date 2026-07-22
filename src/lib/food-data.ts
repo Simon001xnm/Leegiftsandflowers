@@ -88,24 +88,21 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
 ];
 
 export const MOCK_MENU: MenuItem[] = [
-  // List 1
-  { id: 'p1', restaurantId: 'r1', name: 'BEEF CHEMSHA 1KG', price: 1400, description: 'Slow-boiled tender beef.', imageUrl: MEAT_IMAGES.supu, category: 'Cooked' },
-  { id: 'p2', restaurantId: 'r1', name: 'BEEF CHOMA 1KG', price: 1400, description: 'Grilled beef cuts.', imageUrl: MEAT_IMAGES.choma, category: 'Nyama Choma', isPopular: true },
-  { id: 'p3', restaurantId: 'r1', name: 'BEEF DRY FRY 1KG', price: 1400, description: 'Spiced dry-fried beef.', imageUrl: MEAT_IMAGES.choma, category: 'Cooked' },
-  { id: 'p4', restaurantId: 'r1', name: 'BEEF TAKEAWAY', price: 900, description: 'Fresh beef for takeaway.', imageUrl: MEAT_IMAGES.steak, category: 'Raw Meat' },
-  { id: 'p5', restaurantId: 'r1', name: 'CHIPS', price: 200, description: 'Crispy potato fries.', imageUrl: MEAT_IMAGES.grocery, category: 'Sides' },
+  { id: 'p1', restaurantId: 'r1', name: 'BEEF CHEMSHA 1KG', price: 1400, description: 'Slow-boiled tender beef.', imageUrl: '/beef%20chemsha%20SMB.jpg', category: 'Cooked' },
+  { id: 'p2', restaurantId: 'r1', name: 'BEEF CHOMA 1KG', price: 1400, description: 'Grilled beef cuts.', imageUrl: '/BEEF%20CHOMA.jpg', category: 'Nyama Choma', isPopular: true },
+  { id: 'p3', restaurantId: 'r1', name: 'BEEF DRY FRY 1KG', price: 1400, description: 'Spiced dry-fried beef.', imageUrl: '/BEEF%20DRY%20FRY.jpg', category: 'Cooked' },
+  { id: 'p4', restaurantId: 'r1', name: 'BEEF TAKEAWAY', price: 900, description: 'Fresh beef for takeaway.', imageUrl: '/BEEF%20TAKEAWAY.jpg', category: 'Raw Meat' },
+  { id: 'p5', restaurantId: 'r1', name: 'CHIPS', price: 200, description: 'Crispy potato fries.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
   { id: 'p6', restaurantId: 'r1', name: 'COOKING SERVCE CHARGE', price: 250, description: 'Professional cooking service.', imageUrl: MEAT_IMAGES.choma, category: 'Essentials' },
-  { id: 'p7', restaurantId: 'r1', name: 'FULL CHICKEN', price: 700, description: 'Whole farm-fresh chicken.', imageUrl: MEAT_IMAGES.raw, category: 'Cooked' },
-  { id: 'p8', restaurantId: 'r1', name: 'FULL CHICKEN CHOMA', price: 1000, description: 'Grilled whole chicken.', imageUrl: MEAT_IMAGES.choma, category: 'Nyama Choma' },
-  { id: 'p9', restaurantId: 'r1', name: 'FULL KICHWA GOAT', price: 800, description: 'Traditional goat head delicacy.', imageUrl: MEAT_IMAGES.kichwa, category: 'Delicacies' },
-  { id: 'p10', restaurantId: 'r1', name: 'FULL MGUU COW BOILED', price: 400, description: 'Traditional boiled cow leg.', imageUrl: MEAT_IMAGES.supu, category: 'Delicacies' },
+  { id: 'p7', restaurantId: 'r1', name: 'FULL CHICKEN', price: 700, description: 'Whole farm-fresh chicken.', imageUrl: '/FULL%20CHICKEN.jpg', category: 'Cooked' },
+  { id: 'p8', restaurantId: 'r1', name: 'FULL CHICKEN CHOMA', price: 1000, description: 'Grilled whole chicken.', imageUrl: '/FULL%20CHICKEN%20CHOMA.jpg', category: 'Nyama Choma' },
+  { id: 'p9', restaurantId: 'r1', name: 'FULL KICHWA GOAT', price: 800, description: 'Traditional goat head delicacy.', imageUrl: '/FULL%20KICHWA%20YA%20GOAT.jpg', category: 'Delicacies' },
+  { id: 'p10', restaurantId: 'r1', name: 'FULL MGUU COW BOILED', price: 400, description: 'Traditional boiled cow leg.', imageUrl: '/MGUU%20COW.jpg', category: 'Delicacies' },
   { id: 'p11', restaurantId: 'r1', name: 'FULL ULIMI COW', price: 1400, description: 'Boiled cow tongue delicacy.', imageUrl: MEAT_IMAGES.supu, category: 'Delicacies' },
   { id: 'p12', restaurantId: 'r1', name: 'GOAT CHEMSHA 1KG', price: 1400, description: 'Boiled tender goat meat.', imageUrl: MEAT_IMAGES.supu, category: 'Cooked' },
   { id: 'p13', restaurantId: 'r1', name: 'GOAT CHOMA 1KG', price: 1350, description: 'Flame-grilled goat meat.', imageUrl: MEAT_IMAGES.choma, category: 'Nyama Choma', isPopular: true },
   { id: 'p14', restaurantId: 'r1', name: 'GOAT DYFRY 1KG', price: 1400, description: 'Spiced dry-fried goat.', imageUrl: MEAT_IMAGES.choma, category: 'Cooked' },
   { id: 'p15', restaurantId: 'r1', name: 'GOAT FRY 1KG', price: 1400, description: 'Classic fried goat meat.', imageUrl: MEAT_IMAGES.choma, category: 'Cooked' },
-  
-  // List 2
   { id: 'p16', restaurantId: 'r1', name: 'GOAT TAKEAWAY 1KG', price: 1100, description: 'Fresh goat meat for takeaway.', imageUrl: MEAT_IMAGES.mbuzi, category: 'Raw Meat' },
   { id: 'p17', restaurantId: 'r1', name: 'GREENS KIENYEJI', price: 150, description: 'Traditional Kenyan greens.', imageUrl: MEAT_IMAGES.grocery, category: 'Sides' },
   { id: 'p18', restaurantId: 'r1', name: 'LIVER 1KG CHOMA', price: 1400, description: 'Expertly grilled liver.', imageUrl: MEAT_IMAGES.choma, category: 'Nyama Choma' },
