@@ -1,14 +1,13 @@
+
 'use client';
 
 import { use, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { MOCK_MENU, MOCK_RESTAURANTS, MenuItem } from "@/lib/food-data";
-import { ArrowLeft, Clock, ShoppingBag, Store, TrendingUp, Info, CheckCircle2 } from "lucide-react";
+import { MOCK_MENU, MOCK_RESTAURANTS } from "@/lib/food-data";
+import { Clock, Store, TrendingUp, CheckCircle2, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
@@ -36,11 +35,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Navigation />
-      
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-8 lg:py-12">
-          {/* Breadcrumbs */}
           <div className="mb-8 flex items-center gap-2 text-[12px] font-black uppercase tracking-widest text-muted-foreground">
             <Link href="/" className="hover:text-primary">Home</Link>
             <span>/</span>
@@ -50,7 +46,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           </div>
 
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-            {/* Image Gallery */}
             <div className="lg:col-span-7">
               <div className="relative aspect-square md:aspect-[4/3] bg-gray-50 border overflow-hidden">
                 <Image 
@@ -64,16 +59,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   <Badge className="bg-primary text-white border-none font-black text-[12px] uppercase tracking-widest px-4 py-1 rounded-none">
                     {item.category}
                   </Badge>
-                  {item.isPopular && (
-                    <Badge className="bg-black text-white border-none font-black text-[12px] uppercase tracking-widest px-4 py-1 rounded-none">
-                      Top Seller
-                    </Badge>
-                  )}
                 </div>
               </div>
             </div>
 
-            {/* Product Details */}
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl lg:text-5xl font-black font-headline text-primary uppercase tracking-tighter leading-none">
@@ -93,7 +82,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
               <div className="space-y-6">
                 <p className="text-[14px] font-medium text-gray-600 leading-relaxed">
-                  {item.description || "Premium quality meat sourced directly from our verified local farms in Nairobi. Guaranteed freshness and hygiene at every step of the process."}
+                  {item.description}
                 </p>
 
                 <div className="bg-gray-50 p-6 space-y-4 border">
@@ -117,53 +106,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   >
                     Add to Basket
                   </Button>
-                  <Link href={`/restaurants/${restaurant?.id}`} className="flex-grow">
-                    <Button variant="outline" className="w-full h-14 text-[14px] font-black uppercase tracking-widest rounded-none border-2">
-                      Full Menu <ArrowLeft className="ml-2 w-4 h-4 rotate-180" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="pt-4 space-y-4">
-                <h4 className="text-[12px] font-black text-black uppercase tracking-widest">Standard Guarantees</h4>
-                <div className="grid grid-cols-2 gap-3">
-                  {["Vacuum Packed", "Farm to Table", "Quick Chilled", "Halal Certified"].map(g => (
-                    <div key={g} className="flex items-center gap-2 text-[12px] font-bold text-gray-500 uppercase tracking-tighter">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500" /> {g}
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Related Items */}
-          {relatedItems.length > 0 && (
-            <section className="mt-24 space-y-8">
-              <div className="flex items-center justify-between border-b pb-6">
-                <h2 className="text-2xl lg:text-3xl font-black font-headline text-black uppercase tracking-tighter">You might also like</h2>
-                <Link href="/restaurants" className="text-[14px] font-black text-primary hover:underline uppercase tracking-widest">Explore Marketplace</Link>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-l border-t">
-                {relatedItems.map((related, idx) => (
-                  <Link 
-                    key={related.id} 
-                    href={`/products/${related.id}`}
-                    className="group flex flex-col bg-white border-r border-b hover-heartbeat"
-                  >
-                    <div className="relative aspect-square overflow-hidden bg-gray-50">
-                      <Image src={related.imageUrl} alt={related.name} fill className="object-cover transition-transform group-hover:scale-105" />
-                    </div>
-                    <div className="p-4 space-y-2">
-                      <h3 className="font-black text-[14px] text-black uppercase tracking-tighter truncate group-hover:text-primary transition-colors">{related.name}</h3>
-                      <p className="font-black text-[11px] text-black">KES {related.price.toLocaleString()}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
         </div>
       </main>
     </div>

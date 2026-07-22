@@ -4,7 +4,6 @@
 import { use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_EVENTS } from "@/lib/events-data";
 import { Calendar, MapPin, Ticket, User, Share2, Heart, ArrowLeft, Info, CircleCheck } from "lucide-react";
@@ -20,16 +19,11 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
 
   const ticketsLeft = event.ticketsTotal - event.ticketsSold;
   const selloutPercentage = (event.ticketsSold / event.ticketsTotal) * 100;
-
-  // Use a public Google Maps search embed which doesn't require a restricted API key for basic usage
   const searchEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(event.location)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Navigation />
-      
       <main className="flex-grow">
-        {/* Hero Section */}
         <div className="relative h-[40vh] lg:h-[60vh] overflow-hidden">
           <Image 
             src={event.imageUrl} 
@@ -72,7 +66,6 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
 
         <div className="container mx-auto px-4 py-12 lg:py-20">
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* Left Content */}
             <div className="lg:col-span-2 space-y-12">
               <section>
                 <h2 className="text-2xl font-bold font-headline text-primary mb-6 flex items-center gap-2">
@@ -80,7 +73,6 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                 </h2>
                 <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed">
                   <p>{event.description}</p>
-                  <p className="mt-4">Join us for this incredible {event.category.toLowerCase()} event in Nairobi. Whether you're a seasoned enthusiast or just curious, there's something for everyone at {event.title}. Our team has meticulously planned every detail to ensure an unforgettable experience.</p>
                 </div>
               </section>
 
@@ -108,7 +100,6 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
               </section>
             </div>
 
-            {/* Sticky Sidebar */}
             <div className="space-y-6">
               <Card className="sticky top-24 border-2 border-primary/10 shadow-xl overflow-hidden">
                 <CardContent className="p-0">
@@ -120,14 +111,6 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                           {event.price === 0 ? 'Free' : `KES ${event.price.toLocaleString()}`}
                         </h3>
                       </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="icon" className="rounded-full">
-                          <Share2 className="w-4 h-4" />
-                        </Button>
-                        <Button variant="outline" size="icon" className="rounded-full">
-                          <Heart className="w-4 h-4" />
-                        </Button>
-                      </div>
                     </div>
 
                     <div className="space-y-2">
@@ -136,44 +119,14 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                         <span className="font-medium">{ticketsLeft} tickets remaining</span>
                       </div>
                       <Progress value={selloutPercentage} className="h-2" />
-                      {ticketsLeft < 50 && ticketsLeft > 0 && (
-                        <p className="text-destructive text-xs font-bold animate-pulse">
-                          Selling fast! Almost sold out.
-                        </p>
-                      )}
                     </div>
 
-                    <Link href={`/booking/${event.id}`}>
+                    <Link href={`/checkout`}>
                       <Button className="w-full h-14 text-lg rounded-xl gap-3 shadow-lg shadow-primary/20 mt-4" disabled={ticketsLeft <= 0}>
                         <Ticket className="w-5 h-5" />
                         {ticketsLeft > 0 ? 'Secure Your Spot' : 'Sold Out'}
                       </Button>
                     </Link>
-
-                    <p className="text-xs text-center text-muted-foreground">
-                      No hidden fees. Instant digital delivery.
-                    </p>
-                  </div>
-                  
-                  <div className="bg-muted p-6 border-t">
-                    <h4 className="font-bold text-sm text-primary mb-4">Location</h4>
-                    <div className="aspect-video relative rounded-lg overflow-hidden bg-background border mb-4">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        frameBorder="0"
-                        scrolling="no"
-                        marginHeight={0}
-                        marginWidth={0}
-                        src={searchEmbedUrl}
-                        className="grayscale hover:grayscale-0 transition-all duration-500"
-                        title="Google Maps Location"
-                      ></iframe>
-                    </div>
-                    <p className="text-sm text-muted-foreground flex items-start gap-2">
-                      <MapPin className="w-4 h-4 shrink-0 text-accent" />
-                      {event.location}
-                    </p>
                   </div>
                 </CardContent>
               </Card>

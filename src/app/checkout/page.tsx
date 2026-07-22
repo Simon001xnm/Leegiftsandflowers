@@ -1,8 +1,8 @@
+
 'use client';
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -26,14 +26,13 @@ import { doc, setDoc } from "firebase/firestore";
 import { errorEmitter } from '@/firebase/error-emitter';
 import { FirestorePermissionError } from '@/firebase/errors';
 import Link from "next/link";
-import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 export default function GlobalCheckoutPage() {
   const router = useRouter();
   const { cart, addToCart, removeFromCart, clearItem, subtotal, clearCart } = useCart();
   const { user, loading: authLoading } = useUser();
   const firestore = useFirestore();
-  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
 
@@ -73,7 +72,6 @@ export default function GlobalCheckoutPage() {
         }
       });
 
-    // Clear cart after order
     setTimeout(() => {
       clearCart();
       router.push(`/track/${orderId}`);
@@ -83,7 +81,6 @@ export default function GlobalCheckoutPage() {
   if (cart.length === 0 && !loading) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        <Navigation />
         <main className="container mx-auto px-4 py-20 flex flex-col items-center justify-center text-center">
           <div className="w-20 h-20 bg-gray-50 flex items-center justify-center mb-6">
             <ShoppingBag className="w-10 h-10 text-gray-300" />
@@ -113,7 +110,6 @@ export default function GlobalCheckoutPage() {
         </div>
 
         <div className="grid lg:grid-cols-12 gap-10">
-          {/* Basket Review */}
           <div className="lg:col-span-7 space-y-10">
             <section className="space-y-6">
               <h2 className="text-2xl font-black font-headline text-black uppercase tracking-tighter flex items-center gap-3">
@@ -153,7 +149,7 @@ export default function GlobalCheckoutPage() {
                 <CardContent className="p-6 flex items-center justify-between">
                   <div className="space-y-1">
                     <p className="font-black text-[14px] uppercase tracking-widest">Home Address</p>
-                    <p className="text-[14px] font-medium text-muted-foreground">Silver Heights, Kileleshwa, Nairobi, Kenya</p>
+                    <p className="text-[14px] font-medium text-muted-foreground">Silver Heights, Nairobi, Kenya</p>
                   </div>
                   <Button variant="outline" className="rounded-none border-2 font-black text-[12px] uppercase tracking-widest">Change</Button>
                 </CardContent>
@@ -161,7 +157,6 @@ export default function GlobalCheckoutPage() {
             </section>
           </div>
 
-          {/* Payment Summary */}
           <div className="lg:col-span-5">
             <div className="sticky top-24 space-y-8">
               <Card className="rounded-none border shadow-2xl overflow-hidden">

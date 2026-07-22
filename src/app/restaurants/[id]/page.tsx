@@ -1,11 +1,12 @@
+
 'use client';
 
-import { use, useState, useMemo } from "react";
+import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, MOCK_MENU, MenuItem } from "@/lib/food-data";
-import { Star, Clock, MapPin, Bike, ArrowLeft, ShoppingCart, Utensils, X, Minus, Plus, TrendingUp } from "lucide-react";
+import { Star, Clock, MapPin, Bike, ArrowLeft, ShoppingCart, Utensils, X, Minus, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -21,15 +22,8 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
   const { cart, addToCart, removeFromCart, clearItem, subtotal } = useCart();
   
   const vendorItems = MOCK_MENU.filter(m => m.restaurantId === id);
-  
-  const relatedItems = MOCK_MENU.filter(m => 
-    m.restaurantId !== id && 
-    (m.category === restaurant?.category || restaurant?.category === 'Raw Meat')
-  ).slice(0, 8);
-
   const deliveryFee = restaurant?.deliveryFee || 100;
   const total = subtotal + (subtotal > 0 ? deliveryFee : 0);
-
   const vendorCategories = Array.from(new Set(vendorItems.map(item => item.category || 'Mains')));
 
   if (!restaurant) return <div className="p-20 text-center font-headline text-2xl">Vendor not found</div>;
@@ -37,7 +31,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <main className="flex-grow">
-        {/* Header Section */}
         <div className="relative h-[25vh] lg:h-[35vh] overflow-hidden">
           <Image src={restaurant.imageUrl} alt={restaurant.name} fill className="object-cover" priority />
           <div className="absolute inset-0 bg-black/40" />
@@ -54,8 +47,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                   <div className="flex items-center gap-2"><Star className="w-4 h-4 text-accent fill-accent" /> {restaurant.rating}</div>
                   <div className="flex items-center gap-2 opacity-60">•</div>
                   <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> {restaurant.deliveryTime}</div>
-                  <div className="flex items-center gap-2 opacity-60">•</div>
-                  <div className="flex items-center gap-2"><MapPin className="w-4 h-4" /> {restaurant.location}</div>
                 </div>
               </div>
             </div>
@@ -64,7 +55,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
         <div className="container mx-auto px-4 py-8 md:py-12">
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
-            
             <div className="lg:col-span-8 space-y-16">
               <Tabs defaultValue={vendorCategories[0]} className="w-full">
                 <div className="sticky top-24 md:top-28 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
@@ -88,26 +78,8 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                   </TabsContent>
                 ))}
               </Tabs>
-
-              {relatedItems.length > 0 && (
-                <section className="pt-12 space-y-8">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-lg md:text-3xl font-black text-black uppercase tracking-tighter">You might also like</h2>
-                    <Link href="/restaurants" className="text-[14px] font-black text-primary hover:underline uppercase tracking-widest">Explore All</Link>
-                  </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 border-l border-t">
-                    {relatedItems.map((item) => (
-                      <HighDensityProductCard key={item.id} item={item} onAdd={() => {
-                        addToCart(item);
-                        toast({ title: "Added to basket", description: `${item.name} added.` });
-                      }} isSmall />
-                    ))}
-                  </div>
-                </section>
-              )}
             </div>
 
-            {/* Sticky Basket */}
             <div className="lg:col-span-4 sticky top-24 lg:top-28 space-y-6">
               <Card className="border shadow-2xl bg-white rounded-none">
                 <CardHeader className="bg-gray-50 py-5 px-8 border-b">
@@ -115,7 +87,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                     <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3 text-black">
                       <ShoppingCart className="w-5 h-5" /> Your Basket
                     </CardTitle>
-                    {cart.length > 0 && <Badge className="bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0 rounded-none">{cart.length}</Badge>}
                   </div>
                 </CardHeader>
                 
@@ -154,10 +125,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                         <span>Subtotal</span>
                         <span>KES {subtotal.toLocaleString()}</span>
                       </div>
-                      <div className="flex justify-between text-[14px] font-bold text-gray-500 uppercase tracking-widest">
-                        <span className="flex items-center gap-2"><Bike className="w-4 h-4" /> Delivery</span>
-                        <span>KES {deliveryFee.toLocaleString()}</span>
-                      </div>
                       <Separator className="my-4" />
                       <div className="flex justify-between items-end pt-2">
                         <div className="space-y-1">
@@ -185,58 +152,27 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
   );
 }
 
-function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAdd: () => void; isSmall?: boolean }) {
+function HighDensityProductCard({ item, onAdd }: { item: MenuItem; onAdd: () => void }) {
   return (
-    <Card className={cn(
-      "overflow-hidden border-r border-b shadow-none hover-heartbeat bg-white rounded-none",
-      isSmall && "flex-col"
-    )}>
-      <div className={cn("flex h-full", isSmall ? "flex-col h-auto" : "h-40 md:h-48")}>
-        {!isSmall && (
-          <div className="p-4 flex-grow space-y-3 flex flex-col justify-center bg-white">
-            <Link href={`/products/${item.id}`} className="flex flex-col group">
-              <h3 className="font-black text-[14px] md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
-              {item.isPopular && <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
-            </Link>
-            <p className="text-[12px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
-            <div className="flex items-center justify-between pt-3 border-t gap-2">
-              <span className="font-black text-[11px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
-              <Button 
-                className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all active:scale-95 shrink-0" 
-                onClick={(e) => { e.preventDefault(); onAdd(); }}
-              >
-                Add
-              </Button>
-            </div>
+    <Card className="overflow-hidden border-r border-b shadow-none hover-heartbeat bg-white rounded-none">
+      <div className="flex h-40 md:h-48">
+        <div className="p-4 flex-grow space-y-3 flex flex-col justify-center bg-white">
+          <Link href={`/products/${item.id}`} className="flex flex-col group">
+            <h3 className="font-black text-[14px] md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
+          </Link>
+          <div className="flex items-center justify-between pt-3 border-t gap-2">
+            <span className="font-black text-[11px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+            <Button 
+              className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all shrink-0" 
+              onClick={(e) => { e.preventDefault(); onAdd(); }}
+            >
+              Add
+            </Button>
           </div>
-        )}
-        <Link href={`/products/${item.id}`} className={cn("relative overflow-hidden bg-gray-100 block", isSmall ? "aspect-square w-full" : "w-36 md:w-48 h-full shrink-0")}>
+        </div>
+        <Link href={`/products/${item.id}`} className="relative overflow-hidden bg-gray-100 w-36 md:w-48 h-full shrink-0 block">
           <Image src={item.imageUrl} alt={item.name} fill className="object-cover transition-transform group-hover:scale-105" />
-          
-          <div className="absolute top-2 left-2 z-30 w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity">
-            <Image 
-              src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
-              alt="Steak West" 
-              width={32} 
-              height={32} 
-              className="object-contain"
-            />
-          </div>
         </Link>
-        
-        {isSmall && (
-          <div className="p-4 space-y-3 bg-white">
-            <Link href={`/products/${item.id}`}>
-              <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1 hover:text-primary transition-colors">{item.name}</h3>
-            </Link>
-            <div className="flex items-center justify-between gap-2 pt-2 border-t">
-              <span className="font-black text-[11px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
-              <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0" onClick={(e) => { e.preventDefault(); onAdd(); }}>
-                Add
-              </Button>
-            </div>
-          </div>
-        )}
       </div>
     </Card>
   );

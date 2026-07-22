@@ -32,7 +32,7 @@ export default function ProfilePage() {
     return doc(db, "users", user.uid);
   }, [db, user?.uid]);
 
-  const { data: profile, loading: profileLoading } = useDoc(userRef);
+  const { data: profile } = useDoc(userRef);
 
   const handleSignOut = async () => {
     if (user?.uid?.startsWith('demo-')) {
@@ -73,7 +73,6 @@ export default function ProfilePage() {
   return (
     <main className="container mx-auto px-4 py-12 flex-grow max-w-5xl">
       <div className="grid lg:grid-cols-3 gap-10">
-        {/* Profile Card */}
         <div className="lg:col-span-1">
           <Card className="border-none shadow-2xl overflow-hidden rounded-[2.5rem] bg-card">
             <div className="h-32 bg-primary relative">
@@ -112,13 +111,9 @@ export default function ProfilePage() {
           </Card>
         </div>
 
-        {/* Stats & Info */}
         <div className="lg:col-span-2 space-y-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <h1 className="text-4xl font-bold font-headline text-primary">Member Overview</h1>
-            {user.uid.startsWith('demo-') && (
-              <Badge className="bg-amber-100 text-amber-700 border-none px-4 py-1 text-[14px]">Demo Account</Badge>
-            )}
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -129,32 +124,7 @@ export default function ProfilePage() {
                 {profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : "Active Now"}
               </p>
             </Card>
-            <Card className="p-8 border-2 rounded-[2.5rem] shadow-sm hover:shadow-md transition-shadow">
-              <Calendar className="w-10 h-10 text-accent mb-4" />
-              <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Loyalty Status</p>
-              <p className="font-bold text-xl">Silver Tier</p>
-            </Card>
           </div>
-
-          <Card className="border-2 rounded-[2.5rem] p-8 shadow-sm">
-            <h3 className="font-bold text-2xl mb-6 text-primary">Account Information</h3>
-            <div className="space-y-6">
-              <div className="flex justify-between items-center py-2 border-b border-dashed">
-                <span className="text-muted-foreground font-medium text-[14px]">Full Name</span>
-                <span className="font-bold text-primary text-[14px]">{user.displayName || "Guest User"}</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-dashed">
-                <span className="text-muted-foreground font-medium text-[14px]">Email Status</span>
-                <Badge variant="outline" className="text-[10px] uppercase font-bold px-3 py-1 rounded-full border-primary/20 text-primary">
-                  {user.emailVerified || user.uid.startsWith('demo-') ? "Verified" : "Unverified"}
-                </Badge>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-dashed">
-                <span className="text-muted-foreground font-medium text-[14px]">Active Role</span>
-                <span className="font-bold capitalize text-primary text-[14px]">{role}</span>
-              </div>
-            </div>
-          </Card>
         </div>
       </div>
     </main>

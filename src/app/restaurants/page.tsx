@@ -18,7 +18,6 @@ function DiscoveryContent() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<FoodCategory | 'All'>('All');
 
-  // Sync category state with URL query parameter
   useEffect(() => {
     const cat = searchParams.get('cat');
     if (cat && (CATEGORIES.includes(cat as FoodCategory) || cat === 'All')) {
@@ -72,15 +71,6 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between mb-8 pb-4 border-b">
-        <span className="text-[14px] font-bold text-muted-foreground uppercase tracking-widest">
-          Found <span className="text-primary font-black">{filteredRestaurants.length}</span> specialty vendors
-        </span>
-        <Button variant="ghost" size="sm" className="gap-2 text-[14px] font-black uppercase tracking-widest text-muted-foreground">
-          <SlidersHorizontal className="w-4 h-4" /> Sort by: Nearest
-        </Button>
-      </div>
-
       {filteredRestaurants.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 border-l border-t">
           {filteredRestaurants.map((restaurant) => (
@@ -117,9 +107,6 @@ function DiscoveryContent() {
                   <div className="flex items-center gap-4 text-[14px] font-bold text-muted-foreground uppercase tracking-tighter">
                     <div className="flex items-center gap-1">
                       <Clock className="w-4 h-4" /> {restaurant.deliveryTime}
-                    </div>
-                    <div className="font-black text-primary">
-                      KES {restaurant.deliveryFee}
                     </div>
                   </div>
                 </div>

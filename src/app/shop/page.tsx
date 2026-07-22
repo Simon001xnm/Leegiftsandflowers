@@ -1,8 +1,8 @@
+
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_PRODUCTS } from "@/lib/events-data";
 import { ShoppingCart, Filter, Sparkles } from "lucide-react";
@@ -19,8 +19,6 @@ export default function FlowerShopPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Navigation />
-      
       <main className="flex-grow container mx-auto px-4 py-12">
         <header className="mb-12">
           <Badge variant="secondary" className="mb-4 bg-accent/10 text-accent border-none px-4 py-1">
@@ -78,7 +76,6 @@ export default function FlowerShopPage() {
                 </p>
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold text-primary">£{product.price}</span>
-                  <span className="text-xs text-muted-foreground">/ arrangement</span>
                 </div>
               </CardContent>
               <CardFooter className="p-6 pt-0">
@@ -89,12 +86,6 @@ export default function FlowerShopPage() {
             </Card>
           ))}
         </div>
-
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">No arrangements found in this category.</p>
-          </div>
-        )}
       </main>
     </div>
   );

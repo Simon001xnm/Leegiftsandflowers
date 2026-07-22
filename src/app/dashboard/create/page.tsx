@@ -2,7 +2,6 @@
 "use client";
 
 import { useState } from "react";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,8 +29,6 @@ export default function CreateEventPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navigation />
-      
       <main className="container mx-auto px-4 py-12 flex-grow max-w-5xl">
         <div className="mb-10 text-center lg:text-left">
           <h1 className="text-4xl font-bold font-headline text-primary mb-2">Create New Event</h1>

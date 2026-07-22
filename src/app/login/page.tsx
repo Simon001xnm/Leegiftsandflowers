@@ -1,8 +1,8 @@
+
 "use client";
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,7 +37,6 @@ export default function LoginPage() {
     };
     
     localStorage.setItem('abc_demo_user', JSON.stringify(mockUser));
-    // Also save role for UI testing
     localStorage.setItem('abc_demo_role', role);
     
     toast({ 
@@ -88,9 +87,6 @@ export default function LoginPage() {
       }
       router.push(redirectPath);
     } catch (error: any) {
-      console.warn("Auth failed, checking for testing mode bypass...", error);
-      
-      // If Firebase is not configured (invalid API key), allow demo login
       if (error.code === 'auth/api-key-not-valid' || error.message?.includes('api-key-not-valid')) {
         handleDemoLogin(email, name);
       } else {
@@ -107,8 +103,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-muted/30 flex flex-col">
-      <Navigation />
-      
       <main className="flex-grow flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-4">
           <Alert className="bg-amber-50 border-amber-200 text-amber-800 rounded-2xl">
@@ -123,19 +117,6 @@ export default function LoginPage() {
             <CardHeader className="bg-primary text-primary-foreground text-center pb-8 pt-10">
               <div className="relative mx-auto w-fit mb-2">
                 <CardTitle className="text-4xl font-headline font-bold">ABC</CardTitle>
-                <svg 
-                  className="absolute -bottom-2 left-0 w-full h-3 text-white" 
-                  viewBox="0 0 40 10" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    d="M2 2C10 8 30 8 38 2" 
-                    stroke="currentColor" 
-                    strokeWidth="3" 
-                    strokeLinecap="round"
-                  />
-                </svg>
               </div>
               <CardDescription className="text-primary-foreground/70 font-medium">Secure access to Nairobi's best food</CardDescription>
             </CardHeader>

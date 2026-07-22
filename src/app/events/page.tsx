@@ -4,13 +4,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Navigation } from "@/components/Navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { MOCK_EVENTS, EventCategory } from "@/lib/events-data";
-import { Calendar, MapPin, Search, Filter, SlidersHorizontal } from "lucide-react";
+import { Calendar, MapPin, Search, SlidersHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const CATEGORIES: EventCategory[] = ['Music', 'Tech', 'Workshop', 'Art', 'Food', 'Business'];
 
@@ -27,15 +25,12 @@ export default function EventsDiscovery() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation />
-      
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="max-w-4xl mb-12">
           <h1 className="text-4xl lg:text-5xl font-bold font-headline text-primary mb-4">Discovery</h1>
           <p className="text-muted-foreground text-lg">Browse curated events from top organizers around the world.</p>
         </div>
 
-        {/* Search and Filters */}
         <div className="flex flex-col md:flex-row gap-4 mb-10">
           <div className="relative flex-grow">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -76,7 +71,6 @@ export default function EventsDiscovery() {
           </Button>
         </div>
 
-        {/* Grid */}
         {filteredEvents.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredEvents.map((event) => (
@@ -91,7 +85,6 @@ export default function EventsDiscovery() {
                     alt={event.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-ai-hint="event photo"
                   />
                   <Badge className="absolute top-4 left-4 shadow-sm bg-white/90 text-primary hover:bg-white">
                     {event.category}

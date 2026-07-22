@@ -1,27 +1,23 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
-import { Navigation } from "@/components/Navigation";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { MOCK_ORDERS, MOCK_MENU } from "@/lib/food-data";
 import { 
   Users, 
   TrendingUp, 
-  MoreHorizontal, 
-  Edit3, 
   Trash2, 
   Plus,
   ShoppingBag,
   ChefHat,
   Receipt,
-  Package,
-  CheckCircle2,
-  XCircle,
   Search,
   Printer,
-  Calculator
+  Calculator,
+  CheckCircle2,
+  XCircle
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -86,7 +82,6 @@ export default function RestaurantOwnerDashboard() {
     setPosCart([]);
     toast({ title: "Order Processed", description: "Receipt generated. Opening printer..." });
     
-    // Small delay to allow state to update before print trigger
     setTimeout(() => {
         window.print();
     }, 500);
@@ -94,10 +89,6 @@ export default function RestaurantOwnerDashboard() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="no-print">
-        <Navigation />
-      </div>
-      
       <main className="container mx-auto px-4 py-12 flex-grow no-print">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
           <div>
@@ -295,7 +286,6 @@ export default function RestaurantOwnerDashboard() {
             </div>
           </TabsContent>
 
-          {/* Other tabs remain same... */}
           <TabsContent value="orders" className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold font-headline text-primary">Live Order Queue</h2>
@@ -397,7 +387,6 @@ export default function RestaurantOwnerDashboard() {
         </Tabs>
       </main>
 
-      {/* Hidden Thermal Print View */}
       {receipt && (
         <div id="thermal-receipt" className="print-only font-mono text-black p-4 space-y-4 text-sm w-[80mm] mx-auto bg-white border border-gray-100">
             <div className="text-center space-y-1">

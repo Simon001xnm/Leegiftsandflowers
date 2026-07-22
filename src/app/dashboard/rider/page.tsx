@@ -2,7 +2,6 @@
 "use client";
 
 import { useState } from "react";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MOCK_ORDERS } from "@/lib/food-data";
@@ -33,7 +32,6 @@ export default function RiderDashboard() {
 
   const handleOpenNavigation = () => {
     if (!activeTask) return;
-    // Open Google Maps directions from current location to delivery address
     const destination = encodeURIComponent(activeTask.deliveryAddress);
     const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=bicycling`;
     window.open(url, '_blank');
@@ -41,8 +39,6 @@ export default function RiderDashboard() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navigation />
-      
       <main className="container mx-auto px-4 py-12 flex-grow max-w-5xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
           <div>
@@ -62,7 +58,6 @@ export default function RiderDashboard() {
           </Card>
         </div>
 
-        {/* Earnings Stats */}
         <div className="grid sm:grid-cols-3 gap-6 mb-12">
           {stats.map((stat) => (
             <Card key={stat.label} className="border-none shadow-sm rounded-3xl">
@@ -77,7 +72,6 @@ export default function RiderDashboard() {
           ))}
         </div>
 
-        {/* Current Task */}
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <h2 className="text-2xl font-bold font-headline text-primary">Active Delivery</h2>

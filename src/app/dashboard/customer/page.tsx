@@ -1,18 +1,15 @@
 
 "use client";
 
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { MOCK_ORDERS, MOCK_RESTAURANTS } from "@/lib/food-data";
 import { 
   Package, 
   MapPin, 
   Clock, 
   Star, 
-  Heart, 
   ChevronRight, 
-  Wallet,
   ShoppingBag
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -25,11 +22,8 @@ export default function CustomerDashboard() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navigation />
-      
       <main className="container mx-auto px-4 py-12 flex-grow max-w-6xl">
         <div className="grid lg:grid-cols-3 gap-10">
-          {/* Left Column: Profile & Stats */}
           <div className="lg:col-span-1 space-y-8">
             <Card className="border-none shadow-sm bg-primary text-primary-foreground overflow-hidden">
               <CardContent className="p-8">
@@ -80,9 +74,7 @@ export default function CustomerDashboard() {
             </div>
           </div>
 
-          {/* Right Column: Orders */}
           <div className="lg:col-span-2 space-y-10">
-            {/* Active Orders */}
             <section className="space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold font-headline text-primary flex items-center gap-2">
@@ -135,7 +127,6 @@ export default function CustomerDashboard() {
               </div>
             </section>
 
-            {/* Past Orders */}
             <section className="space-y-6">
               <h2 className="text-2xl font-bold font-headline text-primary">Order History</h2>
               <div className="grid gap-4">

@@ -3,7 +3,6 @@
 
 import { use, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -40,7 +39,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       return;
     }
     
-    // Optimistic UI: Set loading for a split second but redirect immediately
     setLoading(true);
     const orderId = `LEE-${Math.floor(100000 + Math.random() * 900000)}`;
 
@@ -57,10 +55,8 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
 
     const orderRef = doc(firestore, "orders", orderId);
     
-    // Initiate write in background without awaiting (Optimistic Mutation)
     setDoc(orderRef, orderData)
       .catch(async (error) => {
-        // Only handle real permission errors. Demo users won't see this interrupt the UX.
         if (!user?.uid?.startsWith('demo-')) {
           const permissionError = new FirestorePermissionError({
             path: orderRef.path,
@@ -71,7 +67,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
         }
       });
 
-    // REDIRECT IMMEDIATELY - No waiting for the server
     router.push(`/track/${orderId}`);
   };
 
@@ -79,8 +74,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navigation />
-      
       <main className="container mx-auto px-4 py-12 flex-grow max-w-4xl">
         <div className="grid lg:grid-cols-5 gap-8">
           <div className="lg:col-span-3 space-y-6">
