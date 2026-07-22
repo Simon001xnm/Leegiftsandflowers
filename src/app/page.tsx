@@ -91,10 +91,10 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-white">
       <PromotionalPopup />
       
-      <main className="flex-grow p-4 space-y-8 pb-4">
+      <main className="flex-grow p-2 sm:p-4 space-y-8 pb-4">
         
-        {/* Hero Section */}
-        <div className="relative h-[400px] md:h-[550px] w-full rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden bg-black shadow-2xl group">
+        {/* Responsive Hero Section */}
+        <div className="relative min-h-[450px] md:h-[550px] w-full rounded-[2rem] md:rounded-[3.5rem] overflow-hidden bg-black shadow-2xl group">
           <video 
             autoPlay 
             muted 
@@ -105,31 +105,33 @@ export default function Home() {
             <source src="/From Klickpin.com- 833517843581501058-pin-id-833517843581501058 (1).mp4" type="video/mp4" />
           </video>
           
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
 
-          <div className="relative z-10 h-full flex flex-col items-start justify-center px-8 md:px-16 py-8">
+          <div className="relative z-10 h-full flex flex-col items-start justify-center px-6 sm:px-10 md:px-16 py-12">
             <div className="flex flex-col space-y-6 max-w-xl">
-              <div className="flex items-center gap-4">
-                <ButcheryLogo className="w-24 h-24 md:w-32 md:h-32" />
+              <div className="flex items-center gap-3 sm:gap-4">
+                <ButcheryLogo className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32" />
                 <div className="flex flex-col">
-                  <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white">Steak West</h2>
-                  <Badge className="bg-primary text-white border-none px-3 py-1 text-sm font-black uppercase tracking-[0.2em] w-fit">
+                  <h2 className="text-xl sm:text-2xl md:text-4xl font-black uppercase tracking-tighter text-white">Steak West</h2>
+                  <Badge className="bg-primary text-white border-none px-3 py-1 text-[10px] sm:text-sm font-black uppercase tracking-[0.2em] w-fit">
                     Super ya Nyama
                   </Badge>
                 </div>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-black font-headline text-white tracking-tighter uppercase leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-black font-headline text-white tracking-tighter uppercase leading-[1.1]">
                 Premium Cuts.<br />
                 <span className="text-primary italic">Fast. Fresh.</span><br />
-                <span className="text-white/80 text-[14px] md:text-lg tracking-normal font-medium normal-case block mt-2">Nairobi's Best Delivered in 20 Mins.</span>
+                <span className="text-white/80 text-[14px] sm:text-[16px] md:text-lg tracking-normal font-medium normal-case block mt-2">
+                  Nairobi's Best Delivered in 20 Mins.
+                </span>
               </h1>
 
-              <div className="flex gap-4 pt-4">
-                <Button className="h-12 md:h-14 px-8 md:px-10 rounded-2xl bg-primary text-white hover:bg-primary/90 font-black shadow-lg transition-all active:scale-95 text-[14px] uppercase tracking-widest">
-                  Get it Delivered
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 w-full sm:w-auto">
+                <Button className="h-12 md:h-14 px-8 md:px-10 rounded-2xl bg-primary text-white hover:bg-primary/90 font-black shadow-lg transition-all active:scale-95 text-[14px] uppercase tracking-widest w-full sm:w-auto">
+                  Pick it up
                 </Button>
-                <Button variant="outline" className="h-12 md:h-14 px-8 md:px-10 rounded-2xl border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent">
+                <Button variant="outline" className="h-12 md:h-14 px-8 md:px-10 rounded-2xl border-2 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full sm:w-auto">
                   Browse Deals
                 </Button>
               </div>
@@ -161,7 +163,7 @@ export default function Home() {
             </div>
             <Link href="/restaurants" className="text-[14px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
             {allDelicacies.slice(0, 10).map((item, idx) => (
               <ProductCard key={item.id} item={item} idx={idx} />
             ))}
@@ -179,7 +181,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
             {allMeatProducts.concat(allDelicacies.slice(10)).map((item, idx) => (
               <ProductCard key={item.id} item={item} idx={idx} />
             ))}
@@ -276,7 +278,7 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
       href={`/restaurants/${item.restaurantId}`}
       className="group flex flex-col space-y-3"
     >
-      <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gray-50 border shadow-sm group-hover:border-primary/20 transition-all">
+      <div className="relative aspect-square rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-gray-50 border shadow-sm group-hover:border-primary/20 transition-all">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
@@ -284,8 +286,7 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         
-        {/* Branding logo in top left corner */}
-        <div className="absolute top-3 left-3 z-30 w-10 h-10 opacity-90 group-hover:opacity-100 transition-opacity">
+        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-30 w-8 h-8 sm:w-10 sm:h-10 opacity-90 group-hover:opacity-100 transition-opacity">
           <Image 
             src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
             alt="Steak West" 
@@ -295,39 +296,39 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
           />
         </div>
 
-        <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
-          <Badge className="bg-white/95 text-black border-none px-3 py-1 font-black text-[14px] uppercase tracking-widest">
+        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 flex flex-col gap-1 sm:gap-2">
+          <Badge className="bg-white/95 text-black border-none px-2 py-0.5 sm:px-3 sm:py-1 font-black text-[10px] sm:text-[14px] uppercase tracking-widest">
             {idx % 3 === 0 ? "Premium" : "Fresh"}
           </Badge>
           {item.isPopular && (
-            <Badge className="bg-primary text-white border-none px-3 py-1 font-black text-[14px] uppercase tracking-widest">
+            <Badge className="bg-primary text-white border-none px-2 py-0.5 sm:px-3 sm:py-1 font-black text-[10px] sm:text-[14px] uppercase tracking-widest">
               Hot
             </Badge>
           )}
         </div>
 
         <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
-          <div className="bg-white rounded-full px-5 py-2 flex items-center gap-3 shadow-xl">
-            <WalkingIcon className="w-5 h-5 text-black" />
-            <span className="text-[14px] font-black text-black uppercase tracking-widest">Pick it up</span>
+          <div className="bg-white rounded-full px-4 py-1.5 sm:px-5 sm:py-2 flex items-center gap-2 sm:gap-3 shadow-xl">
+            <WalkingIcon className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
+            <span className="text-[12px] sm:text-[14px] font-black text-black uppercase tracking-widest">Pick it up</span>
           </div>
         </div>
 
-        <div className="absolute bottom-3 left-3 z-10">
-           <div className="bg-black/90 text-white text-lg font-black px-3 py-1.5 rounded-xl uppercase tracking-tighter">
+        <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 z-10">
+           <div className="bg-black/90 text-white text-sm sm:text-lg font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl uppercase tracking-tighter">
               KES {item.price.toLocaleString()}
            </div>
         </div>
       </div>
 
-      <div className="px-2 space-y-1">
-        <h3 className="font-black text-sm md:text-lg text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
+      <div className="px-1 sm:px-2 space-y-1">
+        <h3 className="font-black text-[14px] sm:text-lg text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
           {item.name}
         </h3>
-        <div className="flex items-center gap-3 text-[14px] text-gray-400 font-bold uppercase tracking-widest">
-          <span className="flex items-center gap-1 text-emerald-600"><TrendingUp className="w-4 h-4" /> Trending</span>
+        <div className="flex items-center gap-2 sm:gap-3 text-[12px] sm:text-[14px] text-gray-400 font-bold uppercase tracking-widest">
+          <span className="flex items-center gap-1 text-emerald-600"><TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" /> Trending</span>
           <span>•</span>
-          <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> 20m</span>
+          <span className="flex items-center gap-1"><Clock className="w-3 h-3 sm:w-4 sm:h-4" /> 20m</span>
         </div>
       </div>
     </Link>
