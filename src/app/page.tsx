@@ -70,7 +70,6 @@ export default function Home() {
       <PromotionalPopup />
       
       <main className="flex-grow p-0 space-y-0 pb-4">
-        
         <div className="relative min-h-[450px] md:h-[600px] w-full overflow-hidden bg-black flex items-center">
           <video 
             autoPlay 

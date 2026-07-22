@@ -39,7 +39,7 @@ export function Navigation() {
           <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
         </Button>
         <Link href="/" className="flex items-center gap-1.5 md:gap-2 group py-1">
-          <ButcheryLogo className="w-8 h-8 md:w-10 md:h-10" />
+          <ButcheryLogo className="w-6 h-6 md:w-7 md:h-7" />
           <div className="flex flex-col -space-y-0.5 md:-space-y-1">
             <span className="font-headline text-[13px] md:text-[16px] font-black tracking-tighter text-black uppercase leading-none whitespace-nowrap">
               Steak West
