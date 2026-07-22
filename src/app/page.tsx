@@ -175,9 +175,9 @@ export default function Home() {
               <div className="col-span-2 md:col-span-2 space-y-4 md:space-y-6">
                 <div className="flex items-center gap-3 md:gap-4">
                   <ButcheryLogo className="w-12 h-12 md:w-16 md:h-16" />
-                  <span className="font-headline text-[13px] md:text-[16px] font-black tracking-tighter text-black uppercase leading-tight">Steak West</span>
+                  <span className="font-headline text-[13px] md:text-[14px] font-black tracking-tighter text-black uppercase leading-tight">Steak West</span>
                 </div>
-                <p className="text-[12px] md:text-[14px] font-bold text-gray-400 uppercase leading-relaxed max-w-[280px]">
+                <p className="text-[10px] md:text-[12px] font-bold text-gray-400 uppercase leading-relaxed max-w-[280px]">
                   Nairobi's Trusted Meat Source. Super ya Nyama.
                 </p>
                 <div className="flex flex-wrap gap-2 pt-2">
