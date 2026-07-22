@@ -17,7 +17,6 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navigation />
       <div className="flex flex-grow relative">
         {!isCheckout && !isLogin && <SidebarNav />}
         <main className={cn(

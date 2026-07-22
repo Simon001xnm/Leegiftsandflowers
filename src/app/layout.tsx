@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { MobileBottomNav } from "@/components/MobileBottomNav";
 import { FirebaseClientProvider } from "@/firebase";
 import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
+import { Navigation } from '@/components/Navigation';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
@@ -42,6 +43,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased bg-background text-foreground min-h-screen pb-20 md:pb-0">
         <FirebaseClientProvider>
+          <Navigation />
           <AppLayoutWrapper>
             {children}
           </AppLayoutWrapper>
