@@ -81,7 +81,6 @@ export const MOCK_MENU: MenuItem[] = [
   { id: 'p3', restaurantId: 'r1', name: 'BEEF DRY FRY 1KG', price: 1400, description: 'Spiced dry-fried beef.', imageUrl: '/BEEF DRY FRY.jpg', category: 'Cooked' },
   { id: 'p4', restaurantId: 'r1', name: 'BEEF TAKEAWAY', price: 900, description: 'Fresh beef for takeaway.', imageUrl: '/BEEF TAKEAWAY.jpg', category: 'Raw Meat' },
   { id: 'p5', restaurantId: 'r1', name: 'CHIPS', price: 200, description: 'Crispy potato fries.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
-  { id: 'p6', restaurantId: 'r1', name: 'COOKING SERVCE CHARGE', price: 250, description: 'Professional cooking service.', imageUrl: '/BEEF CHOMA.jpg', category: 'Essentials' },
   { id: 'p7', restaurantId: 'r1', name: 'FULL CHICKEN', price: 700, description: 'Whole farm-fresh chicken.', imageUrl: '/FULL CHICKEN.jpg', category: 'Cooked' },
   { id: 'p8', restaurantId: 'r1', name: 'FULL CHICKEN CHOMA', price: 1000, description: 'Grilled whole chicken.', imageUrl: '/FULL CHICKEN CHOMA.jpg', category: 'Nyama Choma' },
   { id: 'p9', restaurantId: 'r1', name: 'FULL KICHWA GOAT', price: 800, description: 'Traditional goat head delicacy.', imageUrl: '/FULL KICHWA YA GOAT.jpg', category: 'Delicacies' },
@@ -90,19 +89,9 @@ export const MOCK_MENU: MenuItem[] = [
   { id: 'p12', restaurantId: 'r1', name: 'GOAT CHEMSHA 1KG', price: 1400, description: 'Boiled tender goat meat.', imageUrl: '/beef chemsha SMB.jpg', category: 'Cooked' },
   { id: 'p13', restaurantId: 'r1', name: 'GOAT CHOMA 1KG', price: 1350, description: 'Flame-grilled goat meat.', imageUrl: '/BEEF CHOMA.jpg', category: 'Nyama Choma', isPopular: true },
   { id: 'p14', restaurantId: 'r1', name: 'GOAT DYFRY 1KG', price: 1400, description: 'Spiced dry-fried goat.', imageUrl: '/BEEF DRY FRY.jpg', category: 'Cooked' },
-  { id: 'p15', restaurantId: 'r1', name: 'GOAT FRY 1KG', price: 1400, description: 'Classic fried goat meat.', imageUrl: '/BEEF DRY FRY.jpg', category: 'Cooked' },
   { id: 'p16', restaurantId: 'r1', name: 'GOAT TAKEAWAY 1KG', price: 1100, description: 'Fresh goat meat for takeaway.', imageUrl: '/BEEF TAKEAWAY.jpg', category: 'Raw Meat' },
-  { id: 'p17', restaurantId: 'r1', name: 'GREENS KIENYEJI', price: 150, description: 'Traditional Kenyan greens.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
-  { id: 'p18', restaurantId: 'r1', name: 'LIVER 1KG CHOMA', price: 1400, description: 'Expertly grilled liver.', imageUrl: '/BEEF CHOMA.jpg', category: 'Nyama Choma' },
-  { id: 'p19', restaurantId: 'r1', name: 'LIVER 1KG DRY FRY', price: 1400, description: 'Savory dry-fried liver.', imageUrl: '/BEEF DRY FRY.jpg', category: 'Cooked' },
   { id: 'p20', restaurantId: 'r1', name: 'LIVER 1KG TAKE AWAY', price: 1100, description: 'Fresh liver for takeaway.', imageUrl: '/BEEF TAKEAWAY.jpg', category: 'Raw Meat' },
-  { id: 'p21', restaurantId: 'r1', name: 'LIVER 1KG WET FRY', price: 1400, description: 'Delicious wet-fried liver.', imageUrl: '/BEEF DRY FRY.jpg', category: 'Cooked' },
-  { id: 'p22', restaurantId: 'r1', name: 'MGUU GOAT', price: 50, description: 'Individual goat leg piece.', imageUrl: '/MGUU COW.jpg', category: 'Delicacies' },
-  { id: 'p23', restaurantId: 'r1', name: 'MUKIMO', price: 150, description: 'Traditional mashed delicacy.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
-  { id: 'p24', restaurantId: 'r1', name: 'MUTURA', price: 100, description: 'Authentic Nairobi sausage.', imageUrl: '/BEEF CHOMA.jpg', category: 'Delicacies', isPopular: true },
-  { id: 'p25', restaurantId: 'r1', name: 'SOUP', price: 50, description: 'Rich, flavorful bone broth.', imageUrl: '/beef chemsha SMB.jpg', category: 'Delicacies' },
-  { id: 'p26', restaurantId: 'r1', name: 'SPINACH', price: 50, description: 'Freshly sautéed spinach.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
-  { id: 'p27', restaurantId: 'r1', name: 'UGALI', price: 50, description: 'A Kenyan staple side dish.', imageUrl: '/CHIPS.jpg', category: 'Sides' }
+  { id: 'p24', restaurantId: 'r1', name: 'MUTURA', price: 100, description: 'Authentic Nairobi sausage.', imageUrl: '/BEEF CHOMA.jpg', category: 'Delicacies', isPopular: true }
 ];
 
 export const MOCK_ORDERS: Order[] = [
