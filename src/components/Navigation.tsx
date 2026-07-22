@@ -17,12 +17,12 @@ import { cn } from "@/lib/utils";
 import { InstallAppButton } from "./InstallAppButton";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
-  <div className={cn("relative overflow-hidden shrink-0", className)}>
+  <div className={cn("relative shrink-0 overflow-hidden", className)}>
     <Image 
       src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
       alt="Steak West Logo" 
       fill 
-      className="object-contain"
+      className="object-contain object-center"
       priority
     />
   </div>
@@ -32,18 +32,18 @@ export function Navigation() {
   const [toggle, setToggle] = useState<'delivery' | 'pickup'>('delivery');
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-24 md:h-28 flex items-center gap-2 md:gap-4 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-20 md:h-24 flex items-center gap-2 md:gap-4 shadow-sm">
       <div className="flex items-center gap-2 md:gap-3 shrink-0">
-        <Button variant="ghost" size="icon" className="h-9 w-9 md:h-11 md:w-11 hover:bg-primary/5 rounded-none">
+        <Button variant="ghost" size="icon" className="h-9 w-9 md:h-10 md:w-10 hover:bg-primary/5 rounded-none">
           <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
         </Button>
-        <Link href="/" className="flex items-center gap-1.5 md:gap-2.5 group">
-          <ButcheryLogo className="w-12 h-12 md:w-18 md:h-18 transition-transform group-hover:scale-105" />
+        <Link href="/" className="flex items-center gap-1.5 md:gap-2 group">
+          <ButcheryLogo className="w-8 h-8 md:w-12 md:h-12" />
           <div className="flex flex-col -space-y-0.5 md:-space-y-1">
-            <span className="font-headline text-[14px] md:text-xl font-black tracking-tighter text-black uppercase leading-none whitespace-nowrap">
+            <span className="font-headline text-[14px] md:text-lg font-black tracking-tighter text-black uppercase leading-none whitespace-nowrap">
               Steak West
             </span>
-            <span className="text-[10px] md:text-[12px] font-black text-primary uppercase tracking-widest whitespace-nowrap">Super ya Nyama</span>
+            <span className="text-[10px] md:text-[11px] font-black text-primary uppercase tracking-widest whitespace-nowrap">Super ya Nyama</span>
           </div>
         </Link>
       </div>
@@ -87,7 +87,7 @@ export function Navigation() {
         <div className="hidden md:block">
           <InstallAppButton />
         </div>
-        <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 h-9 w-9 md:h-11 md:w-11 shadow-xl shadow-black/10 transition-transform active:scale-95 rounded-none">
+        <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 h-9 w-9 md:h-10 md:w-10 shadow-xl shadow-black/10 transition-transform active:scale-95 rounded-none">
           <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
           <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-3.5 h-3.5 md:w-4.5 md:h-4.5 flex items-center justify-center font-black border-2 border-white">
             0
