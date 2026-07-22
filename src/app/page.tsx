@@ -284,7 +284,7 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
 
         {/* Hover Overlay with Rounded Green Background */}
         <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
-          <div className="bg-emerald-500 rounded-full px-8 py-4 flex items-center gap-3 shadow-xl transform scale-90 group-hover:scale-100 transition-transform">
+          <div className="bg-emerald-500 rounded-full-important px-8 py-4 flex items-center gap-3 shadow-xl transform scale-90 group-hover:scale-100 transition-transform">
             <Plus className="w-5 h-5 text-white" />
             <span className="text-[14px] font-black text-white uppercase tracking-widest">Add</span>
           </div>

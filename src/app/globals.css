@@ -29,22 +29,20 @@
 
 @layer base {
   * {
-    /* Enforce sharp rectangular corners for general layout elements */
+    /* Enforce sharp rectangular corners globally except where specified */
+    border-radius: 0 !important;
     @apply border-border;
   }
   
-  /* Standard containers are rectangles */
-  .card, [role="tabpanel"], button:not(.rounded-full), input {
-    @apply rounded-none;
-  }
-
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline tracking-tighter text-black uppercase;
   }
   
+  /* Standard density and font size */
   p, span, div, button, input {
     @apply text-[14px];
   }
@@ -54,9 +52,11 @@
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
+  
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -73,5 +73,11 @@
     position: relative;
     z-index: 10;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    background-color: white !important;
+  }
+
+  /* Specific override for rounded elements */
+  .rounded-full-important {
+    border-radius: 9999px !important;
   }
 }

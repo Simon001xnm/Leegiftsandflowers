@@ -224,10 +224,10 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-2">
               <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
-              {/* Add trigger with rounded green background */}
+              {/* Rounded Green Background Trigger */}
               <Button 
                 size="icon" 
-                className="w-10 h-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg" 
+                className="w-10 h-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full-important shadow-lg transition-transform active:scale-95" 
                 onClick={onAdd}
               >
                 <Plus className="w-5 h-5" />
@@ -249,7 +249,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
           </div>
 
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-             <div className="bg-emerald-500 rounded-full p-3 shadow-2xl scale-75 group-hover:scale-100 transition-transform">
+             <div className="bg-emerald-500 rounded-full-important p-3 shadow-2xl scale-75 group-hover:scale-100 transition-transform">
                 <Plus className="w-6 h-6 text-white" />
              </div>
           </div>
@@ -266,7 +266,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         {isSmall && (
           <div className="p-4 space-y-2 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <Button className="w-full h-10 bg-emerald-500 hover:bg-emerald-600 text-white text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2 rounded-full" onClick={onAdd}>
+            <Button className="w-full h-10 bg-emerald-500 hover:bg-emerald-600 text-white text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2 rounded-full-important" onClick={onAdd}>
               <Plus className="w-4 h-4" /> Add
             </Button>
           </div>
