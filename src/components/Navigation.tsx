@@ -17,12 +17,13 @@ import { InstallAppButton } from "./InstallAppButton";
 import { useCart } from "@/context/CartContext";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
-  <div className={cn("relative shrink-0 flex items-center justify-center h-7 w-auto", className)}>
+  <div className={cn("relative shrink-0 flex items-center justify-center", className)}>
     <Image 
       src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
       alt="Steak West Logo" 
-      fill 
-      className="object-contain object-center"
+      width={100}
+      height={32}
+      className="object-contain h-7 w-auto"
       priority
     />
   </div>
@@ -39,8 +40,8 @@ export function Navigation() {
           <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
         </Button>
         <Link href="/" className="flex items-center gap-1.5 md:gap-2 group py-1">
-          <ButcheryLogo className="w-20" />
-          <div className="hidden sm:flex flex-col -space-y-0.5 md:-space-y-1">
+          <ButcheryLogo />
+          <div className="hidden sm:flex flex-col -space-y-0.5 md:-space-y-1 ml-1">
             <span className="font-headline text-[13px] md:text-[14px] font-black tracking-tighter text-black uppercase leading-none whitespace-nowrap">
               Steak West
             </span>

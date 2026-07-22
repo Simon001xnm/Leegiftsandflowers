@@ -24,8 +24,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // Load cart from storage on mount
   useEffect(() => {
-    const savedCart = typeof window !== 'undefined' ? localStorage.getItem('steak_west_cart_v3') : null;
+    const savedCart = typeof window !== 'undefined' ? localStorage.getItem('steak_west_cart_v4') : null;
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
@@ -36,9 +37,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsInitialized(true);
   }, []);
 
+  // Save cart to storage whenever it changes
   useEffect(() => {
     if (isInitialized && typeof window !== 'undefined') {
-      localStorage.setItem('steak_west_cart_v3', JSON.stringify(cart));
+      localStorage.setItem('steak_west_cart_v4', JSON.stringify(cart));
     }
   }, [cart, isInitialized]);
 
