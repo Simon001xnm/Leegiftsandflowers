@@ -31,7 +31,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Initialize from storage
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('steak_west_v2');
+      const saved = localStorage.getItem('steak_west_v3');
       if (saved) {
         try {
           setCart(JSON.parse(saved));
@@ -46,7 +46,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Sync to storage
   useEffect(() => {
     if (isLoaded && typeof window !== 'undefined') {
-      localStorage.setItem('steak_west_v2', JSON.stringify(cart));
+      localStorage.setItem('steak_west_v3', JSON.stringify(cart));
     }
   }, [cart, isLoaded]);
 

@@ -223,10 +223,10 @@ export default function ProfilePage() {
         <form id="edit-profile-form" onSubmit={handleUpdateProfile} className="space-y-3">
           <div className="space-y-1">
             <Label className="text-[8px] font-bold ml-1 uppercase tracking-widest text-muted-foreground">Full Identity</Label>
-            <Input 
+            <input 
               name="name" 
               defaultValue={profile?.name || ""} 
-              className="h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px]"
+              className="w-full h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px] outline-none"
               placeholder="Your full name"
             />
           </div>
@@ -234,10 +234,10 @@ export default function ProfilePage() {
           <div className="space-y-1">
             <Label className="text-[8px] font-bold ml-1 uppercase tracking-widest text-muted-foreground">E-Mail Address</Label>
             <div className="relative">
-              <Input 
+              <input 
                 value={user.email || ""} 
                 disabled 
-                className="h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px] opacity-60 cursor-not-allowed"
+                className="w-full h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px] opacity-60 cursor-not-allowed outline-none"
               />
               <Badge variant="outline" className="absolute right-2 top-1/2 -translate-y-1/2 border-emerald-200 text-emerald-600 bg-emerald-50 text-[5px] rounded-full px-1 h-3">VERIFIED</Badge>
             </div>
@@ -246,11 +246,11 @@ export default function ProfilePage() {
           <div className="space-y-1">
             <Label className="text-[8px] font-bold ml-1 uppercase tracking-widest text-muted-foreground">Terminal Password</Label>
             <div className="relative">
-              <Input 
+              <input 
                 type="password" 
                 value="••••••••••••" 
                 disabled 
-                className="h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px] opacity-60"
+                className="w-full h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px] opacity-60 outline-none"
               />
               <Eye className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400" />
             </div>
@@ -263,9 +263,9 @@ export default function ProfilePage() {
                  <img src="https://flagcdn.com/w20/ke.png" width="10" alt="Kenya" />
                  <span className="text-[8px] font-bold">+254</span>
               </div>
-              <Input 
+              <input 
                 placeholder="700 000 000" 
-                className="h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px] flex-grow"
+                className="flex-grow h-8 rounded-xl bg-gray-50 border-none px-3 font-bold text-[10px] outline-none"
               />
             </div>
           </div>

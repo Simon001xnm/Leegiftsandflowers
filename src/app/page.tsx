@@ -4,26 +4,18 @@ import Link from "next/link";
 import { PromotionalPopup } from "@/components/PromotionalPopup";
 import { MOCK_MENU, MenuItem } from "@/lib/food-data";
 import { 
-  Beef, 
-  Flame, 
-  Zap, 
-  Utensils, 
   Award, 
-  ShoppingBag,
-  TrendingUp,
-  Clock,
   ArrowRight,
   ShieldCheck
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 
 /**
- * Main Landing Page - Mental Programming Optimized
+ * Main Landing Page - High-Conversion Eye-Catching Marketing
  */
 export default function Home() {
   const { addToCart } = useCart();
@@ -35,7 +27,7 @@ export default function Home() {
       <PromotionalPopup />
       
       <main className="flex-grow p-0 space-y-0 pb-4">
-        {/* Enhanced Hero Section */}
+        {/* Eye-Catching Hero Section */}
         <div className="relative min-h-[600px] md:h-[750px] w-full overflow-hidden bg-black flex items-center">
           <video 
             autoPlay 
@@ -53,32 +45,32 @@ export default function Home() {
             <div className="flex flex-col space-y-8 max-w-5xl">
               <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-left-6 duration-1000">
                 <Badge className="bg-primary text-white border-none px-5 py-2 text-[12px] md:text-sm font-black uppercase tracking-[0.3em] w-fit rounded-none shadow-2xl">
-                  SYSTEM_ACTIVE: NAIROBI_LOGISTICS
+                  SYSTEM ACTIVE // NAIROBI
                 </Badge>
                 <h1 className="text-5xl sm:text-7xl md:text-9xl font-black font-headline text-white tracking-tighter uppercase leading-[0.85]">
-                  FRESH_CUTS.<br />
-                  <span className="text-primary italic">FAST_TRACK.</span>
+                  NAIROBI'S BEST<br />
+                  <span className="text-primary italic">MEAT. FAST.</span>
                 </h1>
               </div>
 
               <div className="max-w-2xl border-l-8 border-primary pl-10 space-y-6 animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
-                <p className="text-white text-xl md:text-2xl font-bold leading-tight">
-                  Premium meat node. Sourced daily, distributed in 20 minutes across the central network. Freshness verified by Supabase.
+                <p className="text-white text-xl md:text-2xl font-bold leading-tight uppercase">
+                  Sourced daily. Delivered in 20 minutes. 100% Freshness Guaranteed.
                 </p>
                 <div className="flex items-center gap-6 text-white/40 font-black text-[10px] uppercase tracking-[0.5em]">
-                  <ShieldCheck className="w-5 h-5 text-emerald-500" /> SECURE_DATA_NODE
+                  <ShieldCheck className="w-5 h-5 text-emerald-500" /> SECURE_NETWORK
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 md:gap-8 pt-10 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500">
                 <Link href="/restaurants" className="w-full sm:w-auto">
-                  <Button className="h-20 md:h-24 px-12 md:px-20 bg-primary text-white hover:bg-white hover:text-black font-black shadow-2xl transition-all active:scale-95 text-[18px] uppercase tracking-[0.2em] w-full rounded-none group">
-                    Enter Marketplace <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-3 transition-transform" />
+                  <Button className="h-20 md:h-24 px-12 md:px-20 bg-primary text-white hover:bg-white hover:text-black font-black shadow-2xl transition-all active:scale-95 text-[20px] uppercase tracking-[0.2em] w-full rounded-none group">
+                    ORDER NOW <ArrowRight className="ml-4 w-6 h-6 group-hover:translate-x-3 transition-transform" />
                   </Button>
                 </Link>
-                <Link href="/profile" className="w-full sm:w-auto">
+                <Link href="/dashboard/customer" className="w-full sm:w-auto">
                   <Button variant="outline" className="h-20 md:h-24 px-12 md:px-16 border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[15px] uppercase tracking-widest bg-transparent w-full rounded-none backdrop-blur-md">
-                    Access My Node
+                    TRACK ORDERS
                   </Button>
                 </Link>
               </div>
@@ -86,15 +78,15 @@ export default function Home() {
           </div>
         </div>
 
-        {/* High Volume Market View */}
+        {/* High-Volume Market Grid */}
         <section className="bg-white p-8 md:p-20">
           <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-16 border-b-8 border-black pb-10">
             <div className="space-y-4">
-              <Badge className="bg-black text-white font-black uppercase tracking-[0.4em] text-[11px] px-5 py-2 rounded-none">INVENTORY_HOT</Badge>
+              <Badge className="bg-black text-white font-black uppercase tracking-[0.4em] text-[11px] px-5 py-2 rounded-none">LIVE INVENTORY</Badge>
               <h2 className="text-5xl md:text-8xl font-black text-black uppercase tracking-tighter leading-none">THE_MARKET</h2>
             </div>
             <p className="text-[14px] font-bold text-gray-400 uppercase tracking-widest max-w-sm text-right">
-              Live Stock Feed from Westlands & City Market. Real-time availability verified.
+              FRESH CUTS FROM WESTLANDS. AVAILABLE FOR IMMEDIATE DISPATCH.
             </p>
           </div>
 
@@ -105,7 +97,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Professional Footer */}
+        {/* Professional Branding Footer */}
         <footer className="pt-32 border-t-8 border-black bg-black text-white pb-32">
           <div className="container mx-auto px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-24">
@@ -120,29 +112,29 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-xl text-gray-500 font-bold uppercase leading-tight max-w-lg">
-                  Nairobi's Trusted Meat Source. Logistics-First Butchery. Powered by Supabase.
+                  NAIROBI'S TRUSTED MEAT SOURCE. LOGISTICS-FIRST BUTCHERY.
                 </p>
               </div>
               <div className="space-y-8">
-                <h5 className="font-black text-[12px] uppercase tracking-[0.4em] text-gray-600">Network</h5>
+                <h5 className="font-black text-[12px] uppercase tracking-[0.4em] text-gray-600">NETWORK</h5>
                 <ul className="space-y-4 text-[13px] font-black uppercase tracking-widest">
-                  <li><Link href="/restaurants" className="hover:text-primary transition-colors">Marketplace</Link></li>
-                  <li><Link href="/profile" className="hover:text-primary transition-colors">Member Node</Link></li>
-                  <li><Link href="/checkout" className="hover:text-primary transition-colors">Global Basket</Link></li>
+                  <li><Link href="/restaurants" className="hover:text-primary transition-colors">MARKETPLACE</Link></li>
+                  <li><Link href="/profile" className="hover:text-primary transition-colors">MY PROFILE</Link></li>
+                  <li><Link href="/checkout" className="hover:text-primary transition-colors">BASKET</Link></li>
                 </ul>
               </div>
               <div className="space-y-8">
-                <h5 className="font-black text-[12px] uppercase tracking-[0.4em] text-gray-600">Protocol</h5>
+                <h5 className="font-black text-[12px] uppercase tracking-[0.4em] text-gray-600">SECURITY</h5>
                 <ul className="space-y-4 text-[13px] font-black uppercase tracking-widest text-gray-400">
-                  <li>Security SSL</li>
-                  <li>Privacy Node</li>
-                  <li>Terms of Sale</li>
+                  <li>SSL PROTECTION</li>
+                  <li>PRIVACY NODE</li>
+                  <li>TERMS OF SALE</li>
                 </ul>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/10 pt-16 gap-10">
               <p className="text-[11px] text-gray-600 font-black uppercase tracking-[0.5em]">
-                © 2026 STEAK WEST GLOBAL_LOGISTICS.
+                © 2026 STEAK WEST GLOBAL LOGISTICS.
               </p>
               <div className="flex items-center gap-10 opacity-20 filter grayscale">
                  <ShieldCheck className="w-8 h-8" />
@@ -162,8 +154,8 @@ function ProductCard({ item, idx, addToCart, toast }: { item: MenuItem, idx: num
     e.stopPropagation();
     addToCart(item);
     toast({
-      title: "NODE_COMMITTED",
-      description: `${item.name} synchronized with basket.`,
+      title: "ADDED TO BASKET",
+      description: `${item.name} ready for checkout.`,
     });
   };
 
@@ -178,7 +170,7 @@ function ProductCard({ item, idx, addToCart, toast }: { item: MenuItem, idx: num
         />
         <div className="absolute top-4 right-4 z-10">
           <Badge className="bg-black text-white border-none px-3 py-1 font-black text-[9px] uppercase tracking-widest rounded-none shadow-2xl">
-            {idx % 4 === 0 ? "PRIME_SLOT" : "FRESH_FEED"}
+            {idx % 4 === 0 ? "PRIME CUT" : "FRESH DAILY"}
           </Badge>
         </div>
       </Link>
@@ -191,7 +183,7 @@ function ProductCard({ item, idx, addToCart, toast }: { item: MenuItem, idx: num
           <div className="flex items-center gap-3 text-[10px] text-gray-400 font-black uppercase tracking-widest">
             <span className="flex items-center gap-1 text-emerald-600">LIVE</span>
             <span className="opacity-20">|</span>
-            <span className="flex items-center gap-1">20m_NODE</span>
+            <span className="flex items-center gap-1">20 MIN DELIVERY</span>
           </div>
         </Link>
 
@@ -201,7 +193,7 @@ function ProductCard({ item, idx, addToCart, toast }: { item: MenuItem, idx: num
             className="h-12 px-6 bg-black text-white text-[11px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all shadow-xl active:scale-90"
             onClick={handleAdd}
           >
-            Commit +
+            ADD +
           </Button>
         </div>
       </div>
