@@ -38,12 +38,12 @@ export function Navigation() {
           <Menu className="w-6 h-6 md:w-7 md:h-7 text-black" />
         </Button>
         <Link href="/" className="flex items-center gap-3 group">
-          <ButcheryLogo className="w-10 h-10 md:w-12 md:h-12 transition-transform group-hover:scale-110" />
+          <ButcheryLogo className="w-14 h-14 md:w-20 md:h-20 transition-transform group-hover:scale-110" />
           <div className="flex flex-col -space-y-1">
             <span className="font-headline text-xl md:text-3xl font-black tracking-tighter text-black uppercase leading-none">
               Steak West
             </span>
-            <span className="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em]">Super ya Nyama</span>
+            <span className="text-sm font-black text-primary uppercase tracking-[0.2em]">Super ya Nyama</span>
           </div>
         </Link>
       </div>

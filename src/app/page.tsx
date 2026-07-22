@@ -116,7 +116,7 @@ export default function Home() {
             <div className="relative z-10 h-full flex flex-col items-start justify-center px-8 md:px-16 py-8">
               <div className="flex flex-col space-y-6 max-w-xl">
                 <div className="flex items-center gap-4">
-                  <ButcheryLogo className="w-16 h-16 md:w-20 md:h-20" />
+                  <ButcheryLogo className="w-20 h-20 md:w-28 md:h-28" />
                   <div className="flex flex-col">
                     <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter text-white">Steak West</h2>
                     <Badge className="bg-primary text-white border-none px-3 py-1 text-sm font-black uppercase tracking-[0.2em] w-fit">
@@ -198,7 +198,7 @@ export default function Home() {
               <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 mb-8">
                 <div className="col-span-2 md:col-span-1 space-y-6">
                   <div className="flex items-center gap-3">
-                    <ButcheryLogo className="w-10 h-10" />
+                    <ButcheryLogo className="w-16 h-16" />
                     <span className="font-headline text-2xl font-black tracking-tighter text-black uppercase">Steak West</span>
                   </div>
                   <p className="text-sm font-bold text-gray-400 uppercase leading-tight max-w-[180px]">
