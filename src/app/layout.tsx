@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
     apple: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
+    shortcut: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
   },
 };
 

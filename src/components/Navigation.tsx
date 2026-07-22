@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 import { InstallAppButton } from "./InstallAppButton";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
-  <div className={cn("relative shrink-0", className)}>
+  <div className={cn("relative shrink-0 flex items-center justify-center", className)}>
     <Image 
       src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
       alt="Steak West Logo" 
@@ -37,8 +37,8 @@ export function Navigation() {
         <Button variant="ghost" size="icon" className="h-9 w-9 md:h-10 md:w-10 hover:bg-primary/5 rounded-none">
           <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
         </Button>
-        <Link href="/" className="flex items-center gap-1.5 md:gap-2 group">
-          <ButcheryLogo className="w-7 h-7 md:w-9 md:h-9" />
+        <Link href="/" className="flex items-center gap-1.5 md:gap-2 group py-1">
+          <ButcheryLogo className="w-8 h-8 md:w-10 md:h-10" />
           <div className="flex flex-col -space-y-0.5 md:-space-y-1">
             <span className="font-headline text-[13px] md:text-[16px] font-black tracking-tighter text-black uppercase leading-none whitespace-nowrap">
               Steak West
