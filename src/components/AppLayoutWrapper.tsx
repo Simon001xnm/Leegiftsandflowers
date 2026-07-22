@@ -14,19 +14,21 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   
   // Hide global elements only on purely functional pages like login
   const isLogin = pathname?.startsWith('/login');
+  const isCheckout = pathname?.startsWith('/checkout');
   
   // The user requested that the Main Nav "remain in motion" even on checkout.
-  // We hide only for minimal auth flows.
+  // We keep top nav visible on checkout, but hide the sidebar to focus the user.
   const isMinimal = isLogin;
+  const hideSidebar = isLogin || isCheckout;
 
   return (
     <div className="flex flex-col min-h-screen">
       {!isMinimal && <Navigation />}
       <div className="flex flex-grow relative">
-        {!isMinimal && <SidebarNav />}
+        {!hideSidebar && <SidebarNav />}
         <main className={cn(
           "flex-grow transition-all duration-300",
-          !isMinimal && "lg:ml-64"
+          (!hideSidebar) ? "lg:ml-64" : "ml-0"
         )}>
           {children}
         </main>

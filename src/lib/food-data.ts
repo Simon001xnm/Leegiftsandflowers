@@ -1,4 +1,3 @@
-
 export type FoodCategory = 'Raw Meat' | 'Nyama Choma' | 'Delicacies' | 'Cooked' | 'Sides' | 'Drinks' | 'Grocery' | 'Essentials';
 export type OrderStatus = 'Pending' | 'Preparing' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
 
@@ -35,7 +34,7 @@ export interface Order {
   status: OrderStatus;
   date: string;
   deliveryAddress: string;
-  hour?: number; // Added for hourly tracking
+  hour?: number; 
 }
 
 export const MOCK_RESTAURANTS: Restaurant[] = [

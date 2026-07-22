@@ -1,8 +1,7 @@
-
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
-import { MenuItem } from '@/lib/food-data';
+import type { MenuItem } from '@/lib/food-data';
 
 export interface CartItem {
   item: MenuItem;
@@ -21,25 +20,31 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+/**
+ * Stable CartProvider that handles basket persistence and global state.
+ * Refactored to prevent HMR factory instantiation errors.
+ */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // Hydrate cart from localStorage on mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('steak_west_basket_v3');
+      const saved = localStorage.getItem('steak_west_basket_v5');
       if (saved) {
         setCart(JSON.parse(saved));
       }
     } catch (e) {
-      console.warn('Basket sync paused');
+      console.warn('Basket hydration failed');
     }
     setIsInitialized(true);
   }, []);
 
+  // Persist cart changes
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem('steak_west_basket_v3', JSON.stringify(cart));
+      localStorage.setItem('steak_west_basket_v5', JSON.stringify(cart));
     }
   }, [cart, isInitialized]);
 

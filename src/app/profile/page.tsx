@@ -13,6 +13,10 @@ import { doc } from "firebase/firestore";
 import { useFirestore } from "@/firebase";
 import { useMemoFirebase } from "@/firebase/use-memo-firebase";
 
+/**
+ * High-density Merchant Hub and Profile page.
+ * Handles both authenticated and guest (logged-out) states.
+ */
 export default function ProfilePage() {
   const { user, loading: authLoading } = useUser();
   const auth = useAuth();
@@ -50,6 +54,7 @@ export default function ProfilePage() {
     </div>
   );
 
+  // Professional Guest View
   if (!user) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
