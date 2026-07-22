@@ -1,4 +1,3 @@
-
 "use client";
 
 import { use, useState, useMemo } from "react";
@@ -13,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 // Custom walking icon for native feel
 const WalkingIcon = ({ className }: { className?: string }) => (
@@ -97,14 +97,14 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute bottom-0 left-0 w-full p-6 lg:p-10">
             <div className="container mx-auto">
-              <Link href="/" className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-3 text-xs font-black uppercase tracking-widest group">
+              <Link href="/" className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-3 text-[14px] font-black uppercase tracking-widest group">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Marketplace
               </Link>
               <div className="max-w-4xl">
                 <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest">{restaurant.category}</Badge>
                 <h1 className="text-3xl lg:text-6xl font-black font-headline text-white mb-2 uppercase tracking-tighter">{restaurant.name}</h1>
-                <div className="flex flex-wrap items-center gap-4 text-white/90 text-sm font-bold uppercase tracking-widest">
+                <div className="flex flex-wrap items-center gap-4 text-white/90 text-[14px] font-bold uppercase tracking-widest">
                   <div className="flex items-center gap-2"><Star className="w-4 h-4 text-accent fill-accent" /> {restaurant.rating}</div>
                   <div className="flex items-center gap-2 opacity-60">•</div>
                   <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> {restaurant.deliveryTime}</div>
@@ -125,7 +125,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                 <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
                   <TabsList className="bg-gray-100 p-1.5 h-11 rounded-xl">
                     {vendorCategories.map(cat => (
-                      <TabsTrigger key={cat} value={cat} className="rounded-lg px-5 font-black text-xs uppercase tracking-widest">{cat}</TabsTrigger>
+                      <TabsTrigger key={cat} value={cat} className="rounded-lg px-5 font-black text-[14px] uppercase tracking-widest">{cat}</TabsTrigger>
                     ))}
                   </TabsList>
                 </div>
@@ -146,7 +146,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                 <section className="pt-12 space-y-8">
                   <div className="flex items-center justify-between">
                     <h2 className="text-lg md:text-3xl font-black text-black uppercase tracking-tighter">You might also like</h2>
-                    <Link href="/restaurants" className="text-xs font-black text-primary hover:underline uppercase tracking-widest">Explore All</Link>
+                    <Link href="/restaurants" className="text-[14px] font-black text-primary hover:underline uppercase tracking-widest">Explore All</Link>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                     {relatedItems.map((item) => (
@@ -162,10 +162,10 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
               <Card className="border shadow-2xl rounded-[2rem] overflow-hidden bg-white">
                 <CardHeader className="bg-gray-50 py-5 px-8 border-b">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-3 text-black">
+                    <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3 text-black">
                       <ShoppingCart className="w-5 h-5" /> Your Basket
                     </CardTitle>
-                    {cart.length > 0 && <Badge className="rounded-full bg-primary text-white text-xs h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
+                    {cart.length > 0 && <Badge className="rounded-full bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
                   </div>
                 </CardHeader>
                 
@@ -173,14 +173,14 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                   {cart.length === 0 ? (
                     <div className="py-14 text-center space-y-3">
                       <Utensils className="w-12 h-12 mx-auto text-gray-200" />
-                      <p className="text-sm font-black text-gray-400 uppercase tracking-widest">Select items to start</p>
+                      <p className="text-[14px] font-black text-gray-400 uppercase tracking-widest">Select items to start</p>
                     </div>
                   ) : (
                     <div className="space-y-6 max-h-[50vh] overflow-auto pr-2 no-scrollbar">
                       {cart.map((cartItem) => (
                         <div key={cartItem.item.id} className="flex flex-col gap-2 border-b pb-4 last:border-0 last:pb-0 group">
                           <div className="flex justify-between items-start gap-3">
-                            <p className="text-sm font-black text-black uppercase tracking-tighter truncate flex-grow">{cartItem.item.name}</p>
+                            <p className="text-[14px] font-black text-black uppercase tracking-tighter truncate flex-grow">{cartItem.item.name}</p>
                             <Button variant="ghost" size="icon" className="h-6 w-6 text-gray-400 opacity-0 group-hover:opacity-100" onClick={() => clearCartItem(cartItem.item.id)}>
                               <X className="w-4 h-4" />
                             </Button>
@@ -188,10 +188,10 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-4 bg-gray-100 rounded-xl px-3 py-1.5">
                               <button onClick={() => removeFromCart(cartItem.item.id)} className="text-black hover:scale-110"><Minus className="w-4 h-4" /></button>
-                              <span className="text-sm font-black min-w-[24px] text-center">{cartItem.quantity}</span>
+                              <span className="text-[14px] font-black min-w-[24px] text-center">{cartItem.quantity}</span>
                               <button onClick={() => addToCart(cartItem.item)} className="text-black hover:scale-110"><Plus className="w-4 h-4" /></button>
                             </div>
-                            <span className="font-black text-sm">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</span>
+                            <span className="font-black text-[14px]">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</span>
                           </div>
                         </div>
                       ))}
@@ -200,11 +200,11 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
                   {subtotal > 0 && (
                     <div className="mt-8 space-y-3 pt-6 border-t border-dashed">
-                      <div className="flex justify-between text-xs font-bold text-gray-500 uppercase tracking-widest">
+                      <div className="flex justify-between text-[14px] font-bold text-gray-500 uppercase tracking-widest">
                         <span>Subtotal</span>
                         <span>KES {subtotal.toLocaleString()}</span>
                       </div>
-                      <div className="flex justify-between text-xs font-bold text-gray-500 uppercase tracking-widest">
+                      <div className="flex justify-between text-[14px] font-bold text-gray-500 uppercase tracking-widest">
                         <span className="flex items-center gap-2"><Bike className="w-4 h-4" /> Delivery</span>
                         <span>KES {deliveryFee.toLocaleString()}</span>
                       </div>
@@ -221,7 +221,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
                 <CardFooter className="p-6 pt-0">
                   <Link href={`/checkout/${restaurant.id}`} className="w-full">
-                    <Button className="w-full h-14 rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
+                    <Button className="w-full h-14 rounded-2xl text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
                       Checkout Order <ArrowLeft className="w-4 h-4 rotate-180 ml-3" />
                     </Button>
                   </Link>
@@ -246,12 +246,12 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         {!isSmall && (
           <div className="p-4 flex-grow space-y-2 flex flex-col justify-center">
             <div className="flex flex-col">
-              <h3 className="font-black text-sm md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
+              <h3 className="font-black text-[14px] md:text-base text-black uppercase tracking-tighter line-clamp-1 group-hover:text-primary transition-colors">{item.name}</h3>
               {item.isPopular && <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Top Pick</span>}
             </div>
-            <p className="text-xs text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
+            <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-2">
-              <span className="font-black text-sm md:text-base text-black">KES {item.price.toLocaleString()}</span>
+              <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
               <Button size="icon" className="w-10 h-10 rounded-xl bg-black hover:bg-black/90 text-white" onClick={onAdd}>
                 <Plus className="w-5 h-5" />
               </Button>
@@ -280,7 +280,7 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
 
           {isSmall && (
              <div className="absolute bottom-2 left-2 z-10">
-                <div className="bg-black/90 text-white text-sm font-black px-2 py-1 rounded-lg">
+                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1 rounded-lg">
                    KES {item.price.toLocaleString()}
                 </div>
              </div>
@@ -289,8 +289,8 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         
         {isSmall && (
           <div className="p-4 space-y-2">
-            <h3 className="font-black text-sm text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <Button className="w-full h-10 rounded-xl bg-black text-xs font-black uppercase tracking-widest" onClick={onAdd}>
+            <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
+            <Button className="w-full h-10 rounded-xl bg-black text-[14px] font-black uppercase tracking-widest" onClick={onAdd}>
               Add to Basket
             </Button>
           </div>
