@@ -20,7 +20,11 @@ export const metadata: Metadata = {
     title: 'Steak West',
   },
   icons: {
-    icon: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
+    icon: [
+      { url: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png' },
+      { url: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png', sizes: '32x32', type: 'image/png' },
+      { url: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png', sizes: '16x16', type: 'image/png' },
+    ],
     apple: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
     shortcut: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
   },
@@ -39,6 +43,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="icon" href="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" />
+        <link rel="shortcut icon" href="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" />
+        <link rel="apple-touch-icon" href="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ff0000" />
       </head>
