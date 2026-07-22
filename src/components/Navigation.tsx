@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -15,11 +14,10 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-// Butchery Logo using the official brand image
 const ButcheryLogo = ({ className }: { className?: string }) => (
   <div className={cn("relative overflow-hidden shrink-0", className)}>
     <Image 
-      src="/WhatsApp Image 2026-07-22 at 10.09.53.jpeg" 
+      src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
       alt="Steak West Logo" 
       fill 
       className="object-contain"
@@ -33,7 +31,6 @@ export function Navigation() {
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-14 md:h-16 flex items-center gap-3 md:gap-6 shadow-sm">
-      {/* Brand & Menu */}
       <div className="flex items-center gap-2 md:gap-4 shrink-0">
         <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 md:h-10 md:w-10 hover:bg-primary/5">
           <Menu className="w-5 h-5 md:w-6 md:h-6 text-black" />
@@ -49,7 +46,6 @@ export function Navigation() {
         </Link>
       </div>
 
-      {/* Desktop Toggle */}
       <div className="hidden lg:flex items-center bg-gray-100 rounded-full p-1 shrink-0 ml-4">
         <button
           onClick={() => setToggle('delivery')}
@@ -71,14 +67,12 @@ export function Navigation() {
         </button>
       </div>
 
-      {/* Desktop Address */}
       <div className="hidden xl:flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-full cursor-pointer shrink-0 border border-transparent hover:border-gray-100 transition-all">
         <MapPin className="w-4 h-4 text-primary" />
         <span className="text-xs font-black uppercase tracking-tighter whitespace-nowrap">Utalii St • ASAP</span>
         <ChevronDown className="w-4 h-4 text-gray-400" />
       </div>
 
-      {/* Search Bar */}
       <div className="flex-grow relative max-w-2xl group">
         <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 md:w-4 md:h-4 text-gray-400 group-focus-within:text-primary transition-colors" />
         <Input 
@@ -87,7 +81,6 @@ export function Navigation() {
         />
       </div>
 
-      {/* Cart Icon */}
       <div className="flex items-center gap-2 shrink-0">
         <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 rounded-full h-9 w-9 md:h-11 md:w-11 shadow-lg shadow-black/10 transition-transform active:scale-95">
           <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
