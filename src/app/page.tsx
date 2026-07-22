@@ -1,8 +1,6 @@
 'use client';
 
 import Link from "next/link";
-import { Navigation } from "@/components/Navigation";
-import { SidebarNav } from "@/components/SidebarNav";
 import { PromotionalPopup } from "@/components/PromotionalPopup";
 import { MOCK_MENU, MenuItem } from "@/lib/food-data";
 import { 

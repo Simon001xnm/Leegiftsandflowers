@@ -17,12 +17,12 @@ import { InstallAppButton } from "./InstallAppButton";
 import { useCart } from "@/context/CartContext";
 
 const ButcheryLogo = () => (
-  <div className="relative shrink-0 flex items-center justify-center pt-1">
+  <div className="relative shrink-0 flex items-center justify-center pt-2">
     <Image 
       src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
       alt="Steak West Logo" 
       width={100}
-      height={32}
+      height={28}
       className="object-contain h-7 w-auto"
       priority
     />
@@ -92,7 +92,7 @@ export function Navigation() {
         <Link href="/checkout">
           <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 h-9 w-9 md:h-10 md:w-10 shadow-xl shadow-black/10 transition-transform active:scale-95 rounded-none">
             <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="absolute -top-1 -right-1 bg-primary text-white text-[9px] w-4 h-4 flex items-center justify-center font-black border-2 border-white">
+            <span className="absolute -top-1 -right-1 bg-primary text-white text-[9px] w-4 h-4 flex items-center justify-center font-black border-2 border-white rounded-full-important">
               {itemCount}
             </span>
           </Button>

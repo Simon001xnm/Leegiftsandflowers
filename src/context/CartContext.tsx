@@ -18,23 +18,23 @@ interface CartContextType {
   itemCount: number;
 }
 
-const CartContext = createContext<CartContextType | null>(null);
+const Context = createContext<CartContextType | undefined>(undefined);
 
 /**
- * Robust Singleton Provider for Cart State.
- * Resolves HMR "Module factory not available" issues.
+ * CartProvider - High-stability state management.
+ * Resolves Next.js HMR instantiation issues.
  */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('steak_west_basket_v5');
+    const saved = localStorage.getItem('steak_west_v6_basket');
     if (saved) {
       try {
         setCart(JSON.parse(saved));
       } catch (e) {
-        console.error('Basket restore failed');
+        console.warn('Basket corrupted, resetting.');
       }
     }
     setIsReady(true);
@@ -42,7 +42,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (isReady) {
-      localStorage.setItem('steak_west_basket_v5', JSON.stringify(cart));
+      localStorage.setItem('steak_west_v6_basket', JSON.stringify(cart));
     }
   }, [cart, isReady]);
 
@@ -89,13 +89,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     itemCount
   }), [cart, addToCart, removeFromCart, clearItem, clearCart, subtotal, itemCount]);
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 
 export function useCart() {
-  const context = useContext(CartContext);
-  if (!context) {
-    // Return a dummy state to prevent crashes before provider loads
+  const context = useContext(Context);
+  if (context === undefined) {
     return {
       cart: [],
       addToCart: () => {},
