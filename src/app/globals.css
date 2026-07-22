@@ -29,9 +29,15 @@
 
 @layer base {
   * {
-    /* Enforce sharp rectangular corners globally */
-    @apply border-border rounded-none !important;
+    /* Enforce sharp rectangular corners for general layout elements */
+    @apply border-border;
   }
+  
+  /* Standard containers are rectangles */
+  .card, [role="tabpanel"], button:not(.rounded-full), input {
+    @apply rounded-none;
+  }
+
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
@@ -39,7 +45,6 @@
     @apply font-headline tracking-tighter text-black uppercase;
   }
   
-  /* Ensure primary text is at least 14px */
   p, span, div, button, input {
     @apply text-[14px];
   }

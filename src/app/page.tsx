@@ -16,7 +16,7 @@ import {
   Instagram,
   TrendingUp,
   Clock,
-  Truck,
+  Plus,
   Youtube,
   Linkedin,
   CreditCard,
@@ -106,10 +106,10 @@ export default function Home() {
               </h1>
 
               <div className="flex flex-col sm:flex-row gap-5 pt-4 w-full sm:w-auto">
-                <Button className="h-16 md:h-20 px-12 md:px-16 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[14px] uppercase tracking-widest w-full sm:w-auto">
+                <Button className="h-16 md:h-20 px-12 md:px-16 bg-primary text-white hover:bg-primary/90 font-black shadow-2xl transition-all active:scale-95 text-[14px] uppercase tracking-widest w-full sm:w-auto rounded-none">
                   Pick it up
                 </Button>
-                <Button variant="outline" className="h-16 md:h-20 px-12 md:px-16 border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full sm:w-auto">
+                <Button variant="outline" className="h-16 md:h-20 px-12 md:px-16 border-4 border-white text-white hover:bg-white hover:text-black font-black transition-all text-[14px] uppercase tracking-widest bg-transparent w-full sm:w-auto rounded-none">
                   Browse Deals
                 </Button>
               </div>
@@ -136,7 +136,7 @@ export default function Home() {
         <section className="bg-primary/5 p-0 border-y border-primary/10">
           <div className="flex justify-between items-end p-6 bg-white border-b">
             <div className="space-y-2">
-              <Badge className="bg-primary text-white font-black uppercase tracking-widest text-[14px] px-4 py-1">Top Sellers</Badge>
+              <Badge className="bg-primary text-white font-black uppercase tracking-widest text-[14px] px-4 py-1 rounded-none">Top Sellers</Badge>
               <h2 className="text-2xl md:text-5xl font-black text-black uppercase tracking-tighter leading-none">Nairobi Originals</h2>
             </div>
             <Link href="/restaurants" className="text-[14px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
@@ -153,7 +153,7 @@ export default function Home() {
             <h2 className="text-2xl md:text-5xl font-black text-black uppercase tracking-tighter leading-none mb-6">Fresh Market</h2>
             <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
               {FILTER_PILLS.map((pill) => (
-                <Button key={pill} variant="outline" className="bg-gray-50 border-none text-[14px] font-black px-8 h-12 shrink-0 uppercase tracking-widest">
+                <Button key={pill} variant="outline" className="bg-gray-50 border-none text-[14px] font-black px-8 h-12 shrink-0 uppercase tracking-widest rounded-none">
                   {pill}
                 </Button>
               ))}
@@ -209,8 +209,8 @@ export default function Home() {
               </div>
 
               <div className="col-span-2 md:col-span-1 space-y-4 flex md:flex-col items-center md:items-end justify-center gap-4">
-                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase">App Store</Button>
-                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase">Play Store</Button>
+                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase rounded-none">App Store</Button>
+                 <Button className="h-14 w-[160px] bg-black text-white text-[14px] font-black uppercase rounded-none">Play Store</Button>
               </div>
             </div>
 
@@ -251,7 +251,7 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
   return (
     <Link 
       href={`/restaurants/${item.restaurantId}`}
-      className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white"
+      className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white rounded-none"
     >
       <div className="relative aspect-square overflow-hidden bg-gray-50">
         <Image 
@@ -272,26 +272,26 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
         </div>
 
         <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
-          <Badge className="bg-white/95 text-black border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest">
+          <Badge className="bg-white/95 text-black border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest rounded-none">
             {idx % 3 === 0 ? "Premium" : "Fresh"}
           </Badge>
           {item.isPopular && (
-            <Badge className="bg-primary text-white border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest">
+            <Badge className="bg-primary text-white border-none px-4 py-1.5 font-black text-[14px] uppercase tracking-widest rounded-none">
               Hot
             </Badge>
           )}
         </div>
 
-        {/* Hover Overlay with Truck Icon */}
+        {/* Hover Overlay with Rounded Green Background */}
         <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
-          <div className="bg-white px-6 py-3 flex items-center gap-3 shadow-xl">
-            <Truck className="w-6 h-6 text-black" />
-            <span className="text-[14px] font-black text-black uppercase tracking-widest">Express</span>
+          <div className="bg-emerald-500 rounded-full px-8 py-4 flex items-center gap-3 shadow-xl transform scale-90 group-hover:scale-100 transition-transform">
+            <Plus className="w-5 h-5 text-white" />
+            <span className="text-[14px] font-black text-white uppercase tracking-widest">Add</span>
           </div>
         </div>
 
         <div className="absolute bottom-4 left-4 z-10">
-           <div className="bg-black/90 text-white text-lg sm:text-xl font-black px-4 py-2 uppercase tracking-tighter">
+           <div className="bg-black/90 text-white text-lg sm:text-xl font-black px-4 py-2 uppercase tracking-tighter rounded-none">
               KES {item.price.toLocaleString()}
            </div>
         </div>

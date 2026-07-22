@@ -1,4 +1,3 @@
-
 "use client";
 
 import { use, useState, useMemo } from "react";
@@ -6,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS, MOCK_MENU, MenuItem } from "@/lib/food-data";
-import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Utensils, X, Truck } from "lucide-react";
+import { Star, Clock, MapPin, Bike, ArrowLeft, Plus, Minus, ShoppingCart, Utensils, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -78,7 +77,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                 Pick it up
               </Link>
               <div className="max-w-4xl">
-                <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest">{restaurant.category}</Badge>
+                <Badge className="mb-3 bg-primary text-white border-none text-[10px] uppercase font-black tracking-widest rounded-none">{restaurant.category}</Badge>
                 <h1 className="text-3xl lg:text-6xl font-black font-headline text-white mb-2 uppercase tracking-tighter">{restaurant.name}</h1>
                 <div className="flex flex-wrap items-center gap-4 text-white/90 text-[14px] font-bold uppercase tracking-widest">
                   <div className="flex items-center gap-2"><Star className="w-4 h-4 text-accent fill-accent" /> {restaurant.rating}</div>
@@ -98,9 +97,9 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
             <div className="lg:col-span-8 space-y-16">
               <Tabs defaultValue={vendorCategories[0]} className="w-full">
                 <div className="sticky top-14 md:top-16 z-20 bg-white/95 backdrop-blur-sm py-3 border-b mb-8 flex items-center justify-between no-scrollbar overflow-x-auto">
-                  <TabsList className="bg-gray-100 p-1.5 h-11">
+                  <TabsList className="bg-gray-100 p-1.5 h-11 rounded-none">
                     {vendorCategories.map(cat => (
-                      <TabsTrigger key={cat} value={cat} className="px-5 font-black text-[14px] uppercase tracking-widest">{cat}</TabsTrigger>
+                      <TabsTrigger key={cat} value={cat} className="px-5 font-black text-[14px] uppercase tracking-widest rounded-none">{cat}</TabsTrigger>
                     ))}
                   </TabsList>
                 </div>
@@ -133,13 +132,13 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
             {/* Sticky Basket */}
             <div className="lg:col-span-4 sticky top-20 lg:top-24 space-y-6">
-              <Card className="border shadow-2xl bg-white">
+              <Card className="border shadow-2xl bg-white rounded-none">
                 <CardHeader className="bg-gray-50 py-5 px-8 border-b">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3 text-black">
                       <ShoppingCart className="w-5 h-5" /> Your Basket
                     </CardTitle>
-                    {cart.length > 0 && <Badge className="bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0">{cart.length}</Badge>}
+                    {cart.length > 0 && <Badge className="bg-primary text-white text-[14px] h-6 w-6 flex items-center justify-center p-0 rounded-none">{cart.length}</Badge>}
                   </div>
                 </CardHeader>
                 
@@ -155,7 +154,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                         <div key={cartItem.item.id} className="flex flex-col gap-2 border-b pb-4 last:border-0 last:pb-0 group">
                           <div className="flex justify-between items-start gap-3">
                             <p className="text-[14px] font-black text-black uppercase tracking-tighter truncate flex-grow">{cartItem.item.name}</p>
-                            <Button variant="ghost" size="icon" className="h-6 w-6 text-gray-400 opacity-0 group-hover:opacity-100" onClick={() => clearCartItem(cartItem.item.id)}>
+                            <Button variant="ghost" size="icon" className="h-6 w-6 text-gray-400 opacity-0 group-hover:opacity-100 rounded-none" onClick={() => clearCartItem(cartItem.item.id)}>
                               <X className="w-4 h-4" />
                             </Button>
                           </div>
@@ -195,7 +194,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 
                 <CardFooter className="p-6 pt-0">
                   <Link href={`/checkout/${restaurant.id}`} className="w-full">
-                    <Button className="w-full h-14 text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10" disabled={cart.length === 0}>
+                    <Button className="w-full h-14 text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10 rounded-none" disabled={cart.length === 0}>
                       Checkout Order <ArrowLeft className="w-4 h-4 rotate-180 ml-3" />
                     </Button>
                   </Link>
@@ -212,7 +211,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
 function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAdd: () => void; isSmall?: boolean }) {
   return (
     <Card className={cn(
-      "overflow-hidden border-r border-b shadow-none hover-heartbeat bg-white",
+      "overflow-hidden border-r border-b shadow-none hover-heartbeat bg-white rounded-none",
       isSmall && "flex-col"
     )}>
       <div className={cn("flex", isSmall ? "flex-col h-auto" : "h-36 md:h-44")}>
@@ -225,8 +224,13 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             <p className="text-[14px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-2">
               <span className="font-black text-[14px] md:text-base text-black">KES {item.price.toLocaleString()}</span>
-              <Button size="icon" className="w-10 h-10 bg-black hover:bg-black/90 text-white" onClick={onAdd}>
-                <Truck className="w-5 h-5" />
+              {/* Add trigger with rounded green background */}
+              <Button 
+                size="icon" 
+                className="w-10 h-10 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg" 
+                onClick={onAdd}
+              >
+                <Plus className="w-5 h-5" />
               </Button>
             </div>
           </div>
@@ -245,14 +249,14 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
           </div>
 
           <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-             <div className="bg-white/90 p-2 shadow-2xl">
-                <Truck className="w-6 h-6 text-black" />
+             <div className="bg-emerald-500 rounded-full p-3 shadow-2xl scale-75 group-hover:scale-100 transition-transform">
+                <Plus className="w-6 h-6 text-white" />
              </div>
           </div>
 
           {isSmall && (
              <div className="absolute bottom-2 left-2 z-10">
-                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1">
+                <div className="bg-black/90 text-white text-[14px] font-black px-2 py-1 rounded-none">
                    KES {item.price.toLocaleString()}
                 </div>
              </div>
@@ -262,8 +266,8 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
         {isSmall && (
           <div className="p-4 space-y-2 bg-white">
             <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1">{item.name}</h3>
-            <Button className="w-full h-10 bg-black text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2" onClick={onAdd}>
-              <Truck className="w-4 h-4" /> Order Now
+            <Button className="w-full h-10 bg-emerald-500 hover:bg-emerald-600 text-white text-[14px] font-black uppercase tracking-widest flex items-center justify-center gap-2 rounded-full" onClick={onAdd}>
+              <Plus className="w-4 h-4" /> Add
             </Button>
           </div>
         )}
