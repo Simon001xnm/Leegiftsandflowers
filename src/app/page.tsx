@@ -119,10 +119,12 @@ export default function Home() {
       <div className="flex flex-grow relative">
         <SidebarNav />
         
-        <main className="flex-grow lg:ml-64 p-1.5 md:p-4 lg:p-6 space-y-4 md:space-y-8">
-          {/* Hero Section - Optimized Mobile Density */}
+        {/* Main Content with padding for mobile navigation to ensure footer is reachable */}
+        <main className="flex-grow lg:ml-64 p-1.5 md:p-4 lg:p-6 space-y-4 md:space-y-8 pb-20 md:pb-8">
+          
+          {/* Hero Section - High Density & Cinematic */}
           <div className="relative min-h-[260px] md:min-h-[420px] w-full rounded-xl md:rounded-[2rem] overflow-hidden bg-black flex flex-col lg:flex-row shadow-xl border border-white/5">
-            <div className="flex-1 p-3 md:p-8 lg:p-12 flex flex-col justify-center items-start space-y-3 md:space-y-6 z-10 bg-white order-2 lg:order-1 relative">
+            <div className="flex-1 p-4 md:p-8 lg:p-12 flex flex-col justify-center items-start space-y-3 md:space-y-6 z-10 bg-white order-2 lg:order-1 relative">
               <Badge className="bg-primary text-white border-none px-2 md:px-4 py-0.5 md:py-1.5 text-[7px] md:text-[9px] font-black uppercase tracking-[0.2em]">
                 Authentic Nairobi
               </Badge>
@@ -170,8 +172,9 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Quick Category Scroller */}
           <section className="space-y-1.5 md:space-y-4">
-            <h2 className="text-xs md:text-xl font-black text-black uppercase tracking-tighter px-0.5">Categories</h2>
+            <h2 className="text-[10px] md:text-xl font-black text-black uppercase tracking-tighter px-0.5">Quick Select</h2>
             <div className="flex gap-3 md:gap-6 overflow-x-auto no-scrollbar pb-1 px-0.5">
               {CATEGORIES.map((cat) => (
                 <Link key={cat.label} href={cat.href} className="flex flex-col items-center gap-1 md:gap-2 group shrink-0">
@@ -184,10 +187,11 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Specialty Vendor Scroller */}
           <section className="space-y-1.5 md:space-y-4">
             <div className="flex items-center justify-between px-0.5">
-              <h2 className="text-xs md:text-xl font-black text-black uppercase tracking-tighter">Specialty Vendors</h2>
-              <Link href="/restaurants" className="text-[7px] md:text-[10px] font-black text-primary hover:underline uppercase tracking-widest">See All</Link>
+              <h2 className="text-[10px] md:text-xl font-black text-black uppercase tracking-tighter">Premium Stores</h2>
+              <Link href="/restaurants" className="text-[7px] md:text-[10px] font-black text-primary hover:underline uppercase tracking-widest">View All</Link>
             </div>
             <div className="flex gap-3 md:gap-5 overflow-x-auto no-scrollbar pb-1 px-0.5">
               {MOCK_RESTAURANTS.map((shop) => (
@@ -201,10 +205,11 @@ export default function Home() {
             </div>
           </section>
 
+          {/* High Density Delicacy Section */}
           <section className="space-y-3 md:space-y-6 bg-gray-50 -mx-1.5 md:-mx-4 p-2 md:p-8 rounded-xl md:rounded-[2rem]">
             <div className="space-y-0.5">
               <Badge className="bg-accent text-black font-black uppercase tracking-widest text-[7px] md:text-[9px]">Hot Now</Badge>
-              <h2 className="text-sm md:text-3xl font-black text-black uppercase tracking-tighter leading-none">Nairobi's Best</h2>
+              <h2 className="text-sm md:text-3xl font-black text-black uppercase tracking-tighter leading-none">Nairobi Originals</h2>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
               {allDelicacies.slice(0, 10).map((item, idx) => (
@@ -213,6 +218,7 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Main Marketplace Grid - High Capacity */}
           <section className="space-y-3 md:space-y-6">
             <div className="flex flex-col gap-1.5">
               <h2 className="text-sm md:text-3xl font-black text-black uppercase tracking-tighter leading-none">Marketplace</h2>
@@ -231,127 +237,123 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Compact Premium Footer */}
+          {/* Ultra-Congested High-Density Footer (Appears at end of scroll) */}
           <footer className="pt-6 md:pt-10 border-t mt-8 md:mt-12 bg-white">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8 mb-8 md:mb-12">
-                <div className="col-span-2 md:col-span-4 lg:col-span-1 space-y-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8 mb-8">
+                <div className="col-span-2 md:col-span-4 lg:col-span-1 space-y-3">
                   <div className="flex items-center gap-1.5">
-                    <ButcheryLogo className="w-6 h-6 text-black" />
-                    <span className="font-headline text-xl font-black tracking-tighter text-black uppercase">Steak West</span>
+                    <ButcheryLogo className="w-5 h-5 text-black" />
+                    <span className="font-headline text-lg font-black tracking-tighter text-black uppercase">Steak West</span>
                   </div>
-                  <div className="flex gap-3">
-                    <Link href="#" className="w-7 h-7 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
-                      <Facebook className="w-3.5 h-3.5 text-gray-600" />
+                  <div className="flex gap-2">
+                    <Link href="#" className="w-6 h-6 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+                      <Facebook className="w-3 h-3 text-gray-600" />
                     </Link>
-                    <Link href="#" className="w-7 h-7 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
-                      <Twitter className="w-3.5 h-3.5 text-gray-600" />
+                    <Link href="#" className="w-6 h-6 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+                      <Twitter className="w-3 h-3 text-gray-600" />
                     </Link>
-                    <Link href="#" className="w-7 h-7 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
-                      <Instagram className="w-3.5 h-3.5 text-gray-600" />
+                    <Link href="#" className="w-6 h-6 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+                      <Instagram className="w-3 h-3 text-gray-600" />
                     </Link>
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">Company</h4>
-                  <ul className="space-y-1.5">
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors">About Us</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors">Careers</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors">Press</Link></li>
+                <div className="space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-gray-400">Company</h4>
+                  <ul className="space-y-1">
+                    <li><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-black">About Us</Link></li>
+                    <li><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-black">Careers</Link></li>
                   </ul>
                 </div>
 
-                <div className="space-y-3">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">Marketplace</h4>
-                  <ul className="space-y-1.5">
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors">Premium Beef</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors">Nyama Choma</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors">Mutura Special</Link></li>
+                <div className="space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-gray-400">Shop</h4>
+                  <ul className="space-y-1">
+                    <li><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-black">Beef Cuts</Link></li>
+                    <li><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-black">Nyama Choma</Link></li>
                   </ul>
                 </div>
 
-                <div className="space-y-3">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">Help</h4>
-                  <ul className="space-y-1.5">
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors flex items-center gap-1.5"><HelpCircle className="w-3 h-3" /> FAQ</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors flex items-center gap-1.5"><FileText className="w-3 h-3" /> Privacy Policy</Link></li>
-                    <li><Link href="#" className="text-[11px] font-bold text-gray-600 hover:text-black transition-colors flex items-center gap-1.5"><FileText className="w-3 h-3" /> Terms of Service</Link></li>
+                <div className="space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-gray-400">Support</h4>
+                  <ul className="space-y-1">
+                    <li><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-black">FAQs</Link></li>
+                    <li><Link href="#" className="text-[10px] font-bold text-gray-600 hover:text-black">Terms</Link></li>
                   </ul>
                 </div>
 
-                <div className="col-span-2 md:col-span-1 lg:col-span-1 space-y-3">
-                  <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400">Download App</h4>
-                  <div className="flex flex-col gap-1.5">
-                    <Button variant="outline" className="h-8 w-28 rounded-md bg-black text-white border-none hover:bg-black/90 text-[9px] font-bold p-0 flex items-center justify-center gap-1.5">
-                      <Globe className="w-3.5 h-3.5" /> App Store
+                <div className="col-span-2 md:col-span-1 lg:col-span-1 space-y-2">
+                  <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-gray-400">App</h4>
+                  <div className="flex gap-2">
+                    <Button variant="outline" className="h-7 w-20 rounded bg-black text-white border-none hover:bg-black/90 text-[8px] font-bold p-0">
+                      App Store
                     </Button>
-                    <Button variant="outline" className="h-8 w-28 rounded-md bg-black text-white border-none hover:bg-black/90 text-[9px] font-bold p-0 flex items-center justify-center gap-1.5">
-                      <ShoppingBag className="w-3.5 h-3.5" /> Google Play
+                    <Button variant="outline" className="h-7 w-20 rounded bg-black text-white border-none hover:bg-black/90 text-[8px] font-bold p-0">
+                      Play Store
                     </Button>
                   </div>
                 </div>
               </div>
 
-              {/* Congested Final Pad */}
-              <div className="border-t pt-6 pb-20 md:pb-8 space-y-6">
-                <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-                  <div className="flex flex-col md:flex-row items-center gap-4 lg:gap-10">
-                    <div className="text-left space-y-1">
-                      <h4 className="text-[7px] font-black uppercase tracking-[0.2em] text-gray-400">Official Banking Partners</h4>
+              {/* Congested "Last Pad" - Official Attribution & Bank Details */}
+              <div className="border-t pt-4 space-y-4">
+                <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+                  <div className="flex flex-col md:flex-row items-center gap-4 lg:gap-8">
+                    <div className="text-left space-y-0.5">
+                      <h4 className="text-[7px] font-black uppercase tracking-[0.2em] text-gray-400">Official Banking Partner</h4>
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-1.5">
-                          <Landmark className="w-3.5 h-3.5 text-black" />
-                          <div className="text-[9px] font-black uppercase">
+                          <Landmark className="w-3 h-3 text-black" />
+                          <div className="text-[8px] font-black uppercase">
                             <span className="text-gray-400">Bank:</span> Equity Bank Kenya
                           </div>
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <CreditCard className="w-3.5 h-3.5 text-black" />
-                          <div className="text-[9px] font-black uppercase">
+                          <CreditCard className="w-3 h-3 text-black" />
+                          <div className="text-[8px] font-black uppercase">
                             <span className="text-gray-400">Acc:</span> 1234567890123
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="text-left space-y-1.5">
-                      <h4 className="text-[7px] font-black uppercase tracking-[0.2em] text-gray-400 text-center md:text-left">Accepted Payments</h4>
-                      <div className="grid grid-cols-4 md:flex items-center gap-1 md:gap-2">
+                    <div className="text-left space-y-0.5">
+                      <h4 className="text-[7px] font-black uppercase tracking-[0.2em] text-gray-400">Payments</h4>
+                      <div className="grid grid-cols-4 md:flex items-center gap-1 md:gap-1.5">
                         {PAYMENT_METHODS.map((payment) => (
-                          <div key={payment.name} className="flex items-center gap-1 bg-gray-50 px-1.5 py-0.5 rounded border border-gray-100 hover:border-primary/20 transition-colors group cursor-default">
+                          <div key={payment.name} className="flex items-center gap-1 bg-gray-50 px-1 py-0.5 rounded border border-gray-100 cursor-default">
                             {payment.color ? (
-                              <div className={cn("w-1 h-1 rounded-full shrink-0", payment.color)} />
+                              <div className={cn("w-1 h-1 rounded-full", payment.color)} />
                             ) : (
-                              <payment.icon className="w-1.5 h-1.5 text-gray-400 group-hover:text-black" />
+                              <payment.icon className="w-1.5 h-1.5 text-gray-400" />
                             )}
-                            <span className="text-[6.5px] md:text-[7.5px] font-black uppercase truncate text-gray-500 group-hover:text-black">{payment.name}</span>
+                            <span className="text-[6.5px] font-black uppercase text-gray-500">{payment.name}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center lg:items-end text-center lg:text-right gap-1">
-                    <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest leading-none">
+                  <div className="flex flex-col items-center lg:items-end text-center lg:text-right">
+                    <p className="text-[7px] font-black text-gray-400 uppercase tracking-widest leading-none mb-0.5">
                       Engineered by
                     </p>
                     <Link href="https://simonstyles.co.ke" target="_blank" className="group flex flex-col items-center lg:items-end">
-                      <span className="text-[11px] md:text-xs font-black text-black uppercase tracking-tighter group-hover:text-primary transition-colors">
+                      <span className="text-[9px] font-black text-black uppercase tracking-tighter group-hover:text-primary transition-colors">
                         Simon Styles Technologies Limited
                       </span>
-                      <span className="text-[7.5px] font-bold text-primary group-hover:underline">www.simonstyles.co.ke</span>
+                      <span className="text-[7px] font-bold text-primary group-hover:underline">www.simonstyles.co.ke</span>
                     </Link>
                   </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center justify-between gap-3 pt-6 border-t border-dashed">
-                  <div className="flex items-center gap-4 text-[7px] font-black text-gray-400 uppercase tracking-widest">
-                    <Link href="#" className="hover:text-black transition-colors">Privacy</Link>
-                    <Link href="#" className="hover:text-black transition-colors">Terms</Link>
-                    <Link href="#" className="hover:text-black transition-colors">Cookies</Link>
+                <div className="flex flex-col md:flex-row items-center justify-between gap-2 pt-4 border-t border-dashed">
+                  <div className="flex items-center gap-3 text-[6.5px] font-black text-gray-400 uppercase tracking-widest">
+                    <Link href="#" className="hover:text-black">Privacy</Link>
+                    <Link href="#" className="hover:text-black">Terms</Link>
                   </div>
-                  <p className="text-[7px] text-gray-400 font-black uppercase tracking-[0.3em]">
+                  <p className="text-[6.5px] text-gray-400 font-black uppercase tracking-[0.3em]">
                     © {new Date().getFullYear()} Steak West Butchery.
                   </p>
                 </div>
@@ -364,14 +366,14 @@ export default function Home() {
   );
 }
 
-// Ultra-Compact High-Density Product Card
+// Ultra-Compact High-Density Product Card for Marketplace Efficiency
 function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
   return (
     <Link 
       href={`/restaurants/${item.restaurantId}`}
       className="group flex flex-col space-y-1"
     >
-      <div className="relative aspect-square md:aspect-[3/4] rounded-lg md:rounded-[1.5rem] overflow-hidden bg-gray-100 shadow-sm border border-black/5">
+      <div className="relative aspect-square rounded-lg md:rounded-2xl overflow-hidden bg-gray-100 shadow-sm border border-black/5">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
@@ -380,39 +382,40 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
           data-ai-hint="butchery item"
         />
         
-        <div className="absolute top-1.5 left-1.5 z-10 flex flex-col gap-0.5">
-          <Badge className="bg-white/95 backdrop-blur shadow-sm text-black border-none px-1.5 py-0.5 font-black text-[6px] md:text-[8px] uppercase tracking-widest">
-            {idx % 2 === 0 ? "Premium" : "Hot"}
+        {/* Dynamic Overlays */}
+        <div className="absolute top-1 left-1 z-10 flex flex-col gap-0.5">
+          <Badge className="bg-white/95 backdrop-blur shadow-sm text-black border-none px-1 py-0.5 font-black text-[5px] md:text-[7px] uppercase tracking-widest">
+            {idx % 3 === 0 ? "Premium" : "Hot"}
           </Badge>
           {item.isPopular && (
-            <Badge className="bg-primary text-white border-none px-1.5 py-0.5 font-black text-[6px] md:text-[8px] uppercase tracking-widest">
-              Bestseller
+            <Badge className="bg-primary text-white border-none px-1 py-0.5 font-black text-[5px] md:text-[7px] uppercase tracking-widest">
+              Top Pick
             </Badge>
           )}
         </div>
 
-        <div className="absolute inset-0 z-20 hidden md:flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[2px]">
-          <div className="bg-white rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-xl">
-            <WalkingIcon className="w-2.5 h-2.5 text-black" />
-            <span className="text-[7px] font-black text-black uppercase tracking-widest">Order Delivery</span>
+        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/10 backdrop-blur-[1px]">
+          <div className="bg-white rounded-full px-2 py-1 flex items-center gap-1 shadow-xl">
+            <WalkingIcon className="w-2 h-2 text-black" />
+            <span className="text-[6px] font-black text-black uppercase tracking-widest">Quick View</span>
           </div>
         </div>
 
-        <div className="absolute bottom-1.5 left-1.5 z-10">
-           <div className="bg-black/90 text-white text-[7px] md:text-[9px] font-black px-1.5 md:px-3 py-0.5 md:py-1.5 rounded shadow-lg uppercase tracking-tighter backdrop-blur-sm">
+        <div className="absolute bottom-1 left-1 z-10">
+           <div className="bg-black/90 text-white text-[7px] md:text-[9px] font-black px-1.5 md:px-2 py-0.5 rounded shadow-lg uppercase tracking-tighter backdrop-blur-sm">
               KES {item.price.toLocaleString()}
            </div>
         </div>
       </div>
 
-      <div className="space-y-0.5 px-0.5">
-        <h3 className="font-black text-[9px] md:text-xs lg:text-sm text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
+      <div className="space-y-0 px-0.5">
+        <h3 className="font-black text-[9px] md:text-xs text-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-tight truncate">
           {item.name}
         </h3>
-        <div className="flex items-center gap-1 md:gap-1.5 text-[6.5px] md:text-[8px] text-gray-500 font-bold uppercase tracking-widest">
+        <div className="flex items-center gap-1 text-[6.5px] md:text-[8px] text-gray-500 font-bold uppercase tracking-widest">
           <span className="flex items-center gap-0.5"><TrendingUp className="w-1.5 h-1.5 text-emerald-500" /> Fast</span>
           <span>•</span>
-          <span>{((idx + 1) * 0.8).toFixed(1)} km</span>
+          <span>{((idx + 1) * 0.7).toFixed(1)} km</span>
         </div>
       </div>
     </Link>
