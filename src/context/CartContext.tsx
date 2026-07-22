@@ -22,28 +22,31 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 /**
  * Optimized CartProvider to prevent HMR factory instantiation errors.
+ * Strictly decoupled from server components to maintain stability.
  */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isReady, setIsReady] = useState(false);
 
-  // Initialize from storage once
+  // Initialize from storage once on mount
   useEffect(() => {
-    const saved = localStorage.getItem('steak_west_v10');
-    if (saved) {
-      try {
-        setCart(JSON.parse(saved));
-      } catch (e) {
-        console.error('Failed to parse basket');
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('steak_west_cart_v2');
+      if (saved) {
+        try {
+          setCart(JSON.parse(saved));
+        } catch (e) {
+          console.error('Failed to parse basket');
+        }
       }
+      setIsReady(true);
     }
-    setIsReady(true);
   }, []);
 
-  // Save to storage on change
+  // Sync to storage on change
   useEffect(() => {
-    if (isReady) {
-      localStorage.setItem('steak_west_v10', JSON.stringify(cart));
+    if (isReady && typeof window !== 'undefined') {
+      localStorage.setItem('steak_west_cart_v2', JSON.stringify(cart));
     }
   }, [cart, isReady]);
 

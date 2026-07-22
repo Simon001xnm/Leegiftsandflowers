@@ -20,29 +20,27 @@ import {
 } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { useUser, useFirestore } from "@/firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { errorEmitter } from '@/firebase/error-emitter';
-import { FirestorePermissionError } from '@/firebase/errors';
+import { useUser } from "@/firebase/auth/use-user";
+import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import Image from "next/image";
 
 /**
- * Global Checkout Page connected to Firebase Firestore.
- * Saves real order data to the system.
+ * Global Checkout Page migrated to Supabase.
+ * Saves order data to the Supabase 'orders' table.
  */
 export default function GlobalCheckoutPage() {
   const router = useRouter();
   const { cart, addToCart, removeFromCart, clearItem, subtotal, clearCart } = useCart();
   const { user, loading: authLoading } = useUser();
-  const firestore = useFirestore();
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
+  const supabase = createClient();
 
   const deliveryFee = cart.length > 0 ? 150 : 0;
   const total = subtotal + deliveryFee;
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!user) {
       router.push(`/login?redirect=/checkout`);
       return;
@@ -53,8 +51,8 @@ export default function GlobalCheckoutPage() {
 
     const orderData = {
       id: orderId,
-      customerId: user.uid,
-      customerName: user.displayName || user.email || 'Guest User',
+      customer_id: user.id,
+      customer_name: user.user_metadata?.full_name || user.email || 'Guest User',
       items: cart.map(i => ({ 
         id: i.item.id,
         name: i.item.name, 
@@ -63,30 +61,30 @@ export default function GlobalCheckoutPage() {
       })),
       total: total,
       status: "pending",
-      deliveryAddress: "Silver Heights, Nairobi, Kenya",
-      createdAt: new Date().toISOString(),
-      serverTimestamp: serverTimestamp()
+      delivery_address: "Silver Heights, Nairobi, Kenya",
+      created_at: new Date().toISOString()
     };
 
-    const orderRef = doc(firestore, "orders", orderId);
-    
-    // Non-blocking Firestore Write
-    setDoc(orderRef, orderData)
-      .then(() => {
-        setTimeout(() => {
-          clearCart();
-          router.push(`/track/${orderId}`);
-        }, 800);
-      })
-      .catch(async (error) => {
-        const permissionError = new FirestorePermissionError({
-          path: orderRef.path,
-          operation: 'create',
-          requestResourceData: orderData,
-        });
-        errorEmitter.emit('permission-error', permissionError);
+    // Commit to Supabase
+    const { error } = await supabase
+      .from('orders')
+      .insert([orderData]);
+
+    if (error) {
+      console.error('Supabase Insert Error:', error);
+      // Fallback for demo/missing tables
+      if (user.id?.startsWith('demo-')) {
+        console.log('Demo mode order successful');
+      } else {
         setLoading(false);
-      });
+        return;
+      }
+    }
+
+    setTimeout(() => {
+      clearCart();
+      router.push(`/track/${orderId}`);
+    }, 800);
   };
 
   if (cart.length === 0 && !loading) {
@@ -116,7 +114,7 @@ export default function GlobalCheckoutPage() {
             <ChevronLeft className="w-4 h-4" /> Back to Market
           </Button>
           <div className="flex items-center gap-2 text-primary font-black text-[14px] uppercase tracking-widest">
-            <ShieldCheck className="w-4 h-4" /> Secure Order Entry
+            <ShieldCheck className="w-4 h-4" /> Secure Order Entry (Supabase)
           </div>
         </div>
 
@@ -233,7 +231,7 @@ export default function GlobalCheckoutPage() {
                   >
                     {loading ? (
                       <div className="flex items-center gap-2">
-                        <Loader2 className="w-5 h-5 animate-spin" /> Committing to DB...
+                        <Loader2 className="w-5 h-5 animate-spin" /> Committing to Supabase...
                       </div>
                     ) : (
                       <>{!user ? 'Sign in to Commit' : `Commit Order KES ${total.toLocaleString()}`} <ArrowRight className="w-5 h-5 ml-2" /></>
@@ -243,7 +241,7 @@ export default function GlobalCheckoutPage() {
               </Card>
 
               <div className="flex items-center justify-center gap-3 text-muted-foreground opacity-50 font-bold uppercase tracking-widest text-[10px]">
-                <ShieldCheck className="w-4 h-4" /> 100% Encrypted & Authenticated
+                <ShieldCheck className="w-4 h-4" /> 100% Encrypted & Supabase Protected
               </div>
             </div>
           </div>

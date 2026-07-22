@@ -1,26 +1,25 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { User, onAuthStateChanged } from 'firebase/auth';
-import { useAuth } from '../provider';
+import { createClient } from '@/lib/supabase/client';
 
 /**
- * Enhanced useUser hook that supports "Demo Mode" for testing.
- * If no real Firebase user is found, it checks for a mock user in localStorage.
+ * Migration: useUser hook now powered by Supabase.
+ * Supports "Demo Mode" for testing if Supabase isn't configured or during dev.
  */
 export function useUser() {
-  const auth = useAuth();
-  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
+  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Listen for real Firebase Auth changes
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser) {
-        setUser(firebaseUser);
-        setLoading(false);
+    // 1. Get initial session
+    const getInitialUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        setUser(session.user);
       } else {
-        // 2. Fallback to Demo Mode check if no real user
+        // Fallback to Demo Mode check
         const mockUserData = localStorage.getItem('abc_demo_user');
         if (mockUserData) {
           try {
@@ -28,15 +27,30 @@ export function useUser() {
           } catch (e) {
             setUser(null);
           }
+        }
+      }
+      setLoading(false);
+    };
+
+    getInitialUser();
+
+    // 2. Listen for Auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        setUser(session.user);
+      } else {
+        const mockUserData = localStorage.getItem('abc_demo_user');
+        if (mockUserData) {
+          setUser(JSON.parse(mockUserData));
         } else {
           setUser(null);
         }
-        setLoading(false);
       }
+      setLoading(false);
     });
 
-    return () => unsubscribe();
-  }, [auth]);
+    return () => subscription.unsubscribe();
+  }, [supabase]);
 
   return { user, loading };
 }
