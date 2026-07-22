@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import { use, useState, useMemo } from "react";
 import Image from "next/image";
@@ -13,11 +12,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
 
 export default function RestaurantDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { toast } = useToast();
   const { id } = use(params);
   const restaurant = MOCK_RESTAURANTS.find(r => r.id === id);
+  const { cart, addToCart, removeFromCart, clearItem, subtotal } = useCart();
   
   const vendorItems = MOCK_MENU.filter(m => m.restaurantId === id);
   
@@ -26,37 +27,6 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
     (m.category === restaurant?.category || restaurant?.category === 'Raw Meat')
   ).slice(0, 8);
 
-  const [cart, setCart] = useState<{ item: MenuItem; quantity: number }[]>([]);
-
-  const addToCart = (item: MenuItem) => {
-    setCart(prev => {
-      const existing = prev.find(i => i.item.id === item.id);
-      if (existing) {
-        return prev.map(i => i.item.id === item.id ? { ...i, quantity: i.quantity + 1 } : i);
-      }
-      return [...prev, { item, quantity: 1 }];
-    });
-    toast({
-      title: "Added to basket",
-      description: `${item.name} added.`,
-    });
-  };
-
-  const removeFromCart = (itemId: string) => {
-    setCart(prev => {
-      const existing = prev.find(i => i.item.id === itemId);
-      if (existing && existing.quantity > 1) {
-        return prev.map(i => i.item.id === itemId ? { ...i, quantity: i.quantity - 1 } : i);
-      }
-      return prev.filter(i => i.item.id !== itemId);
-    });
-  };
-
-  const clearCartItem = (itemId: string) => {
-    setCart(prev => prev.filter(i => i.item.id !== itemId));
-  };
-
-  const subtotal = useMemo(() => cart.reduce((acc, curr) => acc + (curr.item.price * curr.quantity), 0), [cart]);
   const deliveryFee = restaurant?.deliveryFee || 100;
   const total = subtotal + (subtotal > 0 ? deliveryFee : 0);
 
@@ -109,7 +79,10 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                   <TabsContent key={cat} value={cat} className="mt-0 outline-none">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-t">
                       {vendorItems.filter(item => (item.category || 'Mains') === cat).map((item) => (
-                        <HighDensityProductCard key={item.id} item={item} onAdd={() => addToCart(item)} />
+                        <HighDensityProductCard key={item.id} item={item} onAdd={() => {
+                          addToCart(item);
+                          toast({ title: "Added to basket", description: `${item.name} added.` });
+                        }} />
                       ))}
                     </div>
                   </TabsContent>
@@ -124,7 +97,10 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 border-l border-t">
                     {relatedItems.map((item) => (
-                      <HighDensityProductCard key={item.id} item={item} onAdd={() => addToCart(item)} isSmall />
+                      <HighDensityProductCard key={item.id} item={item} onAdd={() => {
+                        addToCart(item);
+                        toast({ title: "Added to basket", description: `${item.name} added.` });
+                      }} isSmall />
                     ))}
                   </div>
                 </section>
@@ -155,7 +131,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                         <div key={cartItem.item.id} className="flex flex-col gap-2 border-b pb-4 last:border-0 last:pb-0 group">
                           <div className="flex justify-between items-start gap-3">
                             <p className="text-[14px] font-black text-black uppercase tracking-tighter truncate flex-grow">{cartItem.item.name}</p>
-                            <Button variant="ghost" size="icon" className="h-6 w-6 text-gray-400 opacity-0 group-hover:opacity-100 rounded-none" onClick={() => clearCartItem(cartItem.item.id)}>
+                            <Button variant="ghost" size="icon" className="h-6 w-6 text-gray-400 opacity-0 group-hover:opacity-100 rounded-none" onClick={() => clearItem(cartItem.item.id)}>
                               <X className="w-4 h-4" />
                             </Button>
                           </div>
@@ -165,7 +141,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                               <span className="text-[14px] font-black min-w-[24px] text-center">{cartItem.quantity}</span>
                               <button onClick={() => addToCart(cartItem.item)} className="text-black hover:scale-110"><Plus className="w-4 h-4" /></button>
                             </div>
-                            <span className="font-black text-[14px]">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</span>
+                            <span className="font-black text-[11px]">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</span>
                           </div>
                         </div>
                       ))}
@@ -194,7 +170,7 @@ export default function RestaurantDetailPage({ params }: { params: Promise<{ id:
                 </CardContent>
 
                 <CardFooter className="p-6 pt-0">
-                  <Link href={`/checkout/${restaurant.id}`} className="w-full">
+                  <Link href="/checkout" className="w-full">
                     <Button className="w-full h-14 text-[14px] font-black uppercase tracking-widest shadow-xl shadow-primary/10 rounded-none" disabled={cart.length === 0}>
                       Checkout Order <ArrowLeft className="w-4 h-4 rotate-180 ml-3" />
                     </Button>
@@ -224,10 +200,10 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
             </Link>
             <p className="text-[12px] text-gray-400 line-clamp-2 leading-tight h-8">{item.description}</p>
             <div className="flex items-center justify-between pt-3 border-t gap-2">
-              <span className="font-black text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+              <span className="font-black text-[11px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
               <Button 
                 className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-all active:scale-95 shrink-0" 
-                onClick={onAdd}
+                onClick={(e) => { e.preventDefault(); onAdd(); }}
               >
                 Add
               </Button>
@@ -254,8 +230,8 @@ function HighDensityProductCard({ item, onAdd, isSmall }: { item: MenuItem; onAd
               <h3 className="font-black text-[14px] text-black uppercase tracking-tighter line-clamp-1 hover:text-primary transition-colors">{item.name}</h3>
             </Link>
             <div className="flex items-center justify-between gap-2 pt-2 border-t">
-              <span className="font-black text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
-              <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0" onClick={onAdd}>
+              <span className="font-black text-[11px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+              <Button className="h-10 px-4 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0" onClick={(e) => { e.preventDefault(); onAdd(); }}>
                 Add
               </Button>
             </div>

@@ -1,0 +1,99 @@
+'use client';
+
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { MenuItem } from '@/lib/food-data';
+
+interface CartItem {
+  item: MenuItem;
+  quantity: number;
+}
+
+interface CartContextType {
+  cart: CartItem[];
+  addToCart: (item: MenuItem) => void;
+  removeFromCart: (itemId: string) => void;
+  clearItem: (itemId: string) => void;
+  clearCart: () => void;
+  subtotal: number;
+  itemCount: number;
+}
+
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+export function CartProvider({ children }: { children: ReactNode }) {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    const savedCart = localStorage.getItem('steak_west_cart');
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch (e) {
+        console.error('Failed to parse cart', e);
+      }
+    }
+  }, []);
+
+  // Save cart to localStorage on change
+  useEffect(() => {
+    localStorage.setItem('steak_west_cart', JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (item: MenuItem) => {
+    setCart((prev) => {
+      const existing = prev.find((i) => i.item.id === item.id);
+      if (existing) {
+        return prev.map((i) =>
+          i.item.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
+      }
+      return [...prev, { item, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (itemId: string) => {
+    setCart((prev) => {
+      const existing = prev.find((i) => i.item.id === itemId);
+      if (existing && existing.quantity > 1) {
+        return prev.map((i) =>
+          i.item.id === itemId ? { ...i, quantity: i.quantity - 1 } : i
+        );
+      }
+      return prev.filter((i) => i.item.id !== itemId);
+    });
+  };
+
+  const clearItem = (itemId: string) => {
+    setCart((prev) => prev.filter((i) => i.item.id !== itemId));
+  };
+
+  const clearCart = () => setCart([]);
+
+  const subtotal = cart.reduce((acc, curr) => acc + curr.item.price * curr.quantity, 0);
+  const itemCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearItem,
+        clearCart,
+        subtotal,
+        itemCount,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+}
+
+export function useCart() {
+  const context = useContext(CartContext);
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
+}

@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import { use, useMemo } from "react";
 import Image from "next/image";
@@ -10,9 +9,13 @@ import { MOCK_MENU, MOCK_RESTAURANTS, MenuItem } from "@/lib/food-data";
 import { ArrowLeft, Clock, ShoppingBag, Store, TrendingUp, Info, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
   const item = MOCK_MENU.find(m => m.id === id);
   const restaurant = MOCK_RESTAURANTS.find(r => r.id === item?.restaurantId);
   
@@ -22,6 +25,14 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   }, [item]);
 
   if (!item) return <div className="p-20 text-center font-headline text-2xl">Product not found</div>;
+
+  const handleAdd = () => {
+    addToCart(item);
+    toast({
+      title: "Added to basket",
+      description: `${item.name} added to your global basket.`,
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -100,9 +111,15 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 <div className="flex gap-4">
+                  <Button 
+                    className="flex-grow h-14 text-[14px] font-black uppercase tracking-widest rounded-none shadow-xl shadow-primary/10"
+                    onClick={handleAdd}
+                  >
+                    Add to Basket
+                  </Button>
                   <Link href={`/restaurants/${restaurant?.id}`} className="flex-grow">
-                    <Button className="w-full h-14 text-[14px] font-black uppercase tracking-widest rounded-none shadow-xl shadow-primary/10">
-                      View full Menu <ArrowLeft className="ml-2 w-4 h-4 rotate-180" />
+                    <Button variant="outline" className="w-full h-14 text-[14px] font-black uppercase tracking-widest rounded-none border-2">
+                      Full Menu <ArrowLeft className="ml-2 w-4 h-4 rotate-180" />
                     </Button>
                   </Link>
                 </div>
@@ -140,7 +157,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                     <div className="p-4 space-y-2">
                       <h3 className="font-black text-[14px] text-black uppercase tracking-tighter truncate group-hover:text-primary transition-colors">{related.name}</h3>
-                      <p className="font-black text-[14px] text-black">KES {related.price.toLocaleString()}</p>
+                      <p className="font-black text-[11px] text-black">KES {related.price.toLocaleString()}</p>
                     </div>
                   </Link>
                 ))}

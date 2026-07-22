@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import Link from "next/link";
 import Image from "next/image";
@@ -15,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { InstallAppButton } from "./InstallAppButton";
+import { useCart } from "@/context/CartContext";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
   <div className={cn("relative shrink-0 flex items-center justify-center", className)}>
@@ -30,6 +30,7 @@ const ButcheryLogo = ({ className }: { className?: string }) => (
 
 export function Navigation() {
   const [toggle, setToggle] = useState<'delivery' | 'pickup'>('delivery');
+  const { itemCount } = useCart();
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b px-3 md:px-6 h-20 md:h-24 flex items-center gap-2 md:gap-4 shadow-sm">
@@ -87,12 +88,14 @@ export function Navigation() {
         <div className="hidden md:block">
           <InstallAppButton />
         </div>
-        <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 h-9 w-9 md:h-10 md:w-10 shadow-xl shadow-black/10 transition-transform active:scale-95 rounded-none">
-          <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
-          <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-3.5 h-3.5 md:w-4.5 md:h-4.5 flex items-center justify-center font-black border-2 border-white">
-            0
-          </span>
-        </Button>
+        <Link href="/checkout">
+          <Button variant="ghost" size="icon" className="relative bg-black text-white hover:bg-black/90 h-9 w-9 md:h-10 md:w-10 shadow-xl shadow-black/10 transition-transform active:scale-95 rounded-none">
+            <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-3.5 h-3.5 md:w-4.5 md:h-4.5 flex items-center justify-center font-black border-2 border-white">
+              {itemCount}
+            </span>
+          </Button>
+        </Link>
       </div>
     </nav>
   );

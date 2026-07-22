@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import Link from "next/link";
 import Image from "next/image";
@@ -25,6 +24,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/hooks/use-toast";
 
 const ButcheryLogo = ({ className }: { className?: string }) => (
   <div className={cn("relative overflow-hidden shrink-0", className)}>
@@ -242,6 +243,19 @@ export default function Home() {
 }
 
 function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(item);
+    toast({
+      title: "Added to basket",
+      description: `${item.name} added to your global basket.`,
+    });
+  };
+
   return (
     <div 
       className="group flex flex-col space-y-0 border-r border-b hover-heartbeat bg-white rounded-none"
@@ -289,8 +303,11 @@ function ProductCard({ item, idx }: { item: MenuItem, idx: number }) {
         </Link>
 
         <div className="flex items-center justify-between pt-2 border-t gap-2 mt-auto">
-          <span className="font-black text-[12px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
-          <Button className="h-9 px-3 bg-black text-white text-[12px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0">
+          <span className="font-black text-[11px] text-black whitespace-nowrap">KES {item.price.toLocaleString()}</span>
+          <Button 
+            className="h-8 px-3 bg-black text-white text-[11px] font-black uppercase tracking-widest rounded-none hover:bg-primary transition-colors shrink-0"
+            onClick={handleAdd}
+          >
             Add
           </Button>
         </div>
