@@ -1,25 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { 
-  ShoppingCart, 
-  ChevronRight,
   Plus,
-  Star,
-  Search,
   MapPin,
   Tag,
-  TrendingUp,
-  Clock,
-  ShieldCheck
+  TrendingUp
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
-import { Badge } from "@/components/ui/badge";
 
 const products = [
   { id: 'p1', name: "58 Spiced Orange Gin & Tonic", price: 99, oldPrice: 300, discount: "-67%", image: "https://picsum.photos/seed/drink1/300/300" },
@@ -105,20 +98,20 @@ export default function App() {
         </div>
       </section>
 
-      {/* RETAIL DISCOVERY GRID */}
-      <main className="container mx-auto px-4 py-16 space-y-20">
+      {/* RETAIL DISCOVERY GRID - SEAMLESS BORDERS */}
+      <main className="container mx-auto px-4 py-16 space-y-24">
         
         {/* PROMOTIONS */}
-        <section className="space-y-8">
-          <div className="flex items-center justify-between border-b-4 border-black pb-4">
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4">
             <div className="flex items-center gap-3">
-               <Tag className="w-6 h-6 text-red-600" />
-               <h2 className="text-3xl font-black tracking-tighter uppercase">Flash Deals</h2>
+               <Tag className="w-5 h-5 text-red-600" />
+               <h2 className="text-2xl font-black tracking-tighter uppercase">Flash Deals</h2>
             </div>
-            <Button variant="ghost" className="font-black text-[11px] uppercase tracking-widest hover:text-red-600">View All</Button>
+            <Button variant="ghost" className="font-black text-[10px] uppercase tracking-widest hover:text-red-600">View All</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-12">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-t border-l border-gray-100">
             {products.slice(0, 6).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -126,16 +119,16 @@ export default function App() {
         </section>
 
         {/* BEST SELLERS */}
-        <section className="space-y-8">
-          <div className="flex items-center justify-between border-b-4 border-black pb-4">
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4">
             <div className="flex items-center gap-3">
-               <TrendingUp className="w-6 h-6 text-red-600" />
-               <h2 className="text-3xl font-black tracking-tighter uppercase">Elite Selection</h2>
+               <TrendingUp className="w-5 h-5 text-red-600" />
+               <h2 className="text-2xl font-black tracking-tighter uppercase">Elite Selection</h2>
             </div>
-            <Button variant="ghost" className="font-black text-[11px] uppercase tracking-widest hover:text-red-600">Explore</Button>
+            <Button variant="ghost" className="font-black text-[10px] uppercase tracking-widest hover:text-red-600">Explore</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-12">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-t border-l border-gray-100">
             {products.slice(6, 12).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -170,22 +163,33 @@ function Stat({ node, label }: { node: string, label: string }) {
 
 function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void }) {
   return (
-    <div className="flex flex-col group gap-3">
+    <motion.div 
+      className="flex flex-col group border-r border-b border-gray-100 bg-white relative z-0"
+      whileHover={{ 
+        scale: [1, 1.04, 1],
+        zIndex: 10,
+        transition: { 
+          repeat: Infinity, 
+          duration: 0.8,
+          ease: "easeInOut"
+        }
+      }}
+    >
       {/* IMAGE CONTAINER */}
-      <div className="relative aspect-square bg-gray-50 rounded-[2rem] overflow-hidden border-2 border-gray-100 flex items-center justify-center p-6 transition-all duration-500 hover:border-red-600/20 shadow-sm hover:shadow-2xl">
+      <div className="relative aspect-square bg-gray-50 flex items-center justify-center p-4 md:p-6 transition-colors duration-500 group-hover:bg-white">
         <div className="relative w-full h-full">
           <Image 
             src={product.image} 
             alt={product.name} 
             fill 
-            className="object-contain transition-transform duration-700 group-hover:scale-110" 
+            className="object-contain" 
           />
         </div>
 
         {/* DISCOUNT BADGE */}
         {product.discount && (
-          <div className="absolute top-4 left-4 z-10">
-            <span className="bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-lg shadow-lg uppercase tracking-tighter">
+          <div className="absolute top-2 left-2 z-10">
+            <span className="bg-red-600 text-white text-[8px] md:text-[10px] font-black px-1.5 py-0.5 rounded shadow-lg uppercase tracking-tighter">
               {product.discount}
             </span>
           </div>
@@ -193,29 +197,32 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
 
         {/* ADD BUTTON */}
         <button 
-          onClick={() => onAdd(product)}
-          className="absolute bottom-4 right-4 w-10 h-10 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center shadow-2xl hover:bg-red-600 hover:text-white hover:scale-110 active:scale-90 transition-all z-20 group/btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            onAdd(product);
+          }}
+          className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white hover:scale-110 active:scale-90 transition-all z-20 group/btn"
         >
-          <Plus className="w-6 h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
+          <Plus className="w-5 h-5 md:w-6 md:h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
         </button>
       </div>
 
       {/* CONTENT AREA */}
-      <div className="space-y-1 px-1">
-        <h3 className="text-[11px] md:text-[13px] font-black text-gray-800 line-clamp-2 leading-tight min-h-[2.4em] uppercase tracking-tighter">
+      <div className="space-y-1 p-3 md:p-4">
+        <h3 className="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight min-h-[2.4em] uppercase tracking-tighter">
           {product.name}
         </h3>
         <div className="flex flex-col">
-          <span className="text-[14px] md:text-[16px] font-black text-black">
+          <span className="text-[12px] md:text-[14px] font-black text-black">
             KSh {product.price.toLocaleString()}
           </span>
           {product.oldPrice && (
-            <span className="text-[11px] text-gray-400 line-through font-bold">
+            <span className="text-[9px] md:text-[11px] text-gray-400 line-through font-bold">
               KSh {product.oldPrice.toLocaleString()}
             </span>
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
