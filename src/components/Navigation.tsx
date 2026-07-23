@@ -12,7 +12,7 @@ import { InstallAppButton } from "./InstallAppButton";
 
 /**
  * Unified sticky navigation
- * Logo positioned at the far left edge with minimal padding.
+ * Logo positioned at the far left edge with zero padding.
  */
 export function Navigation() {
   const { itemCount } = useCart();
@@ -29,17 +29,17 @@ export function Navigation() {
 
   return (
     <nav className={cn(
-      "fixed top-0 z-50 w-full transition-all duration-500 h-24 flex items-center justify-between pr-4 md:pr-12 pl-1 md:pl-2 border-b",
+      "fixed top-0 z-50 w-full transition-all duration-500 h-24 flex items-center justify-between pr-4 md:pr-12 pl-0 border-b",
       isScrolled 
         ? "bg-white/95 backdrop-blur-xl border-gray-100 shadow-lg" 
         : "bg-white border-transparent"
     )}>
-      <div className="flex items-center gap-4 md:gap-10">
+      <div className="flex items-center gap-0 md:gap-4 lg:gap-10">
         <Link href="/" className="flex items-center group">
-          <div className="relative h-16 w-52 md:h-18 md:w-80">
+          <div className="relative h-20 w-64 md:h-22 md:w-80">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
-              alt="Steak West" 
+              alt="Steak West Butchery" 
               fill
               className="object-contain object-left"
               priority
@@ -48,7 +48,9 @@ export function Navigation() {
         </Link>
 
         {/* Action button between Logo and links */}
-        <InstallAppButton />
+        <div className="ml-4 md:ml-6">
+          <InstallAppButton />
+        </div>
 
         <div className="hidden lg:flex items-center gap-10">
           {['Shop', 'Offers', 'About', 'Contact'].map((item) => (

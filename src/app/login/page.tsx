@@ -85,7 +85,7 @@ function LoginForm() {
             <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain p-2" />
           </div>
           <div className="space-y-1">
-            <h1 className="text-3xl font-black tracking-tighter uppercase leading-none">Steak West Central</h1>
+            <h1 className="text-3xl font-black tracking-tighter uppercase leading-none">Steak West Butchery</h1>
             <p className="text-muted-foreground text-[11px] font-black uppercase tracking-[0.25em]">Global meat distribution network</p>
           </div>
         </div>
