@@ -94,13 +94,15 @@ export default function App() {
       {/* Hero section */}
       <section className="relative min-h-[70vh] flex items-center justify-center bg-black overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop" 
-            alt="Hero meat" 
-            fill 
-            className="object-cover opacity-60"
-            priority
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          >
+            <source src="/From%20Klickpin.com-%2013933080092165366-pin-id-13933080092165366.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
         </div>
         
