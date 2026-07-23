@@ -2,7 +2,7 @@ import { createBrowserClient } from '@supabase/ssr'
 
 /**
  * Resilient Supabase client creation.
- * Uses fallbacks to prevent the application from crashing if environment variables are missing.
+ * Provides fallbacks to ensure the app doesn't crash if keys are missing.
  */
 export function createClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder-project.supabase.co';

@@ -33,7 +33,7 @@
   }
   
   html {
-    font-size: 15px; /* BASE FONT SIZE LOCK FOR HIGH DENSITY */
+    font-size: 15px; /* CRITICAL: BASE FONT SIZE LOCK */
   }
 
   body {
@@ -69,13 +69,5 @@
 
   .hover-heartbeat:hover {
     animation: heartbeat 0.8s ease-in-out infinite;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
   }
 }
