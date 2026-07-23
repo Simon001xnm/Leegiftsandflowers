@@ -99,12 +99,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* RETAIL DISCOVERY GRID - SEAMLESS BORDERS */}
-      <main className="container mx-auto px-4 py-16 space-y-24">
+      {/* RETAIL DISCOVERY GRID - NO SECTION MARGINS */}
+      <main className="container mx-auto px-4">
         
         {/* PROMOTIONS */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4">
+        <section>
+          <div className="flex items-center justify-between border-b-2 border-black/5 py-4">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-black tracking-tighter uppercase">Flash Deals</h2>
@@ -112,16 +112,16 @@ export default function App() {
             <Button variant="ghost" className="font-black text-[10px] uppercase tracking-widest hover:text-red-600">View All</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-t border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-l border-gray-100">
             {products.slice(0, 6).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
         </section>
 
-        {/* BEST SELLERS */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4">
+        {/* BEST SELLERS - SEAMLESSLY ATTACHED */}
+        <section>
+          <div className="flex items-center justify-between border-b-2 border-black/5 py-4">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-black tracking-tighter uppercase">Elite Selection</h2>
@@ -129,7 +129,7 @@ export default function App() {
             <Button variant="ghost" className="font-black text-[10px] uppercase tracking-widest hover:text-red-600">Explore</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-t border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-l border-gray-100 pb-12">
             {products.slice(6, 12).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
