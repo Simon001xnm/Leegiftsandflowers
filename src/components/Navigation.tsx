@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from "react";
@@ -8,10 +9,11 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/firebase/auth/use-user";
 import { cn } from "@/lib/utils";
+import { InstallAppButton } from "./InstallAppButton";
 
 /**
  * Unified sticky navigation
- * Updated with white background for logo clarity and dark text for contrast.
+ * Updated with InstallAppButton between logo and cart.
  */
 export function Navigation() {
   const { itemCount } = useCart();
@@ -33,9 +35,9 @@ export function Navigation() {
         ? "bg-white/95 backdrop-blur-xl border-gray-100 shadow-lg" 
         : "bg-white border-transparent"
     )}>
-      <div className="flex items-center gap-12">
+      <div className="flex items-center gap-8 md:gap-12">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative h-16 w-64 md:h-18 md:w-80">
+          <div className="relative h-16 w-52 md:h-18 md:w-80">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West" 
@@ -45,6 +47,9 @@ export function Navigation() {
             />
           </div>
         </Link>
+
+        {/* Action button between Logo and links */}
+        <InstallAppButton />
 
         <div className="hidden lg:flex items-center gap-10">
           {['Shop', 'Offers', 'About', 'Contact'].map((item) => (

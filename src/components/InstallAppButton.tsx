@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 
 /**
  * A direct download/install button for the Steak West Software.
- * It only appears when the system is ready to install.
+ * Updated to follow Sentence Case and non-bold typography.
  */
 export function InstallAppButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
@@ -51,7 +51,7 @@ export function InstallAppButton() {
       setDeferredPrompt(null);
       toast({
         title: "Success",
-        description: "Steak West is now installed as software on your desktop.",
+        description: "Steak West is now installed as software on your device.",
       });
     }
     setIsInstalling(false);
@@ -64,14 +64,14 @@ export function InstallAppButton() {
     <Button 
       onClick={handleInstall}
       disabled={isInstalling}
-      className="flex items-center gap-3 bg-primary text-white border-none hover:bg-primary/90 rounded-full font-black text-xs uppercase tracking-widest h-12 px-8 transition-all shadow-2xl animate-pulse"
+      className="hidden md:flex items-center gap-2 bg-primary text-white border-none hover:bg-primary/90 rounded-full font-bold text-[12px] h-10 px-6 transition-all shadow-xl animate-pulse whitespace-nowrap"
     >
       {isInstalling ? (
-        <Loader2 className="w-5 h-5 animate-spin" />
+        <Loader2 className="w-4 h-4 animate-spin" />
       ) : (
-        <Download className="w-5 h-5" />
+        <Download className="w-4 h-4" />
       )}
-      {isInstalling ? "Downloading..." : "Install Software"}
+      {isInstalling ? "Installing..." : "Install software"}
     </Button>
   );
 }
