@@ -1,9 +1,11 @@
+'use client';
+
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 /**
- * Optimized Middleware - Removed redirect loops to fix blank screen.
- * Only handles session refreshing.
+ * ULTRA-STABLE MIDDLEWARE
+ * Removed all redirect logic to prevent infinite white-screen loops.
  */
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -31,9 +33,7 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // IMPORTANT: We only refresh the session. 
-  // Redirect loops are the #1 cause of white screens. 
-  // Authentication checks should happen at the component level or specific route handlers.
+  // Refresh session only, never redirect here
   await supabase.auth.getUser()
 
   return supabaseResponse

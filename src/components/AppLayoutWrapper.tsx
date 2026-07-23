@@ -7,13 +7,15 @@ import { cn } from '@/lib/utils';
 import { Suspense } from 'react';
 
 /**
- * Global wrapper - Simplified to fix blank screens.
+ * RESILIENT LAYOUT WRAPPER
+ * Optimized to prevent hydration stalls and white screens.
  */
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname() || '/';
+  const pathname = usePathname();
   
-  const isLogin = pathname.startsWith('/login');
-  const isCheckout = pathname.startsWith('/checkout');
+  // Minimal checks to prevent crashing if pathname is null
+  const isLogin = pathname?.startsWith('/login') || false;
+  const isCheckout = pathname?.startsWith('/checkout') || false;
   const isDiscovery = pathname === '/restaurants';
   
   const isMinimal = isLogin;
@@ -23,7 +25,7 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col min-h-screen">
       {!isMinimal && <Navigation />}
       <div className="flex flex-grow relative">
-        <Suspense fallback={null}>
+        <Suspense fallback={<div className="w-64 hidden lg:block border-r bg-white" />}>
           {!hideSidebar && <SidebarNav />}
         </Suspense>
         <main className={cn(
