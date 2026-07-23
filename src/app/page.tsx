@@ -6,7 +6,11 @@ import {
   Plus,
   MapPin,
   Tag,
-  TrendingUp
+  TrendingUp,
+  ShoppingCart,
+  Truck,
+  ShieldCheck,
+  Star
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,41 +20,41 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
 const products = [
-  // FLASH DEALS (0-15)
-  { id: 'p1', name: "58 Spiced orange gin & tonic", price: 99, oldPrice: 300, discount: "-67%", image: "https://picsum.photos/seed/drink1/300/300" },
-  { id: 'p2', name: "Kenyan originals apple cider", price: 99, oldPrice: 250, discount: "-60%", image: "https://picsum.photos/seed/drink2/300/300" },
-  { id: 'p3', name: "KO dry cider premium", price: 99, oldPrice: 200, discount: "-50%", image: "https://picsum.photos/seed/drink3/300/300" },
-  { id: 'p4', name: "Outlet kings sliced sandwich", price: 62.5, oldPrice: 125, discount: "-50%", image: "https://picsum.photos/seed/bread/300/300" },
-  { id: 'p5', name: "KC lemon and ginger 750ml", price: 840, discount: "-15%", image: "https://picsum.photos/seed/sauce/300/300" },
-  { id: 'p6', name: "Isinya eggs 20 pack", price: 458, image: "https://picsum.photos/seed/eggs/300/300" },
-  { id: 'p7', name: "QMP beef cubes steak 1/2kg", price: 533, image: "https://picsum.photos/seed/beefcubes/300/300" },
-  { id: 'p8', name: "Green farm yellow yolk eggs", price: 619, image: "https://picsum.photos/seed/eggs2/300/300" },
-  { id: 'p9', name: "Premium T-Bone steak", price: 1200, oldPrice: 1500, discount: "-20%", image: "https://picsum.photos/seed/tbone/300/300" },
-  { id: 'p10', name: "Fresh chicken wings 1kg", price: 550, image: "https://picsum.photos/seed/wings/300/300" },
-  { id: 'p11', name: "Beef mince extra lean", price: 650, image: "https://picsum.photos/seed/mince/300/300" },
-  { id: 'p12', name: "Goat meat choma cut", price: 750, image: "https://picsum.photos/seed/goat/300/300" },
-  { id: 'p13', name: "Lamb chops signature", price: 950, oldPrice: 1100, discount: "-13%", image: "https://picsum.photos/seed/lamb/300/300" },
-  { id: 'p14', name: "Pork belly ribs 1kg", price: 880, image: "https://picsum.photos/seed/pork/300/300" },
-  { id: 'p15', name: "Whole tilapia fish", price: 450, oldPrice: 600, discount: "-25%", image: "https://picsum.photos/seed/fish/300/300" },
-  { id: 'p16', name: "Beef sirloin roast", price: 1400, image: "https://picsum.photos/seed/sirloin/300/300" },
-  
-  // ELITE SELECTION (16-31)
-  { id: 'p17', name: "Wagyu style ribeye cut", price: 2500, image: "https://picsum.photos/seed/ribeye/300/300" },
-  { id: 'p18', name: "Organic chicken thighs", price: 680, image: "https://picsum.photos/seed/thighs/300/300" },
-  { id: 'p19', name: "Mutton shoulder pack", price: 1100, image: "https://picsum.photos/seed/mutton/300/300" },
-  { id: 'p20', name: "Smoked beef sausages", price: 400, image: "https://picsum.photos/seed/sausage/300/300" },
-  { id: 'p21', name: "Gourmet beef burger patties", price: 850, image: "https://picsum.photos/seed/burger/300/300" },
-  { id: 'p22', name: "Pork chops center cut", price: 780, image: "https://picsum.photos/seed/porkchops/300/300" },
-  { id: 'p23', name: "Dressed whole duck", price: 1800, image: "https://picsum.photos/seed/duck/300/300" },
-  { id: 'p24', name: "Beef liver fresh cut", price: 500, image: "https://picsum.photos/seed/liver/300/300" },
-  { id: 'p25', name: "Marinated chicken drumsticks", price: 720, image: "https://picsum.photos/seed/drumstick/300/300" },
-  { id: 'p26', name: "Beef fillet mignon", price: 1950, image: "https://picsum.photos/seed/fillet/300/300" },
-  { id: 'p27', name: "Goat leg whole", price: 1600, image: "https://picsum.photos/seed/goatleg/300/300" },
-  { id: 'p28', name: "Bacon strip premium", price: 650, image: "https://picsum.photos/seed/bacon/300/300" },
-  { id: 'p29', name: "Beef short ribs 1kg", price: 1250, image: "https://picsum.photos/seed/shortribs/300/300" },
-  { id: 'p30', name: "Assorted meatballs pack", price: 550, image: "https://picsum.photos/seed/meatballs/300/300" },
-  { id: 'p31', name: "Pork fillet tenderloin", price: 980, image: "https://picsum.photos/seed/tenderloin/300/300" },
-  { id: 'p32', name: "Beef skewers ready-to-grill", price: 850, image: "https://picsum.photos/seed/skewers/300/300" }
+  // FLASH DEALS (16 items)
+  { id: 'p1', name: "Beef chemsha 1kg", price: 1400, oldPrice: 1600, discount: "-14%", image: "/beef chemsha SMB.jpg" },
+  { id: 'p2', name: "Beef choma 1kg", price: 1400, oldPrice: 1800, discount: "-12%", image: "/BEEF CHOMA.jpg" },
+  { id: 'p3', name: "Beef dry fry 1kg", price: 1400, oldPrice: 1550, discount: "-10%", image: "/BEEF DRY FRY.jpg" },
+  { id: 'p4', name: "Beef takeaway", price: 900, oldPrice: 1100, discount: "-18%", image: "/BEEF TAKEAWAY.jpg" },
+  { id: 'p5', name: "Chips", price: 200, oldPrice: 250, discount: "-20%", image: "/CHIPS.jpg" },
+  { id: 'p6', name: "Full chicken choma", price: 1000, oldPrice: 1200, discount: "-16%", image: "/FULL CHICKEN CHOMA.jpg" },
+  { id: 'p7', name: "Full chicken", price: 700, oldPrice: 850, discount: "-17%", image: "/FULL CHICKEN.jpg" },
+  { id: 'p8', name: "Full kichwa goat", price: 800, oldPrice: 1000, discount: "-20%", image: "/FULL KICHWA YA GOAT.jpg" },
+  { id: 'p9', name: "Full mguu cow", price: 400, oldPrice: 500, discount: "-20%", image: "/FULL MGUU COW.jpg" },
+  { id: 'p10', name: "Prime beef cubes", price: 533, oldPrice: 650, discount: "-18%", image: "/BEEF TAKEAWAY.jpg" },
+  { id: 'p11', name: "Fresh wings bucket", price: 550, oldPrice: 700, discount: "-21%", image: "/FULL CHICKEN.jpg" },
+  { id: 'p12', name: "Grilled ribs choma", price: 1400, oldPrice: 1700, discount: "-17%", image: "/BEEF CHOMA.jpg" },
+  { id: 'p13', name: "Deluxe boiled cuts", price: 400, oldPrice: 600, discount: "-33%", image: "/FULL MGUU COW.jpg" },
+  { id: 'p14', name: "Takeaway family pack", price: 2499, oldPrice: 3000, discount: "-17%", image: "/BEEF TAKEAWAY.jpg" },
+  { id: 'p15', name: "Crispy snack chips", price: 200, oldPrice: 300, discount: "-33%", image: "/CHIPS.jpg" },
+  { id: 'p16', name: "Signature goat head", price: 800, oldPrice: 1200, discount: "-33%", image: "/FULL KICHWA YA GOAT.jpg" },
+
+  // ELITE SELECTION (16 items)
+  { id: 'p17', name: "Premium beef chemsha", price: 1400, image: "/beef chemsha SMB.jpg" },
+  { id: 'p18', name: "Select beef choma", price: 1400, image: "/BEEF CHOMA.jpg" },
+  { id: 'p19', name: "Elite dry fry portion", price: 1400, image: "/BEEF DRY FRY.jpg" },
+  { id: 'p20', name: "Butchery fresh takeaway", price: 900, image: "/BEEF TAKEAWAY.jpg" },
+  { id: 'p21', name: "Platter of chips", price: 200, image: "/CHIPS.jpg" },
+  { id: 'p22', name: "Grand chicken choma", price: 1000, image: "/FULL CHICKEN CHOMA.jpg" },
+  { id: 'p23', name: "Farm fresh whole chicken", price: 700, image: "/FULL CHICKEN.jpg" },
+  { id: 'p24', name: "Elite kichwa special", price: 800, image: "/FULL KICHWA YA GOAT.jpg" },
+  { id: 'p25', name: "Special cow mguu", price: 400, image: "/FULL MGUU COW.jpg" },
+  { id: 'p26', name: "Prime cuts selection", price: 1500, image: "/BEEF TAKEAWAY.jpg" },
+  { id: 'p27', name: "Whole roast chicken", price: 700, image: "/FULL CHICKEN.jpg" },
+  { id: 'p28', name: "Premium choma cuts", price: 1400, image: "/BEEF CHOMA.jpg" },
+  { id: 'p29', name: "Dry fry family size", price: 1400, image: "/BEEF DRY FRY.jpg" },
+  { id: 'p30', name: "Large chips pack", price: 400, image: "/CHIPS.jpg" },
+  { id: 'p31', name: "Goat head elite", price: 800, image: "/FULL KICHWA YA GOAT.jpg" },
+  { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" }
 ];
 
 export default function App() {
@@ -73,7 +77,7 @@ export default function App() {
   return (
     <div className="bg-white text-black min-h-screen font-body selection:bg-red-600 selection:text-white">
       {/* HERO SECTION */}
-      <section className="relative h-[65vh] min-h-[550px] flex items-center justify-center bg-black overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center justify-center bg-black overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <Image 
             src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop" 
@@ -86,27 +90,70 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10 text-center space-y-12">
-          {/* Hero text removed as requested */}
+        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-10 text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-6"
+            >
+              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
+                Premium Cuts. <br />
+                <span className="text-red-600">Freshly Dispatched.</span>
+              </h1>
+              <p className="text-white/70 text-lg max-w-md font-medium">
+                Savor the sweetness of shopping for the finest beef, chicken, and delicacies in Nairobi.
+              </p>
+            </motion.div>
 
-          <div className="flex flex-col md:flex-row items-center gap-4 max-w-2xl mx-auto bg-white rounded-3xl p-2 shadow-2xl border-4 border-white/10">
-            <div className="flex items-center gap-3 px-6 py-4 flex-grow w-full">
-              <MapPin className="text-red-600 w-6 h-6 shrink-0" />
-              <input 
-                placeholder="Enter delivery location" 
-                className="w-full bg-transparent outline-none text-black text-[14px] font-medium placeholder:text-gray-400"
-              />
+            <div className="flex flex-col sm:flex-row items-center gap-4 bg-white/5 backdrop-blur-xl p-2 rounded-[2rem] border border-white/10 shadow-2xl">
+              <div className="flex items-center gap-3 px-6 py-4 flex-grow w-full">
+                <MapPin className="text-red-600 w-6 h-6 shrink-0" />
+                <input 
+                  placeholder="Set delivery location" 
+                  className="w-full bg-transparent outline-none text-white text-[14px] font-medium placeholder:text-white/30"
+                />
+              </div>
+              <Button className="w-full sm:w-auto h-14 px-10 bg-red-600 hover:bg-red-700 text-white rounded-[1.5rem] font-bold text-[13px] shadow-xl transition-all active:scale-95">
+                Order Now
+              </Button>
             </div>
-            <Button className="w-full md:w-auto h-16 px-12 bg-red-600 hover:bg-red-700 text-white rounded-[1.5rem] font-bold text-[13px] shadow-xl transition-all active:scale-95">
-              Order Now
-            </Button>
+
+            <div className="flex justify-start gap-8 md:gap-12">
+               <Stat node="10K+" label="Customers" isGold />
+               <Stat node="50+" label="Products" isGold />
+               <Stat node="4.8★" label="Rating" isGold />
+            </div>
           </div>
 
-          <div className="flex justify-center gap-8 md:gap-16 pt-8">
-             <Stat node="10K+" label="Customers" isGold />
-             <Stat node="50+" label="Products" isGold />
-             <Stat node="4.8★" label="Rating" isGold />
+          <div className="relative hidden md:block">
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative aspect-square w-full max-w-md mx-auto"
+            >
+              <Image 
+                src="/BEEF CHOMA.jpg" 
+                alt="Today's Special" 
+                fill 
+                className="rounded-[3rem] object-cover shadow-2xl border-4 border-white/10"
+              />
+              <div className="absolute -bottom-6 -left-6 bg-white text-black p-6 rounded-[2rem] shadow-2xl border border-gray-100 animate-in zoom-in duration-700">
+                <p className="text-[10px] font-black uppercase text-red-600 tracking-widest mb-1">Today's Special</p>
+                <h3 className="font-bold text-lg mb-1">Premium BBQ Pack</h3>
+                <p className="font-black text-xl">KSh 2,499</p>
+              </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* FEATURES MINI SECTION */}
+      <section className="bg-white border-b">
+        <div className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+           <Feature icon={<ShieldCheck className="w-8 h-8" />} title="Premium Quality" text="Freshly selected and farm-sourced." />
+           <Feature icon={<Truck className="w-8 h-8" />} title="Fast Delivery" text="Dispatch to your door in 25 mins." />
+           <Feature icon={<Star className="w-8 h-8" />} title="Trusted Service" text="Serving thousands of happy families." />
         </div>
       </section>
 
@@ -114,8 +161,8 @@ export default function App() {
       <main className="container mx-auto px-4">
         
         {/* PROMOTIONS - 16 PRODUCTS */}
-        <section>
-          <div className="flex items-center justify-between border-b-2 border-black/5 py-4">
+        <section className="py-12">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-bold tracking-tight">Flash Deals</h2>
@@ -130,9 +177,9 @@ export default function App() {
           </div>
         </section>
 
-        {/* BEST SELLERS - 16 PRODUCTS */}
-        <section>
-          <div className="flex items-center justify-between border-b-2 border-black/5 py-4">
+        {/* ELITE SELECTION - 16 PRODUCTS */}
+        <section className="pb-24">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-bold tracking-tight">Elite Selection</h2>
@@ -140,7 +187,7 @@ export default function App() {
             <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">Explore</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100 pb-12">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(16, 32).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -172,6 +219,18 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
         isGold && "bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(251,191,36,0.6)] animate-pulse"
       )}>{node}</h3>
       <p className="text-[11px] font-medium text-white/70">{label}</p>
+    </div>
+  );
+}
+
+function Feature({ icon, title, text }: { icon: React.ReactNode, title: string, text: string }) {
+  return (
+    <div className="flex items-start gap-4 p-6 rounded-[1.5rem] hover:bg-gray-50 transition-colors group">
+      <div className="text-red-600 group-hover:scale-110 transition-transform">{icon}</div>
+      <div>
+        <h4 className="font-bold text-lg leading-tight mb-1">{title}</h4>
+        <p className="text-sm text-gray-500">{text}</p>
+      </div>
     </div>
   );
 }
