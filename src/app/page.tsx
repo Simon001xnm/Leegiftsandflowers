@@ -3,15 +3,15 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MOCK_MENU, MenuItem } from "@/lib/food-data";
+import { MOCK_MENU } from "@/lib/food-data";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowRight, Heart, ChevronRight, Star } from "lucide-react";
+import { Heart, ChevronRight } from "lucide-react";
 
 /**
  * ULTRA-HIGH DENSITY LANDING PAGE
  * Optimized for 4 columns on mobile to match premium retail standards.
- * Simplified for HMR stability.
+ * Simplified architectural pattern to prevent HMR module factory errors.
  */
 export default function Home() {
   const { addToCart } = useCart();
@@ -51,7 +51,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ULTRA-HIGH DENSITY MARKET GRID - STRICT 4 COLUMNS ON MOBILE */}
+        {/* ULTRA-HIGH DENSITY MARKET GRID - MINIMUM 4 COLUMNS ON MOBILE */}
         <section className="py-6 md:py-12 bg-white px-2 md:px-12 container mx-auto">
           <div className="flex items-end justify-between mb-4 px-1">
             <div className="space-y-0">

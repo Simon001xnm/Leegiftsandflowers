@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Search, Star, Clock, Beef, Utensils, Zap, ShoppingBag, Heart, Pizza, Coffee, IceCream } from "lucide-react";
+import { ShoppingBag, Beef, Utensils, Zap, Pizza, Coffee, Star, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES = [
