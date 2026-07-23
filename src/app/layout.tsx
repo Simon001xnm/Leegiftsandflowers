@@ -8,18 +8,11 @@ import { CartProvider } from '@/context/CartContext';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'Steak West Butchery | Premium Meat & Choma Delivery',
-  description: 'Order fresh raw meat, Nyama Choma, Mutura, and local Kenyan delicacies in Nairobi. Fastest delivery from Steak West Butchery.',
+  title: 'Steak West | Premium Meat Logistics',
+  description: 'Nairobi #1 Premium Meat Dispatch. Secure, Fast, Reliable.',
   manifest: '/manifest.json',
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Steak West',
-  },
   icons: {
-    icon: [
-      { url: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png' },
-    ],
+    icon: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
     apple: '/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png',
   },
 };
@@ -44,7 +37,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased bg-background text-foreground min-h-screen pb-20 md:pb-0">
+      <body className="font-body antialiased bg-white text-foreground min-h-screen pb-20 md:pb-0">
         <FirebaseClientProvider>
           <CartProvider>
             <AppLayoutWrapper>
@@ -58,10 +51,10 @@ export default function RootLayout({
           {`
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                  console.log('SW registration successful');
+                navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                  console.log('SW Active');
                 }).catch(function(err) {
-                  console.log('SW registration failed: ', err);
+                  console.log('SW Error', err);
                 });
               });
             }

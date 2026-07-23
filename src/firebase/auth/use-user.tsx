@@ -4,53 +4,46 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 /**
- * Migration: useUser hook now powered by Supabase.
- * Supports "Demo Mode" for testing if Supabase isn't configured or during dev.
+ * Resilient useUser hook.
+ * Prevents the application from hanging/blinking white if Supabase is initializing.
  */
 export function useUser() {
-  const supabase = createClient();
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Get initial session
-    const getInitialUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        setUser(session.user);
-      } else {
-        // Fallback to Demo Mode check
-        const mockUserData = localStorage.getItem('abc_demo_user');
-        if (mockUserData) {
-          try {
-            setUser(JSON.parse(mockUserData));
-          } catch (e) {
-            setUser(null);
-          }
+    let subscription: any = null;
+
+    const initAuth = async () => {
+      try {
+        const supabase = createClient();
+        
+        // Initial session check
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          setUser(session.user);
         }
+
+        // Listen for changes
+        const { data } = supabase.auth.onAuthStateChange((event, session) => {
+          setUser(session?.user || null);
+          setLoading(false);
+        });
+        
+        subscription = data.subscription;
+      } catch (error) {
+        console.warn('Supabase Auth connection bypassed for local stability');
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
-    getInitialUser();
+    initAuth();
 
-    // 2. Listen for Auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        setUser(session.user);
-      } else {
-        const mockUserData = localStorage.getItem('abc_demo_user');
-        if (mockUserData) {
-          setUser(JSON.parse(mockUserData));
-        } else {
-          setUser(null);
-        }
-      }
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
-  }, [supabase]);
+    return () => {
+      if (subscription) subscription.unsubscribe();
+    };
+  }, []);
 
   return { user, loading };
 }
