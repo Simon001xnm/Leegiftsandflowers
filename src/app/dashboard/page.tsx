@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -9,37 +8,72 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { Plus, Package, ShoppingCart, RefreshCcw, Loader2, Trash2 } from "lucide-react";
 
 /**
- * MERCHANT POS & INVENTORY DASHBOARD
- * Direct link to Supabase 'products' table.
+ * COMPREHENSIVE MERCHANT BUSINESS TERMINAL
+ * Full Inventory, Product Upload, and POS Suite.
  */
 export default function MerchantDashboard() {
   const { toast } = useToast();
   const supabase = createClient();
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [addingProduct, setAddingProduct] = useState(false);
   const [posCart, setPosCart] = useState<any[]>([]);
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (!error && data) setProducts(data);
-      } catch (e) {
-        console.warn("Supabase POS link deferred");
-      } finally {
-        setLoading(false);
-      }
+  // Form State
+  const [newProduct, setNewProduct] = useState({
+    name: "",
+    price: "",
+    category: "Raw Meat",
+    description: "",
+    image_url: ""
+  });
+
+  async function loadData() {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (!error && data) setProducts(data);
+    } catch (e) {
+      console.warn("Supabase Sync Deferred");
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     loadData();
   }, [supabase]);
+
+  const handleAddProduct = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAddingProduct(true);
+    
+    const { error } = await supabase.from('products').insert([{
+      ...newProduct,
+      price: parseFloat(newProduct.price),
+      is_in_stock: true,
+      created_at: new Date().toISOString()
+    }]);
+
+    if (error) {
+      toast({ variant: "destructive", title: "Upload Failed", description: error.message });
+    } else {
+      toast({ title: "Product Live", description: "Identity added to global marketplace." });
+      setNewProduct({ name: "", price: "", category: "Raw Meat", description: "", image_url: "" });
+      loadData();
+    }
+    setAddingProduct(false);
+  };
 
   const toggleStock = async (id: string, currentStatus: boolean) => {
     const { error } = await supabase
@@ -51,7 +85,7 @@ export default function MerchantDashboard() {
       toast({ variant: "destructive", title: "Sync Error", description: error.message });
     } else {
       setProducts(prev => prev.map(p => p.id === id ? { ...p, is_in_stock: !currentStatus } : p));
-      toast({ title: "Node Updated", description: "Product availability synced globally." });
+      toast({ title: "Node Updated", description: "Item availability synced." });
     }
   };
 
@@ -71,40 +105,44 @@ export default function MerchantDashboard() {
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-black uppercase tracking-tighter">Business Terminal</h1>
-          <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Supabase Connected // Secure Node</p>
+          <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Supabase Connected // Secure Node V4</p>
         </div>
         <div className="flex gap-2">
-          <Badge className="bg-emerald-100 text-emerald-700 border-none rounded-none px-4 py-2 font-black uppercase tracking-widest text-[9px]">Network Active</Badge>
-          <Button variant="outline" className="rounded-none border-2 border-black font-black uppercase text-[10px]" onClick={() => window.location.reload()}>Refresh Feed</Button>
+          <Badge className="bg-emerald-100 text-emerald-700 border-none rounded-none px-4 py-2 font-black uppercase tracking-widest text-[9px]">Network Optimal</Badge>
+          <Button variant="outline" className="rounded-none border-2 border-black font-black uppercase text-[10px] h-10 px-6" onClick={loadData}>
+            <RefreshCcw className="w-3 h-3 mr-2" /> Refresh Feed
+          </Button>
         </div>
       </header>
 
       <Tabs defaultValue="pos" className="space-y-8">
-        <TabsList className="bg-gray-100 p-1 rounded-none h-12">
-          <TabsTrigger value="pos" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">POS Terminal</TabsTrigger>
+        <TabsList className="bg-gray-100 p-1 rounded-none h-12 border-2 border-black">
+          <TabsTrigger value="pos" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">POS Register</TabsTrigger>
           <TabsTrigger value="inventory" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">Inventory Suite</TabsTrigger>
+          <TabsTrigger value="add" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">Add Product</TabsTrigger>
         </TabsList>
 
         <TabsContent value="pos" className="grid lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
               {products.map(p => (
-                <Card 
+                <button 
                   key={p.id} 
                   className={cn(
-                    "rounded-none border-2 cursor-pointer hover:border-primary transition-all",
-                    !p.is_in_stock && "opacity-40 grayscale pointer-events-none"
+                    "flex flex-col border-2 rounded-none transition-all text-left group",
+                    p.is_in_stock ? "border-black hover:bg-black hover:text-white" : "opacity-30 border-gray-100 grayscale pointer-events-none"
                   )}
                   onClick={() => addToPosCart(p)}
                 >
-                  <div className="aspect-square relative bg-gray-50 border-b-2">
-                    {p.image_url ? <img src={p.image_url} alt="" className="object-cover w-full h-full" /> : <div className="w-full h-full flex items-center justify-center opacity-20"><span className="font-black">IMG</span></div>}
+                  <div className="aspect-square bg-gray-50 border-b-2 border-black overflow-hidden relative">
+                    <img src={p.image_url || `https://picsum.photos/seed/${p.id}/200/200`} alt="" className="object-cover w-full h-full" />
+                    {!p.is_in_stock && <div className="absolute inset-0 flex items-center justify-center bg-white/80"><span className="text-[8px] font-black uppercase">Offline</span></div>}
                   </div>
-                  <div className="p-3">
-                    <p className="font-black text-[10px] uppercase truncate">{p.name}</p>
-                    <p className="font-black text-primary text-[11px]">KES {p.price}</p>
+                  <div className="p-2">
+                    <p className="text-[9px] font-black uppercase truncate leading-none mb-1">{p.name}</p>
+                    <p className="text-[10px] font-black">KES {p.price}</p>
                   </div>
-                </Card>
+                </button>
               ))}
             </div>
           </div>
@@ -112,27 +150,39 @@ export default function MerchantDashboard() {
           <div className="lg:col-span-4">
             <Card className="rounded-none border-4 border-black shadow-2xl sticky top-24">
               <CardHeader className="bg-black text-white py-4">
-                <CardTitle className="text-[12px] font-black uppercase">Current Bill</CardTitle>
+                <CardTitle className="text-[12px] font-black uppercase flex items-center gap-2">
+                  <ShoppingCart className="w-4 h-4" /> Current Bill
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
-                <div className="space-y-4 max-h-[300px] overflow-auto">
-                  {posCart.length === 0 ? <p className="text-center py-10 text-[10px] font-black opacity-20 uppercase">Register Empty</p> : posCart.map(i => (
-                    <div key={i.id} className="flex justify-between items-center border-b border-dashed pb-2">
+                <div className="space-y-4 min-h-[200px] max-h-[400px] overflow-auto pr-2 no-scrollbar">
+                  {posCart.length === 0 ? (
+                    <div className="text-center py-20 opacity-20 flex flex-col items-center">
+                      <Plus className="w-8 h-8 mb-2" />
+                      <p className="text-[10px] font-black uppercase">Register Empty</p>
+                    </div>
+                  ) : posCart.map(i => (
+                    <div key={i.id} className="flex justify-between items-center border-b border-dashed border-black/20 pb-3">
                       <div>
-                        <p className="font-black text-[11px] uppercase">{i.name}</p>
-                        <p className="text-[9px] font-bold opacity-50">{i.quantity}x @ {i.price}</p>
+                        <p className="font-black text-[12px] uppercase leading-none mb-1">{i.name}</p>
+                        <p className="text-[9px] font-bold opacity-50 uppercase tracking-widest">{i.quantity}x @ {i.price}</p>
                       </div>
-                      <span className="font-black text-[11px]">KES {i.price * i.quantity}</span>
+                      <div className="flex items-center gap-4">
+                        <span className="font-black text-[12px]">KES {i.price * i.quantity}</span>
+                        <button onClick={() => setPosCart(prev => prev.filter(item => item.id !== i.id))} className="text-red-500 hover:scale-110">
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
                 <div className="pt-6 border-t-2 border-black">
                   <div className="flex justify-between items-end mb-6">
-                    <span className="text-[8px] font-black text-muted-foreground uppercase">Grand Total</span>
-                    <span className="text-3xl font-black text-black">KES {total.toLocaleString()}</span>
+                    <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Grand Total</span>
+                    <span className="text-4xl font-black text-black leading-none">KES {total.toLocaleString()}</span>
                   </div>
-                  <Button className="w-full h-14 bg-black text-white font-black uppercase text-[12px] rounded-none" disabled={posCart.length === 0} onClick={() => {setPosCart([]); toast({ title: "Order Processed" })}}>
-                    Print & Sync Transaction
+                  <Button className="w-full h-16 bg-black text-white font-black uppercase text-[14px] rounded-none hover:bg-emerald-600 transition-all shadow-xl shadow-black/10" disabled={posCart.length === 0} onClick={() => {setPosCart([]); toast({ title: "Transaction Processed" })}}>
+                    Finalize & Sync Node
                   </Button>
                 </div>
               </CardContent>
@@ -141,39 +191,124 @@ export default function MerchantDashboard() {
         </TabsContent>
 
         <TabsContent value="inventory" className="space-y-6">
-          <div className="border-4 border-black overflow-hidden">
+          <div className="border-4 border-black overflow-hidden bg-white">
             <table className="w-full text-left">
               <thead className="bg-gray-100 border-b-2 border-black">
                 <tr>
-                  <th className="px-6 py-4 text-[10px] font-black uppercase">Item Node</th>
-                  <th className="px-6 py-4 text-[10px] font-black uppercase">Pricing</th>
-                  <th className="px-6 py-4 text-[10px] font-black uppercase">Live Status</th>
-                  <th className="px-6 py-4 text-right text-[10px] font-black uppercase">Lock</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Item Node</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Pricing</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Category</th>
+                  <th className="px-6 py-4 text-right text-[10px] font-black uppercase tracking-widest">Lock Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y border-black">
+              <tbody className="divide-y divide-black/10">
                 {products.map(p => (
-                  <tr key={p.id} className="hover:bg-gray-50">
+                  <tr key={p.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gray-100 border" />
-                        <span className="font-black text-[12px] uppercase">{p.name}</span>
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gray-50 border-2 border-black overflow-hidden shrink-0">
+                           <img src={p.image_url || `https://picsum.photos/seed/${p.id}/200/200`} className="object-cover w-full h-full" alt="" />
+                        </div>
+                        <span className="font-black text-[13px] uppercase tracking-tighter">{p.name}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-black text-[12px]">KES {p.price}</td>
+                    <td className="px-6 py-4 font-black text-[13px]">KES {p.price}</td>
                     <td className="px-6 py-4">
-                       <Badge className={cn("rounded-none text-[8px] font-black uppercase", p.is_in_stock ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700")}>
-                         {p.is_in_stock ? "Online" : "Offline"}
-                       </Badge>
+                       <Badge className="bg-black text-white text-[8px] font-black uppercase rounded-none">{p.category}</Badge>
                     </td>
                     <td className="px-6 py-4 text-right">
-                       <Switch checked={p.is_in_stock} onCheckedChange={() => toggleStock(p.id, p.is_in_stock)} className="data-[state=checked]:bg-emerald-500" />
+                       <div className="flex items-center justify-end gap-3">
+                          <span className={cn("text-[9px] font-black uppercase tracking-widest", p.is_in_stock ? "text-emerald-600" : "text-red-500")}>
+                            {p.is_in_stock ? "ONLINE" : "OFFLINE"}
+                          </span>
+                          <Switch checked={p.is_in_stock} onCheckedChange={() => toggleStock(p.id, p.is_in_stock)} className="data-[state=checked]:bg-emerald-500" />
+                       </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+        </TabsContent>
+
+        <TabsContent value="add">
+          <Card className="max-w-2xl mx-auto rounded-none border-4 border-black shadow-2xl">
+            <CardHeader className="bg-black text-white">
+              <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3">
+                <Plus className="w-5 h-5" /> New Product Identity
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-8">
+              <form onSubmit={handleAddProduct} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label className="text-[10px] font-black uppercase tracking-widest">Product Name</Label>
+                    <Input 
+                      required
+                      placeholder="e.g. PREMIUM T-BONE" 
+                      className="rounded-none border-2 border-black font-bold h-12 uppercase"
+                      value={newProduct.name}
+                      onChange={e => setNewProduct({...newProduct, name: e.target.value})}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-[10px] font-black uppercase tracking-widest">Price (KES)</Label>
+                    <Input 
+                      required
+                      type="number"
+                      placeholder="1500" 
+                      className="rounded-none border-2 border-black font-bold h-12"
+                      value={newProduct.price}
+                      onChange={e => setNewProduct({...newProduct, price: e.target.value})}
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label className="text-[10px] font-black uppercase tracking-widest">Category Node</Label>
+                  <select 
+                    className="w-full h-12 border-2 border-black rounded-none px-4 font-bold text-[12px] uppercase bg-white outline-none focus:bg-gray-50"
+                    value={newProduct.category}
+                    onChange={e => setNewProduct({...newProduct, category: e.target.value})}
+                  >
+                    <option>Raw Meat</option>
+                    <option>Nyama Choma</option>
+                    <option>Cooked</option>
+                    <option>Delicacies</option>
+                    <option>Grocery</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-[10px] font-black uppercase tracking-widest">Image URL</Label>
+                  <Input 
+                    placeholder="https://..." 
+                    className="rounded-none border-2 border-black font-bold h-12"
+                    value={newProduct.image_url}
+                    onChange={e => setNewProduct({...newProduct, image_url: e.target.value})}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="text-[10px] font-black uppercase tracking-widest">Description</Label>
+                  <Textarea 
+                    className="rounded-none border-2 border-black font-bold min-h-[100px]"
+                    placeholder="Premium quality, farm fresh..."
+                    value={newProduct.description}
+                    onChange={e => setNewProduct({...newProduct, description: e.target.value})}
+                  />
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full h-16 bg-black text-white font-black uppercase text-[14px] rounded-none hover:bg-primary transition-all"
+                  disabled={addingProduct}
+                >
+                  {addingProduct ? <Loader2 className="w-6 h-6 animate-spin" /> : "Authorize & Upload Item"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
