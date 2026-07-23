@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-black overflow-hidden">
-      {/* Cinematic Video Background */}
+    <section className="relative h-[50vh] md:h-[60vh] min-h-[400px] flex items-center justify-center bg-black overflow-hidden">
+      {/* Cinematic Video Background Optimized for All Screens */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -16,9 +16,9 @@ export function Hero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-60"
         >
-          <source src="/From%20Klickpin.com-%2013933080092165366-pin-id-13933080092165366.mp4" type="video/mp4" />
+          <source src="/From%20Klickpin.com-%20833517843581501058-pin-id-833517843581501058%20(1).mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
       </div>
       
       <div className="container mx-auto px-6 relative z-10 text-center space-y-8">

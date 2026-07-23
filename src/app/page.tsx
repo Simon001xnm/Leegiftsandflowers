@@ -92,7 +92,7 @@ export default function App() {
   return (
     <div className="bg-white text-black min-h-screen font-body selection:bg-red-600 selection:text-white">
       {/* Hero section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center bg-black overflow-hidden pt-20">
+      <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center bg-black overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -101,9 +101,9 @@ export default function App() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           >
-            <source src="/From%20Klickpin.com-%2013933080092165366-pin-id-13933080092165366.mp4" type="video/mp4" />
+            <source src="/From%20Klickpin.com-%20833517843581501058-pin-id-833517843581501058%20(1).mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black" />
         </div>
         
         <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
