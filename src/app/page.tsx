@@ -148,15 +148,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* FEATURES MINI SECTION */}
-      <section className="bg-white border-b">
-        <div className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-           <Feature icon={<ShieldCheck className="w-8 h-8" />} title="Premium Quality" text="Freshly selected and farm-sourced." />
-           <Feature icon={<Truck className="w-8 h-8" />} title="Fast Delivery" text="Dispatch to your door in 25 mins." />
-           <Feature icon={<Star className="w-8 h-8" />} title="Trusted Service" text="Serving thousands of happy families." />
-        </div>
-      </section>
-
       {/* RETAIL DISCOVERY GRID */}
       <main className="container mx-auto px-4">
         
@@ -219,18 +210,6 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
         isGold && "bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(251,191,36,0.6)] animate-pulse"
       )}>{node}</h3>
       <p className="text-[11px] font-medium text-white/70">{label}</p>
-    </div>
-  );
-}
-
-function Feature({ icon, title, text }: { icon: React.ReactNode, title: string, text: string }) {
-  return (
-    <div className="flex items-start gap-4 p-6 rounded-[1.5rem] hover:bg-gray-50 transition-colors group">
-      <div className="text-red-600 group-hover:scale-110 transition-transform">{icon}</div>
-      <div>
-        <h4 className="font-bold text-lg leading-tight mb-1">{title}</h4>
-        <p className="text-sm text-gray-500">{text}</p>
-      </div>
     </div>
   );
 }
