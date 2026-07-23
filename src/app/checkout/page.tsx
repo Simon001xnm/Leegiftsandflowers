@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from "react";
@@ -25,9 +26,6 @@ import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import Image from "next/image";
 
-/**
- * Global Checkout Page - Wire to Supabase.
- */
 export default function GlobalCheckoutPage() {
   const router = useRouter();
   const { cart, addToCart, removeFromCart, clearItem, subtotal, clearCart } = useCart();
@@ -63,14 +61,12 @@ export default function GlobalCheckoutPage() {
       created_at: new Date().toISOString()
     };
 
-    // Commit to Supabase 'orders' table
     const { error } = await supabase
       .from('orders')
       .insert([orderData]);
 
     if (error) {
-      console.error('Supabase Error:', error);
-      // Fail gracefully for demo purposes if table doesn't exist
+      console.error('Error:', error);
       if (user.id?.startsWith('demo-')) {
          console.log('Demo mode bypass');
       } else {
@@ -79,7 +75,6 @@ export default function GlobalCheckoutPage() {
       }
     }
 
-    // Success flow
     setTimeout(() => {
       clearCart();
       router.push(`/track/${orderId}`);
@@ -94,7 +89,7 @@ export default function GlobalCheckoutPage() {
             <ShoppingBag className="w-10 h-10 text-gray-200" />
           </div>
           <h1 className="text-3xl font-black font-headline text-black uppercase tracking-tighter mb-4">Your Basket is Empty</h1>
-          <p className="text-muted-foreground mb-8 max-w-sm font-bold uppercase tracking-widest text-[12px]">Looks like you haven't added any premium cuts to your basket yet.</p>
+          <p className="text-muted-foreground mb-8 max-w-sm font-bold uppercase tracking-widest text-[12px]">Looks like you haven't added any premium cuts yet.</p>
           <Link href="/restaurants">
             <Button className="h-14 px-10 rounded-none font-black text-[14px] uppercase tracking-widest shadow-xl shadow-primary/10">
               Start Shopping
@@ -110,10 +105,10 @@ export default function GlobalCheckoutPage() {
       <main className="container mx-auto px-4 py-8 lg:py-12 flex-grow max-w-6xl">
         <div className="mb-8 flex items-center justify-between">
           <Button variant="ghost" className="gap-2 font-black text-[14px] uppercase tracking-widest" onClick={() => router.back()}>
-            <ChevronLeft className="w-4 h-4" /> Back to Market
+            <ChevronLeft className="w-4 h-4" /> Back
           </Button>
           <div className="flex items-center gap-2 text-primary font-black text-[14px] uppercase tracking-widest">
-            <ShieldCheck className="w-4 h-4" /> Secure Order Entry (Supabase)
+            <ShieldCheck className="w-4 h-4" /> Secure Payment
           </div>
         </div>
 
@@ -121,7 +116,7 @@ export default function GlobalCheckoutPage() {
           <div className="lg:col-span-7 space-y-10">
             <section className="space-y-6">
               <h2 className="text-2xl font-black font-headline text-black uppercase tracking-tighter flex items-center gap-3">
-                <ShoppingBag className="w-6 h-6 text-primary" /> Review Selection ({cart.length})
+                <ShoppingBag className="w-6 h-6 text-primary" /> My Selection ({cart.length})
               </h2>
               <div className="border-t border-l">
                 {cart.map((cartItem) => (
@@ -141,9 +136,9 @@ export default function GlobalCheckoutPage() {
                         <p className="font-black text-[14px]">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</p>
                       </div>
                     </div>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-300 hover:text-red-500 rounded-none self-start" onClick={() => clearItem(cartItem.item.id)}>
+                    <button className="h-8 w-8 text-gray-300 hover:text-red-500 self-start" onClick={() => clearItem(cartItem.item.id)}>
                       <Trash2 className="w-4 h-4" />
-                    </Button>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -151,7 +146,7 @@ export default function GlobalCheckoutPage() {
 
             <section className="space-y-6">
               <h2 className="text-2xl font-black font-headline text-black uppercase tracking-tighter flex items-center gap-3">
-                <MapPin className="w-6 h-6 text-primary" /> Delivery Node
+                <MapPin className="w-6 h-6 text-primary" /> Destination
               </h2>
               <Card className="rounded-none border shadow-none bg-gray-50">
                 <CardContent className="p-6 flex items-center justify-between">
@@ -159,7 +154,7 @@ export default function GlobalCheckoutPage() {
                     <p className="font-black text-[14px] uppercase tracking-widest">Home Address</p>
                     <p className="text-[14px] font-medium text-muted-foreground">Silver Heights, Nairobi, Kenya</p>
                   </div>
-                  <Button variant="outline" className="rounded-none border-2 font-black text-[12px] uppercase tracking-widest">Edit</Button>
+                  <Button variant="outline" className="rounded-none border-2 font-black text-[12px] uppercase tracking-widest">Change</Button>
                 </CardContent>
               </Card>
             </section>
@@ -169,7 +164,7 @@ export default function GlobalCheckoutPage() {
             <div className="sticky top-24 space-y-8">
               <Card className="rounded-none border shadow-2xl overflow-hidden">
                 <CardHeader className="bg-black text-white py-6">
-                  <CardTitle className="text-[14px] font-black uppercase tracking-widest">Transaction Method</CardTitle>
+                  <CardTitle className="text-[14px] font-black uppercase tracking-widest">Payment Method</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid gap-4">
@@ -181,7 +176,7 @@ export default function GlobalCheckoutPage() {
                         <Smartphone className="w-5 h-5 text-primary" />
                         <div className="space-y-0.5">
                           <p className="font-black text-[14px] uppercase tracking-widest">M-Pesa</p>
-                          <p className="text-[10px] font-bold text-muted-foreground uppercase">Instant mobile checkout</p>
+                          <p className="text-[10px] font-bold text-muted-foreground uppercase">Mobile checkout</p>
                         </div>
                       </div>
                       <RadioGroupItem value="mpesa" id="mpesa" className="rounded-none" />
@@ -206,7 +201,7 @@ export default function GlobalCheckoutPage() {
 
               <Card className="rounded-none border-4 border-black shadow-none bg-white">
                 <CardHeader className="bg-gray-50 border-b">
-                  <CardTitle className="text-[14px] font-black uppercase tracking-widest">Order Summary</CardTitle>
+                  <CardTitle className="text-[14px] font-black uppercase tracking-widest">Order Total</CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 space-y-6">
                   <div className="space-y-3">
@@ -215,7 +210,7 @@ export default function GlobalCheckoutPage() {
                       <span>KES {subtotal.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-[14px] font-bold text-muted-foreground uppercase tracking-widest">
-                      <span>Delivery Fee</span>
+                      <span>Delivery</span>
                       <span>KES {deliveryFee.toLocaleString()}</span>
                     </div>
                   </div>
@@ -224,24 +219,20 @@ export default function GlobalCheckoutPage() {
                     <p className="text-4xl font-black text-primary">KES {total.toLocaleString()}</p>
                   </div>
                   <Button 
-                    className="w-full h-16 text-[14px] font-black uppercase tracking-widest rounded-none shadow-xl shadow-primary/20 hover:scale-[1.01] transition-all"
+                    className="w-full h-16 text-[14px] font-black uppercase tracking-widest rounded-none shadow-xl transition-all"
                     onClick={handleCheckout}
                     disabled={loading || authLoading}
                   >
                     {loading ? (
                       <div className="flex items-center gap-2">
-                        <Loader2 className="w-5 h-5 animate-spin" /> Committing to Supabase...
+                        <Loader2 className="w-5 h-5 animate-spin" /> Processing...
                       </div>
                     ) : (
-                      <>{!user ? 'Sign in to Commit' : `Commit Order KES ${total.toLocaleString()}`} <ArrowRight className="w-5 h-5 ml-2" /></>
+                      <>{!user ? 'Sign in to Pay' : `Pay KES ${total.toLocaleString()}`} <ArrowRight className="w-5 h-5 ml-2" /></>
                     )}
                   </Button>
                 </CardContent>
               </Card>
-
-              <div className="flex items-center justify-center gap-3 text-muted-foreground opacity-50 font-bold uppercase tracking-widest text-[10px]">
-                <ShieldCheck className="w-4 h-4" /> 100% Encrypted & Supabase Protected
-              </div>
             </div>
           </div>
         </div>

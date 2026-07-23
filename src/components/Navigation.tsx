@@ -1,12 +1,11 @@
+
 'use client';
 
 import Link from "next/link";
 import Image from "next/image";
 import { 
   Search, 
-  MapPin, 
   ShoppingCart, 
-  ChevronDown,
   User,
   LogIn
 } from "lucide-react";
@@ -17,10 +16,6 @@ import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/firebase/auth/use-user";
 
-/**
- * PURE RETAIL NAVIGATION
- * Only contains shopping-relevant links.
- */
 export function Navigation() {
   const [toggle, setToggle] = useState<'delivery' | 'pickup'>('delivery');
   const { itemCount } = useCart();
@@ -49,15 +44,9 @@ export function Navigation() {
           <button onClick={() => setToggle('pickup')} className={cn("px-4 py-1 text-[11px] font-black uppercase transition-all rounded-full h-7 flex items-center", toggle === 'pickup' ? "bg-white shadow-sm text-black" : "text-gray-500 hover:text-black")}>Pickup</button>
         </div>
 
-        <div className="flex items-center gap-1.5 px-3 py-1.5 hover:bg-gray-50 rounded-full cursor-pointer transition-all shrink-0">
-          <MapPin className="w-3.5 h-3.5 text-black" />
-          <span className="text-[12px] font-black uppercase tracking-tight">Select Node</span>
-          <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-        </div>
-
         <div className="flex-grow relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-500" />
-          <Input className="w-full bg-gray-100 border-none h-8 pl-9 text-[12px] font-bold rounded-full" placeholder="Search premium cuts..." />
+          <Input className="w-full bg-gray-100 border-none h-8 pl-9 text-[12px] font-bold rounded-full" placeholder="Search for items..." />
         </div>
       </div>
 

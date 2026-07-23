@@ -9,11 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import { createClient } from "@/lib/supabase/client";
 import { InstallAppButton } from "@/components/InstallAppButton";
 
-/**
- * PERFORMANCE-OPTIMIZED LANDING PAGE
- * Strictly enforces 4-column mobile density.
- * Uses instant-render logic with database fallback.
- */
 export default function Home() {
   const { addToCart } = useCart();
   const { toast } = useToast();
@@ -33,7 +28,6 @@ export default function Home() {
         if (!error && data && data.length > 0) {
           setProducts(data);
         } else {
-          // Fallback to minimal mock if database is empty or keys are missing
           setProducts([
             { id: 'f1', name: 'Premium T-Bone', price: 1500, category: 'Raw Meat' },
             { id: 'f2', name: 'Goat Choma', price: 1350, category: 'Grills' },
@@ -60,7 +54,7 @@ export default function Home() {
          <Link href="/" className="font-black italic text-xl tracking-tighter">STEAK WEST<span className="text-primary">.</span></Link>
          <div className="flex items-center gap-6">
            <Link href="/login" className="text-[11px] font-black uppercase tracking-widest hover:text-primary transition-colors">Sign In</Link>
-           <Link href="/checkout" className="flex items-center gap-2 bg-black text-white px-5 h-9 rounded-full text-[11px] font-black uppercase tracking-widest shadow-lg shadow-black/10">
+           <Link href="/checkout" className="flex items-center gap-2 bg-black text-white px-5 h-9 rounded-full text-[11px] font-black uppercase tracking-widest">
              <BasketIcon />
              <span>Basket</span>
            </Link>
@@ -72,7 +66,6 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
           <div className="relative z-20 px-8 container mx-auto text-white space-y-8">
             <div className="space-y-4">
-              <span className="bg-primary px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] inline-block tracking-widest">ESTABLISHED 2026</span>
               <h1 className="text-5xl md:text-8xl font-black leading-[0.85] uppercase tracking-tighter">
                 PREMIUM MEAT<br />DISPATCHED
               </h1>
@@ -92,7 +85,7 @@ export default function Home() {
         <section className="py-10 px-4 container mx-auto">
           <div className="flex items-end justify-between mb-6 border-b-4 border-black pb-3">
              <h2 className="text-[14px] md:text-2xl font-black uppercase tracking-tighter">Live Selection</h2>
-             <Link href="/restaurants" className="text-[9px] font-black uppercase text-primary tracking-widest hover:underline">Market Discovery</Link>
+             <Link href="/restaurants" className="text-[9px] font-black uppercase text-primary tracking-widest hover:underline">Explore More</Link>
           </div>
 
           <div className="grid grid-cols-4 md:grid-cols-8 gap-2 md:gap-4">
@@ -144,11 +137,7 @@ export default function Home() {
       <footer className="bg-black text-white p-12 pb-28">
         <div className="container mx-auto text-center space-y-6">
            <h2 className="text-2xl font-black italic tracking-tighter">STEAK WEST<span className="text-primary">.</span></h2>
-           <p className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.4em]">Premium Distribution Hub // Nairobi, Kenya</p>
-           <div className="flex justify-center gap-6 text-[8px] font-black text-gray-600 uppercase tracking-widest">
-             <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> SSL SECURE</span>
-             <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> SUPABASE SYNC</span>
-           </div>
+           <p className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.4em]">Nairobi, Kenya</p>
         </div>
       </footer>
     </div>

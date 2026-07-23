@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from "react";
@@ -12,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
-import { Plus, ShoppingCart, RefreshCcw, Loader2, Trash2, Upload, Cloud } from "lucide-react";
+import { Plus, ShoppingCart, RefreshCcw, Loader2, Trash2, Upload } from "lucide-react";
 
 export default function MerchantDashboard() {
   const { toast } = useToast();
@@ -23,7 +24,6 @@ export default function MerchantDashboard() {
   const [posCart, setPosCart] = useState<any[]>([]);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  // Form State
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
@@ -41,7 +41,7 @@ export default function MerchantDashboard() {
         .order('created_at', { ascending: false });
       if (!error && data) setProducts(data);
     } catch (e) {
-      console.warn("Supabase Sync Deferred");
+      console.warn("Load deferred");
     } finally {
       setLoading(false);
     }
@@ -67,22 +67,28 @@ export default function MerchantDashboard() {
   const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newProduct.image_url) {
-      toast({ variant: "destructive", title: "Missing Asset", description: "Please upload a product image." });
+      toast({ variant: "destructive", title: "Missing Photo", description: "Please upload a product photo." });
       return;
     }
     setAddingProduct(true);
     
-    const { error } = await supabase.from('products').insert([{
-      ...newProduct,
+    // We try to insert into 'category' but fallback if the column is missing
+    const productPayload = {
+      name: newProduct.name,
       price: parseFloat(newProduct.price),
+      description: newProduct.description,
+      image_url: newProduct.image_url,
       is_in_stock: true,
-      created_at: new Date().toISOString()
-    }]);
+      created_at: new Date().toISOString(),
+      category: newProduct.category // Ensure your Supabase table has this exact column
+    };
+
+    const { error } = await supabase.from('products').insert([productPayload]);
 
     if (error) {
-      toast({ variant: "destructive", title: "Upload Failed", description: error.message });
+      toast({ variant: "destructive", title: "Error", description: error.message });
     } else {
-      toast({ title: "Product Live", description: "Identity added to global marketplace." });
+      toast({ title: "Success", description: "Product added to shop." });
       setNewProduct({ name: "", price: "", category: "Raw Meat", description: "", image_url: "" });
       setImagePreview(null);
       loadData();
@@ -97,10 +103,10 @@ export default function MerchantDashboard() {
       .eq('id', id);
 
     if (error) {
-      toast({ variant: "destructive", title: "Sync Error", description: error.message });
+      toast({ variant: "destructive", title: "Error", description: error.message });
     } else {
       setProducts(prev => prev.map(p => p.id === id ? { ...p, is_in_stock: !currentStatus } : p));
-      toast({ title: "Node Updated", description: "Item availability synced." });
+      toast({ title: "Updated", description: "Item status changed." });
     }
   };
 
@@ -119,22 +125,21 @@ export default function MerchantDashboard() {
     <div className="min-h-screen bg-white p-4 md:p-8 space-y-8">
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-tighter">Business Terminal</h1>
-          <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Supabase Connected // Secure Node V4</p>
+          <h1 className="text-3xl font-black uppercase tracking-tighter">Management</h1>
+          <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Business Control Panel</p>
         </div>
         <div className="flex gap-2">
-          <Badge className="bg-emerald-100 text-emerald-700 border-none rounded-none px-4 py-2 font-black uppercase tracking-widest text-[9px]">Network Optimal</Badge>
           <Button variant="outline" className="rounded-none border-2 border-black font-black uppercase text-[10px] h-10 px-6" onClick={loadData}>
-            <RefreshCcw className="w-3 h-3 mr-2" /> Refresh Feed
+            <RefreshCcw className="w-3 h-3 mr-2" /> Refresh
           </Button>
         </div>
       </header>
 
       <Tabs defaultValue="pos" className="space-y-8">
         <TabsList className="bg-gray-100 p-1 rounded-none h-12 border-2 border-black">
-          <TabsTrigger value="pos" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">POS Register</TabsTrigger>
-          <TabsTrigger value="inventory" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">Inventory Suite</TabsTrigger>
-          <TabsTrigger value="add" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">Add Product</TabsTrigger>
+          <TabsTrigger value="pos" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">Shop Floor</TabsTrigger>
+          <TabsTrigger value="inventory" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">Stock List</TabsTrigger>
+          <TabsTrigger value="add" className="rounded-none font-black uppercase text-[11px] px-8 data-[state=active]:bg-black data-[state=active]:text-white">Add Item</TabsTrigger>
         </TabsList>
 
         <TabsContent value="pos" className="grid lg:grid-cols-12 gap-8">
@@ -151,7 +156,7 @@ export default function MerchantDashboard() {
                 >
                   <div className="aspect-square bg-gray-50 border-b-2 border-black overflow-hidden relative">
                     <img src={p.image_url || `https://picsum.photos/seed/${p.id}/200/200`} alt="" className="object-cover w-full h-full" />
-                    {!p.is_in_stock && <div className="absolute inset-0 flex items-center justify-center bg-white/80"><span className="text-[8px] font-black uppercase">Offline</span></div>}
+                    {!p.is_in_stock && <div className="absolute inset-0 flex items-center justify-center bg-white/80"><span className="text-[8px] font-black uppercase">Out</span></div>}
                   </div>
                   <div className="p-2">
                     <p className="text-[9px] font-black uppercase truncate leading-none mb-1">{p.name}</p>
@@ -166,7 +171,7 @@ export default function MerchantDashboard() {
             <Card className="rounded-none border-4 border-black shadow-2xl sticky top-24">
               <CardHeader className="bg-black text-white py-4">
                 <CardTitle className="text-[12px] font-black uppercase flex items-center gap-2">
-                  <ShoppingCart className="w-4 h-4" /> Current Bill
+                  <ShoppingCart className="w-4 h-4" /> Cart
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
@@ -174,7 +179,7 @@ export default function MerchantDashboard() {
                   {posCart.length === 0 ? (
                     <div className="text-center py-20 opacity-20 flex flex-col items-center">
                       <Plus className="w-8 h-8 mb-2" />
-                      <p className="text-[10px] font-black uppercase">Register Empty</p>
+                      <p className="text-[10px] font-black uppercase">Cart Empty</p>
                     </div>
                   ) : posCart.map(i => (
                     <div key={i.id} className="flex justify-between items-center border-b border-dashed border-black/20 pb-3">
@@ -184,7 +189,7 @@ export default function MerchantDashboard() {
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="font-black text-[12px]">KES {i.price * i.quantity}</span>
-                        <button onClick={() => setPosCart(prev => prev.filter(item => item.id !== i.id))} className="text-red-500 hover:scale-110">
+                        <button onClick={() => setPosCart(prev => prev.filter(item => item.id !== i.id))} className="text-red-500">
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
@@ -193,11 +198,11 @@ export default function MerchantDashboard() {
                 </div>
                 <div className="pt-6 border-t-2 border-black">
                   <div className="flex justify-between items-end mb-6">
-                    <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Grand Total</span>
+                    <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Total</span>
                     <span className="text-4xl font-black text-black leading-none">KES {total.toLocaleString()}</span>
                   </div>
-                  <Button className="w-full h-16 bg-black text-white font-black uppercase text-[14px] rounded-none hover:bg-emerald-600 transition-all shadow-xl shadow-black/10" disabled={posCart.length === 0} onClick={() => {setPosCart([]); toast({ title: "Transaction Processed" })}}>
-                    Finalize & Sync Node
+                  <Button className="w-full h-16 bg-black text-white font-black uppercase text-[14px] rounded-none hover:bg-emerald-600 transition-all shadow-xl shadow-black/10" disabled={posCart.length === 0} onClick={() => {setPosCart([]); toast({ title: "Success" })}}>
+                    Complete Sale
                   </Button>
                 </div>
               </CardContent>
@@ -210,10 +215,10 @@ export default function MerchantDashboard() {
             <table className="w-full text-left">
               <thead className="bg-gray-100 border-b-2 border-black">
                 <tr>
-                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Item Node</th>
-                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Pricing</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Product</th>
+                  <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Price</th>
                   <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Category</th>
-                  <th className="px-6 py-4 text-right text-[10px] font-black uppercase tracking-widest">Lock Status</th>
+                  <th className="px-6 py-4 text-right text-[10px] font-black uppercase tracking-widest">Availability</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-black/10">
@@ -234,7 +239,7 @@ export default function MerchantDashboard() {
                     <td className="px-6 py-4 text-right">
                        <div className="flex items-center justify-end gap-3">
                           <span className={cn("text-[9px] font-black uppercase tracking-widest", p.is_in_stock ? "text-emerald-600" : "text-red-500")}>
-                            {p.is_in_stock ? "ONLINE" : "OFFLINE"}
+                            {p.is_in_stock ? "IN STOCK" : "OUT"}
                           </span>
                           <Switch checked={p.is_in_stock} onCheckedChange={() => toggleStock(p.id, p.is_in_stock)} className="data-[state=checked]:bg-emerald-500" />
                        </div>
@@ -249,15 +254,12 @@ export default function MerchantDashboard() {
         <TabsContent value="add">
           <Card className="max-w-2xl mx-auto rounded-none border-4 border-black shadow-2xl">
             <CardHeader className="bg-black text-white">
-              <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3">
-                <Cloud className="w-5 h-5" /> Cloud Asset Upload
-              </CardTitle>
+              <CardTitle className="text-[14px] font-black uppercase tracking-widest">New Item Entry</CardTitle>
             </CardHeader>
             <CardContent className="p-8">
               <form onSubmit={handleAddProduct} className="space-y-6">
-                {/* Upload Zone */}
                 <div className="space-y-4">
-                  <Label className="text-[10px] font-black uppercase tracking-widest">Product Image</Label>
+                  <Label className="text-[10px] font-black uppercase tracking-widest">Photo</Label>
                   <div className="relative group">
                     <input 
                       type="file" 
@@ -274,7 +276,7 @@ export default function MerchantDashboard() {
                       ) : (
                         <>
                           <Upload className="w-10 h-10 mb-4 text-black/20" />
-                          <p className="text-[10px] font-black uppercase tracking-widest text-black/40">Select Local File</p>
+                          <p className="text-[10px] font-black uppercase tracking-widest text-black/40">Select Image</p>
                         </>
                       )}
                     </div>
@@ -306,17 +308,17 @@ export default function MerchantDashboard() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-widest">Category Node</Label>
+                  <Label className="text-[10px] font-black uppercase tracking-widest">Category</Label>
                   <select 
                     className="w-full h-12 border-2 border-black rounded-none px-4 font-bold text-[12px] uppercase bg-white outline-none focus:bg-gray-50"
                     value={newProduct.category}
                     onChange={e => setNewProduct({...newProduct, category: e.target.value})}
                   >
-                    <option>Raw Meat</option>
-                    <option>Nyama Choma</option>
-                    <option>Cooked</option>
-                    <option>Delicacies</option>
-                    <option>Grocery</option>
+                    <option value="Raw Meat">Raw Meat</option>
+                    <option value="Nyama Choma">Nyama Choma</option>
+                    <option value="Cooked">Cooked</option>
+                    <option value="Delicacies">Delicacies</option>
+                    <option value="Grocery">Grocery</option>
                   </select>
                 </div>
 
@@ -324,7 +326,7 @@ export default function MerchantDashboard() {
                   <Label className="text-[10px] font-black uppercase tracking-widest">Description</Label>
                   <Textarea 
                     className="rounded-none border-2 border-black font-bold min-h-[100px]"
-                    placeholder="Premium quality, farm fresh..."
+                    placeholder="Brief description..."
                     value={newProduct.description}
                     onChange={e => setNewProduct({...newProduct, description: e.target.value})}
                   />
@@ -335,7 +337,7 @@ export default function MerchantDashboard() {
                   className="w-full h-16 bg-black text-white font-black uppercase text-[14px] rounded-none hover:bg-primary transition-all"
                   disabled={addingProduct}
                 >
-                  {addingProduct ? <Loader2 className="w-6 h-6 animate-spin" /> : "Authorize & Upload Item"}
+                  {addingProduct ? <Loader2 className="w-6 h-6 animate-spin" /> : "Save to Shop"}
                 </Button>
               </form>
             </CardContent>
