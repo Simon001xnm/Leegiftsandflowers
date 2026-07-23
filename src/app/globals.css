@@ -33,12 +33,13 @@
   }
   
   html {
-    font-size: 15px; /* BASE FONT SIZE LOCK */
+    font-size: 15px; /* BASE FONT SIZE LOCK FOR HIGH DENSITY */
   }
 
   body {
     @apply bg-background text-foreground font-body antialiased;
     font-size: 1rem;
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -59,14 +60,10 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
-  .mask-fade-right {
-    mask-image: linear-gradient(to right, black 80%, transparent 100%);
-  }
 
   @keyframes heartbeat {
     0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+    50% { transform: scale(1.01); }
     100% { transform: scale(1); }
   }
 

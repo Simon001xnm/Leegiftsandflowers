@@ -1,28 +1,30 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { initializeFirebase } from './index';
 import { FirebaseProvider } from './provider';
 
 /**
  * Resilient Provider that initializes Firebase on the client.
- * Uses useMemo for immediate singleton initialization to prevent blank screen renders.
+ * Ensures the app renders immediately even during sync.
  */
 export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const instances = useMemo(() => {
-    if (typeof window === 'undefined') return null;
-    try {
-      return initializeFirebase();
-    } catch (e) {
-      console.error("Firebase init error:", e);
-      return null;
+  const [instances, setInstances] = useState<any>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const inst = initializeFirebase();
+        setInstances(inst);
+      } catch (e) {
+        console.error("Firebase failover:", e);
+      }
     }
   }, []);
 
-  // Wrap children. If Firebase isn't initialized yet (SSR or error), 
-  // we render children raw to ensure the initial HTML is visible.
+  // Always render children to prevent white screen
   if (!instances) {
-    return <>{children}</>; 
+    return <>{children}</>;
   }
 
   return (
