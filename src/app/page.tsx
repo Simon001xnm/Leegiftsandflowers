@@ -53,7 +53,7 @@ const products = [
   { id: 'p31', name: "Goat head elite", price: 800, image: "/FULL KICHWA YA GOAT.jpg" },
   { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" },
 
-  // Drinks refreshment (16 items) - Using provided images and duplicating to fill grid
+  // Drinks refreshment (16 items)
   { id: 'd1', name: "Premium refreshment one", price: 150, image: "/From%20Klickpin.com-%20944418984376291262-pin-id-944418984376291262-story-1.jpg" },
   { id: 'd2', name: "Elite juice blend", price: 220, image: "/From%20Klickpin.com-%20599330662967424085-pin-id-599330662967424085.jpg" },
   { id: 'd3', name: "Sparkling hydration", price: 100, image: "/From%20Klickpin.com-%2010836855347433280-pin-id-10836855347433280.jpg" },
@@ -108,7 +108,7 @@ export default function App() {
         
         <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-12 text-left">
-            <div className="flex flex-col sm:flex-row items-center gap-4 bg-white/5 backdrop-blur-xl p-2 rounded-[2rem] border border-white/10 shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center gap-4 max-w-xl bg-white/5 backdrop-blur-xl p-2 rounded-[2rem] border border-white/10 shadow-2xl">
               <div className="flex items-center gap-3 px-6 py-4 flex-grow w-full">
                 <MapPin className="text-red-600 w-6 h-6 shrink-0" />
                 <input 
@@ -121,7 +121,7 @@ export default function App() {
               </Button>
             </div>
 
-            <div className="flex justify-start gap-8 md:gap-12">
+            <div className="flex justify-start gap-4 md:gap-12">
                <Stat node="10K+" label="Customers" isGold />
                <Stat node="50+" label="Products" isGold />
                <Stat node="4.8★" label="Rating" isGold />
@@ -231,12 +231,12 @@ export default function App() {
 
 function Stat({ node, label, isGold }: { node: string, label: string, isGold?: boolean }) {
   return (
-    <div className="text-white">
+    <div className="text-white text-center sm:text-left">
       <h3 className={cn(
-        "text-2xl md:text-4xl font-bold leading-none mb-1 transition-all duration-700",
+        "text-xl md:text-4xl font-bold leading-none mb-1 transition-all duration-700",
         isGold && "bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(251,191,36,0.6)] animate-pulse"
       )}>{node}</h3>
-      <p className="text-[11px] font-medium text-white/70">{label}</p>
+      <p className="text-[9px] md:text-[11px] font-medium text-white/70 uppercase tracking-widest">{label}</p>
     </div>
   );
 }
