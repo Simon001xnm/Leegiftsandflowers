@@ -23,9 +23,9 @@ export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = (
   }, []);
 
   // We wrap children in the provider only if instances exist,
-  // but we ALWAYS return something that renders children.
+  // but we ALWAYS return something that renders children to prevent white screen.
   if (!instances) {
-    return <div id="app-root-fallback">{children}</div>;
+    return <div id="app-root-shell">{children}</div>;
   }
 
   return (
