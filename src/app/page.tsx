@@ -116,8 +116,8 @@ export default function App() {
           </div>
 
           <div className="flex justify-center gap-8 md:gap-16 pt-8">
-             <Stat node="10K+" label="Customers" />
-             <Stat node="50+" label="Products" />
+             <Stat node="10K+" label="Customers" isGold />
+             <Stat node="50+" label="Products" isGold />
              <Stat node="4.8★" label="Rating" isGold />
           </div>
         </div>
@@ -181,8 +181,8 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
   return (
     <div className="text-white">
       <h3 className={cn(
-        "text-2xl md:text-4xl font-black leading-none mb-1",
-        isGold && "bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(251,191,36,0.4)]"
+        "text-2xl md:text-4xl font-black leading-none mb-1 transition-all duration-700",
+        isGold && "bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(251,191,36,0.6)] animate-pulse"
       )}>{node}</h3>
       <p className="text-[9px] md:text-[11px] font-black uppercase text-white/40 tracking-widest">{label}</p>
     </div>
