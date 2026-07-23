@@ -8,9 +8,9 @@ import { useToast } from "@/hooks/use-toast";
 import { createClient } from "@/lib/supabase/client";
 
 /**
- * ULTRA-RESILIENT LANDING PAGE
- * 4-Column Mobile Grid Locked.
- * Stabilized Fetching for Preview Environments.
+ * PURE RETAIL LANDING PAGE
+ * 100% focused on the "sweetness of shopping".
+ * All admin/owner links removed.
  */
 export default function Home() {
   const { addToCart } = useCart();
@@ -38,7 +38,6 @@ export default function Home() {
     getProducts();
   }, [supabase]);
 
-  // Inline SVG for instant render without library loading stalls
   const BasketIcon = () => (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
   );
@@ -60,23 +59,21 @@ export default function Home() {
         <div className="relative h-[250px] md:h-[450px] bg-black overflow-hidden flex items-center">
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
           <div className="relative z-20 px-8 container mx-auto text-white">
-            <span className="bg-primary px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] mb-4 inline-block">TERMINAL_ACTIVE</span>
+            <span className="bg-primary px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] mb-4 inline-block tracking-widest">ESTABLISHED 2026</span>
             <h1 className="text-5xl md:text-8xl font-black leading-[0.85] uppercase tracking-tighter mb-8">
-              PREMIUM MEAT<br />LOGISTICS
+              PREMIUM MEAT<br />DELIVERED FAST
             </h1>
             <div className="flex gap-3">
-              <Link href="/restaurants"><button className="h-12 px-8 bg-primary font-black text-[11px] uppercase tracking-[0.1em] rounded-full hover:scale-105 transition-transform active:scale-95">ORDER NOW</button></Link>
-              <Link href="/dashboard"><button className="h-12 px-8 bg-white/10 backdrop-blur-md border border-white/20 font-black text-[11px] uppercase tracking-[0.1em] rounded-full hover:bg-white/20 transition-all">MERCHANT POS</button></Link>
+              <Link href="/restaurants"><button className="h-12 px-10 bg-primary font-black text-[11px] uppercase tracking-[0.1em] rounded-full hover:scale-105 transition-transform active:scale-95 shadow-xl">SHOP THE MARKET</button></Link>
             </div>
           </div>
           <Image src="https://picsum.photos/seed/steak8/1200/800" alt="Hero" fill className="object-cover opacity-60" priority />
         </div>
 
-        {/* 4-COLUMN MOBILE GRID - RETAIL STANDARD */}
         <section className="py-10 px-4 container mx-auto">
           <div className="flex items-end justify-between mb-6 border-b-4 border-black pb-3">
-             <h2 className="text-[14px] md:text-2xl font-black uppercase tracking-tighter">Live Dispatch Selection</h2>
-             <Link href="/restaurants" className="text-[9px] font-black uppercase text-primary tracking-widest hover:underline">View Global Network</Link>
+             <h2 className="text-[14px] md:text-2xl font-black uppercase tracking-tighter">Live Selection</h2>
+             <Link href="/restaurants" className="text-[9px] font-black uppercase text-primary tracking-widest hover:underline">View All Locations</Link>
           </div>
 
           {loading ? (
@@ -89,7 +86,7 @@ export default function Home() {
             <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
               {products.length === 0 ? (
                 <div className="col-span-4 py-24 text-center opacity-30">
-                  <p className="text-[11px] font-black uppercase tracking-[0.3em]">Syncing Local Nodes...</p>
+                  <p className="text-[11px] font-black uppercase tracking-[0.3em]">Refreshing Supply...</p>
                 </div>
               ) : products.map((item) => (
                 <div key={item.id} className="flex flex-col gap-2 group">
@@ -113,7 +110,7 @@ export default function Home() {
                             imageUrl: item.image_url || '',
                             category: item.category
                           });
-                          toast({ title: "READY", description: `${item.name} added.` });
+                          toast({ title: "ADDED", description: `${item.name} in basket.` });
                         }}
                         className="bg-black text-white px-2 py-1 rounded-full text-[7px] font-black uppercase tracking-widest hover:bg-primary transition-colors active:scale-90"
                       >
@@ -131,11 +128,10 @@ export default function Home() {
       <footer className="bg-black text-white p-12 pb-28">
         <div className="container mx-auto text-center space-y-6">
            <h2 className="text-2xl font-black italic tracking-tighter">STEAK WEST<span className="text-primary">.</span></h2>
-           <p className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.4em]">Premium Logistics Node // System V4.0.1</p>
+           <p className="text-[9px] text-gray-500 font-bold uppercase tracking-[0.4em]">Premium Distribution Hub // Nairobi, Kenya</p>
            <div className="flex justify-center gap-6 text-[8px] font-black text-gray-600 uppercase tracking-widest">
-             <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> SSL Secure</span>
-             <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> PostgreSQL Sync</span>
-             <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> Supabase Live</span>
+             <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> SSL SECURE</span>
+             <span className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" /> SUPABASE SYNC</span>
            </div>
         </div>
       </footer>
