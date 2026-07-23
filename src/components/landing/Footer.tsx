@@ -12,7 +12,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Brand Identity */}
           <div className="space-y-4 text-center md:text-left">
-            <div className="relative h-16 w-64 mx-auto md:mx-0">
+            <div className="relative h-20 w-80 mx-auto md:mx-0">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                 alt="Steak West" 
@@ -45,9 +45,9 @@ export function Footer() {
         </div>
 
         {/* Legal Minimal */}
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/30 font-medium">
+        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white font-medium">
           <p>
-            © 2026 Steak West Butchery | <span className="italic">Supa ya nyama</span>
+            © 2026 Steak West Butchery | SUPA YA NYAMA
           </p>
           <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
