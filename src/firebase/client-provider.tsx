@@ -5,8 +5,8 @@ import { initializeFirebase } from './index';
 import { FirebaseProvider } from './provider';
 
 /**
- * Resilient Provider that initializes Firebase on the client.
- * ENSURES immediate rendering of children to prevent white screens.
+ * Resilient Provider - Never blocks rendering.
+ * Fixes blank white screen issues by ensuring children render immediately.
  */
 export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [instances, setInstances] = useState<any>(null);
@@ -17,14 +17,15 @@ export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = (
         const inst = initializeFirebase();
         setInstances(inst);
       } catch (e) {
-        console.warn("Firebase lazy init deferred");
+        console.warn("Firebase initialization deferred");
       }
     }
   }, []);
 
-  // ALWAYS return children to prevent the app from being stuck on a white screen
+  // We wrap children in the provider only if instances exist,
+  // but we ALWAYS return something that renders children.
   if (!instances) {
-    return <>{children}</>;
+    return <div id="app-root-fallback">{children}</div>;
   }
 
   return (
