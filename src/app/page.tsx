@@ -53,23 +53,23 @@ const products = [
   { id: 'p31', name: "Goat head elite", price: 800, image: "/FULL KICHWA YA GOAT.jpg" },
   { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" },
 
-  // Drinks refreshment (16 items)
-  { id: 'd1', name: "Coca Cola 500ml", price: 80, image: "https://picsum.photos/seed/cola/600/600" },
-  { id: 'd2', name: "Fanta Orange 500ml", price: 80, image: "https://picsum.photos/seed/fanta/600/600" },
-  { id: 'd3', name: "Sprite 500ml", price: 80, image: "https://picsum.photos/seed/sprite/600/600" },
-  { id: 'd4', name: "Minute Maid 400ml", price: 120, image: "https://picsum.photos/seed/maid/600/600" },
-  { id: 'd5', name: "Del Monte Mango 1L", price: 220, image: "https://picsum.photos/seed/mango/600/600" },
-  { id: 'd6', name: "Afia Juice Mixed", price: 100, image: "https://picsum.photos/seed/afia/600/600" },
-  { id: 'd7', name: "Coke Zero 500ml", price: 90, image: "https://picsum.photos/seed/zero/600/600" },
-  { id: 'd8', name: "Keringet Water 500ml", price: 50, image: "https://picsum.photos/seed/water1/600/600" },
-  { id: 'd9', name: "Pick N Peel 1L", price: 200, image: "https://picsum.photos/seed/pick/600/600" },
-  { id: 'd10', name: "Quencher Juice 1L", price: 150, image: "https://picsum.photos/seed/quencher/600/600" },
-  { id: 'd11', name: "Soda water 500ml", price: 70, image: "https://picsum.photos/seed/sodawater/600/600" },
-  { id: 'd12', name: "Stoney ginger beer", price: 85, image: "https://picsum.photos/seed/stoney/600/600" },
-  { id: 'd13', name: "Tonic water 500ml", price: 100, image: "https://picsum.photos/seed/tonic/600/600" },
-  { id: 'd14', name: "Fresh passion juice", price: 150, image: "https://picsum.photos/seed/passion/600/600" },
-  { id: 'd15', name: "Fresh mango juice", price: 150, image: "https://picsum.photos/seed/mangofresh/600/600" },
-  { id: 'd16', name: "Keringet sparkling", price: 110, image: "https://picsum.photos/seed/sparkling/600/600" }
+  // Drinks refreshment (16 items) - Using provided images and duplicating to fill grid
+  { id: 'd1', name: "Premium refreshment one", price: 150, image: "/From%20Klickpin.com-%20944418984376291262-pin-id-944418984376291262-story-1.jpg" },
+  { id: 'd2', name: "Elite juice blend", price: 220, image: "/From%20Klickpin.com-%20599330662967424085-pin-id-599330662967424085.jpg" },
+  { id: 'd3', name: "Sparkling hydration", price: 100, image: "/From%20Klickpin.com-%2010836855347433280-pin-id-10836855347433280.jpg" },
+  { id: 'd4', name: "Fresh node nectar", price: 180, image: "/From%20Klickpin.com-%206966574420736490-pin-id-6966574420736490-story-1.jpg" },
+  { id: 'd5', name: "Signature berry sync", price: 250, image: "/From%20Klickpin.com-%2050524827070351339-pin-id-50524827070351339-story-1.jpg" },
+  { id: 'd6', name: "Tropical dispatch", price: 200, image: "/From%20Klickpin.com-%20141019032077665218-pin-id-141019032077665218.jpg" },
+  { id: 'd7', name: "Classic cola 500ml", price: 80, image: "/From%20Klickpin.com-%20944418984376291262-pin-id-944418984376291262-story-1.jpg" },
+  { id: 'd8', name: "Fanta orange twist", price: 80, image: "/From%20Klickpin.com-%20599330662967424085-pin-id-599330662967424085.jpg" },
+  { id: 'd9', name: "Minute maid fruit", price: 120, image: "/From%20Klickpin.com-%2010836855347433280-pin-id-10836855347433280.jpg" },
+  { id: 'd10', name: "Keringet mineral 500ml", price: 50, image: "/From%20Klickpin.com-%206966574420736490-pin-id-6966574420736490-story-1.jpg" },
+  { id: 'd11', name: "Del monte mango 1l", price: 220, image: "/From%20Klickpin.com-%2050524827070351339-pin-id-50524827070351339-story-1.jpg" },
+  { id: 'd12', name: "Soda water mixer", price: 90, image: "/From%20Klickpin.com-%20141019032077665218-pin-id-141019032077665218.jpg" },
+  { id: 'd13', name: "Stoney ginger 500ml", price: 85, image: "/From%20Klickpin.com-%20944418984376291262-pin-id-944418984376291262-story-1.jpg" },
+  { id: 'd14', name: "Fresh passion quart", price: 150, image: "/From%20Klickpin.com-%20599330662967424085-pin-id-599330662967424085.jpg" },
+  { id: 'd15', name: "Sprite lemon lime", price: 80, image: "/From%20Klickpin.com-%2010836855347433280-pin-id-10836855347433280.jpg" },
+  { id: 'd16', name: "Coke zero sugar", price: 90, image: "/From%20Klickpin.com-%20141019032077665218-pin-id-141019032077665218.jpg" }
 ];
 
 export default function App() {

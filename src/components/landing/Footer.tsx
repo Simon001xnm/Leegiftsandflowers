@@ -46,7 +46,7 @@ export function Footer() {
 
         {/* Legal Minimal */}
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white font-medium">
-          <p>
+          <p className="text-white">
             © 2026 Steak West Butchery | SUPA YA NYAMA
           </p>
           <div className="flex gap-8">
