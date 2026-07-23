@@ -8,7 +8,11 @@ import {
   Plus,
   Star,
   Search,
-  MapPin
+  MapPin,
+  Tag,
+  TrendingUp,
+  Clock,
+  ShieldCheck
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,17 +37,8 @@ const products = [
 ];
 
 export default function App() {
-  const { addToCart, itemCount } = useCart();
+  const { addToCart } = useCart();
   const { toast } = useToast();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleAddToCart = (p: any) => {
     addToCart({
@@ -55,115 +50,92 @@ export default function App() {
       imageUrl: p.image,
       category: 'Selection'
     });
-    toast({ title: "ADDED", description: p.name });
+    toast({ title: "READY", description: p.name });
   };
 
   return (
     <div className="bg-white text-black min-h-screen font-body selection:bg-red-600 selection:text-white">
-      {/* NAVBAR */}
-      <nav className={`flex justify-between items-center px-4 md:px-12 py-4 fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white border-b shadow-sm' : 'bg-transparent'}`}>
-        <div className="flex items-center gap-4">
-          <Link href="/" className="group flex items-center gap-2">
-            <h1 className={`text-xl md:text-2xl font-black tracking-tighter uppercase transition-colors ${isScrolled ? 'text-red-600' : 'text-white'}`}>
-              🥩 STEAK WEST
-            </h1>
-          </Link>
-          {isScrolled && (
-            <div className="hidden md:flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full border">
-              <MapPin className="w-4 h-4 text-red-600" />
-              <span className="text-[12px] font-bold">Nairobi</span>
-            </div>
-          )}
-        </div>
-
-        <div className="space-x-8 hidden lg:flex">
-          {['Home', 'Shop', 'Offers', 'Contact'].map((item) => (
-            <Link key={item} href={`/${item.toLowerCase()}`} className={`text-[12px] font-black uppercase tracking-widest transition-colors ${isScrolled ? 'text-black/60 hover:text-red-600' : 'text-white/60 hover:text-white'}`}>
-              {item}
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Link href="/login">
-            <Button variant="ghost" className={`font-black text-[12px] uppercase ${isScrolled ? 'text-black' : 'text-white'}`}>Login</Button>
-          </Link>
-          <Link href="/checkout">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-full flex items-center gap-2 transition-all active:scale-95 shadow-lg relative">
-              <ShoppingCart className="w-4 h-4" />
-              <span className="text-[11px] font-black uppercase tracking-widest hidden sm:inline">Basket</span>
-              {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-white text-red-600 text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-red-600">
-                  {itemCount}
-                </span>
-              )}
-            </button>
-          </Link>
-        </div>
-      </nav>
-
-      {/* HERO */}
-      <section className="relative h-[40vh] min-h-[400px] flex items-center justify-center bg-black overflow-hidden">
+      {/* HERO SECTION */}
+      <section className="relative h-[65vh] min-h-[550px] flex items-center justify-center bg-black overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
             src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop" 
-            alt="Hero" 
+            alt="Hero Meat" 
             fill 
             className="object-cover opacity-60"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/60" />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10 text-center space-y-6">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+        <div className="container mx-auto px-6 relative z-10 text-center space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none"
+            transition={{ duration: 0.8 }}
+            className="space-y-4"
           >
-            FRESH MEAT. <span className="text-red-600">DISPATCHED.</span>
-          </motion.h1>
+            <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.9]">
+              FRESH MEAT. <br />
+              <span className="text-red-600">DISPATCHED.</span>
+            </h1>
+            <p className="text-white/70 font-black text-[12px] md:text-[14px] uppercase tracking-[0.4em]">
+              Premium Quality • 25 Min Delivery • Farm to Table
+            </p>
+          </motion.div>
 
-          <div className="flex flex-col md:flex-row items-center gap-4 max-w-xl mx-auto bg-white rounded-2xl p-2 shadow-2xl border">
-            <div className="flex items-center gap-3 px-4 py-3 flex-grow w-full">
-              <MapPin className="text-red-600 w-5 h-5 shrink-0" />
+          <div className="flex flex-col md:flex-row items-center gap-4 max-w-2xl mx-auto bg-white rounded-3xl p-2 shadow-2xl border-4 border-white/10">
+            <div className="flex items-center gap-3 px-6 py-4 flex-grow w-full">
+              <MapPin className="text-red-600 w-6 h-6 shrink-0" />
               <input 
-                placeholder="Enter delivery location" 
-                className="w-full bg-transparent outline-none text-black text-[14px] font-bold placeholder:text-gray-400 uppercase tracking-widest"
+                placeholder="ENTER DELIVERY LOCATION" 
+                className="w-full bg-transparent outline-none text-black text-[14px] font-black placeholder:text-gray-400 uppercase tracking-widest"
               />
             </div>
-            <Button className="w-full md:w-auto h-12 px-8 bg-red-600 hover:bg-red-700 text-white rounded-xl font-black uppercase text-[12px] tracking-widest">
-              Explore
+            <Button className="w-full md:w-auto h-16 px-12 bg-red-600 hover:bg-red-700 text-white rounded-[1.5rem] font-black uppercase text-[13px] tracking-widest shadow-xl transition-all active:scale-95">
+              Order Now
             </Button>
+          </div>
+
+          <div className="flex justify-center gap-8 md:gap-16 pt-8">
+             <Stat node="10K+" label="Customers" />
+             <Stat node="50+" label="Products" />
+             <Stat node="4.8★" label="Rating" />
           </div>
         </div>
       </section>
 
-      {/* RETAIL GRID - GLOVO STYLE */}
-      <main className="container mx-auto px-4 py-12 space-y-16">
+      {/* RETAIL DISCOVERY GRID */}
+      <main className="container mx-auto px-4 py-16 space-y-20">
         
-        {/* PROMOTIONS SECTION */}
-        <section>
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-black tracking-tighter uppercase">Promotions</h2>
-            <Button variant="secondary" className="rounded-full bg-gray-100 hover:bg-gray-200 text-black font-black text-[12px] px-6">Show all</Button>
+        {/* PROMOTIONS */}
+        <section className="space-y-8">
+          <div className="flex items-center justify-between border-b-4 border-black pb-4">
+            <div className="flex items-center gap-3">
+               <Tag className="w-6 h-6 text-red-600" />
+               <h2 className="text-3xl font-black tracking-tighter uppercase">Flash Deals</h2>
+            </div>
+            <Button variant="ghost" className="font-black text-[11px] uppercase tracking-widest hover:text-red-600">View All</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-10">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-12">
             {products.slice(0, 6).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
         </section>
 
-        {/* TOP SELLERS SECTION */}
-        <section>
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-black tracking-tighter uppercase">Top Sellers</h2>
-            <Button variant="secondary" className="rounded-full bg-gray-100 hover:bg-gray-200 text-black font-black text-[12px] px-6">Show all</Button>
+        {/* BEST SELLERS */}
+        <section className="space-y-8">
+          <div className="flex items-center justify-between border-b-4 border-black pb-4">
+            <div className="flex items-center gap-3">
+               <TrendingUp className="w-6 h-6 text-red-600" />
+               <h2 className="text-3xl font-black tracking-tighter uppercase">Elite Selection</h2>
+            </div>
+            <Button variant="ghost" className="font-black text-[11px] uppercase tracking-widest hover:text-red-600">Explore</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-10">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-12">
             {products.slice(6, 12).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -172,39 +144,48 @@ export default function App() {
 
       </main>
 
-      {/* MINI FOOTER */}
-      <footer className="px-6 md:px-12 py-10 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 bg-gray-50">
-        <div className="flex items-center gap-2">
-           <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">© 2026 STEAK WEST NETWORK.</span>
-        </div>
-        <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest text-gray-500">
-           <Link href="/privacy" className="hover:text-red-600 transition-colors">Privacy</Link>
-           <Link href="/terms" className="hover:text-red-600 transition-colors">Terms</Link>
-           <span className="text-red-600 font-bold">+254 704 524070</span>
+      {/* FOOTER MINI */}
+      <footer className="bg-black py-8 border-t border-white/5">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+           <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em]">© 2026 STEAK WEST NETWORK</p>
+           <div className="flex gap-8">
+             <Link href="/privacy" className="text-[10px] font-black text-white/50 hover:text-white uppercase tracking-widest">Privacy</Link>
+             <Link href="/terms" className="text-[10px] font-black text-white/50 hover:text-white uppercase tracking-widest">Terms</Link>
+             <span className="text-red-600 font-black text-[10px] uppercase tracking-widest">+254 704 524070</span>
+           </div>
         </div>
       </footer>
     </div>
   );
 }
 
+function Stat({ node, label }: { node: string, label: string }) {
+  return (
+    <div className="text-white">
+      <h3 className="text-2xl md:text-4xl font-black leading-none mb-1">{node}</h3>
+      <p className="text-[9px] md:text-[11px] font-black uppercase text-white/40 tracking-widest">{label}</p>
+    </div>
+  );
+}
+
 function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void }) {
   return (
-    <div className="flex flex-col group gap-2">
+    <div className="flex flex-col group gap-3">
       {/* IMAGE CONTAINER */}
-      <div className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center p-4">
+      <div className="relative aspect-square bg-gray-50 rounded-[2rem] overflow-hidden border-2 border-gray-100 flex items-center justify-center p-6 transition-all duration-500 hover:border-red-600/20 shadow-sm hover:shadow-2xl">
         <div className="relative w-full h-full">
           <Image 
             src={product.image} 
             alt={product.name} 
             fill 
-            className="object-contain transition-transform duration-500 group-hover:scale-110" 
+            className="object-contain transition-transform duration-700 group-hover:scale-110" 
           />
         </div>
 
         {/* DISCOUNT BADGE */}
         {product.discount && (
-          <div className="absolute top-2 left-2 z-10">
-            <span className="bg-red-600 text-white text-[10px] font-black px-1.5 py-0.5 rounded shadow-sm">
+          <div className="absolute top-4 left-4 z-10">
+            <span className="bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded-lg shadow-lg uppercase tracking-tighter">
               {product.discount}
             </span>
           </div>
@@ -213,24 +194,24 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
         {/* ADD BUTTON */}
         <button 
           onClick={() => onAdd(product)}
-          className="absolute bottom-2 right-2 w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50 hover:scale-110 active:scale-90 transition-all z-20"
+          className="absolute bottom-4 right-4 w-10 h-10 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center shadow-2xl hover:bg-red-600 hover:text-white hover:scale-110 active:scale-90 transition-all z-20 group/btn"
         >
-          <Plus className="w-5 h-5 text-red-600 stroke-[3px]" />
+          <Plus className="w-6 h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
         </button>
       </div>
 
       {/* CONTENT AREA */}
-      <div className="space-y-0.5 px-0.5">
-        <h3 className="text-[11px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight min-h-[2.4em]">
+      <div className="space-y-1 px-1">
+        <h3 className="text-[11px] md:text-[13px] font-black text-gray-800 line-clamp-2 leading-tight min-h-[2.4em] uppercase tracking-tighter">
           {product.name}
         </h3>
         <div className="flex flex-col">
-          <span className="text-[12px] md:text-[14px] font-black text-black">
-            KSh{product.price.toLocaleString()}
+          <span className="text-[14px] md:text-[16px] font-black text-black">
+            KSh {product.price.toLocaleString()}
           </span>
           {product.oldPrice && (
-            <span className="text-[10px] md:text-[11px] text-gray-400 line-through font-bold">
-              KSh{product.oldPrice.toLocaleString()}
+            <span className="text-[11px] text-gray-400 line-through font-bold">
+              KSh {product.oldPrice.toLocaleString()}
             </span>
           )}
         </div>
@@ -238,4 +219,3 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
     </div>
   );
 }
-
