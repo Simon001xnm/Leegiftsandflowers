@@ -17,7 +17,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
 const products = [
-  // FLASH DEALS (16 items)
+  // Flash deals (16 items)
   { id: 'p1', name: "Beef chemsha 1kg", price: 1400, oldPrice: 1600, discount: "-14%", image: "/beef chemsha SMB.jpg" },
   { id: 'p2', name: "Beef choma 1kg", price: 1400, oldPrice: 1800, discount: "-12%", image: "/BEEF CHOMA.jpg" },
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, oldPrice: 1550, discount: "-10%", image: "/BEEF DRY FRY.jpg" },
@@ -35,7 +35,7 @@ const products = [
   { id: 'p15', name: "Crispy snack chips", price: 200, oldPrice: 300, discount: "-33%", image: "/CHIPS.jpg" },
   { id: 'p16', name: "Signature goat head", price: 800, oldPrice: 1200, discount: "-33%", image: "/FULL KICHWA YA GOAT.jpg" },
 
-  // ELITE SELECTION (16 items)
+  // Elite selection (16 items)
   { id: 'p17', name: "Premium beef chemsha", price: 1400, image: "/beef chemsha SMB.jpg" },
   { id: 'p18', name: "Select beef choma", price: 1400, image: "/BEEF CHOMA.jpg" },
   { id: 'p19', name: "Elite dry fry portion", price: 1400, image: "/BEEF DRY FRY.jpg" },
@@ -53,7 +53,7 @@ const products = [
   { id: 'p31', name: "Goat head elite", price: 800, image: "/FULL KICHWA YA GOAT.jpg" },
   { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" },
 
-  // DRINKS REFRESHMENT (16 items)
+  // Drinks refreshment (16 items)
   { id: 'd1', name: "Coca Cola 500ml", price: 80, image: "https://picsum.photos/seed/cola/600/600" },
   { id: 'd2', name: "Fanta Orange 500ml", price: 80, image: "https://picsum.photos/seed/fanta/600/600" },
   { id: 'd3', name: "Sprite 500ml", price: 80, image: "https://picsum.photos/seed/sprite/600/600" },
@@ -91,12 +91,12 @@ export default function App() {
 
   return (
     <div className="bg-white text-black min-h-screen font-body selection:bg-red-600 selection:text-white">
-      {/* HERO SECTION */}
+      {/* Hero section */}
       <section className="relative min-h-[70vh] flex items-center justify-center bg-black overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <Image 
             src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop" 
-            alt="Hero Meat" 
+            alt="Hero meat" 
             fill 
             className="object-cover opacity-60"
             priority
@@ -148,10 +148,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* RETAIL DISCOVERY GRID */}
+      {/* Retail discovery grid */}
       <main className="container mx-auto px-4">
         
-        {/* PROMOTIONS */}
+        {/* Flash deals */}
         <section className="py-12">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
@@ -170,7 +170,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ELITE SELECTION */}
+        {/* Elite selection */}
         <section className="pb-12">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
@@ -189,7 +189,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* DRINKS REFRESHMENT */}
+        {/* Drinks refreshment */}
         <section className="pb-24">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
@@ -210,7 +210,7 @@ export default function App() {
 
       </main>
 
-      {/* FOOTER MINI */}
+      {/* Footer mini */}
       <footer className="bg-black py-8 border-t border-white/5">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
            <p className="text-[11px] font-medium text-white/30 tracking-wide">

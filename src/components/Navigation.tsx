@@ -10,8 +10,8 @@ import { useUser } from "@/firebase/auth/use-user";
 import { cn } from "@/lib/utils";
 
 /**
- * UNIFIED STICKY NAVIGATION
- * Updated with White Background for logo clarity.
+ * Unified sticky navigation
+ * Updated with white background for logo clarity and dark text for contrast.
  */
 export function Navigation() {
   const { itemCount } = useCart();

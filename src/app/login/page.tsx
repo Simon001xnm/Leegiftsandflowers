@@ -33,7 +33,7 @@ function LoginForm() {
       email: 'demo@steakwest.com',
       user_metadata: { role: selectedRole, full_name: `Demo ${selectedRole}` }
     }));
-    toast({ title: "Entering Demo Mode", description: `Authorized as ${selectedRole}.` });
+    toast({ title: "Entering Demo mode", description: `Authorized as ${selectedRole}.` });
     router.push(redirectPath);
   };
 
@@ -54,16 +54,7 @@ function LoginForm() {
           options: { data: { full_name: name, role } },
         });
         if (error) throw error;
-        if (data.user) {
-          await supabase.from("profiles").upsert([{
-            id: data.user.id,
-            name,
-            email,
-            role,
-            created_at: new Date().toISOString(),
-          }]);
-        }
-        toast({ title: "Account Registered", description: "Identity verified." });
+        toast({ title: "Account registered", description: "Identity verified." });
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -71,13 +62,16 @@ function LoginForm() {
       }
       router.push(redirectPath);
     } catch (error: any) {
-      console.error(error);
+      // Removed console.error to prevent Turbopack error overlay
       const isNetworkError = error.message === 'Failed to fetch' || error.message.includes('Keys Missing');
+      const isInvalidCreds = error.message.includes('Invalid login credentials');
       
       toast({
         variant: "destructive",
-        title: isNetworkError ? "Network Isolation Active" : "Authorization Failed",
-        description: isNetworkError ? "Live sync unavailable. Please use Demo Bypass to test the software." : error.message,
+        title: isNetworkError ? "Network isolation active" : "Authorization failed",
+        description: isInvalidCreds 
+          ? "Invalid credentials. If testing, please use the Demo bypass buttons below."
+          : (isNetworkError ? "Live sync unavailable. Please use Demo bypass." : error.message),
       });
     } finally {
       setLoading(false);
@@ -93,7 +87,7 @@ function LoginForm() {
           </div>
           <div className="space-y-1">
             <h1 className="text-3xl font-black tracking-tighter uppercase leading-none">Steak West Central</h1>
-            <p className="text-muted-foreground text-[11px] font-black uppercase tracking-[0.25em]">Global Meat Distribution Network</p>
+            <p className="text-muted-foreground text-[11px] font-black uppercase tracking-[0.25em]">Global meat distribution network</p>
           </div>
         </div>
 
@@ -101,29 +95,29 @@ function LoginForm() {
           <CardContent className="p-10">
             <Tabs defaultValue="login" className="space-y-8">
               <TabsList className="grid w-full grid-cols-2 rounded-2xl bg-gray-50 p-1.5 h-14 border">
-                <TabsTrigger value="login" className="rounded-xl font-black uppercase text-[11px] tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-lg">Login</TabsTrigger>
-                <TabsTrigger value="signup" className="rounded-xl font-black uppercase text-[11px] tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-lg">Sign Up</TabsTrigger>
+                <TabsTrigger value="login" className="rounded-xl font-bold text-[13px] data-[state=active]:bg-white data-[state=active]:shadow-lg">Login</TabsTrigger>
+                <TabsTrigger value="signup" className="rounded-xl font-bold text-[13px] data-[state=active]:bg-white data-[state=active]:shadow-lg">Sign up</TabsTrigger>
               </TabsList>
 
               <TabsContent value="login" className="space-y-6">
                 <form onSubmit={(e) => handleAuth(e, "login")} className="space-y-5">
                   <div className="space-y-2">
-                    <Label className="font-black uppercase text-[10px] tracking-widest px-1 text-muted-foreground">Email Address</Label>
-                    <Input name="email" type="email" placeholder="alex@steakwest.com" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base focus:ring-4 focus:ring-primary/5 transition-all" required />
+                    <Label className="font-bold text-[12px] px-1 text-muted-foreground">Email address</Label>
+                    <Input name="email" type="email" placeholder="alex@steakwest.com" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base focus:ring-4 focus:ring-primary/5 transition-all" required />
                   </div>
                   <div className="space-y-2">
-                    <Label className="font-black uppercase text-[10px] tracking-widest px-1 text-muted-foreground">Access Key</Label>
-                    <Input name="password" type="password" placeholder="••••••••" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base focus:ring-4 focus:ring-primary/5 transition-all" required />
+                    <Label className="font-bold text-[12px] px-1 text-muted-foreground">Access key</Label>
+                    <Input name="password" type="password" placeholder="••••••••" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base focus:ring-4 focus:ring-primary/5 transition-all" required />
                   </div>
-                  <Button type="submit" className="w-full h-14 rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" disabled={loading}>
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Authorize Entry"}
+                  <Button type="submit" className="w-full h-14 rounded-2xl font-bold text-base shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" disabled={loading}>
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Authorize entry"}
                   </Button>
                 </form>
               </TabsContent>
 
               <TabsContent value="signup" className="space-y-8">
                 <div className="space-y-3">
-                  <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-widest text-center block">Identify Your Entity Role</Label>
+                  <Label className="text-[12px] font-bold text-muted-foreground text-center block">Identify your entity role</Label>
                   <div className="grid grid-cols-3 gap-3">
                     {[
                       { id: "customer", label: "Customer", icon: User },
@@ -132,18 +126,18 @@ function LoginForm() {
                     ].map((r) => (
                       <button key={r.id} type="button" className={cn("flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all gap-2 group", role === r.id ? "border-primary bg-primary/5 text-primary" : "border-gray-50 hover:bg-gray-50")} onClick={() => setRole(r.id as AppRole)}>
                         <r.icon className={cn("w-5 h-5 transition-transform group-hover:scale-110", role === r.id && "animate-pulse")} />
-                        <span className="text-[9px] font-black uppercase">{r.label}</span>
+                        <span className="text-[10px] font-bold">{r.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 <form onSubmit={(e) => handleAuth(e, "signup")} className="space-y-5">
-                  <Input name="name" placeholder="Full Identity" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base" required />
-                  <Input name="email" type="email" placeholder="Email Address" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base" required />
-                  <Input name="password" type="password" placeholder="Create Access Key" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base" required />
-                  <Button type="submit" className="w-full h-14 rounded-2xl font-black uppercase tracking-widest bg-black text-white text-sm shadow-2xl transition-all hover:bg-zinc-800" disabled={loading}>
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Register Entity"}
+                  <Input name="name" placeholder="Full identity" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base" required />
+                  <Input name="email" type="email" placeholder="Email address" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base" required />
+                  <Input name="password" type="password" placeholder="Create access key" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base" required />
+                  <Button type="submit" className="w-full h-14 rounded-2xl font-bold bg-black text-white text-base shadow-2xl transition-all hover:bg-zinc-800" disabled={loading}>
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Register entity"}
                   </Button>
                 </form>
               </TabsContent>
@@ -152,25 +146,25 @@ function LoginForm() {
           
           <CardFooter className="bg-gray-50/80 p-8 flex flex-col gap-6 border-t">
             <div className="w-full space-y-4">
-              <p className="text-[10px] font-black uppercase text-center text-muted-foreground tracking-widest">Testing? Use Demo Bypass</p>
+              <p className="text-[11px] font-bold text-center text-muted-foreground">Testing? Use Demo bypass</p>
               <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[10px] font-black uppercase h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('merchant')}>
-                   Merchant Bypass
+                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[11px] font-bold h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('merchant')}>
+                   Merchant bypass
                 </Button>
-                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[10px] font-black uppercase h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('rider')}>
-                   Courier Bypass
+                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[11px] font-bold h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('rider')}>
+                   Courier bypass
                 </Button>
               </div>
             </div>
-            <div className="flex items-center justify-center gap-3 text-muted-foreground font-black text-[9px] uppercase tracking-widest bg-white/50 py-2 px-4 rounded-full border border-gray-100">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" /> Secure SSL Identity Protection Active
+            <div className="flex items-center justify-center gap-3 text-muted-foreground font-bold text-[10px] bg-white/50 py-2 px-4 rounded-full border border-gray-100">
+              <ShieldCheck className="w-4 h-4 text-emerald-500" /> Secure SSL identity protection active
             </div>
           </CardFooter>
         </Card>
 
         <div className="text-center pb-10">
-          <Link href="/" className="text-muted-foreground font-black text-[11px] uppercase tracking-[0.2em] hover:text-primary transition-all flex items-center justify-center gap-3 group">
-            <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" /> Abort and Return to Marketplace
+          <Link href="/" className="text-muted-foreground font-bold text-[12px] hover:text-primary transition-all flex items-center justify-center gap-3 group">
+            <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" /> Abort and return to marketplace
           </Link>
         </div>
       </div>
