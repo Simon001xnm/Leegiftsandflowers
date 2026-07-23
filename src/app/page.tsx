@@ -83,7 +83,8 @@ export default function App() {
             priority
             data-ai-hint="raw steak"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/60" />
+          {/* Refined gradient to ensure shiny gold figures pop */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
         </div>
         
         <div className="container mx-auto px-6 relative z-10 text-center space-y-8">
@@ -184,7 +185,7 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
         "text-2xl md:text-4xl font-black leading-none mb-1 transition-all duration-700",
         isGold && "bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(251,191,36,0.6)] animate-pulse"
       )}>{node}</h3>
-      <p className="text-[9px] md:text-[11px] font-black uppercase text-white/40 tracking-widest">{label}</p>
+      <p className="text-[9px] md:text-[11px] font-black uppercase text-white/70 tracking-widest">{label}</p>
     </div>
   );
 }
