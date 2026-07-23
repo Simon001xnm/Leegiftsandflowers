@@ -1,3 +1,4 @@
+
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -18,6 +19,11 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
+/**
+ * ROOT LAYOUT - NON-BLOCKING ARCHITECTURE
+ * Ensures white screen issues are permanently resolved by making
+ * all providers resilient and asynchronous.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

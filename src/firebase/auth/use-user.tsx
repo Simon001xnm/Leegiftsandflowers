@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import { createClient } from '@/lib/supabase/client';
 
 /**
  * Resilient useUser hook.
- * Prevents the application from hanging/blinking white if Supabase is initializing.
+ * Supports real Supabase Auth with a transparent Demo Mode fallback.
  */
 export function useUser() {
   const [user, setUser] = useState<any>(null);
@@ -16,6 +17,14 @@ export function useUser() {
 
     const initAuth = async () => {
       try {
+        // Check for Demo User first
+        const demoUser = localStorage.getItem('steak_west_demo_user');
+        if (demoUser) {
+          setUser(JSON.parse(demoUser));
+          setLoading(false);
+          return;
+        }
+
         const supabase = createClient();
         
         // Initial session check
@@ -26,13 +35,16 @@ export function useUser() {
 
         // Listen for changes
         const { data } = supabase.auth.onAuthStateChange((event, session) => {
+          if (event === 'SIGNED_OUT') {
+            localStorage.removeItem('steak_west_demo_user');
+          }
           setUser(session?.user || null);
           setLoading(false);
         });
         
         subscription = data.subscription;
       } catch (error) {
-        console.warn('Supabase Auth connection bypassed for local stability');
+        console.warn('Auth Resilience Triggered');
       } finally {
         setLoading(false);
       }
