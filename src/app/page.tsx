@@ -2,23 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { PromotionalPopup } from "@/components/PromotionalPopup";
 import { MOCK_MENU, MenuItem } from "@/lib/food-data";
-import { 
-  Award, 
-  ArrowRight,
-  ShieldCheck,
-  Heart,
-  ChevronRight
-} from "lucide-react";
+import { Award, ArrowRight, ShieldCheck, Heart, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import { PromotionalPopup } from "@/components/PromotionalPopup";
 
 /**
- * Ultra-high density landing page with strict 4-column mobile grid.
- * Fixed HMR module factory stability.
+ * ULTRA-HIGH DENSITY LANDING PAGE
+ * Optimized for 4 columns on mobile to match premium retail standards.
  */
 export default function Home() {
   const { addToCart } = useCart();
@@ -30,7 +24,7 @@ export default function Home() {
       
       <main className="flex-grow space-y-0">
         {/* Eye-Catching Hero */}
-        <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden bg-black flex items-center">
+        <div className="relative h-[300px] md:h-[500px] w-full overflow-hidden bg-black flex items-center">
           <video 
             autoPlay 
             muted 
@@ -44,27 +38,27 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
           <div className="relative z-10 w-full px-4 md:px-12 py-8 container mx-auto">
-            <div className="flex flex-col space-y-4 max-w-4xl">
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                <Badge className="bg-primary text-white border-none px-3 py-1 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-2">
+            <div className="flex flex-col space-y-3 max-w-4xl">
+              <div className="animate-in fade-in slide-in-from-bottom-2 duration-700">
+                <Badge className="bg-primary text-white border-none px-2 py-0.5 text-[7px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-2">
                   NAIROBI'S #1 BUTCHERY
                 </Badge>
-                <h1 className="text-3xl md:text-7xl font-black text-white leading-[0.9] mb-4 uppercase">
+                <h1 className="text-2xl md:text-6xl font-black text-white leading-[0.9] mb-3 uppercase tracking-tighter">
                   NAIROBI'S BEST<br />
                   <span className="text-primary italic">MEAT. FAST.</span>
                 </h1>
-                <p className="text-xs md:text-lg text-white/90 font-medium max-w-xs md:max-w-lg mb-6">
-                  Sourced daily. Prepared expertly. Delivered in under 30 minutes.
+                <p className="text-[10px] md:text-lg text-white/90 font-medium max-w-[200px] md:max-w-lg mb-5">
+                  Daily Fresh. Delivered in under 30 minutes.
                 </p>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   <Link href="/restaurants">
-                    <Button size="lg" className="h-12 md:h-16 px-6 md:px-10 bg-primary text-white hover:bg-white hover:text-black font-black text-[10px] md:text-[14px] uppercase tracking-widest rounded-full transition-all shadow-xl shadow-primary/20">
-                      ORDER NOW <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
+                    <Button size="sm" className="h-9 md:h-14 px-5 md:px-10 bg-primary text-white hover:bg-white hover:text-black font-black text-[9px] md:text-[14px] uppercase tracking-widest rounded-full transition-all shadow-xl">
+                      ORDER NOW <ArrowRight className="ml-1 w-3 h-3 md:w-5 md:h-5" />
                     </Button>
                   </Link>
                   <Link href="/dashboard/customer">
-                    <Button variant="outline" size="lg" className="h-12 md:h-16 px-6 md:px-10 border-2 border-white text-white hover:bg-white hover:text-black font-black text-[10px] md:text-[14px] uppercase tracking-widest rounded-full transition-all backdrop-blur-md bg-transparent">
-                      TRACK ORDERS
+                    <Button variant="outline" size="sm" className="h-9 md:h-14 px-5 md:px-10 border-2 border-white text-white hover:bg-white hover:text-black font-black text-[9px] md:text-[14px] uppercase tracking-widest rounded-full transition-all bg-transparent">
+                      TRACK
                     </Button>
                   </Link>
                 </div>
@@ -73,26 +67,26 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Dynamic Market Strip - STRICT 4 COLUMNS ON MOBILE */}
-        <section className="py-8 md:py-16 bg-white px-2 md:px-12 container mx-auto">
-          <div className="flex items-end justify-between mb-6 px-2">
-            <div className="space-y-0.5">
-              <h2 className="text-sm md:text-3xl font-black text-black leading-tight uppercase tracking-tighter">PREMIUM SELECTIONS</h2>
-              <p className="text-gray-400 font-bold text-[8px] md:text-[10px] uppercase tracking-widest">Immediate dispatch nodes active</p>
+        {/* ULTRA-HIGH DENSITY MARKET GRID - STRICT 4 COLUMNS ON MOBILE */}
+        <section className="py-6 md:py-16 bg-white px-1 md:px-12 container mx-auto">
+          <div className="flex items-end justify-between mb-4 px-2">
+            <div className="space-y-0">
+              <h2 className="text-[10px] md:text-3xl font-black text-black leading-tight uppercase tracking-tighter">PREMIUM SELECTIONS</h2>
+              <p className="text-gray-400 font-bold text-[7px] md:text-[10px] uppercase tracking-[0.1em]">Instant Node Dispatch Active</p>
             </div>
             <Link href="/restaurants">
-               <Button variant="link" className="font-black text-black p-0 gap-1 text-[9px] md:text-[12px] uppercase tracking-widest">SEE ALL <ChevronRight className="w-2.5 h-2.5" /></Button>
+               <Button variant="link" className="font-black text-black p-0 gap-1 text-[8px] md:text-[12px] uppercase tracking-widest h-auto">SEE ALL <ChevronRight className="w-2 h-2" /></Button>
             </Link>
           </div>
 
-          <div className="grid grid-cols-4 gap-1.5 md:gap-8">
+          <div className="grid grid-cols-4 gap-1 md:gap-8">
             {MOCK_MENU.slice(0, 12).map((item) => (
               <ProductCard 
                 key={item.id} 
                 item={item} 
                 onAdd={() => {
                   addToCart(item);
-                  toast({ title: "Added to basket", description: `${item.name} ready.` });
+                  toast({ title: "Added", description: `${item.name} ready.` });
                 }} 
               />
             ))}
@@ -100,39 +94,38 @@ export default function Home() {
         </section>
 
         {/* Brand Footer */}
-        <footer className="bg-black text-white pt-12 pb-24">
+        <footer className="bg-black text-white pt-10 pb-24">
           <div className="container mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 border-b border-white/10 pb-12">
-              <div className="col-span-2 space-y-4">
-                <div className="relative h-8 w-32">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10 border-b border-white/10 pb-10">
+              <div className="col-span-2 space-y-3">
+                <div className="relative h-6 w-24">
                   <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West" fill className="object-contain object-left" />
                 </div>
-                <p className="text-sm md:text-xl font-bold text-gray-500 max-w-md uppercase tracking-tighter">
+                <p className="text-[10px] md:text-base font-bold text-gray-500 uppercase tracking-tighter">
                   THE GOLD STANDARD IN NAIROBI MEAT LOGISTICS.
                 </p>
               </div>
-              <div className="space-y-3">
-                <h4 className="text-[8px] font-black text-gray-400 uppercase tracking-widest">PLATFORM</h4>
-                <ul className="space-y-1 text-[9px] font-bold uppercase tracking-tighter">
-                  <li><Link href="/restaurants" className="hover:text-primary transition-colors">MARKETPLACE</Link></li>
-                  <li><Link href="/profile" className="hover:text-primary transition-colors">ACCOUNT</Link></li>
-                  <li><Link href="/checkout" className="hover:text-primary transition-colors">CART</Link></li>
+              <div className="space-y-2">
+                <h4 className="text-[7px] font-black text-gray-400 uppercase tracking-widest">PLATFORM</h4>
+                <ul className="space-y-1 text-[8px] font-bold uppercase tracking-tighter">
+                  <li><Link href="/restaurants" className="hover:text-primary">MARKETPLACE</Link></li>
+                  <li><Link href="/profile" className="hover:text-primary">ACCOUNT</Link></li>
+                  <li><Link href="/checkout" className="hover:text-primary">CART</Link></li>
                 </ul>
               </div>
-              <div className="space-y-3">
-                <h4 className="text-[8px] font-black text-gray-400 uppercase tracking-widest">SECURITY</h4>
-                <ul className="space-y-1 text-[9px] font-bold text-gray-500 uppercase tracking-tighter">
+              <div className="space-y-2">
+                <h4 className="text-[7px] font-black text-gray-400 uppercase tracking-widest">SECURITY</h4>
+                <ul className="space-y-1 text-[8px] font-bold text-gray-500 uppercase tracking-tighter">
                   <li>SSL PROTECTION</li>
                   <li>PRIVACY NODE</li>
-                  <li>TERMS OF SALE</li>
                 </ul>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-gray-600 font-black text-[8px] uppercase tracking-widest">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-gray-600 font-black text-[7px] uppercase tracking-widest">
               <p>© 2026 STEAK WEST GLOBAL LOGISTICS.</p>
-              <div className="flex gap-6 opacity-40">
-                <ShieldCheck className="w-4 h-4" />
-                <Award className="w-4 h-4" />
+              <div className="flex gap-4 opacity-40">
+                <ShieldCheck className="w-3 h-3" />
+                <Award className="w-3 h-3" />
               </div>
             </div>
           </div>
@@ -143,32 +136,32 @@ export default function Home() {
 }
 
 /**
- * Compact Product Card optimized for 4-column mobile grids.
+ * Compact Product Card for 4-column mobile grids.
  */
 function ProductCard({ item, onAdd }: { item: MenuItem; onAdd: () => void }) {
   return (
     <div className="group flex flex-col gap-1 md:gap-3">
-      <div className="relative aspect-square rounded-sm md:rounded-2xl overflow-hidden bg-gray-50 shadow-sm border border-gray-100">
+      <div className="relative aspect-square rounded-sm md:rounded-2xl overflow-hidden bg-gray-50 border border-gray-100">
         <Image 
           src={item.imageUrl} 
           alt={item.name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-700"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
           data-ai-hint="raw meat"
         />
-        <div className="absolute top-0.5 right-0.5 md:top-3 md:right-3">
-          <Button size="icon" variant="ghost" className="rounded-full bg-white/90 backdrop-blur-md h-3.5 w-3.5 md:h-8 md:w-8 shadow-sm text-black">
-            <Heart className="w-2 h-2 md:w-4 md:h-4" />
+        <div className="absolute top-0.5 right-0.5 md:top-2 md:right-2">
+          <Button size="icon" variant="ghost" className="rounded-full bg-white/90 backdrop-blur-md h-3 w-3 md:h-8 md:w-8 shadow-sm text-black p-0">
+            <Heart className="w-1.5 h-1.5 md:w-4 md:h-4" />
           </Button>
         </div>
       </div>
       <div className="space-y-0.5 md:space-y-1.5 px-0.5">
-        <h3 className="text-[7px] md:text-[13px] font-black truncate group-hover:text-primary transition-colors leading-tight uppercase tracking-tight">{item.name}</h3>
+        <h3 className="text-[7px] md:text-[13px] font-black truncate group-hover:text-primary transition-colors leading-none uppercase tracking-tighter">{item.name}</h3>
         <div className="flex items-center justify-between pt-0.5">
           <span className="text-[7px] md:text-[14px] font-black">KES {item.price.toLocaleString()}</span>
           <button 
             onClick={(e) => { e.preventDefault(); onAdd(); }}
-            className="rounded-full bg-black text-white hover:bg-primary transition-all px-1 md:px-4 h-3.5 md:h-8 font-black text-[5px] md:text-[9px] uppercase tracking-widest"
+            className="rounded-full bg-black text-white hover:bg-primary transition-all px-1 md:px-4 h-3 md:h-8 font-black text-[5px] md:text-[9px] uppercase tracking-widest"
           >
             ADD
           </button>
