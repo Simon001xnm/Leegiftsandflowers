@@ -1,34 +1,26 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { initializeFirebase } from './index';
 import { FirebaseProvider } from './provider';
-import { FirebaseApp } from 'firebase/app';
-import { Firestore } from 'firebase/firestore';
-import { Auth } from 'firebase/auth';
 
 /**
- * Resilient Provider that handles the transition from server to client.
- * Returns children immediately to prevent blank screens while instances initialize.
+ * Resilient Provider that initializes Firebase on the client.
+ * Uses useMemo for immediate singleton initialization to prevent blank screen renders.
  */
 export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [instances, setInstances] = useState<{
-    firebaseApp: FirebaseApp;
-    firestore: Firestore;
-    auth: Auth;
-  } | null>(null);
-
-  useEffect(() => {
+  const instances = useMemo(() => {
+    if (typeof window === 'undefined') return null;
     try {
-      const results = initializeFirebase();
-      setInstances(results);
+      return initializeFirebase();
     } catch (e) {
-      console.error("Firebase initialization error:", e);
+      console.error("Firebase init error:", e);
+      return null;
     }
   }, []);
 
-  // Render children immediately to avoid the blank white screen.
-  // The provider will wrap them once Firebase is ready.
+  // Wrap children. If Firebase isn't initialized yet (SSR or error), 
+  // we render children raw to ensure the initial HTML is visible.
   if (!instances) {
     return <>{children}</>; 
   }
