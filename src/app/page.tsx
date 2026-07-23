@@ -15,6 +15,7 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
 const products = [
+  // FLASH DEALS (0-15)
   { id: 'p1', name: "58 Spiced Orange Gin & Tonic", price: 99, oldPrice: 300, discount: "-67%", image: "https://picsum.photos/seed/drink1/300/300" },
   { id: 'p2', name: "Kenyan Originals Apple Cider", price: 99, oldPrice: 250, discount: "-60%", image: "https://picsum.photos/seed/drink2/300/300" },
   { id: 'p3', name: "KO Dry Cider Premium", price: 99, oldPrice: 200, discount: "-50%", image: "https://picsum.photos/seed/drink3/300/300" },
@@ -26,7 +27,29 @@ const products = [
   { id: 'p9', name: "Premium T-Bone Steak", price: 1200, oldPrice: 1500, discount: "-20%", image: "https://picsum.photos/seed/tbone/300/300" },
   { id: 'p10', name: "Fresh Chicken Wings 1Kg", price: 550, image: "https://picsum.photos/seed/wings/300/300" },
   { id: 'p11', name: "Beef Mince Extra Lean", price: 650, image: "https://picsum.photos/seed/mince/300/300" },
-  { id: 'p12', name: "Goat Meat Choma Cut", price: 750, image: "https://picsum.photos/seed/goat/300/300" }
+  { id: 'p12', name: "Goat Meat Choma Cut", price: 750, image: "https://picsum.photos/seed/goat/300/300" },
+  { id: 'p13', name: "Lamb Chops Signature", price: 950, oldPrice: 1100, discount: "-13%", image: "https://picsum.photos/seed/lamb/300/300" },
+  { id: 'p14', name: "Pork Belly Ribs 1Kg", price: 880, image: "https://picsum.photos/seed/pork/300/300" },
+  { id: 'p15', name: "Whole Tilapia Fish", price: 450, oldPrice: 600, discount: "-25%", image: "https://picsum.photos/seed/fish/300/300" },
+  { id: 'p16', name: "Beef Sirloin Roast", price: 1400, image: "https://picsum.photos/seed/sirloin/300/300" },
+  
+  // ELITE SELECTION (16-31)
+  { id: 'p17', name: "Wagyu Style Ribeye Cut", price: 2500, image: "https://picsum.photos/seed/ribeye/300/300" },
+  { id: 'p18', name: "Organic Chicken Thighs", price: 680, image: "https://picsum.photos/seed/thighs/300/300" },
+  { id: 'p19', name: "Mutton Shoulder Pack", price: 1100, image: "https://picsum.photos/seed/mutton/300/300" },
+  { id: 'p20', name: "Smoked Beef Sausages", price: 400, image: "https://picsum.photos/seed/sausage/300/300" },
+  { id: 'p21', name: "Gourmet Beef Burger Patties", price: 850, image: "https://picsum.photos/seed/burger/300/300" },
+  { id: 'p22', name: "Pork Chops Center Cut", price: 780, image: "https://picsum.photos/seed/porkchops/300/300" },
+  { id: 'p23', name: "Dressed Whole Duck", price: 1800, image: "https://picsum.photos/seed/duck/300/300" },
+  { id: 'p24', name: "Beef Liver Fresh Cut", price: 500, image: "https://picsum.photos/seed/liver/300/300" },
+  { id: 'p25', name: "Marinated Chicken Drumsticks", price: 720, image: "https://picsum.photos/seed/drumstick/300/300" },
+  { id: 'p26', name: "Beef Fillet Mignon", price: 1950, image: "https://picsum.photos/seed/fillet/300/300" },
+  { id: 'p27', name: "Goat Leg Whole", price: 1600, image: "https://picsum.photos/seed/goatleg/300/300" },
+  { id: 'p28', name: "Bacon Strip Premium", price: 650, image: "https://picsum.photos/seed/bacon/300/300" },
+  { id: 'p29', name: "Beef Short Ribs 1Kg", price: 1250, image: "https://picsum.photos/seed/shortribs/300/300" },
+  { id: 'p30', name: "Assorted Meatballs Pack", price: 550, image: "https://picsum.photos/seed/meatballs/300/300" },
+  { id: 'p31', name: "Pork Fillet Tenderloin", price: 980, image: "https://picsum.photos/seed/tenderloin/300/300" },
+  { id: 'p32', name: "Beef Skewers Ready-to-Grill", price: 850, image: "https://picsum.photos/seed/skewers/300/300" }
 ];
 
 export default function App() {
@@ -99,10 +122,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* RETAIL DISCOVERY GRID - NO SECTION MARGINS */}
+      {/* RETAIL DISCOVERY GRID */}
       <main className="container mx-auto px-4">
         
-        {/* PROMOTIONS */}
+        {/* PROMOTIONS - 16 PRODUCTS */}
         <section>
           <div className="flex items-center justify-between border-b-2 border-black/5 py-4">
             <div className="flex items-center gap-3">
@@ -112,14 +135,14 @@ export default function App() {
             <Button variant="ghost" className="font-black text-[10px] uppercase tracking-widest hover:text-red-600">View All</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-l border-gray-100">
-            {products.slice(0, 6).map((p) => (
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+            {products.slice(0, 16).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
         </section>
 
-        {/* BEST SELLERS - SEAMLESSLY ATTACHED */}
+        {/* BEST SELLERS - 16 PRODUCTS */}
         <section>
           <div className="flex items-center justify-between border-b-2 border-black/5 py-4">
             <div className="flex items-center gap-3">
@@ -129,8 +152,8 @@ export default function App() {
             <Button variant="ghost" className="font-black text-[10px] uppercase tracking-widest hover:text-red-600">Explore</Button>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-0 border-l border-gray-100 pb-12">
-            {products.slice(6, 12).map((p) => (
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100 pb-12">
+            {products.slice(16, 32).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
