@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -9,11 +8,23 @@ import { useToast } from "@/hooks/use-toast";
 import { Heart, ChevronRight, Star, ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-const FALLBACK_PRODUCTS = [
+const ALL_PRODUCTS = [
   { id: 'p1', name: 'Premium Beef Steak', price: 850, category: 'Beef', rating: 4.9, image: 'https://picsum.photos/seed/steak2/600/800' },
-  { id: 'p2', name: 'Goat Meat', price: 750, category: 'Goat', rating: 4.8, image: 'https://picsum.photos/seed/goat2/600/800' },
-  { id: 'p3', name: 'Chicken Full', price: 600, category: 'Chicken', rating: 4.7, image: 'https://picsum.photos/seed/chicken2/600/800' },
-  { id: 'p4', name: 'Beef Mince', price: 650, category: 'Beef', rating: 4.9, image: 'https://picsum.photos/seed/mince2/600/800' },
+  { id: 'p2', name: 'Goat Meat Choma', price: 750, category: 'Goat', rating: 4.8, image: 'https://picsum.photos/seed/goat2/600/800' },
+  { id: 'p3', name: 'Full Chicken Roast', price: 600, category: 'Chicken', rating: 4.7, image: 'https://picsum.photos/seed/chicken2/600/800' },
+  { id: 'p4', name: 'Beef Mince Extra', price: 650, category: 'Beef', rating: 4.9, image: 'https://picsum.photos/seed/mince2/600/800' },
+  { id: 'p5', name: 'T-Bone Premium', price: 1200, category: 'Beef', rating: 4.9, image: 'https://picsum.photos/seed/tbone/600/800' },
+  { id: 'p6', name: 'Mutton Chops', price: 950, category: 'Goat', rating: 4.8, image: 'https://picsum.photos/seed/mutton/600/800' },
+  { id: 'p7', name: 'Chicken Wings (1kg)', price: 550, category: 'Chicken', rating: 4.6, image: 'https://picsum.photos/seed/wings/600/800' },
+  { id: 'p8', name: 'Beef Sausages', price: 400, category: 'Delicacies', rating: 4.7, image: 'https://picsum.photos/seed/sausage/600/800' },
+  { id: 'p9', name: 'Sirloin Cut', price: 1100, category: 'Beef', rating: 4.9, image: 'https://picsum.photos/seed/sirloin/600/800' },
+  { id: 'p10', name: 'Pork Chops', price: 800, category: 'Pork', rating: 4.7, image: 'https://picsum.photos/seed/pork/600/800' },
+  { id: 'p11', name: 'Full Kichwa Goat', price: 800, category: 'Delicacies', rating: 4.8, image: 'https://picsum.photos/seed/kichwa/600/800' },
+  { id: 'p12', name: 'Beef Chemsha', price: 1400, category: 'Cooked', rating: 4.9, image: 'https://picsum.photos/seed/chemsha/600/800' },
+  { id: 'p13', name: 'Ribeye Steak', price: 1500, category: 'Beef', rating: 5.0, image: 'https://picsum.photos/seed/ribeye/600/800' },
+  { id: 'p14', name: 'Lamb Leg', price: 1300, category: 'Lamb', rating: 4.8, image: 'https://picsum.photos/seed/lamb/600/800' },
+  { id: 'p15', name: 'Whole Tilapia', price: 450, category: 'Fish', rating: 4.7, image: 'https://picsum.photos/seed/fish/600/800' },
+  { id: 'p16', name: 'Mutura (Signature)', price: 100, category: 'Delicacies', rating: 4.9, image: 'https://picsum.photos/seed/mutura/600/800' },
 ];
 
 export function Products() {
@@ -21,48 +32,40 @@ export function Products() {
   const { toast } = useToast();
 
   return (
-    <section className="bg-black py-24">
-      <div className="container mx-auto px-6">
-        <div className="flex items-end justify-between mb-16 border-b border-white/5 pb-8">
-          <div className="space-y-2">
-            <p className="text-primary font-black text-[11px] uppercase tracking-[0.5em]">The Retail Feed</p>
-            <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter">Our Popular Picks</h2>
-          </div>
-          <Link href="/restaurants" className="flex items-center gap-3 text-[11px] font-black text-white/40 uppercase tracking-[0.3em] hover:text-primary transition-all group">
-            Marketplace Nodes <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+    <section className="bg-black py-12">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
+          <h2 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter">Premium Selection</h2>
+          <Link href="/restaurants" className="text-[10px] font-black text-primary uppercase tracking-[0.3em] hover:opacity-80 flex items-center gap-2">
+            View All <ChevronRight className="w-3 h-3" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
-          {FALLBACK_PRODUCTS.map((item) => (
-            <div key={item.id} className="group relative flex flex-col space-y-6 animate-in fade-in slide-in-from-bottom-4">
-              <div className="relative aspect-[3/4] rounded-[2.5rem] overflow-hidden bg-[#111] border border-white/5 shadow-2xl transition-all duration-700 hover:border-primary/20">
-                <Image src={item.image} alt={item.name} fill className="object-cover opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000" />
+        <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6">
+          {ALL_PRODUCTS.map((item) => (
+            <div key={item.id} className="group relative flex flex-col space-y-3">
+              <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-[#111] border border-white/5 shadow-2xl transition-all duration-500 hover:border-primary/40">
+                <Image src={item.image} alt={item.name} fill className="object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
                 
-                <div className="absolute top-6 left-6">
-                   <Badge className="bg-black/60 backdrop-blur-md text-white border-none font-black text-[9px] uppercase px-3 py-1 tracking-widest">{item.category}</Badge>
+                <div className="absolute top-2 left-2">
+                   <Badge className="bg-black/80 backdrop-blur-md text-white border-none font-black text-[7px] md:text-[9px] uppercase px-2 py-0.5 tracking-widest">{item.category}</Badge>
                 </div>
 
-                <button className="absolute top-6 right-6 w-12 h-12 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-primary transition-all shadow-2xl active:scale-90">
-                  <Heart className="w-5 h-5" />
-                </button>
-
-                <div className="absolute bottom-6 left-6 right-6">
-                   <div className="bg-black/60 backdrop-blur-xl p-4 rounded-2xl border border-white/5 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                         <Star className="w-3.5 h-3.5 fill-primary text-primary" />
-                         <span className="text-[11px] font-black text-white">{item.rating}</span>
+                <div className="absolute bottom-2 left-2 right-2">
+                   <div className="bg-black/60 backdrop-blur-xl p-1.5 md:p-2 rounded-lg border border-white/5 flex items-center justify-between">
+                      <div className="flex items-center gap-1">
+                         <Star className="w-2.5 h-2.5 fill-primary text-primary" />
+                         <span className="text-[8px] md:text-[10px] font-black text-white">{item.rating}</span>
                       </div>
-                      <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Available</span>
+                      <span className="text-[7px] md:text-[9px] font-black text-white/40 uppercase tracking-widest">Live</span>
                    </div>
                 </div>
               </div>
               
-              <div className="space-y-2 px-2 text-center">
-                <h3 className="text-[16px] font-black text-white uppercase tracking-tighter group-hover:text-primary transition-colors">{item.name}</h3>
-                <p className="text-primary font-black text-[20px] flex items-center justify-center gap-2">
-                   KES {item.price.toLocaleString()} 
-                   <span className="text-[10px] text-white/20 uppercase tracking-widest">/ kg</span>
+              <div className="space-y-1 px-1">
+                <h3 className="text-[9px] md:text-[13px] font-black text-white uppercase tracking-tighter truncate group-hover:text-primary transition-colors">{item.name}</h3>
+                <p className="text-primary font-black text-[10px] md:text-[16px]">
+                   KES {item.price.toLocaleString()}
                 </p>
               </div>
 
@@ -77,14 +80,11 @@ export function Products() {
                     imageUrl: item.image,
                     category: item.category
                   });
-                  toast({ title: "ITEM ADDED", description: `${item.name} is in your basket.` });
+                  toast({ title: "READY", description: `${item.name} added.` });
                 }}
-                className="w-full h-14 bg-white text-black font-black uppercase text-[12px] tracking-widest rounded-2xl hover:bg-primary hover:text-white transition-all shadow-2xl active:scale-95 flex items-center justify-center gap-3 group/btn overflow-hidden relative"
+                className="w-full h-9 md:h-12 bg-white text-black font-black uppercase text-[8px] md:text-[11px] tracking-widest rounded-lg hover:bg-primary hover:text-white transition-all active:scale-95 flex items-center justify-center gap-2"
               >
-                <div className="absolute inset-0 bg-primary translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
-                <span className="relative z-10 flex items-center gap-3">
-                  <ShoppingCart className="w-4 h-4 animate-heartbeat" /> Add To Cart
-                </span>
+                <ShoppingCart className="w-3 h-3 md:w-4 h-4" /> Add
               </button>
             </div>
           ))}
