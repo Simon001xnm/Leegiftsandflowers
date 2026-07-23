@@ -206,7 +206,7 @@ export default function MerchantDashboard() {
         </div>
       </header>
 
-      <main className="flex-grow p-6 lg:p-10 container mx-auto max-w-7xl">
+      <main className="flex-grow p-6 lg:p-10 pb-32 container mx-auto max-w-7xl">
         {/* Quick Analytics Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
           <QuickStat icon={TrendingUp} label="Daily sales" value="KES 42.5K" color="text-emerald-600" bg="bg-emerald-50" />
