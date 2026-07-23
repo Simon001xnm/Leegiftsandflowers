@@ -57,6 +57,7 @@ export default function App() {
             fill 
             className="object-cover opacity-60"
             priority
+            data-ai-hint="raw steak"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/60" />
         </div>
@@ -164,7 +165,7 @@ function Stat({ node, label }: { node: string, label: string }) {
 function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void }) {
   return (
     <motion.div 
-      className="flex flex-col group border-r border-b border-gray-100 bg-white relative z-0"
+      className="flex flex-col group border-r border-b border-gray-100 bg-white relative z-0 overflow-hidden"
       whileHover={{ 
         scale: [1, 1.04, 1],
         zIndex: 10,
@@ -175,16 +176,15 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
         }
       }}
     >
-      {/* IMAGE CONTAINER */}
-      <div className="relative aspect-square bg-gray-50 flex items-center justify-center p-4 md:p-6 transition-colors duration-500 group-hover:bg-white">
-        <div className="relative w-full h-full">
-          <Image 
-            src={product.image} 
-            alt={product.name} 
-            fill 
-            className="object-contain" 
-          />
-        </div>
+      {/* IMAGE CONTAINER - FULL BLEED */}
+      <div className="relative aspect-square bg-gray-50 overflow-hidden transition-colors duration-500 group-hover:bg-white">
+        <Image 
+          src={product.image} 
+          alt={product.name} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+          data-ai-hint="product image"
+        />
 
         {/* DISCOUNT BADGE */}
         {product.discount && (
@@ -208,7 +208,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
       </div>
 
       {/* CONTENT AREA */}
-      <div className="space-y-1 p-3 md:p-4">
+      <div className="space-y-1 p-3 md:p-4 bg-white">
         <h3 className="text-[10px] md:text-[12px] font-black text-gray-800 line-clamp-2 leading-tight min-h-[2.4em] uppercase tracking-tighter">
           {product.name}
         </h3>
