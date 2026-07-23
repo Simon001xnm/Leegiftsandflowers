@@ -9,7 +9,7 @@ import { Auth } from 'firebase/auth';
 
 /**
  * Resilient Provider that handles the transition from server to client.
- * Returns a minimal placeholder to avoid hydration mismatches without blocking the UI.
+ * Returns children immediately to prevent blank screens while instances initialize.
  */
 export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [instances, setInstances] = useState<{
@@ -19,15 +19,18 @@ export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = (
   } | null>(null);
 
   useEffect(() => {
-    // Initialization is synchronous once on the client
-    const results = initializeFirebase();
-    setInstances(results);
+    try {
+      const results = initializeFirebase();
+      setInstances(results);
+    } catch (e) {
+      console.error("Firebase initialization error:", e);
+    }
   }, []);
 
-  // Return children even if instances are null initially to prevent a blank screen.
-  // The Firebase context will be provided as soon as the effect runs.
+  // Render children immediately to avoid the blank white screen.
+  // The provider will wrap them once Firebase is ready.
   if (!instances) {
-    return <div className="min-h-screen bg-white" />; 
+    return <>{children}</>; 
   }
 
   return (
