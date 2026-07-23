@@ -1,20 +1,38 @@
 'use client';
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MOCK_MENU } from "@/lib/food-data";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import { createClient } from "@/lib/supabase/client";
 
 /**
  * ULTRA-STABLE HIGH-DENSITY LANDING PAGE
+ * Powered by Supabase Live Data.
  * Locked to 4 columns on mobile.
- * Uses inline SVGs to permanently resolve Lucide-React HMR module factory errors.
  */
 export default function Home() {
   const { addToCart } = useCart();
   const { toast } = useToast();
+  const supabase = createClient();
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch real-time products from Supabase
+  useEffect(() => {
+    async function getProducts() {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('is_in_stock', true)
+        .order('created_at', { ascending: false });
+      
+      if (!error && data) setProducts(data);
+      setLoading(false);
+    }
+    getProducts();
+  }, [supabase]);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -67,43 +85,59 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-4">
-            {MOCK_MENU.map((item) => (
-              <div key={item.id} className="group flex flex-col gap-2">
-                <div className="relative aspect-square rounded-sm overflow-hidden bg-gray-50 border border-gray-100 shadow-sm">
-                  <Image 
-                    src={item.imageUrl} 
-                    alt={item.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    sizes="(max-width: 768px) 25vw, 12vw"
-                  />
-                  <div className="absolute top-1 right-1">
-                    <button className="rounded-full bg-white/95 p-1 shadow-md text-black hover:text-primary transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                    </button>
+          {loading ? (
+            <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+                <div key={i} className="aspect-square bg-gray-50 animate-pulse border" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 md:gap-4">
+              {products.map((item) => (
+                <div key={item.id} className="group flex flex-col gap-2">
+                  <div className="relative aspect-square rounded-sm overflow-hidden bg-gray-50 border border-gray-100 shadow-sm">
+                    <Image 
+                      src={item.image_url || `https://picsum.photos/seed/${item.id}/400/400`} 
+                      alt={item.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      sizes="(max-width: 768px) 25vw, 12vw"
+                    />
+                    <div className="absolute top-1 right-1">
+                      <button className="rounded-full bg-white/95 p-1 shadow-md text-black hover:text-primary transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="space-y-1 px-0.5">
+                    <h3 className="text-[9px] md:text-[14px] font-black truncate uppercase tracking-tighter leading-none group-hover:text-primary transition-colors">
+                      {item.name}
+                    </h3>
+                    <div className="flex items-center justify-between pt-1">
+                      <span className="text-[9px] md:text-[15px] font-black">KES {item.price}</span>
+                      <button 
+                        onClick={() => {
+                          addToCart({
+                            id: item.id,
+                            restaurantId: item.restaurant_id || 'r1',
+                            name: item.name,
+                            price: item.price,
+                            description: item.description,
+                            imageUrl: item.image_url || '',
+                            category: item.category
+                          });
+                          toast({ title: "READY", description: `${item.name} added.` });
+                        }}
+                        className="rounded-full bg-black text-white px-2 py-0.5 font-black text-[7px] md:text-[10px] uppercase tracking-widest hover:bg-primary transition-all active:scale-90 shadow-sm"
+                      >
+                        ADD
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-1 px-0.5">
-                  <h3 className="text-[9px] md:text-[14px] font-black truncate uppercase tracking-tighter leading-none group-hover:text-primary transition-colors">
-                    {item.name}
-                  </h3>
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-[9px] md:text-[15px] font-black">KES {item.price}</span>
-                    <button 
-                      onClick={() => {
-                        addToCart(item);
-                        toast({ title: "READY", description: `${item.name} added.` });
-                      }}
-                      className="rounded-full bg-black text-white px-2 py-0.5 font-black text-[7px] md:text-[10px] uppercase tracking-widest hover:bg-primary transition-all active:scale-90 shadow-sm"
-                    >
-                      ADD
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Fleet Status Nodes */}

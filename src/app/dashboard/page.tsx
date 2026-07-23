@@ -1,10 +1,8 @@
-
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { MOCK_ORDERS, MOCK_MENU } from "@/lib/food-data";
 import { 
   Users, 
   TrendingUp, 
@@ -17,7 +15,9 @@ import {
   Printer,
   Calculator,
   CheckCircle2,
-  XCircle
+  XCircle,
+  Loader2,
+  Image as ImageIcon
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -27,13 +27,26 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
 
 export default function RestaurantOwnerDashboard() {
   const { toast } = useToast();
+  const supabase = createClient();
   const [activeTab, setActiveTab] = useState("overview");
-  const [posCart, setPosCart] = useState<{id: string, name: string, price: number, quantity: number}[]>([]);
-  const [inventory, setInventory] = useState(MOCK_MENU.map(item => ({ ...item, inStock: true })));
+  const [posCart, setPosCart] = useState<any[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [receipt, setReceipt] = useState<any | null>(null);
+
+  // Fetch products from Supabase
+  useEffect(() => {
+    async function loadData() {
+      const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+      if (!error && data) setProducts(data);
+      setLoading(false);
+    }
+    loadData();
+  }, [supabase]);
 
   const stats = [
     { label: "Total Revenue", value: "KES 145,280", icon: TrendingUp, color: "text-emerald-500", bg: "bg-emerald-50" },
@@ -43,7 +56,7 @@ export default function RestaurantOwnerDashboard() {
   ];
 
   const addToPosCart = (item: any) => {
-    if (!item.inStock) {
+    if (!item.is_in_stock) {
       toast({ variant: "destructive", title: "Out of Stock", description: `${item.name} is currently unavailable.` });
       return;
     }
@@ -60,13 +73,18 @@ export default function RestaurantOwnerDashboard() {
     setPosCart(prev => prev.filter(i => i.id !== id));
   };
 
-  const toggleStock = (id: string) => {
-    setInventory(prev => prev.map(item => item.id === id ? { ...item, inStock: !item.inStock } : item));
-    const item = inventory.find(i => i.id === id);
-    toast({
-      title: "Inventory Updated",
-      description: `${item?.name} is now ${!item?.inStock ? 'In Stock' : 'Out of Stock'}.`,
-    });
+  const toggleStock = async (id: string, currentStatus: boolean) => {
+    const { error } = await supabase
+      .from('products')
+      .update({ is_in_stock: !currentStatus })
+      .eq('id', id);
+
+    if (error) {
+      toast({ variant: "destructive", title: "Sync Failed", description: "Could not update availability." });
+    } else {
+      setProducts(prev => prev.map(p => p.id === id ? { ...p, is_in_stock: !currentStatus } : p));
+      toast({ title: "Live Sync Active", description: "Inventory status updated globally." });
+    }
   };
 
   const handleCheckout = () => {
@@ -80,300 +98,194 @@ export default function RestaurantOwnerDashboard() {
     };
     setReceipt(newReceipt);
     setPosCart([]);
-    toast({ title: "Order Processed", description: "Receipt generated. Opening printer..." });
-    
-    setTimeout(() => {
-        window.print();
-    }, 500);
+    toast({ title: "Order Processed", description: "Receipt generated. Syncing with ledger..." });
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <main className="container mx-auto px-4 py-12 flex-grow no-print">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+    <div className="min-h-screen bg-white flex flex-col pb-20 md:pb-0">
+      <main className="container mx-auto px-4 py-8 max-w-7xl no-print">
+        <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
           <div>
-            <h1 className="text-4xl font-bold font-headline text-primary mb-2">Merchant Portal</h1>
-            <p className="text-muted-foreground">Manage your kitchen, POS, and inventory from one central hub.</p>
+            <h1 className="text-3xl font-black font-headline text-black uppercase tracking-tighter">Business Terminal</h1>
+            <p className="text-[12px] font-bold text-muted-foreground uppercase tracking-widest">Supabase Connected // Secure Node</p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
              <Link href="/dashboard/create">
-              <Button variant="outline" className="h-12 px-6 rounded-xl gap-2">
-                <Plus className="w-5 h-5" /> Add Menu Item
+              <Button variant="outline" className="h-10 px-6 rounded-none border-2 border-black font-black text-[11px] uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                <Plus className="w-4 h-4 mr-2" /> New Product
               </Button>
             </Link>
-            <Button className="h-12 px-6 rounded-xl gap-2 shadow-lg shadow-primary/20">
-              Kitchen View
+            <Button className="h-10 px-6 rounded-none bg-black text-white font-black text-[11px] uppercase tracking-widest shadow-xl">
+              Kitchen Link
             </Button>
           </div>
-        </div>
+        </header>
 
         <Tabs defaultValue="overview" className="space-y-8" onValueChange={setActiveTab}>
-          <TabsList className="bg-muted/50 p-1 rounded-2xl h-14 w-full md:w-auto grid grid-cols-2 md:flex md:gap-2">
-            <TabsTrigger value="overview" className="rounded-xl font-bold data-[state=active]:bg-primary data-[state=active]:text-white">Overview</TabsTrigger>
-            <TabsTrigger value="pos" className="rounded-xl font-bold data-[state=active]:bg-primary data-[state=active]:text-white">POS Terminal</TabsTrigger>
-            <TabsTrigger value="orders" className="rounded-xl font-bold data-[state=active]:bg-primary data-[state=active]:text-white">Order Queue</TabsTrigger>
-            <TabsTrigger value="inventory" className="rounded-xl font-bold data-[state=active]:bg-primary data-[state=active]:text-white">Inventory</TabsTrigger>
+          <TabsList className="bg-gray-100 p-1 rounded-none h-12 w-full md:w-auto flex gap-1">
+            <TabsTrigger value="overview" className="rounded-none px-6 font-black text-[11px] uppercase tracking-widest data-[state=active]:bg-black data-[state=active]:text-white transition-all">Overview</TabsTrigger>
+            <TabsTrigger value="pos" className="rounded-none px-6 font-black text-[11px] uppercase tracking-widest data-[state=active]:bg-black data-[state=active]:text-white transition-all">POS</TabsTrigger>
+            <TabsTrigger value="inventory" className="rounded-none px-6 font-black text-[11px] uppercase tracking-widest data-[state=active]:bg-black data-[state=active]:text-white transition-all">Inventory</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-12">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {stats.map((stat) => (
-                <Card key={stat.label} className="border-none shadow-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 rounded-xl ${stat.bg} flex items-center justify-center ${stat.color}`}>
-                        <stat.icon className="w-6 h-6" />
-                      </div>
-                      <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-none">+18%</Badge>
-                    </div>
-                    <h3 className="text-2xl font-bold text-primary mb-1">{stat.value}</h3>
-                    <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
-                  </CardContent>
+                <Card key={stat.label} className="rounded-none border-2 border-black shadow-none bg-white p-6 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <stat.icon className="w-12 h-12" />
+                  </div>
+                  <p className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em] mb-2">{stat.label}</p>
+                  <h3 className="text-2xl font-black text-black leading-none">{stat.value}</h3>
+                  <div className="mt-4 flex items-center gap-1.5 text-emerald-600 font-black text-[10px] uppercase tracking-widest">
+                    <TrendingUp className="w-3 h-3" /> +12% Efficiency
+                  </div>
                 </Card>
               ))}
             </div>
-
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold font-headline text-primary">Recent Activity</h2>
-              <div className="bg-card rounded-2xl border shadow-sm overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left">
-                    <thead className="bg-muted/50 border-b">
-                      <tr>
-                        <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Order ID</th>
-                        <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Customer</th>
-                        <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Status</th>
-                        <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y">
-                      {MOCK_ORDERS.slice(0, 5).map((order) => (
-                        <tr key={order.id} className="hover:bg-muted/5 transition-colors">
-                          <td className="px-6 py-4 font-bold text-primary">{order.id}</td>
-                          <td className="px-6 py-4 text-sm font-medium">{order.customerName}</td>
-                          <td className="px-6 py-4">
-                            <Badge className={cn("border-none", order.status === 'Delivered' ? "bg-emerald-50 text-emerald-700" : "bg-primary/10 text-primary")}>
-                              {order.status}
-                            </Badge>
-                          </td>
-                          <td className="px-6 py-4 font-bold">KES {order.total.toLocaleString()}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
           </TabsContent>
 
-          <TabsContent value="pos" className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
+          <TabsContent value="pos" className="grid lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-8 space-y-6">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input placeholder="Search items for manual order entry..." className="pl-10 h-12 rounded-xl" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Input placeholder="Quick search..." className="pl-10 h-12 rounded-none border-2 border-black font-bold" />
               </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {inventory.map((item) => (
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                {products.map((item) => (
                   <Card 
                     key={item.id} 
                     className={cn(
-                      "cursor-pointer transition-all hover:ring-2 hover:ring-primary/20",
-                      !item.inStock && "opacity-50 grayscale"
+                      "cursor-pointer rounded-none border shadow-none hover:ring-2 hover:ring-black transition-all group",
+                      !item.is_in_stock && "opacity-40 grayscale"
                     )}
                     onClick={() => addToPosCart(item)}
                   >
-                    <CardContent className="p-4 flex gap-4 items-center">
-                      <div className="w-16 h-16 rounded-lg relative overflow-hidden bg-muted">
-                        <img src={item.imageUrl} alt={item.name} className="object-cover w-full h-full" />
-                      </div>
-                      <div className="flex-grow">
-                        <h4 className="font-bold text-sm text-primary">{item.name}</h4>
-                        <p className="text-xs text-muted-foreground">KES {item.price}</p>
-                      </div>
-                      {!item.inStock && <Badge variant="destructive" className="text-[8px] uppercase">Sold Out</Badge>}
-                    </CardContent>
+                    <div className="aspect-square relative overflow-hidden bg-gray-50 border-b">
+                      {item.image_url ? (
+                        <img src={item.image_url} alt={item.name} className="object-cover w-full h-full group-hover:scale-110 transition-transform" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-300">
+                          <ImageIcon className="w-8 h-8" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-3 space-y-1">
+                      <h4 className="font-black text-[11px] uppercase tracking-tighter line-clamp-1">{item.name}</h4>
+                      <p className="text-[10px] font-bold text-primary">KES {item.price}</p>
+                    </div>
                   </Card>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-6">
-              <Card className="border-2 border-primary/10 shadow-xl rounded-2xl">
-                <CardHeader className="border-b bg-muted/30">
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <Calculator className="w-5 h-5 text-primary" /> Current Bill
+            <div className="lg:col-span-4">
+              <Card className="rounded-none border-4 border-black shadow-2xl sticky top-24">
+                <CardHeader className="bg-black text-white py-4">
+                  <CardTitle className="text-[12px] font-black uppercase tracking-widest flex items-center gap-2">
+                    <Calculator className="w-4 h-4" /> Current Bill
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6 space-y-4">
+                <CardContent className="p-6 space-y-6">
                   {posCart.length === 0 ? (
-                    <div className="py-12 text-center space-y-2">
-                      <ShoppingBag className="w-8 h-8 text-muted-foreground mx-auto opacity-20" />
-                      <p className="text-sm text-muted-foreground">No items added to bill.</p>
+                    <div className="py-10 text-center opacity-20">
+                      <ShoppingBag className="w-10 h-10 mx-auto mb-2" />
+                      <p className="text-[10px] font-black uppercase tracking-widest">Register Empty</p>
                     </div>
                   ) : (
-                    <div className="space-y-4">
+                    <div className="space-y-4 max-h-[300px] overflow-auto pr-2">
                       {posCart.map(item => (
-                        <div key={item.id} className="flex justify-between items-center text-sm">
-                          <div className="flex gap-2">
-                            <span className="font-bold text-primary">{item.quantity}x</span>
-                            <span>{item.name}</span>
+                        <div key={item.id} className="flex justify-between items-center group">
+                          <div className="space-y-0.5">
+                            <p className="font-black text-[12px] uppercase tracking-tighter">{item.name}</p>
+                            <p className="text-[10px] font-bold text-muted-foreground">{item.quantity}x @ KES {item.price}</p>
                           </div>
                           <div className="flex items-center gap-3">
-                            <span className="font-bold">KES {item.price * item.quantity}</span>
-                            <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive" onClick={() => removeFromPosCart(item.id)}>
-                              <Trash2 className="w-3 h-3" />
-                            </Button>
+                            <span className="font-black text-[12px]">KES {item.price * item.quantity}</span>
+                            <button onClick={() => removeFromPosCart(item.id)} className="text-gray-300 hover:text-red-500 transition-colors">
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
                           </div>
                         </div>
                       ))}
-                      <div className="pt-4 border-t space-y-2">
-                        <div className="flex justify-between text-muted-foreground text-xs uppercase font-bold tracking-widest">
-                          <span>Subtotal</span>
-                          <span>KES {posCart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0)}</span>
-                        </div>
-                        <div className="flex justify-between text-xl font-bold text-primary">
-                          <span>Total</span>
-                          <span>KES {posCart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0)}</span>
-                        </div>
-                      </div>
                     </div>
                   )}
-                </CardContent>
-                <CardFooter className="p-6 bg-muted/10 border-t">
-                  <Button 
-                    className="w-full h-12 rounded-xl gap-2 text-lg shadow-lg shadow-primary/10" 
-                    disabled={posCart.length === 0}
-                    onClick={handleCheckout}
-                  >
-                    <Receipt className="w-5 h-5" /> Generate & Print
-                  </Button>
-                </CardFooter>
-              </Card>
 
-              {receipt && (
-                <Card className="border-dashed border-2 bg-accent/5 border-accent animate-in zoom-in-95 duration-300">
-                  <CardContent className="p-6 space-y-4">
-                    <div className="text-center border-b pb-4">
-                      <h3 className="font-bold text-lg uppercase tracking-tighter">ABC</h3>
-                      <p className="text-[10px] text-muted-foreground">OFFICIAL RECEIPT</p>
-                    </div>
-                    <div className="text-xs space-y-1">
-                      <div className="flex justify-between"><span>ID:</span> <span>{receipt.orderId}</span></div>
-                      <div className="flex justify-between"><span>Date:</span> <span>{receipt.date}</span></div>
-                    </div>
-                    <div className="space-y-2 py-4 border-y border-dashed">
-                      {receipt.items.map((i: any) => (
-                        <div key={i.id} className="flex justify-between text-xs">
-                          <span>{i.name} x{i.quantity}</span>
-                          <span className="font-mono">KES {i.price * i.quantity}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex justify-between font-bold text-lg">
-                      <span>Total:</span>
-                      <span className="font-mono">KES {receipt.total}</span>
+                  <div className="pt-6 border-t border-dashed space-y-3">
+                    <div className="flex justify-between items-end">
+                      <div className="space-y-0.5">
+                        <p className="text-[8px] font-black text-muted-foreground uppercase tracking-widest">Grand Total</p>
+                        <p className="text-3xl font-black text-black">KES {posCart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0).toLocaleString()}</p>
+                      </div>
                     </div>
                     <Button 
-                      variant="outline" 
-                      className="w-full gap-2 text-xs border-primary text-primary hover:bg-primary/10" 
-                      onClick={() => window.print()}
+                      className="w-full h-14 rounded-none bg-black text-white font-black text-[12px] uppercase tracking-widest shadow-xl shadow-primary/10 transition-all hover:scale-[1.02] active:scale-95" 
+                      disabled={posCart.length === 0}
+                      onClick={handleCheckout}
                     >
-                      <Printer className="w-3 h-3" /> Reprint Thermal Receipt
+                      <Receipt className="w-4 h-4 mr-2" /> Print & Sync
                     </Button>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="orders" className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold font-headline text-primary">Live Order Queue</h2>
-              <Badge className="bg-primary text-white">12 Pending</Badge>
-            </div>
-            <div className="grid gap-4">
-              {MOCK_ORDERS.filter(o => o.status !== 'Delivered').map((order) => (
-                <Card key={order.id} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                    <div className="flex gap-4">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <ShoppingBag className="w-6 h-6" />
-                      </div>
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                           <h4 className="font-bold text-primary">{order.id}</h4>
-                           <Badge variant="outline" className="text-[10px]">{order.status}</Badge>
-                        </div>
-                        <p className="text-sm font-medium">{order.customerName}</p>
-                        <p className="text-xs text-muted-foreground">{order.items.join(', ')}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2 w-full md:w-auto">
-                      <Button variant="outline" size="sm" className="flex-grow md:flex-grow-0 rounded-full border-primary/20 hover:bg-primary/5">
-                        <Receipt className="w-4 h-4 mr-2" /> Print KOT
-                      </Button>
-                      <Button size="sm" className="flex-grow md:flex-grow-0 rounded-full gap-2">
-                        Mark Ready <ChefHat className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
 
           <TabsContent value="inventory" className="space-y-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <h2 className="text-2xl font-bold font-headline text-primary">Menu Availability</h2>
-              <div className="relative w-full md:w-64">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input placeholder="Filter menu..." className="pl-10" />
-              </div>
+              <h2 className="text-2xl font-black font-headline text-black uppercase tracking-tighter">Menu Availability</h2>
+              <Badge className="bg-emerald-100 text-emerald-700 border-none rounded-none font-black px-4 py-1.5 uppercase text-[10px] tracking-widest">
+                Real-Time Sync Active
+              </Badge>
             </div>
 
-            <div className="bg-card rounded-2xl border shadow-sm overflow-hidden">
+            <div className="border-4 border-black bg-white overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="bg-muted/50 border-b">
+                  <thead className="bg-gray-100 border-b-2 border-black">
                     <tr>
-                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Item Name</th>
-                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Category</th>
-                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Price</th>
-                      <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">Status</th>
-                      <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">Availability</th>
+                      <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Item Node</th>
+                      <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Pricing</th>
+                      <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Live Status</th>
+                      <th className="px-6 py-4 text-right text-[10px] font-black uppercase tracking-widest">Network Lock</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y">
-                    {inventory.map((item) => (
-                      <tr key={item.id} className={cn("hover:bg-muted/5 transition-colors", !item.inStock && "bg-muted/20")}>
-                        <td className="px-6 py-4 font-bold text-primary flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg relative overflow-hidden shrink-0 border">
-                             <img src={item.imageUrl} alt="" className="object-cover w-full h-full" />
+                  <tbody className="divide-y border-black">
+                    {products.map((item) => (
+                      <tr key={item.id} className={cn("hover:bg-gray-50 transition-colors", !item.is_in_stock && "bg-gray-50/50")}>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-gray-100 border relative overflow-hidden shrink-0">
+                               {item.image_url ? <img src={item.image_url} alt="" className="object-cover w-full h-full" /> : <ImageIcon className="w-6 h-6 m-3 text-gray-300" />}
+                            </div>
+                            <div>
+                               <p className="font-black text-[13px] uppercase tracking-tighter">{item.name}</p>
+                               <p className="text-[10px] font-bold text-muted-foreground uppercase">{item.category}</p>
+                            </div>
                           </div>
-                          {item.name}
                         </td>
-                        <td className="px-6 py-4 text-sm font-medium">{item.category}</td>
-                        <td className="px-6 py-4 text-sm">KES {item.price}</td>
+                        <td className="px-6 py-4 font-black text-[13px]">KES {item.price}</td>
                         <td className="px-6 py-4">
                           <Badge 
                             variant="secondary" 
                             className={cn(
-                              "border-none",
-                              item.inStock ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"
+                              "border-none rounded-none px-3 py-1 font-black text-[9px] uppercase tracking-widest",
+                              item.is_in_stock ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"
                             )}
                           >
-                            {item.inStock ? "In Stock" : "Out of Stock"}
+                            {item.is_in_stock ? "In Network" : "Offline"}
                           </Badge>
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="flex items-center justify-end gap-3">
                             <Label htmlFor={`stock-${item.id}`} className="cursor-pointer">
-                              {item.inStock ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : <XCircle className="w-4 h-4 text-red-400" />}
+                              {item.is_in_stock ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : <XCircle className="w-4 h-4 text-red-300" />}
                             </Label>
                             <Switch 
                               id={`stock-${item.id}`}
-                              checked={item.inStock}
-                              onCheckedChange={() => toggleStock(item.id)}
+                              checked={item.is_in_stock}
+                              onCheckedChange={() => toggleStock(item.id, item.is_in_stock)}
+                              className="data-[state=checked]:bg-emerald-500"
                             />
                           </div>
                         </td>
@@ -390,19 +302,19 @@ export default function RestaurantOwnerDashboard() {
       {receipt && (
         <div id="thermal-receipt" className="print-only font-mono text-black p-4 space-y-4 text-sm w-[80mm] mx-auto bg-white border border-gray-100">
             <div className="text-center space-y-1">
-                <h1 className="text-xl font-bold tracking-tighter">ABC</h1>
-                <p className="text-xs">Nairobi, Kenya</p>
+                <h1 className="text-xl font-bold tracking-tighter">STEAK WEST</h1>
+                <p className="text-xs">Nairobi, Kenya // SUPABASE_NODE_01</p>
                 <p className="text-xs">Tel: +254 700 000000</p>
             </div>
             
             <div className="border-b border-dashed border-black pt-2" />
             
             <div className="flex justify-between">
-                <span>ORDER:</span>
+                <span>TX_ID:</span>
                 <span className="font-bold">{receipt.orderId}</span>
             </div>
             <div className="flex justify-between">
-                <span>DATE:</span>
+                <span>TIMESTAMP:</span>
                 <span>{receipt.date}</span>
             </div>
 
@@ -412,10 +324,10 @@ export default function RestaurantOwnerDashboard() {
                 {receipt.items.map((item: any, i: number) => (
                     <div key={i} className="flex flex-col">
                         <div className="flex justify-between">
-                            <span className="uppercase">{item.name}</span>
+                            <span className="uppercase font-bold">{item.name}</span>
                             <span>{item.price * item.quantity}</span>
                         </div>
-                        <span className="text-xs">  {item.quantity} x {item.price}</span>
+                        <span className="text-[10px]">  {item.quantity} x KES {item.price}</span>
                     </div>
                 ))}
             </div>
@@ -430,8 +342,8 @@ export default function RestaurantOwnerDashboard() {
             <div className="border-b border-dashed border-black" />
 
             <div className="text-center pt-4 space-y-1">
-                <p className="font-bold">THANK YOU FOR YOUR BUSINESS!</p>
-                <p className="text-[10px]">Order processed via ABC POS Terminal</p>
+                <p className="font-bold uppercase tracking-tighter">SYNCED TO NETWORK</p>
+                <p className="text-[9px]">THANK YOU FOR YOUR BUSINESS</p>
             </div>
         </div>
       )}
