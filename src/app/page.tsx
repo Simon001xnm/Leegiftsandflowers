@@ -7,10 +7,6 @@ import {
   MapPin,
   Tag,
   TrendingUp,
-  ShoppingCart,
-  Truck,
-  ShieldCheck,
-  Star
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -87,25 +83,11 @@ export default function App() {
             priority
             data-ai-hint="raw steak"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
         </div>
         
         <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-10 text-left">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="space-y-6"
-            >
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
-                Premium Cuts. <br />
-                <span className="text-red-600">Freshly Dispatched.</span>
-              </h1>
-              <p className="text-white/70 text-lg max-w-md font-medium">
-                Savor the sweetness of shopping for the finest beef, chicken, and delicacies in Nairobi.
-              </p>
-            </motion.div>
-
+          <div className="space-y-12 text-left">
             <div className="flex flex-col sm:flex-row items-center gap-4 bg-white/5 backdrop-blur-xl p-2 rounded-[2rem] border border-white/10 shadow-2xl">
               <div className="flex items-center gap-3 px-6 py-4 flex-grow w-full">
                 <MapPin className="text-red-600 w-6 h-6 shrink-0" />
