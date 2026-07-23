@@ -12,12 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
-import { Plus, Package, ShoppingCart, RefreshCcw, Loader2, Trash2 } from "lucide-react";
+import { Plus, ShoppingCart, RefreshCcw, Loader2, Trash2, Upload, Cloud } from "lucide-react";
 
-/**
- * COMPREHENSIVE MERCHANT BUSINESS TERMINAL
- * Full Inventory, Product Upload, and POS Suite.
- */
 export default function MerchantDashboard() {
   const { toast } = useToast();
   const supabase = createClient();
@@ -25,6 +21,7 @@ export default function MerchantDashboard() {
   const [loading, setLoading] = useState(true);
   const [addingProduct, setAddingProduct] = useState(false);
   const [posCart, setPosCart] = useState<any[]>([]);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // Form State
   const [newProduct, setNewProduct] = useState({
@@ -54,8 +51,25 @@ export default function MerchantDashboard() {
     loadData();
   }, [supabase]);
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setNewProduct({ ...newProduct, image_url: base64String });
+        setImagePreview(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!newProduct.image_url) {
+      toast({ variant: "destructive", title: "Missing Asset", description: "Please upload a product image." });
+      return;
+    }
     setAddingProduct(true);
     
     const { error } = await supabase.from('products').insert([{
@@ -70,6 +84,7 @@ export default function MerchantDashboard() {
     } else {
       toast({ title: "Product Live", description: "Identity added to global marketplace." });
       setNewProduct({ name: "", price: "", category: "Raw Meat", description: "", image_url: "" });
+      setImagePreview(null);
       loadData();
     }
     setAddingProduct(false);
@@ -235,11 +250,37 @@ export default function MerchantDashboard() {
           <Card className="max-w-2xl mx-auto rounded-none border-4 border-black shadow-2xl">
             <CardHeader className="bg-black text-white">
               <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3">
-                <Plus className="w-5 h-5" /> New Product Identity
+                <Cloud className="w-5 h-5" /> Cloud Asset Upload
               </CardTitle>
             </CardHeader>
             <CardContent className="p-8">
               <form onSubmit={handleAddProduct} className="space-y-6">
+                {/* Upload Zone */}
+                <div className="space-y-4">
+                  <Label className="text-[10px] font-black uppercase tracking-widest">Product Image</Label>
+                  <div className="relative group">
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleImageUpload} 
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" 
+                    />
+                    <div className={cn(
+                      "w-full aspect-video border-4 border-dashed border-black/10 flex flex-col items-center justify-center transition-all bg-gray-50",
+                      imagePreview ? "border-solid border-emerald-500 bg-emerald-50" : "group-hover:bg-gray-100 group-hover:border-black/30"
+                    )}>
+                      {imagePreview ? (
+                        <img src={imagePreview} className="w-full h-full object-contain p-4" alt="Preview" />
+                      ) : (
+                        <>
+                          <Upload className="w-10 h-10 mb-4 text-black/20" />
+                          <p className="text-[10px] font-black uppercase tracking-widest text-black/40">Select Local File</p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label className="text-[10px] font-black uppercase tracking-widest">Product Name</Label>
@@ -277,16 +318,6 @@ export default function MerchantDashboard() {
                     <option>Delicacies</option>
                     <option>Grocery</option>
                   </select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-widest">Image URL</Label>
-                  <Input 
-                    placeholder="https://..." 
-                    className="rounded-none border-2 border-black font-bold h-12"
-                    value={newProduct.image_url}
-                    onChange={e => setNewProduct({...newProduct, image_url: e.target.value})}
-                  />
                 </div>
 
                 <div className="space-y-2">

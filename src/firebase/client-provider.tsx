@@ -5,8 +5,9 @@ import { initializeFirebase } from './index';
 import { FirebaseProvider } from './provider';
 
 /**
- * Resilient Provider - Never blocks rendering.
- * Fixes blank white screen issues by ensuring children render immediately.
+ * ULTRA-RESILIENT PROVIDER - NEVER BLOCKS RENDERING.
+ * Ensures that the application shell is painted immediately.
+ * Background services sync after initial UI paint.
  */
 export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [instances, setInstances] = useState<any>(null);
@@ -17,15 +18,15 @@ export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = (
         const inst = initializeFirebase();
         setInstances(inst);
       } catch (e) {
-        console.warn("Firebase initialization deferred");
+        console.warn("Firebase initialization deferred for stability");
       }
     }
   }, []);
 
-  // We wrap children in the provider only if instances exist,
-  // but we ALWAYS return something that renders children to prevent white screen.
+  // Root shell renders immediately with or without Firebase instances
+  // If instances aren't ready, we provide a shell that prevents the white screen.
   if (!instances) {
-    return <div id="app-root-shell">{children}</div>;
+    return <div id="steak-west-shell" className="min-h-screen bg-white">{children}</div>;
   }
 
   return (

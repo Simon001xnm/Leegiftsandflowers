@@ -10,6 +10,7 @@ import { createClient } from "@/lib/supabase/client";
 /**
  * ULTRA-RESILIENT LANDING PAGE
  * 4-Column Mobile Grid Locked.
+ * Stabilized Fetching for Preview Environments.
  */
 export default function Home() {
   const { addToCart } = useCart();
@@ -37,7 +38,7 @@ export default function Home() {
     getProducts();
   }, [supabase]);
 
-  // Inline SVG for instant render
+  // Inline SVG for instant render without library loading stalls
   const BasketIcon = () => (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
   );
@@ -56,7 +57,6 @@ export default function Home() {
       </header>
 
       <main className="flex-grow">
-        {/* Proportional Hero */}
         <div className="relative h-[250px] md:h-[450px] bg-black overflow-hidden flex items-center">
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
           <div className="relative z-20 px-8 container mx-auto text-white">
