@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -12,25 +11,32 @@ import { Testimonials } from "@/components/landing/Testimonials";
 import { MobileApp } from "@/components/landing/MobileApp";
 import { Footer } from "@/components/landing/Footer";
 
-/**
- * CUSTOMER LANDING PAGE - "THE SWEETNESS OF SHOPPING"
- * Modular architecture for professional retail presentation.
- */
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-black">
       <Hero />
       <Categories />
-      
-      <main className="container mx-auto px-4 py-12 space-y-20">
-        <Products />
-        <WhyChooseUs />
-        <Offers />
-        <HowItWorks />
-        <Testimonials />
-        <MobileApp />
-      </main>
-
+      <Products />
+      <WhyChooseUs />
+      <Offers />
+      <div className="bg-primary py-12">
+        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { label: 'Happy Customers', val: '10K+' },
+            { label: 'Products', val: '50+' },
+            { label: 'Delivery Riders', val: '20+' },
+            { label: 'Customer Rating', val: '4.8★' },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center text-white space-y-1">
+              <p className="text-4xl font-black">{stat.val}</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <HowItWorks />
+      <Testimonials />
+      <MobileApp />
       <Footer />
     </div>
   );

@@ -1,51 +1,62 @@
-
 'use client';
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { MapPin, Search } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative h-[400px] md:h-[500px] flex items-center justify-center bg-[#f7f7f7] overflow-hidden">
+    <section className="relative h-[100vh] min-h-[700px] flex items-center bg-black overflow-hidden pt-20">
       <div className="absolute inset-0 z-0">
         <Image 
           src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop" 
-          alt="Hero Background" 
+          alt="Premium Steak" 
           fill 
-          className="object-cover opacity-10 md:opacity-20"
+          className="object-cover opacity-60"
           priority
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10 text-center space-y-8 max-w-4xl">
-        <div className="space-y-4">
-          <h1 className="text-4xl md:text-7xl font-black tracking-tighter leading-[0.9] uppercase">
-            Premium Meat <br className="hidden md:block" /> <span className="text-primary">Dispatched.</span>
-          </h1>
-          <p className="text-[12px] md:text-base font-bold text-gray-500 uppercase tracking-widest">
-            Straight from the farm to your doorstep in 30 minutes.
+      <div className="container mx-auto px-6 md:px-12 relative z-10 space-y-8">
+        <div className="max-w-3xl space-y-6">
+          <p className="text-primary font-black text-[12px] md:text-[14px] uppercase tracking-[0.3em]">
+            Premium Quality, Fresh Everyday
           </p>
-        </div>
+          <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.95] uppercase tracking-tighter">
+            Fresh Meat. <br /> <span className="text-white">Fast Delivery.</span>
+          </h1>
+          <p className="text-[14px] md:text-lg text-white/70 font-medium max-w-xl leading-relaxed">
+            Order beef, chicken, goat meat and more from Steak West Butchery. Freshly prepared, professionally packed and delivered to your door.
+          </p>
 
-        <div className="max-w-2xl mx-auto w-full bg-white shadow-2xl rounded-2xl md:rounded-full p-2 flex flex-col md:flex-row items-center gap-2 border-4 border-black/5">
-          <div className="flex items-center gap-3 px-4 py-3 flex-grow w-full border-b md:border-b-0 md:border-r">
-            <MapPin className="text-primary w-5 h-5 shrink-0" />
-            <span className="text-[13px] font-black uppercase tracking-tight truncate text-left">Silver Heights, Nairobi</span>
+          <div className="flex flex-col md:flex-row items-center gap-0 max-w-xl bg-white/10 backdrop-blur-md rounded-2xl md:rounded-full p-2 border border-white/20">
+            <div className="flex items-center gap-3 px-6 py-4 flex-grow w-full">
+              <MapPin className="text-primary w-5 h-5 shrink-0" />
+              <input 
+                placeholder="Enter your delivery location" 
+                className="w-full bg-transparent outline-none text-white text-[14px] font-medium placeholder:text-white/40"
+              />
+            </div>
+            <Button className="w-full md:w-auto h-14 md:h-12 px-10 bg-primary hover:bg-primary/90 text-white rounded-xl md:rounded-full font-black uppercase text-[12px] tracking-widest gap-2">
+              Order Now <ArrowRight className="w-4 h-4" />
+            </Button>
           </div>
-          <div className="flex items-center gap-3 px-4 py-3 flex-grow w-full">
-            <Search className="text-gray-400 w-5 h-5 shrink-0" />
-            <input 
-              placeholder="What are you craving?" 
-              className="w-full bg-transparent outline-none text-[13px] font-bold uppercase placeholder:text-gray-300"
-            />
+
+          <div className="flex flex-wrap gap-8 pt-6">
+            {[
+              { icon: '🥩', label: 'Fresh Daily Supply' },
+              { icon: '🛡️', label: 'Hygienic Processing' },
+              { icon: '🚚', label: 'Fast & Reliable Delivery' },
+              { icon: '🏆', label: '100% Premium Quality' },
+            ].map((badge) => (
+              <div key={badge.label} className="flex items-center gap-3">
+                <span className="text-2xl">{badge.icon}</span>
+                <span className="text-[11px] font-black text-white/60 uppercase tracking-widest">{badge.label}</span>
+              </div>
+            ))}
           </div>
-          <Link href="/restaurants" className="w-full md:w-auto">
-            <button className="w-full h-12 md:h-14 px-8 bg-black text-white rounded-xl md:rounded-full font-black uppercase text-[11px] tracking-widest hover:bg-primary transition-all active:scale-95">
-              Search
-            </button>
-          </Link>
         </div>
       </div>
     </section>

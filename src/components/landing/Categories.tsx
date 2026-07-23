@@ -1,34 +1,36 @@
-
 'use client';
 
 import React from "react";
 import Link from "next/link";
-import { Beef, Utensils, ShoppingBag, Store, GlassWater, Zap } from "lucide-react";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const CATEGORIES = [
-  { id: 'cat1', name: 'Butchery', icon: Beef, color: 'bg-red-50 text-red-600', href: '/restaurants?cat=Raw Meat' },
-  { id: 'cat2', name: 'Grills', icon: Utensils, color: 'bg-orange-50 text-orange-600', href: '/restaurants?cat=Nyama Choma' },
-  { id: 'cat3', name: 'Cooked', icon: ShoppingBag, color: 'bg-emerald-50 text-emerald-600', href: '/restaurants?cat=Cooked' },
-  { id: 'cat4', name: 'Grocery', icon: Store, color: 'bg-blue-50 text-blue-600', href: '/restaurants?cat=Grocery' },
-  { id: 'cat5', name: 'Drinks', icon: GlassWater, color: 'bg-purple-50 text-purple-600', href: '/restaurants?cat=Drinks' },
-  { id: 'cat6', name: 'Quick', icon: Zap, color: 'bg-yellow-50 text-yellow-600', href: '/restaurants?cat=Delicacies' },
+  { name: 'Beef', image: 'https://picsum.photos/seed/beef/200/200', href: '/restaurants?cat=Raw Meat' },
+  { name: 'Chicken', image: 'https://picsum.photos/seed/chicken/200/200', href: '/restaurants?cat=Cooked' },
+  { name: 'Goat Meat', image: 'https://picsum.photos/seed/goat/200/200', href: '/restaurants?cat=Raw Meat' },
+  { name: 'Fish', image: 'https://picsum.photos/seed/fish/200/200', href: '/restaurants?cat=Grocery' },
+  { name: 'Sausages', image: 'https://picsum.photos/seed/sausage/200/200', href: '/restaurants?cat=Delicacies' },
+  { name: 'Ready to Cook', image: 'https://picsum.photos/seed/ready/200/200', href: '/restaurants?cat=Delicacies' },
 ];
 
 export function Categories() {
   return (
-    <section className="sticky top-20 md:top-24 z-40 bg-white/95 backdrop-blur-md border-b py-6 overflow-hidden">
-      <div className="container mx-auto">
-        <div className="flex gap-6 md:gap-12 overflow-x-auto no-scrollbar px-4 pb-2">
+    <section className="bg-brand-dark py-20 border-y border-white/5">
+      <div className="container mx-auto px-6 text-center space-y-12">
+        <div className="space-y-2">
+          <p className="text-primary font-black text-[10px] uppercase tracking-[0.4em]">Shop By Category</p>
+          <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">What are you looking for?</h2>
+          <p className="text-white/40 text-[13px] font-medium">Choose from our wide range of fresh and quality products.</p>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16">
           {CATEGORIES.map((cat) => (
-            <Link key={cat.id} href={cat.href} className="flex flex-col items-center gap-2 shrink-0 group">
-              <div className={cn(
-                "w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all group-hover:scale-110 group-active:scale-90 shadow-md",
-                cat.color
-              )}>
-                <cat.icon className="w-6 h-6 md:w-7 h-7" />
+            <Link key={cat.name} href={cat.href} className="group flex flex-col items-center gap-4">
+              <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-primary transition-all duration-500 shadow-2xl group-hover:scale-110">
+                <Image src={cat.image} alt={cat.name} fill className="object-cover" />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
               </div>
-              <span className="text-[9px] md:text-[11px] font-black uppercase tracking-tighter text-black">
+              <span className="text-[11px] font-black uppercase text-white/60 group-hover:text-white tracking-widest transition-colors">
                 {cat.name}
               </span>
             </Link>
