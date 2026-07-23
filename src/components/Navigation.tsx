@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from "next/link";
@@ -24,15 +23,15 @@ export function Navigation() {
   const { user } = useUser();
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b px-4 md:px-8 h-12 md:h-16 flex items-center justify-between shadow-sm">
+    <nav className="sticky top-0 z-50 w-full bg-white border-b px-4 md:px-8 h-16 md:h-20 flex items-center justify-between shadow-sm">
       <div className="flex items-center gap-4 md:gap-8 shrink-0">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative h-6 md:h-8 w-auto">
+          <div className="relative h-10 md:h-14 w-auto">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West" 
-              width={100}
-              height={32}
+              width={160}
+              height={56}
               className="object-contain h-full w-auto"
               priority
             />

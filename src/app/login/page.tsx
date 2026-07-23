@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Suspense, useState } from "react";
@@ -89,7 +88,7 @@ function LoginForm() {
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-lg space-y-6">
         <div className="flex flex-col items-center gap-4 text-center">
-          <div className="relative w-16 h-16 bg-white rounded-2xl shadow-lg overflow-hidden border p-2">
+          <div className="relative w-24 h-24 bg-white rounded-3xl shadow-xl overflow-hidden border p-3">
             <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Logo" fill className="object-contain p-2" />
           </div>
           <div>
