@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -63,5 +64,12 @@
 
   .hover-heartbeat:hover {
     animation: heartbeat 0.8s ease-in-out infinite;
+  }
+}
+
+/* Ensure mobile content doesn't get cut off by bottom nav */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 5rem; /* Space for the 16px height + safe area */
   }
 }

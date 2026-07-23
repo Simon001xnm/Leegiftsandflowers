@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { FirebaseClientProvider } from "@/firebase";
 import { CartProvider } from '@/context/CartContext';
 import { AppLayoutWrapper } from '@/components/AppLayoutWrapper';
+import { MobileBottomNav } from '@/components/MobileBottomNav';
 
 export const metadata: Metadata = {
   title: 'Steak West | Global Marketplace',
@@ -37,6 +38,7 @@ export default function RootLayout({
             <AppLayoutWrapper>
               {children}
             </AppLayoutWrapper>
+            <MobileBottomNav />
             <Toaster />
           </CartProvider>
         </FirebaseClientProvider>
