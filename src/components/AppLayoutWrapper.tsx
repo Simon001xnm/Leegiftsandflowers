@@ -4,17 +4,14 @@ import { usePathname } from 'next/navigation';
 import { Navigation } from './Navigation';
 import { SidebarNav } from './SidebarNav';
 import { cn } from '@/lib/utils';
-import { Suspense } from 'react';
 
 /**
  * RESILIENT LAYOUT WRAPPER
- * Optimized to prevent hydration stalls and white screens.
- * Uses strict non-blocking logic for preview environments.
+ * Simplified to prevent any possible hydration stalls or white screens.
  */
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   
-  // Resilient pathname checks
   const path = pathname || '';
   const isLogin = path.startsWith('/login');
   const isCheckout = path.startsWith('/checkout');
@@ -27,9 +24,7 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col min-h-screen">
       {!isMinimal && <Navigation />}
       <div className="flex flex-grow relative">
-        <Suspense fallback={null}>
-          {!hideSidebar && <SidebarNav />}
-        </Suspense>
+        {!hideSidebar && <SidebarNav />}
         <main className={cn(
           "flex-grow transition-all duration-300",
           (!hideSidebar) ? "lg:ml-64" : "ml-0"

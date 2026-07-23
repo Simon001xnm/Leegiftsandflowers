@@ -6,8 +6,7 @@ import { FirebaseProvider } from './provider';
 
 /**
  * ULTRA-RESILIENT PROVIDER - NEVER BLOCKS RENDERING.
- * Ensures that the application shell is painted immediately.
- * Background services sync after initial UI paint.
+ * Removed all conditional returns to prevent Next.js 15 hydration stalls.
  */
 export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [instances, setInstances] = useState<any>(null);
@@ -18,15 +17,15 @@ export const FirebaseClientProvider: React.FC<{ children: React.ReactNode }> = (
         const inst = initializeFirebase();
         setInstances(inst);
       } catch (e) {
-        console.warn("Firebase initialization deferred for stability");
+        console.warn("Firebase initialization deferred");
       }
     }
   }, []);
 
-  // Root shell renders immediately with or without Firebase instances
-  // If instances aren't ready, we provide a shell that prevents the white screen.
+  // We wrap children in a fragment if instances aren't ready,
+  // ensuring the page content ALWAYS renders immediately.
   if (!instances) {
-    return <div id="steak-west-shell" className="min-h-screen bg-white">{children}</div>;
+    return <>{children}</>;
   }
 
   return (
