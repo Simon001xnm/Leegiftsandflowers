@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -214,7 +213,9 @@ export default function App() {
       {/* FOOTER MINI */}
       <footer className="bg-black py-8 border-t border-white/5">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-           <p className="text-[11px] font-medium text-white/30 tracking-wide">© 2026 Steak West Network</p>
+           <p className="text-[11px] font-medium text-white/30 tracking-wide">
+             © 2026 Steak West Butchery | <span className="italic">Supa yeah nyama</span>
+           </p>
            <div className="flex gap-8">
              <Link href="/privacy" className="text-[11px] font-medium text-white/50 hover:text-white">Privacy</Link>
              <Link href="/terms" className="text-[11px] font-medium text-white/50 hover:text-white">Terms</Link>

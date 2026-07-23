@@ -46,10 +46,12 @@ export function Footer() {
 
         {/* Legal Minimal */}
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] text-white/20 font-black uppercase tracking-[0.4em]">
-          <p>© 2026 STEAK WEST NETWORK. ALL NODES SECURED.</p>
+          <p>
+            © 2026 Steak West Butchery | <span className="italic">Supa yeah nyama</span>
+          </p>
           <div className="flex gap-8">
-            <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           </div>
         </div>
       </div>
