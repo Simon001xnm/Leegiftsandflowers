@@ -23,15 +23,15 @@ export function Navigation() {
   const { user } = useUser();
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b px-4 md:px-8 h-16 md:h-20 flex items-center justify-between shadow-sm">
-      <div className="flex items-center gap-4 md:gap-8 shrink-0">
+    <nav className="sticky top-0 z-50 w-full bg-white border-b px-4 md:px-8 h-20 md:h-24 flex items-center justify-between shadow-sm">
+      <div className="flex items-center gap-6 md:gap-10 shrink-0">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative h-10 md:h-14 w-auto">
+          <div className="relative h-14 md:h-20 w-auto transition-transform hover:scale-105 active:scale-95 duration-300">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West" 
-              width={160}
-              height={56}
+              width={280}
+              height={80}
               className="object-contain h-full w-auto"
               priority
             />
@@ -39,41 +39,41 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Address Selector */}
-        <button className="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full hover:bg-gray-50 transition-colors border shadow-sm">
-          <MapPin className="w-4 h-4 text-primary" />
-          <span className="text-[12px] font-black uppercase tracking-tight">Silver Heights, Nairobi</span>
-          <ChevronDown className="w-3 h-3 text-gray-400" />
+        <button className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full hover:bg-gray-50 transition-all border shadow-sm active:scale-95">
+          <MapPin className="w-5 h-5 text-primary" />
+          <span className="text-[13px] font-black uppercase tracking-tight">Silver Heights, Nairobi</span>
+          <ChevronDown className="w-4 h-4 text-gray-400" />
         </button>
       </div>
 
       <div className="hidden lg:flex items-center gap-4 flex-grow max-w-2xl px-8">
-        <div className="flex items-center bg-gray-100 rounded-full p-0.5 border shrink-0">
-          <button onClick={() => setToggle('delivery')} className={cn("px-5 py-1 text-[10px] font-black uppercase transition-all rounded-full h-8 flex items-center", toggle === 'delivery' ? "bg-white shadow-sm text-black" : "text-gray-500 hover:text-black")}>Delivery</button>
-          <button onClick={() => setToggle('pickup')} className={cn("px-5 py-1 text-[10px] font-black uppercase transition-all rounded-full h-8 flex items-center", toggle === 'pickup' ? "bg-white shadow-sm text-black" : "text-gray-500 hover:text-black")}>Pickup</button>
+        <div className="flex items-center bg-gray-100 rounded-full p-1 border shrink-0">
+          <button onClick={() => setToggle('delivery')} className={cn("px-6 py-1.5 text-[11px] font-black uppercase transition-all rounded-full h-9 flex items-center", toggle === 'delivery' ? "bg-white shadow-md text-black" : "text-gray-500 hover:text-black")}>Delivery</button>
+          <button onClick={() => setToggle('pickup')} className={cn("px-6 py-1.5 text-[11px] font-black uppercase transition-all rounded-full h-9 flex items-center", toggle === 'pickup' ? "bg-white shadow-md text-black" : "text-gray-500 hover:text-black")}>Pickup</button>
         </div>
 
         <div className="flex-grow relative group">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <Input className="w-full bg-gray-50 border-none h-10 pl-10 text-[12px] font-bold rounded-full focus:bg-white focus:ring-2 focus:ring-black/5" placeholder="Sausages, T-Bone, Goat..." />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Input className="w-full bg-gray-50 border-none h-12 pl-12 text-[13px] font-bold rounded-full focus:bg-white focus:ring-4 focus:ring-black/5 transition-all" placeholder="Sausages, T-Bone, Goat..." />
         </div>
       </div>
 
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-3 shrink-0">
         <Link href={user ? "/profile" : "/login"}>
-          <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-2 font-black uppercase tracking-widest text-[10px] px-5 h-9 rounded-full bg-white border border-gray-200 hover:border-black transition-all">
-            {user ? <User className="w-4 h-4" /> : <LogIn className="w-4 h-4" />}
+          <Button variant="ghost" size="sm" className="hidden sm:flex items-center gap-2 font-black uppercase tracking-widest text-[11px] px-6 h-10 rounded-full bg-white border-2 border-gray-100 hover:border-black transition-all shadow-sm">
+            {user ? <User className="w-5 h-5" /> : <LogIn className="w-5 h-5" />}
             {user ? "Account" : "Sign In"}
           </Button>
-          <Button variant="ghost" size="icon" className="sm:hidden h-10 w-10 rounded-full">
-            {user ? <User className="w-5 h-5" /> : <LogIn className="w-5 h-5" />}
+          <Button variant="ghost" size="icon" className="sm:hidden h-12 w-12 rounded-full border border-gray-100">
+            {user ? <User className="w-6 h-6" /> : <LogIn className="w-6 h-6" />}
           </Button>
         </Link>
 
         <Link href="/checkout">
-          <Button variant="default" size="sm" className="relative bg-black text-white hover:bg-gray-800 h-9 px-5 rounded-full font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 shadow-lg">
-            <ShoppingCart className="w-4 h-4 mr-2" />
+          <Button variant="default" size="sm" className="relative bg-black text-white hover:bg-gray-800 h-10 px-6 rounded-full font-black uppercase tracking-widest text-[11px] transition-all active:scale-95 shadow-xl shadow-black/10">
+            <ShoppingCart className="w-5 h-5 mr-2" />
             <span className="hidden sm:inline">Basket ({itemCount})</span>
-            {itemCount > 0 && <span className="absolute -top-1 -right-1 bg-primary text-white w-4 h-4 rounded-full text-[8px] flex items-center justify-center border-2 border-white">{itemCount}</span>}
+            {itemCount > 0 && <span className="absolute -top-1.5 -right-1.5 bg-primary text-white w-5 h-5 rounded-full text-[9px] font-black flex items-center justify-center border-2 border-white">{itemCount}</span>}
           </Button>
         </Link>
       </div>

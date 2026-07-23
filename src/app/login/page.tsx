@@ -85,92 +85,92 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-lg space-y-6">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <div className="relative w-24 h-24 bg-white rounded-3xl shadow-xl overflow-hidden border p-3">
-            <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Logo" fill className="object-contain p-2" />
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-6">
+      <div className="w-full max-w-lg space-y-8">
+        <div className="flex flex-col items-center gap-6 text-center">
+          <div className="relative w-40 h-40 bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white p-4 transition-transform hover:scale-105 duration-500">
+            <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain p-2" />
           </div>
-          <div>
-            <h1 className="text-2xl font-black tracking-tighter">Steak West Central</h1>
-            <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-widest">Global Meat Distribution Network</p>
+          <div className="space-y-1">
+            <h1 className="text-3xl font-black tracking-tighter uppercase leading-none">Steak West Central</h1>
+            <p className="text-muted-foreground text-[11px] font-black uppercase tracking-[0.25em]">Global Meat Distribution Network</p>
           </div>
         </div>
 
-        <Card className="w-full border-none shadow-2xl rounded-[2.5rem] overflow-hidden bg-white">
-          <CardContent className="p-8">
-            <Tabs defaultValue="login" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-2 rounded-xl bg-gray-100 p-1 h-12">
-                <TabsTrigger value="login" className="rounded-lg font-bold uppercase text-[10px] data-[state=active]:bg-white">Login</TabsTrigger>
-                <TabsTrigger value="signup" className="rounded-lg font-bold uppercase text-[10px] data-[state=active]:bg-white">Sign Up</TabsTrigger>
+        <Card className="w-full border-none shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] rounded-[3rem] overflow-hidden bg-white">
+          <CardContent className="p-10">
+            <Tabs defaultValue="login" className="space-y-8">
+              <TabsList className="grid w-full grid-cols-2 rounded-2xl bg-gray-50 p-1.5 h-14 border">
+                <TabsTrigger value="login" className="rounded-xl font-black uppercase text-[11px] tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-lg">Login</TabsTrigger>
+                <TabsTrigger value="signup" className="rounded-xl font-black uppercase text-[11px] tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-lg">Sign Up</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="login" className="space-y-4">
-                <form onSubmit={(e) => handleAuth(e, "login")} className="space-y-4">
-                  <div className="space-y-1">
-                    <Label className="font-black uppercase text-[9px] tracking-widest px-1">Email Address</Label>
-                    <Input name="email" type="email" placeholder="alex@steakwest.com" className="h-12 rounded-xl bg-gray-50 border-none font-bold text-sm" required />
+              <TabsContent value="login" className="space-y-6">
+                <form onSubmit={(e) => handleAuth(e, "login")} className="space-y-5">
+                  <div className="space-y-2">
+                    <Label className="font-black uppercase text-[10px] tracking-widest px-1 text-muted-foreground">Email Address</Label>
+                    <Input name="email" type="email" placeholder="alex@steakwest.com" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base focus:ring-4 focus:ring-primary/5 transition-all" required />
                   </div>
-                  <div className="space-y-1">
-                    <Label className="font-black uppercase text-[9px] tracking-widest px-1">Access Key</Label>
-                    <Input name="password" type="password" placeholder="••••••••" className="h-12 rounded-xl bg-gray-50 border-none font-bold text-sm" required />
+                  <div className="space-y-2">
+                    <Label className="font-black uppercase text-[10px] tracking-widest px-1 text-muted-foreground">Access Key</Label>
+                    <Input name="password" type="password" placeholder="••••••••" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base focus:ring-4 focus:ring-primary/5 transition-all" required />
                   </div>
-                  <Button type="submit" className="w-full h-12 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl shadow-primary/20 transition-all" disabled={loading}>
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Authorize Entry"}
+                  <Button type="submit" className="w-full h-14 rounded-2xl font-black uppercase tracking-widest text-sm shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" disabled={loading}>
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Authorize Entry"}
                   </Button>
                 </form>
               </TabsContent>
 
-              <TabsContent value="signup" className="space-y-6">
-                <div className="space-y-2">
-                  <Label className="text-[9px] uppercase font-black text-muted-foreground tracking-widest text-center block">Identify Your Entity Role</Label>
-                  <div className="grid grid-cols-3 gap-2">
+              <TabsContent value="signup" className="space-y-8">
+                <div className="space-y-3">
+                  <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-widest text-center block">Identify Your Entity Role</Label>
+                  <div className="grid grid-cols-3 gap-3">
                     {[
                       { id: "customer", label: "Customer", icon: User },
                       { id: "merchant", label: "Merchant", icon: Store },
                       { id: "rider", label: "Courier", icon: Bike },
                     ].map((r) => (
-                      <button key={r.id} type="button" className={cn("flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all gap-1", role === r.id ? "border-primary bg-primary/5 text-primary" : "border-gray-50")} onClick={() => setRole(r.id as AppRole)}>
-                        <r.icon className="w-4 h-4" />
-                        <span className="text-[8px] font-black uppercase">{r.label}</span>
+                      <button key={r.id} type="button" className={cn("flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all gap-2 group", role === r.id ? "border-primary bg-primary/5 text-primary" : "border-gray-50 hover:bg-gray-50")} onClick={() => setRole(r.id as AppRole)}>
+                        <r.icon className={cn("w-5 h-5 transition-transform group-hover:scale-110", role === r.id && "animate-pulse")} />
+                        <span className="text-[9px] font-black uppercase">{r.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <form onSubmit={(e) => handleAuth(e, "signup")} className="space-y-4">
-                  <Input name="name" placeholder="Full Identity" className="h-12 rounded-xl bg-gray-50 border-none font-bold text-sm" required />
-                  <Input name="email" type="email" placeholder="Email Address" className="h-12 rounded-xl bg-gray-50 border-none font-bold text-sm" required />
-                  <Input name="password" type="password" placeholder="Create Access Key" className="h-12 rounded-xl bg-gray-50 border-none font-bold text-sm" required />
-                  <Button type="submit" className="w-full h-12 rounded-xl font-black uppercase tracking-widest bg-black text-white text-xs shadow-xl" disabled={loading}>
-                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Register Entity"}
+                <form onSubmit={(e) => handleAuth(e, "signup")} className="space-y-5">
+                  <Input name="name" placeholder="Full Identity" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base" required />
+                  <Input name="email" type="email" placeholder="Email Address" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base" required />
+                  <Input name="password" type="password" placeholder="Create Access Key" className="h-14 rounded-2xl bg-gray-50 border-none font-bold text-base" required />
+                  <Button type="submit" className="w-full h-14 rounded-2xl font-black uppercase tracking-widest bg-black text-white text-sm shadow-2xl transition-all hover:bg-zinc-800" disabled={loading}>
+                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Register Entity"}
                   </Button>
                 </form>
               </TabsContent>
             </Tabs>
           </CardContent>
           
-          <CardFooter className="bg-gray-50/50 p-6 flex flex-col gap-4 border-t">
-            <div className="w-full space-y-3">
-              <p className="text-[9px] font-black uppercase text-center text-muted-foreground tracking-widest">Testing? Use Demo Bypass</p>
-              <div className="grid grid-cols-2 gap-2">
-                <Button variant="outline" className="rounded-xl border-dashed border-2 text-[9px] font-black uppercase h-10" onClick={() => handleDemoBypass('merchant')}>
+          <CardFooter className="bg-gray-50/80 p-8 flex flex-col gap-6 border-t">
+            <div className="w-full space-y-4">
+              <p className="text-[10px] font-black uppercase text-center text-muted-foreground tracking-widest">Testing? Use Demo Bypass</p>
+              <div className="grid grid-cols-2 gap-3">
+                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[10px] font-black uppercase h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('merchant')}>
                    Merchant Bypass
                 </Button>
-                <Button variant="outline" className="rounded-xl border-dashed border-2 text-[9px] font-black uppercase h-10" onClick={() => handleDemoBypass('rider')}>
+                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[10px] font-black uppercase h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('rider')}>
                    Courier Bypass
                 </Button>
               </div>
             </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground font-bold text-[8px] uppercase tracking-widest">
-              <ShieldCheck className="w-3 h-3 text-emerald-500" /> Secure SSL Identity Protection Active
+            <div className="flex items-center justify-center gap-3 text-muted-foreground font-black text-[9px] uppercase tracking-widest bg-white/50 py-2 px-4 rounded-full border border-gray-100">
+              <ShieldCheck className="w-4 h-4 text-emerald-500" /> Secure SSL Identity Protection Active
             </div>
           </CardFooter>
         </Card>
 
-        <div className="text-center">
-          <Link href="/" className="text-muted-foreground font-bold text-[10px] uppercase tracking-widest hover:text-primary transition-colors flex items-center justify-center gap-2">
-            Abort and Return to Marketplace <ArrowRight className="w-3 h-3" />
+        <div className="text-center pb-10">
+          <Link href="/" className="text-muted-foreground font-black text-[11px] uppercase tracking-[0.2em] hover:text-primary transition-all flex items-center justify-center gap-3 group">
+            <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" /> Abort and Return to Marketplace
           </Link>
         </div>
       </div>
@@ -180,7 +180,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center"><Loader2 className="w-6 h-6 animate-spin text-primary" /></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>}>
       <LoginForm />
     </Suspense>
   );
