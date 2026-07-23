@@ -2,34 +2,22 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-rider-1",
-      "description": "Professional delivery rider on a scooter",
-      "imageUrl": "/4eb2df709a9485b9045e3b464e1caef0.jpg",
-      "imageHint": "delivery rider"
+      "id": "coke-bottle",
+      "description": "Chilled soda bottle",
+      "imageUrl": "https://picsum.photos/seed/coke/600/600",
+      "imageHint": "soda bottle"
     },
     {
-      "id": "hero-rider-2",
-      "description": "Nairobi food delivery service",
-      "imageUrl": "/5aea2e51aa48601c2c82b82cbc7e5b20.jpg",
-      "imageHint": "food delivery"
+      "id": "juice-glass",
+      "description": "Fresh fruit juice in a glass",
+      "imageUrl": "https://picsum.photos/seed/juice/600/600",
+      "imageHint": "fruit juice"
     },
     {
-      "id": "hero-rider-4",
-      "description": "Fast food delivery personnel",
-      "imageUrl": "/From Klickpin.com- 1072067886316355785-pin-id-1072067886316355785-story-1.jpg",
-      "imageHint": "food courier"
-    },
-    {
-      "id": "burger-hero",
-      "description": "Delicious juicy burger with fries",
-      "imageUrl": "https://picsum.photos/seed/burger1/800/600",
-      "imageHint": "burger"
-    },
-    {
-      "id": "pizza-hero",
-      "description": "Hot pepperoni pizza being sliced",
-      "imageUrl": "https://picsum.photos/seed/pizza1/800/600",
-      "imageHint": "pizza"
+      "id": "water-bottle",
+      "description": "Clean mineral water",
+      "imageUrl": "https://picsum.photos/seed/water/600/600",
+      "imageHint": "mineral water"
     }
   ]
 }

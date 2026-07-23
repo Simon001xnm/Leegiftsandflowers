@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from "react";
@@ -7,6 +8,7 @@ import {
   MapPin,
   Tag,
   TrendingUp,
+  Zap,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +23,7 @@ const products = [
   { id: 'p2', name: "Beef choma 1kg", price: 1400, oldPrice: 1800, discount: "-12%", image: "/BEEF CHOMA.jpg" },
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, oldPrice: 1550, discount: "-10%", image: "/BEEF DRY FRY.jpg" },
   { id: 'p4', name: "Beef takeaway", price: 900, oldPrice: 1100, discount: "-18%", image: "/BEEF TAKEAWAY.jpg" },
-  { id: 'p5', name: "Chips", price: 200, oldPrice: 250, discount: "-20%", image: "/CHIPS.jpg" },
+  { id: 'p5', name: "Chips portion", price: 200, oldPrice: 250, discount: "-20%", image: "/CHIPS.jpg" },
   { id: 'p6', name: "Full chicken choma", price: 1000, oldPrice: 1200, discount: "-16%", image: "/FULL CHICKEN CHOMA.jpg" },
   { id: 'p7', name: "Full chicken", price: 700, oldPrice: 850, discount: "-17%", image: "/FULL CHICKEN.jpg" },
   { id: 'p8', name: "Full kichwa goat", price: 800, oldPrice: 1000, discount: "-20%", image: "/FULL KICHWA YA GOAT.jpg" },
@@ -50,7 +52,25 @@ const products = [
   { id: 'p29', name: "Dry fry family size", price: 1400, image: "/BEEF DRY FRY.jpg" },
   { id: 'p30', name: "Large chips pack", price: 400, image: "/CHIPS.jpg" },
   { id: 'p31', name: "Goat head elite", price: 800, image: "/FULL KICHWA YA GOAT.jpg" },
-  { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" }
+  { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" },
+
+  // DRINKS REFRESHMENT (16 items)
+  { id: 'd1', name: "Coca Cola 500ml", price: 80, image: "https://picsum.photos/seed/cola/600/600" },
+  { id: 'd2', name: "Fanta Orange 500ml", price: 80, image: "https://picsum.photos/seed/fanta/600/600" },
+  { id: 'd3', name: "Sprite 500ml", price: 80, image: "https://picsum.photos/seed/sprite/600/600" },
+  { id: 'd4', name: "Minute Maid 400ml", price: 120, image: "https://picsum.photos/seed/maid/600/600" },
+  { id: 'd5', name: "Del Monte Mango 1L", price: 220, image: "https://picsum.photos/seed/mango/600/600" },
+  { id: 'd6', name: "Afia Juice Mixed", price: 100, image: "https://picsum.photos/seed/afia/600/600" },
+  { id: 'd7', name: "Coke Zero 500ml", price: 90, image: "https://picsum.photos/seed/zero/600/600" },
+  { id: 'd8', name: "Keringet Water 500ml", price: 50, image: "https://picsum.photos/seed/water1/600/600" },
+  { id: 'd9', name: "Pick N Peel 1L", price: 200, image: "https://picsum.photos/seed/pick/600/600" },
+  { id: 'd10', name: "Quencher Juice 1L", price: 150, image: "https://picsum.photos/seed/quencher/600/600" },
+  { id: 'd11', name: "Soda water 500ml", price: 70, image: "https://picsum.photos/seed/sodawater/600/600" },
+  { id: 'd12', name: "Stoney ginger beer", price: 85, image: "https://picsum.photos/seed/stoney/600/600" },
+  { id: 'd13', name: "Tonic water 500ml", price: 100, image: "https://picsum.photos/seed/tonic/600/600" },
+  { id: 'd14', name: "Fresh passion juice", price: 150, image: "https://picsum.photos/seed/passion/600/600" },
+  { id: 'd15', name: "Fresh mango juice", price: 150, image: "https://picsum.photos/seed/mangofresh/600/600" },
+  { id: 'd16', name: "Keringet sparkling", price: 110, image: "https://picsum.photos/seed/sparkling/600/600" }
 ];
 
 export default function App() {
@@ -81,7 +101,6 @@ export default function App() {
             fill 
             className="object-cover opacity-60"
             priority
-            data-ai-hint="raw steak"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
         </div>
@@ -116,14 +135,14 @@ export default function App() {
             >
               <Image 
                 src="/BEEF CHOMA.jpg" 
-                alt="Today's Special" 
+                alt="Today's special" 
                 fill 
                 className="rounded-[3rem] object-cover shadow-2xl border-4 border-white/10"
               />
               <div className="absolute -bottom-6 -left-6 bg-white text-black p-6 rounded-[2rem] shadow-2xl border border-gray-100 animate-in zoom-in duration-700">
-                <p className="text-[10px] font-black uppercase text-red-600 tracking-widest mb-1">Today's Special</p>
-                <h3 className="font-bold text-lg mb-1">Premium BBQ Pack</h3>
-                <p className="font-black text-xl">KSh 2,499</p>
+                <p className="text-[10px] font-medium text-red-600 tracking-wider mb-1">Today's special</p>
+                <h3 className="font-medium text-lg mb-1">Premium BBQ pack</h3>
+                <p className="font-bold text-xl">KSh 2,499</p>
               </div>
             </motion.div>
           </div>
@@ -133,14 +152,16 @@ export default function App() {
       {/* RETAIL DISCOVERY GRID */}
       <main className="container mx-auto px-4">
         
-        {/* PROMOTIONS - 16 PRODUCTS */}
+        {/* PROMOTIONS */}
         <section className="py-12">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
-               <h2 className="text-2xl font-bold tracking-tight">Flash Deals</h2>
+               <h2 className="text-2xl font-medium tracking-tight">Flash deals</h2>
             </div>
-            <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">View All</Button>
+            <Link href="/offers">
+              <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">View all</Button>
+            </Link>
           </div>
           
           <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
@@ -150,18 +171,39 @@ export default function App() {
           </div>
         </section>
 
-        {/* ELITE SELECTION - 16 PRODUCTS */}
-        <section className="pb-24">
+        {/* ELITE SELECTION */}
+        <section className="pb-12">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
-               <h2 className="text-2xl font-bold tracking-tight">Elite Selection</h2>
+               <h2 className="text-2xl font-medium tracking-tight">Elite selection</h2>
             </div>
-            <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">Explore</Button>
+            <Link href="/shop">
+              <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">Explore</Button>
+            </Link>
           </div>
           
           <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(16, 32).map((p) => (
+              <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
+            ))}
+          </div>
+        </section>
+
+        {/* DRINKS REFRESHMENT */}
+        <section className="pb-24">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
+            <div className="flex items-center gap-3">
+               <Zap className="w-5 h-5 text-red-600" />
+               <h2 className="text-2xl font-medium tracking-tight">Drinks refreshment</h2>
+            </div>
+            <Link href="/shop">
+              <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">View drinks</Button>
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+            {products.slice(32, 48).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
