@@ -19,6 +19,7 @@ export default function MerchantDashboard() {
   const { toast } = useToast();
   const supabase = createClient();
   const [products, setProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [addingProduct, setAddingProduct] = useState(false);
   const [posCart, setPosCart] = useState<any[]>([]);
@@ -27,7 +28,7 @@ export default function MerchantDashboard() {
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
-    category: "Raw Meat",
+    category_id: "",
     description: "",
     image_url: ""
   });
@@ -35,11 +36,29 @@ export default function MerchantDashboard() {
   async function loadData() {
     setLoading(true);
     try {
-      const { data, error } = await supabase
+      // Fetch Products with Category Name joined
+      const { data: productsData, error: productsError } = await supabase
         .from('products')
-        .select('*')
+        .select(`
+          *,
+          categories (name)
+        `)
         .order('created_at', { ascending: false });
-      if (!error && data) setProducts(data);
+      
+      if (!productsError && productsData) setProducts(productsData);
+
+      // Fetch Categories for the dropdown
+      const { data: categoriesData, error: categoriesError } = await supabase
+        .from('categories')
+        .select('*')
+        .order('name', { ascending: true });
+      
+      if (!categoriesError && categoriesData) {
+        setCategories(categoriesData);
+        if (categoriesData.length > 0 && !newProduct.category_id) {
+          setNewProduct(prev => ({ ...prev, category_id: categoriesData[0].id }));
+        }
+      }
     } catch (e) {
       console.warn("Load deferred");
     } finally {
@@ -72,15 +91,14 @@ export default function MerchantDashboard() {
     }
     setAddingProduct(true);
     
-    // We try to insert into 'category' but fallback if the column is missing
     const productPayload = {
       name: newProduct.name,
       price: parseFloat(newProduct.price),
       description: newProduct.description,
       image_url: newProduct.image_url,
       is_in_stock: true,
-      created_at: new Date().toISOString(),
-      category: newProduct.category // Ensure your Supabase table has this exact column
+      category_id: newProduct.category_id,
+      created_at: new Date().toISOString()
     };
 
     const { error } = await supabase.from('products').insert([productPayload]);
@@ -89,7 +107,13 @@ export default function MerchantDashboard() {
       toast({ variant: "destructive", title: "Error", description: error.message });
     } else {
       toast({ title: "Success", description: "Product added to shop." });
-      setNewProduct({ name: "", price: "", category: "Raw Meat", description: "", image_url: "" });
+      setNewProduct({ 
+        name: "", 
+        price: "", 
+        category_id: categories.length > 0 ? categories[0].id : "", 
+        description: "", 
+        image_url: "" 
+      });
       setImagePreview(null);
       loadData();
     }
@@ -125,8 +149,8 @@ export default function MerchantDashboard() {
     <div className="min-h-screen bg-white p-4 md:p-8 space-y-8">
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-tighter">Management</h1>
-          <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Business Control Panel</p>
+          <h1 className="text-3xl font-black uppercase tracking-tighter">Manager</h1>
+          <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Store Control Center</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" className="rounded-none border-2 border-black font-black uppercase text-[10px] h-10 px-6" onClick={loadData}>
@@ -234,7 +258,9 @@ export default function MerchantDashboard() {
                     </td>
                     <td className="px-6 py-4 font-black text-[13px]">KES {p.price}</td>
                     <td className="px-6 py-4">
-                       <Badge className="bg-black text-white text-[8px] font-black uppercase rounded-none">{p.category}</Badge>
+                       <Badge className="bg-black text-white text-[8px] font-black uppercase rounded-none">
+                         {p.categories?.name || "Uncategorized"}
+                       </Badge>
                     </td>
                     <td className="px-6 py-4 text-right">
                        <div className="flex items-center justify-end gap-3">
@@ -311,14 +337,16 @@ export default function MerchantDashboard() {
                   <Label className="text-[10px] font-black uppercase tracking-widest">Category</Label>
                   <select 
                     className="w-full h-12 border-2 border-black rounded-none px-4 font-bold text-[12px] uppercase bg-white outline-none focus:bg-gray-50"
-                    value={newProduct.category}
-                    onChange={e => setNewProduct({...newProduct, category: e.target.value})}
+                    value={newProduct.category_id}
+                    onChange={e => setNewProduct({...newProduct, category_id: e.target.value})}
+                    required
                   >
-                    <option value="Raw Meat">Raw Meat</option>
-                    <option value="Nyama Choma">Nyama Choma</option>
-                    <option value="Cooked">Cooked</option>
-                    <option value="Delicacies">Delicacies</option>
-                    <option value="Grocery">Grocery</option>
+                    <option value="" disabled>Select Category</option>
+                    {categories.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -337,7 +365,7 @@ export default function MerchantDashboard() {
                   className="w-full h-16 bg-black text-white font-black uppercase text-[14px] rounded-none hover:bg-primary transition-all"
                   disabled={addingProduct}
                 >
-                  {addingProduct ? <Loader2 className="w-6 h-6 animate-spin" /> : "Save to Shop"}
+                  {addingProduct ? <Loader2 className="w-6 h-6 animate-spin" /> : "SAVE TO SHOP"}
                 </Button>
               </form>
             </CardContent>
