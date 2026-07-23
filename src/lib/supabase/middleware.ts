@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 /**
  * ULTRA-STABLE MIDDLEWARE
- * Removed all redirect logic to prevent infinite white-screen loops.
+ * Stripped of all redirect logic to prevent infinite circular white-screen loops.
  */
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -32,7 +32,8 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // Just refresh the user - no redirects here to prevent loops
+  // Critical: We only refresh the session. 
+  // We DO NOT perform redirects here as it breaks the prototype preview.
   await supabase.auth.getUser()
 
   return supabaseResponse

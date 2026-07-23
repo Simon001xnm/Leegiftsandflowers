@@ -6,8 +6,12 @@ import { FirebaseClientProvider } from "@/firebase";
 import { CartProvider } from '@/context/CartContext';
 import { AppLayoutWrapper } from '@/components/AppLayoutWrapper';
 
+/**
+ * NEXT.JS 15 METADATA & VIEWPORT LOCK
+ * Separating these exports is critical to resolve persistent blank white screen issues.
+ */
 export const metadata: Metadata = {
-  title: 'Steak West | Business Terminal',
+  title: 'Steak West | Global Marketplace',
   description: 'Premium Meat Distribution Network.',
 };
 
@@ -19,11 +23,6 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-/**
- * ROOT LAYOUT - NON-BLOCKING ARCHITECTURE
- * Ensures white screen issues are permanently resolved by making
- * all providers resilient and asynchronous.
- */
 export default function RootLayout({
   children,
 }: Readonly<{
