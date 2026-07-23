@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * UNIFIED STICKY NAVIGATION
- * Refined with Sentence Case typography and non-bold elements.
+ * Updated with White Background for logo clarity.
  */
 export function Navigation() {
   const { itemCount } = useCart();
@@ -28,10 +28,10 @@ export function Navigation() {
 
   return (
     <nav className={cn(
-      "fixed top-0 z-50 w-full transition-all duration-500 h-20 flex items-center justify-between px-4 md:px-12",
+      "fixed top-0 z-50 w-full transition-all duration-500 h-20 flex items-center justify-between px-4 md:px-12 border-b",
       isScrolled 
-        ? "bg-black/95 backdrop-blur-xl border-b border-white/5 shadow-2xl" 
-        : "bg-transparent"
+        ? "bg-white/95 backdrop-blur-xl border-gray-100 shadow-lg" 
+        : "bg-white border-transparent"
     )}>
       <div className="flex items-center gap-12">
         <Link href="/" className="flex items-center gap-2 group">
@@ -51,7 +51,7 @@ export function Navigation() {
             <Link 
               key={item} 
               href={`/${item.toLowerCase().replace(' ', '-')}`}
-              className="text-[13px] font-medium text-white/50 hover:text-white transition-all hover:translate-y-[-1px]"
+              className="text-[13px] font-medium text-gray-500 hover:text-black transition-all hover:translate-y-[-1px]"
             >
               {item}
             </Link>
@@ -60,10 +60,10 @@ export function Navigation() {
       </div>
 
       <div className="flex items-center gap-4 md:gap-6">
-        <Link href="/checkout" className="relative p-2 text-white hover:text-red-600 transition-colors group">
+        <Link href="/checkout" className="relative p-2 text-black hover:text-red-600 transition-colors group">
           <ShoppingCart className="w-6 h-6 group-hover:scale-110 transition-transform" />
           {itemCount > 0 && (
-            <span className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-black animate-in zoom-in">
+            <span className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white animate-in zoom-in">
               {itemCount}
             </span>
           )}
