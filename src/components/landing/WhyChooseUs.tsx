@@ -1,61 +1,72 @@
+
 'use client';
 
 import React from "react";
-import { ShieldCheck, Truck, Utensils, Heart, ArrowRight } from "lucide-react";
+import { ShieldCheck, Truck, Utensils, Heart, ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const FEATURES = [
   { 
-    icon: <Heart className="w-6 h-6 text-primary" />, 
+    icon: <Heart className="w-8 h-8 text-primary" />, 
     title: "Premium Quality", 
     desc: "We source the best meat from trusted suppliers." 
   },
   { 
-    icon: <ShieldCheck className="w-6 h-6 text-primary" />, 
+    icon: <ShieldCheck className="w-8 h-8 text-primary" />, 
     title: "Hygienic & Safe", 
-    desc: "All our meat is hygienically processed and packed." 
+    desc: "Professionally processed and packed." 
   },
   { 
-    icon: <Truck className="w-6 h-6 text-primary" />, 
+    icon: <Truck className="w-8 h-8 text-primary" />, 
     title: "Fast Delivery", 
-    desc: "We deliver to your doorstep on time, every time." 
+    desc: "Delivered fresh to your doorstep." 
   },
   { 
-    icon: <Utensils className="w-6 h-6 text-primary" />, 
+    icon: <Utensils className="w-8 h-8 text-primary" />, 
     title: "Affordable Prices", 
-    desc: "Top quality meat at the best market prices." 
+    desc: "Quality meat at competitive prices." 
   },
 ];
 
 export function WhyChooseUs() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <p className="text-primary font-black text-[12px] uppercase tracking-[0.4em]">Why Choose Us</p>
-              <h2 className="text-4xl md:text-6xl font-black text-black leading-tight uppercase tracking-tighter">
-                We deliver more <br /> than just meat.
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-10">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-3 bg-primary/10 px-5 py-2 rounded-full">
+                <Star className="w-4 h-4 text-primary fill-primary" />
+                <span className="text-[11px] font-black text-primary uppercase tracking-[0.3em]">Quality Assured</span>
+              </div>
+              <h2 className="text-5xl md:text-7xl font-black text-black leading-[0.95] uppercase tracking-tighter">
+                WE DELIVER MORE <br /> <span className="text-primary">THAN JUST MEAT.</span>
               </h2>
-              <p className="text-muted-foreground text-[16px] leading-relaxed max-w-lg">
+              <p className="text-zinc-500 text-[16px] md:text-[18px] leading-relaxed max-w-xl font-medium">
                 At Steak West Butchery, we are committed to quality, hygiene and excellent customer service. Our farm-to-table process ensures you get the freshest cuts every single time.
               </p>
             </div>
-            <Button className="h-14 px-10 rounded-full bg-primary hover:bg-primary/90 text-white font-black uppercase text-[12px] tracking-widest gap-3 shadow-xl shadow-primary/20">
-              Learn More <ArrowRight className="w-5 h-5" />
-            </Button>
+            <div className="flex flex-wrap gap-4">
+              <Button className="h-16 px-12 rounded-2xl bg-black hover:bg-zinc-900 text-white font-black uppercase text-[12px] tracking-widest gap-3 shadow-2xl transition-all hover:scale-105 active:scale-95">
+                Learn More <ArrowRight className="w-5 h-5" />
+              </Button>
+              <Button variant="outline" className="h-16 px-12 rounded-2xl border-2 border-black font-black uppercase text-[12px] tracking-widest hover:bg-zinc-50 transition-all">
+                Our Process
+              </Button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 md:gap-8">
-            {FEATURES.map((feature) => (
-              <div key={feature.title} className="p-8 rounded-[2.5rem] bg-gray-50 border border-gray-100 space-y-4 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                  {feature.icon}
+          <div className="grid grid-cols-2 gap-6 md:gap-10">
+            {FEATURES.map((feature, i) => (
+              <div key={feature.title} className="p-10 rounded-[3rem] bg-zinc-50 border border-zinc-100 space-y-6 hover:shadow-2xl hover:bg-white transition-all duration-700 hover:-translate-y-2 group">
+                <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center shadow-xl group-hover:bg-primary transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                   {React.cloneElement(feature.icon as React.ReactElement, {
+                     className: "w-8 h-8 text-primary group-hover:text-white transition-colors"
+                   })}
                 </div>
-                <div className="space-y-1">
-                  <h4 className="text-[16px] font-black uppercase tracking-tighter">{feature.title}</h4>
-                  <p className="text-[12px] font-medium text-muted-foreground leading-relaxed uppercase">{feature.desc}</p>
+                <div className="space-y-2">
+                  <h4 className="text-[18px] font-black uppercase tracking-tighter text-black">{feature.title}</h4>
+                  <p className="text-[13px] font-bold text-zinc-400 leading-relaxed uppercase tracking-wider">{feature.desc}</p>
                 </div>
               </div>
             ))}
