@@ -86,7 +86,6 @@ function LoginForm() {
           </div>
           <div className="space-y-1">
             <h1 className="text-3xl font-black tracking-tighter uppercase leading-none">Steak West Butchery</h1>
-            <p className="text-muted-foreground text-[11px] font-black uppercase tracking-[0.25em]">Global meat distribution network</p>
           </div>
         </div>
 
