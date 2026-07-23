@@ -1,17 +1,15 @@
 import { createBrowserClient } from '@supabase/ssr'
 
 /**
- * Resilient Supabase client.
- * Prevents app crashes if environment variables are not yet injected.
+ * ULTRA-RESILIENT Supabase client.
+ * Prevents white-screen crashes if environment variables are not yet fully injected.
  */
 export function createClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   
-  // If keys are missing, we use a placeholder to avoid total initialization failure
-  // which results in a white screen.
+  // Use non-crashing fallbacks for development/initial-build stability
   if (!supabaseUrl || !supabaseKey) {
-    console.warn("Supabase keys missing. Using local-only mode.");
     return createBrowserClient(
       'https://placeholder-project.supabase.co', 
       'placeholder-key'

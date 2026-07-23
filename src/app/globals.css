@@ -60,14 +60,4 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  @keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.01); }
-    100% { transform: scale(1); }
-  }
-
-  .hover-heartbeat:hover {
-    animation: heartbeat 0.8s ease-in-out infinite;
-  }
 }

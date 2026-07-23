@@ -20,7 +20,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-white">
       <main className="flex-grow">
         {/* Compact Hero */}
-        <div className="relative h-[220px] md:h-[400px] w-full overflow-hidden bg-black flex items-center">
+        <div className="relative h-[240px] md:h-[450px] w-full overflow-hidden bg-black flex items-center">
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
           <div className="relative z-20 w-full px-6 container mx-auto">
             <div className="flex flex-col space-y-2 max-w-2xl">
@@ -45,23 +45,24 @@ export default function Home() {
             </div>
           </div>
           <Image 
-            src="https://picsum.photos/seed/steak1/1200/800" 
+            src="https://picsum.photos/seed/steak88/1200/800" 
             alt="Hero" 
             fill 
             className="object-cover opacity-70"
             priority
             sizes="100vw"
+            data-ai-hint="premium meat"
           />
         </div>
 
         {/* ULTRA-HIGH DENSITY 4-COLUMN MOBILE GRID */}
         <section className="py-10 bg-white px-3 md:px-12 container mx-auto">
-          <div className="flex items-end justify-between mb-6 px-1">
+          <div className="flex items-end justify-between mb-6 px-1 border-b-2 border-black pb-2">
             <div className="space-y-0.5">
-              <h2 className="text-[12px] md:text-2xl font-black text-black leading-tight uppercase tracking-tighter">PREMIUM SELECTIONS</h2>
+              <h2 className="text-[14px] md:text-2xl font-black text-black leading-tight uppercase tracking-tighter">PREMIUM SELECTIONS</h2>
               <p className="text-gray-400 font-bold text-[8px] md:text-[11px] uppercase tracking-[0.2em]">GLOBAL DISPATCH READY</p>
             </div>
-            <Link href="/restaurants" className="text-[9px] md:text-[12px] font-black uppercase tracking-widest hover:text-primary transition-colors border-b-2 border-black pb-1">
+            <Link href="/restaurants" className="text-[9px] md:text-[12px] font-black uppercase tracking-widest hover:text-primary transition-colors">
               SEE ALL
             </Link>
           </div>
@@ -94,7 +95,7 @@ export default function Home() {
                         addToCart(item);
                         toast({ title: "READY", description: `${item.name} added.` });
                       }}
-                      className="rounded-full bg-black text-white px-2.5 py-0.5 font-black text-[7px] md:text-[10px] uppercase tracking-widest hover:bg-primary transition-all active:scale-90 shadow-sm"
+                      className="rounded-full bg-black text-white px-2 py-0.5 font-black text-[7px] md:text-[10px] uppercase tracking-widest hover:bg-primary transition-all active:scale-90 shadow-sm"
                     >
                       ADD
                     </button>

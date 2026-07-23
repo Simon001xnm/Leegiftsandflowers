@@ -1,11 +1,9 @@
-'use client';
-
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 /**
- * ULTRA-STABLE MIDDLEWARE
- * Removed all redirect logic to prevent infinite white-screen loops.
+ * STABLE MIDDLEWARE
+ * Removed all client-side directives and redirect logic to prevent white-screen loops.
  */
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -33,7 +31,7 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // Refresh session only, never redirect here
+  // Refresh session token silently
   await supabase.auth.getUser()
 
   return supabaseResponse
