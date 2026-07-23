@@ -20,8 +20,8 @@ export function Footer() {
                 className="object-contain" 
               />
             </div>
-            <p className="text-[10px] text-white/40 font-black uppercase tracking-[0.3em]">
-              Premium Meat Distribution Network
+            <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest">
+              Premium meat distribution network
             </p>
           </div>
 
@@ -45,9 +45,9 @@ export function Footer() {
         </div>
 
         {/* Legal Minimal */}
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] text-white/20 font-black uppercase tracking-[0.4em]">
+        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/30 font-medium">
           <p>
-            © 2026 Steak West Butchery | <span className="italic">Supa yeah nyama</span>
+            © 2026 Steak West Butchery | <span className="italic">Supa ya nyama</span>
           </p>
           <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>

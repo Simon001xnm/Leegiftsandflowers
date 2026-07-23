@@ -115,7 +115,7 @@ export default function App() {
                 />
               </div>
               <Button className="w-full sm:w-auto h-14 px-10 bg-red-600 hover:bg-red-700 text-white rounded-[1.5rem] font-bold text-[13px] shadow-xl transition-all active:scale-95">
-                Order Now
+                Order now
               </Button>
             </div>
 
@@ -214,7 +214,7 @@ export default function App() {
       <footer className="bg-black py-8 border-t border-white/5">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
            <p className="text-[11px] font-medium text-white/30 tracking-wide">
-             © 2026 Steak West Butchery | <span className="italic">Supa yeah nyama</span>
+             © 2026 Steak West Butchery | <span className="italic">Supa ya nyama</span>
            </p>
            <div className="flex gap-8">
              <Link href="/privacy" className="text-[11px] font-medium text-white/50 hover:text-white">Privacy</Link>
@@ -259,7 +259,6 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
           alt={product.name} 
           fill 
           className="object-cover transition-transform duration-700 group-hover:scale-110" 
-          data-ai-hint="product image"
         />
 
         {product.discount && (
