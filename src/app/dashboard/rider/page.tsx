@@ -38,31 +38,32 @@ export default function RiderDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col pt-24">
       <main className="container mx-auto px-4 py-12 flex-grow max-w-5xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
           <div>
-            <h1 className="text-4xl font-bold font-headline text-primary mb-2">Delivery Desk</h1>
-            <p className="text-muted-foreground">{isOnline ? 'Online and ready' : 'Currently Offline'}.</p>
+            <h1 className="text-4xl font-medium font-headline text-primary mb-2 tracking-tight">Delivery desk</h1>
+            <p className="text-muted-foreground font-medium">{isOnline ? 'Online and ready' : 'Currently offline'}.</p>
           </div>
-          <Card className="p-4 flex items-center gap-4 bg-muted/30 rounded-2xl border-none">
+          <Card className="p-4 flex items-center gap-4 bg-white shadow-sm border-none rounded-2xl">
             <div className="flex items-center gap-2">
               <Power className={cn("w-4 h-4", isOnline ? "text-emerald-500" : "text-muted-foreground")} />
-              <Label htmlFor="online-status" className="font-bold text-sm">Accepting Orders</Label>
+              <Label htmlFor="online-status" className="font-bold text-sm">Accepting orders</Label>
             </div>
             <Switch 
               id="online-status" 
               checked={isOnline} 
               onCheckedChange={setIsOnline} 
+              className="data-[state=checked]:bg-emerald-500"
             />
           </Card>
         </div>
 
         <div className="grid sm:grid-cols-3 gap-6 mb-12">
           {stats.map((stat) => (
-            <Card key={stat.label} className="border-none shadow-sm rounded-3xl">
+            <Card key={stat.label} className="border-none shadow-sm rounded-3xl bg-white">
               <CardContent className="p-6">
-                <p className="text-sm text-muted-foreground font-medium mb-2">{stat.label}</p>
+                <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-3">{stat.label}</p>
                 <div className="flex items-center justify-between">
                   <h3 className="text-2xl font-bold text-primary">{stat.value}</h3>
                   <stat.icon className={cn("w-6 h-6", stat.color)} />
@@ -74,18 +75,18 @@ export default function RiderDashboard() {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <h2 className="text-2xl font-bold font-headline text-primary">Current Trip</h2>
+            <h2 className="text-2xl font-medium font-headline text-primary tracking-tight">Current trip</h2>
             {activeTask ? (
-              <Card className="border-2 border-primary/20 shadow-xl overflow-hidden rounded-[2.5rem]">
+              <Card className="border-none shadow-2xl overflow-hidden rounded-[2.5rem] bg-white">
                 <div className="bg-primary p-6 text-primary-foreground flex justify-between items-center">
                   <div className="flex items-center gap-3">
                     <Bike className="w-8 h-8" />
                     <div>
-                      <p className="text-[10px] uppercase font-bold opacity-70">Order Ref</p>
+                      <p className="text-[10px] uppercase font-bold opacity-70">Order ref</p>
                       <h3 className="text-xl font-bold">{activeTask.id}</h3>
                     </div>
                   </div>
-                  <Badge className="bg-white/20 text-white border-none px-4 py-1">In Progress</Badge>
+                  <Badge className="bg-white/20 text-white border-none px-4 py-1 font-bold">In progress</Badge>
                 </div>
                 <CardContent className="p-8 space-y-8">
                   <div className="space-y-6">
@@ -94,8 +95,8 @@ export default function RiderDashboard() {
                         <div className="w-3 h-3 rounded-full bg-primary" />
                       </div>
                       <div className="space-y-1">
-                        <p className="text-xs font-bold text-muted-foreground uppercase">Pickup</p>
-                        <p className="font-bold text-lg">{activeTask.restaurantName}</p>
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Pickup</p>
+                        <p className="font-medium text-lg tracking-tight">{activeTask.restaurantName}</p>
                       </div>
                     </div>
                     
@@ -104,9 +105,9 @@ export default function RiderDashboard() {
                         <MapPin className="w-5 h-5 text-emerald-600" />
                       </div>
                       <div className="space-y-1">
-                        <p className="text-xs font-bold text-muted-foreground uppercase">Delivery</p>
-                        <p className="font-bold text-lg">{activeTask.customerName}</p>
-                        <p className="text-sm text-muted-foreground">{activeTask.deliveryAddress}</p>
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Delivery</p>
+                        <p className="font-medium text-lg tracking-tight">{activeTask.customerName}</p>
+                        <p className="text-sm text-muted-foreground font-medium">{activeTask.deliveryAddress}</p>
                       </div>
                     </div>
                   </div>
@@ -114,22 +115,22 @@ export default function RiderDashboard() {
                   <div className="flex gap-3">
                     <Button 
                       onClick={handleOpenNavigation}
-                      className="flex-grow h-14 rounded-xl gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
+                      className="flex-grow h-14 rounded-2xl gap-2 shadow-xl shadow-primary/10 hover:scale-[1.02] transition-all font-bold"
                     >
                       <NavIcon className="w-5 h-5" /> Navigation
                     </Button>
-                    <Button variant="secondary" size="icon" className="h-14 w-14 rounded-xl">
+                    <Button variant="secondary" size="icon" className="h-14 w-14 rounded-2xl bg-gray-100 hover:bg-gray-200">
                       <Phone className="w-5 h-5" />
                     </Button>
                   </div>
                   
-                  <Button variant="outline" className="w-full h-14 rounded-xl text-emerald-600 hover:bg-emerald-50 border-emerald-200 font-bold">
-                    Mark Delivered
+                  <Button variant="outline" className="w-full h-14 rounded-2xl text-emerald-600 hover:bg-emerald-50 border-emerald-100 font-bold">
+                    Mark delivered
                   </Button>
                 </CardContent>
               </Card>
             ) : (
-              <Card className="border-dashed border-2 py-20 flex flex-col items-center justify-center text-center rounded-[2.5rem]">
+              <Card className="border-dashed border-2 py-20 flex flex-col items-center justify-center text-center rounded-[2.5rem] bg-gray-50/50">
                 <Bike className="w-12 h-12 text-muted-foreground/30 mb-4" />
                 <p className="text-muted-foreground font-medium">No active trips</p>
               </Card>
@@ -137,25 +138,25 @@ export default function RiderDashboard() {
           </div>
 
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold font-headline text-primary">Recent History</h2>
-            <Card className="rounded-[2rem] overflow-hidden">
-              <CardContent className="p-4 space-y-4">
+            <h2 className="text-2xl font-medium font-headline text-primary tracking-tight">Recent history</h2>
+            <Card className="rounded-[2.5rem] overflow-hidden border-none shadow-sm bg-white">
+              <CardContent className="p-6 space-y-4">
                 {[1, 2, 3].map(i => (
-                  <div key={i} className="flex justify-between items-center py-3 border-b last:border-none">
+                  <div key={i} className="flex justify-between items-center py-3 border-b last:border-none border-gray-50">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
-                        <CircleCheck className="w-4 h-4" />
+                      <div className="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                        <CircleCheck className="w-5 h-5" />
                       </div>
                       <div>
                         <p className="text-sm font-bold">ORD-09{i}</p>
-                        <p className="text-[10px] text-muted-foreground">Today, 12:45 PM</p>
+                        <p className="text-[10px] font-medium text-muted-foreground uppercase">Today, 12:45 PM</p>
                       </div>
                     </div>
-                    <p className="text-sm font-bold text-primary">+KES 180</p>
+                    <p className="text-sm font-bold text-emerald-600">+KES 180</p>
                   </div>
                 ))}
-                <Button variant="ghost" className="w-full text-xs text-muted-foreground hover:bg-transparent hover:text-primary">
-                  View More
+                <Button variant="ghost" className="w-full text-xs font-bold text-muted-foreground hover:bg-transparent hover:text-primary pt-4 uppercase tracking-widest">
+                  View all logs
                 </Button>
               </CardContent>
             </Card>

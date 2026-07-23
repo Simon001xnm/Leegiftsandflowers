@@ -164,9 +164,9 @@ export default function MerchantDashboard() {
   );
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] flex flex-col">
-      {/* Dynamic Command Bar */}
-      <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b px-6 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-[#fcfcfc] flex flex-col pt-24">
+      {/* Dynamic Command Bar - Sticky below the global nav */}
+      <header className="sticky top-24 z-30 bg-white/80 backdrop-blur-md border-b px-6 py-4 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
             <LayoutGrid className="w-5 h-5" />
@@ -278,7 +278,7 @@ export default function MerchantDashboard() {
             </div>
 
             <div className="lg:col-span-4">
-              <Card className="rounded-[2.5rem] border shadow-[0_32px_64px_-12px_rgba(0,0,0,0.1)] sticky top-28 bg-white overflow-hidden">
+              <Card className="rounded-[2.5rem] border shadow-[0_32px_64px_-12px_rgba(0,0,0,0.1)] sticky top-[180px] bg-white overflow-hidden">
                 <CardHeader className="bg-gray-50/80 border-b px-8 py-6">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">
@@ -290,9 +290,9 @@ export default function MerchantDashboard() {
                   </div>
                 </CardHeader>
                 <CardContent className="p-8">
-                  <div className="space-y-6 min-h-[300px] max-h-[450px] overflow-auto pr-2 no-scrollbar">
+                  <div className="space-y-6 min-h-[200px] max-h-[350px] overflow-auto pr-2 no-scrollbar">
                     {posCart.length === 0 ? (
-                      <div className="text-center py-20 opacity-30 flex flex-col items-center">
+                      <div className="text-center py-10 opacity-30 flex flex-col items-center">
                         <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                           <Plus className="w-6 h-6" />
                         </div>
@@ -323,7 +323,7 @@ export default function MerchantDashboard() {
                     ))}
                   </div>
 
-                  <div className="mt-10 pt-8 border-t-2 border-dashed space-y-6">
+                  <div className="mt-6 pt-6 border-t-2 border-dashed space-y-6">
                     <div className="flex justify-between items-end">
                       <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Total</span>
                       <span className="text-4xl font-bold text-gray-900 tracking-tighter">KES {total.toLocaleString()}</span>
