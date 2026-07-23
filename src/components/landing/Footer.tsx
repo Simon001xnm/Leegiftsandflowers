@@ -12,7 +12,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Brand Identity */}
           <div className="space-y-4 text-center md:text-left">
-            <div className="relative h-12 w-48 mx-auto md:mx-0">
+            <div className="relative h-16 w-64 mx-auto md:mx-0">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                 alt="Steak West" 

@@ -28,14 +28,14 @@ export function Navigation() {
 
   return (
     <nav className={cn(
-      "fixed top-0 z-50 w-full transition-all duration-500 h-20 flex items-center justify-between px-4 md:px-12 border-b",
+      "fixed top-0 z-50 w-full transition-all duration-500 h-24 flex items-center justify-between px-4 md:px-12 border-b",
       isScrolled 
         ? "bg-white/95 backdrop-blur-xl border-gray-100 shadow-lg" 
         : "bg-white border-transparent"
     )}>
       <div className="flex items-center gap-12">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative h-12 w-48 md:h-14 md:w-60">
+          <div className="relative h-16 w-64 md:h-18 md:w-80">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West" 

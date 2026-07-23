@@ -62,7 +62,6 @@ function LoginForm() {
       }
       router.push(redirectPath);
     } catch (error: any) {
-      // Removed console.error to prevent Turbopack error overlay
       const isNetworkError = error.message === 'Failed to fetch' || error.message.includes('Keys Missing');
       const isInvalidCreds = error.message.includes('Invalid login credentials');
       
@@ -82,7 +81,7 @@ function LoginForm() {
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-lg space-y-8">
         <div className="flex flex-col items-center gap-6 text-center">
-          <div className="relative w-40 h-40 bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white p-4 transition-transform hover:scale-105 duration-500">
+          <div className="relative w-52 h-52 bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border-4 border-white p-4 transition-transform hover:scale-105 duration-500">
             <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain p-2" />
           </div>
           <div className="space-y-1">
