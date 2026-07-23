@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingCart, User, LogIn, Store, ShieldCheck } from "lucide-react";
+import { ShoppingCart, User, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/firebase/auth/use-user";
@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * UNIFIED STICKY NAVIGATION
- * Transitions from transparent to solid black/glass on scroll.
+ * Refined with Sentence Case typography and non-bold elements.
  */
 export function Navigation() {
   const { itemCount } = useCart();
@@ -51,7 +51,7 @@ export function Navigation() {
             <Link 
               key={item} 
               href={`/${item.toLowerCase().replace(' ', '-')}`}
-              className="text-[11px] font-black text-white/50 hover:text-white uppercase tracking-[0.3em] transition-all hover:scale-105"
+              className="text-[13px] font-medium text-white/50 hover:text-white transition-all hover:translate-y-[-1px]"
             >
               {item}
             </Link>
@@ -63,14 +63,14 @@ export function Navigation() {
         <Link href="/checkout" className="relative p-2 text-white hover:text-red-600 transition-colors group">
           <ShoppingCart className="w-6 h-6 group-hover:scale-110 transition-transform" />
           {itemCount > 0 && (
-            <span className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-black animate-in zoom-in">
+            <span className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-black animate-in zoom-in">
               {itemCount}
             </span>
           )}
         </Link>
 
         <Link href={user ? "/profile" : "/login"}>
-          <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6 md:px-8 h-10 font-black uppercase text-[10px] tracking-widest shadow-xl shadow-red-600/20 transition-all active:scale-95">
+          <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6 md:px-8 h-10 font-bold text-[12px] shadow-xl shadow-red-600/20 transition-all active:scale-95">
             {user ? (
               <div className="flex items-center gap-2">
                 <User className="w-3.5 h-3.5" />
