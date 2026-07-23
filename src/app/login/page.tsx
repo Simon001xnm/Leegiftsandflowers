@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Store, Bike, Mail, Lock, Loader2, UserPlus, LogIn, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
+import { User, Store, Bike, Mail, Lock, Loader2, ShieldCheck, ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -33,7 +33,7 @@ function LoginForm() {
       email: 'demo@steakwest.com',
       user_metadata: { role: selectedRole, full_name: `Demo ${selectedRole}` }
     }));
-    toast({ title: "Entering Demo mode", description: `Authorized as ${selectedRole}.` });
+    toast({ title: "Entering demo mode", description: `Authorized as ${selectedRole}.` });
     router.push(redirectPath);
   };
 
@@ -48,7 +48,7 @@ function LoginForm() {
 
     try {
       if (mode === "signup") {
-        const { data, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
           email,
           password,
           options: { data: { full_name: name, role } },
@@ -69,8 +69,8 @@ function LoginForm() {
         variant: "destructive",
         title: isNetworkError ? "Network isolation active" : "Authorization failed",
         description: isInvalidCreds 
-          ? "Invalid credentials. If testing, please use the Demo bypass buttons below."
-          : (isNetworkError ? "Live sync unavailable. Please use Demo bypass." : error.message),
+          ? "Invalid credentials. If testing, please use the demo bypass buttons below."
+          : (isNetworkError ? "Live sync unavailable. Please use demo bypass." : error.message),
       });
     } finally {
       setLoading(false);
@@ -145,7 +145,7 @@ function LoginForm() {
           
           <CardFooter className="bg-gray-50/80 p-8 flex flex-col gap-6 border-t">
             <div className="w-full space-y-4">
-              <p className="text-[11px] font-bold text-center text-muted-foreground">Testing? Use Demo bypass</p>
+              <p className="text-[11px] font-bold text-center text-muted-foreground">Testing? Use demo bypass</p>
               <div className="grid grid-cols-2 gap-3">
                 <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[11px] font-bold h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('merchant')}>
                    Merchant bypass
