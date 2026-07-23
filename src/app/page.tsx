@@ -13,6 +13,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const products = [
   // FLASH DEALS (0-15)
@@ -117,7 +118,7 @@ export default function App() {
           <div className="flex justify-center gap-8 md:gap-16 pt-8">
              <Stat node="10K+" label="Customers" />
              <Stat node="50+" label="Products" />
-             <Stat node="4.8★" label="Rating" />
+             <Stat node="4.8★" label="Rating" isGold />
           </div>
         </div>
       </section>
@@ -176,10 +177,13 @@ export default function App() {
   );
 }
 
-function Stat({ node, label }: { node: string, label: string }) {
+function Stat({ node, label, isGold }: { node: string, label: string, isGold?: boolean }) {
   return (
     <div className="text-white">
-      <h3 className="text-2xl md:text-4xl font-black leading-none mb-1">{node}</h3>
+      <h3 className={cn(
+        "text-2xl md:text-4xl font-black leading-none mb-1",
+        isGold && "bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(251,191,36,0.4)]"
+      )}>{node}</h3>
       <p className="text-[9px] md:text-[11px] font-black uppercase text-white/40 tracking-widest">{label}</p>
     </div>
   );
