@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -13,7 +12,7 @@ import { InstallAppButton } from "./InstallAppButton";
 
 /**
  * Unified sticky navigation
- * Updated with InstallAppButton between logo and cart.
+ * Logo positioned at the far left edge with minimal padding.
  */
 export function Navigation() {
   const { itemCount } = useCart();
@@ -30,19 +29,19 @@ export function Navigation() {
 
   return (
     <nav className={cn(
-      "fixed top-0 z-50 w-full transition-all duration-500 h-24 flex items-center justify-between px-4 md:px-12 border-b",
+      "fixed top-0 z-50 w-full transition-all duration-500 h-24 flex items-center justify-between pr-4 md:pr-12 pl-1 md:pl-2 border-b",
       isScrolled 
         ? "bg-white/95 backdrop-blur-xl border-gray-100 shadow-lg" 
         : "bg-white border-transparent"
     )}>
-      <div className="flex items-center gap-8 md:gap-12">
-        <Link href="/" className="flex items-center gap-2 group">
+      <div className="flex items-center gap-4 md:gap-10">
+        <Link href="/" className="flex items-center group">
           <div className="relative h-16 w-52 md:h-18 md:w-80">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West" 
               fill
-              className="object-contain"
+              className="object-contain object-left"
               priority
             />
           </div>
