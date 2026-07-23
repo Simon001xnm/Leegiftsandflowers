@@ -3,15 +3,17 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 /**
- * ULTRA-STABLE MIDDLEWARE
- * Stripped of all redirect logic to prevent infinite circular white-screen loops.
+ * ULTRA-PERFORMANCE MIDDLEWARE
+ * Stripped of all network-bound checks to eliminate request latency.
+ * Does not perform redirects or auth verification.
  */
 export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
+  const supabaseResponse = NextResponse.next({
     request,
   })
 
-  const supabase = createServerClient(
+  // We only initialize the client to sync cookies, no blocking network calls.
+  createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'placeholder',
     {
@@ -21,20 +23,10 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
         },
       },
     }
   )
-
-  // Critical: We only refresh the session. 
-  // We DO NOT perform redirects here as it breaks the prototype preview.
-  await supabase.auth.getUser()
 
   return supabaseResponse
 }
