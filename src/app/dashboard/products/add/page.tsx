@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from "react";
@@ -5,12 +6,7 @@ import { useRouter } from "next/navigation";
 import { 
   ChevronLeft, 
   Save, 
-  X, 
-  Plus, 
   Package, 
-  Tag, 
-  Info,
-  Scale,
   DollarSign,
   AlertTriangle,
   Calendar,
@@ -31,7 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MerchantDashboardLayout } from "@/components/dashboard/MerchantDashboardLayout";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -45,8 +41,8 @@ export default function AddProductPage() {
   const [formData, setFormData] = useState({
     name: "",
     sku: "",
-    category: "",
-    unit_of_measure: "Piece (pc)",
+    category: "BEEF",
+    unit_of_measure: "kg",
     cost_price: 0,
     price: 0,
     price_2_name: "Price 2",
@@ -85,7 +81,8 @@ export default function AddProductPage() {
         .from('products')
         .insert([{
           ...formData,
-          is_in_stock: formData.stock > 0,
+          is_in_stock: (formData.stock || 0) > 0,
+          restaurant_id: 'r1', // Default node ID
           created_at: new Date().toISOString()
         }]);
 
@@ -179,7 +176,7 @@ export default function AddProductPage() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Category *</Label>
-                    <Select onValueChange={(v) => handleSelectChange('category', v)}>
+                    <Select value={formData.category} onValueChange={(v) => handleSelectChange('category', v)}>
                       <SelectTrigger className="h-11 bg-slate-50/50 border-slate-200">
                         <SelectValue placeholder="Select Category" />
                       </SelectTrigger>
@@ -194,7 +191,7 @@ export default function AddProductPage() {
                   </div>
                   <div className="space-y-2">
                     <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Unit of measure *</Label>
-                    <Select defaultValue="Piece (pc)" onValueChange={(v) => handleSelectChange('unit_of_measure', v)}>
+                    <Select value={formData.unit_of_measure} onValueChange={(v) => handleSelectChange('unit_of_measure', v)}>
                       <SelectTrigger className="h-11 bg-slate-50/50 border-slate-200">
                         <SelectValue placeholder="Select Unit" />
                       </SelectTrigger>
