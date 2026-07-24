@@ -225,7 +225,7 @@ export default function App() {
             <div className="flex items-center gap-3">
                <div className="relative h-12 w-64 md:h-16 md:w-80">
                   <Image 
-                    src="/deco merchants.png" 
+                    src="/finewood deco merchants.png" 
                     alt="Finewood deco merchants" 
                     fill 
                     className="object-contain object-left" 
