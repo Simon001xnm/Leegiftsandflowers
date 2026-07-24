@@ -162,8 +162,8 @@ export default function App() {
       <main className="container mx-auto px-4">
         
         {/* Flash deals */}
-        <section className="py-4">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
+        <section className="py-2">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Flash deals</h2>
@@ -181,8 +181,8 @@ export default function App() {
         </section>
 
         {/* Elite selection */}
-        <section className="py-4">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
+        <section className="py-2">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Elite selection</h2>
@@ -200,8 +200,8 @@ export default function App() {
         </section>
 
         {/* Drinks refreshment */}
-        <section className="py-4">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
+        <section className="py-2">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
             <div className="flex items-center gap-3">
                <Zap className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Drinks refreshment</h2>
@@ -218,9 +218,9 @@ export default function App() {
           </div>
         </section>
 
-        {/* Finewood Marquee Section - NO ROUNDED CORNERS - ZERO MARGIN HEADER */}
-        <section className="pb-8 pt-4">
-          <div className="flex flex-row items-center justify-center gap-0 border-b-2 border-black/5 pb-4 mb-4">
+        {/* Finewood Marquee Section - ZERO MARGIN SIGNATURE */}
+        <section className="pb-4 pt-2">
+          <div className="flex flex-row items-center justify-center gap-0 border-b-2 border-black/5 pb-2 mb-2">
             <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest shrink-0">Your Extras Plug</span>
             <div className="relative h-14 w-28 md:h-28 md:w-[220px] shrink-0">
               <Image 
@@ -237,11 +237,11 @@ export default function App() {
 
       </main>
 
-      {/* Footer - REFINED ROLE-BASED SPLIT */}
+      {/* Footer - SYMMETRIC LOGO SPREAD & VERTICAL INFO STACK */}
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-12 items-center">
-             {/* Left: WORDS (Information) - STRICT VERTICAL STACK WITHOUT HEADERS */}
+             {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
              <div className="md:col-span-4 flex flex-col">
                 <div className="text-[15px] text-white font-medium space-y-1">
                     <p>Nairobi West, Nairobi, Kenya</p>
@@ -253,17 +253,16 @@ export default function App() {
                 </div>
              </div>
 
-             {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - DISTRIBUTED WITH MARGINS */}
-             <div className="md:col-span-8 flex flex-row items-center justify-end w-full pt-10 md:pt-0">
-                {/* Site Logo & Partners Row */}
-                <div className="flex flex-row items-center justify-end w-full gap-8 md:gap-16">
-                  <div className="relative h-20 w-32 md:h-32 md:w-56 shrink-0">
+             {/* Right: LOGOS - SYMMETRIC HORIZONTAL SPREAD */}
+             <div className="md:col-span-8 w-full pt-10 md:pt-0">
+                <div className="flex flex-row items-center justify-between w-full">
+                  <div className="relative h-20 w-36 md:h-24 md:w-56 shrink-0">
                     <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
                   </div>
-                  <div className="relative h-16 w-24 md:h-24 md:w-40 shrink-0">
+                  <div className="relative h-16 w-28 md:h-20 md:w-44 shrink-0">
                     <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                   </div>
-                  <div className="relative h-16 w-24 md:h-24 md:w-40 shrink-0">
+                  <div className="relative h-16 w-28 md:h-20 md:w-44 shrink-0">
                     <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                   </div>
                 </div>
@@ -305,7 +304,7 @@ function ProductMarquee() {
   };
   
   return (
-    <div className="pt-10 pb-0 overflow-hidden bg-gray-50/50 border border-gray-100">
+    <div className="pt-8 pb-0 overflow-hidden bg-gray-50/50 border border-gray-100">
       <div className="flex">
         <motion.div 
           className="flex"
