@@ -220,9 +220,9 @@ export default function App() {
 
         {/* Finewood Marquee Section - ZERO MARGIN SIGNATURE */}
         <section className="pb-4 pt-2">
-          <div className="flex flex-row items-center justify-center gap-4 border-b-2 border-black/5 pb-2 mb-2">
+          <div className="flex flex-row items-center justify-between gap-4 border-b-2 border-black/5 pb-2 mb-2">
             <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest shrink-0">Your Extras Plug</span>
-            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest text-right shrink-0">Appliances and Accessories</span>
+            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest text-right shrink-0">your plug for home appliances ,phones and accessories.</span>
           </div>
           <ProductMarquee />
         </section>
@@ -234,7 +234,7 @@ export default function App() {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-8 items-center">
              {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
-             <div className="md:col-span-4 flex flex-col">
+             <div className="md:col-span-5 flex flex-col">
                 <div className="text-[15px] text-white font-medium space-y-1">
                     <p>Nairobi West, Nairobi, Kenya</p>
                     <p className="text-white/40">P. O Box 7144- 00200</p>
@@ -246,7 +246,7 @@ export default function App() {
              </div>
 
              {/* Right: LOGOS - SYMMETRIC HORIZONTAL SPREAD */}
-             <div className="md:col-span-8 w-full pt-10 md:pt-0">
+             <div className="md:col-span-7 w-full pt-10 md:pt-0">
                 <div className="flex flex-row items-center justify-between w-full gap-4">
                   <div className="relative h-20 w-36 md:h-24 md:w-56 shrink-0">
                     <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
