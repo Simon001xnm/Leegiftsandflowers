@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -99,7 +98,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-white text-black min-h-screen font-body selection:bg-red-600 selection:text-white">
+    <div className="bg-white text-black min-h-screen font-body selection:bg-red-600 selection:text-white overflow-x-hidden">
       {/* Hero section */}
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center bg-black overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
@@ -115,7 +114,7 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black" />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+        <div className="w-full px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-12 text-left">
             <div className="flex flex-col sm:flex-row items-center gap-4 max-w-xl bg-white/5 backdrop-blur-xl p-2 rounded-[2rem] border border-white/10 shadow-2xl">
               <div className="flex items-center gap-3 px-6 py-4 flex-grow w-full">
@@ -159,12 +158,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* Retail discovery grid */}
-      <main className="container mx-auto px-1 md:px-4">
+      {/* Retail discovery grid - EDGE TO EDGE */}
+      <main className="w-full">
         
-        {/* Flash deals - STRICT 4 COLUMNS MOBILE */}
+        {/* Flash deals - FULL WIDTH 4 COLUMNS */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-0">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-4">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Flash deals</h2>
@@ -174,16 +173,16 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(0, 16).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
         </section>
 
-        {/* Elite selection - STRICT 4 COLUMNS MOBILE */}
+        {/* Elite selection - FULL WIDTH 4 COLUMNS */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-0">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-4">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Elite selection</h2>
@@ -193,16 +192,16 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(16, 32).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
         </section>
 
-        {/* Drinks refreshment - STRICT 4 COLUMNS MOBILE */}
+        {/* Drinks refreshment - FULL WIDTH 4 COLUMNS */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-0">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-4">
             <div className="flex items-center gap-3">
                <Zap className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Drinks refreshment</h2>
@@ -212,14 +211,14 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(32, 48).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
         </section>
 
-        {/* Finewood Marquee Section - CLEAN TYPOGRAPHIC SIGNATURE */}
+        {/* Finewood Marquee Section - FULL WIDTH */}
         <section className="pb-4 pt-2">
           <div className="border-b-2 border-black/5 pb-2 mb-2 text-center px-4">
             <span className="text-[10px] md:text-[22px] font-black text-black uppercase tracking-tight leading-tight block">
@@ -233,7 +232,7 @@ export default function App() {
 
       {/* Footer - SYMMETRIC LOGO SPREAD & VERTICAL INFO STACK */}
       <footer className="bg-black py-16 border-t border-white/5">
-        <div className="container mx-auto px-6">
+        <div className="w-full px-6">
           <div className="grid md:grid-cols-12 gap-8 items-center">
              {/* Left: Information Stack */}
              <div className="md:col-span-5 flex flex-col">
