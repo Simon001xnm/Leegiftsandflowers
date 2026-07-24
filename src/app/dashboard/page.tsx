@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -41,6 +40,7 @@ export default function POSDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [currentTime, setCurrentTime] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
 
   const categories = [
     "All", "MUTTON", "GOAT", "CHICKEN", "FOOD", "BEEF", "SOUP", "MUTURA", 
@@ -51,6 +51,7 @@ export default function POSDashboard() {
     const updateTime = () => {
       const now = new Date();
       setCurrentTime(now.toLocaleTimeString('en-GB', { hour12: false }));
+      setCurrentDate(now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }));
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
@@ -161,7 +162,7 @@ export default function POSDashboard() {
             <Beef className="w-4 h-4" /> Butchery
           </Button>
           <div className="flex items-center gap-4 text-gray-500 text-[13px] font-medium">
-             <div className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'Short' })}</div>
+             <div className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {currentDate}</div>
              <div className="font-bold text-black">{currentTime}</div>
              <div className="flex items-center gap-1.5"><UserIcon className="w-4 h-4" /> {currentUser?.email?.split('@')[0] || "Operator"}</div>
           </div>
