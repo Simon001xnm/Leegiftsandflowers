@@ -45,7 +45,10 @@ import {
   Ban,
   SunMoon,
   ChevronDown,
-  X
+  X,
+  Cpu,
+  Zap,
+  HardDrive
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -63,6 +66,12 @@ export default function POSDashboard() {
   const [currentTime, setCurrentTime] = useState("");
   const [currentDate, setCurrentDate] = useState("");
 
+  const [hardwareStatus, setHardwareStatus] = useState({
+    printer: "Online",
+    scale: "Ready",
+    scanner: "Connected"
+  });
+
   const sidebarCategories = [
     {
       title: "Main",
@@ -74,6 +83,15 @@ export default function POSDashboard() {
         { label: "Orders", icon: FileText },
         { label: "Returns", icon: RotateCcw },
         { label: "Quotations", icon: FileQuestion },
+      ]
+    },
+    {
+      title: "Hardware",
+      items: [
+        { label: "Scales & Weighing", icon: Scale },
+        { label: "Thermal Printers", icon: Printer },
+        { label: "Barcode Scanners", icon: Zap },
+        { label: "System Diagnostics", icon: Cpu },
       ]
     },
     {
@@ -262,7 +280,24 @@ export default function POSDashboard() {
               <Store className="w-4 h-4" />
               STEAK WEST BUTCHERY
             </div>
-            <div className="flex items-center gap-2 ml-6">
+            
+            {/* Hardware Status Monitoring Strip */}
+            <div className="hidden xl:flex items-center gap-4 ml-8 px-4 border-l border-white/10">
+              <div className="flex items-center gap-2">
+                <Printer className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Printer: <span className="text-white">{hardwareStatus.printer}</span></span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Scale className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Scale: <span className="text-white">{hardwareStatus.scale}</span></span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Scanner: <span className="text-white">{hardwareStatus.scanner}</span></span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 ml-auto lg:ml-6">
               <Button size="sm" className="bg-[#22c55e] hover:bg-[#16a34a] h-8 rounded-md px-4 gap-2 font-bold text-[11px] uppercase">
                 <ShoppingCart className="w-3.5 h-3.5" /> Restaurant
               </Button>
