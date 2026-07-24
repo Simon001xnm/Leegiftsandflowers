@@ -218,7 +218,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Rebranded Marquee Section */}
+        {/* Rebranded Marquee Section - NO ROUNDED CORNERS */}
         <section className="pb-0">
           <div className="flex flex-col items-center border-b-2 border-black/5 pb-4 mb-8">
             <div className="relative h-20 w-80 md:h-28 md:w-[600px]">
@@ -236,11 +236,11 @@ export default function App() {
 
       </main>
 
-      {/* Footer mini - Role-based stack (Info left, Logos right) */}
+      {/* Footer mini - ROLE-BASED VERTICAL STACK (Words Left, Logos Right) */}
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-12 items-start">
-             {/* Left: Consolidated Business Info - VERTICALLY STACKED */}
+             {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
              <div className="md:col-span-7 flex flex-col gap-12">
                 <div className="space-y-4">
                   <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Operating Node</p>
@@ -254,14 +254,14 @@ export default function App() {
                   <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Direct Dispatch</p>
                   <div className="space-y-1 text-[15px] text-white font-medium">
                       <p className="text-primary font-bold">0722522346</p>
-                      <p className="text-white/40">Info@steakwestbutchery.co.ke</p>
+                      <p className="text-white/40 lowercase">Info@steakwestbutchery.co.ke</p>
                   </div>
                 </div>
              </div>
 
-             {/* Right: Brand and Partner Logos (Vertical Stack) */}
+             {/* Right: LOGOS - STRICT VERTICAL STACK */}
              <div className="md:col-span-5 flex flex-col items-end gap-12">
-                {/* Brand Logo - Enlarged */}
+                {/* Brand Logo - Enlarged Vertical Anchor */}
                 <div className="relative h-28 w-full max-w-[450px]">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
@@ -271,10 +271,10 @@ export default function App() {
                   />
                 </div>
 
-                {/* Dispatch Partners - Vertically Stacked */}
+                {/* Dispatch Partners - VERTICALLY STACKED LOGOS */}
                 <div className="flex flex-col items-end gap-6">
                    <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em]">Dispatch Partners</p>
-                   <div className="space-y-6">
+                   <div className="flex flex-col gap-6 items-end">
                       <div className="relative h-12 w-32 md:h-14 md:w-36">
                         <Image src="/images.png" alt="Glovo" fill className="object-contain object-right" />
                       </div>
@@ -321,7 +321,7 @@ function ProductMarquee() {
   };
   
   return (
-    <div className="pt-10 pb-0 overflow-hidden bg-gray-50/50 border border-gray-100 rounded-none">
+    <div className="pt-10 pb-0 overflow-hidden bg-gray-50/50 border border-gray-100">
       <div className="flex">
         <motion.div 
           className="flex"
@@ -332,7 +332,7 @@ function ProductMarquee() {
             ease: "linear" 
           }}
         >
-          {/* Duplicate products for infinite scroll illusion using the provided Finewood assets */}
+          {/* Duplicate products for infinite scroll illusion */}
           {[...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS].map((p, i) => (
             <div 
               key={`${p.id}-${i}`} 

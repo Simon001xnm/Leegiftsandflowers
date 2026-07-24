@@ -11,7 +11,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-12 items-start">
           
-          {/* Left: Operational & Contact Info - Consolidated & Vertically Stacked */}
+          {/* Left: WORDS (Information) - Consolidated & VERTICALLY STACKED */}
           <div className="md:col-span-7 flex flex-col gap-12 text-[13px] font-bold uppercase tracking-widest">
                <div className="space-y-4">
                   <p className="text-white/30 text-[9px] font-black uppercase tracking-[0.3em]">Operational Node</p>
@@ -42,9 +42,9 @@ export function Footer() {
                </div>
           </div>
 
-          {/* Right: Brand and Partner logos (Vertical Stack) */}
+          {/* Right: LOGOS - VERTICALLY STACKED */}
           <div className="md:col-span-5 flex flex-col items-end gap-12">
-            {/* Main Logo Enlarged */}
+            {/* Main Brand Logo Enlarged Anchor */}
             <div className="relative h-28 w-full max-w-[450px]">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
@@ -54,10 +54,10 @@ export function Footer() {
               />
             </div>
 
-            {/* Vertical Partners Stack */}
+            {/* Vertical Partners Stack beneath Brand Logo */}
             <div className="flex flex-col items-end gap-6">
                <p className="text-white/30 text-[9px] font-black uppercase tracking-[0.3em]">Dispatch Partners</p>
-               <div className="space-y-6">
+               <div className="flex flex-col gap-6 items-end">
                   <div className="relative h-12 w-32 md:h-14 md:w-36">
                     <Image src="/images.png" alt="Glovo" fill className="object-contain object-right" />
                   </div>
