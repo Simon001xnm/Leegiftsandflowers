@@ -16,7 +16,7 @@ export function Footer() {
                <div className="text-[15px] text-white/90 font-medium space-y-1">
                   <p>Nairobi West, Nairobi, Kenya</p>
                   <p className="text-white/40">P. O Box 7144- 00200</p>
-                  <div className="pt-2">
+                  <div className="pt-2 flex flex-col space-y-1">
                     <p className="text-primary font-bold">0722522346</p>
                     <p className="text-white/40 lowercase">Info@steakwestbutchery.co.ke</p>
                   </div>
