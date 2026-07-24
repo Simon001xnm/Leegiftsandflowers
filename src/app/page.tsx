@@ -218,9 +218,9 @@ export default function App() {
           </div>
         </section>
 
-        {/* Finewood Marquee Section - NO ROUNDED CORNERS */}
+        {/* Finewood Marquee Section - NO ROUNDED CORNERS - ZERO MARGIN HEADER */}
         <section className="pb-8 pt-4">
-          <div className="flex flex-row items-center justify-center gap-x-4 md:gap-x-10 border-b-2 border-black/5 pb-4 mb-4">
+          <div className="flex flex-row items-center justify-center gap-0 border-b-2 border-black/5 pb-4 mb-4">
             <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest shrink-0">Your Extras Plug</span>
             <div className="relative h-14 w-56 md:h-28 md:w-[400px] shrink-0">
               <Image 

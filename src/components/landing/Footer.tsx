@@ -40,6 +40,7 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Desktop-only copyright and legal bar */}
         <div className="mt-20 pt-8 border-t border-white/5 hidden md:flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex flex-col md:flex-row items-center gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
@@ -52,7 +53,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="hidden md:flex gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
+          <div className="flex gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           </div>
