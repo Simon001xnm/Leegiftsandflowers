@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -223,7 +222,7 @@ export default function App() {
         <section className="pb-24">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-8">
             <div className="flex items-center gap-3">
-               <div className="relative h-12 w-64 md:h-16 md:w-80">
+               <div className="relative h-16 w-80 md:h-24 md:w-[500px]">
                   <Image 
                     src="/finewood deco merchants.png" 
                     alt="Finewood deco merchants" 
