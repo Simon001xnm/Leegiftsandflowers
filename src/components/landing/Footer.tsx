@@ -47,26 +47,26 @@ export function Footer() {
           {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - DISTRIBUTED */}
           <div className="md:col-span-8 flex flex-row items-center justify-between w-full h-full pt-10 px-4 md:px-0">
             {/* Main Brand Logo - Scaled */}
-            <div className="relative h-20 w-44 md:h-28 md:w-64 shrink-0">
+            <div className="relative h-20 w-44 md:h-32 md:w-80 shrink-0">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                 alt="Steak West" 
                 fill 
-                className="object-contain object-left" 
+                className="object-contain object-right" 
               />
             </div>
 
             {/* Horizontal Dispatch Logos strip - Scaled & Distributed */}
-            <div className="relative h-20 w-44 md:h-28 md:w-64 shrink-0">
+            <div className="relative h-16 w-36 md:h-24 md:w-48 shrink-0">
               <Image src="/images.png" alt="Glovo" fill className="object-contain" />
             </div>
-            <div className="relative h-20 w-44 md:h-28 md:w-64 shrink-0">
+            <div className="relative h-16 w-36 md:h-24 md:w-48 shrink-0">
               <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
             </div>
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="mt-20 pt-8 border-t border-white/5 hidden md:flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex flex-col md:flex-row items-center gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
               <p>© 2026 Steak West Butchery | SUPA YA NYAMA</p>

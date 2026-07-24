@@ -181,7 +181,7 @@ export default function App() {
         </section>
 
         {/* Elite selection */}
-        <section className="pb-6 md:pb-8">
+        <section className="pb-6">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
@@ -200,7 +200,7 @@ export default function App() {
         </section>
 
         {/* Drinks refreshment */}
-        <section className="pb-6 md:pb-8">
+        <section className="pb-6">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <Zap className="w-5 h-5 text-red-600" />
@@ -264,31 +264,31 @@ export default function App() {
              {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - DISTRIBUTED */}
              <div className="md:col-span-8 flex flex-row items-center justify-between w-full h-full pt-10 px-4 md:px-0">
                 {/* Brand Logo - Scaled */}
-                <div className="relative h-20 w-44 md:h-28 md:w-64 shrink-0">
+                <div className="relative h-20 w-44 md:h-32 md:w-80 shrink-0">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                     alt="Steak West Brand" 
                     fill 
-                    className="object-contain object-left" 
+                    className="object-contain object-right" 
                   />
                 </div>
 
                 {/* Dispatch Partner Logos - Scaled & Evenly Gapped */}
-                <div className="relative h-20 w-44 md:h-28 md:w-64 shrink-0">
+                <div className="relative h-16 w-36 md:h-24 md:w-48 shrink-0">
                   <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                 </div>
-                <div className="relative h-20 w-44 md:h-28 md:w-64 shrink-0">
+                <div className="relative h-16 w-36 md:h-24 md:w-48 shrink-0">
                   <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                 </div>
              </div>
           </div>
           
-          <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="mt-16 pt-8 border-t border-white/5 hidden md:flex flex-col md:flex-row justify-between items-center gap-8">
              <div className="flex flex-col md:flex-row items-center gap-6">
                <p className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
                  © 2026 Steak West Butchery | SUPA YA NYAMA
                </p>
-               <div className="hidden md:flex gap-8">
+               <div className="flex gap-8">
                  <Link href="/privacy" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Privacy</Link>
                  <Link href="/terms" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Terms</Link>
                </div>
