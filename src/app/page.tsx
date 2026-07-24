@@ -261,10 +261,10 @@ export default function App() {
                 </div>
              </div>
 
-             {/* Right: LOGOS - HORIZONTAL LAYOUT */}
-             <div className="md:col-span-6 flex flex-row items-center justify-end gap-10">
-                {/* Brand Logo */}
-                <div className="relative h-24 w-64 md:h-28 md:w-80">
+             {/* Right: LOGOS - HORIZONTAL LAYOUT - All resized to match */}
+             <div className="md:col-span-6 flex flex-row items-center justify-end gap-6 md:gap-10">
+                {/* Brand Logo - Resized to match partners */}
+                <div className="relative h-10 w-24 md:h-12 md:w-28">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                     alt="Steak West Brand" 
@@ -274,13 +274,11 @@ export default function App() {
                 </div>
 
                 {/* Dispatch Partner Logos */}
-                <div className="flex flex-row gap-6 items-center">
-                  <div className="relative h-10 w-24 md:h-12 md:w-28">
-                    <Image src="/images.png" alt="Glovo" fill className="object-contain" />
-                  </div>
-                  <div className="relative h-10 w-24 md:h-12 md:w-28">
-                    <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
-                  </div>
+                <div className="relative h-10 w-24 md:h-12 md:w-28">
+                  <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+                </div>
+                <div className="relative h-10 w-24 md:h-12 md:w-28">
+                  <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                 </div>
              </div>
           </div>

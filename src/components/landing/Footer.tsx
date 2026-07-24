@@ -15,7 +15,7 @@ export function Footer() {
           <div className="md:col-span-6 flex flex-col gap-10 text-[13px] font-bold uppercase tracking-widest">
                <div className="space-y-10">
                   <div className="space-y-4">
-                    <p className="text-white/30 text-[9px] font-black uppercase tracking-[0.3em]">Operational Node</p>
+                    <p className="text-white/30 text-[9px] font-black uppercase tracking-[0.3em]">Operating Node</p>
                     <div className="space-y-3">
                        <div className="flex items-center gap-3 text-white">
                           <MapPin className="w-5 h-5 text-primary shrink-0" />
@@ -44,10 +44,10 @@ export function Footer() {
                </div>
           </div>
 
-          {/* Right: LOGOS - HORIZONTAL LAYOUT */}
-          <div className="md:col-span-6 flex flex-row items-center justify-end gap-10">
-            {/* Main Brand Logo */}
-            <div className="relative h-24 w-64 md:h-28 md:w-80">
+          {/* Right: LOGOS - HORIZONTAL LAYOUT - All resized to match */}
+          <div className="md:col-span-6 flex flex-row items-center justify-end gap-6 md:gap-10">
+            {/* Main Brand Logo - Resized to match partners */}
+            <div className="relative h-10 w-24 md:h-12 md:w-28">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                 alt="Steak West" 
@@ -56,14 +56,12 @@ export function Footer() {
               />
             </div>
 
-            {/* Horizontal Partners strip */}
-            <div className="flex flex-row gap-6 items-center">
-              <div className="relative h-10 w-24 md:h-12 md:w-28">
-                <Image src="/images.png" alt="Glovo" fill className="object-contain" />
-              </div>
-              <div className="relative h-10 w-24 md:h-12 md:w-28">
-                <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
-              </div>
+            {/* Horizontal Dispatch Logos strip */}
+            <div className="relative h-10 w-24 md:h-12 md:w-28">
+              <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+            </div>
+            <div className="relative h-10 w-24 md:h-12 md:w-28">
+              <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
             </div>
           </div>
         </div>
