@@ -255,13 +255,25 @@ export default function App() {
                 </div>
              </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-             <p className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
-               © 2026 Steak West Butchery | SUPA YA NYAMA
-             </p>
-             <div className="flex gap-8">
-               <Link href="/privacy" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Privacy</Link>
-               <Link href="/terms" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Terms</Link>
+          
+          <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+             <div className="flex items-center gap-8 grayscale opacity-30 hover:opacity-100 transition-all duration-500">
+               <div className="relative h-8 w-24">
+                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+               </div>
+               <div className="relative h-8 w-24">
+                 <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
+               </div>
+             </div>
+             
+             <div className="flex flex-col md:flex-row items-center gap-6">
+               <p className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
+                 © 2026 Steak West Butchery | SUPA YA NYAMA
+               </p>
+               <div className="flex gap-8">
+                 <Link href="/privacy" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Privacy</Link>
+                 <Link href="/terms" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Terms</Link>
+               </div>
              </div>
           </div>
         </div>

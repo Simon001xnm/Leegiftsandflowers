@@ -60,16 +60,28 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
-          <div className="flex items-center gap-8">
-            <p>© 2026 Steak West Butchery</p>
-            <div className="flex gap-4">
-              {[Facebook, Instagram, Twitter].map((Icon, i) => (
-                <Icon key={i} className="w-3.5 h-3.5 hover:text-white cursor-pointer transition-colors" />
-              ))}
+        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="flex items-center gap-8 grayscale opacity-30 hover:opacity-100 transition-all duration-500">
+               <div className="relative h-8 w-24">
+                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+               </div>
+               <div className="relative h-8 w-24">
+                 <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
+               </div>
+            </div>
+            
+            <div className="flex flex-col md:flex-row items-center gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
+              <p>© 2026 Steak West Butchery</p>
+              <div className="flex gap-4">
+                {[Facebook, Instagram, Twitter].map((Icon, i) => (
+                  <Icon key={i} className="w-3.5 h-3.5 hover:text-white cursor-pointer transition-colors" />
+                ))}
+              </div>
             </div>
           </div>
-          <div className="flex gap-8">
+
+          <div className="flex gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           </div>
