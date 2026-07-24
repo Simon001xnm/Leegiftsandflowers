@@ -27,13 +27,13 @@ export function Footer() {
           <div className="md:col-span-8 flex flex-row items-center justify-between w-full pt-10 md:pt-0">
             {/* Site Logo & Partners Row */}
             <div className="flex flex-row items-center justify-between w-full gap-2">
-              <div className="relative h-16 w-36 md:h-32 md:w-64 shrink-0">
+              <div className="relative h-20 w-44 md:h-32 md:w-80 shrink-0">
                 <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
               </div>
-              <div className="relative h-14 w-32 md:h-28 md:w-56 shrink-0">
+              <div className="relative h-16 w-36 md:h-24 md:w-64 shrink-0">
                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
               </div>
-              <div className="relative h-14 w-32 md:h-28 md:w-56 shrink-0">
+              <div className="relative h-16 w-36 md:h-24 md:w-64 shrink-0">
                 <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
               </div>
             </div>

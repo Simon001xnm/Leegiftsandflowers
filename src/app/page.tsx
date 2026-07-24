@@ -220,8 +220,8 @@ export default function App() {
 
         {/* Finewood Marquee Section - NO ROUNDED CORNERS */}
         <section className="pb-8 pt-4">
-          <div className="flex flex-row items-center justify-between gap-4 border-b-2 border-black/5 pb-4 mb-4">
-            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest">Your Extras Plug</span>
+          <div className="flex flex-row items-center justify-center gap-x-4 md:gap-x-10 border-b-2 border-black/5 pb-4 mb-4">
+            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest shrink-0">Your Extras Plug</span>
             <div className="relative h-14 w-56 md:h-28 md:w-[400px] shrink-0">
               <Image 
                 src="/finewood deco merchants 2.png" 
@@ -230,7 +230,7 @@ export default function App() {
                 className="object-contain" 
               />
             </div>
-            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest text-right">Appliances and Accessories</span>
+            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest text-right shrink-0">Appliances and Accessories</span>
           </div>
           <ProductMarquee />
         </section>
@@ -257,13 +257,13 @@ export default function App() {
              <div className="md:col-span-8 flex flex-row items-center justify-between w-full pt-10 md:pt-0">
                 {/* Site Logo & Partners Row */}
                 <div className="flex flex-row items-center justify-between w-full gap-2">
-                  <div className="relative h-16 w-36 md:h-32 md:w-64 shrink-0">
+                  <div className="relative h-20 w-44 md:h-32 md:w-80 shrink-0">
                     <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
                   </div>
-                  <div className="relative h-14 w-32 md:h-28 md:w-56 shrink-0">
+                  <div className="relative h-16 w-36 md:h-24 md:w-64 shrink-0">
                     <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                   </div>
-                  <div className="relative h-14 w-32 md:h-28 md:w-56 shrink-0">
+                  <div className="relative h-16 w-36 md:h-24 md:w-64 shrink-0">
                     <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                   </div>
                 </div>
