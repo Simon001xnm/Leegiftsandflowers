@@ -253,10 +253,10 @@ export default function App() {
                 </div>
              </div>
 
-             {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - DISTRIBUTED */}
+             {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - DISTRIBUTED WITH MARGINS */}
              <div className="md:col-span-8 flex flex-row items-center justify-end w-full pt-10 md:pt-0">
                 {/* Site Logo & Partners Row */}
-                <div className="flex flex-row items-center justify-end w-full gap-0">
+                <div className="flex flex-row items-center justify-end w-full gap-8 md:gap-16">
                   <div className="relative h-20 w-32 md:h-32 md:w-56 shrink-0">
                     <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
                   </div>
