@@ -218,7 +218,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Rebranded Marquee Section - NO ROUNDED CORNERS */}
+        {/* Finewood Marquee Section - NO ROUNDED CORNERS */}
         <section className="pb-0">
           <div className="flex flex-col items-center border-b-2 border-black/5 pb-4 mb-8">
             <div className="relative h-20 w-80 md:h-28 md:w-[600px]">
@@ -236,32 +236,34 @@ export default function App() {
 
       </main>
 
-      {/* Footer mini - ROLE-BASED VERTICAL STACK (Words Left, Logos Right) */}
+      {/* Footer - ROLE-BASED SPLIT (Words Left/Vertical, Logos Right/Horizontal) */}
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-12 items-start">
              {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
-             <div className="md:col-span-7 flex flex-col gap-12">
-                <div className="space-y-4">
-                  <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Operating Node</p>
-                  <div className="space-y-1 text-[15px] text-white font-medium">
-                      <p>Nairobi West, Nairobi, Kenya</p>
-                      <p className="text-white/40">P. O Box 7144- 00200</p>
+             <div className="md:col-span-6 flex flex-col gap-10">
+                <div className="space-y-10">
+                  <div className="space-y-4">
+                    <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Operating Node</p>
+                    <div className="space-y-1 text-[15px] text-white font-medium">
+                        <p>Nairobi West, Nairobi, Kenya</p>
+                        <p className="text-white/40">P. O Box 7144- 00200</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="space-y-4">
-                  <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Direct Dispatch</p>
-                  <div className="space-y-1 text-[15px] text-white font-medium">
-                      <p className="text-primary font-bold">0722522346</p>
-                      <p className="text-white/40 lowercase">Info@steakwestbutchery.co.ke</p>
+                  <div className="space-y-4">
+                    <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Direct Dispatch</p>
+                    <div className="space-y-1 text-[15px] text-white font-medium">
+                        <p className="text-primary font-bold">0722522346</p>
+                        <p className="text-white/40 lowercase">Info@steakwestbutchery.co.ke</p>
+                    </div>
                   </div>
                 </div>
              </div>
 
-             {/* Right: LOGOS - STRICT VERTICAL STACK */}
-             <div className="md:col-span-5 flex flex-col items-end gap-12">
-                {/* Brand Logo - Enlarged Vertical Anchor */}
+             {/* Right: LOGOS - HORIZONTAL LAYOUT */}
+             <div className="md:col-span-6 flex flex-col items-end gap-12">
+                {/* Brand Logo - Enlarged Anchor */}
                 <div className="relative h-28 w-full max-w-[450px]">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
@@ -271,15 +273,15 @@ export default function App() {
                   />
                 </div>
 
-                {/* Dispatch Partners - VERTICALLY STACKED LOGOS */}
+                {/* Dispatch Partners - HORIZONTAL STRIP */}
                 <div className="flex flex-col items-end gap-6">
                    <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em]">Dispatch Partners</p>
-                   <div className="flex flex-col gap-6 items-end">
-                      <div className="relative h-12 w-32 md:h-14 md:w-36">
-                        <Image src="/images.png" alt="Glovo" fill className="object-contain object-right" />
+                   <div className="flex flex-row gap-8 items-center">
+                      <div className="relative h-10 w-24 md:h-12 md:w-28">
+                        <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                       </div>
-                      <div className="relative h-12 w-32 md:h-14 md:w-36">
-                        <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain object-right" />
+                      <div className="relative h-10 w-24 md:h-12 md:w-28">
+                        <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                       </div>
                    </div>
                 </div>
@@ -332,7 +334,6 @@ function ProductMarquee() {
             ease: "linear" 
           }}
         >
-          {/* Duplicate products for infinite scroll illusion */}
           {[...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS].map((p, i) => (
             <div 
               key={`${p.id}-${i}`} 
