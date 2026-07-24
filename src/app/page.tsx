@@ -162,7 +162,7 @@ export default function App() {
       <main className="container mx-auto px-4">
         
         {/* Flash deals */}
-        <section className="py-12">
+        <section className="py-8">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
@@ -181,7 +181,7 @@ export default function App() {
         </section>
 
         {/* Elite selection */}
-        <section className="pb-12">
+        <section className="pb-8">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
@@ -200,7 +200,7 @@ export default function App() {
         </section>
 
         {/* Drinks refreshment */}
-        <section className="pb-24">
+        <section className="pb-10">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <Zap className="w-5 h-5 text-red-600" />
@@ -236,12 +236,12 @@ export default function App() {
 
       </main>
 
-      {/* Footer - REFINED ROLE-BASED SPLIT (Logos Distributed & Magnified) */}
+      {/* Footer - REFINED ROLE-BASED SPLIT (Uniform Logo Strip) */}
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-12 items-start">
              {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
-             <div className="md:col-span-6 flex flex-col gap-10">
+             <div className="md:col-span-4 flex flex-col gap-10">
                 <div className="space-y-10">
                   <div className="space-y-4">
                     <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Operating Node</p>
@@ -261,10 +261,10 @@ export default function App() {
                 </div>
              </div>
 
-             {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - Reduced gaps, Increased size */}
-             <div className="md:col-span-6 flex flex-row items-center justify-between w-full h-full pt-10">
-                {/* Brand Logo - Enlarged */}
-                <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
+             {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - Evenly Distributed */}
+             <div className="md:col-span-8 flex flex-row items-center justify-between w-full h-full pt-10 px-4 md:px-0">
+                {/* Brand Logo - Scaled */}
+                <div className="relative h-16 w-36 md:h-20 md:w-56 shrink-0">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                     alt="Steak West Brand" 
@@ -273,11 +273,11 @@ export default function App() {
                   />
                 </div>
 
-                {/* Dispatch Partner Logos - Enlarged with minimal distance */}
-                <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
+                {/* Dispatch Partner Logos - Scaled & Evenly Gapped */}
+                <div className="relative h-16 w-36 md:h-20 md:w-56 shrink-0">
                   <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                 </div>
-                <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
+                <div className="relative h-16 w-36 md:h-20 md:w-56 shrink-0">
                   <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                 </div>
              </div>
