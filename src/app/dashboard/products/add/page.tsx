@@ -9,7 +9,6 @@ import {
   Plus, 
   Package, 
   Tag, 
-  Barcode, 
   Info,
   Scale,
   DollarSign,
@@ -46,7 +45,6 @@ export default function AddProductPage() {
   const [formData, setFormData] = useState({
     name: "",
     sku: "",
-    barcode: "",
     category: "",
     unit_of_measure: "Piece (pc)",
     cost_price: 0,
@@ -181,19 +179,6 @@ export default function AddProductPage() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Barcode</Label>
-                    <div className="relative">
-                      <Barcode className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                      <Input 
-                        name="barcode"
-                        placeholder="706710" 
-                        value={formData.barcode}
-                        onChange={handleInputChange}
-                        className="h-11 pl-10 bg-slate-50/50 border-slate-200 focus:bg-white"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
                     <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Category *</Label>
                     <Select onValueChange={(v) => handleSelectChange('category', v)}>
                       <SelectTrigger className="h-11 bg-slate-50/50 border-slate-200">
@@ -205,6 +190,19 @@ export default function AddProductPage() {
                         <SelectItem value="CHICKEN">Chicken</SelectItem>
                         <SelectItem value="MUTURA">Mutura</SelectItem>
                         <SelectItem value="CHOMA">Choma</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Unit of measure *</Label>
+                    <Select defaultValue="Piece (pc)" onValueChange={(v) => handleSelectChange('unit_of_measure', v)}>
+                      <SelectTrigger className="h-11 bg-slate-50/50 border-slate-200">
+                        <SelectValue placeholder="Select Unit" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="kg">Kilogram (kg)</SelectItem>
+                        <SelectItem value="Piece (pc)">Piece (pc)</SelectItem>
+                        <SelectItem value="Litre (L)">Litre (L)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -231,20 +229,7 @@ export default function AddProductPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-8 space-y-8">
-                <div className="grid md:grid-cols-3 gap-6 pb-6 border-b border-dashed border-slate-100">
-                  <div className="space-y-2">
-                    <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Unit of measure *</Label>
-                    <Select defaultValue="Piece (pc)" onValueChange={(v) => handleSelectChange('unit_of_measure', v)}>
-                      <SelectTrigger className="h-11 bg-slate-50/50 border-slate-200">
-                        <SelectValue placeholder="Select Unit" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="kg">Kilogram (kg)</SelectItem>
-                        <SelectItem value="Piece (pc)">Piece (pc)</SelectItem>
-                        <SelectItem value="Litre (L)">Litre (L)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                <div className="grid md:grid-cols-2 gap-6 pb-6 border-b border-dashed border-slate-100">
                   <div className="space-y-2">
                     <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Cost price *</Label>
                     <div className="relative">
