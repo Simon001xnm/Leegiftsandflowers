@@ -219,7 +219,7 @@ export default function App() {
         </section>
 
         {/* Rebranded Marquee Section */}
-        <section className="pb-24">
+        <section className="pb-0">
           <div className="flex flex-col items-center border-b-2 border-black/5 pb-4 mb-8">
             <div className="relative h-20 w-80 md:h-28 md:w-[600px]">
               <Image 
@@ -288,7 +288,7 @@ function ProductMarquee() {
   };
   
   return (
-    <div className="py-10 overflow-hidden bg-gray-50/50 border border-gray-100 rounded-none">
+    <div className="pt-10 pb-0 overflow-hidden bg-gray-50/50 border border-gray-100 rounded-none">
       <div className="flex">
         <motion.div 
           className="flex"
