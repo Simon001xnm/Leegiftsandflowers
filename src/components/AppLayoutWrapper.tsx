@@ -1,4 +1,3 @@
-
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -12,6 +11,7 @@ import { createClient } from '@/lib/supabase/client';
 /**
  * ROLE-BASED LAYOUT ARCHITECTURE
  * Separates Customer, Merchant, and Rider experiences completely.
+ * Updated to hide main nav for all dashboard sub-paths.
  */
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -34,9 +34,10 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const path = pathname || '';
   const isLogin = path.startsWith('/login');
   
-  // THE NEW POS IS FULL SCREEN - Disable global navigation for POS dashboard
-  const isMerchantDash = path === '/dashboard';
+  // Detect any path under the merchant dashboard
+  const isMerchantDash = path.startsWith('/dashboard') && !path.startsWith('/dashboard/customer') && !path.startsWith('/dashboard/rider');
   
+  // Standard sidebar is used for simple dashboards, Merchant POS uses its own Layout
   const showSidebar = !isMerchantDash && (path.startsWith('/dashboard/inventory') || path.startsWith('/dashboard/rider'));
   const hideGlobalNav = isLogin || isMerchantDash;
 
