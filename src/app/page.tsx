@@ -73,6 +73,13 @@ const products = [
   { id: 'd16', name: "Coke zero sugar", price: 90, image: "/From%20Klickpin.com-%20141019032077665218-pin-id-141019032077665218.jpg" }
 ];
 
+const FINEWOOD_PRODUCTS = [
+  { id: 'f1', name: "Premium Decor Piece", price: 2500, image: "/wddf.jpg" },
+  { id: 'f2', name: "Modern Home Utility", price: 4200, image: "/wdff.jpg" },
+  { id: 'f3', name: "Elegant Accessory", price: 1500, image: "/wdffc.jpg" },
+  { id: 'f4', name: "Bespoke Finishing", price: 3800, image: "/wfhfjj.jpg" },
+];
+
 export default function App() {
   const { addToCart } = useCart();
   const { toast } = useToast();
@@ -260,7 +267,6 @@ export default function App() {
 }
 
 function ProductMarquee() {
-  const marqueeProducts = products.slice(0, 12);
   const { addToCart } = useCart();
   const { toast } = useToast();
 
@@ -284,13 +290,13 @@ function ProductMarquee() {
           className="flex"
           animate={{ x: ["-50%", "0%"] }}
           transition={{ 
-            duration: 60, 
+            duration: 40, 
             repeat: Infinity, 
             ease: "linear" 
           }}
         >
-          {/* Duplicate products for infinite scroll illusion */}
-          {[...marqueeProducts, ...marqueeProducts, ...marqueeProducts, ...marqueeProducts].map((p, i) => (
+          {/* Duplicate products for infinite scroll illusion using the provided Finewood assets */}
+          {[...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS].map((p, i) => (
             <div 
               key={`${p.id}-${i}`} 
               className="w-[180px] md:w-[220px] shrink-0 border-r border-gray-100 last:border-r-0"
