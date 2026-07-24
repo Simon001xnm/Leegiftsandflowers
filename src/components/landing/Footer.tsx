@@ -9,10 +9,10 @@ export function Footer() {
   return (
     <footer className="bg-black text-white border-t border-white/5 py-20">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-12 gap-12 items-center">
+        <div className="grid md:grid-cols-12 gap-8 items-center">
           
           {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
-          <div className="md:col-span-4 flex flex-col">
+          <div className="md:col-span-5 flex flex-col">
                <div className="text-[15px] text-white/90 font-medium space-y-1">
                   <p>Nairobi West, Nairobi, Kenya</p>
                   <p className="text-white/40">P. O Box 7144- 00200</p>
@@ -24,7 +24,7 @@ export function Footer() {
           </div>
 
           {/* Right: LOGOS - SYMMETRIC HORIZONTAL SPREAD */}
-          <div className="md:col-span-8 w-full pt-10 md:pt-0">
+          <div className="md:col-span-7 w-full pt-10 md:pt-0">
             <div className="flex flex-row items-center justify-between w-full">
               <div className="relative h-20 w-36 md:h-24 md:w-56 shrink-0">
                 <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
