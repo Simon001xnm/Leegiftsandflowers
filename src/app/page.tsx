@@ -240,23 +240,22 @@ export default function App() {
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-12 items-start">
-             {/* Left: Consolidated Business Info */}
-             <div className="md:col-span-7 space-y-12">
-                <div className="grid sm:grid-cols-2 gap-12">
-                   <div className="space-y-4">
-                      <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Operating Node</p>
-                      <div className="space-y-1 text-[15px] text-white font-medium">
-                         <p>Nairobi West, Nairobi, Kenya</p>
-                         <p className="text-white/40">P. O Box 7144- 00200</p>
-                      </div>
-                   </div>
-                   <div className="space-y-4">
-                      <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Direct Dispatch</p>
-                      <div className="space-y-1 text-[15px] text-white font-medium">
-                         <p className="text-primary font-bold">0722522346</p>
-                         <p className="text-white/40">Info@steakwestbutchery.co.ke</p>
-                      </div>
-                   </div>
+             {/* Left: Consolidated Business Info - VERTICALLY STACKED */}
+             <div className="md:col-span-7 flex flex-col gap-12">
+                <div className="space-y-4">
+                  <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Operating Node</p>
+                  <div className="space-y-1 text-[15px] text-white font-medium">
+                      <p>Nairobi West, Nairobi, Kenya</p>
+                      <p className="text-white/40">P. O Box 7144- 00200</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Direct Dispatch</p>
+                  <div className="space-y-1 text-[15px] text-white font-medium">
+                      <p className="text-primary font-bold">0722522346</p>
+                      <p className="text-white/40">Info@steakwestbutchery.co.ke</p>
+                  </div>
                 </div>
              </div>
 

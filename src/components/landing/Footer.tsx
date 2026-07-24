@@ -11,9 +11,8 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-12 items-start">
           
-          {/* Left: Operational & Contact Info - Consolidated */}
-          <div className="md:col-span-7 grid gap-10 text-[13px] font-bold uppercase tracking-widest">
-            <div className="grid sm:grid-cols-2 gap-12">
+          {/* Left: Operational & Contact Info - Consolidated & Vertically Stacked */}
+          <div className="md:col-span-7 flex flex-col gap-12 text-[13px] font-bold uppercase tracking-widest">
                <div className="space-y-4">
                   <p className="text-white/30 text-[9px] font-black uppercase tracking-[0.3em]">Operational Node</p>
                   <div className="space-y-3">
@@ -41,7 +40,6 @@ export function Footer() {
                      </Link>
                   </div>
                </div>
-            </div>
           </div>
 
           {/* Right: Brand and Partner logos (Vertical Stack) */}
