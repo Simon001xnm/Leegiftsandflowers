@@ -103,7 +103,7 @@ function DiscoveryContent() {
           </div>
         </section>
 
-        {/* ULTRA-HIGH DENSITY PRODUCT GRID */}
+        {/* ULTRA-HIGH DENSITY PRODUCT GRID - FIXED TO 4 IN WIDTH ON MOBILE */}
         <section className="space-y-6">
           <div className="flex items-center justify-between px-1 border-b border-gray-100 pb-4">
             <h2 className="text-xl md:text-2xl font-medium tracking-tight">Marketplace discovery</h2>

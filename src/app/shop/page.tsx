@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from "react";
@@ -84,7 +83,7 @@ export default function ShopPage() {
         </header>
 
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-t border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-t border-gray-100">
             {filtered.map(p => (
               <ProductCard key={p.id} product={p} onAdd={() => handleAdd(p)} />
             ))}
@@ -127,8 +126,8 @@ function ProductCard({ product, onAdd }: any) {
         </button>
       </div>
       <div className="p-4 space-y-1">
-        <p className="text-[13px] font-medium text-gray-700 line-clamp-1">{product.name}</p>
-        <p className="text-[14px] font-bold text-black">KSh {product.price.toLocaleString()}</p>
+        <p className="text-[10px] md:text-[13px] font-medium text-gray-700 line-clamp-1">{product.name}</p>
+        <p className="text-[12px] md:text-[14px] font-bold text-black">KSh {product.price.toLocaleString()}</p>
       </div>
     </motion.div>
   );
