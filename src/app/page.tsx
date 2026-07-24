@@ -220,8 +220,9 @@ export default function App() {
 
         {/* Finewood Marquee Section - NO ROUNDED CORNERS */}
         <section className="pb-8">
-          <div className="flex flex-col items-center border-b-2 border-black/5 pb-4 mb-4">
-            <div className="relative h-20 w-80 md:h-28 md:w-[600px]">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 border-b-2 border-black/5 pb-4 mb-4">
+            <span className="text-[10px] md:text-[14px] font-black text-muted-foreground uppercase tracking-widest text-center">Your Extras Plug</span>
+            <div className="relative h-12 w-48 md:h-20 md:w-80 shrink-0">
               <Image 
                 src="/finewood deco merchants 2.png" 
                 alt="Finewood deco merchants" 
@@ -229,7 +230,7 @@ export default function App() {
                 className="object-contain" 
               />
             </div>
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-2">Your Extras Plug for Home Appliances and Accessories</p>
+            <span className="text-[10px] md:text-[14px] font-black text-muted-foreground uppercase tracking-widest text-center">Appliances and Accessories</span>
           </div>
           <ProductMarquee />
         </section>
@@ -245,7 +246,7 @@ export default function App() {
                 <div className="text-[15px] text-white font-medium space-y-1">
                     <p>Nairobi West, Nairobi, Kenya</p>
                     <p className="text-white/40">P. O Box 7144- 00200</p>
-                    <div className="pt-3">
+                    <div className="pt-2">
                       <p className="text-primary font-bold">0722522346</p>
                       <p className="text-white/40 lowercase">Info@steakwestbutchery.co.ke</p>
                     </div>
