@@ -239,7 +239,7 @@ export default function App() {
       {/* Footer mini */}
       <footer className="bg-black py-12 border-t border-white/5">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
              <div className="space-y-4">
                 <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Steak West Butchery</p>
                 <div className="space-y-1 text-[13px] text-white/50 font-medium">
@@ -247,6 +247,20 @@ export default function App() {
                    <p>P. O Box 7144- 00200</p>
                 </div>
              </div>
+
+             {/* Partner Section - Moved and Recolored */}
+             <div className="space-y-4">
+                <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Dispatch Partners</p>
+                <div className="flex items-center gap-6">
+                   <div className="relative h-8 w-24">
+                     <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+                   </div>
+                   <div className="relative h-8 w-24">
+                     <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
+                   </div>
+                </div>
+             </div>
+
              <div className="space-y-4 md:text-right">
                 <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Direct Dispatch</p>
                 <div className="space-y-1 text-[13px] text-white/50 font-medium">
@@ -257,15 +271,6 @@ export default function App() {
           </div>
           
           <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-             <div className="flex items-center gap-8 grayscale opacity-30 hover:opacity-100 transition-all duration-500">
-               <div className="relative h-8 w-24">
-                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
-               </div>
-               <div className="relative h-8 w-24">
-                 <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
-               </div>
-             </div>
-             
              <div className="flex flex-col md:flex-row items-center gap-6">
                <p className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
                  © 2026 Steak West Butchery | SUPA YA NYAMA

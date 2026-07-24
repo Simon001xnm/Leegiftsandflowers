@@ -11,7 +11,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-12 items-start">
           {/* Brand Identity */}
-          <div className="md:col-span-5 space-y-6 text-center md:text-left">
+          <div className="md:col-span-4 space-y-6 text-center md:text-left">
             <div className="relative h-20 w-80 mx-auto md:mx-0">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
@@ -28,8 +28,21 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Dispatch Partners Column */}
+          <div className="md:col-span-4 space-y-6">
+             <p className="text-white/30 text-[9px] font-black uppercase tracking-widest">Dispatch Partners</p>
+             <div className="flex items-center gap-6">
+                <div className="relative h-8 w-24">
+                  <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+                </div>
+                <div className="relative h-8 w-24">
+                  <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
+                </div>
+             </div>
+          </div>
+
           {/* Rapid Contact Grid */}
-          <div className="md:col-span-7 grid sm:grid-cols-2 gap-8 text-[11px] font-bold uppercase tracking-widest">
+          <div className="md:col-span-4 grid gap-8 text-[11px] font-bold uppercase tracking-widest">
             <div className="space-y-4">
               <p className="text-white/30 text-[9px] font-black">Dispatch Nodes</p>
               <div className="space-y-3">
@@ -62,15 +75,6 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex items-center gap-8 grayscale opacity-30 hover:opacity-100 transition-all duration-500">
-               <div className="relative h-8 w-24">
-                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
-               </div>
-               <div className="relative h-8 w-24">
-                 <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
-               </div>
-            </div>
-            
             <div className="flex flex-col md:flex-row items-center gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
               <p>© 2026 Steak West Butchery</p>
               <div className="flex gap-4">
