@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -36,7 +35,8 @@ import {
   Cpu,
   Zap,
   Usb,
-  ChevronDown
+  ChevronDown,
+  Plus
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -127,7 +127,7 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
     {
       title: "Settings",
       items: [
-        { label: "Users", icon: Users },
+        { label: "Users", icon: Users, href: "/dashboard/users" },
         { label: "Switch Shop", icon: Store },
       ]
     }
