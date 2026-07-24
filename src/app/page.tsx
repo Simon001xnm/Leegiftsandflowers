@@ -220,18 +220,16 @@ export default function App() {
 
         {/* Rebranded Marquee Section */}
         <section className="pb-24">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-8">
-            <div className="flex items-center gap-3">
-               <div className="relative h-16 w-80 md:h-24 md:w-[500px]">
-                  <Image 
-                    src="/finewood deco merchants.png" 
-                    alt="Finewood deco merchants" 
-                    fill 
-                    className="object-contain object-left" 
-                  />
-               </div>
+          <div className="flex flex-col items-center border-b-2 border-black/5 pb-4 mb-8">
+            <div className="relative h-20 w-80 md:h-28 md:w-[600px]">
+              <Image 
+                src="/deco merchants 2.png" 
+                alt="Finewood deco merchants" 
+                fill 
+                className="object-contain" 
+              />
             </div>
-            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest hidden md:block">Your Extras Plug for Home Appliances and Accessories</p>
+            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-2">Your Extras Plug for Home Appliances and Accessories</p>
           </div>
           <ProductMarquee />
         </section>
