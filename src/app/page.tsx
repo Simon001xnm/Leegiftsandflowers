@@ -236,50 +236,53 @@ export default function App() {
 
       </main>
 
-      {/* Footer mini - Swapped Layout (Info left, Logo right) */}
+      {/* Footer mini - Role-based stack (Info left, Logos right) */}
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-12 gap-12 items-center">
-             {/* Left: Contact Info */}
-             <div className="md:col-span-4 space-y-8">
-                <div className="space-y-4">
-                   <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.2em]">Operating Node</p>
-                   <div className="space-y-1 text-[15px] text-white font-medium">
-                      <p>Nairobi West, Nairobi, Kenya</p>
-                      <p className="text-white/50">P. O Box 7144- 00200</p>
+          <div className="grid md:grid-cols-12 gap-12 items-start">
+             {/* Left: Consolidated Business Info */}
+             <div className="md:col-span-7 space-y-12">
+                <div className="grid sm:grid-cols-2 gap-12">
+                   <div className="space-y-4">
+                      <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Operating Node</p>
+                      <div className="space-y-1 text-[15px] text-white font-medium">
+                         <p>Nairobi West, Nairobi, Kenya</p>
+                         <p className="text-white/40">P. O Box 7144- 00200</p>
+                      </div>
                    </div>
-                </div>
-                <div className="space-y-4">
-                   <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.2em]">Direct Dispatch</p>
-                   <div className="space-y-1 text-[15px] text-white font-medium">
-                      <p className="text-primary font-bold">0722522346</p>
-                      <p className="text-white/50">Info@steakwestbutchery.co.ke</p>
-                   </div>
-                </div>
-             </div>
-
-             {/* Middle: Partners */}
-             <div className="md:col-span-3 space-y-6">
-                <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.2em]">Dispatch Partners</p>
-                <div className="flex items-center gap-6">
-                   <div className="relative h-8 w-24">
-                     <Image src="/images.png" alt="Glovo" fill className="object-contain" />
-                   </div>
-                   <div className="relative h-8 w-24">
-                     <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
+                   <div className="space-y-4">
+                      <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.3em]">Direct Dispatch</p>
+                      <div className="space-y-1 text-[15px] text-white font-medium">
+                         <p className="text-primary font-bold">0722522346</p>
+                         <p className="text-white/40">Info@steakwestbutchery.co.ke</p>
+                      </div>
                    </div>
                 </div>
              </div>
 
-             {/* Right: Big Brand Logo */}
-             <div className="md:col-span-5 flex justify-end">
-                <div className="relative h-24 w-80 md:h-32 md:w-full max-w-[450px]">
+             {/* Right: Brand and Partner Logos (Vertical Stack) */}
+             <div className="md:col-span-5 flex flex-col items-end gap-12">
+                {/* Brand Logo - Enlarged */}
+                <div className="relative h-28 w-full max-w-[450px]">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                     alt="Steak West Brand" 
                     fill 
                     className="object-contain object-right" 
                   />
+                </div>
+
+                {/* Dispatch Partners - Vertically Stacked */}
+                <div className="flex flex-col items-end gap-6">
+                   <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em]">Dispatch Partners</p>
+                   <div className="space-y-6">
+                      <div className="relative h-12 w-32 md:h-14 md:w-36">
+                        <Image src="/images.png" alt="Glovo" fill className="object-contain object-right" />
+                      </div>
+                      <div className="relative h-12 w-32 md:h-14 md:w-36">
+                        <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain object-right" />
+                      </div>
+                   </div>
                 </div>
              </div>
           </div>
