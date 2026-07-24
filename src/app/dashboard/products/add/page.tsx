@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -109,7 +110,6 @@ export default function AddProductPage() {
   return (
     <MerchantDashboardLayout>
       <div className="p-6 max-w-6xl mx-auto space-y-6">
-        {/* Breadcrumb Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button 
@@ -146,7 +146,6 @@ export default function AddProductPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-8">
-          {/* Main Info Column */}
           <div className="lg:col-span-2 space-y-8">
             <Card className="border-slate-200 shadow-sm rounded-xl overflow-hidden">
               <CardHeader className="bg-slate-50/50 border-b border-slate-100">
@@ -329,7 +328,6 @@ export default function AddProductPage() {
             </Card>
           </div>
 
-          {/* Sidebar Column */}
           <div className="space-y-8">
             <Card className="border-slate-200 shadow-sm rounded-xl overflow-hidden">
               <CardHeader className="bg-slate-50/50 border-b border-slate-100">
