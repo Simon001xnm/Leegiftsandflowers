@@ -56,7 +56,7 @@ export const MOCK_EVENTS: EventItem[] = [
     title: 'The Royal Wedding Showcase',
     category: 'Wedding',
     date: '2024-06-15T10:00:00Z',
-    location: 'Stall 16A, City Market, Koinange Street, Nairobi',
+    location: 'Nairobi West, Nairobi',
     price: 4500,
     description: 'An exclusive viewing of our latest luxury wedding floral collections and grand ballroom transformations in the heart of Nairobi.',
     imageUrl: REAL_IMAGES[0],
@@ -84,7 +84,7 @@ export const MOCK_EVENTS: EventItem[] = [
     title: 'Tropical Arrangement Workshop',
     category: 'Workshop',
     date: '2024-05-25T14:00:00Z',
-    location: 'Stall 16A, City Market, Koinange Street, Nairobi',
+    location: 'Nairobi West, Nairobi',
     price: 3500,
     description: 'A hands-on masterclass in our Nairobi studio creating the perfect centerpiece using seasonal tropical blooms.',
     imageUrl: REAL_IMAGES[2],
@@ -124,9 +124,9 @@ export const MOCK_EVENTS: EventItem[] = [
 ];
 
 const productNames = [
-  "Blushing Romance", "Savannah Elegance", "City Market Fresh", "Nairobi Bloom", 
+  "Blushing Romance", "Savannah Elegance", "Nairobi West Fresh", "Nairobi Bloom", 
   "Koinange Special", "Market Day Surprise", "Royal Orchid Mix", "Sunset Safari",
-  "Highland Lilies", "Rift Valley Roses", "Stall 16A Signature", "Tropical Bliss",
+  "Highland Lilies", "Rift Valley Roses", "Signature Cut", "Tropical Bliss",
   "Elegant Ivory", "Crimson Passion", "Velvet Petals", "Morning Dew",
   "Golden Sunbeam", "Midnight Mystery", "Azure Dreams", "Lavender Whisper",
   "Peppermint Fresh", "Summer Solstice", "Autumn Hearth", "Winter Frost",
@@ -142,14 +142,14 @@ export const MOCK_PRODUCTS: ProductItem[] = Array.from({ length: 40 }).map((_, i
   id: `p${i + 1}`,
   name: productNames[i % productNames.length],
   price: 1500 + (Math.floor(Math.random() * 20) * 500),
-  description: `A beautiful hand-crafted arrangement from Lee Decors Stall 16A, featuring the freshest seasonal blooms available in Nairobi.`,
+  description: `A beautiful hand-crafted arrangement from Lee Decors Nairobi West, featuring the freshest seasonal blooms available in Nairobi.`,
   imageUrl: REAL_IMAGES[i % REAL_IMAGES.length],
   category: categories[i % categories.length]
 }));
 
 export const MOCK_GALLERY: GalleryItem[] = REAL_IMAGES.map((img, i) => ({
   id: `g${i + 1}`,
-  title: i === 0 ? 'Our Market Stall' : `Signature Work ${i}`,
-  description: i === 0 ? 'Stall 16A at the iconic City Market, Nairobi.' : 'Exquisite floral artistry from Lee Decors.',
+  title: i === 0 ? 'Our Main Node' : `Signature Work ${i}`,
+  description: i === 0 ? 'Our distribution center at the iconic Nairobi West.' : 'Exquisite floral artistry from Lee Decors.',
   imageUrl: img
 }));

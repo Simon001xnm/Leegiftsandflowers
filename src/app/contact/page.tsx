@@ -1,8 +1,7 @@
-
 'use client';
 
 import React from "react";
-import { Mail, Phone, MapPin, MessageSquare, Send } from "lucide-react";
+import { Mail, Phone, MapPin, MessageSquare, Send, Box } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,9 +18,10 @@ export default function ContactPage() {
             </header>
 
             <div className="space-y-8">
-              <ContactLink icon={Phone} title="Call us" value="+254 704 524070" href="tel:+254704524070" />
-              <ContactLink icon={Mail} title="Email support" value="dispatch@steakwest.co.ke" href="mailto:dispatch@steakwest.co.ke" />
-              <ContactLink icon={MapPin} title="Main node" value="Stall 16A, City Market, Nairobi" />
+              <ContactLink icon={Phone} title="Call us" value="0722522346" href="tel:0722522346" />
+              <ContactLink icon={Mail} title="Email support" value="Info@steakwestbutchery.co.ke" href="mailto:Info@steakwestbutchery.co.ke" />
+              <ContactLink icon={Box} title="Mailing address" value="P. O Box 7144- 00200" />
+              <ContactLink icon={MapPin} title="Main node" value="Nairobi West, Nairobi" />
               <ContactLink icon={MessageSquare} title="Live chat" value="Available 8am - 10pm daily" />
             </div>
           </div>

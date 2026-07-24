@@ -1,4 +1,3 @@
-
 "use client";
 
 import { MOCK_GALLERY } from "@/lib/events-data";
@@ -18,7 +17,7 @@ export default function GalleryPage() {
           </Badge>
           <h1 className="text-4xl lg:text-6xl font-bold font-headline text-primary mb-6">Floral Gallery</h1>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Step into the world of Lee Decors. From our daily operations at Stall 16A, City Market to the grandest venues in Nairobi, see the passion we put into every arrangement.
+            Step into the world of Lee Decors. From our daily operations at Nairobi West to the grandest venues in Nairobi, see the passion we put into every arrangement.
           </p>
         </header>
 

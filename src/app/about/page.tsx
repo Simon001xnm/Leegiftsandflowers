@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -25,7 +24,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-center p-8">
              <div className="max-w-2xl space-y-4">
                 <h2 className="text-3xl md:text-4xl text-white font-medium">Quality you can trust.</h2>
-                <p className="text-white/80">Every cut is inspected by our master butchers at Stall 16A, City Market, ensuring you get nothing but the best.</p>
+                <p className="text-white/80">Every cut is inspected by our master butchers at Nairobi West, ensuring you get nothing but the best.</p>
              </div>
           </div>
         </section>
@@ -39,16 +38,16 @@ export default function AboutPage() {
         <section className="bg-gray-50 rounded-[3rem] p-10 md:p-20 flex flex-col md:flex-row items-center gap-12">
            <div className="space-y-6 flex-grow">
               <h2 className="text-4xl font-medium tracking-tight">Visit our node.</h2>
-              <p className="text-muted-foreground leading-relaxed">Located in the heart of Nairobi, our main distribution center at City Market handles thousands of orders daily. Come experience the freshness first hand.</p>
+              <p className="text-muted-foreground leading-relaxed">Located in the heart of Nairobi, our main distribution center at Nairobi West handles thousands of orders daily. Come experience the freshness first hand.</p>
               <div className="flex items-center gap-3 text-red-600 font-bold">
                  <MapPin className="w-5 h-5" />
-                 <span>Stall 16A, City Market, Nairobi</span>
+                 <span>Nairobi West, Nairobi, Kenya</span>
               </div>
            </div>
            <div className="relative w-full md:w-[300px] h-[300px] shrink-0">
               <Image 
                 src="https://picsum.photos/seed/market/600/600" 
-                alt="City Market Location" 
+                alt="Nairobi West Location" 
                 fill 
                 className="object-cover rounded-full border-8 border-white shadow-2xl"
               />

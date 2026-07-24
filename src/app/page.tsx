@@ -8,6 +8,7 @@ import {
   Tag,
   TrendingUp,
   Zap,
+  ShoppingBag
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -210,22 +211,48 @@ export default function App() {
           </div>
         </section>
 
-        {/* Left-to-Right Moving Product Marquee */}
-        <ProductMarquee />
+        {/* Rebranded Marquee Section */}
+        <section className="pb-24">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-8">
+            <div className="flex items-center gap-3">
+               <ShoppingBag className="w-5 h-5 text-blue-600" />
+               <h2 className="text-2xl font-medium tracking-tight">Finewood deco merchants</h2>
+            </div>
+            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest hidden md:block">Your Extras Plug for Home Appliances and Accessories</p>
+          </div>
+          <ProductMarquee />
+        </section>
 
       </main>
 
       {/* Footer mini */}
-      <footer className="bg-black py-8 border-t border-white/5">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-           <p className="text-[11px] font-medium text-white tracking-wide">
-             © 2026 Steak West Butchery | SUPA YA NYAMA
-           </p>
-           <div className="flex gap-8">
-             <Link href="/privacy" className="text-[11px] font-medium text-white/50 hover:text-white">Privacy</Link>
-             <Link href="/terms" className="text-[11px] font-medium text-white/50 hover:text-white">Terms</Link>
-             <span className="text-red-600 font-bold text-[11px]">+254 704 524070</span>
-           </div>
+      <footer className="bg-black py-12 border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+             <div className="space-y-4">
+                <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Steak West Butchery</p>
+                <div className="space-y-1 text-[13px] text-white/50 font-medium">
+                   <p>Nairobi West, Nairobi, Kenya</p>
+                   <p>P. O Box 7144- 00200</p>
+                </div>
+             </div>
+             <div className="space-y-4 md:text-right">
+                <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Direct Dispatch</p>
+                <div className="space-y-1 text-[13px] text-white/50 font-medium">
+                   <p>0722522346</p>
+                   <p>Info@steakwestbutchery.co.ke</p>
+                </div>
+             </div>
+          </div>
+          <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+             <p className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
+               © 2026 Steak West Butchery | SUPA YA NYAMA
+             </p>
+             <div className="flex gap-8">
+               <Link href="/privacy" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Privacy</Link>
+               <Link href="/terms" className="text-[10px] font-medium text-white/30 hover:text-white uppercase tracking-widest">Terms</Link>
+             </div>
+          </div>
         </div>
       </footer>
     </div>
@@ -251,7 +278,7 @@ function ProductMarquee() {
   };
   
   return (
-    <section className="py-20 overflow-hidden bg-white border-t border-gray-100 -mx-4">
+    <div className="py-10 overflow-hidden bg-gray-50/50 rounded-[3rem] border border-gray-100">
       <div className="flex">
         <motion.div 
           className="flex"
@@ -266,14 +293,14 @@ function ProductMarquee() {
           {[...marqueeProducts, ...marqueeProducts, ...marqueeProducts, ...marqueeProducts].map((p, i) => (
             <div 
               key={`${p.id}-${i}`} 
-              className="w-[180px] md:w-[220px] shrink-0 border-l first:border-l-0"
+              className="w-[180px] md:w-[220px] shrink-0 border-r border-gray-100 last:border-r-0"
             >
               <ProductCard product={p} onAdd={handleAddToCart} />
             </div>
           ))}
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -292,7 +319,7 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
 function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void }) {
   return (
     <motion.div 
-      className="flex flex-col group border-r border-b border-gray-100 bg-white relative z-0 overflow-hidden"
+      className="flex flex-col group bg-white relative z-0 overflow-hidden"
       whileHover={{ 
         scale: [1, 1.04, 1],
         zIndex: 10,
