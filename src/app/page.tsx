@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -163,7 +162,7 @@ export default function App() {
       <main className="container mx-auto px-4">
         
         {/* Flash deals */}
-        <section className="py-6 md:py-8">
+        <section className="py-4">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
@@ -182,7 +181,7 @@ export default function App() {
         </section>
 
         {/* Elite selection */}
-        <section className="pb-4">
+        <section className="py-4">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
@@ -201,7 +200,7 @@ export default function App() {
         </section>
 
         {/* Drinks refreshment */}
-        <section className="pb-4">
+        <section className="py-4">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-4 mb-0">
             <div className="flex items-center gap-3">
                <Zap className="w-5 h-5 text-red-600" />
@@ -220,10 +219,10 @@ export default function App() {
         </section>
 
         {/* Finewood Marquee Section - NO ROUNDED CORNERS */}
-        <section className="pb-8">
+        <section className="pb-8 pt-4">
           <div className="flex flex-row items-center justify-between gap-4 border-b-2 border-black/5 pb-4 mb-4">
             <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest">Your Extras Plug</span>
-            <div className="relative h-12 w-48 md:h-20 md:w-80 shrink-0">
+            <div className="relative h-14 w-56 md:h-28 md:w-[400px] shrink-0">
               <Image 
                 src="/finewood deco merchants 2.png" 
                 alt="Finewood deco merchants" 
@@ -257,14 +256,14 @@ export default function App() {
              {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - DISTRIBUTED */}
              <div className="md:col-span-8 flex flex-row items-center justify-between w-full pt-10 md:pt-0">
                 {/* Site Logo & Partners Row */}
-                <div className="flex flex-row items-center justify-between w-full gap-4">
-                  <div className="relative h-12 w-28 md:h-20 md:w-48 shrink-0">
+                <div className="flex flex-row items-center justify-between w-full gap-2">
+                  <div className="relative h-16 w-36 md:h-32 md:w-64 shrink-0">
                     <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
                   </div>
-                  <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0">
+                  <div className="relative h-14 w-32 md:h-28 md:w-56 shrink-0">
                     <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                   </div>
-                  <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0">
+                  <div className="relative h-14 w-32 md:h-28 md:w-56 shrink-0">
                     <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                   </div>
                 </div>
