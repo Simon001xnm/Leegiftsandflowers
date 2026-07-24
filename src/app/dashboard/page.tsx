@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { useUser } from "@/firebase/auth/use-user";
 import { 
   Plus, 
   ShoppingCart, 
@@ -26,17 +27,23 @@ import {
   Settings, 
   ArrowRight,
   Search,
-  CheckCircle2
+  CheckCircle2,
+  Users,
+  ShieldCheck,
+  UserPlus
 } from "lucide-react";
 import Image from "next/image";
 
 export default function MerchantDashboard() {
   const { toast } = useToast();
+  const { user: currentUser } = useUser();
   const supabase = createClient();
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
+  const [teamMembers, setTeamMembers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [addingProduct, setAddingProduct] = useState(false);
+  const [addingUser, setAddingUser] = useState(false);
   const [posCart, setPosCart] = useState<any[]>([]);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,6 +55,15 @@ export default function MerchantDashboard() {
     description: "",
     image_url: ""
   });
+
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    role: "cashier"
+  });
+
+  // Current user's role check (In a real app, this would be fetched from the profile)
+  const userRole = currentUser?.user_metadata?.role || "admin";
 
   async function loadData() {
     setLoading(true);
@@ -72,6 +88,22 @@ export default function MerchantDashboard() {
         if (categoriesData.length > 0 && !newProduct.category_id) {
           setNewProduct(prev => ({ ...prev, category_id: categoriesData[0].id }));
         }
+      }
+
+      // Load Team Members (Mocking or fetching from profiles)
+      const { data: profilesData } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('role', 'merchant'); // This might need adjustment based on your schema
+      
+      if (profilesData) setTeamMembers(profilesData);
+      else {
+        // Fallback for demo
+        setTeamMembers([
+          { id: '1', name: 'Alex Admin', email: 'admin@steakwest.com', role: 'admin' },
+          { id: '2', name: 'Jane Manager', email: 'jane@steakwest.com', role: 'manager' },
+          { id: '3', name: 'Bob Cashier', email: 'bob@steakwest.com', role: 'cashier' },
+        ]);
       }
     } catch (e) {
       console.warn("Load deferred");
@@ -134,6 +166,23 @@ export default function MerchantDashboard() {
     setAddingProduct(false);
   };
 
+  const handleAddUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAddingUser(true);
+    // In a real app, this would use auth.signUp or an edge function
+    // For this prototype, we'll simulate adding to the local list
+    const newUserEntry = {
+      id: Math.random().toString(36).substr(2, 9),
+      ...newUser,
+      created_at: new Date().toISOString()
+    };
+    
+    setTeamMembers(prev => [...prev, newUserEntry]);
+    toast({ title: "User added", description: `${newUser.name} is now authorized as ${newUser.role}.` });
+    setNewUser({ name: "", email: "", role: "cashier" });
+    setAddingUser(false);
+  };
+
   const toggleStock = async (id: string, currentStatus: boolean) => {
     const { error } = await supabase
       .from('products')
@@ -165,7 +214,6 @@ export default function MerchantDashboard() {
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] flex flex-col pt-24">
-      {/* Dynamic Command Bar - Sticky below the global nav */}
       <header className="sticky top-24 z-30 bg-white/80 backdrop-blur-md border-b px-6 py-4 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
@@ -207,20 +255,26 @@ export default function MerchantDashboard() {
       </header>
 
       <main className="flex-grow p-6 lg:p-10 pb-32 container mx-auto max-w-7xl">
-        {/* Quick Analytics Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
           <QuickStat icon={TrendingUp} label="Daily sales" value="KES 42.5K" color="text-emerald-600" bg="bg-emerald-50" />
           <QuickStat icon={Package} label="Active items" value={products.length.toString()} color="text-blue-600" bg="bg-blue-50" />
           <QuickStat icon={ShoppingCart} label="Orders today" value="18" color="text-orange-600" bg="bg-orange-50" />
-          <QuickStat icon={CheckCircle2} label="Fill rate" value="98%" color="text-purple-600" bg="bg-purple-50" />
+          <QuickStat icon={Users} label="Active team" value={teamMembers.length.toString()} color="text-purple-600" bg="bg-purple-50" />
         </div>
 
         <Tabs defaultValue="pos" className="space-y-8">
           <div className="flex items-center justify-between">
             <TabsList className="bg-gray-100/80 p-1.5 rounded-2xl h-14 border shadow-inner">
               <TabsTrigger value="pos" className="rounded-xl font-bold text-sm px-8 data-[state=active]:bg-white data-[state=active]:shadow-md transition-all">Shop floor</TabsTrigger>
-              <TabsTrigger value="inventory" className="rounded-xl font-bold text-sm px-8 data-[state=active]:bg-white data-[state=active]:shadow-md transition-all">Stock list</TabsTrigger>
-              <TabsTrigger value="add" className="rounded-xl font-bold text-sm px-8 data-[state=active]:bg-white data-[state=active]:shadow-md transition-all text-primary">Add item</TabsTrigger>
+              {(userRole === 'admin' || userRole === 'manager') && (
+                <TabsTrigger value="inventory" className="rounded-xl font-bold text-sm px-8 data-[state=active]:bg-white data-[state=active]:shadow-md transition-all">Stock list</TabsTrigger>
+              )}
+              {userRole === 'admin' && (
+                <>
+                  <TabsTrigger value="add" className="rounded-xl font-bold text-sm px-8 data-[state=active]:bg-white data-[state=active]:shadow-md transition-all text-primary">Add item</TabsTrigger>
+                  <TabsTrigger value="team" className="rounded-xl font-bold text-sm px-8 data-[state=active]:bg-white data-[state=active]:shadow-md transition-all">Team</TabsTrigger>
+                </>
+              )}
             </TabsList>
           </div>
 
@@ -497,6 +551,133 @@ export default function MerchantDashboard() {
                   </form>
                 </CardContent>
               </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="team" className="space-y-8">
+            <div className="grid lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-8">
+                <Card className="rounded-[3rem] border shadow-sm overflow-hidden bg-white">
+                  <div className="p-8 border-b bg-gray-50/50">
+                    <h3 className="text-xl font-bold flex items-center gap-2">
+                      <Users className="w-5 h-5 text-primary" /> Node team
+                    </h3>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead className="bg-gray-50 border-b">
+                        <tr>
+                          <th className="px-8 py-5 text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Identity</th>
+                          <th className="px-8 py-5 text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Authorized Role</th>
+                          <th className="px-8 py-5 text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Status</th>
+                          <th className="px-8 py-5 text-right text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100">
+                        {teamMembers.map(member => (
+                          <tr key={member.id} className="hover:bg-gray-50/50 transition-colors">
+                            <td className="px-8 py-5">
+                              <div className="flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                                  {member.name.charAt(0)}
+                                </div>
+                                <div>
+                                  <p className="font-medium text-[14px] text-gray-900">{member.name}</p>
+                                  <p className="text-[11px] text-muted-foreground">{member.email}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-8 py-5">
+                               <Badge variant="outline" className={cn(
+                                 "font-bold rounded-lg px-3 py-1 text-[10px] uppercase tracking-widest",
+                                 member.role === 'admin' ? "border-primary text-primary" : "border-gray-300 text-gray-500"
+                               )}>
+                                 {member.role}
+                               </Badge>
+                            </td>
+                            <td className="px-8 py-5">
+                               <div className="flex items-center gap-2">
+                                  <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                                  <span className="text-[10px] font-bold uppercase text-emerald-600">Active</span>
+                               </div>
+                            </td>
+                            <td className="px-8 py-5 text-right">
+                               <Button variant="ghost" size="sm" className="text-gray-400 hover:text-red-500">
+                                  <Trash2 className="w-4 h-4" />
+                               </Button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </Card>
+              </div>
+
+              <div className="lg:col-span-4">
+                <Card className="rounded-[2.5rem] border shadow-2xl bg-white overflow-hidden">
+                  <CardHeader className="bg-black text-white p-8">
+                    <CardTitle className="text-[14px] font-bold uppercase tracking-widest flex items-center gap-2">
+                      <UserPlus className="w-4 h-4" /> Authorize new entity
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-8">
+                    <form onSubmit={handleAddUser} className="space-y-6">
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest ml-1">Full identity</Label>
+                          <Input 
+                            required
+                            placeholder="e.g. John Kuria" 
+                            className="rounded-2xl border-gray-100 h-14 bg-gray-50 focus:bg-white transition-all"
+                            value={newUser.name}
+                            onChange={e => setNewUser({...newUser, name: e.target.value})}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest ml-1">Email address</Label>
+                          <Input 
+                            required
+                            type="email"
+                            placeholder="john@steakwest.com" 
+                            className="rounded-2xl border-gray-100 h-14 bg-gray-50 focus:bg-white transition-all"
+                            value={newUser.email}
+                            onChange={e => setNewUser({...newUser, email: e.target.value})}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest ml-1">System role</Label>
+                          <select 
+                            className="w-full h-14 rounded-2xl bg-gray-50 border border-gray-100 px-4 text-sm font-medium outline-none focus:bg-white transition-all appearance-none"
+                            value={newUser.role}
+                            onChange={e => setNewUser({...newUser, role: e.target.value})}
+                            required
+                          >
+                            <option value="cashier">Cashier (Shop floor only)</option>
+                            <option value="manager">Manager (Inventory + Sales)</option>
+                            <option value="admin">Admin (Full access)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <Button 
+                        type="submit" 
+                        className="w-full h-16 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 text-base"
+                        disabled={addingUser}
+                      >
+                        {addingUser ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : "Authorize entry"}
+                      </Button>
+
+                      <div className="flex items-center gap-3 p-4 bg-muted/50 rounded-2xl border border-dashed">
+                        <ShieldCheck className="w-5 h-5 text-emerald-600" />
+                        <p className="text-[10px] font-medium text-muted-foreground leading-tight">
+                          Roles define data visibility. Admins manage the entire node structure.
+                        </p>
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </TabsContent>
         </Tabs>
