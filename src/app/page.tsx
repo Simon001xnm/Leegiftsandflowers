@@ -262,28 +262,25 @@ export default function App() {
              </div>
 
              {/* Right: LOGOS - HORIZONTAL LAYOUT */}
-             <div className="md:col-span-6 flex flex-col items-end gap-12">
-                {/* Brand Logo - Enlarged Anchor */}
-                <div className="relative h-28 w-full max-w-[450px]">
+             <div className="md:col-span-6 flex flex-row items-center justify-end gap-10">
+                {/* Brand Logo */}
+                <div className="relative h-24 w-64 md:h-28 md:w-80">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                     alt="Steak West Brand" 
                     fill 
-                    className="object-contain object-right" 
+                    className="object-contain" 
                   />
                 </div>
 
-                {/* Dispatch Partners - HORIZONTAL STRIP */}
-                <div className="flex flex-col items-end gap-6">
-                   <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em]">Dispatch Partners</p>
-                   <div className="flex flex-row gap-8 items-center">
-                      <div className="relative h-10 w-24 md:h-12 md:w-28">
-                        <Image src="/images.png" alt="Glovo" fill className="object-contain" />
-                      </div>
-                      <div className="relative h-10 w-24 md:h-12 md:w-28">
-                        <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
-                      </div>
-                   </div>
+                {/* Dispatch Partner Logos */}
+                <div className="flex flex-row gap-6 items-center">
+                  <div className="relative h-10 w-24 md:h-12 md:w-28">
+                    <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+                  </div>
+                  <div className="relative h-10 w-24 md:h-12 md:w-28">
+                    <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
+                  </div>
                 </div>
              </div>
           </div>
