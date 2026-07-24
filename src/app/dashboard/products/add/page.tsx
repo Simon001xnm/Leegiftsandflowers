@@ -56,7 +56,6 @@ export default function AddProductPage() {
     stock: 0,
     low_stock_threshold: 10,
     expiry_date: "",
-    batch_number: "",
     description: "",
     is_butchery_product: true,
   });
@@ -350,7 +349,7 @@ export default function AddProductPage() {
             <Card className="border-slate-200 shadow-sm rounded-xl overflow-hidden">
               <CardHeader className="bg-slate-50/50 border-b border-slate-100">
                 <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3">
-                  <Calendar className="w-4 h-4 text-slate-400" /> Batch & Lifecycle
+                  <Calendar className="w-4 h-4 text-slate-400" /> Lifecycle
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
@@ -364,17 +363,6 @@ export default function AddProductPage() {
                     className="h-11 bg-slate-50/50 border-slate-200"
                   />
                   <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider ml-1">Optional: Set for fresh items</p>
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-[12px] font-bold text-slate-500 uppercase tracking-widest ml-1">Batch number</Label>
-                  <Input 
-                    name="batch_number"
-                    placeholder="Enter batch number" 
-                    value={formData.batch_number}
-                    onChange={handleInputChange}
-                    className="h-11 bg-slate-50/50 border-slate-200"
-                  />
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider ml-1">Tracking for inventory nodes</p>
                 </div>
               </CardContent>
             </Card>

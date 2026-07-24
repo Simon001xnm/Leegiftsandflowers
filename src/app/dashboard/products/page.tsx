@@ -37,6 +37,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MerchantDashboardLayout } from "@/components/dashboard/MerchantDashboardLayout";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function ProductsPage() {
   const supabase = createClient();
@@ -131,8 +132,6 @@ export default function ProductsPage() {
             </SelectContent>
           </Select>
 
-          <Input placeholder="Filter Batch No." className="w-40 h-10 bg-white border-slate-200 text-[13px]" />
-
           <div className="flex gap-2 ml-auto">
             <Button className="bg-[#3b82f6] hover:bg-[#2563eb] h-10 px-6 font-bold text-[13px]">Filter</Button>
             <Button variant="outline" className="bg-[#64748b] hover:bg-[#475569] text-white border-none h-10 px-6 font-bold text-[13px]">Reset</Button>
@@ -147,7 +146,6 @@ export default function ProductsPage() {
                 <TableHead className="w-[40px] px-4"><Checkbox className="border-slate-300" /></TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Image</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Name</TableHead>
-                <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Barcode</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Category</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Unit</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Cost</TableHead>
@@ -156,7 +154,6 @@ export default function ProductsPage() {
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Price 3</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Stock</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Expiry</TableHead>
-                <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Batch No.</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider">Status</TableHead>
                 <TableHead className="text-[12px] font-black uppercase text-slate-500 tracking-wider text-right pr-6">Actions</TableHead>
               </TableRow>
@@ -164,13 +161,13 @@ export default function ProductsPage() {
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={15} className="h-32 text-center text-slate-400 font-bold uppercase text-[11px] tracking-widest">
+                  <TableCell colSpan={13} className="h-32 text-center text-slate-400 font-bold uppercase text-[11px] tracking-widest">
                     Synchronizing Inventory Node...
                   </TableCell>
                 </TableRow>
               ) : filteredProducts.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={15} className="h-32 text-center text-slate-400 font-bold uppercase text-[11px] tracking-widest">
+                  <TableCell colSpan={13} className="h-32 text-center text-slate-400 font-bold uppercase text-[11px] tracking-widest">
                     No products matching your criteria
                   </TableCell>
                 </TableRow>
@@ -188,7 +185,6 @@ export default function ProductsPage() {
                     </div>
                   </TableCell>
                   <TableCell className="font-bold text-[13px] text-slate-700 max-w-[200px] truncate">{p.name}</TableCell>
-                  <TableCell className="text-[13px] text-slate-500 font-medium">{p.barcode || "706710"}</TableCell>
                   <TableCell className="text-[12px] font-bold text-slate-500 uppercase">{p.category || "CHEMSHA"}</TableCell>
                   <TableCell className="text-[13px] text-slate-500">{p.unit_of_measure || "kg"}</TableCell>
                   <TableCell className="text-[13px] text-slate-500">{p.cost_price?.toLocaleString() || "0.00"}</TableCell>
@@ -204,7 +200,6 @@ export default function ProductsPage() {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-[13px] text-slate-400 font-medium">{p.expiry_date ? new Date(p.expiry_date).toLocaleDateString() : "-"}</TableCell>
-                  <TableCell className="text-[13px] text-slate-400 font-medium">{p.batch_number || "-"}</TableCell>
                   <TableCell>
                     <Badge className="bg-[#22c55e] text-white hover:bg-[#22c55e] border-none rounded-md px-2 py-0.5 font-bold text-[10px] uppercase tracking-wider">
                       Active
