@@ -12,7 +12,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-8 items-center">
           
-          {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
+          {/* Left: Operational Information Stack */}
           <div className="md:col-span-5 flex flex-col">
                <div className="text-[15px] text-white/90 font-medium space-y-1">
                   <p>Nairobi West, Nairobi, Kenya</p>
@@ -24,19 +24,19 @@ export function Footer() {
                </div>
           </div>
 
-          {/* Right: LOGOS - SYMMETRIC HORIZONTAL SPREAD WITH BALANCED MARGINS & MAX WIDTH ON LARGE SCREENS */}
+          {/* Right: Partner Logos - SYMMETRIC SPREAD WITH MARGIN */}
           <div className="md:col-span-7 w-full pt-10 md:pt-0">
-            <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-16 max-w-3xl ml-auto">
-              <div className="relative h-20 w-36 md:h-24 md:w-56 shrink-0">
+            <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-12 max-w-4xl ml-auto">
+              <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
                 <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
               </div>
-              <div className="relative h-20 w-36 md:h-24 md:w-56 shrink-0">
+              <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
                 <Image src="/finewood deco merchants 2.png" alt="Finewood Deco" fill className="object-contain" />
               </div>
-              <div className="relative h-16 w-28 md:h-20 md:w-44 shrink-0">
+              <div className="relative h-12 w-24 md:h-16 md:w-44 shrink-0">
                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
               </div>
-              <div className="relative h-16 w-28 md:h-20 md:w-44 shrink-0">
+              <div className="relative h-12 w-24 md:h-16 md:w-44 shrink-0">
                 <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
               </div>
             </div>

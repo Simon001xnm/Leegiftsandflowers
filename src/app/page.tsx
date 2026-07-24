@@ -160,11 +160,11 @@ export default function App() {
       </section>
 
       {/* Retail discovery grid */}
-      <main className="container mx-auto px-4">
+      <main className="container mx-auto px-1 md:px-4">
         
         {/* Flash deals - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-0">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Flash deals</h2>
@@ -174,7 +174,7 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(0, 16).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -183,7 +183,7 @@ export default function App() {
 
         {/* Elite selection - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-0">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Elite selection</h2>
@@ -193,7 +193,7 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(16, 32).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -202,7 +202,7 @@ export default function App() {
 
         {/* Drinks refreshment - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-0">
             <div className="flex items-center gap-3">
                <Zap className="w-5 h-5 text-red-600" />
                <h2 className="text-2xl font-medium tracking-tight">Drinks refreshment</h2>
@@ -212,7 +212,7 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-gray-100">
             {products.slice(32, 48).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -221,7 +221,7 @@ export default function App() {
 
         {/* Finewood Marquee Section - CLEAN TYPOGRAPHIC SIGNATURE */}
         <section className="pb-4 pt-2">
-          <div className="border-b-2 border-black/5 pb-2 mb-2 text-center">
+          <div className="border-b-2 border-black/5 pb-2 mb-2 text-center px-4">
             <span className="text-[10px] md:text-[22px] font-black text-black uppercase tracking-tight leading-tight block">
               your plug for home appliances, phones and accessories.
             </span>
@@ -235,7 +235,7 @@ export default function App() {
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-8 items-center">
-             {/* Left: WORDS (Information) - STRICT VERTICAL STACK */}
+             {/* Left: Information Stack */}
              <div className="md:col-span-5 flex flex-col">
                 <div className="text-[15px] text-white font-medium space-y-1">
                     <p>Nairobi West, Nairobi, Kenya</p>
@@ -247,19 +247,19 @@ export default function App() {
                 </div>
              </div>
 
-             {/* Right: LOGOS - SYMMETRIC HORIZONTAL SPREAD WITH BALANCED MARGINS */}
+             {/* Right: Partner Logos - SYMMETRIC SPREAD */}
              <div className="md:col-span-7 w-full pt-10 md:pt-0">
-                <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-16 max-w-3xl ml-auto">
-                  <div className="relative h-20 w-36 md:h-24 md:w-56 shrink-0">
+                <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-12 max-w-4xl ml-auto">
+                  <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
                     <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
                   </div>
-                  <div className="relative h-20 w-36 md:h-24 md:w-56 shrink-0">
+                  <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
                     <Image src="/finewood deco merchants 2.png" alt="Finewood Deco" fill className="object-contain" />
                   </div>
-                  <div className="relative h-16 w-28 md:h-20 md:w-44 shrink-0">
+                  <div className="relative h-12 w-24 md:h-16 md:w-44 shrink-0">
                     <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                   </div>
-                  <div className="relative h-16 w-28 md:h-20 md:w-44 shrink-0">
+                  <div className="relative h-12 w-24 md:h-16 md:w-44 shrink-0">
                     <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                   </div>
                 </div>
@@ -315,7 +315,7 @@ function ProductMarquee() {
           {[...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS].map((p, i) => (
             <div 
               key={`${p.id}-${i}`} 
-              className="w-[180px] md:w-[220px] shrink-0 border-r border-gray-100 last:border-r-0"
+              className="w-[140px] md:w-[220px] shrink-0 border-r border-gray-100 last:border-r-0"
             >
               <ProductCard product={p} onAdd={handleAddToCart} />
             </div>
@@ -342,17 +342,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
   return (
     <motion.div 
       className="flex flex-col group bg-white relative z-0 overflow-hidden"
-      whileHover={{ 
-        scale: [1, 1.04, 1],
-        zIndex: 10,
-        transition: { 
-          repeat: Infinity, 
-          duration: 0.8,
-          ease: "easeInOut"
-        }
-      }}
     >
-      <div className="relative aspect-square bg-gray-50 overflow-hidden transition-colors duration-500 group-hover:bg-white">
+      <div className="relative aspect-square bg-gray-50 overflow-hidden">
         <Image 
           src={product.image} 
           alt={product.name} 
@@ -361,8 +352,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
         />
 
         {product.discount && (
-          <div className="absolute top-2 left-2 z-10">
-            <span className="bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow-lg">
+          <div className="absolute top-1 left-1 md:top-2 md:left-2 z-10">
+            <span className="bg-red-600 text-white text-[7px] md:text-[9px] font-bold px-1 py-0.5 rounded shadow-lg">
               {product.discount}
             </span>
           </div>
@@ -373,22 +364,22 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
             e.stopPropagation();
             onAdd(product);
           }}
-          className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white hover:scale-110 active:scale-90 transition-all z-20 group/btn"
+          className="absolute bottom-1 right-1 w-7 h-7 md:w-10 md:h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white transition-all z-20 group/btn"
         >
-          <Plus className="w-5 h-5 md:w-6 md:h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
+          <Plus className="w-4 h-4 md:w-6 md:h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
         </button>
       </div>
 
-      <div className="space-y-1 p-3 md:p-4 bg-white">
-        <h3 className="text-[9px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">
+      <div className="space-y-1 p-2 md:p-4 bg-white">
+        <h3 className="text-[8px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">
           {product.name}
         </h3>
         <div className="flex flex-col">
-          <span className="text-[10px] md:text-[14px] font-bold text-black">
+          <span className="text-[9px] md:text-[14px] font-bold text-black">
             KSh {product.price.toLocaleString()}
           </span>
           {product.oldPrice && (
-            <span className="text-[8px] md:text-[11px] text-gray-400 line-through font-normal">
+            <span className="text-[7px] md:text-[11px] text-gray-400 line-through font-normal">
               KSh {product.oldPrice.toLocaleString()}
             </span>
           )}
