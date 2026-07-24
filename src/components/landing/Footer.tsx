@@ -7,7 +7,7 @@ import { Facebook, Instagram, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white border-t border-white/5 py-20">
+    <footer className="bg-black text-white border-t border-white/5 py-16">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-8 items-center">
           
@@ -43,7 +43,7 @@ export function Footer() {
         </div>
 
         {/* Desktop-only copyright and legal bar */}
-        <div className="mt-20 pt-8 border-t border-white/5 hidden md:flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="mt-16 pt-8 border-t border-white/5 hidden md:flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex flex-col md:flex-row items-center gap-8 text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">
               <p>© 2026 Steak West Butchery | SUPA YA NYAMA</p>

@@ -218,11 +218,12 @@ export default function App() {
           </div>
         </section>
 
-        {/* Finewood Marquee Section - ZERO MARGIN SIGNATURE */}
+        {/* Finewood Marquee Section - CLEAN TYPOGRAPHIC SIGNATURE */}
         <section className="pb-4 pt-2">
-          <div className="flex flex-row items-center justify-between gap-4 border-b-2 border-black/5 pb-2 mb-2">
-            <span className="text-[12px] md:text-[22px] font-black text-black uppercase tracking-tight shrink-0">Your Extras Plug</span>
-            <span className="text-[10px] md:text-[22px] font-black text-black uppercase tracking-tight text-right leading-tight shrink-0">your plug for home appliances ,phones and accessories.</span>
+          <div className="border-b-2 border-black/5 pb-2 mb-2 text-center">
+            <span className="text-[10px] md:text-[22px] font-black text-black uppercase tracking-tight leading-tight block">
+              your plug for home appliances, phones and accessories.
+            </span>
           </div>
           <ProductMarquee />
         </section>
