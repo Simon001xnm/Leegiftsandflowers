@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from "react";
@@ -284,7 +285,7 @@ function ProductMarquee() {
   };
   
   return (
-    <div className="py-10 overflow-hidden bg-gray-50/50 rounded-[3rem] border border-gray-100">
+    <div className="py-10 overflow-hidden bg-gray-50/50 border border-gray-100 rounded-none">
       <div className="flex">
         <motion.div 
           className="flex"

@@ -1,3 +1,4 @@
+
 export type FoodCategory = 'Raw Meat' | 'Nyama Choma' | 'Delicacies' | 'Cooked' | 'Sides' | 'Drinks' | 'Grocery' | 'Essentials';
 export type OrderStatus = 'Pending' | 'Preparing' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
 
@@ -47,19 +48,19 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
     deliveryFee: 100,
     imageUrl: "/BEEF TAKEAWAY.jpg",
     description: 'Nairobi\'s finest selection of premium beef, goat, and pork. Fresh from the farm.',
-    location: 'Westlands, Nairobi',
+    location: 'Nairobi West, Nairobi',
     isFeatured: true
   },
   {
     id: 'r2',
-    name: 'City Market Choma Grill',
+    name: 'Nairobi West Choma Node',
     category: 'Nyama Choma',
     rating: 4.8,
     deliveryTime: '30-45 min',
     deliveryFee: 150,
     imageUrl: "/BEEF CHOMA.jpg",
     description: 'Expertly grilled Nyama Choma, served hot with legendary kachumbari.',
-    location: 'Koinange St, Nairobi',
+    location: 'Nairobi West, Nairobi',
     isFeatured: true
   }
 ];
