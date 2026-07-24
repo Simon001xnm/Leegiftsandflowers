@@ -210,6 +210,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* Left-to-Right Moving Product Marquee */}
+        <ProductMarquee />
+
       </main>
 
       {/* Footer mini */}
@@ -226,6 +229,42 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function ProductMarquee() {
+  const marqueeProducts = products.slice(0, 10);
+  
+  return (
+    <section className="py-16 overflow-hidden bg-gray-50/30 border-y border-gray-100 -mx-4">
+      <div className="flex">
+        <motion.div 
+          className="flex gap-6 pr-6"
+          animate={{ x: ["-50%", "0%"] }}
+          transition={{ 
+            duration: 40, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+        >
+          {/* Double products for infinite scroll illusion */}
+          {[...marqueeProducts, ...marqueeProducts, ...marqueeProducts].map((p, i) => (
+            <div 
+              key={`${p.id}-${i}`} 
+              className="flex items-center gap-4 bg-white border border-gray-200/60 px-6 py-4 rounded-[2rem] shadow-sm hover:shadow-xl transition-all group shrink-0"
+            >
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-gray-50">
+                <Image src={p.image} alt={p.name} fill className="object-cover group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="space-y-0.5">
+                <p className="text-[10px] font-black text-red-600 uppercase tracking-widest leading-none">Fresh Stock</p>
+                <p className="text-[13px] font-medium text-gray-800 uppercase tracking-tighter">{p.name}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
