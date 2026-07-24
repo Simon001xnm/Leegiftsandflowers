@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from "react";
@@ -49,7 +50,7 @@ export default function ShopPage() {
   return (
     <div className="bg-white min-h-screen pt-24 pb-20">
       <div className="container mx-auto px-6">
-        <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <header className="mb-12 flex flex-col md:group-end justify-between gap-8">
            <div className="space-y-2">
               <h1 className="text-4xl font-medium tracking-tight">Marketplace</h1>
               <p className="text-muted-foreground">Everything you need for the perfect meal.</p>
@@ -120,14 +121,14 @@ function ProductCard({ product, onAdd }: any) {
         <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
         <button 
           onClick={onAdd}
-          className="absolute bottom-2 right-2 w-10 h-10 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white transition-all z-20 group/btn"
+          className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white transition-all z-20 group/btn"
         >
-          <Plus className="w-6 h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
+          <Plus className="w-4 h-4 md:w-6 md:h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
         </button>
       </div>
-      <div className="p-4 space-y-1">
-        <p className="text-[10px] md:text-[13px] font-medium text-gray-700 line-clamp-1">{product.name}</p>
-        <p className="text-[12px] md:text-[14px] font-bold text-black">KSh {product.price.toLocaleString()}</p>
+      <div className="p-2 md:p-4 space-y-1 bg-white">
+        <p className="text-[9px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">{product.name}</p>
+        <p className="text-[10px] md:text-[14px] font-bold text-black">KSh {product.price.toLocaleString()}</p>
       </div>
     </motion.div>
   );

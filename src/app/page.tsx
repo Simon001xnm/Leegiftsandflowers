@@ -162,7 +162,7 @@ export default function App() {
       {/* Retail discovery grid */}
       <main className="container mx-auto px-4">
         
-        {/* Flash deals */}
+        {/* Flash deals - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
             <div className="flex items-center gap-3">
@@ -181,7 +181,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Elite selection */}
+        {/* Elite selection - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
             <div className="flex items-center gap-3">
@@ -200,7 +200,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Drinks refreshment */}
+        {/* Drinks refreshment - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0">
             <div className="flex items-center gap-3">
