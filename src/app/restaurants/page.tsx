@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
@@ -141,11 +142,11 @@ function DiscoveryContent() {
                   </button>
                 </div>
 
-                <div className="p-3 md:p-4 space-y-1">
-                  <h3 className="text-[10px] md:text-[13px] font-medium text-gray-800 line-clamp-2 leading-tight min-h-[2.4em]">
+                <div className="p-2 md:p-4 space-y-1">
+                  <h3 className="text-[9px] md:text-[13px] font-medium text-gray-800 line-clamp-2 leading-tight min-h-[2.4em]">
                     {p.name}
                   </h3>
-                  <p className="text-[12px] md:text-[14px] font-bold text-black">
+                  <p className="text-[10px] md:text-[14px] font-bold text-black">
                     KES {p.price.toLocaleString()}
                   </p>
                 </div>

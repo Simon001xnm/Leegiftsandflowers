@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from "react";
@@ -379,15 +380,15 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
       </div>
 
       <div className="space-y-1 p-3 md:p-4 bg-white">
-        <h3 className="text-[11px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">
+        <h3 className="text-[9px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">
           {product.name}
         </h3>
         <div className="flex flex-col">
-          <span className="text-[12px] md:text-[14px] font-bold text-black">
+          <span className="text-[10px] md:text-[14px] font-bold text-black">
             KSh {product.price.toLocaleString()}
           </span>
           {product.oldPrice && (
-            <span className="text-[10px] md:text-[11px] text-gray-400 line-through font-normal">
+            <span className="text-[8px] md:text-[11px] text-gray-400 line-through font-normal">
               KSh {product.oldPrice.toLocaleString()}
             </span>
           )}
