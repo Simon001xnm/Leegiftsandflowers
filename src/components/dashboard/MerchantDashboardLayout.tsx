@@ -229,17 +229,8 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
               )}
             </button>
             
-            <div className="relative h-10 w-40 ml-2 bg-white/5 rounded px-2">
-              <Image 
-                src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
-                alt="Steak West" 
-                fill 
-                className="object-contain" 
-              />
-            </div>
-            
             {/* Hardware Status Monitoring Strip */}
-            <div className="hidden xl:flex items-center gap-4 ml-8 px-4 border-l border-white/10">
+            <div className="hidden xl:flex items-center gap-4 ml-4 px-4 border-l border-white/10">
               <div className="flex items-center gap-2">
                 <Cpu className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Service: <span className="text-white">Connected</span></span>
