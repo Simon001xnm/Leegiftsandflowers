@@ -36,7 +36,8 @@ import {
   Zap,
   Usb,
   ChevronDown,
-  Plus
+  Plus,
+  Menu
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -51,6 +52,7 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
   const { user: currentUser } = useUser();
   const [currentTime, setCurrentTime] = useState("");
   const [currentDate, setCurrentDate] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const sidebarCategories = [
     {
@@ -153,8 +155,11 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="h-screen flex overflow-hidden bg-[#f1f5f9]">
       {/* LEFT SIDEBAR NAVIGATION */}
-      <aside className="w-64 bg-[#1e293b] flex flex-col shrink-0">
-        <div className="h-16 flex items-center px-6 gap-3 border-b border-white/5">
+      <aside className={cn(
+        "bg-[#1e293b] flex flex-col shrink-0 transition-all duration-300 ease-in-out overflow-hidden",
+        isSidebarOpen ? "w-64" : "w-0"
+      )}>
+        <div className="h-16 flex items-center px-6 gap-3 border-b border-white/5 whitespace-nowrap">
            <Store className="w-6 h-6 text-white" />
            <span className="font-black text-white text-sm tracking-tighter uppercase">Steak West Butchery</span>
         </div>
@@ -172,13 +177,13 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
         <div className="flex-grow overflow-y-auto no-scrollbar px-2 space-y-1 pb-10">
            {sidebarCategories.map((group) => (
              <div key={group.title} className="space-y-1 pt-4 first:pt-0">
-                <p className="px-4 text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">{group.title}</p>
+                <p className="px-4 text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 whitespace-nowrap">{group.title}</p>
                 {group.items.map((item) => (
                   <button 
                     key={item.label}
                     onClick={() => item.href && router.push(item.href)}
                     className={cn(
-                      "w-full flex items-center gap-3 px-4 py-2.5 rounded-md text-[13px] transition-all",
+                      "w-full flex items-center gap-3 px-4 py-2.5 rounded-md text-[13px] transition-all whitespace-nowrap",
                       pathname === item.href 
                         ? "bg-[#3b82f6] text-white" 
                         : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -192,7 +197,7 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
            ))}
            <div className="pt-8 space-y-1">
               <button className="w-full flex items-center justify-between px-4 py-2.5 rounded-md text-[13px] text-gray-400 hover:text-white hover:bg-white/5">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 whitespace-nowrap">
                    <SunMoon className="w-4 h-4" />
                    <span>Theme</span>
                 </div>
@@ -206,8 +211,15 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
         {/* Top Header Command Bar */}
         <header className="h-16 bg-[#1e293b] flex items-center justify-between px-4 text-white shrink-0 border-l border-white/5">
           <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-white/10 rounded-md">
-              <X className="w-5 h-5 text-gray-400" />
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 hover:bg-white/10 rounded-md transition-colors"
+            >
+              {isSidebarOpen ? (
+                <X className="w-5 h-5 text-gray-400" />
+              ) : (
+                <Menu className="w-5 h-5 text-gray-400" />
+              )}
             </button>
             <div className="flex items-center gap-1.5 ml-2 font-black text-sm tracking-tight uppercase">
               <Store className="w-4 h-4" />
