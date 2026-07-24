@@ -1,6 +1,7 @@
+
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Navigation } from './Navigation';
 import { SidebarNav } from './SidebarNav';
 import { useUser } from '@/firebase/auth/use-user';
@@ -14,7 +15,7 @@ import { createClient } from '@/lib/supabase/client';
  */
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user, loading } = useUser();
+  const { user } = useUser();
   const [role, setRole] = useState<string | null>(null);
   const supabase = createClient();
 
@@ -32,13 +33,12 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
 
   const path = pathname || '';
   const isLogin = path.startsWith('/login');
-  const isMerchantDash = path === '/dashboard' || path.startsWith('/dashboard/inventory') || path.startsWith('/dashboard/add');
-  const isRiderDash = path.startsWith('/dashboard/rider');
-  const isCustomerDash = path.startsWith('/dashboard/customer');
   
-  // Sidebar only appears for Merchant and Rider work environments
-  const showSidebar = isMerchantDash || isRiderDash;
-  const hideGlobalNav = isLogin;
+  // THE NEW POS IS FULL SCREEN - Disable global navigation for POS dashboard
+  const isMerchantDash = path === '/dashboard';
+  
+  const showSidebar = !isMerchantDash && (path.startsWith('/dashboard/inventory') || path.startsWith('/dashboard/rider'));
+  const hideGlobalNav = isLogin || isMerchantDash;
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
