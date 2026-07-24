@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from "react";
@@ -28,7 +29,7 @@ export function Footer() {
             {/* Site Logo & Partners Row */}
             <div className="flex flex-row items-center justify-between w-full gap-4">
               <div className="relative h-12 w-28 md:h-20 md:w-48 shrink-0">
-                <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West" fill className="object-contain" />
+                <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
               </div>
               <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0">
                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />

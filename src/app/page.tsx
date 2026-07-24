@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from "react";
@@ -221,7 +222,7 @@ export default function App() {
         {/* Finewood Marquee Section - NO ROUNDED CORNERS */}
         <section className="pb-8">
           <div className="flex flex-row items-center justify-between gap-4 border-b-2 border-black/5 pb-4 mb-4">
-            <span className="text-[10px] md:text-[14px] font-black text-muted-foreground uppercase tracking-widest">Your Extras Plug</span>
+            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest">Your Extras Plug</span>
             <div className="relative h-12 w-48 md:h-20 md:w-80 shrink-0">
               <Image 
                 src="/finewood deco merchants 2.png" 
@@ -230,7 +231,7 @@ export default function App() {
                 className="object-contain" 
               />
             </div>
-            <span className="text-[10px] md:text-[14px] font-black text-muted-foreground uppercase tracking-widest text-right">Appliances and Accessories</span>
+            <span className="text-[14px] md:text-[22px] font-black text-black uppercase tracking-widest text-right">Appliances and Accessories</span>
           </div>
           <ProductMarquee />
         </section>
