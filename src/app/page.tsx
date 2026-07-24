@@ -236,21 +236,31 @@ export default function App() {
 
       </main>
 
-      {/* Footer mini */}
-      <footer className="bg-black py-12 border-t border-white/5">
+      {/* Footer mini - Swapped Layout (Info left, Logo right) */}
+      <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-             <div className="space-y-4">
-                <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Steak West Butchery</p>
-                <div className="space-y-1 text-[13px] text-white/50 font-medium">
-                   <p>Nairobi West, Nairobi, Kenya</p>
-                   <p>P. O Box 7144- 00200</p>
+          <div className="grid md:grid-cols-12 gap-12 items-center">
+             {/* Left: Contact Info */}
+             <div className="md:col-span-4 space-y-8">
+                <div className="space-y-4">
+                   <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.2em]">Operating Node</p>
+                   <div className="space-y-1 text-[15px] text-white font-medium">
+                      <p>Nairobi West, Nairobi, Kenya</p>
+                      <p className="text-white/50">P. O Box 7144- 00200</p>
+                   </div>
+                </div>
+                <div className="space-y-4">
+                   <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.2em]">Direct Dispatch</p>
+                   <div className="space-y-1 text-[15px] text-white font-medium">
+                      <p className="text-primary font-bold">0722522346</p>
+                      <p className="text-white/50">Info@steakwestbutchery.co.ke</p>
+                   </div>
                 </div>
              </div>
 
-             {/* Partner Section - Moved and Recolored */}
-             <div className="space-y-4">
-                <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Dispatch Partners</p>
+             {/* Middle: Partners */}
+             <div className="md:col-span-3 space-y-6">
+                <p className="text-[11px] font-black text-white/30 uppercase tracking-[0.2em]">Dispatch Partners</p>
                 <div className="flex items-center gap-6">
                    <div className="relative h-8 w-24">
                      <Image src="/images.png" alt="Glovo" fill className="object-contain" />
@@ -261,16 +271,20 @@ export default function App() {
                 </div>
              </div>
 
-             <div className="space-y-4 md:text-right">
-                <p className="text-[11px] font-black text-white uppercase tracking-[0.2em]">Direct Dispatch</p>
-                <div className="space-y-1 text-[13px] text-white/50 font-medium">
-                   <p>0722522346</p>
-                   <p>Info@steakwestbutchery.co.ke</p>
+             {/* Right: Big Brand Logo */}
+             <div className="md:col-span-5 flex justify-end">
+                <div className="relative h-24 w-80 md:h-32 md:w-full max-w-[450px]">
+                  <Image 
+                    src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
+                    alt="Steak West Brand" 
+                    fill 
+                    className="object-contain object-right" 
+                  />
                 </div>
              </div>
           </div>
           
-          <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
              <div className="flex flex-col md:flex-row items-center gap-6">
                <p className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
                  © 2026 Steak West Butchery | SUPA YA NYAMA
