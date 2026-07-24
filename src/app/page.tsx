@@ -55,22 +55,22 @@ const products = [
   { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" },
 
   // Drinks refreshment (16 items)
-  { id: 'd1', name: "Premium refreshment one", price: 150, image: "/From%20Klickpin.com-%20944418984376291262-pin-id-944418984376291262-story-1.jpg" },
-  { id: 'd2', name: "Elite juice blend", price: 220, image: "/From%20Klickpin.com-%20599330662967424085-pin-id-599330662967424085.jpg" },
-  { id: 'd3', name: "Sparkling hydration", price: 100, image: "/From%20Klickpin.com-%2010836855347433280-pin-id-10836855347433280.jpg" },
-  { id: 'd4', name: "Fresh node nectar", price: 180, image: "/From%20Klickpin.com-%206966574420736490-pin-id-6966574420736490-story-1.jpg" },
-  { id: 'd5', name: "Signature berry sync", price: 250, image: "/From%20Klickpin.com-%2050524827070351339-pin-id-50524827070351339-story-1.jpg" },
-  { id: 'd6', name: "Tropical dispatch", price: 200, image: "/From%20Klickpin.com-%20141019032077665218-pin-id-141019032077665218.jpg" },
-  { id: 'd7', name: "Classic cola 500ml", price: 80, image: "/From%20Klickpin.com-%20944418984376291262-pin-id-944418984376291262-story-1.jpg" },
-  { id: 'd8', name: "Fanta orange twist", price: 80, image: "/From%20Klickpin.com-%20599330662967424085-pin-id-599330662967424085.jpg" },
-  { id: 'd9', name: "Minute maid fruit", price: 120, image: "/From%20Klickpin.com-%2010836855347433280-pin-id-10836855347433280.jpg" },
-  { id: 'd10', name: "Keringet mineral 500ml", price: 50, image: "/From%20Klickpin.com-%206966574420736490-pin-id-6966574420736490-story-1.jpg" },
-  { id: 'd11', name: "Del monte mango 1l", price: 220, image: "/From%20Klickpin.com-%2050524827070351339-pin-id-50524827070351339-story-1.jpg" },
-  { id: 'd12', name: "Soda water mixer", price: 90, image: "/From%20Klickpin.com-%20141019032077665218-pin-id-141019032077665218.jpg" },
-  { id: 'd13', name: "Stoney ginger 500ml", price: 85, image: "/From%20Klickpin.com-%20944418984376291262-pin-id-944418984376291262-story-1.jpg" },
-  { id: 'd14', name: "Fresh passion quart", price: 150, image: "/From%20Klickpin.com-%20599330662967424085-pin-id-599330662967424085.jpg" },
-  { id: 'd15', name: "Sprite lemon lime", price: 80, image: "/From%20Klickpin.com-%2010836855347433280-pin-id-10836855347433280.jpg" },
-  { id: 'd16', name: "Coke zero sugar", price: 90, image: "/From%20Klickpin.com-%20141019032077665218-pin-id-141019032077665218.jpg" }
+  { id: 'd1', name: "Premium refreshment one", price: 150, image: "/From Klickpin.com- 944418984376291262-pin-id-944418984376291262-story-1.jpg" },
+  { id: 'd2', name: "Elite juice blend", price: 220, image: "/From Klickpin.com- 599330662967424085-pin-id-599330662967424085.jpg" },
+  { id: 'd3', name: "Sparkling hydration", price: 100, image: "/From Klickpin.com- 10836855347433280-pin-id-10836855347433280.jpg" },
+  { id: 'd4', name: "Fresh node nectar", price: 180, image: "/From Klickpin.com- 6966574420736490-pin-id-6966574420736490-story-1.jpg" },
+  { id: 'd5', name: "Signature berry sync", price: 250, image: "/From Klickpin.com- 50524827070351339-pin-id-50524827070351339-story-1.jpg" },
+  { id: 'd6', name: "Tropical dispatch", price: 200, image: "/From Klickpin.com- 141019032077665218-pin-id-141019032077665218.jpg" },
+  { id: 'd7', name: "Classic cola 500ml", price: 80, image: "/From Klickpin.com- 944418984376291262-pin-id-944418984376291262-story-1.jpg" },
+  { id: 'd8', name: "Fanta orange twist", price: 80, image: "/From Klickpin.com- 599330662967424085-pin-id-599330662967424085.jpg" },
+  { id: 'd9', name: "Minute maid fruit", price: 120, image: "/From Klickpin.com- 10836855347433280-pin-id-10836855347433280.jpg" },
+  { id: 'd10', name: "Keringet mineral 500ml", price: 50, image: "/From Klickpin.com- 6966574420736490-pin-id-6966574420736490-story-1.jpg" },
+  { id: 'd11', name: "Del monte mango 1l", price: 220, image: "/From Klickpin.com- 50524827070351339-pin-id-50524827070351339-story-1.jpg" },
+  { id: 'd12', name: "Soda water mixer", price: 90, image: "/From Klickpin.com- 141019032077665218-pin-id-141019032077665218.jpg" },
+  { id: 'd13', name: "Stoney ginger 500ml", price: 85, image: "/From Klickpin.com- 944418984376291262-pin-id-944418984376291262-story-1.jpg" },
+  { id: 'd14', name: "Fresh passion quart", price: 150, image: "/From Klickpin.com- 599330662967424085-pin-id-599330662967424085.jpg" },
+  { id: 'd15', name: "Sprite lemon lime", price: 80, image: "/From Klickpin.com- 10836855347433280-pin-id-10836855347433280.jpg" },
+  { id: 'd16', name: "Coke zero sugar", price: 90, image: "/From Klickpin.com- 141019032077665218-pin-id-141019032077665218.jpg" }
 ];
 
 const FINEWOOD_PRODUCTS = [
@@ -109,7 +109,7 @@ export default function App() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           >
-            <source src="/From%20Klickpin.com-%20833517843581501058-pin-id-833517843581501058%20(1).mp4" type="video/mp4" />
+            <source src="/From Klickpin.com- 833517843581501058-pin-id-833517843581501058 (1).mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black" />
         </div>
