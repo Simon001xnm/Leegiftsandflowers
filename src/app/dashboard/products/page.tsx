@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -37,6 +36,7 @@ import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MerchantDashboardLayout } from "@/components/dashboard/MerchantDashboardLayout";
+import Link from "next/link";
 
 export default function ProductsPage() {
   const supabase = createClient();
@@ -79,9 +79,11 @@ export default function ProductsPage() {
             <h1 className="text-2xl font-black text-slate-800 uppercase tracking-tight">Products</h1>
             <p className="text-[13px] font-bold text-slate-400">Total: {products.length} products</p>
           </div>
-          <Button className="bg-[#3b82f6] hover:bg-[#2563eb] h-11 px-6 rounded-md gap-2 font-bold text-[13px]">
-            <Plus className="w-4 h-4 stroke-[3px]" /> Add Product
-          </Button>
+          <Link href="/dashboard/products/add">
+            <Button className="bg-[#3b82f6] hover:bg-[#2563eb] h-11 px-6 rounded-md gap-2 font-bold text-[13px]">
+              <Plus className="w-4 h-4 stroke-[3px]" /> Add product
+            </Button>
+          </Link>
         </div>
 
         {/* Filter Bar */}
@@ -188,18 +190,21 @@ export default function ProductsPage() {
                   <TableCell className="font-bold text-[13px] text-slate-700 max-w-[200px] truncate">{p.name}</TableCell>
                   <TableCell className="text-[13px] text-slate-500 font-medium">{p.barcode || "706710"}</TableCell>
                   <TableCell className="text-[12px] font-bold text-slate-500 uppercase">{p.category || "CHEMSHA"}</TableCell>
-                  <TableCell className="text-[13px] text-slate-500">kg</TableCell>
-                  <TableCell className="text-[13px] text-slate-500">0.00</TableCell>
+                  <TableCell className="text-[13px] text-slate-500">{p.unit_of_measure || "kg"}</TableCell>
+                  <TableCell className="text-[13px] text-slate-500">{p.cost_price?.toLocaleString() || "0.00"}</TableCell>
                   <TableCell className="text-[13px] font-bold text-slate-700">{p.price.toLocaleString()}.00</TableCell>
-                  <TableCell className="text-[11px] text-slate-400 font-medium">Price 2:<br/>0.00</TableCell>
-                  <TableCell className="text-[11px] text-slate-400 font-medium">Price 3:<br/>0.00</TableCell>
+                  <TableCell className="text-[11px] text-slate-400 font-medium">{p.price_2_name || 'Price 2'}:<br/>{p.price_2?.toLocaleString() || "0.00"}</TableCell>
+                  <TableCell className="text-[11px] text-slate-400 font-medium">{p.price_3_name || 'Price 3'}:<br/>{p.price_3?.toLocaleString() || "0.00"}</TableCell>
                   <TableCell>
-                    <Badge className="bg-[#ef4444] text-white hover:bg-[#ef4444] border-none rounded-full px-3 py-1 font-bold text-[11px]">
-                      {(p.stock || 0).toFixed(3)} kg
+                    <Badge className={cn(
+                      "text-white border-none rounded-full px-3 py-1 font-bold text-[11px]",
+                      (p.stock || 0) <= (p.low_stock_threshold || 5) ? "bg-[#ef4444]" : "bg-emerald-500"
+                    )}>
+                      {(p.stock || 0).toFixed(3)} {p.unit_of_measure || "kg"}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-[13px] text-slate-400 font-medium">-</TableCell>
-                  <TableCell className="text-[13px] text-slate-400 font-medium">-</TableCell>
+                  <TableCell className="text-[13px] text-slate-400 font-medium">{p.expiry_date ? new Date(p.expiry_date).toLocaleDateString() : "-"}</TableCell>
+                  <TableCell className="text-[13px] text-slate-400 font-medium">{p.batch_number || "-"}</TableCell>
                   <TableCell>
                     <Badge className="bg-[#22c55e] text-white hover:bg-[#22c55e] border-none rounded-md px-2 py-0.5 font-bold text-[10px] uppercase tracking-wider">
                       Active
