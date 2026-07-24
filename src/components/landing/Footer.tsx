@@ -44,10 +44,10 @@ export function Footer() {
                </div>
           </div>
 
-          {/* Right: LOGOS - HORIZONTAL LAYOUT - Evenly Distributed with equal margins */}
-          <div className="md:col-span-6 flex flex-row items-center justify-evenly gap-4 w-full h-full pt-10">
-            {/* Main Brand Logo - Resized to match partners */}
-            <div className="relative h-10 w-24 md:h-12 md:w-28 shrink-0">
+          {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - Magnified & Reduced Gaps */}
+          <div className="md:col-span-6 flex flex-row items-center justify-between w-full h-full pt-10">
+            {/* Main Brand Logo - Enlarged */}
+            <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                 alt="Steak West" 
@@ -56,11 +56,11 @@ export function Footer() {
               />
             </div>
 
-            {/* Horizontal Dispatch Logos strip */}
-            <div className="relative h-10 w-24 md:h-12 md:w-28 shrink-0">
+            {/* Horizontal Dispatch Logos strip - Enlarged with minimal distance */}
+            <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
               <Image src="/images.png" alt="Glovo" fill className="object-contain" />
             </div>
-            <div className="relative h-10 w-24 md:h-12 md:w-28 shrink-0">
+            <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
               <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
             </div>
           </div>

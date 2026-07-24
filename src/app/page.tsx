@@ -236,7 +236,7 @@ export default function App() {
 
       </main>
 
-      {/* Footer - ROLE-BASED SPLIT (Words Left/Vertical, Logos Right/Horizontal Distributed) */}
+      {/* Footer - REFINED ROLE-BASED SPLIT (Logos Distributed & Magnified) */}
       <footer className="bg-black py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-12 gap-12 items-start">
@@ -261,10 +261,10 @@ export default function App() {
                 </div>
              </div>
 
-             {/* Right: LOGOS - HORIZONTAL LAYOUT - Evenly Distributed with equal margins */}
-             <div className="md:col-span-6 flex flex-row items-center justify-evenly gap-4 w-full h-full pt-10">
-                {/* Brand Logo - Resized to match partners */}
-                <div className="relative h-10 w-24 md:h-12 md:w-28 shrink-0">
+             {/* Right: LOGOS - HIGH DENSITY HORIZONTAL LAYOUT - Reduced gaps, Increased size */}
+             <div className="md:col-span-6 flex flex-row items-center justify-between w-full h-full pt-10">
+                {/* Brand Logo - Enlarged */}
+                <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
                   <Image 
                     src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                     alt="Steak West Brand" 
@@ -273,11 +273,11 @@ export default function App() {
                   />
                 </div>
 
-                {/* Dispatch Partner Logos */}
-                <div className="relative h-10 w-24 md:h-12 md:w-28 shrink-0">
+                {/* Dispatch Partner Logos - Enlarged with minimal distance */}
+                <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
                   <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                 </div>
-                <div className="relative h-10 w-24 md:h-12 md:w-28 shrink-0">
+                <div className="relative h-14 w-32 md:h-20 md:w-52 shrink-0">
                   <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
                 </div>
              </div>
