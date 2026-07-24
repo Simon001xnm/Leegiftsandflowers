@@ -44,6 +44,7 @@ import { cn } from "@/lib/utils";
 import { useRouter, usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useUser } from "@/firebase/auth/use-user";
+import Image from "next/image";
 
 export function MerchantDashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -159,9 +160,15 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
         "bg-[#1e293b] flex flex-col shrink-0 transition-all duration-300 ease-in-out overflow-hidden",
         isSidebarOpen ? "w-64" : "w-0"
       )}>
-        <div className="h-16 flex items-center px-6 gap-3 border-b border-white/5 whitespace-nowrap">
-           <Store className="w-6 h-6 text-white" />
-           <span className="font-black text-white text-sm tracking-tighter uppercase">Steak West Butchery</span>
+        <div className="h-16 flex items-center px-4 border-b border-white/5 whitespace-nowrap bg-white">
+           <div className="relative h-12 w-full">
+              <Image 
+                src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
+                alt="Steak West" 
+                fill 
+                className="object-contain object-left" 
+              />
+           </div>
         </div>
 
         <div className="p-4">
@@ -221,9 +228,14 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
                 <Menu className="w-5 h-5 text-gray-400" />
               )}
             </button>
-            <div className="flex items-center gap-1.5 ml-2 font-black text-sm tracking-tight uppercase">
-              <Store className="w-4 h-4" />
-              STEAK WEST BUTCHERY
+            
+            <div className="relative h-10 w-40 ml-2 bg-white/5 rounded px-2">
+              <Image 
+                src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
+                alt="Steak West" 
+                fill 
+                className="object-contain" 
+              />
             </div>
             
             {/* Hardware Status Monitoring Strip */}
