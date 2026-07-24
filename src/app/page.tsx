@@ -223,7 +223,7 @@ export default function App() {
           <div className="flex flex-col items-center border-b-2 border-black/5 pb-4 mb-8">
             <div className="relative h-20 w-80 md:h-28 md:w-[600px]">
               <Image 
-                src="/deco merchants 2.png" 
+                src="/finewood deco merchants 2.png" 
                 alt="Finewood deco merchants" 
                 fill 
                 className="object-contain" 
