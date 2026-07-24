@@ -48,7 +48,8 @@ import {
   X,
   Cpu,
   Zap,
-  HardDrive
+  HardDrive,
+  Usb
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -67,9 +68,10 @@ export default function POSDashboard() {
   const [currentDate, setCurrentDate] = useState("");
 
   const [hardwareStatus, setHardwareStatus] = useState({
+    service: "Connected",
     printer: "Online",
     scale: "Ready",
-    scanner: "Connected"
+    scanner: "Active"
   });
 
   const sidebarCategories = [
@@ -88,6 +90,7 @@ export default function POSDashboard() {
     {
       title: "Hardware",
       items: [
+        { label: "Local service link", icon: Usb },
         { label: "Scales & Weighing", icon: Scale },
         { label: "Thermal Printers", icon: Printer },
         { label: "Barcode Scanners", icon: Zap },
@@ -124,7 +127,7 @@ export default function POSDashboard() {
         { label: "Price Adjustment", icon: TrendingUp },
         { label: "Price History", icon: History },
         { label: "Expiry Management", icon: AlertTriangle },
-        { label: "Products Reconciliation", icon: CheckCircle2 },
+        { label: "Products Reconciliation", icon: FileText },
       ]
     },
     {
@@ -284,16 +287,16 @@ export default function POSDashboard() {
             {/* Hardware Status Monitoring Strip */}
             <div className="hidden xl:flex items-center gap-4 ml-8 px-4 border-l border-white/10">
               <div className="flex items-center gap-2">
+                <Cpu className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Service: <span className="text-white">{hardwareStatus.service}</span></span>
+              </div>
+              <div className="flex items-center gap-2">
                 <Printer className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Printer: <span className="text-white">{hardwareStatus.printer}</span></span>
               </div>
               <div className="flex items-center gap-2">
                 <Scale className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Scale: <span className="text-white">{hardwareStatus.scale}</span></span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Scanner: <span className="text-white">{hardwareStatus.scanner}</span></span>
               </div>
             </div>
 
@@ -528,25 +531,5 @@ export default function POSDashboard() {
         </div>
       </main>
     </div>
-  );
-}
-
-function CheckCircle2(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-      <path d="m9 12 2 2 4-4" />
-    </svg>
   );
 }
