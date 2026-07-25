@@ -27,17 +27,20 @@ const ALL_PRODUCTS = [
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, rating: 4.8, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   { id: 'p11', name: "Farm Chicken (Local)", price: 800, rating: 4.7, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600" },
+  { id: 'rm4', name: "Beef Mince 1kg", price: 950, rating: 4.9, category: "Raw Meat", image: "https://picsum.photos/seed/mince/600/600" },
   
   // COOKED MEAT
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, rating: 4.8, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, rating: 4.9, category: "Cooked Meat", image: "/beef chemsha SMB.jpg" },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, rating: 4.7, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, rating: 4.8, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
+  { id: 'p24', name: "Mutura Node (Standard)", price: 100, rating: 4.9, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
   
   // GROCERY
   { id: 'p5', name: "Crispy Chips Portion", price: 200, rating: 4.5, category: "Grocery", image: "/CHIPS.jpg" },
   { id: 'g1', name: "Fresh Kachumbari", price: 50, rating: 4.9, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
   { id: 'g2', name: "Ugali Extra", price: 100, rating: 4.6, category: "Grocery", image: "https://picsum.photos/seed/ugali/600/600" },
+  { id: 'g3', name: "Fresh Managu", price: 150, rating: 4.7, category: "Grocery", image: "https://picsum.photos/seed/greens/600/600" },
 
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, rating: 4.9, category: "Drinks", image: "https://picsum.photos/seed/cola1/600/600" },
@@ -148,7 +151,7 @@ function DiscoveryContent() {
                 </div>
                 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {section.products.slice(0, 4).map((p) => (
+                  {section.products.map((p) => (
                     <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                   ))}
                 </div>
