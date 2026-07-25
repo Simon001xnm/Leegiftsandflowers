@@ -47,6 +47,15 @@ const ALL_PRODUCTS = [
     images: ["/images (29).jpg"],
     hasTax: true 
   },
+  { 
+    id: 'p-liver', 
+    name: "Liver", 
+    price: 1100, 
+    category: "Raw Meat", 
+    image: "/images (30).jpg", 
+    images: ["/images (30).jpg"],
+    hasTax: true 
+  },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   { id: 'p11', name: "Farm Chicken (Local)", price: 800, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600" },
@@ -199,7 +208,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const isExtraHD = product.id === 'p-fillet' || product.id === 'p-tbone' || product.id === 'p-cubes';
+  const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver'].includes(product.id);
 
   return (
     <Card className="w-full rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col p-1.5 md:p-0">
