@@ -17,8 +17,8 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
-const products = [
-  // Flash deals (16 items)
+const ALL_PRODUCTS = [
+  // Flash deals (Items 0-15)
   { id: 'p1', name: "Beef chemsha 1kg", price: 1400, oldPrice: 1600, discount: "-14%", image: "/beef chemsha SMB.jpg" },
   { id: 'p2', name: "Beef choma 1kg", price: 1400, oldPrice: 1800, discount: "-12%", image: "/BEEF CHOMA.jpg" },
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, oldPrice: 1550, discount: "-10%", image: "/BEEF DRY FRY.jpg" },
@@ -36,7 +36,7 @@ const products = [
   { id: 'p15', name: "Crispy snack chips", price: 200, oldPrice: 300, discount: "-33%", image: "/CHIPS.jpg" },
   { id: 'p16', name: "Signature goat head", price: 800, oldPrice: 1200, discount: "-33%", image: "/FULL KICHWA YA GOAT.jpg" },
 
-  // Elite selection (16 items)
+  // Elite selection (Items 16-31)
   { id: 'p17', name: "Premium beef chemsha", price: 1400, image: "/beef chemsha SMB.jpg" },
   { id: 'p18', name: "Select beef choma", price: 1400, image: "/BEEF CHOMA.jpg" },
   { id: 'p19', name: "Elite dry fry portion", price: 1400, image: "/BEEF DRY FRY.jpg" },
@@ -52,9 +52,8 @@ const products = [
   { id: 'p29', name: "Dry fry family size", price: 1400, image: "/BEEF DRY FRY.jpg" },
   { id: 'p30', name: "Large chips pack", price: 400, image: "/CHIPS.jpg" },
   { id: 'p31', name: "Goat head elite", price: 800, image: "/FULL KICHWA YA GOAT.jpg" },
-  { id: 'p32', name: "Boiled delicacies pack", price: 400, image: "/FULL MGUU COW.jpg" },
 
-  // Drinks refreshment (16 items)
+  // Drinks refreshment (Items 32-47)
   { id: 'd1', name: "Premium refreshment one", price: 150, image: "/From Klickpin.com- 944418984376291262-pin-id-944418984376291262-story-1.jpg" },
   { id: 'd2', name: "Elite juice blend", price: 220, image: "/From Klickpin.com- 599330662967424085-pin-id-599330662967424085.jpg" },
   { id: 'd3', name: "Sparkling hydration", price: 100, image: "/From Klickpin.com- 10836855347433280-pin-id-10836855347433280.jpg" },
@@ -80,7 +79,7 @@ const FINEWOOD_PRODUCTS = [
   { id: 'f4', name: "Bespoke Finishing", price: 3800, image: "/wfhfjj.jpg" },
 ];
 
-export default function App() {
+export default function LandingPage() {
   const { addToCart } = useCart();
   const { toast } = useToast();
 
@@ -94,12 +93,16 @@ export default function App() {
       imageUrl: p.image,
       category: 'Selection'
     });
-    toast({ title: "Added", description: p.name });
+    toast({ title: "Added to basket", description: p.name });
   };
+
+  const flashDeals = ALL_PRODUCTS.slice(0, 16);
+  const eliteSelection = ALL_PRODUCTS.slice(16, 32);
+  const drinksSelection = ALL_PRODUCTS.slice(32, 48);
 
   return (
     <div className="bg-white text-black min-h-screen font-body selection:bg-red-600 selection:text-white overflow-x-hidden">
-      {/* Hero section - FULLY RESPONSIVE */}
+      {/* Hero section */}
       <section className="relative min-h-[60vh] md:min-h-[85vh] flex items-center justify-center bg-black overflow-hidden pt-24 pb-12">
         <div className="absolute inset-0 z-0">
           <video
@@ -167,7 +170,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Retail discovery grid - STRICT RESPONSIVE 2-3-4 */}
+      {/* Main Marketplace Grid Sections */}
       <main className="w-full">
         
         {/* Flash deals */}
@@ -183,7 +186,7 @@ export default function App() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-            {products.slice(0, 16).map((p) => (
+            {flashDeals.map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
@@ -202,7 +205,7 @@ export default function App() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-            {products.slice(16, 32).map((p) => (
+            {eliteSelection.map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
@@ -221,13 +224,13 @@ export default function App() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-            {products.slice(32, 48).map((p) => (
+            {drinksSelection.map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
           </div>
         </section>
 
-        {/* Finewood Marquee Section - FULL WIDTH */}
+        {/* Finewood Marquee Section */}
         <section className="pb-16 pt-6">
           <div className="border-b-2 border-black/5 pb-8 mb-6 text-center px-6">
             <span className="text-[12px] md:text-[22px] font-black text-black uppercase tracking-tight leading-tight block">
@@ -239,7 +242,7 @@ export default function App() {
 
       </main>
 
-      {/* Footer - SYMMETRIC LOGO SPREAD & VERTICAL INFO STACK */}
+      {/* Symmetric Partner Footer */}
       <footer className="bg-black py-20 border-t border-white/5">
         <div className="w-full px-6 max-w-[1400px] mx-auto">
           <div className="grid md:grid-cols-12 gap-8 lg:gap-16 items-center">
@@ -260,7 +263,7 @@ export default function App() {
              <div className="md:col-span-7 w-full pt-12 md:pt-0">
                 <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-12 max-w-4xl ml-auto">
                   <div className="relative h-14 w-28 lg:h-20 lg:w-48 shrink-0 grayscale hover:grayscale-0 transition-all duration-500">
-                    <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
+                    <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West" fill className="object-contain" />
                   </div>
                   <div className="relative h-14 w-28 lg:h-20 lg:w-48 shrink-0 grayscale hover:grayscale-0 transition-all duration-500">
                     <Image src="/finewood deco merchants 2.png" alt="Finewood Deco" fill className="object-contain" />
@@ -269,7 +272,7 @@ export default function App() {
                     <Image src="/images.png" alt="Glovo" fill className="object-contain" />
                   </div>
                   <div className="relative h-12 w-24 lg:h-16 lg:w-40 shrink-0 grayscale hover:grayscale-0 transition-all duration-500">
-                    <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
+                    <Image src="/images (1).png" alt="Uber Eats" fill className="object-contain" />
                   </div>
                 </div>
              </div>
@@ -306,7 +309,7 @@ function ProductMarquee() {
       imageUrl: p.image,
       category: 'Selection'
     });
-    toast({ title: "Added", description: p.name });
+    toast({ title: "Added to basket", description: p.name });
   };
   
   return (
@@ -321,10 +324,10 @@ function ProductMarquee() {
             ease: "linear" 
           }}
         >
-          {[...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS].map((p, i) => (
+          {[...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS, ...FINEWOOD_PRODUCTS].map((p, i) => (
             <div 
               key={`${p.id}-${i}`} 
-              className="w-[200px] md:w-[320px] shrink-0 border-r border-gray-100 last:border-r-0 p-4 lg:p-6"
+              className="w-[280px] md:w-[320px] shrink-0 border-r border-gray-100 last:border-r-0 p-4 lg:p-6"
             >
               <ProductCard product={p} onAdd={handleAddToCart} />
             </div>
