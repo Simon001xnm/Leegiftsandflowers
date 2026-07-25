@@ -5,13 +5,18 @@ import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Star, Plus, ChevronRight, ShoppingBag, Loader2 } from "lucide-react";
+import { Star, Plus, ChevronRight, ShoppingBag, Loader2, RefreshCw } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Footer } from "@/components/landing/Footer";
 import { createClient } from "@/lib/supabase/client";
 
+/**
+ * PUBLIC STOREFRONT CONTENT
+ * Fetches data from Supabase using the public publishable client.
+ * Strictly enforces a 4-3-2 responsive grid.
+ */
 function MarketplaceContent() {
   const { addToCart } = useCart();
   const { toast } = useToast();
@@ -22,20 +27,26 @@ function MarketplaceContent() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('is_in_stock', true)
-        .order('created_at', { ascending: false });
-      
-      if (!error && data) {
-        setProducts(data);
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .eq('is_in_stock', true)
+          .order('created_at', { ascending: false });
+        
+        if (!error && data) {
+          setProducts(data);
+        }
+      } catch (e) {
+        console.error("Public fetch failed", e);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchProducts();
   }, [supabase]);
 
+  // Catalog distribution logic
   const meatProducts = products.filter(p => p.category !== 'DRINKS');
   const drinkProducts = products.filter(p => p.category === 'DRINKS');
 
@@ -55,18 +66,18 @@ function MarketplaceContent() {
   if (loading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-        <Loader2 className="w-10 h-10 animate-spin text-primary" />
-        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-muted-foreground animate-pulse">Syncing Marketplace Node...</p>
+        <RefreshCw className="w-8 h-8 animate-spin text-primary opacity-20" />
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground animate-pulse">Syncing catalog node...</p>
       </div>
     );
   }
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Operating Nodes (Brands) */}
+      {/* Operating Nodes Strip */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-10 space-y-6">
-        <div className="flex items-center justify-between border-b pb-4">
-          <h2 className="text-[10px] md:text-[12px] font-black tracking-[0.3em] uppercase text-muted-foreground">Operating nodes near you</h2>
+        <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+          <h2 className="text-[11px] font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes</h2>
           <Link href="/restaurants" className="text-[10px] font-bold text-primary flex items-center gap-1 hover:underline">
             VIEW NETWORK <ChevronRight className="w-3 h-3" />
           </Link>
@@ -74,20 +85,20 @@ function MarketplaceContent() {
         <div className="flex gap-6 overflow-x-auto no-scrollbar py-2">
           {MOCK_RESTAURANTS.map((brand, i) => (
             <Link key={brand.id + i} href={`/restaurants/${brand.id}`} className="flex flex-col items-center gap-3 shrink-0 group">
-              <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-gray-100 p-1 overflow-hidden transition-all duration-500 shadow-xl group-hover:border-red-600 group-hover:scale-105">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-gray-100 p-1 overflow-hidden transition-all duration-500 shadow-xl group-hover:border-primary group-hover:scale-105">
                 <Image src={brand.imageUrl} alt={brand.name} width={100} height={100} className="object-cover w-full h-full rounded-full" />
               </div>
-              <span className="text-[9px] md:text-[11px] font-black uppercase tracking-widest text-gray-500 group-hover:text-black">{brand.name.split(' ')[0]}</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover:text-black">{brand.name.split(' ')[0]}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* ELITE SELECTION */}
+      {/* PRIMARY CATALOG (MEAT) */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-10 space-y-8">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Elite selection</h2>
-          <Badge variant="outline" className="rounded-none border-red-600 text-red-600 font-black text-[10px] tracking-widest px-3 py-1">
+          <Badge variant="outline" className="rounded-none border-primary text-primary font-black text-[10px] tracking-widest px-3 py-1">
             {meatProducts.length} ITEMS READY
           </Badge>
         </div>
@@ -122,14 +133,14 @@ function MarketplaceContent() {
         )}
       </section>
 
-      {/* Finewood Signature Marquee */}
+      {/* Centered Finewood Marquee */}
       <div className="bg-white border-y py-12">
         <h2 className="text-[12px] md:text-[22px] font-black text-black uppercase tracking-tighter text-center px-6">
           your plug for home appliances, phones and accessories.
         </h2>
       </div>
 
-      {/* REFRESHMENT NODE */}
+      {/* SECONDARY CATALOG (DRINKS) */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-20 space-y-8">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Refreshment node</h2>

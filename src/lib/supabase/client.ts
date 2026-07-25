@@ -2,22 +2,20 @@
 import { createBrowserClient } from '@supabase/ssr'
 
 /**
- * ULTRA-RESILIENT Supabase client.
- * Provides a robust fallback shell to prevent app crashes when keys are missing.
+ * PRODUCTION SUPABASE CLIENT
+ * Uses publishable keys for public reads and authenticated sessions for admin writes.
+ * RLS is enforced at the database level.
  */
 export function createClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'placeholder';
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   
-  try {
-    // If it's a placeholder URL, return the fallback shell immediately to avoid fetch errors
-    if (supabaseUrl.includes('placeholder')) {
-      return createFallbackShell();
-    }
-    return createBrowserClient(supabaseUrl, supabaseKey);
-  } catch (e) {
+  if (!supabaseUrl || !supabaseKey) {
+    console.warn("Supabase Environment Variables Missing. Using fallback shell.");
     return createFallbackShell();
   }
+
+  return createBrowserClient(supabaseUrl, supabaseKey);
 }
 
 function createFallbackShell() {
@@ -28,13 +26,22 @@ function createFallbackShell() {
           order: () => Promise.resolve({ data: [], error: null }),
           single: () => Promise.resolve({ data: null, error: null })
         }),
-        order: () => Promise.resolve({ data: [], error: null }),
+        order: () => ({
+          eq: () => Promise.resolve({ data: [], error: null }),
+          select: () => Promise.resolve({ data: [], error: null })
+        }),
         single: () => Promise.resolve({ data: null, error: null })
       }),
-      insert: () => Promise.resolve({ data: null, error: null }),
+      insert: () => Promise.resolve({ data: null, error: new Error("Environment Missing") }),
       update: () => ({ eq: () => Promise.resolve({ data: null, error: null }) }),
       upsert: () => Promise.resolve({ data: null, error: null }),
     }),
+    storage: {
+      from: () => ({
+        upload: () => Promise.resolve({ data: null, error: new Error("Environment Missing") }),
+        getPublicUrl: () => ({ data: { publicUrl: "" } })
+      })
+    },
     auth: {
       getSession: () => Promise.resolve({ data: { session: null }, error: null }),
       getUser: () => Promise.resolve({ data: { user: null }, error: null }),

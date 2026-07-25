@@ -14,20 +14,27 @@
       },
       "required": ["uid", "role"]
     },
-    "Order": {
-      "title": "Order",
-      "description": "Food delivery order record",
+    "Product": {
+      "title": "Product",
+      "description": "Catalog item stored in Supabase",
       "type": "object",
       "properties": {
-        "id": { "type": "string" },
-        "customerId": { "type": "string" },
-        "restaurantId": { "type": "string" },
-        "riderId": { "type": "string" },
-        "items": { "type": "array", "items": { "type": "object" } },
-        "total": { "type": "number" },
-        "status": { "type": "string", "enum": ["pending", "preparing", "out-for-delivery", "delivered", "cancelled"] },
-        "deliveryAddress": { "type": "string" },
-        "createdAt": { "type": "string", "format": "date-time" }
+        "id": { "type": "string", "format": "uuid" },
+        "name": { "type": "string" },
+        "sku": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "image_url": { "type": "string" },
+        "is_in_stock": { "type": "boolean" },
+        "description": { "type": "string" }
+      }
+    },
+    "AdminUser": {
+      "title": "Admin User",
+      "description": "Supabase-side table to manage write permissions",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string", "format": "uuid" }
       }
     }
   },
@@ -38,10 +45,6 @@
     "/users/{userId}": {
       "schema": "UserProfile",
       "description": "User profiles and roles"
-    },
-    "/orders/{orderId}": {
-      "schema": "Order",
-      "description": "System orders"
     }
   }
 }
