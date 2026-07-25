@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Store, Bike, Loader2, ShieldCheck, ArrowRight } from "lucide-react";
+import { User, Store, Bike, Loader2, ShieldCheck, ArrowRight, AlertTriangle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -26,9 +26,21 @@ function LoginForm() {
   const [role, setRole] = useState<AppRole>("customer");
 
   const redirectPath = searchParams.get("redirect") || "/profile";
+  
+  const hasEnvVars = !!process.env.NEXT_PUBLIC_SUPABASE_URL && !process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder');
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>, mode: "login" | "signup") => {
     e.preventDefault();
+    
+    if (!hasEnvVars) {
+      toast({
+        variant: "destructive",
+        title: "Configuration Missing",
+        description: "Supabase API keys are not set. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY to your environment."
+      });
+      return;
+    }
+
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
@@ -74,6 +86,18 @@ function LoginForm() {
           </div>
         </div>
 
+        {!hasEnvVars && (
+          <div className="bg-amber-50 border-2 border-amber-200 p-6 rounded-[2rem] flex flex-col gap-4 text-amber-900 shadow-lg">
+            <div className="flex items-center gap-3">
+              <AlertTriangle className="w-6 h-6 text-amber-600" />
+              <p className="font-black uppercase tracking-widest text-[12px]">API Keys Required</p>
+            </div>
+            <p className="text-[13px] font-medium leading-relaxed">
+              To enable sign-in and registration, you must provide your Supabase URL and Anon Key in your environment variables.
+            </p>
+          </div>
+        )}
+
         <Card className="w-full border-none shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] rounded-[3rem] overflow-hidden bg-white">
           <CardContent className="p-10">
             <Tabs defaultValue="login" className="space-y-8">
@@ -92,7 +116,7 @@ function LoginForm() {
                     <Label className="font-bold text-[12px] px-1 text-muted-foreground">Access key</Label>
                     <Input name="password" type="password" placeholder="••••••••" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base focus:ring-4 focus:ring-primary/5 transition-all" required />
                   </div>
-                  <Button type="submit" className="w-full h-14 rounded-2xl font-bold text-base shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" disabled={loading}>
+                  <Button type="submit" className="w-full h-14 rounded-2xl font-bold text-base shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" disabled={loading || !hasEnvVars}>
                     {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Authorize entry"}
                   </Button>
                 </form>
@@ -119,7 +143,7 @@ function LoginForm() {
                   <Input name="name" placeholder="Full identity" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base" required />
                   <Input name="email" type="email" placeholder="Email address" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base" required />
                   <Input name="password" type="password" placeholder="Create access key" className="h-14 rounded-2xl bg-gray-50 border-none font-medium text-base" required />
-                  <Button type="submit" className="w-full h-14 rounded-2xl font-bold bg-black text-white text-base shadow-2xl transition-all hover:bg-zinc-800" disabled={loading}>
+                  <Button type="submit" className="w-full h-14 rounded-2xl font-bold bg-black text-white text-base shadow-2xl transition-all hover:bg-zinc-800" disabled={loading || !hasEnvVars}>
                     {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Register entity"}
                   </Button>
                 </form>
