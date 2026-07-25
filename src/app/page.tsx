@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from "react";
@@ -114,7 +113,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 mt-10 space-y-12">
+      <div className="max-w-[1400px] mx-auto px-2 md:px-6 mt-10 space-y-12">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
@@ -132,6 +131,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
+              {/* ULTRA HIGH DENSITY GRID: 4 COLS MOBILE / 8 COLS DESKTOP */}
               <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 md:gap-4">
                 {categoryProducts.map((product) => (
                   <ProductCard 
@@ -191,7 +191,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
             e.stopPropagation();
             onAdd();
           }}
-          className="absolute bottom-2 right-2 w-7 h-7 md:w-9 md:h-9 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all z-20 active:scale-90"
+          className="absolute bottom-1 right-1 md:bottom-2 md:right-2 w-7 h-7 md:w-9 md:h-9 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all z-20 active:scale-90"
         >
           <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
         </button>
