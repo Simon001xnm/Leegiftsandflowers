@@ -174,7 +174,7 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100 w-full">
             {products.slice(0, 16).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -193,7 +193,7 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100 w-full">
             {products.slice(16, 32).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -212,7 +212,7 @@ export default function App() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100 w-full">
             {products.slice(32, 48).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -341,7 +341,7 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
 function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void }) {
   return (
     <motion.div 
-      className="flex flex-col group bg-white relative z-0 overflow-hidden border-r border-b border-gray-100"
+      className="flex flex-col group bg-white relative z-0 overflow-hidden border-r border-b border-gray-100 w-full min-w-0"
     >
       <div className="relative aspect-square bg-gray-50 overflow-hidden">
         <Image 
@@ -352,8 +352,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
         />
 
         {product.discount && (
-          <div className="absolute top-1 left-1 md:top-2 md:left-2 z-10">
-            <span className="bg-red-600 text-white text-[7px] md:text-[9px] font-bold px-1 py-0.5 rounded shadow-lg">
+          <div className="absolute top-1 left-1 z-10">
+            <span className="bg-red-600 text-white text-[7px] font-bold px-1 py-0.5 rounded shadow-lg">
               {product.discount}
             </span>
           </div>
@@ -370,7 +370,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
         </button>
       </div>
 
-      <div className="space-y-1 p-1.5 md:p-4 bg-white">
+      <div className="space-y-1 p-1.5 md:p-4 bg-white min-h-[50px] md:min-h-0">
         <h3 className="text-[8px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">
           {product.name}
         </h3>

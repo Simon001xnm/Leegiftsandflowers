@@ -24,7 +24,7 @@ export function Footer() {
                </div>
           </div>
 
-          {/* Right: Partner Logos - SYMMETRIC SPREAD WITH MARGIN */}
+          {/* Right: Partner Logos - SYMMETRIC SPREAD with margins and max-width */}
           <div className="md:col-span-7 w-full pt-10 md:pt-0">
             <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-12 max-w-4xl ml-auto">
               <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
