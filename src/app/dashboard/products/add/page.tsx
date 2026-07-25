@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -31,6 +30,9 @@ import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useUser } from "@/firebase/auth/use-user";
 import Image from "next/image";
+
+// DEFAULT STORAGE CONFIGURATION
+const STORAGE_BUCKET = 'product-images';
 
 export default function AddProductPage() {
   const router = useRouter();
@@ -78,14 +80,14 @@ export default function AddProductPage() {
       setImageFile(file);
       const objectUrl = URL.createObjectURL(file);
       setImagePreview(objectUrl);
-      // Clean up URL on unmount
-      return () => URL.revokeObjectURL(objectUrl);
+      // Clean up URL on unmount happens via the state change
     }
   };
 
   const generateSlug = (text: string) => {
     return text
       .toLowerCase()
+      .trim()
       .replace(/[^\w ]+/g, '')
       .replace(/ +/g, '-');
   };
@@ -97,18 +99,19 @@ export default function AddProductPage() {
       const filePath = `${fileName}`;
 
       const { error: uploadError } = await supabase.storage
-        .from('product-images')
+        .from(STORAGE_BUCKET)
         .upload(filePath, file);
 
       if (uploadError) {
-        if (uploadError.message === 'Bucket not found') {
-          throw new Error("Supabase Storage Error: The 'product-images' bucket was not found. Please create it in your Supabase Console with public access.");
+        // Detailed error for missing infrastructure
+        if (uploadError.message.includes('Bucket not found')) {
+          throw new Error(`Supabase Storage Error: The '${STORAGE_BUCKET}' bucket was not found. Please create it in your Supabase Console and set it to 'Public'.`);
         }
         throw uploadError;
       }
 
       const { data } = supabase.storage
-        .from('product-images')
+        .from(STORAGE_BUCKET)
         .getPublicUrl(filePath);
 
       return data.publicUrl;
@@ -121,7 +124,7 @@ export default function AddProductPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
-      toast({ variant: "destructive", title: "Authentication required", description: "Please sign in to add products." });
+      toast({ variant: "destructive", title: "Authentication required", description: "Please sign in as an admin." });
       return;
     }
     
@@ -155,12 +158,12 @@ export default function AddProductPage() {
 
       if (error) {
         if (error.message.includes('permission')) {
-          throw new Error("Authorization Error: Admin credentials required to write to database.");
+          throw new Error("Authorization Error: Your account does not have permission to add products. Check RLS policies.");
         }
         throw error;
       }
 
-      toast({ title: "Node deployed", description: `${formData.name} is now live in the catalog.` });
+      toast({ title: "Node deployed", description: `${formData.name} is now live.` });
       router.push("/dashboard/products");
     } catch (error: any) {
       toast({
@@ -193,18 +196,16 @@ export default function AddProductPage() {
         </div>
         <div className="flex gap-3">
           <Button variant="outline" onClick={() => router.back()} className="h-11 px-6 rounded-md font-bold text-[13px] border-slate-200">Discard</Button>
-          <Button onClick={handleSubmit} disabled={loading} className="bg-black hover:bg-zinc-800 h-11 px-8 rounded-md gap-2 font-bold text-[13px] shadow-lg">
+          <Button onClick={handleSubmit} disabled={loading} className="bg-black hover:bg-zinc-800 h-11 px-8 rounded-md gap-2 font-bold text-[13px] shadow-lg transition-all active:scale-95">
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Save className="w-4 h-4 stroke-[3px]" /> Deploy to catalog</>}
           </Button>
         </div>
       </div>
 
-      {!user?.id?.startsWith('demo-') && (
-        <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-center gap-4 text-amber-800 text-[12px] font-bold uppercase tracking-widest">
-           <ShieldAlert className="w-5 h-5 text-amber-500" />
-           <span>Secured by Supabase RLS. Admin credentials and 'product-images' bucket mandatory.</span>
-        </div>
-      )}
+      <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl flex items-center gap-4 text-blue-800 text-[12px] font-bold uppercase tracking-widest">
+           <ImageIcon className="w-5 h-5 text-blue-500" />
+           <span>Ensure the '{STORAGE_BUCKET}' bucket exists in your Supabase Storage console with Public access enabled.</span>
+      </div>
 
       <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
@@ -299,13 +300,13 @@ export default function AddProductPage() {
             </CardHeader>
             <CardContent className="p-6">
               <div 
-                className="relative aspect-square bg-slate-50 border border-dashed rounded-xl flex flex-col items-center justify-center text-center space-y-3 cursor-pointer hover:bg-white transition-all overflow-hidden"
+                className="relative aspect-square bg-slate-50 border border-dashed rounded-xl flex flex-col items-center justify-center text-center space-y-3 cursor-pointer hover:bg-white transition-all overflow-hidden group"
                 onClick={() => document.getElementById('image-upload')?.click()}
               >
                 {imagePreview ? (
                   <>
                     <Image src={imagePreview} alt="Preview" fill className="object-cover" />
-                    <button onClick={(e) => { e.stopPropagation(); setImageFile(null); setImagePreview(null); }} className="absolute top-2 right-2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center backdrop-blur-md"><X className="w-4 h-4" /></button>
+                    <button onClick={(e) => { e.stopPropagation(); setImageFile(null); setImagePreview(null); }} className="absolute top-2 right-2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center backdrop-blur-md hover:bg-red-500 transition-colors"><X className="w-4 h-4" /></button>
                   </>
                 ) : (
                   <>

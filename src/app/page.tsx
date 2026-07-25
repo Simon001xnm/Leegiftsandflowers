@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, Suspense } from "react";
@@ -29,9 +28,8 @@ function MarketplaceContent() {
           .eq('is_in_stock', true)
           .order('created_at', { ascending: false });
         
-        if (!error && data) {
-          setProducts(data);
-        }
+        if (error) throw error;
+        if (data) setProducts(data);
       } catch (e) {
         console.error("Public fetch failed", e);
       } finally {
@@ -41,8 +39,9 @@ function MarketplaceContent() {
     fetchProducts();
   }, [supabase]);
 
-  const meatProducts = products.filter(p => p.category !== 'DRINKS');
-  const drinkProducts = products.filter(p => p.category === 'DRINKS');
+  // CATEGORY SPLIT LOGIC
+  const meatProducts = products.filter(p => p.category?.toUpperCase() !== 'DRINKS');
+  const drinkProducts = products.filter(p => p.category?.toUpperCase() === 'DRINKS');
 
   const handleAdd = (e: React.MouseEvent, p: any) => {
     e.preventDefault();
@@ -70,6 +69,7 @@ function MarketplaceContent() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* BRAND NODES */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-10 space-y-6">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-[11px] font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes</h2>
@@ -89,6 +89,7 @@ function MarketplaceContent() {
         </div>
       </section>
 
+      {/* ELITE SELECTION (MEAT) */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-10 space-y-8">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Elite selection</h2>
@@ -127,12 +128,14 @@ function MarketplaceContent() {
         )}
       </section>
 
+      {/* TYPOGRAPHIC SIGNATURE MARQUEE */}
       <div className="bg-white border-y py-12">
         <h2 className="text-[12px] md:text-[22px] font-black text-black uppercase tracking-tighter text-center px-6">
           your plug for home appliances, phones and accessories.
         </h2>
       </div>
 
+      {/* REFRESHMENT NODE (DRINKS) */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-20 space-y-8">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Refreshment node</h2>
