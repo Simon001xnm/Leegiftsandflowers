@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, Suspense } from "react";
@@ -113,7 +112,7 @@ function MarketplaceContent() {
         {/* MAIN PRODUCT GRID (2 mobile, 3 tablet, 4 desktop) */}
         <section className="space-y-8">
           <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-            <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter">Marketplace Discovery</h2>
+            <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Marketplace discovery</h2>
             <Badge variant="outline" className="rounded-none border-red-600 text-red-600 font-black text-[10px] tracking-widest px-3 py-1">
               {filteredProducts.length} ITEMS READY
             </Badge>
