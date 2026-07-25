@@ -76,7 +76,10 @@ export default function AddProductPage() {
     const file = e.target.files?.[0];
     if (file) {
       setImageFile(file);
-      setImagePreview(URL.createObjectURL(file));
+      const objectUrl = URL.createObjectURL(file);
+      setImagePreview(objectUrl);
+      // Clean up URL on unmount
+      return () => URL.revokeObjectURL(objectUrl);
     }
   };
 
@@ -97,22 +100,30 @@ export default function AddProductPage() {
         .from('product-images')
         .upload(filePath, file);
 
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+        if (uploadError.message === 'Bucket not found') {
+          throw new Error("Supabase Storage Error: The 'product-images' bucket was not found. Please create it in your Supabase Console with public access.");
+        }
+        throw uploadError;
+      }
 
       const { data } = supabase.storage
         .from('product-images')
         .getPublicUrl(filePath);
 
       return data.publicUrl;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading image:', error);
-      return null;
+      throw error;
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
+    if (!user) {
+      toast({ variant: "destructive", title: "Authentication required", description: "Please sign in to add products." });
+      return;
+    }
     
     setLoading(true);
 
@@ -144,12 +155,12 @@ export default function AddProductPage() {
 
       if (error) {
         if (error.message.includes('permission')) {
-          throw new Error("Authorization Error: Admin credentials required.");
+          throw new Error("Authorization Error: Admin credentials required to write to database.");
         }
         throw error;
       }
 
-      toast({ title: "Node deployed", description: `${formData.name} is now live.` });
+      toast({ title: "Node deployed", description: `${formData.name} is now live in the catalog.` });
       router.push("/dashboard/products");
     } catch (error: any) {
       toast({
@@ -191,7 +202,7 @@ export default function AddProductPage() {
       {!user?.id?.startsWith('demo-') && (
         <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-center gap-4 text-amber-800 text-[12px] font-bold uppercase tracking-widest">
            <ShieldAlert className="w-5 h-5 text-amber-500" />
-           <span>Secured by Supabase RLS. Admin credentials mandatory.</span>
+           <span>Secured by Supabase RLS. Admin credentials and 'product-images' bucket mandatory.</span>
         </div>
       )}
 
