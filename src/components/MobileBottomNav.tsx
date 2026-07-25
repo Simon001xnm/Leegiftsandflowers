@@ -3,13 +3,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Search, ShoppingBag, User, Utensils } from "lucide-react";
+import { Home, ShoppingBag, User, Utensils } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 
 /**
  * HIGH-DENSITY MOBILE NAVIGATION
- * Home serves as both the Landing and Discovery/Search node.
+ * Optimized for essential retail flow.
  */
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -17,7 +17,6 @@ export function MobileBottomNav() {
 
   const navItems = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/", label: "Search", icon: Search },
     { href: "/profile", label: "Orders", icon: Utensils },
     { href: "/checkout", label: "Basket", icon: ShoppingBag, badge: itemCount },
     { href: "/profile", label: "Account", icon: User },
@@ -28,7 +27,6 @@ export function MobileBottomNav() {
       {navItems.map((item, index) => {
         const Icon = item.icon;
         const itemKey = `${item.href}-${index}`;
-        // Active logic for home
         const isActive = pathname === item.href;
         
         return (
@@ -52,7 +50,7 @@ export function MobileBottomNav() {
             )}>
               {item.label}
             </span>
-            {item.badge > 0 && (
+            {item.badge !== undefined && item.badge > 0 && (
               <span className="absolute top-1 right-1/4 bg-primary text-white text-[8px] font-black h-3.5 w-3.5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
                 {item.badge}
               </span>
