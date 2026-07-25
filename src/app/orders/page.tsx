@@ -159,7 +159,7 @@ export default function OrdersHub() {
         {/* PAST ORDERS */}
         <section className="space-y-6 pb-12">
           <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
-            <History className="w-4 h-4" /> Past Dispatches
+            <History className="w-4 h-4" /> Orders
           </h2>
           <div className="bg-white border rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-sm">
             <div className="divide-y">
