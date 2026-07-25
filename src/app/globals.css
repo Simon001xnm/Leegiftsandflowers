@@ -53,10 +53,13 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .bg-brand-dark {
-    background-color: #0c0c0c;
+  
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
-  .bg-brand-red {
-    background-color: #921c1c;
+  
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
   }
 }
