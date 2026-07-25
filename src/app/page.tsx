@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { cn } from "@/lib/utils";
-import { Star, Plus, ChevronRight, ShoppingBag } from "lucide-react";
+import { Star, Plus, ChevronRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Footer } from "@/components/landing/Footer";
@@ -122,35 +122,35 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-5 space-y-12 py-12 flex-grow w-full">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-5 space-y-10 py-10 flex-grow w-full">
         {/* Operating nodes */}
-        <section className="space-y-6">
+        <section className="space-y-4">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
           <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
             {MOCK_RESTAURANTS.map((brand, i) => (
               <Link key={brand.id + i} href={`/restaurants/${brand.id}`} className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gray-100 p-1 overflow-hidden transition-all duration-500 shadow-lg group-hover:border-red-600">
+                <div className="w-14 h-14 md:w-20 md:h-20 rounded-full border-2 border-gray-100 p-1 overflow-hidden transition-all duration-500 shadow-lg group-hover:border-red-600">
                   <Image src={brand.imageUrl} alt={brand.name} width={80} height={80} className="object-cover w-full h-full rounded-full" />
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover:text-black">{brand.name.split(' ')[0]}</span>
+                <span className="text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover:text-black">{brand.name.split(' ')[0]}</span>
               </Link>
             ))}
           </div>
         </section>
 
         {/* HIGH DENSITY CONTENT */}
-        <div className="space-y-20">
+        <div className="space-y-12 md:space-y-20">
           {category === 'All' ? (
             sections.map((section) => (
-              <section key={section.title} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-                  <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
-                  <button onClick={() => setCategory(section.title)} className="text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-2 group">
-                    Explore All <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <section key={section.title} className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+                  <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
+                  <button onClick={() => setCategory(section.title)} className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-1 group">
+                    Explore All <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
                   {section.products.map((p) => (
                     <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                   ))}
@@ -158,13 +158,13 @@ function DiscoveryContent() {
               </section>
             ))
           ) : (
-            <section className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-                <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">{category}</h2>
-                <span className="text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
+            <section className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+                <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{category}</h2>
+                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
                 {filteredProducts.map((p) => (
                   <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                 ))}
@@ -190,25 +190,25 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void
         />
         
         {/* Rating Badge */}
-        <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded flex items-center gap-1 shadow-lg">
-          <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-          <span className="text-[10px] font-black text-white">{product.rating}</span>
+        <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
+          <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+          <span className="text-[9px] font-black text-white">{product.rating}</span>
         </div>
 
         {/* Quick Add */}
         <button 
           onClick={onAdd}
-          className="absolute bottom-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
+          className="absolute bottom-2 right-2 w-7 h-7 md:w-9 md:h-9 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
         >
-          <Plus className="w-4 h-4 stroke-[3px]" />
+          <Plus className="w-3.5 h-3.5 md:w-4 md:h-4 stroke-[3px]" />
         </button>
       </div>
 
-      <div className="p-4 space-y-2">
-        <h3 className="text-[13px] font-bold text-gray-800 line-clamp-1 leading-tight uppercase">
+      <div className="p-3 md:p-4 space-y-1.5">
+        <h3 className="text-[11px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
           {product.name}
         </h3>
-        <p className="text-base font-black text-black">
+        <p className="text-[14px] md:text-base font-black text-black">
           KES {product.price.toLocaleString()}
         </p>
       </div>
