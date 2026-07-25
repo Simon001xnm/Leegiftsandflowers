@@ -9,9 +9,8 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 /**
- * ROLE-BASED LAYOUT ARCHITECTURE
- * Separates Customer, Merchant, and Rider experiences completely.
- * Updated to hide main nav for all dashboard sub-paths.
+ * PRODUCTION-READY ROLE-BASED LAYOUT
+ * Orchestrates navigation based on real Supabase roles.
  */
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -21,11 +20,9 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     async function getRole() {
-      if (user && !user.id?.startsWith('demo-')) {
+      if (user) {
         const { data } = await supabase.from('profiles').select('role').eq('id', user.id).single();
         if (data) setRole(data.role);
-      } else if (user?.user_metadata?.role) {
-        setRole(user.user_metadata.role);
       }
     }
     getRole();
@@ -33,11 +30,7 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
 
   const path = pathname || '';
   const isLogin = path.startsWith('/login');
-  
-  // Detect any path under the merchant dashboard
   const isMerchantDash = path.startsWith('/dashboard') && !path.startsWith('/dashboard/customer') && !path.startsWith('/dashboard/rider');
-  
-  // Standard sidebar is used for simple dashboards, Merchant POS uses its own Layout
   const showSidebar = !isMerchantDash && (path.startsWith('/dashboard/inventory') || path.startsWith('/dashboard/rider'));
   const hideGlobalNav = isLogin || isMerchantDash;
 

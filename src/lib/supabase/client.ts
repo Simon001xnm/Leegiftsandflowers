@@ -2,60 +2,15 @@ import { createBrowserClient } from '@supabase/ssr'
 
 /**
  * PRODUCTION SUPABASE CLIENT
- * Uses publishable keys for public reads and authenticated sessions for admin writes.
- * RLS is enforced at the database level.
+ * Strictly uses environment variables for real database and storage connectivity.
  */
 export function createClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   
-  // Guard against placeholder or missing keys
-  const isInvalid = !supabaseUrl || !supabaseKey || 
-                    supabaseUrl.includes('placeholder') || 
-                    supabaseUrl.startsWith('your-') ||
-                    supabaseKey.startsWith('your-');
-
-  if (isInvalid) {
-    if (typeof window !== 'undefined') {
-      console.warn("Supabase Environment Variables Missing or Placeholder. Storage and DB writes will fail.");
-    }
-    return createFallbackShell();
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error("CRITICAL: Supabase Environment Variables are missing. Production operations are unavailable.");
   }
 
   return createBrowserClient(supabaseUrl, supabaseKey);
-}
-
-function createFallbackShell() {
-  return {
-    from: () => ({
-      select: () => ({ 
-        eq: () => ({ 
-          order: () => Promise.resolve({ data: [], error: null }),
-          single: () => Promise.resolve({ data: null, error: null })
-        }),
-        order: () => ({
-          eq: () => Promise.resolve({ data: [], error: null }),
-          select: () => Promise.resolve({ data: [], error: null })
-        }),
-        single: () => Promise.resolve({ data: null, error: null })
-      }),
-      insert: () => Promise.resolve({ data: null, error: new Error("Environment Keys Missing. Database writes are disabled.") }),
-      update: () => ({ eq: () => Promise.resolve({ data: null, error: null }) }),
-      upsert: () => Promise.resolve({ data: null, error: null }),
-    }),
-    storage: {
-      from: () => ({
-        upload: () => Promise.resolve({ data: null, error: new Error("Environment Keys Missing. Storage uploads are disabled.") }),
-        getPublicUrl: () => ({ data: { publicUrl: "" } })
-      })
-    },
-    auth: {
-      getSession: () => Promise.resolve({ data: { session: null }, error: null }),
-      getUser: () => Promise.resolve({ data: { user: null }, error: null }),
-      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
-      signInWithPassword: () => Promise.reject(new Error("Supabase Keys Missing")),
-      signUp: () => Promise.reject(new Error("Supabase Keys Missing")),
-      signOut: () => Promise.resolve({ error: null }),
-    }
-  } as any;
 }

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Suspense, useState } from "react";
@@ -9,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Store, Bike, Mail, Lock, Loader2, ShieldCheck, ArrowRight, AlertCircle } from "lucide-react";
+import { User, Store, Bike, Loader2, ShieldCheck, ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -28,21 +27,6 @@ function LoginForm() {
 
   const redirectPath = searchParams.get("redirect") || "/profile";
 
-  const handleDemoBypass = (selectedRole: AppRole) => {
-    // Note: Demo bypass does not create a real Supabase session.
-    // Real DB/Storage operations will fail with 'Invalid Compact JWS'.
-    localStorage.setItem('steak_west_demo_user', JSON.stringify({
-      id: `demo-${Date.now()}`,
-      email: 'demo@steakwest.com',
-      user_metadata: { role: selectedRole, full_name: `Demo ${selectedRole}` }
-    }));
-    toast({ 
-      title: "Entering demo mode", 
-      description: `Authorized as ${selectedRole}. Note: Live uploads require real login.` 
-    });
-    router.push(redirectPath);
-  };
-
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>, mode: "login" | "signup") => {
     e.preventDefault();
     setLoading(true);
@@ -60,24 +44,18 @@ function LoginForm() {
           options: { data: { full_name: name, role } },
         });
         if (error) throw error;
-        toast({ title: "Account registered", description: "Identity verified." });
+        toast({ title: "Account registered", description: "Identity verified. Please check your email for confirmation." });
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast({ title: "Authorized", description: "Sync successful." });
       }
-      localStorage.removeItem('steak_west_demo_user'); // Clear demo session if real login succeeds
       router.push(redirectPath);
     } catch (error: any) {
-      const isNetworkError = error.message === 'Failed to fetch' || error.message.includes('Keys Missing');
-      const isInvalidCreds = error.message.includes('Invalid login credentials');
-      
       toast({
         variant: "destructive",
-        title: isNetworkError ? "Network isolation active" : "Authorization failed",
-        description: isInvalidCreds 
-          ? "Invalid credentials. If testing, please use the demo bypass buttons below."
-          : (isNetworkError ? "Live sync unavailable. Please use demo bypass." : error.message),
+        title: "Authorization failed",
+        description: error.message,
       });
     } finally {
       setLoading(false);
@@ -149,21 +127,7 @@ function LoginForm() {
             </Tabs>
           </CardContent>
           
-          <CardFooter className="bg-gray-50/80 p-8 flex flex-col gap-6 border-t">
-            <div className="w-full space-y-4">
-              <div className="flex items-center gap-2 justify-center text-[11px] font-bold text-amber-600">
-                <AlertCircle className="w-4 h-4" /> 
-                <span>Bypass modes are for UI exploration only</span>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[11px] font-bold h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('merchant')}>
-                   Merchant bypass
-                </Button>
-                <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[11px] font-bold h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('rider')}>
-                   Courier bypass
-                </Button>
-              </div>
-            </div>
+          <CardFooter className="bg-gray-50/80 p-8 flex flex-col gap-4 border-t">
             <div className="flex items-center justify-center gap-3 text-muted-foreground font-bold text-[10px] bg-white/50 py-2 px-4 rounded-full border border-gray-100">
               <ShieldCheck className="w-4 h-4 text-emerald-500" /> Secure SSL identity protection active
             </div>

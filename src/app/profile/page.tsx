@@ -1,27 +1,22 @@
-
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { 
   User as UserIcon, 
-  LogOut, 
-  Settings, 
-  ChevronRight,
   Heart,
   History,
   Camera,
   ArrowLeft,
   Check,
-  LayoutDashboard,
   Store,
   Bike,
   Clock,
   Package,
   Star,
   ShoppingBag,
-  CreditCard
+  ChevronRight
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +27,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 import { MOCK_ORDERS, MOCK_MENU } from "@/lib/food-data";
+import { cn } from "@/lib/utils";
 
 export default function ProfilePage() {
   const { user, loading: authLoading } = useUser();
@@ -43,7 +39,7 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [saving, setSaving] = useState(false);
 
-  // Mock data for customer dashboard logic
+  // Data for customer workspace
   const orders = MOCK_ORDERS;
   const favorites = MOCK_MENU.slice(0, 3);
   
@@ -51,7 +47,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     async function fetchProfile() {
-      if (user && !user.id?.startsWith('demo-')) {
+      if (user) {
         const { data } = await supabase
           .from('profiles')
           .select('*')
@@ -64,7 +60,6 @@ export default function ProfilePage() {
   }, [user, supabase]);
 
   const handleSignOut = async () => {
-    localStorage.removeItem('steak_west_demo_user');
     await supabase.auth.signOut();
     toast({ title: "Signed out", description: "Your session has ended." });
     router.push("/");
@@ -167,14 +162,12 @@ export default function ProfilePage() {
             )}
           </header>
 
-          {/* Quick Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
              <StatCard icon={Clock} label="Pending orders" value={pendingOrdersCount} color="text-amber-500" />
              <StatCard icon={Heart} label="Your favorites" value={favorites.length} color="text-red-500" />
              <StatCard icon={History} label="Lifetime orders" value={orders.length} color="text-black" />
           </div>
 
-          {/* Customer Workspace */}
           <Tabs defaultValue="activity" className="space-y-8">
             <TabsList className="bg-gray-100 p-1.5 h-12 rounded-2xl w-full md:w-auto border shadow-inner">
               <TabsTrigger value="activity" className="rounded-xl font-black text-[11px] uppercase tracking-widest px-8 data-[state=active]:bg-white data-[state=active]:shadow-lg">My Activity</TabsTrigger>

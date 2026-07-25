@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 /**
- * Resilient useUser hook.
- * Supports real Supabase Auth with a transparent Demo Mode fallback.
+ * PRODUCTION-ONLY useUser hook.
+ * Exclusively supports real Supabase Auth sessions.
  */
 export function useUser() {
   const [user, setUser] = useState<any>(null);
@@ -20,19 +20,13 @@ export function useUser() {
         // Initial session check
         const { data: { session } } = await supabase.auth.getSession();
         
-        // Check for Demo User
-        const demoUser = localStorage.getItem('steak_west_demo_user');
-        
-        if (demoUser) {
-          setUser(JSON.parse(demoUser));
-        } else if (session?.user) {
+        if (session?.user) {
           setUser(session.user);
         }
 
         // Listen for changes
         const { data } = supabase.auth.onAuthStateChange((event, session) => {
           if (event === 'SIGNED_OUT') {
-            localStorage.removeItem('steak_west_demo_user');
             setUser(null);
           } else if (session?.user) {
             setUser(session.user);
@@ -42,7 +36,7 @@ export function useUser() {
         
         subscription = data.subscription;
       } catch (error) {
-        console.warn('Auth resilience triggered');
+        console.error('Auth initialization failed:', error);
       } finally {
         setLoading(false);
       }

@@ -11,9 +11,7 @@ import {
   Image as ImageIcon,
   Loader2,
   X,
-  ShieldAlert,
-  Layers,
-  Lock
+  Layers
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,21 +93,16 @@ export default function AddProductPage() {
 
   const uploadImage = async (file: File): Promise<string | null> => {
     try {
-      // 1. Rigorous Auth Validation to prevent 'Invalid Compact JWS'
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      const { data: { session } } = await supabase.auth.getSession();
       
-      const isDemo = !!localStorage.getItem('steak_west_demo_user');
-      const hasRealToken = session?.access_token && session.access_token.split('.').length === 3;
-
-      if (isDemo || !session || !hasRealToken) {
-        throw new Error("AUTHENTICATION_REQUIRED: Image uploads require a real Supabase session. Demo mode is for UI exploration only.");
+      if (!session) {
+        throw new Error("AUTHENTICATION_REQUIRED: A real Supabase session is required for image uploads.");
       }
 
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      // 2. Perform the upload
       const { error: uploadError } = await supabase.storage
         .from(STORAGE_BUCKET)
         .upload(filePath, file, {
@@ -119,10 +112,7 @@ export default function AddProductPage() {
 
       if (uploadError) {
         if (uploadError.message.includes('Bucket not found')) {
-          throw new Error(`Supabase Storage Error: The '${STORAGE_BUCKET}' bucket was not found. Please create it in your Supabase Console and set it to 'Public'.`);
-        }
-        if (uploadError.message.includes('JWS')) {
-          throw new Error("Supabase Auth Error: Your session token is malformed. Please sign out and sign in again with a real account.");
+          throw new Error(`Supabase Storage Error: The '${STORAGE_BUCKET}' bucket was not found. Please create it in your Supabase Console.`);
         }
         throw uploadError;
       }
@@ -133,17 +123,14 @@ export default function AddProductPage() {
 
       return data.publicUrl;
     } catch (error: any) {
-      console.error('Upload operation aborted:', error);
+      console.error('Upload operation failed:', error);
       throw error;
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) {
-      toast({ variant: "destructive", title: "Authentication required", description: "Please sign in as an admin." });
-      return;
-    }
+    if (!user) return;
     
     setLoading(true);
 
@@ -175,17 +162,17 @@ export default function AddProductPage() {
 
       if (error) {
         if (error.message.includes('permission')) {
-          throw new Error("Authorization Error: Your account does not have permission to add products. Check RLS policies.");
+          throw new Error("Authorization Error: You do not have permission to add products. Check RLS policies.");
         }
         throw error;
       }
 
-      toast({ title: "Node deployed", description: `${formData.name} is now live.` });
+      toast({ title: "Product deployed", description: `${formData.name} is now live.` });
       router.push("/dashboard/products");
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Deployment Aborted",
+        title: "Deployment failed",
         description: error.message
       });
     } finally {
@@ -198,8 +185,6 @@ export default function AddProductPage() {
       <Loader2 className="w-8 h-8 animate-spin text-primary" />
     </div>
   );
-
-  const isDemoUser = !!localStorage.getItem('steak_west_demo_user');
 
   return (
     <div className="p-6 max-w-6xl mx-auto space-y-6">
@@ -221,19 +206,10 @@ export default function AddProductPage() {
         </div>
       </div>
 
-      {isDemoUser && (
-        <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-center gap-4 text-amber-800 text-[12px] font-bold uppercase tracking-widest">
-           <Lock className="w-5 h-5 text-amber-500" />
-           <span>You are in Demo Mode. Real image uploads and database writes require a real Supabase session.</span>
-        </div>
-      )}
-
-      {!isDemoUser && (
-        <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl flex items-center gap-4 text-blue-800 text-[12px] font-bold uppercase tracking-widest">
-             <ImageIcon className="w-5 h-5 text-blue-500" />
-             <span>Ensure the '{STORAGE_BUCKET}' bucket exists in your Supabase Storage console with Public access enabled.</span>
-        </div>
-      )}
+      <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl flex items-center gap-4 text-blue-800 text-[12px] font-bold uppercase tracking-widest">
+           <ImageIcon className="w-5 h-5 text-blue-500" />
+           <span>Ensure the '{STORAGE_BUCKET}' bucket exists in your Supabase Storage console with Public access enabled.</span>
+      </div>
 
       <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">

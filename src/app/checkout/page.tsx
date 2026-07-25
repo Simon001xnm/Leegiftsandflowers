@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from "react";
@@ -66,13 +65,9 @@ export default function GlobalCheckoutPage() {
       .insert([orderData]);
 
     if (error) {
-      // Graceful error handling for demo environments
-      if (user.id?.startsWith('demo-')) {
-         // Silently bypass in demo
-      } else {
-        setLoading(false);
-        return;
-      }
+      setLoading(false);
+      toast({ variant: "destructive", title: "Checkout failed", description: error.message });
+      return;
     }
 
     setTimeout(() => {
