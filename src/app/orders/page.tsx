@@ -52,14 +52,14 @@ export default function OrdersHub() {
             </div>
             <CardContent className="p-6 md:p-12 space-y-6 md:space-y-10 relative z-10">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center">
+                <div className="space-y-3 w-full">
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center shrink-0">
                       <Star className="w-4 h-4 md:w-5 md:h-5 text-white fill-current" />
                     </div>
-                    <span className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary">Gold Level Partner</span>
+                    <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.15em] md:tracking-[0.3em] text-primary">Gold Level Partner</span>
                   </div>
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none break-words">
                     {points.toLocaleString()} <span className="text-primary">POINTS</span>
                   </h1>
                 </div>
@@ -99,8 +99,8 @@ export default function OrdersHub() {
         <section className="space-y-6">
           <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.2em] text-muted-foreground">Today's Special Node</h2>
           <Card className="rounded-[2rem] md:rounded-[3rem] border-2 border-primary/20 bg-primary/5 overflow-hidden group hover:border-primary transition-all">
-            <div className="flex flex-col md:flex-row min-h-[300px]">
-              <div className="relative w-full md:w-[40%] aspect-video md:aspect-auto">
+            <div className="flex flex-col md:flex-row">
+              <div className="relative w-full md:w-[40%] aspect-[16/9] md:aspect-auto">
                 <Image 
                   src="/BEEF CHOMA.jpg" 
                   alt="Platter" 
@@ -137,7 +137,7 @@ export default function OrdersHub() {
           </div>
           <div className="flex gap-4 overflow-x-auto no-scrollbar pb-6 -mx-4 px-4 md:mx-0 md:px-0">
             {favorites.map(item => (
-              <Card key={item.id} className="min-w-[180px] md:min-w-[220px] w-[180px] md:w-[220px] shrink-0 rounded-2xl md:rounded-[2rem] border shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden">
+              <Card key={item.id} className="min-w-[160px] md:min-w-[220px] w-[160px] md:w-[220px] shrink-0 rounded-2xl md:rounded-[2rem] border shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden">
                 <div className="aspect-square relative bg-gray-50">
                   <Image src={item.imageUrl} alt={item.name} fill className="object-cover transition-transform group-hover:scale-105" />
                   <button 
@@ -204,11 +204,11 @@ function OrderStrip({ order, isActive = false }: { order: any, isActive?: boolea
              </div>
           </div>
        </div>
-       <div className="flex items-center gap-3 md:gap-6 ml-4">
-          <div className="text-right hidden sm:block">
+       <div className="flex items-center gap-3 md:gap-6 ml-4 shrink-0">
+          <div className="text-right hidden xs:block">
              <p className="text-[13px] md:text-[14px] font-black">KES {order.total.toLocaleString()}</p>
           </div>
-          <div className="w-8 h-8 md:w-11 md:h-11 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+          <div className="w-8 h-8 md:w-11 md:h-11 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-primary group-hover:text-white transition-all">
              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
           </div>
        </div>
