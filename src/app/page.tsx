@@ -88,10 +88,11 @@ function DiscoveryContent() {
   };
 
   const sections = useMemo(() => {
+    const sequence = ['Raw Meat', 'Cooked Meat', 'Grocery', 'Drinks', 'Kitchen Appliances', 'Phone Accessories'];
     if (category !== 'All') return [];
-    return CATEGORIES.filter(c => c.label !== 'All').map(c => ({
-      title: c.label,
-      products: ALL_PRODUCTS.filter(p => p.category === c.label)
+    return sequence.map(label => ({
+      title: label,
+      products: ALL_PRODUCTS.filter(p => p.category === label)
     }));
   }, [category]);
 
@@ -122,7 +123,7 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-5 space-y-10 py-10 flex-grow w-full">
+      <div className="max-w-[1400px] mx-auto px-5 w-full space-y-10 py-10 flex-grow">
         {/* Operating nodes */}
         <section className="space-y-4">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
@@ -138,19 +139,19 @@ function DiscoveryContent() {
           </div>
         </section>
 
-        {/* HIGH DENSITY CONTENT */}
+        {/* HIGH DENSITY RESPONSIVE GRID */}
         <div className="space-y-12 md:space-y-20">
           {category === 'All' ? (
             sections.map((section) => (
               <section key={section.title} className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                  <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
+                  <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
                   <button onClick={() => setCategory(section.title)} className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-1 group">
                     Explore All <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                   {section.products.map((p) => (
                     <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                   ))}
@@ -160,11 +161,11 @@ function DiscoveryContent() {
           ) : (
             <section className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{category}</h2>
+                <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">{category}</h2>
                 <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 {filteredProducts.map((p) => (
                   <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                 ))}
@@ -180,8 +181,8 @@ function DiscoveryContent() {
 
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
   return (
-    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-      <div className="relative aspect-square bg-gray-50 overflow-hidden">
+    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow w-full max-w-none h-full">
+      <div className="relative aspect-square bg-gray-50 overflow-hidden w-full">
         <Image 
           src={product.image} 
           alt={product.name} 
@@ -198,14 +199,14 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void
         {/* Quick Add */}
         <button 
           onClick={onAdd}
-          className="absolute bottom-2 right-2 w-7 h-7 md:w-9 md:h-9 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
+          className="absolute bottom-2 right-2 w-8 h-8 md:w-9 md:h-9 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
         >
           <Plus className="w-3.5 h-3.5 md:w-4 md:h-4 stroke-[3px]" />
         </button>
       </div>
 
-      <div className="p-3 md:p-4 space-y-1.5">
-        <h3 className="text-[11px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
+      <div className="p-3 md:p-4 space-y-1.5 flex-grow flex flex-col justify-between">
+        <h3 className="text-[12px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
           {product.name}
         </h3>
         <p className="text-[14px] md:text-base font-black text-black">
