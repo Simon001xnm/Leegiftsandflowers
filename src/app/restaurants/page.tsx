@@ -87,9 +87,9 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="container mx-auto px-1 md:px-4 space-y-12 py-8">
+      <div className="container mx-auto px-0 md:px-4 space-y-12 py-8">
         {/* Operating nodes */}
-        <section className="space-y-4 px-2 md:px-0">
+        <section className="space-y-4 px-4 md:px-0">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
           <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
             {MOCK_RESTAURANTS.map((brand, i) => (
@@ -105,7 +105,7 @@ function DiscoveryContent() {
 
         {/* ULTRA-HIGH DENSITY GRID - STRICTLY 4 COLUMNS MOBILE */}
         <section className="space-y-6">
-          <div className="flex items-center justify-between px-3 border-b border-gray-100 pb-4">
+          <div className="flex items-center justify-between px-4 border-b border-gray-100 pb-4">
             <h2 className="text-lg md:text-2xl font-medium tracking-tight">Marketplace discovery</h2>
             <span className="text-[9px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items</span>
           </div>
@@ -130,9 +130,9 @@ function DiscoveryContent() {
                   {/* Quick Add */}
                   <button 
                     onClick={() => handleAdd(p)}
-                    className="absolute bottom-1 right-1 w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20"
+                    className="absolute bottom-1 right-1 w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20"
                   >
-                    <Plus className="w-4 h-4 stroke-[3px]" />
+                    <Plus className="w-3 h-3 stroke-[3px]" />
                   </button>
                 </div>
 

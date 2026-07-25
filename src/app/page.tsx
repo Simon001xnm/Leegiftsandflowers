@@ -162,7 +162,7 @@ export default function App() {
       {/* Retail discovery grid - EDGE TO EDGE */}
       <main className="w-full">
         
-        {/* Flash deals - FULL WIDTH 4 COLUMNS */}
+        {/* Flash deals - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-6">
             <div className="flex items-center gap-3">
@@ -181,7 +181,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Elite selection - FULL WIDTH 4 COLUMNS */}
+        {/* Elite selection - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-6">
             <div className="flex items-center gap-3">
@@ -200,7 +200,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Drinks refreshment - FULL WIDTH 4 COLUMNS */}
+        {/* Drinks refreshment - STRICT 4 COLUMNS MOBILE */}
         <section className="py-2">
           <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-6">
             <div className="flex items-center gap-3">
