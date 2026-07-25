@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from "react";
@@ -8,8 +7,8 @@ import { Facebook, Instagram, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white border-t border-white/5 py-16">
-      <div className="container mx-auto px-6">
+    <footer className="bg-black text-white border-t border-white/5 py-20">
+      <div className="max-w-[1400px] mx-auto px-5">
         <div className="grid md:grid-cols-12 gap-8 items-center">
           
           {/* Left: Operational Information Stack */}
@@ -24,19 +23,19 @@ export function Footer() {
                </div>
           </div>
 
-          {/* Right: Partner Logos - SYMMETRIC SPREAD with margins and max-width */}
+          {/* Right: Partner Logos - SYMMETRIC SPREAD with margin constraint */}
           <div className="md:col-span-7 w-full pt-10 md:pt-0">
             <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-12 max-w-4xl ml-auto">
-              <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
+              <div className="relative h-14 w-28 md:h-20 md:w-48 shrink-0">
                 <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West Brand" fill className="object-contain" />
               </div>
-              <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
+              <div className="relative h-14 w-28 md:h-20 md:w-48 shrink-0">
                 <Image src="/finewood deco merchants 2.png" alt="Finewood Deco" fill className="object-contain" />
               </div>
-              <div className="relative h-12 w-24 md:h-16 md:w-44 shrink-0">
+              <div className="relative h-12 w-24 md:h-16 md:w-40 shrink-0">
                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
               </div>
-              <div className="relative h-12 w-24 md:h-16 md:w-44 shrink-0">
+              <div className="relative h-12 w-24 md:h-16 md:w-40 shrink-0">
                 <Image src="/images (1).png" alt="Uber Eats / Bolt" fill className="object-contain" />
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from "react";
@@ -48,20 +47,20 @@ export default function ShopPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen pt-24 pb-20">
-      <div className="container mx-auto px-6">
-        <header className="mb-12 flex flex-col md:group-end justify-between gap-8">
-           <div className="space-y-2">
-              <h1 className="text-4xl font-medium tracking-tight">Marketplace</h1>
-              <p className="text-muted-foreground">Everything you need for the perfect meal.</p>
+    <div className="bg-white min-h-screen pt-32 pb-20">
+      <div className="max-w-[1400px] mx-auto px-5">
+        <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+           <div className="space-y-3">
+              <h1 className="text-4xl font-bold tracking-tight">Marketplace</h1>
+              <p className="text-muted-foreground text-lg">Premium products dispatched directly to your kitchen.</p>
            </div>
            
            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-              <div className="relative flex-grow sm:w-64">
+              <div className="relative flex-grow sm:w-80">
                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                  <Input 
                    placeholder="Search products..." 
-                   className="pl-11 h-12 rounded-xl bg-gray-50 border-none"
+                   className="pl-11 h-12 rounded-xl bg-gray-50 border-none shadow-inner"
                    value={search}
                    onChange={(e) => setSearch(e.target.value)}
                  />
@@ -84,7 +83,7 @@ export default function ShopPage() {
         </header>
 
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-t border-gray-100">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {filtered.map(p => (
               <ProductCard key={p.id} product={p} onAdd={() => handleAdd(p)} />
             ))}
@@ -105,31 +104,20 @@ export default function ShopPage() {
 
 function ProductCard({ product, onAdd }: any) {
   return (
-    <motion.div 
-      className="flex flex-col group border-r border-b border-gray-100 bg-white relative z-0 overflow-hidden"
-      whileHover={{ 
-        scale: [1, 1.04, 1],
-        zIndex: 10,
-        transition: { 
-          repeat: Infinity, 
-          duration: 0.8,
-          ease: "easeInOut"
-        }
-      }}
-    >
+    <div className="flex flex-col group bg-white relative z-0 overflow-hidden rounded-2xl border shadow-sm hover:shadow-xl transition-all">
       <div className="relative aspect-square bg-gray-50 overflow-hidden">
         <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
         <button 
           onClick={onAdd}
-          className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white transition-all z-20 group/btn"
+          className="absolute bottom-4 right-4 w-10 h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white transition-all z-20 group/btn active:scale-90"
         >
-          <Plus className="w-4 h-4 md:w-6 md:h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
+          <Plus className="w-6 h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
         </button>
       </div>
-      <div className="p-2 md:p-4 space-y-1 bg-white">
-        <p className="text-[9px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">{product.name}</p>
-        <p className="text-[10px] md:text-[14px] font-bold text-black">KSh {product.price.toLocaleString()}</p>
+      <div className="p-5 space-y-2 bg-white flex-grow">
+        <p className="text-sm font-bold text-gray-700 line-clamp-1">{product.name}</p>
+        <p className="text-lg font-black text-black">KSh {product.price.toLocaleString()}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }

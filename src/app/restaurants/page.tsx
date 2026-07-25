@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
@@ -87,32 +86,32 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="container mx-auto px-0 md:px-4 space-y-12 py-8">
+      <div className="max-w-[1400px] mx-auto px-5 space-y-12 py-12">
         {/* Operating nodes */}
-        <section className="space-y-4 px-4 md:px-0">
+        <section className="space-y-6">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
+          <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
             {MOCK_RESTAURANTS.map((brand, i) => (
               <div key={brand.id + i} className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer">
-                <div className="w-14 h-14 md:w-20 md:h-20 rounded-full border-2 border-gray-100 p-1 overflow-hidden transition-all duration-500 shadow-lg group-hover:border-red-600">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gray-100 p-1 overflow-hidden transition-all duration-500 shadow-lg group-hover:border-red-600">
                   <Image src={brand.imageUrl} alt={brand.name} width={80} height={80} className="object-cover w-full h-full rounded-full" />
                 </div>
-                <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest">{brand.name.split(' ')[0]}</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">{brand.name.split(' ')[0]}</span>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ULTRA-HIGH DENSITY GRID - STRICTLY 4 COLUMNS MOBILE */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between px-4 border-b border-gray-100 pb-4">
-            <h2 className="text-lg md:text-2xl font-medium tracking-tight">Marketplace discovery</h2>
-            <span className="text-[9px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items</span>
+        {/* HIGH DENSITY GRID */}
+        <section className="space-y-8">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+            <h2 className="text-xl md:text-3xl font-bold tracking-tight">Marketplace discovery</h2>
+            <span className="text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
           </div>
           
-          <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-0 border-l border-t border-gray-100">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredProducts.map((p) => (
-              <div key={p.id} className="group relative flex flex-col border-r border-b border-gray-100 bg-white overflow-hidden">
+              <div key={p.id} className="group relative flex flex-col bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                 <div className="relative aspect-square bg-gray-50 overflow-hidden">
                   <Image 
                     src={p.image} 
@@ -122,25 +121,25 @@ function DiscoveryContent() {
                   />
                   
                   {/* Rating Badge */}
-                  <div className="absolute bottom-1 left-1 z-20 bg-black/80 backdrop-blur-md px-1 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
-                    <Star className="w-2 h-2 fill-amber-400 text-amber-400" />
-                    <span className="text-[8px] font-black text-white">{p.rating}</span>
+                  <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded flex items-center gap-1 shadow-lg">
+                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                    <span className="text-[10px] font-black text-white">{p.rating}</span>
                   </div>
 
                   {/* Quick Add */}
                   <button 
                     onClick={() => handleAdd(p)}
-                    className="absolute bottom-1 right-1 w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20"
+                    className="absolute bottom-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
                   >
-                    <Plus className="w-3 h-3 stroke-[3px]" />
+                    <Plus className="w-4 h-4 stroke-[3px]" />
                   </button>
                 </div>
 
-                <div className="p-2 md:p-4 space-y-1">
-                  <h3 className="text-[8px] md:text-[13px] font-medium text-gray-800 line-clamp-2 leading-tight min-h-[2.4em]">
+                <div className="p-4 space-y-2">
+                  <h3 className="text-sm font-medium text-gray-800 line-clamp-1">
                     {p.name}
                   </h3>
-                  <p className="text-[9px] md:text-[14px] font-bold text-black">
+                  <p className="text-base font-bold text-black">
                     KES {p.price.toLocaleString()}
                   </p>
                 </div>
