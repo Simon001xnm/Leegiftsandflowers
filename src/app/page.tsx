@@ -147,8 +147,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid */}
-      <div className="w-full max-w-[1600px] lg:max-w-[1400px] md:max-w-none mx-auto px-4 md:px-6 mt-10 space-y-12">
+      {/* Main Marketplace Grid - ULTRA HIGH DENSITY */}
+      <div className="w-full max-w-[1600px] lg:max-w-[1400px] md:max-w-none mx-auto px-2 md:px-6 mt-6 space-y-12">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
@@ -158,16 +158,16 @@ export default function HomePage() {
           if (categoryProducts.length === 0) return null;
 
           return (
-            <section key={category.id} id={category.id} className="space-y-6 scroll-mt-40">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-                <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
-                  <category.icon className="w-4 h-4 text-primary" /> {category.id}
+            <section key={category.id} id={category.id} className="space-y-4 scroll-mt-40">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-2 px-1">
+                <h2 className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
+                  <category.icon className="w-3 h-3 md:w-4 md:h-4 text-primary" /> {category.id}
                 </h2>
-                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
+                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* Responsive Grid Breakpoints: 1 col (<480px), 2 col (sm), 4 col (md), 6 col (lg+) */}
-              <div className="grid grid-cols-1 [@media(min-width:480px)]:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
+              {/* Force 3 columns on tiny mobile, 4 on standard mobile, 8 on desktop */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 md:gap-4">
                 {categoryProducts.map((product) => (
                   <ProductCard 
                     key={product.id} 
@@ -215,8 +215,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
   const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver'].includes(product.id);
 
   return (
-    <Card className="w-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 rounded-xl md:rounded-2xl">
-      {/* Aspect Ratio Node */}
+    <Card className="w-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl">
+      {/* Aspect Ratio Node - Miniature Scale */}
       <div className="aspect-square relative bg-gray-50 overflow-hidden">
         {images.map((img: string, idx: number) => (
           <div 
@@ -231,7 +231,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
               alt={product.name} 
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 25vw, 16vw"
+              sizes="(max-width: 480px) 33vw, (max-width: 768px) 25vw, 12vw"
               quality={100}
               priority={isExtraHD}
               unoptimized={isExtraHD}
@@ -239,34 +239,34 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
           </div>
         ))}
         
-        {/* Floating Interactive Button */}
+        {/* Floating Tiny Interactive Button */}
         <button 
           onClick={(e) => {
             e.stopPropagation();
             onAdd();
           }}
-          className="absolute bottom-2 right-2 md:bottom-3 md:right-3 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-xl opacity-0 md:opacity-100 group-hover:opacity-100 translate-y-2 md:translate-y-0 group-hover:translate-y-0 transition-all z-20 active:scale-90"
+          className="absolute bottom-1.5 right-1.5 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-100 md:opacity-0 group-hover:opacity-100 transition-all z-20 active:scale-90"
         >
-          <Plus className="w-5 h-5 md:w-6 md:h-6 stroke-[3px]" />
+          <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
 
-      {/* Proportional Metadata Node */}
-      <div className="p-3 md:p-4 lg:p-5 flex-grow flex flex-col justify-between space-y-2">
-        <div className="space-y-1">
-          <p className="text-[10px] md:text-[11px] lg:text-[13px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
+      {/* Proportional Metadata Node - Ultra Tiny Typography */}
+      <div className="p-2 flex-grow flex flex-col justify-between space-y-1">
+        <div className="space-y-0.5">
+          <p className="text-[9px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
             {product.name}
           </p>
-          <p className="text-[8px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">
+          <p className="text-[7px] md:text-[8px] text-gray-400 font-bold uppercase tracking-widest truncate">
             {product.category}
           </p>
         </div>
         
         <div className="flex items-center gap-1">
-          <p className="text-[13px] md:text-[14px] lg:text-[16px] font-black text-primary">
-            KES {product.price.toLocaleString()}
+          <p className="text-[11px] md:text-[14px] font-black text-primary">
+            {product.price.toLocaleString()}
           </p>
-          {product.hasTax && <span className="text-[7px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
+          {product.hasTax && <span className="text-[6px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
         </div>
       </div>
     </Card>
