@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from "react";
@@ -163,17 +164,17 @@ export default function App() {
         
         {/* Flash deals - FULL WIDTH 4 COLUMNS */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-4">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-6">
             <div className="flex items-center gap-3">
                <Tag className="w-5 h-5 text-red-600" />
-               <h2 className="text-2xl font-medium tracking-tight">Flash deals</h2>
+               <h2 className="text-xl md:text-2xl font-medium tracking-tight">Flash deals</h2>
             </div>
             <Link href="/offers">
-              <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">View all</Button>
+              <Button variant="ghost" className="font-medium text-[10px] md:text-[12px] hover:text-red-600">View all</Button>
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100">
             {products.slice(0, 16).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -182,17 +183,17 @@ export default function App() {
 
         {/* Elite selection - FULL WIDTH 4 COLUMNS */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-4">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-6">
             <div className="flex items-center gap-3">
                <TrendingUp className="w-5 h-5 text-red-600" />
-               <h2 className="text-2xl font-medium tracking-tight">Elite selection</h2>
+               <h2 className="text-xl md:text-2xl font-medium tracking-tight">Elite selection</h2>
             </div>
             <Link href="/shop">
-              <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">Explore</Button>
+              <Button variant="ghost" className="font-medium text-[10px] md:text-[12px] hover:text-red-600">Explore</Button>
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100">
             {products.slice(16, 32).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -201,17 +202,17 @@ export default function App() {
 
         {/* Drinks refreshment - FULL WIDTH 4 COLUMNS */}
         <section className="py-2">
-          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-4">
+          <div className="flex items-center justify-between border-b-2 border-black/5 pb-2 mb-0 px-2 md:px-6">
             <div className="flex items-center gap-3">
                <Zap className="w-5 h-5 text-red-600" />
-               <h2 className="text-2xl font-medium tracking-tight">Drinks refreshment</h2>
+               <h2 className="text-xl md:text-2xl font-medium tracking-tight">Drinks refreshment</h2>
             </div>
             <Link href="/shop">
-              <Button variant="ghost" className="font-medium text-[12px] hover:text-red-600">View drinks</Button>
+              <Button variant="ghost" className="font-medium text-[10px] md:text-[12px] hover:text-red-600">View drinks</Button>
             </Link>
           </div>
           
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-l border-gray-100">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-0 border-t border-l border-gray-100">
             {products.slice(32, 48).map((p) => (
               <ProductCard key={p.id} product={p} onAdd={handleAddToCart} />
             ))}
@@ -246,7 +247,7 @@ export default function App() {
                 </div>
              </div>
 
-             {/* Right: Partner Logos - SYMMETRIC SPREAD */}
+             {/* Right: Partner Logos - SYMMETRIC SPREAD with margin constraint */}
              <div className="md:col-span-7 w-full pt-10 md:pt-0">
                 <div className="flex flex-row items-center justify-between w-full gap-4 md:pr-12 max-w-4xl ml-auto">
                   <div className="relative h-14 w-28 md:h-20 md:w-56 shrink-0">
@@ -340,7 +341,7 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
 function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void }) {
   return (
     <motion.div 
-      className="flex flex-col group bg-white relative z-0 overflow-hidden"
+      className="flex flex-col group bg-white relative z-0 overflow-hidden border-r border-b border-gray-100"
     >
       <div className="relative aspect-square bg-gray-50 overflow-hidden">
         <Image 
@@ -363,18 +364,18 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
             e.stopPropagation();
             onAdd(product);
           }}
-          className="absolute bottom-1 right-1 w-7 h-7 md:w-10 md:h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white transition-all z-20 group/btn"
+          className="absolute bottom-1 right-1 w-6 h-6 md:w-10 md:h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center shadow-xl hover:bg-red-600 hover:text-white transition-all z-20 group/btn"
         >
-          <Plus className="w-4 h-4 md:w-6 md:h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
+          <Plus className="w-3 h-3 md:w-6 md:h-6 text-red-600 group-hover/btn:text-white stroke-[3px]" />
         </button>
       </div>
 
-      <div className="space-y-1 p-2 md:p-4 bg-white">
+      <div className="space-y-1 p-1.5 md:p-4 bg-white">
         <h3 className="text-[8px] md:text-[13px] font-medium text-gray-700 line-clamp-2 leading-tight min-h-[2.4em]">
           {product.name}
         </h3>
         <div className="flex flex-col">
-          <span className="text-[9px] md:text-[14px] font-bold text-black">
+          <span className="text-[8px] md:text-[14px] font-bold text-black">
             KSh {product.price.toLocaleString()}
           </span>
           {product.oldPrice && (
