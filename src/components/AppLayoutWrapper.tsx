@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { Navigation } from './Navigation';
 import { SidebarNav } from './SidebarNav';
+import { FloatingCartBar } from './FloatingCartBar';
 import { useUser } from '@/firebase/auth/use-user';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
@@ -30,6 +31,7 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
 
   const path = pathname || '';
   const isLogin = path.startsWith('/login');
+  const isCheckout = path.startsWith('/checkout');
   const isMerchantDash = path.startsWith('/dashboard') && !path.startsWith('/dashboard/customer') && !path.startsWith('/dashboard/rider');
   const showSidebar = !isMerchantDash && (path.startsWith('/dashboard/inventory') || path.startsWith('/dashboard/rider'));
   const hideGlobalNav = isLogin || isMerchantDash;
@@ -46,6 +48,7 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+      {!isCheckout && !isMerchantDash && <FloatingCartBar />}
     </div>
   );
 }
