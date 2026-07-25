@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, Suspense, useMemo } from "react";
@@ -102,9 +101,10 @@ function DiscoveryContent() {
   }, [category]);
 
   return (
-    <div className="flex flex-col min-h-screen pt-24 bg-white">
-      <div className="sticky top-24 z-40 bg-white border-b overflow-x-auto no-scrollbar py-3 px-4">
-        <div className="flex items-center gap-8 min-w-max container mx-auto">
+    <div className="flex flex-col min-h-screen pt-20 md:pt-24 bg-white overflow-x-hidden">
+      {/* Scrollable Category Bar */}
+      <div className="sticky top-20 md:top-24 z-40 bg-white border-b overflow-x-auto no-scrollbar py-3 px-4">
+        <div className="flex items-center gap-6 md:gap-8 min-w-max container mx-auto">
           {CATEGORIES.map((cat) => (
             <button 
               key={cat.label}
@@ -122,35 +122,36 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full space-y-10 py-10 flex-grow">
+      <div className="max-w-[1400px] mx-auto w-full space-y-8 md:space-y-10 py-6 md:py-10 flex-grow">
+        {/* Node Explorer */}
         <section className="space-y-4 px-4 md:px-6">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
           <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
             {MOCK_RESTAURANTS.map((brand, i) => (
               <Link key={brand.id + i} href={`/restaurants/${brand.id}`} className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer">
-                <div className="w-14 h-14 md:w-20 md:h-20 rounded-full border-2 border-gray-100 p-1 overflow-hidden transition-all duration-500 shadow-lg group-hover:border-red-600">
+                <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-gray-100 p-0.5 overflow-hidden transition-all duration-500 shadow-lg group-hover:border-red-600">
                   <Image src={brand.imageUrl} alt={brand.name} width={80} height={80} className="object-cover w-full h-full rounded-full" />
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover:text-black">{brand.name.split(' ')[0]}</span>
+                <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover:text-black">{brand.name.split(' ')[0]}</span>
               </Link>
             ))}
           </div>
         </section>
 
+        {/* Product Sections */}
         <div className="space-y-0">
           {category === 'All' ? (
             sections.map((section) => (
               <section key={section.title} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="flex items-center justify-between border-y border-gray-100 bg-gray-50/50 px-4 md:px-6 py-4">
-                  <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
-                  <button onClick={() => setCategory(section.title)} className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-1 group">
-                    Explore All <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                <div className="flex items-center justify-between border-y border-gray-100 bg-gray-50/50 px-4 md:px-6 py-3 md:py-4">
+                  <h2 className="text-sm md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
+                  <button onClick={() => setCategory(section.title)} className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-1 group">
+                    Explore <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
                 
-                {/* 45px Total reduction (22.5px each side) on mobile */}
-                <div className="px-[22.5px] md:px-0">
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
+                <div className="px-0 sm:px-4 md:px-0">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100 overflow-hidden">
                     {section.products.map((p) => (
                       <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                     ))}
@@ -165,9 +166,8 @@ function DiscoveryContent() {
                 <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
               </div>
               
-              {/* 45px Total reduction (22.5px each side) on mobile */}
-              <div className="px-[22.5px] md:px-0">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
+              <div className="px-0 sm:px-4 md:px-0">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100 overflow-hidden">
                   {filteredProducts.map((p) => (
                     <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                   ))}
@@ -184,40 +184,40 @@ function DiscoveryContent() {
 
 /**
  * PRODUCT CARD COMPONENT
- * Zero-padding implementation for seamless grid.
- * Images fill the entire cell width.
+ * Responsive zero-gap implementation.
+ * Ensures strict 2-column fit on mobile without overflow.
  */
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
   return (
-    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border-r border-b border-gray-100 transition-all w-full max-w-none h-full hover:z-10 hover:shadow-2xl">
+    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border-r border-b border-gray-100 transition-all w-full min-w-0 h-full hover:z-10 hover:shadow-2xl overflow-hidden">
       <div className="relative aspect-square bg-gray-50 overflow-hidden w-full shrink-0">
         <Image 
           src={product.image} 
           alt={product.name} 
           fill
-          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-cover transition-transform duration-700 group-hover:scale-110" 
           priority={false}
         />
         
-        <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
-          <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-          <span className="text-[9px] font-black text-white">{product.rating}</span>
+        <div className="absolute bottom-2 left-2 z-20 bg-black/70 backdrop-blur-md px-1 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
+          <Star className="w-2 md:w-2.5 h-2 md:h-2.5 fill-amber-400 text-amber-400" />
+          <span className="text-[8px] md:text-[9px] font-black text-white">{product.rating}</span>
         </div>
 
         <button 
           onClick={onAdd}
-          className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
+          className="absolute bottom-2 right-2 w-7 h-7 md:w-10 md:h-10 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
         >
-          <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
+          <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
 
-      <div className="p-4 md:p-5 space-y-1 md:space-y-1.5 flex-grow flex flex-col justify-between bg-white">
-        <h3 className="text-[11px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
+      <div className="p-3 md:p-5 space-y-1 md:space-y-1.5 flex-grow flex flex-col justify-between bg-white overflow-hidden">
+        <h3 className="text-[10px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em] break-words">
           {product.name}
         </h3>
-        <p className="text-[14px] md:text-lg font-black text-black">
+        <p className="text-[12px] md:text-lg font-black text-black">
           KES {product.price.toLocaleString()}
         </p>
       </div>
@@ -227,7 +227,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-x-hidden">
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-black text-gray-300 uppercase text-[10px] tracking-[0.5em]">SYNCING NODES...</div>}>
         <DiscoveryContent />
       </Suspense>
