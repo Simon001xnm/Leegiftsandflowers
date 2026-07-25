@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -96,28 +95,34 @@ export default function AddProductPage() {
 
   const uploadImage = async (file: File): Promise<string | null> => {
     try {
-      // Security Check: Ensure real session for storage uploads
-      const { data: { session } } = await supabase.auth.getSession();
+      // 1. Rigorous Auth Validation to prevent 'Invalid Compact JWS'
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      
       const isDemo = !!localStorage.getItem('steak_west_demo_user');
+      const hasRealToken = session?.access_token && session.access_token.split('.').length === 3;
 
-      if (isDemo || !session) {
-        throw new Error("AUTHENTICATION_REQUIRED: Image uploads require a real Supabase account. Please sign out and log in with email/password.");
+      if (isDemo || !session || !hasRealToken) {
+        throw new Error("AUTHENTICATION_REQUIRED: Image uploads require a real Supabase session. Demo mode is for UI exploration only.");
       }
 
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
       const filePath = `${fileName}`;
 
+      // 2. Perform the upload
       const { error: uploadError } = await supabase.storage
         .from(STORAGE_BUCKET)
-        .upload(filePath, file);
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
       if (uploadError) {
         if (uploadError.message.includes('Bucket not found')) {
           throw new Error(`Supabase Storage Error: The '${STORAGE_BUCKET}' bucket was not found. Please create it in your Supabase Console and set it to 'Public'.`);
         }
         if (uploadError.message.includes('JWS')) {
-          throw new Error("Supabase Auth Error: Your session is invalid or expired. Please sign in again with a real account.");
+          throw new Error("Supabase Auth Error: Your session token is malformed. Please sign out and sign in again with a real account.");
         }
         throw uploadError;
       }
@@ -128,7 +133,7 @@ export default function AddProductPage() {
 
       return data.publicUrl;
     } catch (error: any) {
-      console.error('Error uploading image:', error);
+      console.error('Upload operation aborted:', error);
       throw error;
     }
   };

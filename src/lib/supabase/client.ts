@@ -1,4 +1,3 @@
-
 import { createBrowserClient } from '@supabase/ssr'
 
 /**
@@ -11,8 +10,15 @@ export function createClient() {
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   
   // Guard against placeholder or missing keys
-  if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('placeholder')) {
-    console.warn("Supabase Environment Variables Missing or Placeholder. Using fallback shell.");
+  const isInvalid = !supabaseUrl || !supabaseKey || 
+                    supabaseUrl.includes('placeholder') || 
+                    supabaseUrl.startsWith('your-') ||
+                    supabaseKey.startsWith('your-');
+
+  if (isInvalid) {
+    if (typeof window !== 'undefined') {
+      console.warn("Supabase Environment Variables Missing or Placeholder. Storage and DB writes will fail.");
+    }
     return createFallbackShell();
   }
 
