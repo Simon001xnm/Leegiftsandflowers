@@ -35,8 +35,8 @@ const ALL_PRODUCTS = [
     name: "Beef T-Bone", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/images (28).jpg", 
-    images: ["/images (28).jpg"],
+    image: "/(28).jpg", 
+    images: ["/(28).jpg"],
     hasTax: true 
   },
   { 
@@ -44,8 +44,8 @@ const ALL_PRODUCTS = [
     name: "Beef Cubes", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/images (29).jpg", 
-    images: ["/images (29).jpg"],
+    image: "/(29).jpg", 
+    images: ["/(29).jpg"],
     hasTax: true 
   },
   { 
@@ -53,8 +53,8 @@ const ALL_PRODUCTS = [
     name: "Liver", 
     price: 1100, 
     category: "Raw Meat", 
-    image: "/images (30).jpg", 
-    images: ["/images (30).jpg"],
+    image: "/(30).jpg", 
+    images: ["/(30).jpg"],
     hasTax: true 
   },
   { 
@@ -62,16 +62,16 @@ const ALL_PRODUCTS = [
     name: "Matumbo", 
     price: 600, 
     category: "Raw Meat", 
-    image: "/matumbo.jpg", 
-    images: ["/matumbo.jpg"]
+    image: "/MATUMBO.jpg", 
+    images: ["/MATUMBO.jpg"]
   },
   { 
     id: 'p-pork', 
     name: "Pork Steak", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/pork steak.webp", 
-    images: ["/pork steak.webp"]
+    image: "/PORK STEAK.webp", 
+    images: ["/PORK STEAK.webp"]
   },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
