@@ -173,7 +173,6 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* Force 3 columns on mobile, 8 on desktop. min-w-0 prevents overflow */}
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {categoryProducts.map((product) => (
                   <div key={product.id} className="min-w-0">
@@ -224,7 +223,6 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
 
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl">
-      {/* Aspect Ratio Node - Miniature Scale */}
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
         {images.map((img: string, idx: number) => (
           <div 
@@ -247,7 +245,6 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
           </div>
         ))}
         
-        {/* Floating Tiny Interactive Button */}
         <button 
           onClick={(e) => {
             e.stopPropagation();
@@ -259,7 +256,6 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
         </button>
       </div>
 
-      {/* Proportional Metadata Node - Ultra Tiny Typography */}
       <div className="p-1.5 md:p-2 flex-grow flex flex-col justify-between space-y-1">
         <div className="space-y-0.5">
           <p className="text-[10px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
