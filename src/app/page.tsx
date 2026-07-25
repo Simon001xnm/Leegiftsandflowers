@@ -122,8 +122,8 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 w-full space-y-10 py-10 flex-grow">
-        <section className="space-y-4">
+      <div className="max-w-[1400px] mx-auto w-full space-y-10 py-10 flex-grow">
+        <section className="space-y-4 px-4 md:px-6">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
           <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
             {MOCK_RESTAURANTS.map((brand, i) => (
@@ -137,18 +137,18 @@ function DiscoveryContent() {
           </div>
         </section>
 
-        <div className="space-y-12 md:space-y-20">
+        <div className="space-y-0">
           {category === 'All' ? (
             sections.map((section) => (
-              <section key={section.title} className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+              <section key={section.title} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="flex items-center justify-between border-y border-gray-100 bg-gray-50/50 px-4 md:px-6 py-4">
                   <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
                   <button onClick={() => setCategory(section.title)} className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-1 group">
                     Explore All <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 w-full">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
                   {section.products.map((p) => (
                     <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                   ))}
@@ -156,13 +156,13 @@ function DiscoveryContent() {
               </section>
             ))
           ) : (
-            <section className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+            <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="flex items-center justify-between border-y border-gray-100 bg-gray-50/50 px-4 md:px-6 py-4">
                 <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{category}</h2>
                 <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 w-full">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
                 {filteredProducts.map((p) => (
                   <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                 ))}
@@ -178,43 +178,40 @@ function DiscoveryContent() {
 
 /**
  * PRODUCT CARD COMPONENT
- * Implements high-density 2-column mobile logic with a 12px internal reduction.
- * The p-3 padding (12px) reduces the image footprint on mobile.
+ * Zero-padding implementation for seamless grid.
+ * Images fill the entire cell width.
  */
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
   return (
-    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all w-full max-w-none h-full">
-      {/* Container Padding: p-3 (12px) on mobile, p-0 on desktop */}
-      <div className="p-3 md:p-0">
-        <div className="relative aspect-square bg-gray-50 overflow-hidden w-full shrink-0 rounded-lg md:rounded-none">
-          <Image 
-            src={product.image} 
-            alt={product.name} 
-            fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-110" 
-            priority={false}
-          />
-          
-          <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
-            <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-            <span className="text-[9px] font-black text-white">{product.rating}</span>
-          </div>
-
-          <button 
-            onClick={onAdd}
-            className="absolute bottom-2 right-2 w-8 h-8 md:w-9 md:h-9 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
-          >
-            <Plus className="w-3.5 h-3.5 md:w-4 md:h-4 stroke-[3px]" />
-          </button>
+    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border-r border-b border-gray-100 transition-all w-full max-w-none h-full hover:z-10 hover:shadow-2xl">
+      <div className="relative aspect-square bg-gray-50 overflow-hidden w-full shrink-0">
+        <Image 
+          src={product.image} 
+          alt={product.name} 
+          fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+          priority={false}
+        />
+        
+        <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
+          <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+          <span className="text-[9px] font-black text-white">{product.rating}</span>
         </div>
+
+        <button 
+          onClick={onAdd}
+          className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
+        >
+          <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
+        </button>
       </div>
 
-      <div className="p-3 md:p-4 space-y-1 md:space-y-1.5 flex-grow flex flex-col justify-between">
+      <div className="p-4 md:p-5 space-y-1 md:space-y-1.5 flex-grow flex flex-col justify-between bg-white">
         <h3 className="text-[11px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
           {product.name}
         </h3>
-        <p className="text-[12px] md:text-base font-black text-black">
+        <p className="text-[14px] md:text-lg font-black text-black">
           KES {product.price.toLocaleString()}
         </p>
       </div>
