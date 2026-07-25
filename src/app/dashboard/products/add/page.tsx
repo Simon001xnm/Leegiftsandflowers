@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from "react";
@@ -78,9 +79,9 @@ export default function AddProductPage() {
     const file = e.target.files?.[0];
     if (file) {
       setImageFile(file);
+      if (imagePreview) URL.revokeObjectURL(imagePreview);
       const objectUrl = URL.createObjectURL(file);
       setImagePreview(objectUrl);
-      // Clean up URL on unmount happens via the state change
     }
   };
 
@@ -103,7 +104,6 @@ export default function AddProductPage() {
         .upload(filePath, file);
 
       if (uploadError) {
-        // Detailed error for missing infrastructure
         if (uploadError.message.includes('Bucket not found')) {
           throw new Error(`Supabase Storage Error: The '${STORAGE_BUCKET}' bucket was not found. Please create it in your Supabase Console and set it to 'Public'.`);
         }
