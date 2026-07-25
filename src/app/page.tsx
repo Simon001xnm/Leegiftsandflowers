@@ -114,7 +114,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 mt-10 space-y-20">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 mt-10 space-y-12">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
@@ -124,15 +124,15 @@ export default function HomePage() {
           if (categoryProducts.length === 0) return null;
 
           return (
-            <section key={category.id} id={category.id} className="space-y-8 scroll-mt-40">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-                <h2 className="text-[12px] md:text-[14px] font-black uppercase tracking-[0.3em] text-black flex items-center gap-3">
-                  <category.icon className="w-5 h-5 text-primary" /> {category.id} Node
+            <section key={category.id} id={category.id} className="space-y-6 scroll-mt-40">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+                <h2 className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
+                  <category.icon className="w-4 h-4 text-primary" /> {category.id}
                 </h2>
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items Available</span>
+                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+              <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 md:gap-4">
                 {categoryProducts.map((product) => (
                   <ProductCard 
                     key={product.id} 
@@ -147,11 +147,11 @@ export default function HomePage() {
 
         {ALL_PRODUCTS.filter(p => p.name.toLowerCase().includes(search.toLowerCase())).length === 0 && (
           <div className="py-40 text-center space-y-4">
-            <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
-              <Search className="w-8 h-8 text-gray-200" />
+            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
+              <Search className="w-6 h-6 text-gray-200" />
             </div>
-            <p className="text-muted-foreground font-black uppercase text-[11px] tracking-widest">No active nodes found matching your search</p>
-            <Button variant="link" onClick={() => setSearch("")} className="text-primary font-black uppercase text-[11px]">Reset Filters</Button>
+            <p className="text-muted-foreground font-black uppercase text-[9px] tracking-widest">No nodes found</p>
+            <Button variant="link" onClick={() => setSearch("")} className="text-primary font-black uppercase text-[9px]">Reset</Button>
           </div>
         )}
       </div>
@@ -164,9 +164,9 @@ function CategoryTab({ label, isActive, onClick }: { label: string, isActive: bo
     <button 
       onClick={onClick}
       className={cn(
-        "px-6 h-12 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all shrink-0 whitespace-nowrap",
+        "px-4 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shrink-0 whitespace-nowrap",
         isActive 
-          ? "bg-black text-white shadow-xl shadow-black/10" 
+          ? "bg-black text-white shadow-lg" 
           : "bg-gray-50 text-gray-400 hover:text-black"
       )}
     >
@@ -177,36 +177,35 @@ function CategoryTab({ label, isActive, onClick }: { label: string, isActive: bo
 
 function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
   return (
-    <Card className="w-full rounded-2xl md:rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all group cursor-pointer overflow-hidden flex flex-col">
+    <Card className="w-full rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col">
       <div className="aspect-square relative bg-gray-50 overflow-hidden">
         <Image 
           src={product.image} 
           alt={product.name} 
           fill 
           className="object-cover transition-transform duration-700 group-hover:scale-110" 
-          sizes="(max-width: 768px) 50vw, 25vw"
-          priority={product.id === 'p4'}
+          sizes="(max-width: 768px) 25vw, 12vw"
         />
         <button 
           onClick={(e) => {
             e.stopPropagation();
             onAdd();
           }}
-          className="absolute bottom-3 right-3 w-10 h-10 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center text-primary shadow-2xl opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all z-20 active:scale-90"
+          className="absolute bottom-2 right-2 w-7 h-7 md:w-9 md:h-9 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all z-20 active:scale-90"
         >
-          <Plus className="w-6 h-6 md:w-8 md:h-8 stroke-[3px]" />
+          <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
-      <div className="p-4 md:p-8 space-y-2 flex-grow flex flex-col justify-between">
-        <div className="space-y-1">
-          <p className="text-[10px] md:text-[12px] font-black uppercase tracking-tighter line-clamp-2 leading-tight group-hover:text-primary transition-colors">
+      <div className="p-2 md:p-3 space-y-1 flex-grow flex flex-col justify-between">
+        <div className="space-y-0.5">
+          <p className="text-[9px] md:text-[10px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
             {product.name}
           </p>
-          <p className="text-[8px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest">
-            {product.category} Node
+          <p className="text-[7px] md:text-[8px] text-gray-400 font-bold uppercase tracking-widest truncate">
+            {product.category}
           </p>
         </div>
-        <p className="text-[15px] md:text-[20px] font-black text-primary pt-2">
+        <p className="text-[11px] md:text-[13px] font-black text-primary">
           KES {product.price.toLocaleString()}
         </p>
       </div>
