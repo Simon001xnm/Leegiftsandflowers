@@ -103,7 +103,6 @@ function DiscoveryContent() {
 
   return (
     <div className="flex flex-col min-h-screen pt-24 bg-white">
-      {/* High Density Category Strip */}
       <div className="sticky top-24 z-40 bg-white border-b overflow-x-auto no-scrollbar py-3 px-4">
         <div className="flex items-center gap-8 min-w-max container mx-auto">
           {CATEGORIES.map((cat) => (
@@ -123,8 +122,7 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-3 md:px-6 w-full space-y-10 py-10 flex-grow">
-        {/* Operating nodes */}
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 w-full space-y-10 py-10 flex-grow">
         <section className="space-y-4">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
           <div className="flex gap-4 overflow-x-auto no-scrollbar py-2">
@@ -139,7 +137,6 @@ function DiscoveryContent() {
           </div>
         </section>
 
-        {/* HIGH DENSITY RESPONSIVE GRID */}
         <div className="space-y-12 md:space-y-20">
           {category === 'All' ? (
             sections.map((section) => (
@@ -182,7 +179,7 @@ function DiscoveryContent() {
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
   return (
     <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all w-full max-w-none h-full">
-      <div className="p-1.5 md:p-0"> {/* Inset reduction for mobile cards */}
+      <div className="p-2 md:p-0">
         <div className="relative aspect-square bg-gray-50 overflow-hidden w-full shrink-0 rounded-lg md:rounded-none">
           <Image 
             src={product.image} 
@@ -193,13 +190,11 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void
             priority={false}
           />
           
-          {/* Rating Badge */}
           <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
             <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
             <span className="text-[9px] font-black text-white">{product.rating}</span>
           </div>
 
-          {/* Quick Add */}
           <button 
             onClick={onAdd}
             className="absolute bottom-2 right-2 w-8 h-8 md:w-9 md:h-9 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
