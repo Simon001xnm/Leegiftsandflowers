@@ -37,6 +37,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  const getSafeUrl = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
+  };
+
   useEffect(() => {
     async function loadData() {
       const localItem = [...STATIC_PRODUCTS, ...MOCK_MENU].find(m => m.id === id);
@@ -103,8 +109,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   if (!product) return <div className="p-20 text-center font-headline text-2xl uppercase font-black">Product not found</div>;
 
   const isLocal = !product.imageUrl.startsWith('http');
-  const isExtraHD = isLocal || ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
-  const safeImageUrl = product.imageUrl.startsWith('http') ? product.imageUrl : encodeURI(product.imageUrl);
+  const isHD = isLocal;
+  const safeImageUrl = getSafeUrl(product.imageUrl);
 
   return (
     <div className="min-h-screen flex flex-col bg-white pt-24 pb-20">
@@ -128,7 +134,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   className="object-cover"
                   priority
                   quality={100}
-                  unoptimized={isExtraHD}
+                  unoptimized={isHD}
                   sizes="(max-width: 1024px) 100vw, 66vw"
                 />
                 <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">

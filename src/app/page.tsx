@@ -20,14 +20,13 @@ const CATEGORIES = [
 ];
 
 const ALL_PRODUCTS = [
-  // RAW MEAT (Premium Nodes)
+  // RAW MEAT (Premium HD Nodes)
   { 
     id: 'p-fillet', 
     name: "Beef Fillet", 
     price: 1100, 
     category: "Raw Meat", 
     image: "/beef fillet raw.jpg", 
-    images: ["/beef fillet raw.jpg"],
     hasTax: true 
   },
   { 
@@ -36,7 +35,6 @@ const ALL_PRODUCTS = [
     price: 1000, 
     category: "Raw Meat", 
     image: "/(28).jpg", 
-    images: ["/(28).jpg"],
     hasTax: true 
   },
   { 
@@ -45,7 +43,6 @@ const ALL_PRODUCTS = [
     price: 1000, 
     category: "Raw Meat", 
     image: "/(29).jpg", 
-    images: ["/(29).jpg"],
     hasTax: true 
   },
   { 
@@ -54,7 +51,6 @@ const ALL_PRODUCTS = [
     price: 1100, 
     category: "Raw Meat", 
     image: "/(30).jpg", 
-    images: ["/(30).jpg"],
     hasTax: true 
   },
   { 
@@ -62,16 +58,14 @@ const ALL_PRODUCTS = [
     name: "Matumbo", 
     price: 600, 
     category: "Raw Meat", 
-    image: "/MATUMBO.jpg", 
-    images: ["/MATUMBO.jpg"]
+    image: "/MATUMBO.jpg"
   },
   { 
     id: 'p-pork', 
     name: "Pork Steak", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/PORK STEAK.webp", 
-    images: ["/PORK STEAK.webp"]
+    image: "/PORK STEAK.webp"
   },
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
@@ -86,10 +80,6 @@ const ALL_PRODUCTS = [
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
   { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
-  // KITCHEN APPLIANCES
-  { id: 'ka1', name: "Digital Air Fryer", price: 12500, category: "Kitchen Appliances", image: "https://picsum.photos/seed/airfryer/600/600" },
-  // PHONE ACCESSORIES
-  { id: 'pa1', name: "20,000mAh Power Bank", price: 4500, category: "Phone Accessories", image: "https://picsum.photos/seed/powerbank/600/600" },
 ];
 
 export default function HomePage() {
@@ -105,7 +95,6 @@ export default function HomePage() {
       name: p.name, 
       price: p.price, 
       imageUrl: p.image, 
-      images: p.images,
       category: p.category,
       description: '',
       hasTax: p.hasTax
@@ -136,7 +125,7 @@ export default function HomePage() {
              <div className="relative flex-grow max-w-2xl">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input 
-                  placeholder="Search dispatches..." 
+                  placeholder="Search network..." 
                   className="w-full h-12 md:h-14 pl-12 pr-4 bg-gray-50 border-none rounded-2xl text-[14px] md:text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -218,52 +207,34 @@ function CategoryTab({ label, isActive, onClick }: { label: string, isActive: bo
 }
 
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseEvent) => void }) {
-  const images = product.images && product.images.length > 0 ? product.images : [product.image];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    if (images.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [images.length]);
+  const getSafeUrl = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    // Encode spaces, parentheses and special chars safely for browser fetch
+    return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
+  };
 
   const isLocal = !product.image.startsWith('http');
-  const isExtraHD = isLocal || ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
+  // FORCE HD BYPASS FOR ALL LOCAL ASSETS
+  const isHD = isLocal;
 
   return (
-    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl">
+    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl bg-white">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
-        {images.map((img: string, idx: number) => {
-          // ULTRA-SAFE URL ENCODING FOR ASSETS WITH SPACES/PARENTHESES
-          const safeSrc = img.startsWith('http') ? img : encodeURI(img);
-          
-          return (
-            <div 
-              key={idx}
-              className={cn(
-                "absolute inset-0 transition-opacity duration-1000",
-                idx === currentImageIndex ? "opacity-100" : "opacity-0"
-              )}
-            >
-              <Image 
-                src={safeSrc} 
-                alt={product.name} 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105" 
-                sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
-                quality={100}
-                priority={isExtraHD}
-                unoptimized={isExtraHD}
-              />
-            </div>
-          );
-        })}
+        <Image 
+          src={getSafeUrl(product.image)} 
+          alt={product.name} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+          sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
+          quality={100}
+          priority={isHD}
+          unoptimized={isHD}
+        />
         
         <button 
           onClick={onAdd}
-          className="absolute bottom-1 right-1 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-100 md:opacity-0 group-hover:opacity-100 transition-all z-20 active:scale-90"
+          className="absolute bottom-1 right-1 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90"
         >
           <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
         </button>
