@@ -6,13 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MOCK_MENU, MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Clock, Store, TrendingUp, RefreshCw } from "lucide-react";
+import { Clock, Store, TrendingUp, RefreshCw, ChevronLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { createClient } from "@/lib/supabase/client";
 
-// COMBINED LIST TO SUPPORT ALL PRODUCTS IN LANDING
+// SYNCED NETWORK CATALOG
 const STATIC_PRODUCTS = [
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, rating: 5.0, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, rating: 5.0, category: "Raw Meat", image: "/(28).jpg", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
@@ -44,7 +44,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   useEffect(() => {
     async function loadData() {
-      // 1. Check local static/mock data first
       const localItem = [...STATIC_PRODUCTS, ...MOCK_MENU].find(m => m.id === id);
       
       if (localItem) {
@@ -53,7 +52,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           name: localItem.name,
           price: localItem.price,
           description: localItem.description || "Premium quality product from the Steak West network.",
-          imageUrl: localItem.image || localItem.imageUrl,
+          imageUrl: (localItem as any).image || localItem.imageUrl,
           category: localItem.category,
           hasTax: localItem.hasTax
         });
@@ -61,7 +60,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         return;
       }
 
-      // 2. Fallback to Supabase
       try {
         const { data } = await supabase.from('products').select('*').eq('id', id).single();
         if (data) {
@@ -109,22 +107,25 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   if (!product) return <div className="p-20 text-center font-headline text-2xl uppercase font-black">Product not found</div>;
 
-  const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
+  const isLocal = !product.imageUrl.startsWith('http');
+  const isExtraHD = isLocal || ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
   const safeImageUrl = product.imageUrl.startsWith('http') ? product.imageUrl : encodeURI(product.imageUrl);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white pt-24">
+    <div className="min-h-screen flex flex-col bg-white pt-24 pb-20">
       <main className="flex-grow">
-        <div className="container mx-auto px-4 py-8 lg:py-12">
-          <div className="mb-8 flex items-center gap-2 text-[12px] font-black uppercase tracking-widest text-muted-foreground">
-            <Link href="/" className="hover:text-primary">Home</Link>
+        <div className="container mx-auto px-4 py-4 lg:py-8">
+          <div className="mb-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+            <Link href="/" className="hover:text-primary flex items-center gap-1">
+               <ChevronLeft className="w-3 h-3" /> Home
+            </Link>
             <span>/</span>
             <span className="text-black">{product.name}</span>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
             <div className="lg:col-span-7">
-              <div className="relative aspect-square md:aspect-[4/3] bg-gray-50 border overflow-hidden">
+              <div className="relative aspect-square md:aspect-[4/3] bg-gray-50 border overflow-hidden rounded-xl md:rounded-[2rem] shadow-sm">
                 <Image 
                   src={safeImageUrl} 
                   alt={product.name} 
@@ -136,7 +137,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   sizes="(max-width: 1024px) 100vw, 66vw"
                 />
                 <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-                  <Badge className="bg-primary text-white border-none font-black text-[12px] uppercase tracking-widest px-4 py-1 rounded-none">
+                  <Badge className="bg-primary text-white border-none font-black text-[12px] uppercase tracking-widest px-4 py-1 rounded-none shadow-xl">
                     {product.category}
                   </Badge>
                 </div>
@@ -148,7 +149,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <h1 className="text-4xl lg:text-5xl font-black font-headline text-primary uppercase tracking-tighter leading-none">
                   {product.name}
                 </h1>
-                <div className="flex items-center gap-4 text-[14px] font-bold text-muted-foreground uppercase tracking-widest">
+                <div className="flex items-center gap-4 text-[12px] font-bold text-muted-foreground uppercase tracking-widest">
                   <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> 20 Min Delivery</span>
                   <span className="text-gray-300">|</span>
                   <span className="flex items-center gap-1.5 text-emerald-600"><TrendingUp className="w-4 h-4" /> Freshly Sourced</span>
@@ -156,40 +157,38 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               </div>
 
               <div className="py-6 border-y border-dashed space-y-2">
-                <p className="text-[12px] font-black text-muted-foreground uppercase tracking-[0.2em]">Price per Unit</p>
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Price per Unit</p>
                 <div className="flex items-baseline gap-2">
-                  <p className="text-4xl font-black text-black">KES {product.price.toLocaleString()}</p>
+                  <p className="text-4xl md:text-5xl font-black text-black leading-none">KES {product.price.toLocaleString()}</p>
                   {product.hasTax && <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Exclusive of VAT</span>}
                 </div>
               </div>
 
               <div className="space-y-6">
-                <p className="text-[14px] font-medium text-gray-600 leading-relaxed">
+                <p className="text-[14px] md:text-[15px] font-medium text-gray-600 leading-relaxed">
                   {product.description}
                 </p>
 
-                <div className="bg-gray-50 p-6 space-y-4 border">
+                <div className="bg-gray-50 p-6 space-y-4 border rounded-2xl">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-white border flex items-center justify-center text-primary">
+                    <div className="w-10 h-10 bg-white border flex items-center justify-center text-primary rounded-xl">
                       <Store className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Sourced From</p>
                       <p className="text-[14px] font-black text-black uppercase tracking-tighter">
-                        Steak West Butchery
+                        Steak West Butchery Node
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex gap-4">
-                  <Button 
-                    className="flex-grow h-14 text-[14px] font-black uppercase tracking-widest rounded-none shadow-xl shadow-primary/10"
-                    onClick={handleAdd}
-                  >
-                    Add to Basket
-                  </Button>
-                </div>
+                <Button 
+                  className="w-full h-16 text-[14px] font-black uppercase tracking-widest rounded-2xl shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
+                  onClick={handleAdd}
+                >
+                  Add to Basket
+                </Button>
               </div>
             </div>
           </div>
@@ -198,4 +197,3 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     </div>
   );
 }
-

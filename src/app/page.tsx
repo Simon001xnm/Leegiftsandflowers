@@ -231,13 +231,14 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
+  const isLocal = !product.image.startsWith('http');
+  const isExtraHD = isLocal || ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
 
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
         {images.map((img: string, idx: number) => {
-          // SAFE URL ENCODING FOR ASSETS WITH SPACES/PARENTHESES
+          // ULTRA-SAFE URL ENCODING FOR ASSETS WITH SPACES/PARENTHESES
           const safeSrc = img.startsWith('http') ? img : encodeURI(img);
           
           return (
@@ -253,7 +254,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
                 alt={product.name} 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105" 
-                sizes="(max-width: 480px) 33vw, (max-width: 768px) 25vw, 12vw"
+                sizes="(max-width: 480px) 50vw, (max-width: 1024px) 33vw, 15vw"
                 quality={100}
                 priority={isExtraHD}
                 unoptimized={isExtraHD}
@@ -290,4 +291,3 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
     </Card>
   );
 }
-
