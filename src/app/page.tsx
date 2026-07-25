@@ -5,18 +5,13 @@ import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Star, Plus, ChevronRight, ShoppingBag, Loader2, RefreshCw } from "lucide-react";
+import { Star, Plus, ChevronRight, ShoppingBag, RefreshCw } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Footer } from "@/components/landing/Footer";
 import { createClient } from "@/lib/supabase/client";
 
-/**
- * PUBLIC STOREFRONT CONTENT
- * Fetches data from Supabase using the public publishable client.
- * Strictly enforces a 4-3-2 responsive grid.
- */
 function MarketplaceContent() {
   const { addToCart } = useCart();
   const { toast } = useToast();
@@ -46,11 +41,12 @@ function MarketplaceContent() {
     fetchProducts();
   }, [supabase]);
 
-  // Catalog distribution logic
   const meatProducts = products.filter(p => p.category !== 'DRINKS');
   const drinkProducts = products.filter(p => p.category === 'DRINKS');
 
-  const handleAdd = (p: any) => {
+  const handleAdd = (e: React.MouseEvent, p: any) => {
+    e.preventDefault();
+    e.stopPropagation();
     addToCart({
       id: p.id,
       restaurantId: p.restaurant_id || 'r1',
@@ -74,7 +70,6 @@ function MarketplaceContent() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Operating Nodes Strip */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-10 space-y-6">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-[11px] font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes</h2>
@@ -94,7 +89,6 @@ function MarketplaceContent() {
         </div>
       </section>
 
-      {/* PRIMARY CATALOG (MEAT) */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-10 space-y-8">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Elite selection</h2>
@@ -106,14 +100,14 @@ function MarketplaceContent() {
         {meatProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {meatProducts.map((p) => (
-              <div key={p.id} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+              <Link key={p.id} href={`/products/${p.slug || p.id}`} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
                 <div className="relative aspect-square bg-gray-50 overflow-hidden">
                   <Image src={p.image_url || `https://picsum.photos/seed/${p.id}/600/600`} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute top-3 left-3 z-20 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-sm flex items-center gap-1 shadow-sm">
                     <Star className="w-3 h-3 fill-primary text-primary" />
                     <span className="text-[10px] font-black text-black">4.9</span>
                   </div>
-                  <button onClick={() => handleAdd(p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
+                  <button onClick={(e) => handleAdd(e, p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
                     <Plus className="w-5 h-5 stroke-[3px]" />
                   </button>
                 </div>
@@ -122,7 +116,7 @@ function MarketplaceContent() {
                   <h3 className="text-[13px] md:text-base font-bold text-gray-900 line-clamp-1 leading-tight">{p.name}</h3>
                   <p className="text-base md:text-lg font-black text-black">KES {p.price.toLocaleString()}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
@@ -133,14 +127,12 @@ function MarketplaceContent() {
         )}
       </section>
 
-      {/* Centered Finewood Marquee */}
       <div className="bg-white border-y py-12">
         <h2 className="text-[12px] md:text-[22px] font-black text-black uppercase tracking-tighter text-center px-6">
           your plug for home appliances, phones and accessories.
         </h2>
       </div>
 
-      {/* SECONDARY CATALOG (DRINKS) */}
       <section className="max-w-[1400px] mx-auto px-5 w-full py-20 space-y-8">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Refreshment node</h2>
@@ -152,10 +144,10 @@ function MarketplaceContent() {
         {drinkProducts.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {drinkProducts.map((p) => (
-              <div key={p.id} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+              <Link key={p.id} href={`/products/${p.slug || p.id}`} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
                 <div className="relative aspect-square bg-gray-50 overflow-hidden">
                   <Image src={p.image_url || `https://picsum.photos/seed/${p.id}/600/600`} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <button onClick={() => handleAdd(p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
+                  <button onClick={(e) => handleAdd(e, p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
                     <Plus className="w-5 h-5 stroke-[3px]" />
                   </button>
                 </div>
@@ -164,7 +156,7 @@ function MarketplaceContent() {
                   <h3 className="text-[13px] md:text-base font-bold text-gray-900 line-clamp-1 leading-tight">{p.name}</h3>
                   <p className="text-base md:text-lg font-black text-black">KES {p.price.toLocaleString()}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (

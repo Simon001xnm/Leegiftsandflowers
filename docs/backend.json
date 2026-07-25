@@ -21,6 +21,7 @@
       "properties": {
         "id": { "type": "string", "format": "uuid" },
         "name": { "type": "string" },
+        "slug": { "type": "string", "description": "URL-friendly version of the name" },
         "sku": { "type": "string" },
         "price": { "type": "number" },
         "category": { "type": "string" },
