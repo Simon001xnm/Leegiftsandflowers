@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from "react";
@@ -26,8 +25,8 @@ const ALL_PRODUCTS = [
     name: "Beef Fillet", 
     price: 1100, 
     category: "Raw Meat", 
-    image: "/fillet raw.jpg", 
-    images: ["/fillet raw.jpg"],
+    image: "/beef fillet raw.jpg", 
+    images: ["/beef fillet raw.jpg"],
     hasTax: true 
   },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
