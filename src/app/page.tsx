@@ -27,7 +27,7 @@ const ALL_PRODUCTS = [
     price: 1100, 
     category: "Raw Meat", 
     image: "/fillet raw.jpg", 
-    images: ["/fillet raw.jpg", "/FilletBeefSteak1.jpg", "/images (23).jpg"],
+    images: ["/fillet raw.jpg"],
     hasTax: true 
   },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
@@ -199,6 +199,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-110" 
               sizes="(max-width: 768px) 25vw, 12vw"
+              quality={100}
+              priority={product.id === 'p-fillet'}
             />
           </div>
         ))}
