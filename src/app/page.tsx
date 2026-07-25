@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from "react";
@@ -63,6 +64,14 @@ const ALL_PRODUCTS = [
     category: "Raw Meat", 
     image: "/MATUMBO.jpg", 
     images: ["/MATUMBO.jpg"]
+  },
+  { 
+    id: 'p-pork', 
+    name: "Pork Steak", 
+    price: 1000, 
+    category: "Raw Meat", 
+    image: "/pork steak.webp", 
+    images: ["/pork steak.webp"]
   },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
@@ -219,7 +228,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo'].includes(product.id);
+  const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
 
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl">
