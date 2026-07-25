@@ -197,9 +197,10 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
               alt={product.name} 
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-110" 
-              sizes="(max-width: 768px) 25vw, 12vw"
+              sizes="(max-width: 768px) 50vw, 25vw"
               quality={100}
               priority={product.id === 'p-fillet'}
+              unoptimized={product.id === 'p-fillet'}
             />
           </div>
         ))}

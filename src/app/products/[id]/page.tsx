@@ -1,4 +1,3 @@
-
 'use client';
 
 import { use, useMemo, useEffect, useState } from "react";
@@ -14,6 +13,7 @@ import { createClient } from "@/lib/supabase/client";
 
 // COMBINED LIST TO SUPPORT ALL PRODUCTS IN LANDING
 const STATIC_PRODUCTS = [
+  { id: 'p-fillet', name: "Beef Fillet", price: 1100, rating: 5.0, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg", description: "Elite quality beef, fresh from our main node." },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, rating: 4.8, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600", description: "Tender goat meat sourced from local suppliers." },
   { id: 'p11', name: "Farm Chicken (Local)", price: 800, rating: 4.7, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600", description: "Authentic local farm-raised chicken." },
@@ -49,7 +49,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           price: localItem.price,
           description: localItem.description || "Premium quality product from the Steak West network.",
           imageUrl: localItem.image || localItem.imageUrl,
-          category: localItem.category
+          category: localItem.category,
+          hasTax: localItem.hasTax
         });
         setLoading(false);
         return;
@@ -85,7 +86,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       price: product.price,
       description: product.description,
       imageUrl: product.imageUrl,
-      category: product.category
+      category: product.category,
+      hasTax: product.hasTax
     });
     toast({
       title: "Added to basket",
@@ -121,6 +123,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   fill 
                   className="object-cover"
                   priority
+                  quality={100}
+                  unoptimized={product.id === 'p-fillet'}
+                  sizes="(max-width: 1024px) 100vw, 66vw"
                 />
                 <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
                   <Badge className="bg-primary text-white border-none font-black text-[12px] uppercase tracking-widest px-4 py-1 rounded-none">
@@ -144,7 +149,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
               <div className="py-6 border-y border-dashed space-y-2">
                 <p className="text-[12px] font-black text-muted-foreground uppercase tracking-[0.2em]">Price per Unit</p>
-                <p className="text-4xl font-black text-black">KES {product.price.toLocaleString()}</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-4xl font-black text-black">KES {product.price.toLocaleString()}</p>
+                  {product.hasTax && <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Exclusive of VAT</span>}
+                </div>
               </div>
 
               <div className="space-y-6">
