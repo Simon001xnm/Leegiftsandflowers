@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from "react";
@@ -18,9 +19,12 @@ import {
   Printer,
   ChevronDown,
   Minus,
-  Plus
+  Plus,
+  Package,
+  PlusCircle
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * POS / SALES DASHBOARD
@@ -85,14 +89,21 @@ export default function POSDashboard() {
     <div className="h-full flex p-4 gap-4 overflow-hidden">
       {/* Inventory Explorer */}
       <div className="flex-grow flex flex-col gap-4 bg-white rounded-xl border p-6 overflow-hidden shadow-sm">
-        <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-          <input 
-            placeholder="Search menu items..." 
-            className="w-full h-14 pl-12 pr-4 bg-[#f8fafc] border border-slate-100 rounded-xl text-[15px] focus:ring-2 focus:ring-primary/10 outline-none"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+        <div className="flex items-center justify-between gap-4">
+          <div className="relative flex-grow">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input 
+              placeholder="Search menu items..." 
+              className="w-full h-14 pl-12 pr-4 bg-[#f8fafc] border border-slate-100 rounded-xl text-[15px] focus:ring-2 focus:ring-primary/10 outline-none"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <Link href="/dashboard/products/add">
+            <Button className="h-14 px-6 bg-slate-900 hover:bg-black rounded-xl gap-2 font-black text-[11px] uppercase tracking-widest shadow-xl shadow-black/10">
+               <PlusCircle className="w-4 h-4" /> Add New
+            </Button>
+          </Link>
         </div>
 
         <div className="flex flex-wrap gap-2 py-2">
@@ -205,34 +216,6 @@ export default function POSDashboard() {
           <div className="bg-red-600 text-white p-4 h-16 rounded-xl flex items-center justify-between shadow-xl shadow-red-600/10">
              <span className="text-sm font-black uppercase tracking-widest">Total</span>
              <span className="text-2xl font-black">{total.toLocaleString()}.00</span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-             <div className="space-y-1.5">
-                <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Customer</Label>
-                <div className="relative">
-                  <Input placeholder="Search..." className="h-11 rounded-lg bg-[#f8fafc] border-none text-[13px] pl-4" />
-                  <div className="absolute right-0 top-0 h-full flex items-center pr-3">
-                    <ChevronDown className="w-4 h-4 text-slate-400" />
-                  </div>
-                </div>
-             </div>
-             <div className="space-y-1.5">
-                <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Discount</Label>
-                <div className="flex h-11">
-                  <Input defaultValue="0" className="h-full rounded-l-lg bg-[#f8fafc] border-none text-[13px] border-r border-slate-100 rounded-r-none" />
-                  <div className="flex items-center bg-[#f8fafc] rounded-r-lg px-3 text-[13px] font-black uppercase text-slate-500 border-l border-white">
-                     Kes <ChevronDown className="w-4 h-4 ml-2" />
-                  </div>
-                </div>
-             </div>
-          </div>
-
-          <div className="flex items-center justify-between p-1">
-             <div className="flex items-center gap-3">
-                <Switch id="print" defaultChecked className="data-[state=checked]:bg-blue-500" />
-                <Label htmlFor="print" className="text-[11px] font-black text-slate-500 uppercase tracking-widest">Auto-print receipt</Label>
-             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4 pt-2">

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from "react";
@@ -37,7 +38,8 @@ import {
   Usb,
   ChevronDown,
   Plus,
-  Menu
+  Menu,
+  PlusCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -45,6 +47,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useUser } from "@/firebase/auth/use-user";
 import Image from "next/image";
+import Link from "next/link";
 
 export function MerchantDashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -61,70 +64,22 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
       items: [
         { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
         { label: "POS / Sales", icon: ShoppingCart, href: "/dashboard" },
-        { label: "Dine-In Checkout", icon: Utensils },
-        { label: "Butchery", icon: Beef },
         { label: "Orders", icon: FileText },
-        { label: "Returns", icon: RotateCcw },
-        { label: "Quotations", icon: FileQuestion },
-      ]
-    },
-    {
-      title: "Hardware",
-      items: [
-        { label: "Local service link", icon: Usb },
-        { label: "Scales & Weighing", icon: Scale },
-        { label: "Thermal Printers", icon: Printer },
-        { label: "Barcode Scanners", icon: Zap },
-        { label: "System Diagnostics", icon: Cpu },
-      ]
-    },
-    {
-      title: "Finance",
-      items: [
-        { label: "Opening Balance", icon: Wallet },
-        { label: "Expense Management", icon: ArrowRightLeft },
-        { label: "Cash Flow", icon: Coins },
-        { label: "Tax Configuration", icon: Scale },
-        { label: "KRA Tax Report", icon: FileText },
-        { label: "Filing History", icon: History },
-      ]
-    },
-    {
-      title: "Credit",
-      items: [
-        { label: "Customers", icon: Users },
-        { label: "Suppliers", icon: Truck },
-        { label: "Supplier Finance", icon: Coins },
       ]
     },
     {
       title: "Products",
       items: [
-        { label: "Products", icon: Package, href: "/dashboard/products" },
+        { label: "Inventory", icon: Package, href: "/dashboard/products" },
+        { label: "Add Product", icon: PlusCircle, href: "/dashboard/products/add" },
         { label: "Categories", icon: Layers },
-        { label: "Unit of Measures", icon: Scale },
-        { label: "Inventory Log", icon: ClipboardList },
-        { label: "Stock In", icon: Plus },
-        { label: "Price Adjustment", icon: TrendingUp },
-        { label: "Price History", icon: History },
-        { label: "Expiry Management", icon: AlertTriangle },
-        { label: "Products Reconciliation", icon: FileText },
       ]
     },
     {
-      title: "Reports",
+      title: "Finance",
       items: [
-        { label: "Cashier Sales", icon: BarChart3 },
-        { label: "Cashier Activity", icon: Users },
-        { label: "Sales Report", icon: BarChart3 },
-        { label: "Stock Movement", icon: Truck },
-        { label: "Profit Report", icon: TrendingUp },
-        { label: "Inventory Report", icon: ClipboardList },
-        { label: "Stock Value Report", icon: Coins },
-        { label: "Supplier Payments", icon: ArrowRightLeft },
-        { label: "Credit Payments", icon: Coins },
-        { label: "Disposed Products", icon: Ban },
-        { label: "Reconciliation Report", icon: FileText },
+        { label: "Cash Flow", icon: Coins },
+        { label: "Tax Report", icon: FileText },
       ]
     },
     {
@@ -157,25 +112,25 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
     <div className="h-screen flex overflow-hidden bg-[#f1f5f9]">
       {/* LEFT SIDEBAR NAVIGATION */}
       <aside className={cn(
-        "bg-[#1e293b] flex flex-col shrink-0 transition-all duration-300 ease-in-out overflow-hidden",
+        "bg-[#1e293b] flex flex-col shrink-0 transition-all duration-300 ease-in-out overflow-hidden border-r border-white/5",
         isSidebarOpen ? "w-64" : "w-0"
       )}>
-        <div className="h-16 flex items-center px-4 border-b border-white/5 whitespace-nowrap bg-white">
-           <div className="relative h-12 w-full">
+        <div className="h-16 flex items-center px-4 bg-white whitespace-nowrap">
+           <Link href="/" className="relative h-10 w-full">
               <Image 
                 src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
                 alt="Steak West" 
                 fill 
                 className="object-contain object-left" 
               />
-           </div>
+           </Link>
         </div>
 
         <div className="p-4">
            <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-500" />
               <input 
-                placeholder="Search menu..." 
+                placeholder="Quick search..." 
                 className="w-full h-10 pl-9 pr-3 bg-[#0f172a] border-none rounded-md text-[13px] text-white placeholder:text-gray-600 outline-none"
               />
            </div>
@@ -192,24 +147,16 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
                     className={cn(
                       "w-full flex items-center gap-3 px-4 py-2.5 rounded-md text-[13px] transition-all whitespace-nowrap",
                       pathname === item.href 
-                        ? "bg-[#3b82f6] text-white" 
+                        ? "bg-[#3b82f6] text-white shadow-lg shadow-blue-500/20" 
                         : "text-gray-400 hover:text-white hover:bg-white/5"
                     )}
                   >
                     <item.icon className="w-4 h-4" />
-                    <span>{item.label}</span>
+                    <span className="font-medium">{item.label}</span>
                   </button>
                 ))}
              </div>
            ))}
-           <div className="pt-8 space-y-1">
-              <button className="w-full flex items-center justify-between px-4 py-2.5 rounded-md text-[13px] text-gray-400 hover:text-white hover:bg-white/5">
-                <div className="flex items-center gap-3 whitespace-nowrap">
-                   <SunMoon className="w-4 h-4" />
-                   <span>Theme</span>
-                </div>
-              </button>
-           </div>
         </div>
       </aside>
 
@@ -229,37 +176,26 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
               )}
             </button>
             
-            {/* Hardware Status Monitoring Strip */}
-            <div className="hidden xl:flex items-center gap-4 ml-4 px-4 border-l border-white/10">
-              <div className="flex items-center gap-2">
-                <Cpu className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Service: <span className="text-white">Connected</span></span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Printer className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Printer: <span className="text-white">Online</span></span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Scale className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Scale: <span className="text-white">Ready</span></span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 ml-auto lg:ml-6">
-              <Button size="sm" className="bg-[#22c55e] hover:bg-[#16a34a] h-8 rounded-md px-4 gap-2 font-bold text-[11px] uppercase">
-                <ShoppingCart className="w-3.5 h-3.5" /> Restaurant
-              </Button>
-              <Button size="sm" className="bg-[#ef4444] hover:bg-[#dc2626] h-8 rounded-md px-4 gap-2 font-bold text-[11px] uppercase shadow-[0_0_15px_rgba(239,68,68,0.3)]">
-                <Beef className="w-3.5 h-3.5" /> Butchery
-              </Button>
+            <div className="hidden lg:flex items-center gap-2 ml-4">
+              <Link href="/dashboard/products/add">
+                <Button size="sm" className="bg-blue-500 hover:bg-blue-600 h-8 rounded-md px-4 gap-2 font-bold text-[11px] uppercase">
+                  <PlusCircle className="w-3.5 h-3.5" /> Add Product
+                </Button>
+              </Link>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
+            <div className="hidden sm:flex items-center gap-3 px-4 border-r border-white/10 text-[10px] font-black uppercase tracking-widest text-gray-400">
+               <span className="text-white">{currentDate}</span>
+               <span className="text-blue-400">{currentTime}</span>
+            </div>
+            
             <button className="p-2 hover:bg-white/10 rounded-full relative">
               <Bell className="w-5 h-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-[#1e293b]" />
             </button>
+            
             <Button 
               variant="destructive" 
               size="sm" 
@@ -273,12 +209,22 @@ export function MerchantDashboardLayout({ children }: { children: React.ReactNod
 
         {/* Dynamic Status Bar */}
         <div className="h-14 bg-white border-b px-4 flex items-center justify-between shadow-sm shrink-0">
-          <div className="flex items-center gap-6 text-gray-500 text-[12px] font-medium">
-             <div className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {currentDate}</div>
-             <div className="font-bold text-black flex items-center gap-1.5"><Clock className="w-4 h-4" /> {currentTime}</div>
-             <div className="flex items-center gap-1.5 font-bold text-black bg-gray-100 px-3 py-1.5 rounded-md">
-                <UserIcon className="w-4 h-4" /> {currentUser?.email?.split('@')[0] || "Operator"}
+          <div className="flex items-center gap-4">
+             <div className="flex items-center gap-2 font-bold text-black bg-slate-100 px-3 py-1.5 rounded-lg text-[12px]">
+                <UserIcon className="w-4 h-4 text-slate-400" /> 
+                <span className="uppercase tracking-tighter">{currentUser?.email?.split('@')[0] || "Operator"}</span>
              </div>
+             <div className="hidden md:flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest">
+                <Cpu className="w-3.5 h-3.5 text-emerald-500" /> Cloud Sync Active
+             </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <Link href="/dashboard/products">
+              <Button variant="outline" size="sm" className="h-8 text-[10px] font-black uppercase tracking-widest border-2">
+                Manage Inventory
+              </Button>
+            </Link>
           </div>
         </div>
 
