@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from "react";
@@ -145,7 +146,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-2 md:px-6 mt-10 space-y-12">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 mt-10 space-y-12">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
@@ -163,7 +164,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 md:gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-4">
                 {categoryProducts.map((product) => (
                   <ProductCard 
                     key={product.id} 
@@ -245,18 +246,18 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
       </div>
       <div className="p-2 md:p-3 space-y-1 flex-grow flex flex-col justify-between">
         <div className="space-y-0.5">
-          <p className="text-[9px] md:text-[10px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
+          <p className="text-[10px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
             {product.name}
           </p>
-          <p className="text-[7px] md:text-[8px] text-gray-400 font-bold uppercase tracking-widest truncate">
+          <p className="text-[8px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">
             {product.category}
           </p>
         </div>
         <div className="flex items-center gap-1">
-          <p className="text-[11px] md:text-[13px] font-black text-primary">
+          <p className="text-[12px] md:text-[14px] font-black text-primary">
             KES {product.price.toLocaleString()}
           </p>
-          {product.hasTax && <span className="text-[6px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
+          {product.hasTax && <span className="text-[7px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
         </div>
       </div>
     </Card>
