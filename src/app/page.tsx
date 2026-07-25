@@ -123,7 +123,7 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-5 w-full space-y-10 py-10 flex-grow">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 w-full space-y-10 py-10 flex-grow">
         {/* Operating nodes */}
         <section className="space-y-4">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
@@ -151,7 +151,7 @@ function DiscoveryContent() {
                   </button>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 w-full">
                   {section.products.map((p) => (
                     <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                   ))}
@@ -165,7 +165,7 @@ function DiscoveryContent() {
                 <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 w-full">
                 {filteredProducts.map((p) => (
                   <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                 ))}
@@ -181,13 +181,15 @@ function DiscoveryContent() {
 
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
   return (
-    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow w-full max-w-none h-full">
-      <div className="relative aspect-square bg-gray-50 overflow-hidden w-full">
+    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all w-full max-w-none h-full">
+      <div className="relative aspect-square bg-gray-50 overflow-hidden w-full shrink-0">
         <Image 
           src={product.image} 
           alt={product.name} 
-          fill 
+          fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-cover transition-transform duration-700 group-hover:scale-110" 
+          priority={false}
         />
         
         {/* Rating Badge */}
@@ -206,10 +208,10 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void
       </div>
 
       <div className="p-3 md:p-4 space-y-1.5 flex-grow flex flex-col justify-between">
-        <h3 className="text-[12px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
+        <h3 className="text-[11px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
           {product.name}
         </h3>
-        <p className="text-[14px] md:text-base font-black text-black">
+        <p className="text-[13px] md:text-base font-black text-black">
           KES {product.price.toLocaleString()}
         </p>
       </div>
