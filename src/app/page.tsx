@@ -114,10 +114,10 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-white pb-24 pt-24 md:pt-32">
+    <main className="min-h-screen bg-white pb-24 pt-24 md:pt-32 w-full max-w-[100vw] overflow-x-hidden">
       {/* Sticky Header Node */}
       <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-4 py-4 md:py-6">
-        <div className="w-full max-w-[1600px] lg:max-w-[1400px] md:max-w-none mx-auto space-y-6">
+        <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
              <div className="relative flex-grow max-w-2xl">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -147,8 +147,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid - ULTRA HIGH DENSITY */}
-      <div className="w-full max-w-[1600px] lg:max-w-[1400px] md:max-w-none mx-auto px-2 md:px-6 mt-6 space-y-12">
+      {/* Main Marketplace Grid - ULTRA HIGH DENSITY 3-UP MOBILE */}
+      <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
@@ -158,7 +158,7 @@ export default function HomePage() {
           if (categoryProducts.length === 0) return null;
 
           return (
-            <section key={category.id} id={category.id} className="space-y-4 scroll-mt-40">
+            <section key={category.id} id={category.id} className="space-y-3 md:space-y-4 scroll-mt-40">
               <div className="flex items-center justify-between border-b border-gray-100 pb-2 px-1">
                 <h2 className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
                   <category.icon className="w-3 h-3 md:w-4 md:h-4 text-primary" /> {category.id}
@@ -166,14 +166,15 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* Force 3 columns on tiny mobile, 4 on standard mobile, 8 on desktop */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 md:gap-4">
+              {/* Force 3 columns on mobile, 4-5 on tablet, 8 on desktop. min-w-0 prevents flex/grid items from pushing boundaries */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {categoryProducts.map((product) => (
-                  <ProductCard 
-                    key={product.id} 
-                    product={product} 
-                    onAdd={() => handleAdd(product)} 
-                  />
+                  <div key={product.id} className="min-w-0">
+                    <ProductCard 
+                      product={product} 
+                      onAdd={() => handleAdd(product)} 
+                    />
+                  </div>
                 ))}
               </div>
             </section>
@@ -215,9 +216,9 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
   const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver'].includes(product.id);
 
   return (
-    <Card className="w-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-xl">
+    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl">
       {/* Aspect Ratio Node - Miniature Scale */}
-      <div className="aspect-square relative bg-gray-50 overflow-hidden">
+      <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
         {images.map((img: string, idx: number) => (
           <div 
             key={idx}
@@ -245,19 +246,19 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
             e.stopPropagation();
             onAdd();
           }}
-          className="absolute bottom-1.5 right-1.5 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-100 md:opacity-0 group-hover:opacity-100 transition-all z-20 active:scale-90"
+          className="absolute bottom-1 right-1 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-100 md:opacity-0 group-hover:opacity-100 transition-all z-20 active:scale-90"
         >
           <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
 
-      {/* Proportional Metadata Node - Ultra Tiny Typography */}
-      <div className="p-2 flex-grow flex flex-col justify-between space-y-1">
+      {/* Proportional Metadata Node - Ultra Tiny Typography to ensure it fits within 3-up columns */}
+      <div className="p-1.5 md:p-2 flex-grow flex flex-col justify-between space-y-1">
         <div className="space-y-0.5">
-          <p className="text-[9px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
+          <p className="text-[10px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
             {product.name}
           </p>
-          <p className="text-[7px] md:text-[8px] text-gray-400 font-bold uppercase tracking-widest truncate">
+          <p className="text-[8px] text-gray-400 font-bold uppercase tracking-widest truncate">
             {product.category}
           </p>
         </div>
