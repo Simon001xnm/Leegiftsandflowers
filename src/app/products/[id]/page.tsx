@@ -15,6 +15,7 @@ import { createClient } from "@/lib/supabase/client";
 const STATIC_PRODUCTS = [
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, rating: 5.0, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, rating: 5.0, category: "Raw Meat", image: "/images (28).jpg", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
+  { id: 'p-cubes', name: "Beef Cubes", price: 1000, rating: 5.0, category: "Raw Meat", image: "/images (29).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg", description: "Elite quality beef, fresh from our main node." },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, rating: 4.8, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600", description: "Tender goat meat sourced from local suppliers." },
   { id: 'p11', name: "Farm Chicken (Local)", price: 800, rating: 4.7, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600", description: "Authentic local farm-raised chicken." },
@@ -105,6 +106,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   if (!product) return <div className="p-20 text-center font-headline text-2xl uppercase font-black">Product not found</div>;
 
+  const isExtraHD = product.id === 'p-fillet' || product.id === 'p-tbone' || product.id === 'p-cubes';
+
   return (
     <div className="min-h-screen flex flex-col bg-white pt-24">
       <main className="flex-grow">
@@ -125,7 +128,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   className="object-cover"
                   priority
                   quality={100}
-                  unoptimized={product.id === 'p-fillet' || product.id === 'p-tbone'}
+                  unoptimized={isExtraHD}
                   sizes="(max-width: 1024px) 100vw, 66vw"
                 />
                 <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">

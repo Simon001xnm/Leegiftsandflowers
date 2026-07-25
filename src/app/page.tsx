@@ -38,6 +38,15 @@ const ALL_PRODUCTS = [
     images: ["/images (28).jpg"],
     hasTax: true 
   },
+  { 
+    id: 'p-cubes', 
+    name: "Beef Cubes", 
+    price: 1000, 
+    category: "Raw Meat", 
+    image: "/images (29).jpg", 
+    images: ["/images (29).jpg"],
+    hasTax: true 
+  },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   { id: 'p11', name: "Farm Chicken (Local)", price: 800, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600" },
@@ -190,6 +199,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  const isExtraHD = product.id === 'p-fillet' || product.id === 'p-tbone' || product.id === 'p-cubes';
+
   return (
     <Card className="w-full rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col p-1.5 md:p-0">
       <div className="aspect-square relative bg-gray-50 overflow-hidden rounded-lg md:rounded-t-2xl md:rounded-b-none">
@@ -208,8 +219,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
               className="object-cover transition-transform duration-700 group-hover:scale-110" 
               sizes="(max-width: 768px) 50vw, 25vw"
               quality={100}
-              priority={product.id === 'p-fillet' || product.id === 'p-tbone'}
-              unoptimized={product.id === 'p-fillet' || product.id === 'p-tbone'}
+              priority={isExtraHD}
+              unoptimized={isExtraHD}
             />
           </div>
         ))}
