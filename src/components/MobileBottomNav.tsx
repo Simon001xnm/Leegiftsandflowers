@@ -9,8 +9,7 @@ import { useCart } from "@/context/CartContext";
 
 /**
  * HIGH-DENSITY MOBILE NAVIGATION
- * Mirrored from Glovo/Uber Eats design patterns for professional retail feel.
- * Updated to remove link to deleted customer dashboard.
+ * Home serves as both the Landing and Discovery/Search node.
  */
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -18,7 +17,7 @@ export function MobileBottomNav() {
 
   const navItems = [
     { href: "/", label: "Home", icon: Home },
-    { href: "/restaurants", label: "Search", icon: Search },
+    { href: "/", label: "Search", icon: Search },
     { href: "/profile", label: "Orders", icon: Utensils },
     { href: "/checkout", label: "Basket", icon: ShoppingBag, badge: itemCount },
     { href: "/profile", label: "Account", icon: User },
@@ -28,9 +27,9 @@ export function MobileBottomNav() {
     <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-white/95 backdrop-blur-xl border-t md:hidden flex items-center justify-around px-2 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
       {navItems.map((item, index) => {
         const Icon = item.icon;
-        // Handle unique keys for items sharing the same href (Orders and Account both go to /profile)
         const itemKey = `${item.href}-${index}`;
-        const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
+        // Active logic for home
+        const isActive = pathname === item.href;
         
         return (
           <Link

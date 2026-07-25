@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from "react";
@@ -56,8 +57,8 @@ export function Navigation() {
           {['Shop', 'Offers', 'About', 'Contact'].map((item) => (
             <Link 
               key={item} 
-              href={`/${item.toLowerCase().replace(' ', '-')}`}
-              className="text-[13px] font-medium text-gray-500 hover:text-black transition-all hover:translate-y-[-1px]"
+              href={item === 'Shop' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+              className="text-[13px] font-black uppercase tracking-widest text-gray-500 hover:text-black transition-all hover:translate-y-[-1px]"
             >
               {item}
             </Link>
