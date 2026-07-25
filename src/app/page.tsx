@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from "react";
@@ -56,6 +55,14 @@ const ALL_PRODUCTS = [
     image: "/images (30).jpg", 
     images: ["/images (30).jpg"],
     hasTax: true 
+  },
+  { 
+    id: 'p-matumbo', 
+    name: "Matumbo", 
+    price: 600, 
+    category: "Raw Meat", 
+    image: "/MATUMBO.jpg", 
+    images: ["/MATUMBO.jpg"]
   },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
@@ -166,7 +173,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* Force 3 columns on mobile, 4-5 on tablet, 8 on desktop. min-w-0 prevents flex/grid items from pushing boundaries */}
+              {/* Force 3 columns on mobile, 8 on desktop. min-w-0 prevents overflow */}
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {categoryProducts.map((product) => (
                   <div key={product.id} className="min-w-0">
@@ -213,7 +220,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver'].includes(product.id);
+  const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo'].includes(product.id);
 
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl">
@@ -252,7 +259,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
         </button>
       </div>
 
-      {/* Proportional Metadata Node - Ultra Tiny Typography to ensure it fits within 3-up columns */}
+      {/* Proportional Metadata Node - Ultra Tiny Typography */}
       <div className="p-1.5 md:p-2 flex-grow flex flex-col justify-between space-y-1">
         <div className="space-y-0.5">
           <p className="text-[10px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
