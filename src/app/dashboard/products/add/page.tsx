@@ -13,7 +13,8 @@ import {
   Loader2,
   X,
   ShieldAlert,
-  Layers
+  Layers,
+  Lock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,6 +96,14 @@ export default function AddProductPage() {
 
   const uploadImage = async (file: File): Promise<string | null> => {
     try {
+      // Security Check: Ensure real session for storage uploads
+      const { data: { session } } = await supabase.auth.getSession();
+      const isDemo = !!localStorage.getItem('steak_west_demo_user');
+
+      if (isDemo || !session) {
+        throw new Error("AUTHENTICATION_REQUIRED: Image uploads require a real Supabase account. Please sign out and log in with email/password.");
+      }
+
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
       const filePath = `${fileName}`;
@@ -106,6 +115,9 @@ export default function AddProductPage() {
       if (uploadError) {
         if (uploadError.message.includes('Bucket not found')) {
           throw new Error(`Supabase Storage Error: The '${STORAGE_BUCKET}' bucket was not found. Please create it in your Supabase Console and set it to 'Public'.`);
+        }
+        if (uploadError.message.includes('JWS')) {
+          throw new Error("Supabase Auth Error: Your session is invalid or expired. Please sign in again with a real account.");
         }
         throw uploadError;
       }
@@ -168,7 +180,7 @@ export default function AddProductPage() {
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Registration failed",
+        title: "Deployment Aborted",
         description: error.message
       });
     } finally {
@@ -181,6 +193,8 @@ export default function AddProductPage() {
       <Loader2 className="w-8 h-8 animate-spin text-primary" />
     </div>
   );
+
+  const isDemoUser = !!localStorage.getItem('steak_west_demo_user');
 
   return (
     <div className="p-6 max-w-6xl mx-auto space-y-6">
@@ -202,10 +216,19 @@ export default function AddProductPage() {
         </div>
       </div>
 
-      <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl flex items-center gap-4 text-blue-800 text-[12px] font-bold uppercase tracking-widest">
-           <ImageIcon className="w-5 h-5 text-blue-500" />
-           <span>Ensure the '{STORAGE_BUCKET}' bucket exists in your Supabase Storage console with Public access enabled.</span>
-      </div>
+      {isDemoUser && (
+        <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-center gap-4 text-amber-800 text-[12px] font-bold uppercase tracking-widest">
+           <Lock className="w-5 h-5 text-amber-500" />
+           <span>You are in Demo Mode. Real image uploads and database writes require a real Supabase session.</span>
+        </div>
+      )}
+
+      {!isDemoUser && (
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl flex items-center gap-4 text-blue-800 text-[12px] font-bold uppercase tracking-widest">
+             <ImageIcon className="w-5 h-5 text-blue-500" />
+             <span>Ensure the '{STORAGE_BUCKET}' bucket exists in your Supabase Storage console with Public access enabled.</span>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">

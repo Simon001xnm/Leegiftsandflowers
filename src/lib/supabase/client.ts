@@ -10,8 +10,9 @@ export function createClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   
-  if (!supabaseUrl || !supabaseKey) {
-    console.warn("Supabase Environment Variables Missing. Using fallback shell.");
+  // Guard against placeholder or missing keys
+  if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('placeholder')) {
+    console.warn("Supabase Environment Variables Missing or Placeholder. Using fallback shell.");
     return createFallbackShell();
   }
 
@@ -32,13 +33,13 @@ function createFallbackShell() {
         }),
         single: () => Promise.resolve({ data: null, error: null })
       }),
-      insert: () => Promise.resolve({ data: null, error: new Error("Environment Missing") }),
+      insert: () => Promise.resolve({ data: null, error: new Error("Environment Keys Missing. Database writes are disabled.") }),
       update: () => ({ eq: () => Promise.resolve({ data: null, error: null }) }),
       upsert: () => Promise.resolve({ data: null, error: null }),
     }),
     storage: {
       from: () => ({
-        upload: () => Promise.resolve({ data: null, error: new Error("Environment Missing") }),
+        upload: () => Promise.resolve({ data: null, error: new Error("Environment Keys Missing. Storage uploads are disabled.") }),
         getPublicUrl: () => ({ data: { publicUrl: "" } })
       })
     },

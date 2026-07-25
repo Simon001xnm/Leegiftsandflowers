@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Suspense, useState } from "react";
@@ -8,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, Store, Bike, Mail, Lock, Loader2, ShieldCheck, ArrowRight } from "lucide-react";
+import { User, Store, Bike, Mail, Lock, Loader2, ShieldCheck, ArrowRight, AlertCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -28,12 +29,17 @@ function LoginForm() {
   const redirectPath = searchParams.get("redirect") || "/profile";
 
   const handleDemoBypass = (selectedRole: AppRole) => {
+    // Note: Demo bypass does not create a real Supabase session.
+    // Real DB/Storage operations will fail with 'Invalid Compact JWS'.
     localStorage.setItem('steak_west_demo_user', JSON.stringify({
       id: `demo-${Date.now()}`,
       email: 'demo@steakwest.com',
       user_metadata: { role: selectedRole, full_name: `Demo ${selectedRole}` }
     }));
-    toast({ title: "Entering demo mode", description: `Authorized as ${selectedRole}.` });
+    toast({ 
+      title: "Entering demo mode", 
+      description: `Authorized as ${selectedRole}. Note: Live uploads require real login.` 
+    });
     router.push(redirectPath);
   };
 
@@ -60,6 +66,7 @@ function LoginForm() {
         if (error) throw error;
         toast({ title: "Authorized", description: "Sync successful." });
       }
+      localStorage.removeItem('steak_west_demo_user'); // Clear demo session if real login succeeds
       router.push(redirectPath);
     } catch (error: any) {
       const isNetworkError = error.message === 'Failed to fetch' || error.message.includes('Keys Missing');
@@ -144,7 +151,10 @@ function LoginForm() {
           
           <CardFooter className="bg-gray-50/80 p-8 flex flex-col gap-6 border-t">
             <div className="w-full space-y-4">
-              <p className="text-[11px] font-bold text-center text-muted-foreground">Testing? Use demo bypass</p>
+              <div className="flex items-center gap-2 justify-center text-[11px] font-bold text-amber-600">
+                <AlertCircle className="w-4 h-4" /> 
+                <span>Bypass modes are for UI exploration only</span>
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 <Button variant="outline" className="rounded-2xl border-dashed border-2 text-[11px] font-bold h-12 hover:bg-white hover:border-solid transition-all" onClick={() => handleDemoBypass('merchant')}>
                    Merchant bypass
