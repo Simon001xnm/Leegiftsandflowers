@@ -62,8 +62,8 @@ const ALL_PRODUCTS = [
     name: "Matumbo", 
     price: 600, 
     category: "Raw Meat", 
-    image: "/MATUMBO.jpg", 
-    images: ["/MATUMBO.jpg"]
+    image: "/matumbo.jpg", 
+    images: ["/matumbo.jpg"]
   },
   { 
     id: 'p-pork', 

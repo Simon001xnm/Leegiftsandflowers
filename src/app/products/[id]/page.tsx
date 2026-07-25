@@ -18,7 +18,7 @@ const STATIC_PRODUCTS = [
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, rating: 5.0, category: "Raw Meat", image: "/images (28).jpg", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
   { id: 'p-cubes', name: "Beef Cubes", price: 1000, rating: 5.0, category: "Raw Meat", image: "/images (29).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
   { id: 'p-liver', name: "Liver", price: 1100, rating: 5.0, category: "Raw Meat", image: "/images (30).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
-  { id: 'p-matumbo', name: "Matumbo", price: 600, rating: 4.8, category: "Raw Meat", image: "/MATUMBO.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
+  { id: 'p-matumbo', name: "Matumbo", price: 600, rating: 4.8, category: "Raw Meat", image: "/matumbo.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
   { id: 'p-pork', name: "Pork Steak", price: 1000, rating: 4.9, category: "Raw Meat", image: "/pork steak.webp", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg", description: "Elite quality beef, fresh from our main node." },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, rating: 4.8, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600", description: "Tender goat meat sourced from local suppliers." },
