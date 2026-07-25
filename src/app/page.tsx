@@ -20,7 +20,7 @@ const CATEGORIES = [
 ];
 
 const ALL_PRODUCTS = [
-  // RAW MEAT
+  // RAW MEAT (Premium Nodes)
   { 
     id: 'p-fillet', 
     name: "Beef Fillet", 
@@ -73,17 +73,15 @@ const ALL_PRODUCTS = [
     image: "/PORK STEAK.webp", 
     images: ["/PORK STEAK.webp"]
   },
-  { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
+  { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
-  { id: 'p11', name: "Farm Chicken (Local)", price: 800, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600" },
-  { id: 'rm4', name: "Beef Mince 1kg", price: 950, category: "Raw Meat", image: "https://picsum.photos/seed/mince/600/600" },
   // COOKED MEAT
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg" },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
   // GROCERY
-  { id: 'p5', name: "Crispy Chips Portion", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
+  { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
   { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
@@ -254,7 +252,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
                 alt={product.name} 
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-105" 
-                sizes="(max-width: 480px) 50vw, (max-width: 1024px) 33vw, 15vw"
+                sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
                 quality={100}
                 priority={isExtraHD}
                 unoptimized={isExtraHD}

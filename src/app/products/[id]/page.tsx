@@ -1,11 +1,11 @@
 
 'use client';
 
-import { use, useMemo, useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { MOCK_MENU, MOCK_RESTAURANTS } from "@/lib/food-data";
+import { MOCK_MENU } from "@/lib/food-data";
 import { Clock, Store, TrendingUp, RefreshCw, ChevronLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
@@ -14,23 +14,18 @@ import { createClient } from "@/lib/supabase/client";
 
 // SYNCED NETWORK CATALOG
 const STATIC_PRODUCTS = [
-  { id: 'p-fillet', name: "Beef Fillet", price: 1100, rating: 5.0, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
-  { id: 'p-tbone', name: "Beef T-Bone", price: 1000, rating: 5.0, category: "Raw Meat", image: "/(28).jpg", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
-  { id: 'p-cubes', name: "Beef Cubes", price: 1000, rating: 5.0, category: "Raw Meat", image: "/(29).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
-  { id: 'p-liver', name: "Liver", price: 1100, rating: 5.0, category: "Raw Meat", image: "/(30).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
-  { id: 'p-matumbo', name: "Matumbo", price: 600, rating: 4.8, category: "Raw Meat", image: "/MATUMBO.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
-  { id: 'p-pork', name: "Pork Steak", price: 1000, rating: 4.9, category: "Raw Meat", image: "/PORK STEAK.webp", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
-  { id: 'p4', name: "Premium Beef Takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg", description: "Elite quality beef, fresh from our main node." },
-  { id: 'p10', name: "Goat Meat 1kg", price: 1350, rating: 4.8, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600", description: "Tender goat meat sourced from local suppliers." },
-  { id: 'p11', name: "Farm Chicken (Local)", price: 800, rating: 4.7, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600", description: "Authentic local farm-raised chicken." },
-  { id: 'rm4', name: "Beef Mince 1kg", price: 950, rating: 4.9, category: "Raw Meat", image: "https://picsum.photos/seed/mince/600/600", description: "Premium beef mince, low fat content." },
-  { id: 'p2', name: "Beef Choma 1kg", price: 1400, rating: 4.8, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef." },
-  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, rating: 4.9, category: "Cooked Meat", image: "/beef chemsha SMB.jpg", description: "Healthy and tender slow-boiled beef." },
-  { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, rating: 4.7, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts." },
-  { id: 'p6', name: "Full Chicken Choma", price: 1000, rating: 4.8, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken." },
-  { id: 'p5', name: "Crispy Chips Portion", price: 200, rating: 4.5, category: "Grocery", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips." },
-  { id: 'ka1', name: "Digital Air Fryer", price: 12500, rating: 4.9, category: "Kitchen Appliances", image: "https://picsum.photos/seed/airfryer/600/600", description: "Healthy cooking for your premium meat cuts." },
-  { id: 'pa1', name: "20,000mAh Power Bank", price: 4500, rating: 4.9, category: "Phone Accessories", image: "https://picsum.photos/seed/powerbank/600/600", description: "Reliable power for your mobile devices." },
+  { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
+  { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/(28).jpg", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
+  { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/(29).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
+  { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/(30).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
+  { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/MATUMBO.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
+  { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/PORK STEAK.webp", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
+  { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg", description: "Elite quality beef, fresh from our main node." },
+  { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef." },
+  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg", description: "Healthy and tender slow-boiled beef." },
+  { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts." },
+  { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken." },
+  { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips." },
 ];
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
