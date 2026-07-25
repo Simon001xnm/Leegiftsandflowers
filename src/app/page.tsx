@@ -340,9 +340,7 @@ function Stat({ node, label, isGold }: { node: string, label: string, isGold?: b
 
 function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void }) {
   return (
-    <motion.div 
-      className="flex flex-col group bg-white relative z-0 overflow-hidden border-r border-b border-gray-100 w-full min-w-0"
-    >
+    <div className="flex flex-col group bg-white relative z-0 overflow-hidden border-r border-b border-gray-100 w-full min-w-0">
       <div className="relative aspect-square bg-gray-50 overflow-hidden">
         <Image 
           src={product.image} 
@@ -385,6 +383,6 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (p: any) => void
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
