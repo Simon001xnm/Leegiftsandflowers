@@ -8,14 +8,17 @@ export function createClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   
-  if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('placeholder') || supabaseKey.includes('placeholder')) {
-    console.error("CRITICAL: Supabase Environment Variables are missing or contain placeholder values.");
-    // We return a client that will fail gracefully with a 401 if used, 
-    // but the app logic now checks for these keys before calling.
+  // Validation for production mode
+  const isMissing = !supabaseUrl || !supabaseKey || 
+                    supabaseUrl.includes('placeholder') || 
+                    supabaseKey.includes('placeholder');
+
+  if (isMissing) {
+    console.error("CRITICAL ERROR: Supabase production credentials are missing. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY in your environment.");
   }
 
   return createBrowserClient(
-    supabaseUrl || 'https://missing-url.supabase.co', 
+    supabaseUrl || 'https://missing.supabase.co', 
     supabaseKey || 'missing-key'
   );
 }

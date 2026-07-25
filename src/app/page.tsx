@@ -1,11 +1,10 @@
-
 'use client';
 
 import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Star, Plus, ChevronRight, ShoppingBag, RefreshCw } from "lucide-react";
+import { Star, Plus, ChevronRight, ShoppingBag, RefreshCw, AlertCircle } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
@@ -19,20 +18,23 @@ function MarketplaceContent() {
   
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const { data, error } = await supabase
+        const { data, error: supabaseError } = await supabase
           .from('products')
           .select('*')
           .eq('is_in_stock', true)
           .order('created_at', { ascending: false });
         
-        if (error) throw error;
+        if (supabaseError) throw supabaseError;
         if (data) setProducts(data);
-      } catch (e) {
-        console.error("Public fetch failed", e);
+      } catch (e: any) {
+        const msg = e.message || "Failed to synchronize with catalog node";
+        console.error("Supabase connection failure:", msg);
+        setError(msg);
       } finally {
         setLoading(false);
       }
@@ -64,6 +66,26 @@ function MarketplaceContent() {
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
         <RefreshCw className="w-8 h-8 animate-spin text-primary opacity-20" />
         <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground animate-pulse">Syncing catalog node...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-6 px-6 text-center">
+        <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center text-red-500">
+           <AlertCircle className="w-8 h-8" />
+        </div>
+        <div className="space-y-2">
+           <h3 className="text-lg font-black uppercase tracking-tighter">Connection Interrupted</h3>
+           <p className="text-[12px] font-medium text-muted-foreground max-w-sm uppercase tracking-widest">Unable to reach the production database. Ensure the 'products' table exists and RLS policies are active.</p>
+        </div>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="text-[10px] font-black text-primary border-b-2 border-primary pb-1 uppercase tracking-[0.2em]"
+        >
+          RETRY SYNC
+        </button>
       </div>
     );
   }
