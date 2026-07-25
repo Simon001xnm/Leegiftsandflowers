@@ -163,7 +163,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid - ULTRA HIGH DENSITY 3-UP MOBILE */}
+      {/* Main Marketplace Grid */}
       <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
@@ -184,10 +184,13 @@ export default function HomePage() {
               
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {categoryProducts.map((product) => (
-                  <div key={product.id} className="min-w-0">
+                  <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
                     <ProductCard 
                       product={product} 
-                      onAdd={() => handleAdd(product)} 
+                      onAdd={(e) => {
+                        e.stopPropagation();
+                        handleAdd(product);
+                      }} 
                     />
                   </div>
                 ))}
@@ -216,7 +219,7 @@ function CategoryTab({ label, isActive, onClick }: { label: string, isActive: bo
   );
 }
 
-function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
+function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseEvent) => void }) {
   const images = product.images && product.images.length > 0 ? product.images : [product.image];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -233,32 +236,34 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
-        {images.map((img: string, idx: number) => (
-          <div 
-            key={idx}
-            className={cn(
-              "absolute inset-0 transition-opacity duration-1000",
-              idx === currentImageIndex ? "opacity-100" : "opacity-0"
-            )}
-          >
-            <Image 
-              src={img} 
-              alt={product.name} 
-              fill 
-              className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              sizes="(max-width: 480px) 33vw, (max-width: 768px) 25vw, 12vw"
-              quality={100}
-              priority={isExtraHD}
-              unoptimized={isExtraHD}
-            />
-          </div>
-        ))}
+        {images.map((img: string, idx: number) => {
+          // SAFE URL ENCODING FOR ASSETS WITH SPACES/PARENTHESES
+          const safeSrc = img.startsWith('http') ? img : encodeURI(img);
+          
+          return (
+            <div 
+              key={idx}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-1000",
+                idx === currentImageIndex ? "opacity-100" : "opacity-0"
+              )}
+            >
+              <Image 
+                src={safeSrc} 
+                alt={product.name} 
+                fill 
+                className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                sizes="(max-width: 480px) 33vw, (max-width: 768px) 25vw, 12vw"
+                quality={100}
+                priority={isExtraHD}
+                unoptimized={isExtraHD}
+              />
+            </div>
+          );
+        })}
         
         <button 
-          onClick={(e) => {
-            e.stopPropagation();
-            onAdd();
-          }}
+          onClick={onAdd}
           className="absolute bottom-1 right-1 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-100 md:opacity-0 group-hover:opacity-100 transition-all z-20 active:scale-90"
         >
           <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
@@ -285,3 +290,4 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
     </Card>
   );
 }
+

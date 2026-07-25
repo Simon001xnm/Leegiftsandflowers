@@ -28,7 +28,6 @@ const STATIC_PRODUCTS = [
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, rating: 4.9, category: "Cooked Meat", image: "/beef chemsha SMB.jpg", description: "Healthy and tender slow-boiled beef." },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, rating: 4.7, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts." },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, rating: 4.8, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken." },
-  { id: 'p24', name: "Mutura Node (Standard)", price: 100, rating: 4.9, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "The authentic Nairobi sausage experience." },
   { id: 'p5', name: "Crispy Chips Portion", price: 200, rating: 4.5, category: "Grocery", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips." },
   { id: 'ka1', name: "Digital Air Fryer", price: 12500, rating: 4.9, category: "Kitchen Appliances", image: "https://picsum.photos/seed/airfryer/600/600", description: "Healthy cooking for your premium meat cuts." },
   { id: 'pa1', name: "20,000mAh Power Bank", price: 4500, rating: 4.9, category: "Phone Accessories", image: "https://picsum.photos/seed/powerbank/600/600", description: "Reliable power for your mobile devices." },
@@ -62,7 +61,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         return;
       }
 
-      // 2. Fallback to Supabase if ID looks like a real database entry
+      // 2. Fallback to Supabase
       try {
         const { data } = await supabase.from('products').select('*').eq('id', id).single();
         if (data) {
@@ -111,6 +110,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   if (!product) return <div className="p-20 text-center font-headline text-2xl uppercase font-black">Product not found</div>;
 
   const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver', 'p-matumbo', 'p-pork'].includes(product.id);
+  const safeImageUrl = product.imageUrl.startsWith('http') ? product.imageUrl : encodeURI(product.imageUrl);
 
   return (
     <div className="min-h-screen flex flex-col bg-white pt-24">
@@ -126,7 +126,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <div className="lg:col-span-7">
               <div className="relative aspect-square md:aspect-[4/3] bg-gray-50 border overflow-hidden">
                 <Image 
-                  src={product.imageUrl} 
+                  src={safeImageUrl} 
                   alt={product.name} 
                   fill 
                   className="object-cover"
@@ -198,3 +198,4 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     </div>
   );
 }
+
