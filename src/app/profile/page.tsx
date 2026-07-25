@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -110,7 +111,7 @@ export default function ProfilePage() {
   const getDashboardPath = () => {
     if (userRole === 'merchant') return '/dashboard';
     if (userRole === 'rider') return '/dashboard/rider';
-    return '/dashboard/customer';
+    return null; // Customers don't have a separate dashboard anymore
   };
 
   const getDashboardIcon = () => {
@@ -120,6 +121,7 @@ export default function ProfilePage() {
   };
 
   const DashboardIcon = getDashboardIcon();
+  const dashboardPath = getDashboardPath();
 
   if (!isEditing) {
     return (
@@ -156,23 +158,25 @@ export default function ProfilePage() {
             </div>
           </section>
 
-          <section className="bg-gray-50 rounded-[2.5rem] p-8 border">
-             <div className="flex items-center justify-between mb-6">
-                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Authorized role</p>
-                <span className="bg-white px-3 py-1 rounded-full border text-[11px] font-bold">{userRole}</span>
-             </div>
-             <Button 
-               className="w-full h-16 bg-black text-white rounded-2xl font-bold text-[14px] gap-3 shadow-2xl"
-               onClick={() => router.push(getDashboardPath())}
-             >
-                <DashboardIcon className="w-5 h-5" />
-                Go to {userRole === 'customer' ? 'My orders' : 'Dashboard'}
-             </Button>
-          </section>
+          {dashboardPath && (
+            <section className="bg-gray-50 rounded-[2.5rem] p-8 border">
+               <div className="flex items-center justify-between mb-6">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Authorized role</p>
+                  <span className="bg-white px-3 py-1 rounded-full border text-[11px] font-bold">{userRole}</span>
+               </div>
+               <Button 
+                 className="w-full h-16 bg-black text-white rounded-2xl font-bold text-[14px] gap-3 shadow-2xl"
+                 onClick={() => router.push(dashboardPath)}
+               >
+                  <DashboardIcon className="w-5 h-5" />
+                  Go to Dashboard
+               </Button>
+            </section>
+          )}
 
           <section className="space-y-2 pt-4">
             <ProfileMenuItem icon={Heart} label="Favourites" />
-            <ProfileMenuItem icon={History} label="Order history" onClick={() => router.push('/dashboard/customer')} />
+            <ProfileMenuItem icon={History} label="Order history" />
             <ProfileMenuItem icon={LogOut} label="Log out" onClick={handleSignOut} isDestructive />
           </section>
         </main>
