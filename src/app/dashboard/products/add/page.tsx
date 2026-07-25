@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from "react";
@@ -11,7 +12,9 @@ import {
   Calendar,
   Layers,
   Image as ImageIcon,
-  Weight
+  Weight,
+  Loader2,
+  X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,16 +32,15 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
-/**
- * ADD PRODUCT MODULE
- * Operates within the persistent shell provided by Dashboard Layout.
- */
 export default function AddProductPage() {
   const router = useRouter();
   const { toast } = useToast();
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -74,17 +76,54 @@ export default function AddProductPage() {
     setFormData(prev => ({ ...prev, [name]: checked }));
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const uploadImage = async (file: File): Promise<string | null> => {
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `products/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('product-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage
+        .from('product-images')
+        .getPublicUrl(filePath);
+
+      return data.publicUrl;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      let imageUrl = "";
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile) || "";
+      }
+
       const { error } = await supabase
         .from('products')
         .insert([{
           ...formData,
+          image_url: imageUrl,
           is_in_stock: (formData.stock || 0) > 0,
-          restaurant_id: 'r1', // Default node ID
+          restaurant_id: 'r1',
           created_at: new Date().toISOString()
         }]);
 
@@ -133,7 +172,7 @@ export default function AddProductPage() {
             disabled={loading}
             className="bg-[#3b82f6] hover:bg-[#2563eb] h-11 px-8 rounded-md gap-2 font-bold text-[13px] shadow-lg shadow-blue-500/20"
           >
-            {loading ? "Syncing..." : (
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : (
               <><Save className="w-4 h-4 stroke-[3px]" /> Save product</>
             )}
           </Button>
@@ -187,6 +226,7 @@ export default function AddProductPage() {
                       <SelectItem value="CHICKEN">Chicken</SelectItem>
                       <SelectItem value="MUTURA">Mutura</SelectItem>
                       <SelectItem value="CHOMA">Choma</SelectItem>
+                      <SelectItem value="DRINKS">Drinks</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -360,7 +400,49 @@ export default function AddProductPage() {
                   onChange={handleInputChange}
                   className="h-11 bg-slate-50/50 border-slate-200"
                 />
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider ml-1">Optional: Set for fresh items</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-slate-200 shadow-sm rounded-xl overflow-hidden">
+            <CardHeader className="bg-slate-50/50 border-b border-slate-100">
+              <CardTitle className="text-[14px] font-black uppercase tracking-widest flex items-center gap-3">
+                <ImageIcon className="w-4 h-4 text-slate-400" /> Product Image
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-4">
+              <div 
+                className="relative aspect-square bg-slate-50 border border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center text-center space-y-3 group cursor-pointer hover:bg-white transition-all overflow-hidden"
+                onClick={() => document.getElementById('image-upload')?.click()}
+              >
+                {imagePreview ? (
+                  <>
+                    <Image src={imagePreview} alt="Preview" fill className="object-cover" />
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); setImageFile(null); setImagePreview(null); }}
+                      className="absolute top-2 right-2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center backdrop-blur-md"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-slate-300 border border-slate-100 shadow-sm group-hover:text-blue-500 group-hover:border-blue-200 transition-all">
+                      <ImageIcon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-[12px] font-bold text-slate-600">Select product photo</p>
+                      <p className="text-[10px] text-slate-400 uppercase font-black tracking-widest">PNG, JPG or WebP</p>
+                    </div>
+                  </>
+                )}
+                <input 
+                  id="image-upload"
+                  type="file" 
+                  accept="image/*" 
+                  className="hidden" 
+                  onChange={handleImageChange}
+                />
               </div>
             </CardContent>
           </Card>
@@ -383,21 +465,8 @@ export default function AddProductPage() {
                   className="data-[state=checked]:bg-[#ef4444]"
                 />
               </div>
-              <p className="text-[10px] text-slate-400 font-bold uppercase leading-relaxed tracking-wider">
-                Enabling this option will trigger the weighing scale logic in the Butchery POS module.
-              </p>
             </CardContent>
           </Card>
-
-          <div className="p-6 bg-slate-50 border border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center text-center space-y-3 group cursor-pointer hover:bg-white transition-all">
-            <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-slate-300 border border-slate-100 shadow-sm group-hover:text-blue-500 group-hover:border-blue-200 transition-all">
-              <ImageIcon className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-[12px] font-bold text-slate-600">Product image</p>
-              <p className="text-[10px] text-slate-400 uppercase font-black tracking-widest">No file chosen</p>
-            </div>
-          </div>
         </div>
       </form>
     </div>

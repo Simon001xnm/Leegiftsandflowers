@@ -1,51 +1,65 @@
+
 'use client';
 
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Star, Plus, ChevronRight } from "lucide-react";
+import { Star, Plus, ChevronRight, ShoppingBag, Loader2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Footer } from "@/components/landing/Footer";
-
-const MEAT_PRODUCTS = [
-  { id: 'p1', name: "Beef chemsha 1kg", price: 1400, rating: 4.9, category: "Cooked", image: "/beef chemsha SMB.jpg" },
-  { id: 'p2', name: "Beef choma 1kg", price: 1400, rating: 4.8, category: "Choma", image: "/BEEF CHOMA.jpg" },
-  { id: 'p3', name: "Beef dry fry 1kg", price: 1400, rating: 4.7, category: "Cooked", image: "/BEEF DRY FRY.jpg" },
-  { id: 'p4', name: "Beef takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
-  { id: 'p5', name: "Chips portion", price: 200, rating: 4.5, category: "Grocery", image: "/CHIPS.jpg" },
-  { id: 'p6', name: "Full chicken choma", price: 1000, rating: 4.8, category: "Choma", image: "/FULL CHICKEN CHOMA.jpg" },
-  { id: 'p7', name: "Full chicken", price: 700, rating: 4.6, category: "Cooked", image: "/FULL CHICKEN.jpg" },
-  { id: 'p8', name: "Full kichwa goat", price: 800, rating: 4.9, category: "Cooked", image: "/FULL KICHWA YA GOAT.jpg" },
-];
-
-const DRINK_PRODUCTS = [
-  { id: 'd1', name: "Coca Cola 500ml", price: 80, rating: 4.9, category: "Drinks", image: "/From Klickpin.com- 944418984376291262-pin-id-944418984376291262-story-1.jpg" },
-  { id: 'd2', name: "Fanta Orange 500ml", price: 80, rating: 4.8, category: "Drinks", image: "/From Klickpin.com- 599330662967424085-pin-id-599330662967424085.jpg" },
-  { id: 'd3', name: "Minute Maid 400ml", price: 120, rating: 4.7, category: "Drinks", image: "/From Klickpin.com- 10836855347433280-pin-id-10836855347433280.jpg" },
-  { id: 'd4', name: "Del Monte Mango 1L", price: 220, rating: 4.9, category: "Drinks", image: "/From Klickpin.com- 50524827070351339-pin-id-50524827070351339-story-1.jpg" },
-  { id: 'd5', name: "Keringet Water 500ml", price: 50, rating: 4.9, category: "Drinks", image: "/From Klickpin.com- 6966574420736490-pin-id-6966574420736490-story-1.jpg" },
-  { id: 'd6', name: "Tropical Dispatch", price: 200, rating: 4.8, category: "Drinks", image: "/From Klickpin.com- 141019032077665218-pin-id-141019032077665218.jpg" },
-];
+import { createClient } from "@/lib/supabase/client";
 
 function MarketplaceContent() {
   const { addToCart } = useCart();
   const { toast } = useToast();
+  const supabase = createClient();
+  
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('is_in_stock', true)
+        .order('created_at', { ascending: false });
+      
+      if (!error && data) {
+        setProducts(data);
+      }
+      setLoading(false);
+    }
+    fetchProducts();
+  }, [supabase]);
+
+  const meatProducts = products.filter(p => p.category !== 'DRINKS');
+  const drinkProducts = products.filter(p => p.category === 'DRINKS');
 
   const handleAdd = (p: any) => {
     addToCart({
       id: p.id,
-      restaurantId: 'r1',
+      restaurantId: p.restaurant_id || 'r1',
       name: p.name,
       price: p.price,
-      description: '',
-      imageUrl: p.image,
+      description: p.description || '',
+      imageUrl: p.image_url || `https://picsum.photos/seed/${p.id}/600/600`,
       category: p.category
     });
     toast({ title: "ADDED TO BASKET", description: p.name });
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
+        <Loader2 className="w-10 h-10 animate-spin text-primary" />
+        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-muted-foreground animate-pulse">Syncing Marketplace Node...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -74,31 +88,38 @@ function MarketplaceContent() {
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Elite selection</h2>
           <Badge variant="outline" className="rounded-none border-red-600 text-red-600 font-black text-[10px] tracking-widest px-3 py-1">
-            {MEAT_PRODUCTS.length} ITEMS READY
+            {meatProducts.length} ITEMS READY
           </Badge>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          {MEAT_PRODUCTS.map((p) => (
-            <div key={p.id} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
-              <div className="relative aspect-square bg-gray-50 overflow-hidden">
-                <Image src={p.image} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute top-3 left-3 z-20 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-sm flex items-center gap-1 shadow-sm">
-                  <Star className="w-3 h-3 fill-primary text-primary" />
-                  <span className="text-[10px] font-black text-black">{p.rating}</span>
+        {meatProducts.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            {meatProducts.map((p) => (
+              <div key={p.id} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                <div className="relative aspect-square bg-gray-50 overflow-hidden">
+                  <Image src={p.image_url || `https://picsum.photos/seed/${p.id}/600/600`} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute top-3 left-3 z-20 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-sm flex items-center gap-1 shadow-sm">
+                    <Star className="w-3 h-3 fill-primary text-primary" />
+                    <span className="text-[10px] font-black text-black">4.9</span>
+                  </div>
+                  <button onClick={() => handleAdd(p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
+                    <Plus className="w-5 h-5 stroke-[3px]" />
+                  </button>
                 </div>
-                <button onClick={() => handleAdd(p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
-                  <Plus className="w-5 h-5 stroke-[3px]" />
-                </button>
+                <div className="p-4 space-y-2 bg-white flex-grow">
+                  <p className="text-[10px] font-black text-primary uppercase tracking-widest">{p.category}</p>
+                  <h3 className="text-[13px] md:text-base font-bold text-gray-900 line-clamp-1 leading-tight">{p.name}</h3>
+                  <p className="text-base md:text-lg font-black text-black">KES {p.price.toLocaleString()}</p>
+                </div>
               </div>
-              <div className="p-4 space-y-2 bg-white flex-grow">
-                <p className="text-[10px] font-black text-primary uppercase tracking-widest">{p.category}</p>
-                <h3 className="text-[13px] md:text-base font-bold text-gray-900 line-clamp-1 leading-tight">{p.name}</h3>
-                <p className="text-base md:text-lg font-black text-black">KES {p.price.toLocaleString()}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="py-20 text-center opacity-20 flex flex-col items-center gap-4">
+            <ShoppingBag className="w-12 h-12" />
+            <p className="font-black text-[12px] uppercase tracking-widest">No Meat Dispatches Available</p>
+          </div>
+        )}
       </section>
 
       {/* Finewood Signature Marquee */}
@@ -117,23 +138,30 @@ function MarketplaceContent() {
           </Badge>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          {DRINK_PRODUCTS.map((p) => (
-            <div key={p.id} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
-              <div className="relative aspect-square bg-gray-50 overflow-hidden">
-                <Image src={p.image} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                <button onClick={() => handleAdd(p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
-                  <Plus className="w-5 h-5 stroke-[3px]" />
-                </button>
+        {drinkProducts.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            {drinkProducts.map((p) => (
+              <div key={p.id} className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                <div className="relative aspect-square bg-gray-50 overflow-hidden">
+                  <Image src={p.image_url || `https://picsum.photos/seed/${p.id}/600/600`} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <button onClick={() => handleAdd(p)} className="absolute bottom-3 right-3 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 z-20 hover:bg-primary transition-all duration-300">
+                    <Plus className="w-5 h-5 stroke-[3px]" />
+                  </button>
+                </div>
+                <div className="p-4 space-y-2 bg-white flex-grow">
+                  <p className="text-[10px] font-black text-primary uppercase tracking-widest">DRINKS</p>
+                  <h3 className="text-[13px] md:text-base font-bold text-gray-900 line-clamp-1 leading-tight">{p.name}</h3>
+                  <p className="text-base md:text-lg font-black text-black">KES {p.price.toLocaleString()}</p>
+                </div>
               </div>
-              <div className="p-4 space-y-2 bg-white flex-grow">
-                <p className="text-[10px] font-black text-primary uppercase tracking-widest">DRINKS</p>
-                <h3 className="text-[13px] md:text-base font-bold text-gray-900 line-clamp-1 leading-tight">{p.name}</h3>
-                <p className="text-base md:text-lg font-black text-black">KES {p.price.toLocaleString()}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="py-20 text-center opacity-20 flex flex-col items-center gap-4">
+            <ShoppingBag className="w-12 h-12" />
+            <p className="font-black text-[12px] uppercase tracking-widest">No Chilled Items Available</p>
+          </div>
+        )}
       </section>
 
       <Footer />
