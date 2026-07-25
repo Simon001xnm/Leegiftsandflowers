@@ -164,7 +164,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-4 justify-items-center">
                 {categoryProducts.map((product) => (
                   <ProductCard 
                     key={product.id} 
@@ -212,7 +212,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
   const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver'].includes(product.id);
 
   return (
-    <Card className="w-full rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col p-1.5 md:p-0">
+    <Card className="w-full max-w-[170px] md:max-w-none rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col p-1.5 md:p-0">
       <div className="aspect-square relative bg-gray-50 overflow-hidden rounded-lg md:rounded-t-2xl md:rounded-b-none">
         {images.map((img: string, idx: number) => (
           <div 
