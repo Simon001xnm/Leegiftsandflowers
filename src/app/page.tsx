@@ -176,10 +176,16 @@ function DiscoveryContent() {
   );
 }
 
+/**
+ * PRODUCT CARD COMPONENT
+ * Implements high-density 2-column mobile logic with a 12px internal reduction.
+ * The p-3 padding (12px) reduces the image footprint on mobile.
+ */
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
   return (
     <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all w-full max-w-none h-full">
-      <div className="p-2 md:p-0">
+      {/* Container Padding: p-3 (12px) on mobile, p-0 on desktop */}
+      <div className="p-3 md:p-0">
         <div className="relative aspect-square bg-gray-50 overflow-hidden w-full shrink-0 rounded-lg md:rounded-none">
           <Image 
             src={product.image} 
@@ -204,8 +210,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void
         </div>
       </div>
 
-      <div className="p-2 md:p-4 space-y-1 md:space-y-1.5 flex-grow flex flex-col justify-between">
-        <h3 className="text-[10px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
+      <div className="p-3 md:p-4 space-y-1 md:space-y-1.5 flex-grow flex flex-col justify-between">
+        <h3 className="text-[11px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em]">
           {product.name}
         </h3>
         <p className="text-[12px] md:text-base font-black text-black">
