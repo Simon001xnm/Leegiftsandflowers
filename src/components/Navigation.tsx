@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from "react";
@@ -29,14 +30,15 @@ export function Navigation() {
 
   return (
     <nav className={cn(
-      "fixed top-0 z-50 w-full transition-all duration-500 h-20 md:h-24 flex items-center justify-between px-4 md:px-12 border-b",
+      "fixed top-0 z-50 w-full transition-all duration-500 h-20 md:h-24 flex items-center justify-between px-4 md:px-8 border-b",
       isScrolled 
         ? "bg-white/95 backdrop-blur-xl border-gray-100 shadow-lg" 
         : "bg-white border-transparent"
     )}>
-      <div className="flex items-center gap-2 md:gap-6 lg:gap-10 max-w-[70%]">
+      {/* Responsive Logo & Nav Node */}
+      <div className="flex items-center gap-4 lg:gap-10">
         <Link href="/" className="flex items-center shrink-0">
-          <div className="relative h-12 w-40 md:h-22 md:w-80">
+          <div className="relative h-10 w-40 md:h-16 md:w-64 lg:w-80">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West Butchery" 
@@ -51,12 +53,12 @@ export function Navigation() {
           <InstallAppButton />
         </div>
 
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-8 xl:gap-10">
           {['Shop', 'Offers', 'About', 'Contact'].map((item) => (
             <Link 
               key={item} 
               href={item === 'Shop' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-              className="text-[13px] font-black uppercase tracking-widest text-gray-500 hover:text-black transition-all hover:translate-y-[-1px]"
+              className="text-[12px] xl:text-[13px] font-black uppercase tracking-widest text-gray-500 hover:text-black transition-all hover:translate-y-[-1px]"
             >
               {item}
             </Link>
@@ -64,7 +66,7 @@ export function Navigation() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 md:gap-6">
+      <div className="flex items-center gap-3 md:gap-6">
         <Link href="/checkout" className="relative p-2 text-black hover:text-red-600 transition-colors group">
           <ShoppingCart className="w-5 h-5 md:w-6 h-6 group-hover:scale-110 transition-transform" />
           {itemCount > 0 && (
@@ -75,7 +77,7 @@ export function Navigation() {
         </Link>
 
         <Link href={user ? "/profile" : "/login"}>
-          <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white rounded-full px-4 md:px-8 h-9 md:h-10 font-bold text-[11px] md:text-[12px] shadow-xl shadow-red-600/20 transition-all active:scale-95">
+          <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white rounded-full px-4 md:px-8 h-9 md:h-10 font-bold text-[10px] md:text-[12px] shadow-xl shadow-red-600/20 transition-all active:scale-95">
             {user ? (
               <div className="flex items-center gap-2">
                 <User className="w-3 h-3 md:w-3.5 h-3.5" />

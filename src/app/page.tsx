@@ -115,14 +115,15 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white pb-24 pt-24 md:pt-32">
+      {/* Sticky Header Node */}
       <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-4 py-4 md:py-6">
-        <div className="max-w-[1400px] mx-auto space-y-6">
+        <div className="w-full max-w-[1600px] lg:max-w-[1400px] md:max-w-none mx-auto space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
              <div className="relative flex-grow max-w-2xl">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input 
                   placeholder="Search dispatches..." 
-                  className="w-full h-14 pl-12 pr-4 bg-gray-50 border-none rounded-2xl text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
+                  className="w-full h-12 md:h-14 pl-12 pr-4 bg-gray-50 border-none rounded-2xl text-[14px] md:text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -146,7 +147,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 mt-10 space-y-12">
+      {/* Main Marketplace Grid */}
+      <div className="w-full max-w-[1600px] lg:max-w-[1400px] md:max-w-none mx-auto px-4 md:px-6 mt-10 space-y-12">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
@@ -158,13 +160,14 @@ export default function HomePage() {
           return (
             <section key={category.id} id={category.id} className="space-y-6 scroll-mt-40">
               <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-                <h2 className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
+                <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
                   <category.icon className="w-4 h-4 text-primary" /> {category.id}
                 </h2>
-                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
+                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-4 justify-items-center">
+              {/* Responsive Grid Breakpoints: 1 col (<480px), 2 col (sm), 4 col (md), 6 col (lg+) */}
+              <div className="grid grid-cols-1 [@media(min-width:480px)]:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
                 {categoryProducts.map((product) => (
                   <ProductCard 
                     key={product.id} 
@@ -212,8 +215,9 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
   const isExtraHD = ['p-fillet', 'p-tbone', 'p-cubes', 'p-liver'].includes(product.id);
 
   return (
-    <Card className="w-full max-w-[170px] md:max-w-none rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col p-1.5 md:p-0">
-      <div className="aspect-square relative bg-gray-50 overflow-hidden rounded-lg md:rounded-t-2xl md:rounded-b-none">
+    <Card className="w-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 rounded-xl md:rounded-2xl">
+      {/* Aspect Ratio Node */}
+      <div className="aspect-square relative bg-gray-50 overflow-hidden">
         {images.map((img: string, idx: number) => (
           <div 
             key={idx}
@@ -226,38 +230,43 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
               src={img} 
               alt={product.name} 
               fill 
-              className="object-cover transition-transform duration-700 group-hover:scale-110" 
-              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-105" 
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 25vw, 16vw"
               quality={100}
               priority={isExtraHD}
               unoptimized={isExtraHD}
             />
           </div>
         ))}
+        
+        {/* Floating Interactive Button */}
         <button 
           onClick={(e) => {
             e.stopPropagation();
             onAdd();
           }}
-          className="absolute bottom-1 right-1 md:bottom-2 md:right-2 w-7 h-7 md:w-9 md:h-9 bg-white rounded-full flex items-center justify-center text-primary shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0 transition-all z-20 active:scale-90"
+          className="absolute bottom-2 right-2 md:bottom-3 md:right-3 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-xl opacity-0 md:opacity-100 group-hover:opacity-100 translate-y-2 md:translate-y-0 group-hover:translate-y-0 transition-all z-20 active:scale-90"
         >
-          <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
+          <Plus className="w-5 h-5 md:w-6 md:h-6 stroke-[3px]" />
         </button>
       </div>
-      <div className="p-2 md:p-3 space-y-1 flex-grow flex flex-col justify-between">
-        <div className="space-y-0.5">
-          <p className="text-[10px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
+
+      {/* Proportional Metadata Node */}
+      <div className="p-3 md:p-4 lg:p-5 flex-grow flex flex-col justify-between space-y-2">
+        <div className="space-y-1">
+          <p className="text-[10px] md:text-[11px] lg:text-[13px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
             {product.name}
           </p>
           <p className="text-[8px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">
             {product.category}
           </p>
         </div>
+        
         <div className="flex items-center gap-1">
-          <p className="text-[12px] md:text-[14px] font-black text-primary">
+          <p className="text-[13px] md:text-[14px] lg:text-[16px] font-black text-primary">
             KES {product.price.toLocaleString()}
           </p>
-          {product.hasTax && <span className="text-[7px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
+          {product.hasTax && <span className="text-[7px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
         </div>
       </div>
     </Card>
