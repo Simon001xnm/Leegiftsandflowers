@@ -1,13 +1,13 @@
 
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { cn } from "@/lib/utils";
-import { Star, Plus } from "lucide-react";
+import { Star, Plus, ChevronRight, ShoppingBag } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Footer } from "@/components/landing/Footer";
@@ -15,27 +15,47 @@ import { Footer } from "@/components/landing/Footer";
 const CATEGORIES = [
   { label: 'All' },
   { label: 'Raw Meat' },
-  { label: 'Choma' },
-  { label: 'Cooked' },
-  { label: 'Drinks' },
+  { label: 'Cooked Meat' },
   { label: 'Grocery' },
+  { label: 'Drinks' },
+  { label: 'Kitchen Appliances' },
+  { label: 'Phone Accessories' },
 ];
 
 const ALL_PRODUCTS = [
-  { id: 'p1', name: "Beef chemsha 1kg", price: 1400, rating: 4.9, category: "Cooked", image: "/beef chemsha SMB.jpg" },
-  { id: 'p2', name: "Beef choma 1kg", price: 1400, rating: 4.8, category: "Choma", image: "/BEEF CHOMA.jpg" },
-  { id: 'p3', name: "Beef dry fry 1kg", price: 1400, rating: 4.7, category: "Cooked", image: "/BEEF DRY FRY.jpg" },
-  { id: 'p4', name: "Beef takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
-  { id: 'p5', name: "Chips portion", price: 200, rating: 4.5, category: "Grocery", image: "/CHIPS.jpg" },
-  { id: 'p6', name: "Full chicken choma", price: 1000, rating: 4.8, category: "Choma", image: "/FULL CHICKEN CHOMA.jpg" },
-  { id: 'p7', name: "Full chicken", price: 700, rating: 4.6, category: "Cooked", image: "/FULL CHICKEN.jpg" },
-  { id: 'p8', name: "Full kichwa goat", price: 800, rating: 4.9, category: "Cooked", image: "/FULL KICHWA YA GOAT.jpg" },
+  // RAW MEAT
+  { id: 'p4', name: "Premium Beef Takeaway", price: 900, rating: 4.9, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
+  { id: 'p10', name: "Goat Meat 1kg", price: 1350, rating: 4.8, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
+  { id: 'p11', name: "Farm Chicken (Local)", price: 800, rating: 4.7, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600" },
+  
+  // COOKED MEAT
+  { id: 'p2', name: "Beef Choma 1kg", price: 1400, rating: 4.8, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
+  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, rating: 4.9, category: "Cooked Meat", image: "/beef chemsha SMB.jpg" },
+  { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, rating: 4.7, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
+  { id: 'p6', name: "Full Chicken Choma", price: 1000, rating: 4.8, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
+  
+  // GROCERY
+  { id: 'p5', name: "Crispy Chips Portion", price: 200, rating: 4.5, category: "Grocery", image: "/CHIPS.jpg" },
+  { id: 'g1', name: "Fresh Kachumbari", price: 50, rating: 4.9, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
+  { id: 'g2', name: "Ugali Extra", price: 100, rating: 4.6, category: "Grocery", image: "https://picsum.photos/seed/ugali/600/600" },
+
+  // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, rating: 4.9, category: "Drinks", image: "https://picsum.photos/seed/cola1/600/600" },
   { id: 'd2', name: "Fanta Orange 500ml", price: 80, rating: 4.8, category: "Drinks", image: "https://picsum.photos/seed/fanta1/600/600" },
-  { id: 'd3', name: "Minute Maid 400ml", price: 120, rating: 4.7, category: "Drinks", image: "https://picsum.photos/seed/juice1/600/600" },
   { id: 'd4', name: "Del Monte Mango 1L", price: 220, rating: 4.9, category: "Drinks", image: "https://picsum.photos/seed/mango1/600/600" },
   { id: 'd5', name: "Keringet Water 500ml", price: 50, rating: 4.9, category: "Drinks", image: "https://picsum.photos/seed/water1/600/600" },
-  { id: 'd6', name: "Tropical Dispatch", price: 200, rating: 4.8, category: "Drinks", image: "https://picsum.photos/seed/tropical1/600/600" },
+
+  // KITCHEN APPLIANCES
+  { id: 'ka1', name: "Digital Air Fryer", price: 12500, rating: 4.9, category: "Kitchen Appliances", image: "https://picsum.photos/seed/airfryer/600/600" },
+  { id: 'ka2', name: "High Power Blender", price: 6500, rating: 4.7, category: "Kitchen Appliances", image: "https://picsum.photos/seed/blender/600/600" },
+  { id: 'ka3', name: "Electric Kettle 1.7L", price: 3200, rating: 4.8, category: "Kitchen Appliances", image: "https://picsum.photos/seed/kettle/600/600" },
+  { id: 'ka4', name: "4-Slice Toaster", price: 4500, rating: 4.6, category: "Kitchen Appliances", image: "https://picsum.photos/seed/toaster/600/600" },
+
+  // PHONE ACCESSORIES
+  { id: 'pa1', name: "20,000mAh Power Bank", price: 4500, rating: 4.9, category: "Phone Accessories", image: "https://picsum.photos/seed/powerbank/600/600" },
+  { id: 'pa2', name: "USB-C Fast Cable", price: 850, rating: 4.8, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600" },
+  { id: 'pa3', name: "Wireless Earbuds Pro", price: 3500, rating: 4.7, category: "Phone Accessories", image: "https://picsum.photos/seed/earbuds/600/600" },
+  { id: 'pa4', name: "Rugged Phone Case", price: 1200, rating: 4.5, category: "Phone Accessories", image: "https://picsum.photos/seed/case/600/600" },
 ];
 
 function DiscoveryContent() {
@@ -49,10 +69,6 @@ function DiscoveryContent() {
     if (cat) setCategory(cat);
   }, [searchParams]);
 
-  const filteredProducts = ALL_PRODUCTS.filter(p => 
-    category === 'All' || p.category === category
-  );
-
   const handleAdd = (e: React.MouseEvent, p: any) => {
     e.preventDefault();
     e.stopPropagation();
@@ -65,8 +81,21 @@ function DiscoveryContent() {
       imageUrl: p.image,
       category: p.category
     });
-    toast({ title: "Added", description: p.name });
+    toast({ title: "READY", description: p.name });
   };
+
+  const sections = useMemo(() => {
+    if (category !== 'All') return [];
+    return CATEGORIES.filter(c => c.label !== 'All').map(c => ({
+      title: c.label,
+      products: ALL_PRODUCTS.filter(p => p.category === c.label)
+    }));
+  }, [category]);
+
+  const filteredProducts = useMemo(() => {
+    if (category === 'All') return [];
+    return ALL_PRODUCTS.filter(p => p.category === category);
+  }, [category]);
 
   return (
     <div className="flex flex-col min-h-screen pt-24 bg-white">
@@ -106,54 +135,81 @@ function DiscoveryContent() {
           </div>
         </section>
 
-        {/* HIGH DENSITY GRID */}
-        <section className="space-y-8">
-          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-            <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">Marketplace discovery</h2>
-            <span className="text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredProducts.map((p) => (
-              <Link key={p.id} href={`/products/${p.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div className="relative aspect-square bg-gray-50 overflow-hidden">
-                  <Image 
-                    src={p.image} 
-                    alt={p.name} 
-                    fill 
-                    className="object-cover transition-transform duration-700 group-hover:scale-110" 
-                  />
-                  
-                  {/* Rating Badge */}
-                  <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded flex items-center gap-1 shadow-lg">
-                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                    <span className="text-[10px] font-black text-white">{p.rating}</span>
-                  </div>
-
-                  {/* Quick Add */}
-                  <button 
-                    onClick={(e) => handleAdd(e, p)}
-                    className="absolute bottom-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
-                  >
-                    <Plus className="w-4 h-4 stroke-[3px]" />
+        {/* HIGH DENSITY CONTENT */}
+        <div className="space-y-20">
+          {category === 'All' ? (
+            sections.map((section) => (
+              <section key={section.title} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                  <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
+                  <button onClick={() => setCategory(section.title)} className="text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-2 group">
+                    Explore All <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
-
-                <div className="p-4 space-y-2">
-                  <h3 className="text-[13px] font-bold text-gray-800 line-clamp-1 leading-tight uppercase">
-                    {p.name}
-                  </h3>
-                  <p className="text-base font-black text-black">
-                    KES {p.price.toLocaleString()}
-                  </p>
+                
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {section.products.slice(0, 4).map((p) => (
+                    <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
+                  ))}
                 </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+              </section>
+            ))
+          ) : (
+            <section className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter">{category}</h2>
+                <span className="text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {filteredProducts.map((p) => (
+                  <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
       </div>
       <Footer />
     </div>
+  );
+}
+
+function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
+  return (
+    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="relative aspect-square bg-gray-50 overflow-hidden">
+        <Image 
+          src={product.image} 
+          alt={product.name} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+        />
+        
+        {/* Rating Badge */}
+        <div className="absolute bottom-2 left-2 z-20 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded flex items-center gap-1 shadow-lg">
+          <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+          <span className="text-[10px] font-black text-white">{product.rating}</span>
+        </div>
+
+        {/* Quick Add */}
+        <button 
+          onClick={onAdd}
+          className="absolute bottom-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
+        >
+          <Plus className="w-4 h-4 stroke-[3px]" />
+        </button>
+      </div>
+
+      <div className="p-4 space-y-2">
+        <h3 className="text-[13px] font-bold text-gray-800 line-clamp-1 leading-tight uppercase">
+          {product.name}
+        </h3>
+        <p className="text-base font-black text-black">
+          KES {product.price.toLocaleString()}
+        </p>
+      </div>
+    </Link>
   );
 }
 
