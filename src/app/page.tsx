@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, Suspense, useMemo } from "react";
@@ -10,6 +11,7 @@ import { Star, Plus, ChevronRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Footer } from "@/components/landing/Footer";
+import { Card } from "@/components/ui/card";
 
 const CATEGORIES = [
   { label: 'All' },
@@ -122,7 +124,7 @@ function DiscoveryContent() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full space-y-8 md:space-y-10 py-6 md:py-10 flex-grow">
+      <div className="max-w-[1400px] mx-auto w-full space-y-8 md:space-y-16 py-6 md:py-12 flex-grow">
         {/* Node Explorer */}
         <section className="space-y-4 px-4 md:px-6">
           <h2 className="text-[10px] md:text-sm font-black tracking-[0.2em] uppercase text-muted-foreground">Operating nodes near you</h2>
@@ -139,19 +141,19 @@ function DiscoveryContent() {
         </section>
 
         {/* Product Sections */}
-        <div className="space-y-0">
+        <div className="space-y-10 md:space-y-20">
           {category === 'All' ? (
             sections.map((section) => (
-              <section key={section.title} className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="flex items-center justify-between border-y border-gray-100 bg-gray-50/50 px-4 md:px-6 py-3 md:py-4">
-                  <h2 className="text-sm md:text-3xl font-black uppercase tracking-tighter">{section.title}</h2>
-                  <button onClick={() => setCategory(section.title)} className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-red-600 flex items-center gap-1 group">
-                    Explore <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              <section key={section.title} className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-6 md:space-y-10">
+                <div className="flex items-center justify-between px-4 md:px-12">
+                  <h2 className="text-xl md:text-5xl font-black uppercase tracking-tighter">{section.title}</h2>
+                  <button onClick={() => setCategory(section.title)} className="text-[9px] md:text-[11px] font-black uppercase tracking-widest text-red-600 flex items-center gap-2 group">
+                    Explore All <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
                 
-                <div className="px-0 sm:px-4 md:px-0">
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100 overflow-hidden">
+                <div className="px-4 md:px-12">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
                     {section.products.map((p) => (
                       <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                     ))}
@@ -160,14 +162,14 @@ function DiscoveryContent() {
               </section>
             ))
           ) : (
-            <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="flex items-center justify-between border-y border-gray-100 bg-gray-50/50 px-4 md:px-6 py-4">
-                <h2 className="text-lg md:text-3xl font-black uppercase tracking-tighter">{category}</h2>
-                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
+            <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-10">
+              <div className="flex items-center justify-between px-4 md:px-12">
+                <h2 className="text-2xl md:text-5xl font-black uppercase tracking-tighter">{category}</h2>
+                <span className="text-[10px] md:text-[12px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items found</span>
               </div>
               
-              <div className="px-0 sm:px-4 md:px-0">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100 overflow-hidden">
+              <div className="px-4 md:px-12">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
                   {filteredProducts.map((p) => (
                     <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
                   ))}
@@ -184,44 +186,46 @@ function DiscoveryContent() {
 
 /**
  * PRODUCT CARD COMPONENT
- * Responsive zero-gap implementation.
- * Ensures strict 2-column fit on mobile without overflow.
+ * Synchronized with the 'Most Ordered' section from the orders page.
+ * Uses exact card sizing, features, and interactive elements.
  */
 function ProductCard({ product, onAdd }: { product: any, onAdd: (e: any) => void }) {
   return (
-    <Link href={`/products/${product.id}`} className="group relative flex flex-col bg-white border-r border-b border-gray-100 transition-all w-full min-w-0 h-full hover:z-10 hover:shadow-2xl overflow-hidden">
-      <div className="relative aspect-square bg-gray-50 overflow-hidden w-full shrink-0">
-        <Image 
-          src={product.image} 
-          alt={product.name} 
-          fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-110" 
-          priority={false}
-        />
-        
-        <div className="absolute bottom-2 left-2 z-20 bg-black/70 backdrop-blur-md px-1 py-0.5 rounded flex items-center gap-0.5 shadow-lg">
-          <Star className="w-2 md:w-2.5 h-2 md:h-2.5 fill-amber-400 text-amber-400" />
-          <span className="text-[8px] md:text-[9px] font-black text-white">{product.rating}</span>
+    <Card className="group relative flex flex-col bg-white border rounded-2xl md:rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden h-full">
+      <Link href={`/products/${product.id}`} className="flex-grow">
+        <div className="relative aspect-square bg-gray-50 overflow-hidden w-full">
+          <Image 
+            src={product.image} 
+            alt={product.name} 
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-110" 
+            priority={false}
+          />
+          
+          <div className="absolute top-3 left-3 z-20 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded-full flex items-center gap-1 shadow-lg">
+            <Star className="w-2.5 md:w-3 h-2.5 md:h-3 fill-amber-400 text-amber-400" />
+            <span className="text-[10px] md:text-[11px] font-black text-white">{product.rating}</span>
+          </div>
+
+          <button 
+            onClick={onAdd}
+            className="absolute bottom-4 right-4 w-10 h-10 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center text-red-600 shadow-2xl opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 z-30 active:scale-90"
+          >
+            <Plus className="w-5 h-5 md:w-7 md:h-7 stroke-[3px]" />
+          </button>
         </div>
 
-        <button 
-          onClick={onAdd}
-          className="absolute bottom-2 right-2 w-7 h-7 md:w-10 md:h-10 bg-red-600 text-white rounded-full flex items-center justify-center shadow-xl active:scale-90 z-20 hover:bg-red-700 transition-colors"
-        >
-          <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
-        </button>
-      </div>
-
-      <div className="p-3 md:p-5 space-y-1 md:space-y-1.5 flex-grow flex flex-col justify-between bg-white overflow-hidden">
-        <h3 className="text-[10px] md:text-[13px] font-bold text-gray-800 line-clamp-2 leading-tight uppercase min-h-[2.5em] break-words">
-          {product.name}
-        </h3>
-        <p className="text-[12px] md:text-lg font-black text-black">
-          KES {product.price.toLocaleString()}
-        </p>
-      </div>
-    </Link>
+        <div className="p-4 md:p-8 space-y-2 flex flex-col justify-between">
+          <h3 className="text-[11px] md:text-[14px] font-black text-black uppercase tracking-tighter line-clamp-2 leading-none">
+            {product.name}
+          </h3>
+          <p className="text-[15px] md:text-[22px] font-black text-red-600">
+            KES {product.price.toLocaleString()}
+          </p>
+        </div>
+      </Link>
+    </Card>
   );
 }
 
