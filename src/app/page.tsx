@@ -148,10 +148,13 @@ function DiscoveryContent() {
                   </button>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
-                  {section.products.map((p) => (
-                    <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
-                  ))}
+                {/* 45px Total reduction (22.5px each side) on mobile */}
+                <div className="px-[22.5px] md:px-0">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
+                    {section.products.map((p) => (
+                      <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
+                    ))}
+                  </div>
                 </div>
               </section>
             ))
@@ -162,10 +165,13 @@ function DiscoveryContent() {
                 <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-600">{filteredProducts.length} items available</span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
-                {filteredProducts.map((p) => (
-                  <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
-                ))}
+              {/* 45px Total reduction (22.5px each side) on mobile */}
+              <div className="px-[22.5px] md:px-0">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full border-l border-t border-gray-100">
+                  {filteredProducts.map((p) => (
+                    <ProductCard key={p.id} product={p} onAdd={(e) => handleAdd(e, p)} />
+                  ))}
+                </div>
               </div>
             </section>
           )}
