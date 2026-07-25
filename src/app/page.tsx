@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Plus, Search, ShoppingBag, Beef, Utensils, Zap, Coffee, Smartphone, ChefHat } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,15 @@ const CATEGORIES = [
 
 const ALL_PRODUCTS = [
   // RAW MEAT
+  { 
+    id: 'p-fillet', 
+    name: "Beef Fillet", 
+    price: 1100, 
+    category: "Raw Meat", 
+    image: "/fillet raw.jpg", 
+    images: ["/fillet raw.jpg", "/FilletBeefSteak1.jpg", "/images (23).jpg"],
+    hasTax: true 
+  },
   { id: 'p4', name: "Premium Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   { id: 'p11', name: "Farm Chicken (Local)", price: 800, category: "Raw Meat", image: "https://picsum.photos/seed/chickenraw/600/600" },
@@ -29,21 +39,16 @@ const ALL_PRODUCTS = [
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg" },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
-  { id: 'p24', name: "Mutura Node (Standard)", price: 100, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
   // GROCERY
   { id: 'p5', name: "Crispy Chips Portion", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
   { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
-  { id: 'g3', name: "Local Spinach Bunch", price: 100, category: "Grocery", image: "https://picsum.photos/seed/spinach/600/600" },
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
   { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
-  { id: 'd8', name: "Keringet Water 500ml", price: 50, category: "Drinks", image: "https://picsum.photos/seed/water1/600/600" },
   // KITCHEN APPLIANCES
   { id: 'ka1', name: "Digital Air Fryer", price: 12500, category: "Kitchen Appliances", image: "https://picsum.photos/seed/airfryer/600/600" },
-  { id: 'ka2', name: "Smoothie Blender", price: 8500, category: "Kitchen Appliances", image: "https://picsum.photos/seed/blender/600/600" },
   // PHONE ACCESSORIES
   { id: 'pa1', name: "20,000mAh Power Bank", price: 4500, category: "Phone Accessories", image: "https://picsum.photos/seed/powerbank/600/600" },
-  { id: 'pa2', name: "Fast USB-C Charger", price: 2500, category: "Phone Accessories", image: "https://picsum.photos/seed/charger/600/600" },
 ];
 
 export default function HomePage() {
@@ -59,8 +64,10 @@ export default function HomePage() {
       name: p.name, 
       price: p.price, 
       imageUrl: p.image, 
+      images: p.images,
       category: p.category,
-      description: '' 
+      description: '',
+      hasTax: p.hasTax
     });
     toast({ title: "READY", description: `${p.name} added to basket.` });
   };
@@ -73,7 +80,7 @@ export default function HomePage() {
     }
     const el = document.getElementById(id);
     if (el) {
-      const offset = 140; // Space for sticky navs
+      const offset = 140; 
       const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
@@ -81,14 +88,13 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white pb-24 pt-24 md:pt-32">
-      {/* Search & Global Category Bar */}
       <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-4 py-4 md:py-6">
         <div className="max-w-[1400px] mx-auto space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
              <div className="relative flex-grow max-w-2xl">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input 
-                  placeholder="Search meat, drinks, or accessories..." 
+                  placeholder="Search dispatches..." 
                   className="w-full h-14 pl-12 pr-4 bg-gray-50 border-none rounded-2xl text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -131,7 +137,6 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* ULTRA HIGH DENSITY GRID: 4 COLS MOBILE / 8 COLS DESKTOP */}
               <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 md:gap-4">
                 {categoryProducts.map((product) => (
                   <ProductCard 
@@ -144,16 +149,6 @@ export default function HomePage() {
             </section>
           );
         })}
-
-        {ALL_PRODUCTS.filter(p => p.name.toLowerCase().includes(search.toLowerCase())).length === 0 && (
-          <div className="py-40 text-center space-y-4">
-            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto">
-              <Search className="w-6 h-6 text-gray-200" />
-            </div>
-            <p className="text-muted-foreground font-black uppercase text-[9px] tracking-widest">No nodes found</p>
-            <Button variant="link" onClick={() => setSearch("")} className="text-primary font-black uppercase text-[9px]">Reset</Button>
-          </div>
-        )}
       </div>
     </main>
   );
@@ -176,16 +171,37 @@ function CategoryTab({ label, isActive, onClick }: { label: string, isActive: bo
 }
 
 function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
+  const images = product.images && product.images.length > 0 ? product.images : [product.image];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
-    <Card className="w-full rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col">
-      <div className="aspect-square relative bg-gray-50 overflow-hidden">
-        <Image 
-          src={product.image} 
-          alt={product.name} 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-110" 
-          sizes="(max-width: 768px) 25vw, 12vw"
-        />
+    <Card className="w-full rounded-xl md:rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer overflow-hidden flex flex-col p-1.5 md:p-0">
+      <div className="aspect-square relative bg-gray-50 overflow-hidden rounded-lg md:rounded-t-2xl md:rounded-b-none">
+        {images.map((img: string, idx: number) => (
+          <div 
+            key={idx}
+            className={cn(
+              "absolute inset-0 transition-opacity duration-1000",
+              idx === currentImageIndex ? "opacity-100" : "opacity-0"
+            )}
+          >
+            <Image 
+              src={img} 
+              alt={product.name} 
+              fill 
+              className="object-cover transition-transform duration-700 group-hover:scale-110" 
+              sizes="(max-width: 768px) 25vw, 12vw"
+            />
+          </div>
+        ))}
         <button 
           onClick={(e) => {
             e.stopPropagation();
@@ -205,9 +221,12 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: () => void }) {
             {product.category}
           </p>
         </div>
-        <p className="text-[11px] md:text-[13px] font-black text-primary">
-          KES {product.price.toLocaleString()}
-        </p>
+        <div className="flex items-center gap-1">
+          <p className="text-[11px] md:text-[13px] font-black text-primary">
+            KES {product.price.toLocaleString()}
+          </p>
+          {product.hasTax && <span className="text-[6px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
+        </div>
       </div>
     </Card>
   );

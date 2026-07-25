@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from "react";
@@ -27,14 +28,14 @@ import Image from "next/image";
 
 export default function GlobalCheckoutPage() {
   const router = useRouter();
-  const { cart, addToCart, removeFromCart, clearItem, subtotal, clearCart } = useCart();
+  const { cart, addToCart, removeFromCart, clearItem, subtotal, taxTotal, clearCart } = useCart();
   const { user, loading: authLoading } = useUser();
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("mpesa");
   const supabase = createClient();
 
   const deliveryFee = cart.length > 0 ? 150 : 0;
-  const total = subtotal + deliveryFee;
+  const total = subtotal + taxTotal + deliveryFee;
 
   const handleCheckout = async () => {
     if (!user) {
@@ -54,6 +55,8 @@ export default function GlobalCheckoutPage() {
         quantity: i.quantity, 
         price: i.item.price 
       })),
+      subtotal: subtotal,
+      tax: taxTotal,
       total: total,
       status: "pending",
       delivery_address: "Silver Heights, Nairobi, Kenya",
@@ -66,7 +69,6 @@ export default function GlobalCheckoutPage() {
 
     if (error) {
       setLoading(false);
-      toast({ variant: "destructive", title: "Checkout failed", description: error.message });
       return;
     }
 
@@ -120,7 +122,7 @@ export default function GlobalCheckoutPage() {
                       <Image src={cartItem.item.imageUrl} alt={cartItem.item.name} fill className="object-cover" />
                     </div>
                     <div className="flex-grow space-y-1">
-                      <h4 className="font-medium text-[16px] tracking-tight line-clamp-1">{cartItem.item.name}</h4>
+                      <h4 className="font-medium text-[16px] tracking-tight line-clamp-1 uppercase">{cartItem.item.name}</h4>
                       <p className="text-[13px] text-muted-foreground font-medium">KES {cartItem.item.price.toLocaleString()}</p>
                       <div className="flex items-center justify-between pt-2">
                         <div className="flex items-center gap-4 bg-gray-100 px-3 py-1 border rounded-lg">
@@ -128,7 +130,10 @@ export default function GlobalCheckoutPage() {
                           <span className="text-[14px] font-bold min-w-[20px] text-center">{cartItem.quantity}</span>
                           <button onClick={() => addToCart(cartItem.item)} className="text-black hover:scale-110"><Plus className="w-3 h-3" /></button>
                         </div>
-                        <p className="font-bold text-[14px]">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</p>
+                        <div className="text-right">
+                          <p className="font-bold text-[14px]">KES {(cartItem.item.price * cartItem.quantity).toLocaleString()}</p>
+                          {cartItem.item.hasTax && <p className="text-[8px] font-black text-gray-400">EXCL. TAX</p>}
+                        </div>
                       </div>
                     </div>
                     <button className="h-8 w-8 text-gray-300 hover:text-red-500 self-start" onClick={() => clearItem(cartItem.item.id)}>
@@ -138,63 +143,11 @@ export default function GlobalCheckoutPage() {
                 ))}
               </div>
             </section>
-
-            <section className="space-y-6">
-              <h2 className="text-2xl font-medium font-headline text-black tracking-tight flex items-center gap-3">
-                <MapPin className="w-6 h-6 text-primary" /> Destination
-              </h2>
-              <Card className="rounded-2xl border shadow-none bg-gray-50">
-                <CardContent className="p-6 flex items-center justify-between">
-                  <div className="space-y-1">
-                    <p className="font-bold text-[14px]">Home address</p>
-                    <p className="text-[14px] font-medium text-muted-foreground">Silver Heights, Nairobi, Kenya</p>
-                  </div>
-                  <Button variant="outline" className="rounded-xl border-2 font-bold text-[12px]">Change</Button>
-                </CardContent>
-              </Card>
-            </section>
           </div>
 
           <div className="lg:col-span-5">
             <div className="sticky top-24 space-y-8">
-              <Card className="rounded-3xl border shadow-2xl overflow-hidden">
-                <CardHeader className="bg-black text-white py-6">
-                  <CardTitle className="text-[14px] font-bold">Payment method</CardTitle>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid gap-4">
-                    <Label
-                      htmlFor="mpesa"
-                      className={`flex items-center justify-between p-4 border rounded-2xl transition-all cursor-pointer ${paymentMethod === 'mpesa' ? 'border-primary bg-primary/5' : 'hover:bg-gray-50'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <Smartphone className="w-5 h-5 text-primary" />
-                        <div className="space-y-0.5">
-                          <p className="font-bold text-[14px]">M-Pesa</p>
-                          <p className="text-[10px] font-medium text-muted-foreground">Mobile checkout</p>
-                        </div>
-                      </div>
-                      <RadioGroupItem value="mpesa" id="mpesa" />
-                    </Label>
-
-                    <Label
-                      htmlFor="card"
-                      className={`flex items-center justify-between p-4 border rounded-2xl transition-all cursor-pointer ${paymentMethod === 'card' ? 'border-primary bg-primary/5' : 'hover:bg-gray-50'}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <CreditCard className="w-5 h-5 text-primary" />
-                        <div className="space-y-0.5">
-                          <p className="font-bold text-[14px]">Debit/Credit card</p>
-                          <p className="text-[10px] font-medium text-muted-foreground">Visa / Mastercard</p>
-                        </div>
-                      </div>
-                      <RadioGroupItem value="card" id="card" />
-                    </Label>
-                  </RadioGroup>
-                </CardContent>
-              </Card>
-
-              <Card className="rounded-3xl border border-gray-100 shadow-xl bg-white">
+              <Card className="rounded-3xl border border-gray-100 shadow-xl bg-white overflow-hidden">
                 <CardHeader className="bg-gray-50 border-b">
                   <CardTitle className="text-[14px] font-bold">Order total</CardTitle>
                 </CardHeader>
@@ -204,13 +157,19 @@ export default function GlobalCheckoutPage() {
                       <span>Subtotal</span>
                       <span>KES {subtotal.toLocaleString()}</span>
                     </div>
+                    {taxTotal > 0 && (
+                      <div className="flex justify-between text-[14px] font-medium text-primary">
+                        <span>VAT (16%)</span>
+                        <span>KES {taxTotal.toLocaleString()}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between text-[14px] font-medium text-muted-foreground">
                       <span>Delivery</span>
                       <span>KES {deliveryFee.toLocaleString()}</span>
                     </div>
                   </div>
                   <div className="pt-6 border-t border-dashed space-y-2">
-                    <p className="text-[11px] font-bold text-muted-foreground">Grand total</p>
+                    <p className="text-[11px] font-bold text-muted-foreground uppercase">Grand total</p>
                     <p className="text-4xl font-bold text-primary">KES {total.toLocaleString()}</p>
                   </div>
                   <Button 

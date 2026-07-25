@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
@@ -15,23 +16,19 @@ interface CartContextType {
   clearItem: (itemId: string) => void;
   clearCart: () => void;
   subtotal: number;
+  taxTotal: number;
   itemCount: number;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
 
-/**
- * Stable CartProvider to prevent HMR module factory errors.
- * Uses a bulletproof, simplified export pattern for Turbopack.
- */
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Initialize from storage
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('steak_west_v3');
+      const saved = localStorage.getItem('steak_west_v4');
       if (saved) {
         try {
           setCart(JSON.parse(saved));
@@ -43,10 +40,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, []);
 
-  // Sync to storage
   useEffect(() => {
     if (isLoaded && typeof window !== 'undefined') {
-      localStorage.setItem('steak_west_v3', JSON.stringify(cart));
+      localStorage.setItem('steak_west_v4', JSON.stringify(cart));
     }
   }, [cart, isLoaded]);
 
@@ -81,6 +77,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const clearCart = () => setCart([]);
 
   const subtotal = useMemo(() => cart.reduce((acc, c) => acc + (c.item.price * c.quantity), 0), [cart]);
+  const taxTotal = useMemo(() => cart.reduce((acc, c) => {
+    if (c.item.hasTax) {
+      return acc + (c.item.price * 0.16 * c.quantity);
+    }
+    return acc;
+  }, 0), [cart]);
+
   const itemCount = useMemo(() => cart.reduce((acc, c) => acc + c.quantity, 0), [cart]);
 
   const value = useMemo(() => ({
@@ -90,8 +93,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     clearItem,
     clearCart,
     subtotal,
+    taxTotal,
     itemCount
-  }), [cart, subtotal, itemCount]);
+  }), [cart, subtotal, taxTotal, itemCount]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

@@ -22,8 +22,10 @@ export interface MenuItem {
   price: number;
   description: string;
   imageUrl: string;
+  images?: string[];
   category: string;
   isPopular?: boolean;
+  hasTax?: boolean;
 }
 
 export interface Order {
