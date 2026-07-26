@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from "react";
@@ -168,7 +167,7 @@ export default function HomePage() {
               <Tag className="w-3 h-3" /> Special Offer
             </div>
             <h2 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-2">
-              WEEKEND BBQ<br />EXTRAVAGANZA
+              STEAK N BITE
             </h2>
             <p className="text-[10px] md:text-sm font-bold text-white/70 uppercase tracking-widest flex items-center gap-2">
               Save up to 20% on select raw cuts <ArrowRight className="w-4 h-4 text-primary" />
