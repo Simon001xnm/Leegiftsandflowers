@@ -21,7 +21,7 @@ const STATIC_PRODUCTS = [
   { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/images (37).jpg", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
   { id: 'p-kidney', name: "Kidney", price: 1000, category: "Raw Meat", image: "/images (38).jpg", description: "Premium Extra HD Kidney. Freshly sourced and prepared for dispatch.", hasTax: true },
   { id: 'p-osumbuko', name: "Osumbuko", price: 900, category: "Raw Meat", image: "/628cb2abc83cb (1).jpeg", description: "Premium Osso Buco cuts, perfect for slow cooking and rich, marrow-infused stews.", hasTax: true },
-  { id: 'p-beef-on-bone', name: "Beef on Bone", price: 900, category: "Raw Meat", image: "/628cb2abc83cb (1).jpeg", description: "Select beef cuts on the bone, ideal for traditional stews and soups.", hasTax: true },
+  { id: 'p-beef-on-bone', name: "Beef on Bone", price: 900, category: "Raw Meat", image: "/boneinroundsteaks (1).webp", description: "Select beef cuts on the bone, ideal for traditional stews and soups.", hasTax: true },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600", description: "Fresh farm-sourced goat meat, tender and perfect for roasting or stews." },
   
   // FINE WOOD KITCHEN
