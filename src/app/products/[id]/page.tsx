@@ -24,7 +24,7 @@ const STATIC_PRODUCTS = [
   { id: 'p-beef-on-bone', name: "Beef on Bone", price: 900, category: "Raw Meat", image: "/boneinroundsteaks (1).webp", description: "Select beef cuts on the bone, ideal for traditional stews and soups.", hasTax: true },
   
   // COOKED MEAT
-  { id: 'c-goat-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", description: "Expertly spiced beef, wet-fried to tender perfection. A Nairobi West signature dish." },
+  { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", description: "Expertly spiced beef, wet-fried to tender perfection. A Nairobi West signature dish." },
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef." },
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg", description: "Healthy and tender slow-boiled beef." },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts." },
