@@ -30,9 +30,9 @@ const STATIC_PRODUCTS = [
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", description: "Healthy and tender slow-boiled beef." },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts." },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken." },
+  { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips." },
   
   // GROCERY
-  { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips." },
   { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600", description: "The legendary Nairobi West accompaniment. Fresh tomatoes, onions, and coriander." },
   
   // DRINKS

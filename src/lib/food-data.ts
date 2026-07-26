@@ -71,7 +71,7 @@ export const MOCK_MENU: MenuItem[] = [
   { id: 'p1', restaurantId: 'r1', name: 'BEEF CHEMSHA 1KG', price: 1400, description: 'Slow-boiled tender beef.', imageUrl: '/images (44).jpg', category: 'Cooked' },
   { id: 'p2', restaurantId: 'r1', name: 'BEEF CHOMA 1KG', price: 1400, description: 'Grilled beef cuts.', imageUrl: '/BEEF CHOMA.jpg', category: 'Nyama Choma', isPopular: true },
   { id: 'p3', restaurantId: 'r1', name: 'BEEF DRY FRY 1KG', price: 1400, description: 'Spiced dry-fried beef.', imageUrl: '/BEEF DRY FRY.jpg', category: 'Cooked' },
-  { id: 'p5', restaurantId: 'r1', name: 'CHIPS', price: 200, description: 'Crispy potato fries.', imageUrl: '/CHIPS.jpg', category: 'Sides' },
+  { id: 'p5', restaurantId: 'r1', name: 'CHIPS', price: 200, description: 'Crispy potato fries.', imageUrl: '/CHIPS.jpg', category: 'Cooked' },
   { id: 'p8', restaurantId: 'r1', name: 'FULL CHICKEN CHOMA', price: 1000, description: 'Grilled whole chicken.', imageUrl: '/FULL CHICKEN CHOMA.jpg', category: 'Nyama Choma' },
   { id: 'p7', restaurantId: 'r1', name: 'FULL CHICKEN', price: 700, description: 'Whole farm-fresh chicken.', imageUrl: '/FULL CHICKEN.jpg', category: 'Cooked' },
   { id: 'p10', restaurantId: 'r1', name: 'FULL MGUU COW BOILED', price: 400, description: 'Traditional boiled cow leg.', imageUrl: '/MGUU COW.jpg', category: 'Delicacies' },

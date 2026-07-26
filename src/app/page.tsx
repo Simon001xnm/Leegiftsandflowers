@@ -113,9 +113,9 @@ const ALL_PRODUCTS = [
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg" },
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
   { id: 'p6', name: "Full chicken choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
+  { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg" },
   
   // GROCERY
-  { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
   { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
   
   // DRINKS
