@@ -79,7 +79,7 @@ const ALL_PRODUCTS = [
     name: "Pork Steak", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/PORK STEAK.webp"
+    image: "/images (37).jpg"
   },
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
