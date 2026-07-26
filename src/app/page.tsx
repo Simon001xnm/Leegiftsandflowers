@@ -105,8 +105,6 @@ const ALL_PRODUCTS = [
     image: "/boneinroundsteaks (1).webp", 
     hasTax: true 
   },
-  { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
-  { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   
   // COOKED MEAT
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },

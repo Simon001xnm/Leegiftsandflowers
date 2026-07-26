@@ -15,7 +15,6 @@ const ALL_PRODUCTS = [
   { id: 'p1', name: "Beef chemsha 1kg", price: 1400, category: "Meat", image: "/beef chemsha SMB.jpg" },
   { id: 'p2', name: "Beef choma 1kg", price: 1400, category: "Meat", image: "/BEEF CHOMA.jpg" },
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, category: "Meat", image: "/BEEF DRY FRY.jpg" },
-  { id: 'p4', name: "Beef takeaway", price: 900, category: "Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p6', name: "Full chicken choma", price: 1000, category: "Meat", image: "/FULL CHICKEN CHOMA.jpg" },
   { id: 'p7', name: "Full chicken", price: 700, category: "Meat", image: "/FULL CHICKEN.jpg" },
   { id: 'p8', name: "Full kichwa goat", price: 800, category: "Meat", image: "/FULL KICHWA YA GOAT.jpg" },
