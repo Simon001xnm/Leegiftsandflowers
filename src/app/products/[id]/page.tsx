@@ -20,6 +20,7 @@ const STATIC_PRODUCTS = [
   { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/images (36).jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
   { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/images (37).jpg", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
   { id: 'p-kidney', name: "Kidney", price: 1000, category: "Raw Meat", image: "/images (38).jpg", description: "Premium Extra HD Kidney. Freshly sourced and prepared for dispatch.", hasTax: true },
+  { id: 'p-osumbuko', name: "Osumbuko", price: 900, category: "Raw Meat", image: "/628cb2abc83cb (1).jpeg", description: "Premium Osso Buco cuts, perfect for slow cooking and rich, marrow-infused stews.", hasTax: true },
   
   // FINE WOOD KITCHEN
   { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg", description: "Handcrafted from solid acacia wood. Durable, antimicrobial, and beautiful." },

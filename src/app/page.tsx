@@ -89,6 +89,14 @@ const ALL_PRODUCTS = [
     image: "/images (38).jpg",
     hasTax: true
   },
+  { 
+    id: 'p-osumbuko', 
+    name: "Osumbuko", 
+    price: 900, 
+    category: "Raw Meat", 
+    image: "/628cb2abc83cb (1).jpeg",
+    hasTax: true
+  },
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   
