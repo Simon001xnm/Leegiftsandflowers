@@ -14,8 +14,8 @@ const CATEGORIES = [
   { id: 'Cooked Meat', icon: Utensils, label: "Cooked Meat" },
   { id: 'Grocery', icon: ShoppingBag, label: "Grocery" },
   { id: 'Drinks', icon: Coffee, label: "Drinks" },
-  { id: 'Phone Accessories', icon: Smartphone, label: "Accessories" },
   { id: 'Fine Wood Kitchen', icon: ChefHat, label: "Fine Wood" },
+  { id: 'Phone Accessories', icon: Smartphone, label: "Phones" },
 ];
 
 const ALL_PRODUCTS = [
@@ -83,7 +83,7 @@ const ALL_PRODUCTS = [
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
   { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
 
-  // FINE WOOD KITCHEN (Last Node)
+  // FINE WOOD KITCHEN
   { 
     id: 'fw-chopping', 
     name: "Fine Wood Chopping Board", 
@@ -111,6 +111,36 @@ const ALL_PRODUCTS = [
     price: 1200, 
     category: "Fine Wood Kitchen", 
     image: "/spatula set.jpg" 
+  },
+
+  // PHONES & ACCESSORIES (New Terminal Section)
+  { 
+    id: 'ph-iphone', 
+    name: "iPhone 15 Pro", 
+    price: 155000, 
+    category: "Phone Accessories", 
+    image: "/iphone.jpg" 
+  },
+  { 
+    id: 'ph-samsung', 
+    name: "Samsung S24", 
+    price: 145000, 
+    category: "Phone Accessories", 
+    image: "/samsung.jpg" 
+  },
+  { 
+    id: 'ph-charger', 
+    name: "Fast Charger 20W", 
+    price: 2500, 
+    category: "Phone Accessories", 
+    image: "/charger.jpg" 
+  },
+  { 
+    id: 'ph-earbuds', 
+    name: "Pro Earbuds", 
+    price: 12000, 
+    category: "Phone Accessories", 
+    image: "/earbuds.jpg" 
   },
 ];
 
@@ -150,7 +180,7 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white pb-24 pt-24 md:pt-32 w-full max-w-[100vw] overflow-x-hidden">
-      {/* Promotional Banner Node - Placed in the margin space */}
+      {/* Promotional Banner Node */}
       <div className="w-full px-2 md:px-6 mb-6">
         <div className="relative w-full h-[140px] md:h-[240px] rounded-[2rem] overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
@@ -227,7 +257,6 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* Strict 3-column mobile layout (grid-cols-3) */}
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {categoryProducts.map((product) => (
                   <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
@@ -269,7 +298,6 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   const getSafeUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    // Manual Hex-Safe encoding for special characters like parentheses
     return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
   };
 

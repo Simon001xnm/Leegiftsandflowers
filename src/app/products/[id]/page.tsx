@@ -1,4 +1,3 @@
-
 'use client';
 
 import { use, useEffect, useState } from "react";
@@ -21,11 +20,17 @@ const STATIC_PRODUCTS = [
   { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/MATUMBO.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
   { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/PORK STEAK.webp", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
   
-  // FINE WOOD KITCHEN DETAIL NODES
+  // FINE WOOD KITCHEN
   { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg", description: "Handcrafted from solid acacia wood. Durable, antimicrobial, and beautiful." },
   { id: 'fw-knife', name: "Fine Wood Knife Block", price: 2500, category: "Fine Wood Kitchen", image: "/knife block.jpg", description: "Elite wooden storage for your premium cutlery set. Magnetic holding system." },
   { id: 'fw-bowl', name: "Fine Wood Salad Bowl", price: 1800, category: "Fine Wood Kitchen", image: "/salad bowl.jpg", description: "Deep walnut salad bowl. Perfect for serving fresh kachumbari in style." },
   { id: 'fw-spatula', name: "Fine Wood Spatula Set", price: 1200, category: "Fine Wood Kitchen", image: "/spatula set.jpg", description: "4-piece handcrafted cooking tool set. Gentle on non-stick surfaces." },
+
+  // PHONES & ACCESSORIES
+  { id: 'ph-iphone', name: "iPhone 15 Pro", price: 155000, category: "Phone Accessories", image: "/iphone.jpg", description: "The ultimate iPhone with Titanium design, A17 Pro chip, and advanced Pro camera system." },
+  { id: 'ph-samsung', name: "Samsung S24", price: 145000, category: "Phone Accessories", image: "/samsung.jpg", description: "Next-gen Galaxy with Galaxy AI, elite zoom capabilities, and stunning LTPO display." },
+  { id: 'ph-charger', name: "Fast Charger 20W", price: 2500, category: "Phone Accessories", image: "/charger.jpg", description: "Universal 20W PD Fast Charger. Reliable power dispatch for all your mobile nodes." },
+  { id: 'ph-earbuds', name: "Pro Earbuds", price: 12000, category: "Phone Accessories", image: "/earbuds.jpg", description: "Immersive sound with Active Noise Cancellation and 24-hour battery endurance." },
 
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg", description: "Elite quality beef, fresh from our main node." },
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef." },
@@ -47,7 +52,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const getSafeUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    // Manual Hex-Safe encoding for special characters like parentheses
     return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
   };
 
@@ -185,7 +189,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     <div>
                       <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Sourced From</p>
                       <p className="text-[14px] font-black text-black uppercase tracking-tighter">
-                        Fine Woods Merchant Node
+                        Steak West Merchant Node
                       </p>
                     </div>
                   </div>
