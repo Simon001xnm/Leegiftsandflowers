@@ -1,3 +1,4 @@
+
 'use client';
 
 import { use, useEffect, useState } from "react";
@@ -38,9 +39,8 @@ const STATIC_PRODUCTS = [
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", description: "A seasonal selection of farm-fresh vegetables, hand-picked for quality.", isHalal: true },
   
   // DRINKS
-  { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600", description: "Chilled 500ml Coca Cola.", isHalal: true },
+  { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/cocacola.jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
-  { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600", description: "Freshly squeezed passion fruit juice.", isHalal: true },
 
   // FINE WOOD KITCHEN
   { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg", description: "Handcrafted from solid acacia wood. Durable, antimicrobial, and beautiful." },

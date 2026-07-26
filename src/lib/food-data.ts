@@ -1,3 +1,4 @@
+
 export type FoodCategory = 'Raw Meat' | 'Nyama Choma' | 'Delicacies' | 'Cooked' | 'Sides' | 'Drinks' | 'Grocery' | 'Essentials';
 export type OrderStatus = 'Pending' | 'Preparing' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
 
@@ -79,6 +80,7 @@ export const MOCK_MENU: MenuItem[] = [
   { id: 'p10', restaurantId: 'r1', name: 'FULL MGUU COW BOILED', price: 400, description: 'Traditional boiled cow leg.', imageUrl: '/MGUU COW.jpg', category: 'Delicacies' },
   { id: 'p24', restaurantId: 'r1', name: 'MUTURA', price: 100, description: 'Authentic Nairobi sausage.', imageUrl: '/BEEF CHOMA.jpg', category: 'Delicacies', isPopular: true },
   { id: 'g3', restaurantId: 'r1', name: 'Fresh Farm Basket', price: 850, description: 'Seasonal farm-fresh vegetables.', imageUrl: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600', category: 'Grocery' },
+  { id: 'd1-coke-150', restaurantId: 'r1', name: 'Coca-Cola take away', price: 150, description: 'Chilled Coca-Cola take away bottle.', imageUrl: '/cocacola.jpg', category: 'Drinks' },
   { id: 'd2-fanta-orange', restaurantId: 'r1', name: 'Fanta Orange take away', price: 150, description: 'Chilled Fanta Orange take away bottle.', imageUrl: '/fantafgdf.jpg', category: 'Drinks' }
 ];
 
