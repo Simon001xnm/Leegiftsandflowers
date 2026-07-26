@@ -1,10 +1,10 @@
+
 'use client';
 
 import { use, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { MOCK_MENU } from "@/lib/food-data";
 import { Clock, Store, TrendingUp, RefreshCw, ChevronLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
@@ -69,17 +69,17 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   useEffect(() => {
     async function loadData() {
-      const localItem = [...STATIC_PRODUCTS, ...MOCK_MENU].find(m => m.id === id);
+      const localItem = STATIC_PRODUCTS.find(m => m.id === id);
       
       if (localItem) {
         setProduct({
           id: localItem.id,
           name: localItem.name,
           price: localItem.price,
-          description: (localItem as any).description || "Premium quality product from the Steak West network.",
-          imageUrl: (localItem as any).image || localItem.imageUrl,
+          description: localItem.description || "Premium quality product from the Steak West network.",
+          imageUrl: localItem.image,
           category: localItem.category,
-          hasTax: (localItem as any).hasTax
+          hasTax: localItem.hasTax
         });
         setLoading(false);
         return;
@@ -132,7 +132,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   if (!product) return <div className="p-20 text-center font-headline text-2xl uppercase font-black">Product not found</div>;
 
-  const isLocal = !product.imageUrl.startsWith('http');
   const safeImageUrl = getSafeUrl(product.imageUrl);
 
   return (

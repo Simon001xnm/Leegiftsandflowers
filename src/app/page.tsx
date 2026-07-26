@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { 
   Plus, 
   Search, 
@@ -138,9 +139,14 @@ const ALL_PRODUCTS = [
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("All");
   const [search, setSearch] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
   const { toast } = useToast();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleAdd = (p: any) => {
     addToCart({ 
@@ -262,7 +268,7 @@ export default function HomePage() {
 
       {/* Main Marketplace Grid */}
       <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
-        {CATEGORIES.map((category) => {
+        {isMounted && CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
             p.name.toLowerCase().includes(search.toLowerCase())
