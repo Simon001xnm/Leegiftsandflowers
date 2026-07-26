@@ -14,7 +14,8 @@ import {
   Tag, 
   ArrowRight,
   ChevronRight,
-  ChevronLeft
+  ChevronLeft,
+  Play
 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -136,7 +137,8 @@ const ALL_PRODUCTS = [
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", isHalal: true },
   
   // GROCERY
-  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600", isHalal: true },
+  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://images.unsplash.com/photo-1510627498534-cf7e9002facc?q=80&w=600", isHalal: true },
+  { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", isHalal: true },
   
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600", isHalal: true },
@@ -318,17 +320,70 @@ export default function HomePage() {
               </div>
               
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
-                {categoryProducts.map((product) => (
-                  <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
-                    <ProductCard 
-                      product={product} 
-                      onAdd={(e) => {
-                        e.stopPropagation();
-                        handleAdd(product);
-                      }} 
-                    />
-                  </div>
-                ))}
+                {category.id === 'Grocery' ? (
+                  <>
+                    {/* First Grocery Item */}
+                    {categoryProducts.slice(0, 1).map((product) => (
+                      <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
+                        <ProductCard 
+                          product={product} 
+                          onAdd={(e) => {
+                            e.stopPropagation();
+                            handleAdd(product);
+                          }} 
+                        />
+                      </div>
+                    ))}
+                    
+                    {/* Live Grocery Video Container - Spans 2 columns */}
+                    <div className="col-span-2 relative aspect-[2/1] sm:aspect-auto rounded-lg md:rounded-xl overflow-hidden bg-black shadow-xl group border-2 border-primary/20">
+                       <video 
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline 
+                        className="absolute inset-0 w-full h-full object-cover opacity-70"
+                       >
+                          <source src="https://assets.mixkit.co/videos/preview/mixkit-vegetables-in-a-market-stall-4303-large.mp4" type="video/mp4" />
+                       </video>
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                       <div className="absolute bottom-2 left-3 md:bottom-4 md:left-5 flex items-center gap-2 md:gap-3">
+                          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary flex items-center justify-center animate-pulse">
+                             <Play className="w-3 h-3 md:w-4 h-4 text-white fill-current ml-0.5" />
+                          </div>
+                          <div>
+                             <p className="text-[10px] md:text-[12px] font-black text-white uppercase tracking-tighter leading-none">Fresh Harvest</p>
+                             <p className="text-[8px] md:text-[10px] font-bold text-primary uppercase tracking-widest">Live Dispatch Node</p>
+                          </div>
+                       </div>
+                    </div>
+
+                    {/* Remaining Grocery Items */}
+                    {categoryProducts.slice(1).map((product) => (
+                      <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
+                        <ProductCard 
+                          product={product} 
+                          onAdd={(e) => {
+                            e.stopPropagation();
+                            handleAdd(product);
+                          }} 
+                        />
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  categoryProducts.map((product) => (
+                    <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
+                      <ProductCard 
+                        product={product} 
+                        onAdd={(e) => {
+                          e.stopPropagation();
+                          handleAdd(product);
+                        }} 
+                      />
+                    </div>
+                  ))
+                )}
               </div>
             </section>
           );
