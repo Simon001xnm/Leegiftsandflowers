@@ -233,7 +233,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   onClick={handleAdd}
                 >
                   Add to Basket
-                </button>
+                </Button>
               </div>
             </div>
           </div>
