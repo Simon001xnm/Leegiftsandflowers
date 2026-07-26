@@ -289,7 +289,8 @@ export default function HomePage() {
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          {/* Light overlay at the bottom for black text visibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
         </div>
         
         <div className="relative z-10 w-full">
