@@ -17,25 +17,25 @@ export function Footer() {
                   <p className="uppercase tracking-tighter">Nairobi West, Nairobi, Kenya</p>
                   <p className="text-black/70 font-medium">P. O Box 7144- 00200</p>
                   <div className="pt-2 flex flex-col space-y-1">
-                    <p className="text-primary font-black text-2xl">0722522346</p>
+                    <p className="text-primary font-black text-3xl">0722522346</p>
                     <p className="text-black font-black lowercase break-all tracking-tight">Info@steakwestbutchery.co.ke</p>
                   </div>
                </div>
           </div>
 
-          {/* Right: Partner Logos - Responsive Wrapping Grid */}
+          {/* Right: Partner Logos - Fixed Color (No Grayscale) */}
           <div className="md:col-span-7 w-full">
             <div className="flex flex-wrap items-center justify-between gap-6 md:gap-8 max-w-4xl md:ml-auto">
-              <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0 grayscale hover:grayscale-0 transition-all">
+              <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0">
                 <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West" fill className="object-contain" />
               </div>
-              <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0 grayscale hover:grayscale-0 transition-all">
+              <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0">
                 <Image src="/finewood deco merchants 2.png" alt="Finewood Deco" fill className="object-contain" />
               </div>
-              <div className="relative h-8 w-20 md:h-14 md:w-32 shrink-0 grayscale hover:grayscale-0 transition-all">
+              <div className="relative h-8 w-20 md:h-14 md:w-32 shrink-0">
                 <Image src="/images.png" alt="Glovo" fill className="object-contain" />
               </div>
-              <div className="relative h-8 w-20 md:h-14 md:w-32 shrink-0 grayscale hover:grayscale-0 transition-all">
+              <div className="relative h-8 w-20 md:h-14 md:w-32 shrink-0">
                 <Image src="/images (1).png" alt="Uber Eats" fill className="object-contain" />
               </div>
             </div>

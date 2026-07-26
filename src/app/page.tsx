@@ -134,7 +134,7 @@ export default function HomePage() {
 
   const scrollTabs = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
+      const { scrollLeft } = scrollRef.current;
       const scrollTo = direction === 'left' ? scrollLeft - 150 : scrollLeft + 150;
       scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
     }
@@ -283,8 +283,6 @@ export default function HomePage() {
             priority
             unoptimized
           />
-          {/* Subtle white-to-transparent overlay at the bottom for black text readability on top of image */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-white/10 to-transparent" />
         </div>
         
         <div className="relative z-10 w-full">
