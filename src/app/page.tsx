@@ -56,7 +56,7 @@ const ALL_PRODUCTS = [
     name: "Beef Cubes", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/(34).jpg", 
+    image: "/images (34).jpg", 
     hasTax: true 
   },
   { 
