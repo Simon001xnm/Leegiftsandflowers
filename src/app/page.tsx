@@ -120,7 +120,7 @@ const ALL_PRODUCTS = [
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
   { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", isHalal: true },
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", isHalal: true },
-  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", isHalal: true },
+  { id: 'p1', name: "BEEF CHEMSHA 1KG", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", isHalal: true },
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", isHalal: true },
   { id: 'p6', name: "Full chicken choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", isHalal: true },
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", isHalal: true },
@@ -197,7 +197,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white w-full max-w-[100vw] overflow-x-hidden">
       {/* Promotional Banner Node */}
       <div className="w-full px-2 md:px-6 mb-6 mt-24 md:mt-32">
-        <div className="relative w-full h-[140px] md:h-[240px] rounded-[2rem] overflow-hidden bg-black shadow-2xl group cursor-pointer">
+        <div className="relative w-full h-[180px] md:h-[320px] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
             alt="Promotional Banner" 
@@ -209,25 +209,25 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
           
-          {/* Halal Badge Node (Hero) */}
-          <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-12 z-20 w-16 h-16 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white shadow-2xl bg-white flex items-center justify-center animate-in zoom-in duration-700 delay-500">
+          {/* Halal Badge Node (Hero - EXTRA LARGE) */}
+          <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-16 z-20 w-28 h-28 md:w-56 md:h-56 rounded-full overflow-hidden border-4 md:border-8 border-white shadow-2xl bg-white flex items-center justify-center animate-in zoom-in duration-700 delay-500">
             <Image 
               src="/images (45).jpg" 
               alt="100% Halal Certified" 
               fill 
-              className="object-contain p-2"
+              className="object-contain p-3 md:p-6"
             />
           </div>
 
-          <div className="absolute inset-0 flex flex-col items-start justify-center p-6 md:p-12 text-left">
-            <div className="inline-flex items-center gap-2 bg-primary text-white px-3 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-3">
-              <Tag className="w-3 h-3" /> Special Offer
+          <div className="absolute inset-0 flex flex-col items-start justify-center p-6 md:p-16 text-left">
+            <div className="inline-flex items-center gap-2 bg-primary text-white px-4 py-1.5 rounded-full text-[9px] md:text-[11px] font-black uppercase tracking-widest mb-4">
+              <Tag className="w-4 h-4" /> Special Offer
             </div>
-            <h2 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-2">
+            <h2 className="text-3xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-3">
               STEAK N BITE
             </h2>
-            <p className="text-[10px] md:sm font-bold text-white/70 uppercase tracking-widest flex items-center gap-2">
-              Save up to 20% on select raw cuts <ArrowRight className="w-4 h-4 text-primary" />
+            <p className="text-[11px] md:text-lg font-bold text-white/70 uppercase tracking-widest flex items-center gap-3">
+              Save up to 20% on select raw cuts <ArrowRight className="w-5 h-5 text-primary" />
             </p>
           </div>
         </div>
@@ -383,41 +383,41 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           priority={isLocal}
         />
         
-        {/* Halal Badge Node */}
+        {/* Halal Badge Node (Increased Size) */}
         {product.isHalal && (
-          <div className="absolute top-1 left-1 md:top-2 md:left-2 z-10 w-5 h-5 md:w-8 md:h-8 rounded-full overflow-hidden border border-white shadow-lg bg-white">
+          <div className="absolute top-1.5 left-1.5 md:top-3 md:left-3 z-10 w-8 h-8 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-white shadow-xl bg-white">
             <Image 
               src="/images (45).jpg" 
               alt="Halal Certified" 
               fill 
-              className="object-contain"
+              className="object-contain p-0.5"
             />
           </div>
         )}
 
         <button 
           onClick={onAdd}
-          className="absolute bottom-1 right-1 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90"
+          className="absolute bottom-1 right-1 w-7 h-7 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90"
         >
-          <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
+          <Plus className="w-4 h-4 md:w-6 md:h-6 stroke-[3px]" />
         </button>
       </div>
 
-      <div className="p-1.5 md:p-2 flex-grow flex flex-col justify-between space-y-1">
+      <div className="p-1.5 md:p-3 flex-grow flex flex-col justify-between space-y-1">
         <div className="space-y-0.5">
-          <p className="text-[10px] md:text-[11px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
+          <p className="text-[10px] md:text-[13px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
             {product.name}
           </p>
-          <p className="text-[8px] text-gray-400 font-bold uppercase tracking-widest truncate">
+          <p className="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-widest truncate">
             {product.category}
           </p>
         </div>
         
         <div className="flex items-center gap-1">
-          <p className="text-[11px] md:text-[14px] font-black text-primary">
+          <p className="text-[11px] md:text-[16px] font-black text-primary">
             {product.price.toLocaleString()}
           </p>
-          {product.hasTax && <span className="text-[6px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
+          {product.hasTax && <span className="text-[6px] md:text-[9px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
         </div>
       </div>
     </Card>

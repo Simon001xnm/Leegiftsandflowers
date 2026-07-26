@@ -27,7 +27,7 @@ const STATIC_PRODUCTS = [
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", description: "Expertly spiced beef, wet-fried to tender perfection. A Nairobi West signature dish.", isHalal: true },
   { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", description: "Expertly spiced goat meat, wet-fried to tender perfection. A Nairobi West signature dish.", isHalal: true },
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef.", isHalal: true },
-  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", description: "Healthy and tender slow-boiled beef.", isHalal: true },
+  { id: 'p1', name: "BEEF CHEMSHA 1KG", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", description: "Healthy and tender slow-boiled beef.", isHalal: true },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts.", isHalal: true },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken.", isHalal: true },
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips.", isHalal: true },
@@ -161,13 +161,14 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   sizes="(max-width: 1024px) 100vw, 66vw"
                 />
                 
+                {/* Halal Badge Node (Increased Size) */}
                 {product.isHalal && (
-                  <div className="absolute top-6 left-6 z-10 w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-white shadow-2xl bg-white animate-in zoom-in-50 duration-500">
+                  <div className="absolute top-6 left-6 z-10 w-20 h-20 md:w-36 md:h-32 rounded-full overflow-hidden border-4 border-white shadow-2xl bg-white animate-in zoom-in-50 duration-500">
                     <Image 
                       src="/images (45).jpg" 
                       alt="Halal Certified" 
                       fill 
-                      className="object-contain"
+                      className="object-contain p-2"
                     />
                   </div>
                 )}
