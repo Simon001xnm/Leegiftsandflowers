@@ -29,13 +29,13 @@ export function FloatingCartBar() {
                 </span>
               </div>
               <div className="space-y-0.5">
-                <p className="text-[10px] font-black text-white/50 uppercase tracking-widest leading-none">View Basket</p>
-                <p className="text-xl font-black tracking-tighter leading-none">KES {subtotal.toLocaleString()}</p>
+                <p className="text-[9px] font-black text-white/50 uppercase tracking-widest leading-none">View Basket</p>
+                <p className="text-lg font-black tracking-tighter leading-none">KES {subtotal.toLocaleString()}</p>
               </div>
             </div>
             
             <div className="flex items-center gap-3">
-               <span className="text-[11px] font-black uppercase tracking-widest group-hover:mr-1 transition-all">Go to Checkout</span>
+               <span className="text-[9px] font-black uppercase tracking-widest group-hover:mr-1 transition-all">Go to Checkout</span>
                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-primary transition-colors">
                   <ArrowRight className="w-4 h-4" />
                </div>
