@@ -161,12 +161,22 @@ export default function HomePage() {
   const [search, setSearch] = useState("");
   const [isMounted, setIsMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { addToCart } = useCart();
   const { toast } = useToast();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Ensure video starts playing after mount
+  useEffect(() => {
+    if (isMounted && videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.warn("Autoplay was prevented by browser policy", error);
+      });
+    }
+  }, [isMounted]);
 
   const handleAdd = (p: any) => {
     addToCart({ 
@@ -336,13 +346,15 @@ export default function HomePage() {
                     {/* The video container */}
                     <div className="col-span-2 relative aspect-[2/1] sm:aspect-auto rounded-lg md:rounded-xl overflow-hidden bg-black shadow-xl group border-2 border-primary/20">
                        <video 
+                        ref={videoRef}
                         autoPlay 
                         muted 
                         loop 
                         playsInline 
+                        preload="auto"
                         className="absolute inset-0 w-full h-full object-cover opacity-80"
                        >
-                          <source src="/Klickpin.com- 3448137210838714-pin-id-3448137210838714.mp4" type="video/mp4" />
+                          <source src="/Klickpin.com-%203448137210838714-pin-id-3448137210838714.mp4" type="video/mp4" />
                        </video>
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                        <div className="absolute bottom-2 left-3 md:bottom-4 md:left-5 flex items-center gap-2 md:gap-3">
