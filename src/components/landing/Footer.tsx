@@ -12,11 +12,10 @@ export function Footer() {
   return (
     <footer className="relative w-full bg-black overflow-hidden">
       {/* 
-        Container with ultra-reduced mobile height (100px).
-        Uses object-cover centered to maintain visual balance 
-        without zooming into the asset excessively.
+        Container with optimized desktop and mobile heights.
+        Uses object-cover centered to maintain visual balance.
       */}
-      <div className="relative w-full h-[100px] md:h-[600px] lg:h-[700px]">
+      <div className="relative w-full h-[100px] md:h-[350px] lg:h-[450px]">
         <Image 
           src="/footer.jpeg" 
           alt="Steak West Terminal Dispatch" 

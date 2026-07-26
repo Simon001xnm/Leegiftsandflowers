@@ -10,7 +10,6 @@ import {
   Zap, 
   Coffee, 
   Smartphone, 
-  Smartphone as PhoneIcon,
   ChefHat, 
   Tag, 
   ArrowRight,
@@ -135,9 +134,9 @@ export default function HomePage() {
   if (!isMounted) return null;
 
   return (
-    <main className="min-h-screen bg-white w-full max-w-[100vw] overflow-x-hidden">
+    <main className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
       {/* Promotional Banner Node */}
-      <div className="w-full px-2 md:px-6 mb-6 mt-24 md:mt-32">
+      <div className="w-full px-2 md:px-10 mb-6 mt-24 md:mt-32">
         <div className="relative w-full h-[180px] md:h-[320px] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
@@ -175,7 +174,7 @@ export default function HomePage() {
 
       {/* Sticky Header Node */}
       <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-4 py-4 md:py-6">
-        <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto space-y-6">
+        <div className="w-full mx-auto space-y-6 md:px-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
              <div className="relative flex-grow max-w-2xl">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -210,7 +209,7 @@ export default function HomePage() {
       </div>
 
       {/* Main Marketplace Grid */}
-      <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
+      <div className="w-full mx-auto px-2 md:px-10 mt-6 space-y-10 md:space-y-12 pb-20">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
@@ -224,7 +223,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1.5 md:gap-4 w-full">
                 {category.id === 'Grocery' ? (
                   <>
                     {categoryProducts.map((product) => (
