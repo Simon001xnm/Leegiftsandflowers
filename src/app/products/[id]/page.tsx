@@ -46,10 +46,8 @@ const STATIC_PRODUCTS = [
   { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg", description: "Elite gourmet kitchen tools, expertly crafted from premium wood nodes. Perfect for precision cooking." },
 
   // PHONES & ACCESSORIES
-  { id: 'ph-iphone', name: "iPhone 15 Pro", price: 155000, category: "Phone Accessories", image: "/iphone.jpg", description: "The ultimate iPhone with Titanium design, A17 Pro chip, and advanced Pro camera system." },
-  { id: 'ph-samsung', name: "Samsung S24", price: 145000, category: "Phone Accessories", image: "/samsung.jpg", description: "Next-gen Galaxy with Galaxy AI, elite zoom capabilities, and stunning LTPO display." },
-  { id: 'ph-charger', name: "Fast Charger 20W", price: 2500, category: "Phone Accessories", image: "/charger.jpg", description: "Universal 20W PD Fast Charger. Reliable power dispatch for all your mobile nodes." },
-  { id: 'ph-earbuds', name: "Pro Earbuds", price: 12000, category: "Phone Accessories", image: "/earbuds.jpg", description: "Immersive sound with Active Noise Cancellation and 24-hour battery endurance." },
+  { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg", description: "Premium selection of high-clarity phone accessories, curated for the modern digital workspace." },
+  { id: 'ph-powerbank-node', name: "Premium Powerbank Node", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg", description: "High-capacity elite powerbank for sustained mobile node endurance. Rapid dispatch ready." },
 ];
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {

@@ -148,10 +148,8 @@ const ALL_PRODUCTS = [
   { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
 
   // PHONES & ACCESSORIES
-  { id: 'ph-iphone', name: "iPhone 15 Pro", price: 155000, category: "Phone Accessories", image: "/iphone.jpg" },
-  { id: 'ph-samsung', name: "Samsung S24", price: 145000, category: "Phone Accessories", image: "/samsung.jpg" },
-  { id: 'ph-charger', name: "Fast Charger 20W", price: 2500, category: "Phone Accessories", image: "/charger.jpg" },
-  { id: 'ph-earbuds', name: "Pro Earbuds", price: 12000, category: "Phone Accessories", image: "/earbuds.jpg" },
+  { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg" },
+  { id: 'ph-powerbank-node', name: "Premium Powerbank Node", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg" },
 ];
 
 export default function HomePage() {
