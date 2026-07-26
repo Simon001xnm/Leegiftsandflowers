@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
   return (
@@ -23,20 +24,20 @@ export function Footer() {
                </div>
           </div>
 
-          {/* Right: Partner Logos - Fixed Color (No Grayscale) */}
+          {/* Right: Partner Logos - Rounded Containers for Uniformity */}
           <div className="md:col-span-7 w-full">
-            <div className="flex flex-wrap items-center justify-between gap-6 md:gap-8 max-w-4xl md:ml-auto">
-              <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0">
-                <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West" fill className="object-contain" />
+            <div className="flex flex-wrap items-center justify-between gap-4 md:gap-6 max-w-4xl md:ml-auto">
+              <div className="relative h-12 w-28 md:h-16 md:w-40 bg-white p-2 rounded-2xl shadow-sm shrink-0 overflow-hidden border border-black/5">
+                <Image src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" alt="Steak West" fill className="object-contain p-1" />
               </div>
-              <div className="relative h-10 w-24 md:h-16 md:w-40 shrink-0">
-                <Image src="/finewood deco merchants 2.png" alt="Finewood Deco" fill className="object-contain" />
+              <div className="relative h-12 w-28 md:h-16 md:w-40 bg-white p-2 rounded-2xl shadow-sm shrink-0 overflow-hidden border border-black/5">
+                <Image src="/finewood deco merchants 2.png" alt="Finewood Deco" fill className="object-contain p-1" />
               </div>
-              <div className="relative h-8 w-20 md:h-14 md:w-32 shrink-0">
-                <Image src="/images.png" alt="Glovo" fill className="object-contain" />
+              <div className="relative h-12 w-24 md:h-16 md:w-32 bg-white p-2 rounded-2xl shadow-sm shrink-0 overflow-hidden border border-black/5">
+                <Image src="/images.png" alt="Glovo" fill className="object-contain p-2" />
               </div>
-              <div className="relative h-8 w-20 md:h-14 md:w-32 shrink-0">
-                <Image src="/images (1).png" alt="Uber Eats" fill className="object-contain" />
+              <div className="relative h-12 w-24 md:h-16 md:w-32 bg-white p-2 rounded-2xl shadow-sm shrink-0 overflow-hidden border border-black/5">
+                <Image src="/images (1).png" alt="Uber Eats" fill className="object-contain p-2" />
               </div>
             </div>
           </div>
