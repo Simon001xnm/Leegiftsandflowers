@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useRef, useEffect } from "react";
@@ -141,7 +140,7 @@ const ALL_PRODUCTS = [
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", isHalal: true },
   
   // DRINKS
-  { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/cocacola.jpg", isHalal: true },
+  { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", isHalal: true },
 
   // FINE WOOD KITCHEN

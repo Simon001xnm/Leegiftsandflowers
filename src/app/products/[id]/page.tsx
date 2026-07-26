@@ -1,4 +1,3 @@
-
 'use client';
 
 import { use, useEffect, useState } from "react";
@@ -39,7 +38,7 @@ const STATIC_PRODUCTS = [
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", description: "A seasonal selection of farm-fresh vegetables, hand-picked for quality.", isHalal: true },
   
   // DRINKS
-  { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/cocacola.jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
+  { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
 
   // FINE WOOD KITCHEN
@@ -228,7 +227,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       <div className="w-6 h-6 relative rounded-full overflow-hidden shrink-0 border border-gray-200">
                         <Image src="/images (45).jpg" alt="" fill className="object-contain" />
                       </div>
-                      <p className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest">100% Halal Certified Production</p>
+                      <p className="text-11px font-bold text-emerald-600 uppercase tracking-widest">100% Halal Certified Production</p>
                     </div>
                   )}
                 </div>
