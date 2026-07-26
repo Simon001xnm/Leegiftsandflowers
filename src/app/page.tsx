@@ -1,7 +1,21 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
-import { Plus, Search, ShoppingBag, Beef, Utensils, Zap, Coffee, Smartphone, ChefHat, Tag, ArrowRight } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { 
+  Plus, 
+  Search, 
+  ShoppingBag, 
+  Beef, 
+  Utensils, 
+  Zap, 
+  Coffee, 
+  Smartphone, 
+  ChefHat, 
+  Tag, 
+  ArrowRight,
+  ChevronRight,
+  ChevronLeft
+} from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -84,69 +98,22 @@ const ALL_PRODUCTS = [
   { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
 
   // FINE WOOD KITCHEN
-  { 
-    id: 'fw-chopping', 
-    name: "Fine Wood Chopping Board", 
-    price: 1500, 
-    category: "Fine Wood Kitchen", 
-    image: "/chopping board.jpg" 
-  },
-  { 
-    id: 'fw-knife', 
-    name: "Fine Wood Knife Block", 
-    price: 2500, 
-    category: "Fine Wood Kitchen", 
-    image: "/knife block.jpg" 
-  },
-  { 
-    id: 'fw-bowl', 
-    name: "Fine Wood Salad Bowl", 
-    price: 1800, 
-    category: "Fine Wood Kitchen", 
-    image: "/salad bowl.jpg" 
-  },
-  { 
-    id: 'fw-spatula', 
-    name: "Fine Wood Spatula Set", 
-    price: 1200, 
-    category: "Fine Wood Kitchen", 
-    image: "/spatula set.jpg" 
-  },
+  { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg" },
+  { id: 'fw-knife', name: "Fine Wood Knife Block", price: 2500, category: "Fine Wood Kitchen", image: "/knife block.jpg" },
+  { id: 'fw-bowl', name: "Fine Wood Salad Bowl", price: 1800, category: "Fine Wood Kitchen", image: "/salad bowl.jpg" },
+  { id: 'fw-spatula', name: "Fine Wood Spatula Set", price: 1200, category: "Fine Wood Kitchen", image: "/spatula set.jpg" },
 
-  // PHONES & ACCESSORIES (New Terminal Section)
-  { 
-    id: 'ph-iphone', 
-    name: "iPhone 15 Pro", 
-    price: 155000, 
-    category: "Phone Accessories", 
-    image: "/iphone.jpg" 
-  },
-  { 
-    id: 'ph-samsung', 
-    name: "Samsung S24", 
-    price: 145000, 
-    category: "Phone Accessories", 
-    image: "/samsung.jpg" 
-  },
-  { 
-    id: 'ph-charger', 
-    name: "Fast Charger 20W", 
-    price: 2500, 
-    category: "Phone Accessories", 
-    image: "/charger.jpg" 
-  },
-  { 
-    id: 'ph-earbuds', 
-    name: "Pro Earbuds", 
-    price: 12000, 
-    category: "Phone Accessories", 
-    image: "/earbuds.jpg" 
-  },
+  // PHONES & ACCESSORIES
+  { id: 'ph-iphone', name: "iPhone 15 Pro", price: 155000, category: "Phone Accessories", image: "/iphone.jpg" },
+  { id: 'ph-samsung', name: "Samsung S24", price: 145000, category: "Phone Accessories", image: "/samsung.jpg" },
+  { id: 'ph-charger', name: "Fast Charger 20W", price: 2500, category: "Phone Accessories", image: "/charger.jpg" },
+  { id: 'ph-earbuds', name: "Pro Earbuds", price: 12000, category: "Phone Accessories", image: "/earbuds.jpg" },
 ];
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("All");
   const [search, setSearch] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
   const { toast } = useToast();
 
@@ -162,6 +129,14 @@ export default function HomePage() {
       hasTax: p.hasTax
     });
     toast({ title: "READY", description: `${p.name} added to basket.` });
+  };
+
+  const scrollTabs = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - 150 : scrollLeft + 150;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -219,20 +194,41 @@ export default function HomePage() {
                   onChange={(e) => setSearch(e.target.value)}
                 />
              </div>
-             <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 md:mx-0">
-                <CategoryTab 
-                  label="All Dispatches" 
-                  isActive={activeTab === 'All'} 
-                  onClick={() => scrollToSection('All')} 
-                />
-                {CATEGORIES.map(cat => (
+             
+             {/* Category Tab Scroll Node */}
+             <div className="relative group">
+                <div 
+                  ref={scrollRef}
+                  className="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 md:mx-0 scroll-smooth"
+                >
                   <CategoryTab 
-                    key={cat.id}
-                    label={cat.label} 
-                    isActive={activeTab === cat.id} 
-                    onClick={() => scrollToSection(cat.id)} 
+                    label="All Dispatches" 
+                    isActive={activeTab === 'All'} 
+                    onClick={() => scrollToSection('All')} 
                   />
-                ))}
+                  {CATEGORIES.map(cat => (
+                    <CategoryTab 
+                      key={cat.id}
+                      label={cat.label} 
+                      isActive={activeTab === cat.id} 
+                      onClick={() => scrollToSection(cat.id)} 
+                    />
+                  ))}
+                </div>
+
+                {/* Scroll Discover Buttons (Mobile Only) */}
+                <button 
+                  onClick={() => scrollTabs('left')}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -ml-2"
+                >
+                  <ChevronLeft className="w-4 h-4 text-primary" />
+                </button>
+                <button 
+                  onClick={() => scrollTabs('right')}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -mr-2"
+                >
+                  <ChevronRight className="w-4 h-4 text-primary" />
+                </button>
              </div>
           </div>
         </div>
@@ -302,6 +298,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   };
 
   const isLocal = !product.image.startsWith('http');
+  const isPremium = product.category === 'Raw Meat' || product.category === 'Fine Wood Kitchen' || product.category === 'Phone Accessories';
   
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl bg-white">
@@ -314,7 +311,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
           quality={100}
           unoptimized={isLocal}
-          priority={isLocal}
+          priority={isLocal && isPremium}
         />
         
         <button 
