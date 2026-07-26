@@ -135,9 +135,9 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
-      {/* Promotional Banner Node */}
-      <div className="w-full px-2 md:px-10 mb-6 mt-24 md:mt-32">
-        <div className="relative w-full h-[180px] md:h-[320px] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-black shadow-2xl group cursor-pointer">
+      {/* Promotional Banner Node - Full Width on Desktop */}
+      <div className="w-full px-2 md:px-10 lg:px-4 xl:px-0 mb-6 mt-24 md:mt-32">
+        <div className="relative w-full h-[180px] md:h-[320px] lg:h-[400px] rounded-[2rem] md:rounded-[3rem] lg:rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
             alt="Promotional Banner" 
@@ -208,8 +208,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid */}
-      <div className="w-full mx-auto px-2 md:px-10 mt-6 space-y-10 md:space-y-12 pb-20">
+      {/* Main Marketplace Grid - Edge to Edge on Desktop */}
+      <div className="w-full mx-auto px-2 md:px-10 lg:px-4 xl:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
@@ -223,6 +223,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
+              {/* Responsive Grid: 3 columns mobile, 4 sm/md, 6 lg+ */}
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1.5 md:gap-4 w-full">
                 {category.id === 'Grocery' ? (
                   <>
@@ -231,7 +232,7 @@ export default function HomePage() {
                         <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                       </div>
                     ))}
-                    <div className="col-span-2 relative aspect-[2/1] sm:aspect-auto rounded-lg md:rounded-xl overflow-hidden bg-black shadow-xl group border-2 border-primary/20">
+                    <div className="col-span-2 lg:col-span-1 relative aspect-[2/1] sm:aspect-auto rounded-lg md:rounded-xl overflow-hidden bg-black shadow-xl group border-2 border-primary/20">
                        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
                           <source src="/video.mp4" type="video/mp4" />
                        </video>
