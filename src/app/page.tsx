@@ -10,6 +10,7 @@ import {
   Zap, 
   Coffee, 
   Smartphone, 
+  Smartphone as PhoneIcon,
   ChefHat, 
   Tag, 
   ArrowRight,
@@ -35,95 +36,17 @@ const CATEGORIES = [
 ];
 
 const ALL_PRODUCTS = [
-  // RAW MEAT (Premium HD Nodes)
-  { 
-    id: 'p-fillet', 
-    name: "Beef Fillet", 
-    price: 1100, 
-    category: "Raw Meat", 
-    image: "/beef fillet raw.jpg", 
-    hasTax: true,
-    isHalal: true
-  },
-  { 
-    id: 'p-tbone', 
-    name: "Beef T-Bone", 
-    price: 1000, 
-    category: "Raw Meat", 
-    image: "/tbone.webp", 
-    hasTax: true,
-    isHalal: true
-  },
-  { 
-    id: 'p-cubes', 
-    name: "Beef Cubes", 
-    price: 1000, 
-    category: "Raw Meat", 
-    image: "/images (34).jpg", 
-    hasTax: true,
-    isHalal: true
-  },
-  { 
-    id: 'p-liver', 
-    name: "Liver", 
-    price: 1100, 
-    category: "Raw Meat", 
-    image: "/images (35).jpg", 
-    hasTax: true,
-    isHalal: true
-  },
-  { 
-    id: 'p-matumbo', 
-    name: "Matumbo", 
-    price: 600, 
-    category: "Raw Meat", 
-    image: "/images (36).jpg",
-    isHalal: true
-  },
-  { 
-    id: 'p-pork', 
-    name: "Pork Steak", 
-    price: 1000, 
-    category: "Raw Meat", 
-    image: "/images (37).jpg",
-    isHalal: false
-  },
-  { 
-    id: 'p-kidney', 
-    name: "Kidney", 
-    price: 1000, 
-    category: "Raw Meat", 
-    image: "/images (38).jpg",
-    hasTax: true,
-    isHalal: true
-  },
-  { 
-    id: 'p-osumbuko', 
-    name: "Osumbuko", 
-    price: 900, 
-    category: "Raw Meat", 
-    image: "/628cb2abc83cb (1).jpeg",
-    hasTax: true,
-    isHalal: true
-  },
-  { 
-    id: 'p-beef-on-bone', 
-    name: "Beef on Bone", 
-    price: 900, 
-    category: "Raw Meat", 
-    image: "/boneinroundsteaks (1).webp", 
-    hasTax: true,
-    isHalal: true
-  },
-  { 
-    id: 'p-goat-takeaway', 
-    name: "Goat Takeaway 1kg", 
-    price: 1000, 
-    category: "Raw Meat", 
-    image: "/images (47).jpg", 
-    hasTax: true,
-    isHalal: true
-  },
+  // RAW MEAT
+  { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", hasTax: true, isHalal: true },
+  { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", hasTax: true, isHalal: true },
+  { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", hasTax: true, isHalal: true },
+  { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/images (35).jpg", hasTax: true, isHalal: true },
+  { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/images (36).jpg", isHalal: true },
+  { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/images (37).jpg", isHalal: false },
+  { id: 'p-kidney', name: "Kidney", price: 1000, category: "Raw Meat", image: "/images (38).jpg", hasTax: true, isHalal: true },
+  { id: 'p-osumbuko', name: "Osumbuko", price: 900, category: "Raw Meat", image: "/628cb2abc83cb (1).jpeg", hasTax: true, isHalal: true },
+  { id: 'p-beef-on-bone', name: "Beef on Bone", price: 900, category: "Raw Meat", image: "/boneinroundsteaks (1).webp", hasTax: true, isHalal: true },
+  { id: 'p-goat-takeaway', name: "Goat Takeaway 1kg", price: 1000, category: "Raw Meat", image: "/images (47).jpg", hasTax: true, isHalal: true },
   
   // COOKED MEAT
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
@@ -165,11 +88,10 @@ export default function HomePage() {
     setIsMounted(true);
   }, []);
 
-  // Ensure video starts playing after mount
   useEffect(() => {
     if (isMounted && videoRef.current) {
       videoRef.current.play().catch(error => {
-        console.warn("Autoplay was prevented by browser policy", error);
+        console.warn("Autoplay was prevented", error);
       });
     }
   }, [isMounted]);
@@ -228,7 +150,6 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
           
-          {/* Halal Badge Node (Hero - EXTRA LARGE) */}
           <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-16 z-20 w-28 h-28 md:w-48 md:h-48 rounded-full overflow-hidden border-4 md:border-8 border-white shadow-2xl bg-white flex items-center justify-center animate-in zoom-in duration-700 delay-500">
             <Image 
               src="/images (45).jpg" 
@@ -266,38 +187,21 @@ export default function HomePage() {
                 />
              </div>
              
-             {/* Category Tab Scroll Node */}
              <div className="relative group">
                 <div 
                   ref={scrollRef}
                   className="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 md:mx-0 scroll-smooth"
                 >
-                  <CategoryTab 
-                    label="All Dispatches" 
-                    isActive={activeTab === 'All'} 
-                    onClick={() => scrollToSection('All')} 
-                  />
+                  <CategoryTab label="All Dispatches" isActive={activeTab === 'All'} onClick={() => scrollToSection('All')} />
                   {CATEGORIES.map(cat => (
-                    <CategoryTab 
-                      key={cat.id}
-                      label={cat.label} 
-                      isActive={activeTab === cat.id} 
-                      onClick={() => scrollToSection(cat.id)} 
-                    />
+                    <CategoryTab key={cat.id} label={cat.label} isActive={activeTab === cat.id} onClick={() => scrollToSection(cat.id)} />
                   ))}
                 </div>
 
-                {/* Scroll Discover Buttons (Mobile Only) */}
-                <button 
-                  onClick={() => scrollTabs('left')}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -ml-2"
-                >
+                <button onClick={() => scrollTabs('left')} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -ml-2">
                   <ChevronLeft className="w-4 h-4 text-primary" />
                 </button>
-                <button 
-                  onClick={() => scrollTabs('right')}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -mr-2"
-                >
+                <button onClick={() => scrollTabs('right')} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -mr-2">
                   <ChevronRight className="w-4 h-4 text-primary" />
                 </button>
              </div>
@@ -308,11 +212,7 @@ export default function HomePage() {
       {/* Main Marketplace Grid */}
       <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
         {CATEGORIES.map((category) => {
-          const categoryProducts = ALL_PRODUCTS.filter(p => 
-            p.category === category.id && 
-            p.name.toLowerCase().includes(search.toLowerCase())
-          );
-
+          const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
 
           return (
@@ -327,29 +227,13 @@ export default function HomePage() {
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {category.id === 'Grocery' ? (
                   <>
-                    {/* The product(s) */}
                     {categoryProducts.map((product) => (
                       <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
-                        <ProductCard 
-                          product={product} 
-                          onAdd={(e) => {
-                            e.stopPropagation();
-                            handleAdd(product);
-                          }} 
-                        />
+                        <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                       </div>
                     ))}
-                    {/* The video container */}
                     <div className="col-span-2 relative aspect-[2/1] sm:aspect-auto rounded-lg md:rounded-xl overflow-hidden bg-black shadow-xl group border-2 border-primary/20">
-                       <video 
-                        ref={videoRef}
-                        autoPlay 
-                        muted 
-                        loop 
-                        playsInline 
-                        preload="auto"
-                        className="absolute inset-0 w-full h-full object-cover opacity-80"
-                       >
+                       <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
                           <source src="/video.mp4" type="video/mp4" />
                        </video>
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -367,13 +251,7 @@ export default function HomePage() {
                 ) : (
                   categoryProducts.map((product) => (
                     <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
-                      <ProductCard 
-                        product={product} 
-                        onAdd={(e) => {
-                          e.stopPropagation();
-                          handleAdd(product);
-                        }} 
-                      />
+                      <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                     </div>
                   ))
                 )}
@@ -383,38 +261,15 @@ export default function HomePage() {
         })}
       </div>
 
-      {/* Terminal Delivery Node & Footer */}
-      <section className="relative min-h-[700px] flex flex-col justify-end">
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src="/4eb2df709a9485b9045e3b464e1caef0.jpg" 
-            alt="Elite Delivery Dispatch" 
-            fill 
-            className="object-cover"
-            priority
-            unoptimized={true}
-          />
-        </div>
-        
-        <div className="relative z-10 w-full">
-           <Footer />
-        </div>
-      </section>
+      {/* Terminal Node Implementation */}
+      <Footer />
     </main>
   );
 }
 
 function CategoryTab({ label, isActive, onClick }: { label: string, isActive: boolean, onClick: () => void }) {
   return (
-    <button 
-      onClick={onClick}
-      className={cn(
-        "px-4 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shrink-0 whitespace-nowrap",
-        isActive 
-          ? "bg-black text-white shadow-lg" 
-          : "bg-gray-50 text-gray-400 hover:text-black"
-      )}
-    >
+    <button onClick={onClick} className={cn("px-4 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shrink-0 whitespace-nowrap", isActive ? "bg-black text-white shadow-lg" : "bg-gray-50 text-gray-400 hover:text-black")}>
       {label}
     </button>
   );
@@ -427,56 +282,26 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
     return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
   };
 
-  const isLocal = !product.image.startsWith('http');
-  
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl bg-white">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
-        <Image 
-          src={getSafeUrl(product.image)} 
-          alt={product.name} 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-110" 
-          sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
-          quality={100}
-          unoptimized={true}
-          priority={isLocal}
-        />
-        
-        {/* Halal Badge Node (Scaling Applied) */}
+        <Image src={getSafeUrl(product.image)} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw" quality={100} unoptimized={true} />
         {product.isHalal && (
           <div className="absolute top-1.5 left-1.5 md:top-2 md:left-2 z-10 w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-white shadow-xl bg-white">
-            <Image 
-              src="/images (45).jpg" 
-              alt="Halal Certified" 
-              fill 
-              className="object-contain p-0.5"
-            />
+            <Image src="/images (45).jpg" alt="Halal Certified" fill className="object-contain p-0.5" />
           </div>
         )}
-
-        <button 
-          onClick={onAdd}
-          className="absolute bottom-1 right-1 w-7 h-7 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90"
-        >
+        <button onClick={onAdd} className="absolute bottom-1 right-1 w-7 h-7 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90">
           <Plus className="w-4 h-4 md:w-6 md:h-6 stroke-[3px]" />
         </button>
       </div>
-
       <div className="p-1.5 md:p-3 flex-grow flex flex-col justify-between space-y-1">
         <div className="space-y-0.5">
-          <p className="text-[10px] md:text-[13px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">
-            {product.name}
-          </p>
-          <p className="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-widest truncate">
-            {product.category}
-          </p>
+          <p className="text-[10px] md:text-[13px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">{product.name}</p>
+          <p className="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
         </div>
-        
         <div className="flex items-center gap-1">
-          <p className="text-[11px] md:text-[16px] font-black text-primary">
-            {product.price.toLocaleString()}
-          </p>
+          <p className="text-[11px] md:text-[16px] font-black text-primary">{product.price.toLocaleString()}</p>
           {product.hasTax && <span className="text-[6px] md:text-[9px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
         </div>
       </div>
