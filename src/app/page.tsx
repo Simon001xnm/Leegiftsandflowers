@@ -97,6 +97,14 @@ const ALL_PRODUCTS = [
     image: "/628cb2abc83cb (1).jpeg",
     hasTax: true
   },
+  { 
+    id: 'p-beef-on-bone', 
+    name: "Beef on Bone", 
+    price: 900, 
+    category: "Raw Meat", 
+    image: "/628cb2abc83cb (1).jpeg",
+    hasTax: true
+  },
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   
@@ -108,7 +116,7 @@ const ALL_PRODUCTS = [
   
   // GROCERY
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
-  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
+  { g2: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
   
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
