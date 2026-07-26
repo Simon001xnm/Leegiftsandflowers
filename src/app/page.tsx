@@ -48,7 +48,7 @@ const ALL_PRODUCTS = [
     name: "Beef T-Bone", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/BEEF T BONE.webp", 
+    image: "/tbone.webp", 
     hasTax: true 
   },
   { 
