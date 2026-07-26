@@ -42,7 +42,8 @@ const ALL_PRODUCTS = [
     price: 1100, 
     category: "Raw Meat", 
     image: "/beef fillet raw.jpg", 
-    hasTax: true 
+    hasTax: true,
+    isHalal: true
   },
   { 
     id: 'p-tbone', 
@@ -50,7 +51,8 @@ const ALL_PRODUCTS = [
     price: 1000, 
     category: "Raw Meat", 
     image: "/tbone.webp", 
-    hasTax: true 
+    hasTax: true,
+    isHalal: true
   },
   { 
     id: 'p-cubes', 
@@ -58,7 +60,8 @@ const ALL_PRODUCTS = [
     price: 1000, 
     category: "Raw Meat", 
     image: "/images (34).jpg", 
-    hasTax: true 
+    hasTax: true,
+    isHalal: true
   },
   { 
     id: 'p-liver', 
@@ -66,21 +69,24 @@ const ALL_PRODUCTS = [
     price: 1100, 
     category: "Raw Meat", 
     image: "/images (35).jpg", 
-    hasTax: true 
+    hasTax: true,
+    isHalal: true
   },
   { 
     id: 'p-matumbo', 
     name: "Matumbo", 
     price: 600, 
     category: "Raw Meat", 
-    image: "/images (36).jpg"
+    image: "/images (36).jpg",
+    isHalal: true
   },
   { 
     id: 'p-pork', 
     name: "Pork Steak", 
     price: 1000, 
     category: "Raw Meat", 
-    image: "/images (37).jpg"
+    image: "/images (37).jpg",
+    isHalal: false
   },
   { 
     id: 'p-kidney', 
@@ -88,7 +94,8 @@ const ALL_PRODUCTS = [
     price: 1000, 
     category: "Raw Meat", 
     image: "/images (38).jpg",
-    hasTax: true
+    hasTax: true,
+    isHalal: true
   },
   { 
     id: 'p-osumbuko', 
@@ -96,7 +103,8 @@ const ALL_PRODUCTS = [
     price: 900, 
     category: "Raw Meat", 
     image: "/628cb2abc83cb (1).jpeg",
-    hasTax: true
+    hasTax: true,
+    isHalal: true
   },
   { 
     id: 'p-beef-on-bone', 
@@ -104,24 +112,25 @@ const ALL_PRODUCTS = [
     price: 900, 
     category: "Raw Meat", 
     image: "/boneinroundsteaks (1).webp", 
-    hasTax: true 
+    hasTax: true,
+    isHalal: true
   },
   
   // COOKED MEAT
-  { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg" },
-  { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg" },
-  { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
-  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg" },
-  { id: 'p3', name: "Beef dry fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
-  { id: 'p6', name: "Full chicken choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
-  { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg" },
+  { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
+  { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", isHalal: true },
+  { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", isHalal: true },
+  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", isHalal: true },
+  { id: 'p3', name: "Beef dry fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", isHalal: true },
+  { id: 'p6', name: "Full chicken choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", isHalal: true },
+  { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", isHalal: true },
   
   // GROCERY
-  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
+  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600", isHalal: true },
   
   // DRINKS
-  { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
-  { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
+  { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600", isHalal: true },
+  { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600", isHalal: true },
 
   // FINE WOOD KITCHEN
   { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg" },
@@ -363,6 +372,18 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           priority={isLocal}
         />
         
+        {/* Halal Badge Node */}
+        {product.isHalal && (
+          <div className="absolute top-1 left-1 md:top-2 md:left-2 z-10 w-5 h-5 md:w-8 md:h-8 rounded-full overflow-hidden border border-white shadow-lg bg-white">
+            <Image 
+              src="/images (45).jpg" 
+              alt="Halal Certified" 
+              fill 
+              className="object-contain"
+            />
+          </div>
+        )}
+
         <button 
           onClick={onAdd}
           className="absolute bottom-1 right-1 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90"

@@ -13,31 +13,31 @@ import { createClient } from "@/lib/supabase/client";
 
 // SYNCED NETWORK CATALOG
 const STATIC_PRODUCTS = [
-  { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
-  { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
-  { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
-  { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/images (35).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
-  { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/images (36).jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
-  { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/images (37).jpg", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
-  { id: 'p-kidney', name: "Kidney", price: 1000, category: "Raw Meat", image: "/images (38).jpg", description: "Premium Extra HD Kidney. Freshly sourced and prepared for dispatch.", hasTax: true },
-  { id: 'p-osumbuko', name: "Osumbuko", price: 900, category: "Raw Meat", image: "/628cb2abc83cb (1).jpeg", description: "Premium Osso Buco cuts, perfect for slow cooking and rich, marrow-infused stews.", hasTax: true },
-  { id: 'p-beef-on-bone', name: "Beef on Bone", price: 900, category: "Raw Meat", image: "/boneinroundsteaks (1).webp", description: "Select beef cuts on the bone, ideal for traditional stews and soups.", hasTax: true },
+  { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true, isHalal: true },
+  { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true, isHalal: true },
+  { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true, isHalal: true },
+  { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/images (35).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true, isHalal: true },
+  { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/images (36).jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew.", isHalal: true },
+  { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/images (37).jpg", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking.", isHalal: false },
+  { id: 'p-kidney', name: "Kidney", price: 1000, category: "Raw Meat", image: "/images (38).jpg", description: "Premium Extra HD Kidney. Freshly sourced and prepared for dispatch.", hasTax: true, isHalal: true },
+  { id: 'p-osumbuko', name: "Osumbuko", price: 900, category: "Raw Meat", image: "/628cb2abc83cb (1).jpeg", description: "Premium Osso Buco cuts, perfect for slow cooking and rich, marrow-infused stews.", hasTax: true, isHalal: true },
+  { id: 'p-beef-on-bone', name: "Beef on Bone", price: 900, category: "Raw Meat", image: "/boneinroundsteaks (1).webp", description: "Select beef cuts on the bone, ideal for traditional stews and soups.", hasTax: true, isHalal: true },
   
   // COOKED MEAT
-  { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", description: "Expertly spiced beef, wet-fried to tender perfection. A Nairobi West signature dish." },
-  { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", description: "Expertly spiced goat meat, wet-fried to tender perfection. A Nairobi West signature dish." },
-  { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef." },
-  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", description: "Healthy and tender slow-boiled beef." },
-  { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts." },
-  { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken." },
-  { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips." },
+  { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", description: "Expertly spiced beef, wet-fried to tender perfection. A Nairobi West signature dish.", isHalal: true },
+  { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", description: "Expertly spiced goat meat, wet-fried to tender perfection. A Nairobi West signature dish.", isHalal: true },
+  { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef.", isHalal: true },
+  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", description: "Healthy and tender slow-boiled beef.", isHalal: true },
+  { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts.", isHalal: true },
+  { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken.", isHalal: true },
+  { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips.", isHalal: true },
   
   // GROCERY
-  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600", description: "The legendary Nairobi West accompaniment. Fresh tomatoes, onions, and coriander." },
+  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600", description: "The legendary Nairobi West accompaniment. Fresh tomatoes, onions, and coriander.", isHalal: true },
   
   // DRINKS
-  { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600", description: "Chilled 500ml Coca Cola." },
-  { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600", description: "Freshly squeezed passion fruit juice." },
+  { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600", description: "Chilled 500ml Coca Cola.", isHalal: true },
+  { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600", description: "Freshly squeezed passion fruit juice.", isHalal: true },
 
   // FINE WOOD KITCHEN
   { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg", description: "Handcrafted from solid acacia wood. Durable, antimicrobial, and beautiful." },
@@ -79,7 +79,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           description: localItem.description || "Premium quality product from the Steak West network.",
           imageUrl: localItem.image,
           category: localItem.category,
-          hasTax: localItem.hasTax
+          hasTax: localItem.hasTax,
+          isHalal: localItem.isHalal
         });
         setLoading(false);
         return;
@@ -159,7 +160,19 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   unoptimized={true}
                   sizes="(max-width: 1024px) 100vw, 66vw"
                 />
-                <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
+                
+                {product.isHalal && (
+                  <div className="absolute top-6 left-6 z-10 w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-white shadow-2xl bg-white animate-in zoom-in-50 duration-500">
+                    <Image 
+                      src="/images (45).jpg" 
+                      alt="Halal Certified" 
+                      fill 
+                      className="object-contain"
+                    />
+                  </div>
+                )}
+
+                <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
                   <Badge className="bg-primary text-white border-none font-black text-[12px] uppercase tracking-widest px-4 py-1 rounded-none shadow-xl">
                     {product.category}
                   </Badge>
@@ -169,9 +182,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-4">
-                <h1 className="text-4xl lg:text-5xl font-black font-headline text-primary uppercase tracking-tighter leading-none">
-                  {product.name}
-                </h1>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-4xl lg:text-5xl font-black font-headline text-primary uppercase tracking-tighter leading-none">
+                    {product.name}
+                  </h1>
+                </div>
                 <div className="flex items-center gap-4 text-[12px] font-bold text-muted-foreground uppercase tracking-widest">
                   <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> Priority Dispatch</span>
                   <span className="text-gray-300">|</span>
@@ -204,6 +219,14 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       </p>
                     </div>
                   </div>
+                  {product.isHalal && (
+                    <div className="flex items-center gap-3 pt-2 border-t border-dashed">
+                      <div className="w-6 h-6 relative rounded-full overflow-hidden shrink-0 border border-gray-200">
+                        <Image src="/images (45).jpg" alt="" fill className="object-contain" />
+                      </div>
+                      <p className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest">100% Halal Certified Production</p>
+                    </div>
+                  )}
                 </div>
 
                 <Button 
