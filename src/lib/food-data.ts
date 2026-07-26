@@ -1,5 +1,3 @@
-
-
 export type FoodCategory = 'Raw Meat' | 'Nyama Choma' | 'Delicacies' | 'Cooked' | 'Sides' | 'Drinks' | 'Grocery' | 'Essentials';
 export type OrderStatus = 'Pending' | 'Preparing' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
 
@@ -71,7 +69,7 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
 export const MOCK_MENU: MenuItem[] = [
   { id: 'c-beef-wet-1kg', restaurantId: 'r1', name: 'Beef Wet Fry 1kg', price: 1400, description: 'Expertly spiced beef, wet-fried to tender perfection.', imageUrl: '/images (41).jpg', category: 'Cooked' },
   { id: 'c-goat-wet-1kg', restaurantId: 'r1', name: 'Goat Wet Fry 1kg', price: 1400, description: 'Expertly spiced goat meat, wet-fried to tender perfection.', imageUrl: '/images (43).jpg', category: 'Cooked' },
-  { id: 'c-goat-choma-1kg', restaurantId: 'r1', name: 'Goat Choma 1kg', price: 1400, description: 'Tender flame-grilled goat meat seasoned for signature taste.', imageUrl: '/images (42).jpg', category: 'Cooked' },
+  { id: 'c-goat-choma-1kg', restaurantId: 'r1', name: 'Goat Choma 1kg', price: 1400, description: 'Tender flame-grilled goat meat seasoned for signature taste.', imageUrl: '/goatchoma.jpg', category: 'Cooked' },
   { id: 'p1', restaurantId: 'r1', name: 'BEEF CHEMSHA 1KG', price: 1400, description: 'Slow-boiled tender beef.', imageUrl: '/images (44).jpg', category: 'Cooked' },
   { id: 'p2', restaurantId: 'r1', name: 'BEEF CHOMA 1KG', price: 1400, description: 'Grilled beef cuts.', imageUrl: '/BEEF CHOMA.jpg', category: 'Nyama Choma', isPopular: true },
   { id: 'p3', restaurantId: 'r1', name: 'BEEF DRY FRY 1KG', price: 1400, description: 'Spiced dry-fried beef.', imageUrl: '/BEEF DRY FRY.jpg', category: 'Cooked' },
@@ -88,4 +86,3 @@ export const MOCK_ORDERS: Order[] = [
   { id: 'ORD-04', customerName: 'Jane', restaurantName: 'Steak West', items: ['Chicken'], total: 700, status: 'Delivered', date: '2024-05-20', deliveryAddress: 'Kileleshwa', hour: 14 },
   { id: 'ORD-05', customerName: 'Mike', restaurantName: 'Steak West', items: ['Mguu Cow'], total: 400, status: 'Delivered', date: '2024-05-20', deliveryAddress: 'CBD', hour: 15 },
 ];
-
