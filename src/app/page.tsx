@@ -116,7 +116,7 @@ const ALL_PRODUCTS = [
   
   // GROCERY
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
-  { g2: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
+  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
   
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
@@ -190,6 +190,7 @@ export default function HomePage() {
             className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
             priority
             data-ai-hint="grilling meat"
+            unoptimized={true}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
           <div className="absolute inset-0 flex flex-col items-start justify-center p-6 md:p-12 text-left">
@@ -305,7 +306,7 @@ export default function HomePage() {
             fill 
             className="object-cover"
             priority
-            unoptimized
+            unoptimized={true}
           />
         </div>
         
@@ -352,7 +353,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           className="object-cover transition-transform duration-700 group-hover:scale-110" 
           sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
           quality={100}
-          unoptimized={isLocal}
+          unoptimized={true}
           priority={isLocal}
         />
         
