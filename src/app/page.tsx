@@ -137,7 +137,6 @@ const ALL_PRODUCTS = [
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", isHalal: true },
   
   // GROCERY
-  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://images.unsplash.com/photo-1510627498534-cf7e9002facc?q=80&w=600", isHalal: true },
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", isHalal: true },
   
   // DRINKS
@@ -322,8 +321,8 @@ export default function HomePage() {
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {category.id === 'Grocery' ? (
                   <>
-                    {/* First Grocery Item */}
-                    {categoryProducts.slice(0, 1).map((product) => (
+                    {/* The product(s) */}
+                    {categoryProducts.map((product) => (
                       <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
                         <ProductCard 
                           product={product} 
@@ -334,8 +333,7 @@ export default function HomePage() {
                         />
                       </div>
                     ))}
-                    
-                    {/* Live Grocery Video Container - Spans 2 columns */}
+                    {/* The video container */}
                     <div className="col-span-2 relative aspect-[2/1] sm:aspect-auto rounded-lg md:rounded-xl overflow-hidden bg-black shadow-xl group border-2 border-primary/20">
                        <video 
                         autoPlay 
@@ -357,19 +355,6 @@ export default function HomePage() {
                           </div>
                        </div>
                     </div>
-
-                    {/* Remaining Grocery Items */}
-                    {categoryProducts.slice(1).map((product) => (
-                      <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
-                        <ProductCard 
-                          product={product} 
-                          onAdd={(e) => {
-                            e.stopPropagation();
-                            handleAdd(product);
-                          }} 
-                        />
-                      </div>
-                    ))}
                   </>
                 ) : (
                   categoryProducts.map((product) => (

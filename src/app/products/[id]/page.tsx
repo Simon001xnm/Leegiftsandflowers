@@ -35,7 +35,6 @@ const STATIC_PRODUCTS = [
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips.", isHalal: true },
   
   // GROCERY
-  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://images.unsplash.com/photo-1510627498534-cf7e9002facc?q=80&w=600", description: "The legendary Nairobi West accompaniment. Fresh tomatoes, onions, and coriander.", isHalal: true },
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", description: "A seasonal selection of farm-fresh vegetables, hand-picked for quality.", isHalal: true },
   
   // DRINKS
