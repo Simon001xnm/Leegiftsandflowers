@@ -13,10 +13,10 @@ import { cn } from "@/lib/utils";
 const CATEGORIES = [
   { id: 'Raw Meat', icon: Beef, label: "Raw Meat" },
   { id: 'Cooked Meat', icon: Utensils, label: "Cooked Meat" },
-  { id: 'Fine Wood Kitchen', icon: ChefHat, label: "Fine Wood" },
   { id: 'Grocery', icon: ShoppingBag, label: "Grocery" },
   { id: 'Drinks', icon: Coffee, label: "Drinks" },
   { id: 'Phone Accessories', icon: Smartphone, label: "Accessories" },
+  { id: 'Fine Wood Kitchen', icon: ChefHat, label: "Fine Wood" },
 ];
 
 const ALL_PRODUCTS = [
@@ -70,7 +70,21 @@ const ALL_PRODUCTS = [
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   
-  // FINE WOOD KITCHEN (New Node)
+  // COOKED MEAT
+  { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
+  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg" },
+  { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
+  { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
+  
+  // GROCERY
+  { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
+  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
+  
+  // DRINKS
+  { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
+  { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
+
+  // FINE WOOD KITCHEN (Last Node)
   { 
     id: 'fw-chopping', 
     name: "Fine Wood Chopping Board", 
@@ -99,20 +113,6 @@ const ALL_PRODUCTS = [
     category: "Fine Wood Kitchen", 
     image: "/spatula set.jpg" 
   },
-
-  // COOKED MEAT
-  { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
-  { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg" },
-  { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
-  { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
-  
-  // GROCERY
-  { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
-  { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
-  
-  // DRINKS
-  { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
-  { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
 ];
 
 export default function HomePage() {
