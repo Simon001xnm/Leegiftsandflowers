@@ -11,7 +11,7 @@ export function Footer() {
   return (
     <footer className="relative w-full h-[400px] md:h-[700px] overflow-hidden bg-black">
       <Image 
-        src="/4eb2df709a9485b9045e3b464e1caef0.jpg" 
+        src="/footer.jpeg" 
         alt="Steak West Terminal Dispatch" 
         fill 
         className="object-cover"
