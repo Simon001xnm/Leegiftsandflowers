@@ -136,8 +136,8 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
       {/* Promotional Banner Node - Full Width */}
-      <div className="w-full px-0 md:px-0 lg:px-0 mb-6 mt-24 md:mt-32">
-        <div className="relative w-full h-[180px] md:h-[320px] lg:h-[400px] rounded-none md:rounded-none lg:rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
+      <div className="w-full px-0 mb-6 mt-24 md:mt-32">
+        <div className="relative w-full h-[180px] md:h-[320px] lg:h-[400px] rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
             alt="Promotional Banner" 
@@ -174,7 +174,7 @@ export default function HomePage() {
 
       {/* Sticky Header Node */}
       <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-0 py-4 md:py-6">
-        <div className="w-full mx-auto space-y-6 md:px-0">
+        <div className="w-full mx-auto space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
              <div className="relative flex-grow max-w-none px-4 md:px-6">
                 <Search className="absolute left-8 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -209,7 +209,7 @@ export default function HomePage() {
       </div>
 
       {/* Main Marketplace Grid - Edge to Edge */}
-      <div className="w-full mx-auto px-0 md:px-0 lg:px-0 mt-6 space-y-10 md:space-y-12 pb-20">
+      <div className="w-full mx-auto px-0 mt-6 space-y-10 md:space-y-12 pb-20 overflow-hidden">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
@@ -224,33 +224,33 @@ export default function HomePage() {
               </div>
               
               {/* HIGH DENSITY ADAPTIVE GRID: 3 mobile, 6 tablet, 8 laptop */}
-              <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-0 w-full md:border-l md:border-t lg:border-l lg:border-t">
+              <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-0 w-full md:border-l md:border-t lg:border-l lg:border-t overflow-hidden">
                 {category.id === 'Grocery' ? (
                   <>
                     {categoryProducts.map((product) => (
-                      <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
+                      <div key={product.id} className="min-w-0 w-full" onClick={() => window.location.href = `/products/${product.id}`}>
                         <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                       </div>
                     ))}
-                    <div className="relative aspect-square rounded-none overflow-hidden bg-black shadow-none group border-b border-r border-gray-100">
+                    <div className="relative aspect-square rounded-none overflow-hidden bg-black shadow-none group border-b border-r border-gray-100 min-w-0 w-full">
                        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
                           <source src="/video.mp4" type="video/mp4" />
                        </video>
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                       <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center animate-pulse">
-                             <Play className="w-3 h-3 text-white fill-current ml-0.5" />
+                       <div className="absolute bottom-2 left-2 flex items-center gap-1">
+                          <div className="w-4 h-4 rounded-full bg-primary flex items-center justify-center animate-pulse">
+                             <Play className="w-2 h-2 text-white fill-current ml-0.5" />
                           </div>
                           <div>
-                             <p className="text-[10px] font-black text-white uppercase tracking-tighter leading-none">Fresh Market</p>
-                             <p className="text-[8px] font-bold text-primary uppercase tracking-widest">Delivered Fresh</p>
+                             <p className="text-[7px] font-black text-white uppercase tracking-tighter leading-none">Fresh Market</p>
+                             <p className="text-[6px] font-bold text-primary uppercase tracking-widest">Delivered Fresh</p>
                           </div>
                        </div>
                     </div>
                   </>
                 ) : (
                   categoryProducts.map((product) => (
-                    <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
+                    <div key={product.id} className="min-w-0 w-full" onClick={() => window.location.href = `/products/${product.id}`}>
                       <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                     </div>
                   ))
@@ -282,7 +282,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   };
 
   return (
-    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border-b border-r border-gray-100 shadow-none hover:bg-gray-50 transition-all duration-300 rounded-none bg-white">
+    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border-b border-r border-gray-100 shadow-none hover:bg-gray-50 transition-all duration-300 rounded-none bg-white min-w-0">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
         <Image src={getSafeUrl(product.image)} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 33vw, (max-width: 1024px) 16vw, 12vw" quality={100} unoptimized={true} />
         {product.isHalal && (
@@ -294,14 +294,14 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           <Plus className="w-3 h-3 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
-      <div className="p-2 md:p-4 flex-grow flex flex-col justify-between space-y-1">
-        <div className="space-y-0.5">
-          <p className="text-[10px] md:text-[13px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">{product.name}</p>
+      <div className="p-2 md:p-4 flex-grow flex flex-col justify-between space-y-1 min-w-0">
+        <div className="space-y-0.5 min-w-0">
+          <p className="text-[10px] md:text-[13px] font-black uppercase tracking-tighter truncate leading-tight group-hover:text-primary transition-colors">{product.name}</p>
           <p className="text-[7px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
         </div>
-        <div className="flex items-center gap-1">
-          <p className="text-[11px] md:text-[16px] font-black text-black">KES {product.price.toLocaleString()}</p>
-          {product.hasTax && <span className="text-[6px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
+        <div className="flex items-center gap-1 min-w-0 overflow-hidden">
+          <p className="text-[11px] md:text-[16px] font-black text-black whitespace-nowrap">KES {product.price.toLocaleString()}</p>
+          {product.hasTax && <span className="text-[6px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter shrink-0">+ TAX</span>}
         </div>
       </div>
     </Card>
