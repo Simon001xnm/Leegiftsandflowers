@@ -135,7 +135,7 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
-      {/* Promotional Banner Node - Full Width on Desktop */}
+      {/* Promotional Banner Node */}
       <div className="w-full px-2 md:px-10 lg:px-4 xl:px-0 mb-6 mt-24 md:mt-32">
         <div className="relative w-full h-[180px] md:h-[320px] lg:h-[400px] rounded-[2rem] md:rounded-[3rem] lg:rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
@@ -208,7 +208,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid - Edge to Edge on Desktop */}
+      {/* Main Marketplace Grid */}
       <div className="w-full mx-auto px-2 md:px-10 lg:px-4 xl:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
@@ -223,7 +223,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* Responsive Grid: 3 columns mobile, 4 sm/md, 6 lg+ */}
+              {/* PRECISION GRID: 3 columns mobile (DO NOT CHANGE), 6 columns desktop */}
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1.5 md:gap-4 w-full">
                 {category.id === 'Grocery' ? (
                   <>
@@ -261,7 +261,6 @@ export default function HomePage() {
         })}
       </div>
 
-      {/* Terminal Node Implementation */}
       <Footer />
     </main>
   );
