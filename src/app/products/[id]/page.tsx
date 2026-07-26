@@ -16,7 +16,7 @@ const STATIC_PRODUCTS = [
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
   { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
-  { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/(30).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
+  { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/images (35).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
   { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/MATUMBO.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
   { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/PORK STEAK.webp", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
   
