@@ -12,6 +12,7 @@ import { createClient } from '@/lib/supabase/client';
 /**
  * PRODUCTION-READY ROLE-BASED LAYOUT
  * Orchestrates navigation based on real Supabase roles.
+ * Updated: Added bottom padding on mobile to prevent Bottom Nav and Cart Bar overlapping content.
  */
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -42,7 +43,7 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
       <div className="flex flex-grow relative">
         {showSidebar && <SidebarNav />}
         <main className={cn(
-          "flex-grow transition-all duration-300",
+          "flex flex-grow transition-all duration-300 pb-32 md:pb-0", // Global mobile bottom inset
           showSidebar ? "lg:ml-64" : "ml-0"
         )}>
           {children}
