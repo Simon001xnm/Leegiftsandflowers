@@ -154,12 +154,6 @@ export default function HomePage() {
     }
   };
 
-  const getSafeUrl = (url: string) => {
-    if (!url) return '';
-    if (url.startsWith('http')) return url;
-    return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
-  };
-
   return (
     <main className="min-h-screen bg-white w-full max-w-[100vw] overflow-x-hidden">
       {/* Promotional Banner Node */}
@@ -279,7 +273,7 @@ export default function HomePage() {
       </div>
 
       {/* Terminal Delivery Node & Footer */}
-      <section className="relative mt-10 min-h-[600px] flex flex-col justify-end">
+      <section className="relative min-h-[700px] flex flex-col justify-end">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/4eb2df709a9485b9045e3b464e1caef0.jpg" 
@@ -289,8 +283,8 @@ export default function HomePage() {
             priority
             unoptimized
           />
-          {/* Light overlay at the bottom for black text visibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
+          {/* Subtle white-to-transparent overlay at the bottom for black text readability on top of image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-white/10 to-transparent" />
         </div>
         
         <div className="relative z-10 w-full">
