@@ -20,6 +20,13 @@ const STATIC_PRODUCTS = [
   { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/(30).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
   { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/MATUMBO.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
   { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/PORK STEAK.webp", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
+  
+  // FINE WOOD KITCHEN DETAIL NODES
+  { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg", description: "Handcrafted from solid acacia wood. Durable, antimicrobial, and beautiful." },
+  { id: 'fw-knife', name: "Fine Wood Knife Block", price: 2500, category: "Fine Wood Kitchen", image: "/knife block.jpg", description: "Elite wooden storage for your premium cutlery set. Magnetic holding system." },
+  { id: 'fw-bowl', name: "Fine Wood Salad Bowl", price: 1800, category: "Fine Wood Kitchen", image: "/salad bowl.jpg", description: "Deep walnut salad bowl. Perfect for serving fresh kachumbari in style." },
+  { id: 'fw-spatula', name: "Fine Wood Spatula Set", price: 1200, category: "Fine Wood Kitchen", image: "/spatula set.jpg", description: "4-piece handcrafted cooking tool set. Gentle on non-stick surfaces." },
+
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg", description: "Elite quality beef, fresh from our main node." },
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", description: "Legendary Nairobi West grilled beef." },
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg", description: "Healthy and tender slow-boiled beef." },
@@ -40,6 +47,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const getSafeUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
+    // Manual Hex-Safe encoding for special characters like parentheses
     return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
   };
 
@@ -109,7 +117,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   if (!product) return <div className="p-20 text-center font-headline text-2xl uppercase font-black">Product not found</div>;
 
   const isLocal = !product.imageUrl.startsWith('http');
-  const isHD = isLocal;
   const safeImageUrl = getSafeUrl(product.imageUrl);
 
   return (
@@ -134,7 +141,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   className="object-cover"
                   priority
                   quality={100}
-                  unoptimized={isHD}
+                  unoptimized={isLocal}
                   sizes="(max-width: 1024px) 100vw, 66vw"
                 />
                 <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
@@ -151,14 +158,14 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   {product.name}
                 </h1>
                 <div className="flex items-center gap-4 text-[12px] font-bold text-muted-foreground uppercase tracking-widest">
-                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> 20 Min Delivery</span>
+                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> Priority Dispatch</span>
                   <span className="text-gray-300">|</span>
-                  <span className="flex items-center gap-1.5 text-emerald-600"><TrendingUp className="w-4 h-4" /> Freshly Sourced</span>
+                  <span className="flex items-center gap-1.5 text-emerald-600"><TrendingUp className="w-4 h-4" /> Artisan Quality</span>
                 </div>
               </div>
 
               <div className="py-6 border-y border-dashed space-y-2">
-                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Price per Unit</p>
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Price Node</p>
                 <div className="flex items-baseline gap-2">
                   <p className="text-4xl md:text-5xl font-black text-black leading-none">KES {product.price.toLocaleString()}</p>
                   {product.hasTax && <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Exclusive of VAT</span>}
@@ -178,7 +185,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     <div>
                       <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Sourced From</p>
                       <p className="text-[14px] font-black text-black uppercase tracking-tighter">
-                        Steak West Butchery Node
+                        Fine Woods Merchant Node
                       </p>
                     </div>
                   </div>

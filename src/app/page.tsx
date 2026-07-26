@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
 const CATEGORIES = [
   { id: 'Raw Meat', icon: Beef, label: "Raw Meat" },
   { id: 'Cooked Meat', icon: Utensils, label: "Cooked Meat" },
+  { id: 'Fine Wood Kitchen', icon: ChefHat, label: "Fine Wood" },
   { id: 'Grocery', icon: ShoppingBag, label: "Grocery" },
   { id: 'Drinks', icon: Coffee, label: "Drinks" },
-  { id: 'Kitchen Appliances', icon: ChefHat, label: "Appliances" },
   { id: 'Phone Accessories', icon: Smartphone, label: "Accessories" },
 ];
 
@@ -69,14 +69,47 @@ const ALL_PRODUCTS = [
   },
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
+  
+  // FINE WOOD KITCHEN (New Node)
+  { 
+    id: 'fw-chopping', 
+    name: "Fine Wood Chopping Board", 
+    price: 1500, 
+    category: "Fine Wood Kitchen", 
+    image: "/chopping board.jpg" 
+  },
+  { 
+    id: 'fw-knife', 
+    name: "Fine Wood Knife Block", 
+    price: 2500, 
+    category: "Fine Wood Kitchen", 
+    image: "/knife block.jpg" 
+  },
+  { 
+    id: 'fw-bowl', 
+    name: "Fine Wood Salad Bowl", 
+    price: 1800, 
+    category: "Fine Wood Kitchen", 
+    image: "/salad bowl.jpg" 
+  },
+  { 
+    id: 'fw-spatula', 
+    name: "Fine Wood Spatula Set", 
+    price: 1200, 
+    category: "Fine Wood Kitchen", 
+    image: "/spatula set.jpg" 
+  },
+
   // COOKED MEAT
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg" },
   { id: 'p1', name: "Beef Chemsha 1kg", price: 1400, category: "Cooked Meat", image: "/beef chemsha SMB.jpg" },
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg" },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg" },
+  
   // GROCERY
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Grocery", image: "/CHIPS.jpg" },
   { id: 'g2', name: "Fresh Kachumbari", price: 150, category: "Grocery", image: "https://picsum.photos/seed/salad/600/600" },
+  
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600" },
   { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
@@ -169,6 +202,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
+              {/* Strict 3-column mobile layout (grid-cols-3) */}
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-1.5 md:gap-4 w-full">
                 {categoryProducts.map((product) => (
                   <div key={product.id} className="min-w-0" onClick={() => window.location.href = `/products/${product.id}`}>
@@ -210,14 +244,12 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   const getSafeUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    // Encode spaces, parentheses and special chars safely for browser fetch
+    // Manual Hex-Safe encoding for special characters like parentheses
     return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
   };
 
   const isLocal = !product.image.startsWith('http');
-  // FORCE HD BYPASS FOR ALL LOCAL ASSETS
-  const isHD = isLocal;
-
+  
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl bg-white">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
@@ -228,8 +260,8 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           className="object-cover transition-transform duration-700 group-hover:scale-110" 
           sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
           quality={100}
-          priority={isHD}
-          unoptimized={isHD}
+          unoptimized={isLocal}
+          priority={isLocal}
         />
         
         <button 
