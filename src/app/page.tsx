@@ -81,6 +81,14 @@ const ALL_PRODUCTS = [
     category: "Raw Meat", 
     image: "/images (37).jpg"
   },
+  { 
+    id: 'p-kidney', 
+    name: "Kidney", 
+    price: 1000, 
+    category: "Raw Meat", 
+    image: "/images (38).jpg",
+    hasTax: true
+  },
   { id: 'p4', name: "Beef Takeaway", price: 900, category: "Raw Meat", image: "/BEEF TAKEAWAY.jpg" },
   { id: 'p10', name: "Goat Meat 1kg", price: 1350, category: "Raw Meat", image: "https://picsum.photos/seed/goat1/600/600" },
   
@@ -175,7 +183,7 @@ export default function HomePage() {
             <h2 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-2">
               STEAK N BITE
             </h2>
-            <p className="text-[10px] md:text-sm font-bold text-white/70 uppercase tracking-widest flex items-center gap-2">
+            <p className="text-[10px] md:sm font-bold text-white/70 uppercase tracking-widest flex items-center gap-2">
               Save up to 20% on select raw cuts <ArrowRight className="w-4 h-4 text-primary" />
             </p>
           </div>
