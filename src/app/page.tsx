@@ -135,8 +135,8 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
-      {/* Promotional Banner Node */}
-      <div className="w-full px-2 md:px-10 lg:px-4 xl:px-0 mb-6 mt-24 md:mt-32">
+      {/* Promotional Banner Node - Full Width on Desktop */}
+      <div className="w-full px-2 md:px-10 lg:px-0 mb-6 mt-24 md:mt-32">
         <div className="relative w-full h-[180px] md:h-[320px] lg:h-[400px] rounded-[2rem] md:rounded-[3rem] lg:rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
@@ -208,23 +208,23 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid */}
-      <div className="w-full mx-auto px-2 md:px-10 lg:px-4 xl:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
+      {/* Main Marketplace Grid - Edge to Edge on Desktop */}
+      <div className="w-full mx-auto px-2 md:px-10 lg:px-0 mt-6 space-y-10 md:space-y-12 pb-20">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
 
           return (
             <section key={category.id} id={category.id} className="space-y-3 md:space-y-4 scroll-mt-40">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-2 px-1">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-2 px-2 md:px-6">
                 <h2 className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
                   <category.icon className="w-3 h-3 md:w-4 md:h-4 text-primary" /> {category.id}
                 </h2>
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* PRECISION GRID: 3 columns mobile (DO NOT CHANGE), 6 columns desktop */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1.5 md:gap-4 w-full">
+              {/* PRECISION GRID: 1 column mobile, 6 columns desktop */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-4 lg:gap-0 w-full lg:border-l lg:border-t">
                 {category.id === 'Grocery' ? (
                   <>
                     {categoryProducts.map((product) => (
@@ -232,18 +232,18 @@ export default function HomePage() {
                         <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                       </div>
                     ))}
-                    <div className="col-span-2 lg:col-span-1 relative aspect-[2/1] sm:aspect-auto rounded-lg md:rounded-xl overflow-hidden bg-black shadow-xl group border-2 border-primary/20">
+                    <div className="relative aspect-square sm:aspect-auto rounded-none overflow-hidden bg-black shadow-none group border-b lg:border-r border-gray-100">
                        <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
                           <source src="/video.mp4" type="video/mp4" />
                        </video>
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                       <div className="absolute bottom-2 left-3 md:bottom-4 md:left-5 flex items-center gap-2 md:gap-3">
-                          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary flex items-center justify-center animate-pulse">
-                             <Play className="w-3 h-3 md:w-4 h-4 text-white fill-current ml-0.5" />
+                       <div className="absolute bottom-4 left-5 flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center animate-pulse">
+                             <Play className="w-4 h-4 text-white fill-current ml-0.5" />
                           </div>
                           <div>
-                             <p className="text-[10px] md:text-[12px] font-black text-white uppercase tracking-tighter leading-none">Fresh Market</p>
-                             <p className="text-[8px] md:text-[10px] font-bold text-primary uppercase tracking-widest">Delivered Fresh</p>
+                             <p className="text-[12px] font-black text-white uppercase tracking-tighter leading-none">Fresh Market</p>
+                             <p className="text-[10px] font-bold text-primary uppercase tracking-widest">Delivered Fresh</p>
                           </div>
                        </div>
                     </div>
@@ -282,26 +282,26 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   };
 
   return (
-    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl bg-white">
+    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border-b lg:border-r border-gray-100 shadow-none hover:bg-gray-50 transition-all duration-300 rounded-none bg-white">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
-        <Image src={getSafeUrl(product.image)} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw" quality={100} unoptimized={true} />
+        <Image src={getSafeUrl(product.image)} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 16vw" quality={100} unoptimized={true} />
         {product.isHalal && (
-          <div className="absolute top-1.5 left-1.5 md:top-2 md:left-2 z-10 w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-white shadow-xl bg-white">
-            <Image src="/images (45).jpg" alt="Halal Certified" fill className="object-contain p-0.5" />
+          <div className="absolute top-4 left-4 z-10 w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-xl bg-white">
+            <Image src="/images (45).jpg" alt="Halal Certified" fill className="object-contain p-1" />
           </div>
         )}
-        <button onClick={onAdd} className="absolute bottom-1 right-1 w-7 h-7 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90">
-          <Plus className="w-4 h-4 md:w-6 md:h-6 stroke-[3px]" />
+        <button onClick={onAdd} className="absolute bottom-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100">
+          <Plus className="w-6 h-6 stroke-[3px]" />
         </button>
       </div>
-      <div className="p-1.5 md:p-3 flex-grow flex flex-col justify-between space-y-1">
-        <div className="space-y-0.5">
-          <p className="text-[10px] md:text-[13px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">{product.name}</p>
-          <p className="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
+      <div className="p-6 flex-grow flex flex-col justify-between space-y-2">
+        <div className="space-y-1">
+          <p className="text-[15px] font-black uppercase tracking-tighter line-clamp-1 leading-tight group-hover:text-primary transition-colors">{product.name}</p>
+          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
         </div>
-        <div className="flex items-center gap-1">
-          <p className="text-[11px] md:text-[16px] font-black text-primary">{product.price.toLocaleString()}</p>
-          {product.hasTax && <span className="text-[6px] md:text-[9px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
+        <div className="flex items-center gap-2">
+          <p className="text-[18px] font-black text-black">KES {product.price.toLocaleString()}</p>
+          {product.hasTax && <span className="text-[9px] font-black text-gray-300 uppercase tracking-tighter">+ TAX</span>}
         </div>
       </div>
     </Card>
