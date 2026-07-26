@@ -340,9 +340,9 @@ export default function HomePage() {
                         muted 
                         loop 
                         playsInline 
-                        className="absolute inset-0 w-full h-full object-cover opacity-70"
+                        className="absolute inset-0 w-full h-full object-cover opacity-80"
                        >
-                          <source src="https://assets.mixkit.co/videos/preview/mixkit-vegetables-in-a-market-stall-4303-large.mp4" type="video/mp4" />
+                          <source src="/Klickpin.com- 3448137210838714-pin-id-3448137210838714.mp4" type="video/mp4" />
                        </video>
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                        <div className="absolute bottom-2 left-3 md:bottom-4 md:left-5 flex items-center gap-2 md:gap-3">
