@@ -22,6 +22,7 @@ import { Card } from "@/components/ui/card";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { Footer } from "@/components/landing/Footer";
 
 const CATEGORIES = [
   { id: 'Raw Meat', icon: Beef, label: "Raw Meat" },
@@ -153,10 +154,16 @@ export default function HomePage() {
     }
   };
 
+  const getSafeUrl = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    return url.split('/').map(segment => encodeURIComponent(segment)).join('/');
+  };
+
   return (
-    <main className="min-h-screen bg-white pb-24 pt-24 md:pt-32 w-full max-w-[100vw] overflow-x-hidden">
+    <main className="min-h-screen bg-white w-full max-w-[100vw] overflow-x-hidden">
       {/* Promotional Banner Node */}
-      <div className="w-full px-2 md:px-6 mb-6">
+      <div className="w-full px-2 md:px-6 mb-6 mt-24 md:mt-32">
         <div className="relative w-full h-[140px] md:h-[240px] rounded-[2rem] overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
@@ -235,7 +242,7 @@ export default function HomePage() {
       </div>
 
       {/* Main Marketplace Grid */}
-      <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12">
+      <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
@@ -270,6 +277,25 @@ export default function HomePage() {
           );
         })}
       </div>
+
+      {/* Terminal Delivery Node & Footer */}
+      <section className="relative mt-10 min-h-[600px] flex flex-col justify-end">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/4eb2df709a9485b9045e3b464e1caef0.jpg" 
+            alt="Elite Delivery Dispatch" 
+            fill 
+            className="object-cover"
+            priority
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 w-full">
+           <Footer />
+        </div>
+      </section>
     </main>
   );
 }
@@ -298,7 +324,6 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   };
 
   const isLocal = !product.image.startsWith('http');
-  const isPremium = product.category === 'Raw Meat' || product.category === 'Fine Wood Kitchen' || product.category === 'Phone Accessories';
   
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg md:rounded-xl bg-white">
@@ -311,7 +336,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           sizes="(max-width: 480px) 33vw, (max-width: 1024px) 25vw, 15vw"
           quality={100}
           unoptimized={isLocal}
-          priority={isLocal && isPremium}
+          priority={isLocal}
         />
         
         <button 

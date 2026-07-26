@@ -7,7 +7,7 @@ import { Facebook, Instagram, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white border-t border-white/5 py-12 md:py-20">
+    <footer className="bg-transparent text-white py-12 md:py-20">
       <div className="max-w-[1400px] mx-auto px-5">
         <div className="grid md:grid-cols-12 gap-10 items-start md:items-center">
           
