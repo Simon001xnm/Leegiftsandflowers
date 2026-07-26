@@ -354,7 +354,7 @@ export default function HomePage() {
                         preload="auto"
                         className="absolute inset-0 w-full h-full object-cover opacity-80"
                        >
-                          <source src="/Klickpin.com-%203448137210838714-pin-id-3448137210838714.mp4" type="video/mp4" />
+                          <source src="/video.mp4" type="video/mp4" />
                        </video>
                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                        <div className="absolute bottom-2 left-3 md:bottom-4 md:left-5 flex items-center gap-2 md:gap-3">
