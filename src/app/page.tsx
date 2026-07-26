@@ -208,6 +208,17 @@ export default function HomePage() {
             unoptimized={true}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
+          
+          {/* Halal Badge Node (Hero) */}
+          <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-12 z-20 w-16 h-16 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white shadow-2xl bg-white flex items-center justify-center animate-in zoom-in duration-700 delay-500">
+            <Image 
+              src="/images (45).jpg" 
+              alt="100% Halal Certified" 
+              fill 
+              className="object-contain p-2"
+            />
+          </div>
+
           <div className="absolute inset-0 flex flex-col items-start justify-center p-6 md:p-12 text-left">
             <div className="inline-flex items-center gap-2 bg-primary text-white px-3 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-3">
               <Tag className="w-3 h-3" /> Special Offer
