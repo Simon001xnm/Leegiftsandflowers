@@ -114,6 +114,15 @@ const ALL_PRODUCTS = [
     hasTax: true,
     isHalal: true
   },
+  { 
+    id: 'p-goat-takeaway', 
+    name: "Goat Takeaway 1kg", 
+    price: 1000, 
+    category: "Raw Meat", 
+    image: "/images (47).jpg", 
+    hasTax: true,
+    isHalal: true
+  },
   
   // COOKED MEAT
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
