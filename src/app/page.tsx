@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { Plus, Search, ShoppingBag, Beef, Utensils, Zap, Coffee, Smartphone, ChefHat } from "lucide-react";
+import { Plus, Search, ShoppingBag, Beef, Utensils, Zap, Coffee, Smartphone, ChefHat, Tag, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -151,6 +151,32 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white pb-24 pt-24 md:pt-32 w-full max-w-[100vw] overflow-x-hidden">
+      {/* Promotional Banner Node - Placed in the margin space */}
+      <div className="w-full px-2 md:px-6 mb-6">
+        <div className="relative w-full h-[140px] md:h-[240px] rounded-[2rem] overflow-hidden bg-black shadow-2xl group cursor-pointer">
+          <Image 
+            src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
+            alt="Promotional Banner" 
+            fill 
+            className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
+            priority
+            data-ai-hint="grilling meat"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
+          <div className="absolute inset-0 flex flex-col items-start justify-center p-6 md:p-12 text-left">
+            <div className="inline-flex items-center gap-2 bg-primary text-white px-3 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-3">
+              <Tag className="w-3 h-3" /> Special Offer
+            </div>
+            <h2 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-2">
+              WEEKEND BBQ<br />EXTRAVAGANZA
+            </h2>
+            <p className="text-[10px] md:text-sm font-bold text-white/70 uppercase tracking-widest flex items-center gap-2">
+              Save up to 20% on select raw cuts <ArrowRight className="w-4 h-4 text-primary" />
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Sticky Header Node */}
       <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-4 py-4 md:py-6">
         <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto space-y-6">
