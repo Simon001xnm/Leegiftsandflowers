@@ -119,6 +119,7 @@ const ALL_PRODUCTS = [
   // COOKED MEAT
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
   { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", isHalal: true },
+  { id: 'c-goat-choma-1kg', name: "Goat Choma 1kg", price: 1400, category: "Cooked Meat", image: "/images (42).jpg", isHalal: true },
   { id: 'p2', name: "Beef Choma 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF CHOMA.jpg", isHalal: true },
   { id: 'p1', name: "BEEF CHEMSHA 1KG", price: 1400, category: "Cooked Meat", image: "/images (44).jpg", isHalal: true },
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", isHalal: true },
@@ -192,6 +193,8 @@ export default function HomePage() {
       window.scrollTo({ top, behavior: 'smooth' });
     }
   };
+
+  if (!isMounted) return null;
 
   return (
     <main className="min-h-screen bg-white w-full max-w-[100vw] overflow-x-hidden">
@@ -288,7 +291,7 @@ export default function HomePage() {
 
       {/* Main Marketplace Grid */}
       <div className="w-full max-w-[1600px] lg:max-w-[1400px] mx-auto px-2 md:px-6 mt-6 space-y-10 md:space-y-12 pb-20">
-        {isMounted && CATEGORIES.map((category) => {
+        {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => 
             p.category === category.id && 
             p.name.toLowerCase().includes(search.toLowerCase())
@@ -383,9 +386,9 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           priority={isLocal}
         />
         
-        {/* Halal Badge Node (Increased Size) */}
+        {/* Halal Badge Node (Scaling Applied) */}
         {product.isHalal && (
-          <div className="absolute top-1.5 left-1.5 md:top-3 md:left-3 z-10 w-8 h-8 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-white shadow-xl bg-white">
+          <div className="absolute top-1.5 left-1.5 md:top-2 md:left-2 z-10 w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-white shadow-xl bg-white">
             <Image 
               src="/images (45).jpg" 
               alt="Halal Certified" 
@@ -423,3 +426,4 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
     </Card>
   );
 }
+
