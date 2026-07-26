@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -10,13 +9,14 @@ import { useCart } from "@/context/CartContext";
 /**
  * HIGH-DENSITY MOBILE NAVIGATION
  * Optimized for essential retail flow.
+ * Removed "Home" in favor of "Shop".
  */
 export function MobileBottomNav() {
   const pathname = usePathname();
   const { itemCount } = useCart();
 
   const navItems = [
-    { href: "/", label: "Home", icon: Home },
+    { href: "/", label: "Shop", icon: Home },
     { href: "/orders", label: "Orders", icon: Utensils },
     { href: "/checkout", label: "Basket", icon: ShoppingBag, badge: itemCount },
     { href: "/profile", label: "Account", icon: User },

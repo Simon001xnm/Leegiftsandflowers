@@ -129,7 +129,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         <div className="container mx-auto px-4 py-4 lg:py-8">
           <div className="mb-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground">
             <Link href="/" className="hover:text-primary flex items-center gap-1">
-               <ChevronLeft className="w-3 h-3" /> Home
+               <ChevronLeft className="w-3 h-3" /> Shop
             </Link>
             <span>/</span>
             <span className="text-black">{product.name}</span>

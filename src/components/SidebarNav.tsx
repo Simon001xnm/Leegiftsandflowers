@@ -12,8 +12,12 @@ import {
 import { cn } from "@/lib/utils";
 import { Suspense } from "react";
 
+/**
+ * Enterprise Inventory Navigation
+ * Removed "Home" in favor of "Shop".
+ */
 const SIDEBAR_ITEMS = [
-  { href: "/", label: "Home", icon: Home },
+  { href: "/", label: "Shop", icon: Home },
   { href: "/restaurants?cat=Raw Meat", label: "Butchery", icon: Beef, cat: "Raw Meat" },
   { href: "/restaurants?cat=Nyama Choma", label: "Grills", icon: Utensils, cat: "Nyama Choma" },
   { href: "/restaurants?cat=Delicacies", label: "Convenience", icon: Zap, cat: "Delicacies" },
