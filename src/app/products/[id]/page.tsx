@@ -15,7 +15,7 @@ import { createClient } from "@/lib/supabase/client";
 const STATIC_PRODUCTS = [
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true },
-  { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/(29).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
+  { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/(34).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true },
   { id: 'p-liver', name: "Liver", price: 1100, category: "Raw Meat", image: "/(30).jpg", description: "Extra HD Premium Liver. Rich in nutrients and freshly sourced.", hasTax: true },
   { id: 'p-matumbo', name: "Matumbo", price: 600, category: "Raw Meat", image: "/MATUMBO.jpg", description: "Premium cleaned matumbo (tripe), freshly processed and ready for your favorite stew." },
   { id: 'p-pork', name: "Pork Steak", price: 1000, category: "Raw Meat", image: "/PORK STEAK.webp", description: "Elite Extra HD Pork Steak. Tender and succulent cuts for gourmet cooking." },
@@ -24,7 +24,7 @@ const STATIC_PRODUCTS = [
   { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg", description: "Handcrafted from solid acacia wood. Durable, antimicrobial, and beautiful." },
   { id: 'fw-knife', name: "Fine Wood Knife Block", price: 2500, category: "Fine Wood Kitchen", image: "/knife block.jpg", description: "Elite wooden storage for your premium cutlery set. Magnetic holding system." },
   { id: 'fw-bowl', name: "Fine Wood Salad Bowl", price: 1800, category: "Fine Wood Kitchen", image: "/salad bowl.jpg", description: "Deep walnut salad bowl. Perfect for serving fresh kachumbari in style." },
-  { id: 'fw-spatula', name: "Fine Wood Spatula Set", price: 1200, category: "Fine Wood Kitchen", image: "/spatula set.jpg", description: "4-piece handcrafted cooking tool set. Gentle on non-stick surfaces." },
+  { id: 'fw-status', name: "Fine Wood Spatula Set", price: 1200, category: "Fine Wood Kitchen", image: "/spatula set.jpg", description: "4-piece handcrafted cooking tool set. Gentle on non-stick surfaces." },
 
   // PHONES & ACCESSORIES
   { id: 'ph-iphone', name: "iPhone 15 Pro", price: 155000, category: "Phone Accessories", image: "/iphone.jpg", description: "The ultimate iPhone with Titanium design, A17 Pro chip, and advanced Pro camera system." },
