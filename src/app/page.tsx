@@ -144,10 +144,8 @@ const ALL_PRODUCTS = [
   { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", isHalal: true },
 
   // FINE WOOD KITCHEN
-  { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg" },
-  { id: 'fw-knife', name: "Fine Wood Knife Block", price: 2500, category: "Fine Wood Kitchen", image: "/knife block.jpg" },
-  { id: 'fw-bowl', name: "Fine Wood Salad Bowl", price: 1800, category: "Fine Wood Kitchen", image: "/salad bowl.jpg" },
-  { id: 'fw-spatula', name: "Fine Wood Spatula Set", price: 1200, category: "Fine Wood Kitchen", image: "/spatula set.jpg" },
+  { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg" },
+  { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
 
   // PHONES & ACCESSORIES
   { id: 'ph-iphone', name: "iPhone 15 Pro", price: 155000, category: "Phone Accessories", image: "/iphone.jpg" },
@@ -233,7 +231,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
           
           {/* Halal Badge Node (Hero - EXTRA LARGE) */}
-          <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-16 z-20 w-28 h-28 md:w-56 md:h-56 rounded-full overflow-hidden border-4 md:border-8 border-white shadow-2xl bg-white flex items-center justify-center animate-in zoom-in duration-700 delay-500">
+          <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-16 z-20 w-28 h-28 md:w-48 md:h-48 rounded-full overflow-hidden border-4 md:border-8 border-white shadow-2xl bg-white flex items-center justify-center animate-in zoom-in duration-700 delay-500">
             <Image 
               src="/images (45).jpg" 
               alt="100% Halal Certified" 

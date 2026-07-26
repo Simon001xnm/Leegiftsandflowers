@@ -42,10 +42,8 @@ const STATIC_PRODUCTS = [
   { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
 
   // FINE WOOD KITCHEN
-  { id: 'fw-chopping', name: "Fine Wood Chopping Board", price: 1500, category: "Fine Wood Kitchen", image: "/chopping board.jpg", description: "Handcrafted from solid acacia wood. Durable, antimicrobial, and beautiful." },
-  { id: 'fw-knife', name: "Fine Wood Knife Block", price: 2500, category: "Fine Wood Kitchen", image: "/knife block.jpg", description: "Elite wooden storage for your premium cutlery set. Magnetic holding system." },
-  { id: 'fw-bowl', name: "Fine Wood Salad Bowl", price: 1800, category: "Fine Wood Kitchen", image: "/salad bowl.jpg", description: "Deep walnut salad bowl. Perfect for serving fresh kachumbari in style." },
-  { id: 'fw-spatula', name: "Fine Wood Spatula Set", price: 1200, category: "Fine Wood Kitchen", image: "/spatula set.jpg", description: "4-piece handcrafted cooking tool set. Gentle on non-stick surfaces." },
+  { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg", description: "Handcrafted artisan kitchenware from the Fine Wood collection. Durable, antimicrobial, and elegant." },
+  { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg", description: "Elite gourmet kitchen tools, expertly crafted from premium wood nodes. Perfect for precision cooking." },
 
   // PHONES & ACCESSORIES
   { id: 'ph-iphone', name: "iPhone 15 Pro", price: 155000, category: "Phone Accessories", image: "/iphone.jpg", description: "The ultimate iPhone with Titanium design, A17 Pro chip, and advanced Pro camera system." },
