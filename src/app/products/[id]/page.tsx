@@ -39,6 +39,7 @@ const STATIC_PRODUCTS = [
   
   // DRINKS
   { id: 'd1', name: "Coca Cola 500ml", price: 80, category: "Drinks", image: "https://picsum.photos/seed/coke/600/600", description: "Chilled 500ml Coca Cola.", isHalal: true },
+  { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
   { id: 'd14', name: "Fresh Passion Juice", price: 150, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600", description: "Freshly squeezed passion fruit juice.", isHalal: true },
 
   // FINE WOOD KITCHEN
