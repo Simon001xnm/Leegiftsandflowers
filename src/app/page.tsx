@@ -242,8 +242,8 @@ export default function HomePage() {
                              <Play className="w-3 h-3 md:w-4 h-4 text-white fill-current ml-0.5" />
                           </div>
                           <div>
-                             <p className="text-[10px] md:text-[12px] font-black text-white uppercase tracking-tighter leading-none">Fresh Harvest</p>
-                             <p className="text-[8px] md:text-[10px] font-bold text-primary uppercase tracking-widest">Live Dispatch Node</p>
+                             <p className="text-[10px] md:text-[12px] font-black text-white uppercase tracking-tighter leading-none">Fresh Market</p>
+                             <p className="text-[8px] md:text-[10px] font-bold text-primary uppercase tracking-widest">Delivered Fresh</p>
                           </div>
                        </div>
                     </div>
