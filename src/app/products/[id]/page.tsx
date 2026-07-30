@@ -68,6 +68,12 @@ const STATIC_PRODUCTS = [
   // PHONES & ACCESSORIES
   { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg", description: "Premium selection of high-clarity phone accessories, curated for the modern digital workspace." },
   { id: 'ph-powerbank-node', name: "Premium Powerbank Node", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg", description: "High-capacity elite powerbank for sustained mobile node endurance. Rapid dispatch ready." },
+  { id: 'ph-cable', name: "Ultra-Sync Data Cable", price: 800, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600", description: "High-speed USB-C data and charging cable. Reinforced fiber for maximum node durability." },
+  { id: 'ph-earbuds', name: "Wireless Earbuds HD", price: 4500, category: "Phone Accessories", image: "https://picsum.photos/seed/earbuds/600/600", description: "Premium wireless earbuds with active noise cancellation and elite audio clarity." },
+  { id: 'ph-case', name: "Titanium Phone Case", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/case/600/600", description: "Ultra-slim titanium-grade protective case. Shockproof engineering for the elite mobile operator." },
+  { id: 'ph-mount', name: "Magnetic Car Mount", price: 1500, category: "Phone Accessories", image: "https://picsum.photos/seed/mount/600/600", description: "Powerful magnetic car mount for secure hands-free navigation during dispatch." },
+  { id: 'ph-screen-guard', name: "Universal Screen Guard", price: 500, category: "Phone Accessories", image: "https://picsum.photos/seed/guard/600/600", description: "High-clarity tempered glass screen protector. Oleophobic coating for smudge-free operation." },
+  { id: 'ph-charger', name: "Travel Fast Charger", price: 2200, category: "Phone Accessories", image: "https://picsum.photos/seed/charger/600/600", description: "Compact 65W fast charger node. Dual-port support for simultaneous device synchronization." },
 ];
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {

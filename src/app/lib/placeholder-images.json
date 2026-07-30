@@ -96,6 +96,42 @@
       "description": "Premium Spice Rack",
       "imageUrl": "https://picsum.photos/seed/spicerack/600/600",
       "imageHint": "spice rack"
+    },
+    {
+      "id": "ph-cable",
+      "description": "USB-C Data Cable",
+      "imageUrl": "https://picsum.photos/seed/cable/600/600",
+      "imageHint": "data cable"
+    },
+    {
+      "id": "ph-earbuds",
+      "description": "Wireless HD Earbuds",
+      "imageUrl": "https://picsum.photos/seed/earbuds/600/600",
+      "imageHint": "wireless earbuds"
+    },
+    {
+      "id": "ph-case",
+      "description": "Protective Phone Case",
+      "imageUrl": "https://picsum.photos/seed/case/600/600",
+      "imageHint": "phone case"
+    },
+    {
+      "id": "ph-mount",
+      "description": "Magnetic Car Mount",
+      "imageUrl": "https://picsum.photos/seed/mount/600/600",
+      "imageHint": "car mount"
+    },
+    {
+      "id": "ph-guard",
+      "description": "Glass Screen Guard",
+      "imageUrl": "https://picsum.photos/seed/guard/600/600",
+      "imageHint": "screen protector"
+    },
+    {
+      "id": "ph-charger",
+      "description": "Travel Fast Charger",
+      "imageUrl": "https://picsum.photos/seed/charger/600/600",
+      "imageHint": "wall charger"
     }
   ]
 }
