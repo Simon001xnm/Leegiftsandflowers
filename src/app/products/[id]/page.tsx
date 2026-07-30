@@ -1,3 +1,4 @@
+
 'use client';
 
 import { use, useEffect, useState } from "react";
@@ -22,6 +23,9 @@ const STATIC_PRODUCTS = [
   { id: 'p-osumbuko', name: "Osumbuko", price: 900, category: "Raw Meat", image: "/628cb2abc83cb (1).jpeg", description: "Premium Osso Buco cuts, perfect for slow cooking and rich, marrow-infused stews.", hasTax: true, isHalal: true },
   { id: 'p-beef-on-bone', name: "Beef on Bone", price: 900, category: "Raw Meat", image: "/boneinroundsteaks (1).webp", description: "Select beef cuts on the bone, ideal for traditional stews and soups.", hasTax: true, isHalal: true },
   { id: 'p-goat-takeaway', name: "Goat Takeaway 1kg", price: 1000, category: "Raw Meat", image: "/images (47).jpg", description: "Premium Goat Takeaway. Freshly sourced and prepared for rapid dispatch from the Nairobi West node.", hasTax: true, isHalal: true },
+  { id: 'p-short-ribs', name: "Beef Short Ribs", price: 1150, category: "Raw Meat", image: "https://picsum.photos/seed/ribs/600/600", description: "Premium Beef Short Ribs, perfect for slow roasting or braising.", isHalal: true },
+  { id: 'p-mince-premium', name: "Premium Beef Mince", price: 950, category: "Raw Meat", image: "https://picsum.photos/seed/mince/600/600", description: "Lean and high-quality ground beef for all your kitchen needs.", isHalal: true },
+  { id: 'p-mutton-chops', name: "Mutton Chops", price: 1100, category: "Raw Meat", image: "https://picsum.photos/seed/mutton/600/600", description: "Tender and flavorful mutton chops, freshly sourced from local farms.", isHalal: true },
   
   // COOKED MEAT
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", description: "Expertly spiced beef, wet-fried to tender perfection. A Nairobi West signature dish.", isHalal: true },
@@ -33,13 +37,22 @@ const STATIC_PRODUCTS = [
   { id: 'p3', name: "Beef Dry Fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", description: "Spiced dry-fried beef cuts.", isHalal: true },
   { id: 'p6', name: "Full Chicken Choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", description: "Flame-grilled whole chicken.", isHalal: true },
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", description: "Perfectly fried golden potato chips.", isHalal: true },
+  { id: 'c-matumbo-wet', name: "Matumbo Wet Fry", price: 900, category: "Cooked Meat", image: "https://picsum.photos/seed/matumbo/600/600", description: "Traditional Matumbo wet-fried with fresh spices and herbs.", isHalal: true },
+  { id: 'c-sausage-platter', name: "Sausage Platter", price: 800, category: "Cooked Meat", image: "https://picsum.photos/seed/sausage/600/600", description: "A delicious platter of grilled beef and chicken sausages.", isHalal: true },
+  { id: 'c-pork-dry-fry', name: "Pork Dry Fry 1kg", price: 1300, category: "Cooked Meat", image: "https://picsum.photos/seed/porkfry/600/600", description: "Spiced dry-fried pork cuts, prepared for rapid dispatch.", isHalal: false },
   
   // GROCERY
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", description: "A seasonal selection of farm-fresh vegetables, hand-picked for quality.", isHalal: true },
+  { id: 'g-onions', name: "Red Onions 1kg", price: 150, category: "Grocery", image: "https://picsum.photos/seed/onions/600/600", description: "Fresh farm red onions, sorted for quality." },
+  { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600", description: "Grade A tomatoes, picked fresh from the fields." },
+  { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/garlic/600/600", description: "Pungent and high-quality garlic bulbs." },
   
   // DRINKS
   { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
+  { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Drinks", image: "https://picsum.photos/seed/water/600/600", description: "Mineral water, chilled for refreshment." },
+  { id: 'd-juice-passion', name: "Fresh Passion Juice 1L", price: 350, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600", description: "Natural passion fruit juice, freshly squeezed." },
+  { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Drinks", image: "https://picsum.photos/seed/sprite/600/600", description: "Chilled Sprite take away bottle." },
 
   // FINE WOOD KITCHEN
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg", description: "Handcrafted artisan kitchenware from the Fine Wood collection. Durable, antimicrobial, and elegant." },

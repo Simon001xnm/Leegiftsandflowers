@@ -18,6 +18,60 @@
       "description": "Clean mineral water",
       "imageUrl": "https://picsum.photos/seed/water/600/600",
       "imageHint": "mineral water"
+    },
+    {
+      "id": "beef-ribs",
+      "description": "Beef Short Ribs",
+      "imageUrl": "https://picsum.photos/seed/ribs/600/600",
+      "imageHint": "beef ribs"
+    },
+    {
+      "id": "beef-mince",
+      "description": "Beef Mince",
+      "imageUrl": "https://picsum.photos/seed/mince/600/600",
+      "imageHint": "beef mince"
+    },
+    {
+      "id": "mutton-chops",
+      "description": "Mutton Chops",
+      "imageUrl": "https://picsum.photos/seed/mutton/600/600",
+      "imageHint": "mutton chops"
+    },
+    {
+      "id": "matumbo-wet",
+      "description": "Matumbo Wet Fry",
+      "imageUrl": "https://picsum.photos/seed/matumbo/600/600",
+      "imageHint": "cooked meat"
+    },
+    {
+      "id": "sausage-platter",
+      "description": "Sausage Platter",
+      "imageUrl": "https://picsum.photos/seed/sausage/600/600",
+      "imageHint": "sausages"
+    },
+    {
+      "id": "pork-dry-fry",
+      "description": "Pork Dry Fry",
+      "imageUrl": "https://picsum.photos/seed/porkfry/600/600",
+      "imageHint": "pork meat"
+    },
+    {
+      "id": "onions",
+      "description": "Red Onions",
+      "imageUrl": "https://picsum.photos/seed/onions/600/600",
+      "imageHint": "red onions"
+    },
+    {
+      "id": "tomatoes",
+      "description": "Fresh Tomatoes",
+      "imageUrl": "https://picsum.photos/seed/tomatoes/600/600",
+      "imageHint": "tomatoes"
+    },
+    {
+      "id": "garlic",
+      "description": "Garlic Pack",
+      "imageUrl": "https://picsum.photos/seed/garlic/600/600",
+      "imageHint": "garlic"
     }
   ]
 }
