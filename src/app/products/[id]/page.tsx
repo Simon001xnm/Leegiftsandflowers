@@ -154,13 +154,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   };
 
   if (loading) return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-white">
       <RefreshCw className="w-8 h-8 animate-spin text-primary opacity-20" />
       <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground">Retrieving Node...</p>
     </div>
   );
 
-  if (!product) return <div className="p-20 text-center font-headline text-2xl uppercase font-black">Product not found</div>;
+  if (!product) return <div className="p-20 text-center font-black text-2xl uppercase tracking-tighter">Product Node Missing</div>;
 
   const safeImageUrl = getSafeUrl(product.imageUrl);
 
@@ -178,7 +178,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
             <div className="lg:col-span-7">
-              <div className="relative aspect-square md:aspect-[4/3] bg-gray-50 border overflow-hidden rounded-xl md:rounded-[2rem] shadow-sm">
+              <div className="relative aspect-square md:aspect-[4/3] bg-gray-50 border-4 border-black overflow-hidden rounded-none shadow-sm">
                 <Image 
                   src={safeImageUrl} 
                   alt={product.name} 
@@ -216,53 +216,53 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     {product.name}
                   </h1>
                 </div>
-                <div className="flex items-center gap-4 text-[12px] font-bold text-muted-foreground uppercase tracking-widest">
-                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> Priority Dispatch</span>
+                <div className="flex items-center gap-4 text-[12px] font-black text-muted-foreground uppercase tracking-widest">
+                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-primary" /> Priority Dispatch</span>
                   <span className="text-gray-300">|</span>
                   <span className="flex items-center gap-1.5 text-emerald-600"><TrendingUp className="w-4 h-4" /> Artisan Quality</span>
                 </div>
               </div>
 
-              <div className="py-6 border-y border-dashed space-y-2">
+              <div className="py-6 border-y-2 border-black border-dashed space-y-2">
                 <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Price Node</p>
                 <div className="flex items-baseline gap-2">
-                  <p className="text-4xl md:text-5xl font-black text-black leading-none">KES {product.price.toLocaleString()}</p>
-                  {product.hasTax && <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Exclusive of VAT</span>}
+                  <p className="text-5xl md:text-6xl font-black text-black leading-none tracking-tighter">KES {product.price.toLocaleString()}</p>
+                  {product.hasTax && <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Excl. VAT</span>}
                 </div>
               </div>
 
               <div className="space-y-6">
-                <p className="text-[14px] md:text-[15px] font-medium text-gray-600 leading-relaxed">
+                <p className="text-[14px] md:text-[15px] font-bold text-gray-600 leading-relaxed uppercase tracking-tight">
                   {product.description}
                 </p>
 
-                <div className="bg-gray-50 p-6 space-y-4 border rounded-2xl">
+                <div className="bg-gray-50 p-6 space-y-4 border-2 border-black rounded-none">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-white border flex items-center justify-center text-primary rounded-xl">
-                      <Store className="w-5 h-5" />
+                    <div className="w-12 h-12 bg-white border-2 border-black flex items-center justify-center text-primary rounded-none shadow-sm">
+                      <Store className="w-6 h-6" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Sourced From</p>
                       <p className="text-[14px] font-black text-black uppercase tracking-tighter">
-                        Steak West Merchant Node
+                        Steak West Central Node
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   <Button 
-                    className="w-full h-16 text-[12px] font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
-                    onClick={handleAdd}
+                    className="w-full h-20 text-[14px] font-black uppercase tracking-widest rounded-none shadow-2xl bg-[#25D366] hover:bg-[#128C7E] border-none transition-all active:scale-95 flex items-center justify-center gap-3"
+                    onClick={handleWhatsAppBuy}
                   >
-                    Add to Basket
+                    <MessageCircle className="w-7 h-7" /> Buy on WhatsApp
                   </Button>
                   <Button 
                     variant="outline"
-                    className="w-full h-16 text-[12px] font-black uppercase tracking-widest rounded-2xl border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all flex items-center justify-center gap-2"
-                    onClick={handleWhatsAppBuy}
+                    className="w-full h-14 text-[11px] font-black uppercase tracking-widest rounded-none border-2 border-black text-black hover:bg-black hover:text-white transition-all"
+                    onClick={handleAdd}
                   >
-                    <MessageCircle className="w-5 h-5" /> Buy on WhatsApp
+                    Add to Basket
                   </Button>
                 </div>
               </div>

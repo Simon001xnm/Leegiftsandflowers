@@ -1,28 +1,24 @@
-
 "use client";
 
 import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Smartphone, LogIn, ShoppingBag, Navigation as NavIcon, MessageCircle } from "lucide-react";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight, Loader2, MapPin, MessageCircle, LogIn, ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { useUser, useFirestore } from "@/firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { errorEmitter } from '@/firebase/error-emitter';
-import { FirestorePermissionError } from '@/firebase/errors';
+import { useUser } from "@/firebase";
 
+/**
+ * RESTAURANT-SPECIFIC WHATSAPP DISPATCH
+ * Direct synchronization for vendor nodes.
+ */
 export default function CheckoutPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
   const { user, loading: authLoading } = useUser();
-  const firestore = useFirestore();
   const restaurant = MOCK_RESTAURANTS.find(r => r.id === id);
   const [loading, setLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("whatsapp");
 
   const orderItems = [
     { name: "Classic Cheeseburger", price: 850, quantity: 2 },
@@ -34,179 +30,100 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
   const total = subtotal + deliveryFee;
 
   const handleWhatsAppCheckout = () => {
+    setLoading(true);
     const phone = "254722522346";
     const itemsList = orderItems.map(i => `- ${i.name} (${i.quantity}x)`).join('\n');
-    const message = `*STEAK WEST ORDER REQUEST*\n\nVendor: ${restaurant?.name}\n\nItems:\n${itemsList}\n\n*Total: KES ${total.toLocaleString()}*\n\n_Please confirm my order for dispatch._`;
+    const message = `*STEAK WEST VENDOR ORDER*\n\nVendor: ${restaurant?.name}\n\nItems:\n${itemsList}\n\n*Total: KES ${total.toLocaleString()}*\n\n_Please confirm my order for dispatch._`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
-  const handleCheckout = () => {
-    if (paymentMethod === 'whatsapp') {
-      handleWhatsAppCheckout();
-      return;
-    }
-
-    if (!user) {
-      router.push(`/login?redirect=/checkout/${id}`);
-      return;
-    }
-    
-    setLoading(true);
-    const orderId = `LEE-${Math.floor(100000 + Math.random() * 900000)}`;
-
-    const orderData = {
-      id: orderId,
-      customerId: user.uid,
-      restaurantId: id,
-      items: orderItems,
-      total: total,
-      status: "pending",
-      deliveryAddress: "Apartment 4B, Silver Heights, Kileleshwa, Nairobi",
-      createdAt: new Date().toISOString()
-    };
-
-    const orderRef = doc(firestore, "orders", orderId);
-    
-    setDoc(orderRef, orderData)
-      .catch(async (error) => {
-        if (!user?.uid?.startsWith('demo-')) {
-          const permissionError = new FirestorePermissionError({
-            path: orderRef.path,
-            operation: 'create',
-            requestResourceData: orderData,
-          });
-          errorEmitter.emit('permission-error', permissionError);
-        }
-      });
-
-    router.push(`/track/${orderId}`);
-  };
-
-  if (!restaurant) return <div className="p-20 text-center font-headline text-2xl">Restaurant not found</div>;
+  if (!restaurant) return <div className="p-20 text-center font-black text-2xl uppercase tracking-tighter">Vendor Node Missing</div>;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col pt-20">
       <main className="container mx-auto px-4 py-12 flex-grow max-w-4xl">
+        <div className="mb-8">
+           <Button variant="ghost" className="gap-2 font-black text-[11px] uppercase tracking-widest" onClick={() => router.back()}>
+             <ChevronLeft className="w-4 h-4" /> Return
+           </Button>
+        </div>
+
         <div className="grid lg:grid-cols-5 gap-8">
           <div className="lg:col-span-3 space-y-6">
-            {!user && !authLoading && paymentMethod !== 'whatsapp' && (
-              <Card className="border-accent bg-accent/5 border-dashed rounded-3xl">
-                <CardContent className="p-6 flex items-center justify-between">
-                  <div>
-                    <p className="font-bold text-primary">Signed out</p>
-                    <p className="text-sm text-muted-foreground">Log in to track your order and earn points.</p>
-                  </div>
-                  <Button variant="outline" size="sm" className="gap-2 border-primary text-primary rounded-xl" onClick={() => router.push(`/login?redirect=/checkout/${id}`)}>
-                    <LogIn className="w-4 h-4" /> Sign In
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
-
-            <Card className="border-2 rounded-[2.5rem] overflow-hidden shadow-sm">
-              <CardHeader>
-                <CardTitle className="font-headline flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-primary" /> Delivery Details
+            <Card className="border-4 border-black rounded-none shadow-sm">
+              <CardHeader className="bg-gray-50 border-b-2 border-black">
+                <CardTitle className="font-black text-[12px] uppercase tracking-widest flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-primary" /> Delivery Node
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-muted/50 border">
-                  <div className="flex-grow">
-                    <p className="font-bold">Home Address</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Apartment 4B, Silver Heights,<br />
-                      Kileleshwa, Nairobi, Kenya
-                    </p>
-                  </div>
-                  <Button variant="ghost" size="sm" className="text-primary font-bold">Edit</Button>
+              <CardContent className="p-6">
+                <div className="p-4 bg-gray-50 border border-black">
+                  <p className="font-black text-[13px] uppercase tracking-tighter">Current Address</p>
+                  <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest leading-relaxed mt-1">
+                    Nairobi West Distribution Range
+                  </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-2 rounded-[2.5rem] overflow-hidden shadow-sm">
-              <CardHeader>
-                <CardTitle className="font-headline">Payment Choice</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid gap-4">
-                  <Label
-                    htmlFor="whatsapp"
-                    className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'whatsapp' ? 'border-[#25D366] bg-[#25D366]/5' : 'hover:bg-muted'}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <MessageCircle className="w-5 h-5 text-[#25D366]" />
-                      <div className="space-y-0.5">
-                        <p className="font-bold">WhatsApp Dispatch</p>
-                        <p className="text-xs text-muted-foreground">Order direct via message</p>
-                      </div>
-                    </div>
-                    <RadioGroupItem value="whatsapp" id="whatsapp" />
-                  </Label>
-
-                  <Label
-                    htmlFor="mpesa"
-                    className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'mpesa' ? 'border-primary bg-primary/5' : 'hover:bg-muted'}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Smartphone className="w-5 h-5 text-primary" />
-                      <div className="space-y-0.5">
-                        <p className="font-bold">M-Pesa</p>
-                        <p className="text-xs text-muted-foreground">Instant mobile checkout</p>
-                      </div>
-                    </div>
-                    <RadioGroupItem value="mpesa" id="mpesa" />
-                  </Label>
-                </RadioGroup>
-              </CardContent>
-            </Card>
+            <div className="p-8 border-4 border-[#25D366] bg-[#25D366]/5 flex items-center justify-between">
+               <div className="flex items-center gap-4">
+                  <MessageCircle className="w-8 h-8 text-[#25D366]" />
+                  <div>
+                     <p className="font-black text-[14px] uppercase tracking-tighter">Direct WhatsApp Order</p>
+                     <p className="text-[10px] font-black uppercase text-[#25D366] tracking-widest">Active Dispatch Protocol</p>
+                  </div>
+               </div>
+            </div>
           </div>
 
           <div className="lg:col-span-2">
-            <Card className="border-2 shadow-xl sticky top-24 overflow-hidden rounded-[2.5rem]">
-              <CardHeader className="bg-primary text-primary-foreground">
-                <CardTitle className="font-headline">Order Total</CardTitle>
-                <p className="text-sm opacity-80">{restaurant.name}</p>
+            <Card className="border-4 border-black shadow-2xl overflow-hidden rounded-none">
+              <CardHeader className="bg-primary text-white border-b-2 border-black py-4">
+                <CardTitle className="text-[12px] font-black uppercase tracking-widest">Order Total</CardTitle>
+                <p className="text-[10px] font-black opacity-80 uppercase tracking-widest">{restaurant.name}</p>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
                 <div className="space-y-4">
                   {orderItems.map((item, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
+                    <div key={i} className="flex justify-between items-center text-[13px] font-black uppercase tracking-tighter">
                       <div className="flex gap-2">
-                        <span className="font-bold text-primary">{item.quantity}x</span>
+                        <span className="text-primary">{item.quantity}x</span>
                         <span className="text-muted-foreground">{item.name}</span>
                       </div>
-                      <span className="font-bold">KES {(item.price * item.quantity).toLocaleString()}</span>
+                      <span>KES {(item.price * item.quantity).toLocaleString()}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-6 border-t space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Delivery</span>
-                    <span className="font-bold">KES {deliveryFee.toLocaleString()}</span>
+                <div className="pt-6 border-t-2 border-black border-dashed space-y-3">
+                  <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-muted-foreground">
+                    <span>Delivery</span>
+                    <span>KES {deliveryFee.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-2xl font-bold text-primary pt-4 border-t">
-                    <span>Total</span>
+                  <div className="flex justify-between text-2xl font-black text-black pt-4 border-t-2 border-black">
+                    <span className="tracking-tighter uppercase">Total</span>
                     <span>KES {total.toLocaleString()}</span>
                   </div>
                 </div>
               </CardContent>
               <CardFooter className="p-6 pt-0">
                 <Button 
-                  className={`w-full h-14 text-lg rounded-2xl gap-2 shadow-lg transition-all ${paymentMethod === 'whatsapp' ? 'bg-[#25D366] hover:bg-[#128C7E] border-none' : 'shadow-primary/20 hover:scale-[1.02] active:scale-95'}`} 
-                  onClick={handleCheckout}
-                  disabled={loading || authLoading}
+                  className="w-full h-16 text-[12px] font-black uppercase tracking-widest rounded-none gap-2 bg-[#25D366] hover:bg-[#128C7E] border-none shadow-xl" 
+                  onClick={handleWhatsAppCheckout}
+                  disabled={loading}
                 >
                   {loading ? (
-                    <div className="flex items-center gap-2">
-                      <Loader2 className="w-5 h-5 animate-spin" /> Instant Checkout...
-                    </div>
+                    <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
-                    <div className="flex items-center gap-2">
-                      {paymentMethod === 'whatsapp' && <MessageCircle className="w-5 h-5" />}
-                      <span>{paymentMethod === 'whatsapp' ? 'Order on WhatsApp' : (!user ? 'Sign in to Pay' : 'Confirm & Track Order')}</span>
-                      {paymentMethod !== 'whatsapp' && <ArrowRight className="w-5 h-5" />}
-                    </div>
+                    <>
+                      <MessageCircle className="w-5 h-5" />
+                      Order on WhatsApp
+                    </>
                   )}
                 </Button>
               </CardFooter>
