@@ -1,12 +1,12 @@
 
 "use client";
 
-import { use, useState, useEffect } from "react";
+import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { MOCK_RESTAURANTS } from "@/lib/food-data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Smartphone, LogIn, ShoppingBag, Navigation as NavIcon } from "lucide-react";
+import { CircleCheck, ArrowRight, Loader2, MapPin, Bike, CreditCard, Smartphone, LogIn, ShoppingBag, Navigation as NavIcon, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -22,7 +22,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
   const firestore = useFirestore();
   const restaurant = MOCK_RESTAURANTS.find(r => r.id === id);
   const [loading, setLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("mpesa");
+  const [paymentMethod, setPaymentMethod] = useState("whatsapp");
 
   const orderItems = [
     { name: "Classic Cheeseburger", price: 850, quantity: 2 },
@@ -33,7 +33,19 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
   const deliveryFee = restaurant?.deliveryFee || 150;
   const total = subtotal + deliveryFee;
 
+  const handleWhatsAppCheckout = () => {
+    const phone = "254722522346";
+    const itemsList = orderItems.map(i => `- ${i.name} (${i.quantity}x)`).join('\n');
+    const message = `*STEAK WEST ORDER REQUEST*\n\nVendor: ${restaurant?.name}\n\nItems:\n${itemsList}\n\n*Total: KES ${total.toLocaleString()}*\n\n_Please confirm my order for dispatch._`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   const handleCheckout = () => {
+    if (paymentMethod === 'whatsapp') {
+      handleWhatsAppCheckout();
+      return;
+    }
+
     if (!user) {
       router.push(`/login?redirect=/checkout/${id}`);
       return;
@@ -77,7 +89,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
       <main className="container mx-auto px-4 py-12 flex-grow max-w-4xl">
         <div className="grid lg:grid-cols-5 gap-8">
           <div className="lg:col-span-3 space-y-6">
-            {!user && !authLoading && (
+            {!user && !authLoading && paymentMethod !== 'whatsapp' && (
               <Card className="border-accent bg-accent/5 border-dashed rounded-3xl">
                 <CardContent className="p-6 flex items-center justify-between">
                   <div>
@@ -118,6 +130,20 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
               <CardContent>
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid gap-4">
                   <Label
+                    htmlFor="whatsapp"
+                    className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'whatsapp' ? 'border-[#25D366] bg-[#25D366]/5' : 'hover:bg-muted'}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <MessageCircle className="w-5 h-5 text-[#25D366]" />
+                      <div className="space-y-0.5">
+                        <p className="font-bold">WhatsApp Dispatch</p>
+                        <p className="text-xs text-muted-foreground">Order direct via message</p>
+                      </div>
+                    </div>
+                    <RadioGroupItem value="whatsapp" id="whatsapp" />
+                  </Label>
+
+                  <Label
                     htmlFor="mpesa"
                     className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'mpesa' ? 'border-primary bg-primary/5' : 'hover:bg-muted'}`}
                   >
@@ -129,20 +155,6 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                       </div>
                     </div>
                     <RadioGroupItem value="mpesa" id="mpesa" />
-                  </Label>
-
-                  <Label
-                    htmlFor="card"
-                    className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'card' ? 'border-primary bg-primary/5' : 'hover:bg-muted'}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <CreditCard className="w-5 h-5 text-primary" />
-                      <div className="space-y-0.5">
-                        <p className="font-bold">Card</p>
-                        <p className="text-xs text-muted-foreground">Visa / Mastercard</p>
-                      </div>
-                    </div>
-                    <RadioGroupItem value="card" id="card" />
                   </Label>
                 </RadioGroup>
               </CardContent>
@@ -181,7 +193,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
               </CardContent>
               <CardFooter className="p-6 pt-0">
                 <Button 
-                  className="w-full h-14 text-lg rounded-2xl gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" 
+                  className={`w-full h-14 text-lg rounded-2xl gap-2 shadow-lg transition-all ${paymentMethod === 'whatsapp' ? 'bg-[#25D366] hover:bg-[#128C7E] border-none' : 'shadow-primary/20 hover:scale-[1.02] active:scale-95'}`} 
                   onClick={handleCheckout}
                   disabled={loading || authLoading}
                 >
@@ -190,7 +202,11 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
                       <Loader2 className="w-5 h-5 animate-spin" /> Instant Checkout...
                     </div>
                   ) : (
-                    <>{!user ? 'Sign in to Pay' : 'Confirm & Track Order'} <ArrowRight className="w-5 h-5" /></>
+                    <div className="flex items-center gap-2">
+                      {paymentMethod === 'whatsapp' && <MessageCircle className="w-5 h-5" />}
+                      <span>{paymentMethod === 'whatsapp' ? 'Order on WhatsApp' : (!user ? 'Sign in to Pay' : 'Confirm & Track Order')}</span>
+                      {paymentMethod !== 'whatsapp' && <ArrowRight className="w-5 h-5" />}
+                    </div>
                   )}
                 </Button>
               </CardFooter>

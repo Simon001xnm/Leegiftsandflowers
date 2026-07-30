@@ -5,7 +5,7 @@ import { use, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Clock, Store, TrendingUp, RefreshCw, ChevronLeft } from "lucide-react";
+import { Clock, Store, TrendingUp, RefreshCw, ChevronLeft, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
@@ -148,6 +148,13 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     });
   };
 
+  const handleWhatsAppBuy = () => {
+    if (!product) return;
+    const phone = "254722522346";
+    const message = `*INSTANT DISPATCH REQUEST*\n\nHello Steak West! I'd like to order this item immediately:\n\n- ${product.name} (1x)\n*Price:* KES ${product.price.toLocaleString()}\n\n_Please confirm availability for immediate delivery._`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   if (loading) return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4">
       <RefreshCw className="w-8 h-8 animate-spin text-primary opacity-20" />
@@ -185,7 +192,6 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   sizes="(max-width: 1024px) 100vw, 66vw"
                 />
                 
-                {/* Halal Badge Node (Increased Size) */}
                 {product.isHalal && (
                   <div className="absolute top-6 left-6 z-10 w-20 h-20 md:w-36 md:h-32 rounded-full overflow-hidden border-4 border-white shadow-2xl bg-white animate-in zoom-in-50 duration-500">
                     <Image 
@@ -244,22 +250,23 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       </p>
                     </div>
                   </div>
-                  {product.isHalal && (
-                    <div className="flex items-center gap-3 pt-2 border-t border-dashed">
-                      <div className="w-6 h-6 relative rounded-full overflow-hidden shrink-0 border border-gray-200">
-                        <Image src="/images (45).jpg" alt="" fill className="object-contain" />
-                      </div>
-                      <p className="text-11px font-bold text-emerald-600 uppercase tracking-widest">100% Halal Certified Production</p>
-                    </div>
-                  )}
                 </div>
 
-                <Button 
-                  className="w-full h-16 text-[14px] font-black uppercase tracking-widest rounded-2xl shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
-                  onClick={handleAdd}
-                >
-                  Add to Basket
-                </Button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Button 
+                    className="w-full h-16 text-[12px] font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
+                    onClick={handleAdd}
+                  >
+                    Add to Basket
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    className="w-full h-16 text-[12px] font-black uppercase tracking-widest rounded-2xl border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all flex items-center justify-center gap-2"
+                    onClick={handleWhatsAppBuy}
+                  >
+                    <MessageCircle className="w-5 h-5" /> Buy on WhatsApp
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

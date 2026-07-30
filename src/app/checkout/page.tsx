@@ -17,7 +17,8 @@ import {
   Plus, 
   Minus,
   ChevronLeft,
-  ShieldCheck
+  ShieldCheck,
+  MessageCircle
 } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -31,13 +32,20 @@ export default function GlobalCheckoutPage() {
   const { cart, addToCart, removeFromCart, clearItem, subtotal, taxTotal, clearCart } = useCart();
   const { user, loading: authLoading } = useUser();
   const [loading, setLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("mpesa");
+  const [paymentMethod, setPaymentMethod] = useState("whatsapp");
   const supabase = createClient();
 
   const deliveryFee = cart.length > 0 ? 150 : 0;
   const total = subtotal + taxTotal + deliveryFee;
 
-  const handleCheckout = async () => {
+  const handleWhatsAppCheckout = () => {
+    const phone = "254722522346";
+    const itemsList = cart.map(i => `- ${i.item.name} (${i.quantity}x @ KES ${i.item.price.toLocaleString()})`).join('\n');
+    const message = `*STEAK WEST DISPATCH REQUEST*\n\nHello Steak West! I'd like to place the following order:\n\n${itemsList}\n\n*Subtotal:* KES ${subtotal.toLocaleString()}\n*VAT (16%):* KES ${taxTotal.toLocaleString()}\n*Delivery:* KES ${deliveryFee.toLocaleString()}\n\n*TOTAL: KES ${total.toLocaleString()}*\n\n_Please confirm availability and delivery time._`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
+  const handleStandardCheckout = async () => {
     if (!user) {
       router.push(`/login?redirect=/checkout`);
       return;
@@ -78,6 +86,14 @@ export default function GlobalCheckoutPage() {
     }, 800);
   };
 
+  const handleCheckout = () => {
+    if (paymentMethod === 'whatsapp') {
+      handleWhatsAppCheckout();
+    } else {
+      handleStandardCheckout();
+    }
+  };
+
   if (cart.length === 0 && !loading) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
@@ -105,7 +121,7 @@ export default function GlobalCheckoutPage() {
             <ChevronLeft className="w-4 h-4" /> Back
           </Button>
           <div className="flex items-center gap-2 text-primary font-bold text-[14px]">
-            <ShieldCheck className="w-4 h-4" /> Secure payment
+            <ShieldCheck className="w-4 h-4" /> Secure checkout node
           </div>
         </div>
 
@@ -143,13 +159,50 @@ export default function GlobalCheckoutPage() {
                 ))}
               </div>
             </section>
+
+            <section className="space-y-6">
+              <h2 className="text-2xl font-medium font-headline text-black tracking-tight">Checkout method</h2>
+              <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid gap-4">
+                <Label
+                  htmlFor="whatsapp"
+                  className={`flex items-center justify-between p-6 rounded-2xl border-2 cursor-pointer transition-all ${paymentMethod === 'whatsapp' ? 'border-[#25D366] bg-[#25D366]/5' : 'hover:bg-gray-50 border-gray-100'}`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-[#25D366] flex items-center justify-center text-white">
+                      <MessageCircle className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="font-black text-[14px] uppercase tracking-tighter">Order via WhatsApp</p>
+                      <p className="text-[11px] text-muted-foreground uppercase font-bold tracking-widest">Instant confirmation with dispatch</p>
+                    </div>
+                  </div>
+                  <RadioGroupItem value="whatsapp" id="whatsapp" />
+                </Label>
+
+                <Label
+                  htmlFor="card"
+                  className={`flex items-center justify-between p-6 rounded-2xl border-2 cursor-pointer transition-all ${paymentMethod === 'card' ? 'border-primary bg-primary/5' : 'hover:bg-gray-50 border-gray-100'}`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-primary">
+                      <CreditCard className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="font-black text-[14px] uppercase tracking-tighter">Card / Mobile Money</p>
+                      <p className="text-[11px] text-muted-foreground uppercase font-bold tracking-widest">Standard digital payment node</p>
+                    </div>
+                  </div>
+                  <RadioGroupItem value="card" id="card" />
+                </Label>
+              </RadioGroup>
+            </section>
           </div>
 
           <div className="lg:col-span-5">
             <div className="sticky top-24 space-y-8">
               <Card className="rounded-3xl border border-gray-100 shadow-xl bg-white overflow-hidden">
                 <CardHeader className="bg-gray-50 border-b">
-                  <CardTitle className="text-[14px] font-bold">Order total</CardTitle>
+                  <CardTitle className="text-[14px] font-bold uppercase tracking-widest">Order total</CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 space-y-6">
                   <div className="space-y-3">
@@ -173,7 +226,7 @@ export default function GlobalCheckoutPage() {
                     <p className="text-4xl font-bold text-primary">KES {total.toLocaleString()}</p>
                   </div>
                   <Button 
-                    className="w-full h-16 text-[14px] font-bold rounded-2xl shadow-xl transition-all"
+                    className={`w-full h-16 text-[14px] font-bold rounded-2xl shadow-xl transition-all ${paymentMethod === 'whatsapp' ? 'bg-[#25D366] hover:bg-[#128C7E]' : ''}`}
                     onClick={handleCheckout}
                     disabled={loading || authLoading}
                   >
@@ -182,7 +235,11 @@ export default function GlobalCheckoutPage() {
                         <Loader2 className="w-5 h-5 animate-spin" /> Processing...
                       </div>
                     ) : (
-                      <>{!user ? 'Sign in to pay' : `Pay KES ${total.toLocaleString()}`} <ArrowRight className="w-5 h-5 ml-2" /></>
+                      <div className="flex items-center gap-2">
+                        {paymentMethod === 'whatsapp' ? <MessageCircle className="w-5 h-5" /> : null}
+                        <span>{paymentMethod === 'whatsapp' ? 'Checkout on WhatsApp' : (!user ? 'Sign in to pay' : `Pay KES ${total.toLocaleString()}`)}</span>
+                        {paymentMethod !== 'whatsapp' && <ArrowRight className="w-5 h-5 ml-2" />}
+                      </div>
                     )}
                   </Button>
                 </CardContent>
