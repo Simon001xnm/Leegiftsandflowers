@@ -30,7 +30,7 @@ const CATEGORIES = [
   { id: 'Raw Meat', icon: Beef, label: "Raw Meat" },
   { id: 'Cooked Meat', icon: Utensils, label: "Cooked Meat" },
   { id: 'Grocery', icon: ShoppingBag, label: "Grocery" },
-  { id: 'Drinks', icon: Coffee, label: "Drinks" },
+  { id: 'Sodas', icon: Coffee, label: "Sodas" },
   { id: 'Fine Wood Kitchen', icon: ChefHat, label: "Fine Wood" },
   { id: 'Phone Accessories', icon: Smartphone, label: "Phones" },
 ];
@@ -71,12 +71,15 @@ const ALL_PRODUCTS = [
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600" },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/garlic/600/600" },
   
-  // DRINKS
-  { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", isHalal: true },
-  { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", isHalal: true },
-  { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Drinks", image: "https://picsum.photos/seed/water/600/600" },
-  { id: 'd-juice-passion', name: "Fresh Passion Juice 1L", price: 350, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600" },
-  { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Drinks", image: "https://picsum.photos/seed/sprite/600/600" },
+  // SODAS
+  { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", isHalal: true },
+  { id: 'd2-fanta-orange', name: "Fanta Orange Take Away", price: 150, category: "Sodas", image: "/fantafgdf.jpg", isHalal: true },
+  { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "https://picsum.photos/seed/water/600/600" },
+  { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Sodas", image: "https://picsum.photos/seed/sprite/600/600" },
+  { id: 'd-stoney', name: "Stoney Tangawizi", price: 150, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600" },
+  { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "https://picsum.photos/seed/krest/600/600" },
+  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/cokezero/600/600" },
+  { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "https://picsum.photos/seed/blackcurrant/600/600" },
 
   // FINE WOOD KITCHEN
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg" },

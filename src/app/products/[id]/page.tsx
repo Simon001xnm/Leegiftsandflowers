@@ -47,12 +47,15 @@ const STATIC_PRODUCTS = [
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600", description: "Grade A tomatoes, picked fresh from the fields." },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/garlic/600/600", description: "Pungent and high-quality garlic bulbs." },
   
-  // DRINKS
-  { id: 'd1-coke-150', name: "Coca-Cola take away", price: 150, category: "Drinks", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
-  { id: 'd2-fanta-orange', name: "Fanta Orange take away", price: 150, category: "Drinks", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
-  { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Drinks", image: "https://picsum.photos/seed/water/600/600", description: "Mineral water, chilled for refreshment." },
-  { id: 'd-juice-passion', name: "Fresh Passion Juice 1L", price: 350, category: "Drinks", image: "https://picsum.photos/seed/passion/600/600", description: "Natural passion fruit juice, freshly squeezed." },
-  { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Drinks", image: "https://picsum.photos/seed/sprite/600/600", description: "Chilled Sprite take away bottle." },
+  // SODAS
+  { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
+  { id: 'd2-fanta-orange', name: "Fanta Orange Take Away", price: 150, category: "Sodas", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
+  { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "https://picsum.photos/seed/water/600/600", description: "Mineral water, chilled for refreshment." },
+  { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Sodas", image: "https://picsum.photos/seed/sprite/600/600", description: "Chilled Sprite take away bottle." },
+  { id: 'd-stoney', name: "Stoney Tangawizi", price: 150, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600", description: "Strong ginger kick, chilled and ready for dispatch." },
+  { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "https://picsum.photos/seed/krest/600/600", description: "Refreshing bitter lemon soda, perfect for pairing with nyama choma." },
+  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/cokezero/600/600", description: "Great Coke taste, zero sugar. Chilled for maximum refreshment." },
+  { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "https://picsum.photos/seed/blackcurrant/600/600", description: "Sweet and tangy blackcurrant fanta." },
 
   // FINE WOOD KITCHEN
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg", description: "Handcrafted artisan kitchenware from the Fine Wood collection. Durable, antimicrobial, and elegant." },

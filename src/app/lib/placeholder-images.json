@@ -8,10 +8,10 @@
       "imageHint": "soda bottle"
     },
     {
-      "id": "juice-glass",
-      "description": "Fresh fruit juice in a glass",
-      "imageUrl": "https://picsum.photos/seed/juice/600/600",
-      "imageHint": "fruit juice"
+      "id": "stoney-bottle",
+      "description": "Stoney Tangawizi bottle",
+      "imageUrl": "https://picsum.photos/seed/stoney/600/600",
+      "imageHint": "ginger beer"
     },
     {
       "id": "water-bottle",
