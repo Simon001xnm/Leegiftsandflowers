@@ -60,6 +60,10 @@ const STATIC_PRODUCTS = [
   // FINE WOOD KITCHEN
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg", description: "Handcrafted artisan kitchenware from the Fine Wood collection. Durable, antimicrobial, and elegant." },
   { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg", description: "Elite gourmet kitchen tools, expertly crafted from premium wood nodes. Perfect for precision cooking." },
+  { id: 'fw-cutting-board', name: "Artisan Cutting Board", price: 1800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/board/600/600", description: "Durable, high-quality wooden cutting board handcrafted for the elite kitchen node." },
+  { id: 'fw-salad-bowl', name: "Hand-Carved Salad Bowl", price: 2500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/bowl/600/600", description: "Beautiful hand-carved wooden salad bowl, perfect for serving fresh farm baskets." },
+  { id: 'fw-utensil-set', name: "5-Piece Utensil Set", price: 1500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/utensils/600/600", description: "Set of 5 handcrafted wooden kitchen utensils for precision culinary dispatch." },
+  { id: 'fw-spice-rack', name: "Wooden Spice Rack", price: 3500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/spicerack/600/600", description: "Handcrafted wooden spice rack to organize your flavor nodes with elite precision." },
 
   // PHONES & ACCESSORIES
   { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg", description: "Premium selection of high-clarity phone accessories, curated for the modern digital workspace." },

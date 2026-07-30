@@ -72,6 +72,30 @@
       "description": "Garlic Pack",
       "imageUrl": "https://picsum.photos/seed/garlic/600/600",
       "imageHint": "garlic"
+    },
+    {
+      "id": "cutting-board",
+      "description": "Artisan Cutting Board",
+      "imageUrl": "https://picsum.photos/seed/board/600/600",
+      "imageHint": "wooden board"
+    },
+    {
+      "id": "salad-bowl",
+      "description": "Hand-Carved Salad Bowl",
+      "imageUrl": "https://picsum.photos/seed/bowl/600/600",
+      "imageHint": "wooden bowl"
+    },
+    {
+      "id": "utensil-set",
+      "description": "Artisan Utensil Set",
+      "imageUrl": "https://picsum.photos/seed/utensils/600/600",
+      "imageHint": "wooden spoons"
+    },
+    {
+      "id": "spice-rack",
+      "description": "Premium Spice Rack",
+      "imageUrl": "https://picsum.photos/seed/spicerack/600/600",
+      "imageHint": "spice rack"
     }
   ]
 }

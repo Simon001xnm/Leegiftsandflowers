@@ -84,6 +84,10 @@ const ALL_PRODUCTS = [
   // FINE WOOD KITCHEN
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg" },
   { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
+  { id: 'fw-cutting-board', name: "Artisan Cutting Board", price: 1800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/board/600/600" },
+  { id: 'fw-salad-bowl', name: "Hand-Carved Salad Bowl", price: 2500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/bowl/600/600" },
+  { id: 'fw-utensil-set', name: "5-Piece Utensil Set", price: 1500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/utensils/600/600" },
+  { id: 'fw-spice-rack', name: "Wooden Spice Rack", price: 3500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/spicerack/600/600" },
 
   // PHONES & ACCESSORIES
   { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg" },
