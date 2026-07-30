@@ -53,7 +53,7 @@ const STATIC_PRODUCTS = [
   { id: 'd-stoney', name: "Stoney Tangawizi", price: 150, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600", description: "Strong ginger kick, chilled and ready for dispatch." },
   { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "https://picsum.photos/seed/krest/600/600", description: "Refreshing bitter lemon soda, perfect for pairing with nyama choma." },
   { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/cokezero/600/600", description: "Great Coke taste, zero sugar. Chilled for maximum refreshment." },
-  { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "https://picsum.photos/seed/blackcurrant/600/600", description: "Sweet and tangy blackcurrant fanta." },
+  { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "/(55).jpg", description: "Sweet and tangy blackcurrant fanta.", isHalal: true },
 
   // FINE WOOD KITCHEN
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg", description: "Handcrafted artisan kitchenware from the Fine Wood collection. Durable, antimicrobial, and elegant." },
