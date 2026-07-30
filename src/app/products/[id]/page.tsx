@@ -51,8 +51,8 @@ const STATIC_PRODUCTS = [
   { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "https://picsum.photos/seed/water/600/600", description: "Mineral water, chilled for refreshment." },
   { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Sodas", image: "https://picsum.photos/seed/sprite/600/600", description: "Chilled Sprite take away bottle." },
   { id: 'd-stoney', name: "Stoney Tangawizi", price: 150, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600", description: "Strong ginger kick, chilled and ready for dispatch." },
-  { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "https://picsum.photos/seed/krest/600/600", description: "Refreshing bitter lemon soda, perfect for pairing with nyama choma." },
-  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/cokezero/600/600", description: "Great Coke taste, zero sugar. Chilled for maximum refreshment." },
+  { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "/images (53).jpg", description: "Refreshing bitter lemon soda, perfect for pairing with nyama choma." },
+  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "/(54).jpg", description: "Great Coke taste, zero sugar. Chilled for maximum refreshment." },
   { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "/(55).jpg", description: "Sweet and tangy blackcurrant fanta.", isHalal: true },
 
   // FINE WOOD KITCHEN

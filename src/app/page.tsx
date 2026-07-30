@@ -75,8 +75,8 @@ const ALL_PRODUCTS = [
   { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "https://picsum.photos/seed/water/600/600" },
   { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Sodas", image: "https://picsum.photos/seed/sprite/600/600" },
   { id: 'd-stoney', name: "Stoney Tangawizi", price: 150, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600" },
-  { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "https://picsum.photos/seed/krest/600/600" },
-  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/cokezero/600/600" },
+  { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "/images (53).jpg" },
+  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "/(54).jpg" },
   { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "/(55).jpg", isHalal: true },
 
   // FINE WOOD KITCHEN
