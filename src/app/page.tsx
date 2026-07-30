@@ -162,8 +162,8 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-primary text-white px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[8px] md:text-[11px] font-black uppercase tracking-widest mb-4">
               <Tag className="w-3 h-3 md:w-4 h-4" /> Special Offer
             </div>
-            <h2 className="text-2xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-3">
-              STEAK N BITE
+            <h2 className="text-xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-3">
+              STEAK WEST BUTCHERY
             </h2>
             <p className="text-[10px] md:text-lg font-bold text-white/70 uppercase tracking-widest flex items-center gap-3">
               Save up to 20% on raw cuts <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-primary" />
