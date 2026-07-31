@@ -52,8 +52,8 @@ const STATIC_PRODUCTS = [
   { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Sodas", image: "https://picsum.photos/seed/sprite/600/600", description: "Chilled Sprite take away bottle." },
   { id: 'd-stoney', name: "Stoney Tangawizi", price: 150, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600", description: "Strong ginger kick, chilled and ready for dispatch." },
   { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "/images (53).jpg", description: "Refreshing bitter lemon soda, perfect for pairing with nyama choma." },
-  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "/(54).jpg", description: "Great Coke taste, zero sugar. Chilled for maximum refreshment." },
-  { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "/(55).jpg", description: "Sweet and tangy blackcurrant fanta.", isHalal: true },
+  { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "/images (54).jpg", description: "Great Coke taste, zero sugar. Chilled for maximum refreshment." },
+  { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "/images (55).jpg", description: "Sweet and tangy blackcurrant fanta.", isHalal: true },
 
   // FINE WOOD KITCHEN
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg", description: "Handcrafted artisan kitchenware from the Fine Wood collection. Durable, antimicrobial, and elegant." },
