@@ -20,7 +20,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -180,14 +179,6 @@ export default function HomePage() {
     toast({ title: "READY", description: `${p.name} added to basket.` });
   };
 
-  const scrollTabs = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const { scrollLeft } = scrollRef.current;
-      const scrollTo = direction === 'left' ? scrollLeft - 150 : scrollLeft + 150;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
-    }
-  };
-
   const scrollToSection = (id: string) => {
     setActiveTab(id);
     if (id === 'All') {
@@ -287,16 +278,20 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* TRUE FLUSH FLEX GRID: Absolute 2 products per row on mobile, precisely edge-to-edge */}
+              {/* TRUE FLUSH FLEX GRID: Mathematical 50% width on mobile, precisely edge-to-edge */}
               <div className="flex flex-wrap w-full border-t border-l border-gray-100 overflow-hidden">
                 {categoryProducts.map((product) => (
-                  <div key={product.id} className="w-1/2 md:w-1/6 lg:w-[12.5%] min-w-0 border-b border-r border-gray-100" onClick={() => window.location.href = `/products/${product.id}`}>
+                  <div 
+                    key={product.id} 
+                    className="w-1/2 flex-[0_0_50%] md:w-1/6 md:flex-none lg:w-[12.5%] min-w-0 border-b border-r border-gray-100" 
+                    onClick={() => window.location.href = `/products/${product.id}`}
+                  >
                     <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                   </div>
                 ))}
                 
                 {category.id === 'Grocery' && (
-                  <div className="w-1/2 md:w-1/6 lg:w-[12.5%] relative aspect-square rounded-none overflow-hidden bg-black border-b border-r border-gray-100">
+                  <div className="w-1/2 flex-[0_0_50%] md:w-1/6 md:flex-none lg:w-[12.5%] relative aspect-square rounded-none overflow-hidden bg-black border-b border-r border-gray-100">
                      <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
                         <source src="/video.mp4" type="video/mp4" />
                      </video>
