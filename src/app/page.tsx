@@ -36,7 +36,7 @@ const CATEGORIES = [
 ];
 
 const ALL_PRODUCTS = [
-  // RAW MEAT (16 Items)
+  // RAW MEAT
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", hasTax: true, isHalal: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", hasTax: true, isHalal: true },
   { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", hasTax: true, isHalal: true },
@@ -51,10 +51,10 @@ const ALL_PRODUCTS = [
   { id: 'p-mutton-chops', name: "Mutton Chops", price: 1100, category: "Raw Meat", image: "/muttonchopsraw.jpg", isHalal: true },
   { id: 'p-mutton-ribs', name: "Mutton Ribs", price: 1050, category: "Raw Meat", image: "/muttonribsraw.jpg", isHalal: true },
   { id: 'p-beef-tongue-raw', name: "Beef Tongue Raw", price: 850, category: "Raw Meat", image: "/beefmuttonraw.jpg", isHalal: true },
-  { id: 'p-pork-sausage-raw', name: "Pork Sausages Raw", price: 750, category: "Raw Meat", image: "https://picsum.photos/seed/rawsaus/600/600", isHalal: false },
   { id: 'p-lamb-chops', name: "Prime Lamb Chops", price: 1300, category: "Raw Meat", image: "/primelambchopsraw.jpg", isHalal: true },
+  { id: 'p-steak-v2', name: "Select Beef Slice", price: 1050, category: "Raw Meat", image: "/shortribsraw.jpg", hasTax: true, isHalal: true },
   
-  // COOKED MEAT (16 Items)
+  // COOKED MEAT
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
   { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", isHalal: true },
   { id: 'c-goat-choma-1kg', name: "Goat Choma 1kg", price: 1400, category: "Cooked Meat", image: "/goatchoma.jpg", isHalal: true },
@@ -64,16 +64,15 @@ const ALL_PRODUCTS = [
   { id: 'p3', name: "Beef dry fry 1kg", price: 1400, category: "Cooked Meat", image: "/BEEF DRY FRY.jpg", isHalal: true },
   { id: 'p6', name: "Full chicken choma", price: 1000, category: "Cooked Meat", image: "/FULL CHICKEN CHOMA.jpg", isHalal: true },
   { id: 'p5', name: "Crispy Chips", price: 200, category: "Cooked Meat", image: "/CHIPS.jpg", isHalal: true },
-  { id: 'c-matumbo-wet', name: "Matumbo Wet Fry", price: 900, category: "Cooked Meat", image: "https://picsum.photos/seed/matumbo/600/600", isHalal: true },
+  { id: 'c-matumbo-wet', name: "Matumbo Wet Fry", price: 900, category: "Cooked Meat", image: "/matumbofry.jpg", isHalal: true },
   { id: 'c-sausage-platter', name: "Sausage Platter", price: 800, category: "Cooked Meat", image: "/sausageplatter.jpg", isHalal: true },
-  { id: 'c-pork-dry-fry', name: "Pork Dry Fry 1kg", price: 1300, category: "Cooked Meat", image: "https://picsum.photos/seed/porkfry/600/600", isHalal: false },
   { id: 'c-kuku-14', name: "Kuku Choma 1/4", price: 350, category: "Cooked Meat", image: "/kukucoma1-4.jpg", isHalal: true },
   { id: 'c-beef-stew', name: "Beef Stew Node", price: 1200, category: "Cooked Meat", image: "/beefsoup.jpg", isHalal: true },
-  { id: 'c-githeri-node', name: "Traditional Githeri", price: 400, category: "Cooked Meat", image: "https://picsum.photos/seed/githeri/600/600", isHalal: true },
   { id: 'c-matumbo-dry', name: "Matumbo Dry Fry", price: 900, category: "Cooked Meat", image: "/matumbofry.jpg", isHalal: true },
+  { id: 'c-mguu-cow', name: "Full Mguu Cow", price: 400, category: "Cooked Meat", image: "/images (46).jpg", isHalal: true },
+  { id: 'c-kichwa-goat', name: "Full Kichwa Goat", price: 800, category: "Cooked Meat", image: "/goatchoma.jpg", isHalal: true },
   
-  // GROCERY (16 Items)
-  { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", isHalal: true },
+  // GROCERY
   { id: 'g-onions', name: "Red Onions 1kg", price: 150, category: "Grocery", image: "/redonion.jpg" },
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600" },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "/freshgarlic.jpg" },
@@ -87,10 +86,11 @@ const ALL_PRODUCTS = [
   { id: 'g-lemons', name: "Lemons Pack", price: 100, category: "Grocery", image: "/lemonspack.jpg" },
   { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 350, category: "Grocery", image: "/farmfresheggs.jpg" },
   { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "/freshmilk1l.jpg" },
-  { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "https://picsum.photos/seed/bread/600/600" },
   { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "/localsugar.jpg" },
-  
-  // SODAS (16 Items)
+  { id: 'g-basket-v2', name: "Season Fruit Pack", price: 600, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600" },
+  { id: 'g-veg-v2', name: "Soup Mix Box", price: 450, category: "Grocery", image: "/greencabbage.jpg" },
+
+  // SODAS
   { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/images (54).jpg", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange Take Away", price: 150, category: "Sodas", image: "/fantafgdf.jpg", isHalal: true },
   { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "/keringetwater.jpg" },
@@ -108,41 +108,41 @@ const ALL_PRODUCTS = [
   { id: 'd-pepsi', name: "Pepsi Classic", price: 150, category: "Sodas", image: "/pepsiclassic.jpg" },
   { id: 'd-diet-coke', name: "Diet Coke 500ml", price: 150, category: "Sodas", image: "/dietcoke.jpg" },
 
-  // FINE WOOD KITCHEN (16 Items)
-  { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg" },
-  { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
+  // FINE WOOD KITCHEN
   { id: 'fw-cutting-board', name: "Artisan Cutting Board", price: 1800, category: "Fine Wood Kitchen", image: "/artisancutting.jpg" },
   { id: 'fw-salad-bowl', name: "Hand-Carved Salad Bowl", price: 2500, category: "Fine Wood Kitchen", image: "/handcraftedbowl.jpg" },
   { id: 'fw-utensil-set', name: "5-Piece Utensil Set", price: 1500, category: "Fine Wood Kitchen", image: "/5-pieces utensil set.jpg" },
   { id: 'fw-spice-rack', name: "Wooden Spice Rack", price: 3500, category: "Fine Wood Kitchen", image: "/35c4c70c970c97afed957e00386b6dc0.jpg" },
-  { id: 'fw-coasters', name: "Wooden Coasters Node", price: 1200, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/coasters/600/600" },
   { id: 'fw-napkin', name: "Artisan Napkin Holder", price: 950, category: "Fine Wood Kitchen", image: "/artisannapkins.jpg" },
   { id: 'fw-fruit-stand', name: "Handcrafted Fruit Stand", price: 2800, category: "Fine Wood Kitchen", image: "/handcraftedfruitsatnd.jpg" },
   { id: 'fw-bread-box', name: "Artisan Bread Box", price: 3200, category: "Fine Wood Kitchen", image: "/artisanbreadbox.jpg" },
   { id: 'fw-knife-block', name: "Elite Knife Block", price: 4500, category: "Fine Wood Kitchen", image: "/artisankniveblock.jpg" },
-  { id: 'fw-rolling-pin', name: "Premium Rolling Pin", price: 1100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/rollingpin/600/600" },
-  { id: 'fw-mortar', name: "Wood Mortar & Pestle", price: 1600, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/mortar/600/600" },
-  { id: 'fw-serving-tray', name: "Gourmet Serving Tray", price: 2100, category: "Fine Wood Kitchen", image: "/gourmentserving.jpg" },
   { id: 'fw-wall-shelf', name: "Kitchen Wall Shelf", price: 5500, category: "Fine Wood Kitchen", image: "/kitchenwallshelf.jpg" },
   { id: 'fw-wood-spoons', name: "Carved Wood Spoons", price: 800, category: "Fine Wood Kitchen", image: "/curvedwoodspoon.jpg" },
+  { id: 'fw-tray-v2', name: "Serving Tray XL", price: 2100, category: "Fine Wood Kitchen", image: "/gourmentserving.jpg" },
+  { id: 'fw-mortar-v2', name: "Artisan Mortar", price: 1600, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/mortar/600/600" },
+  { id: 'fw-pin-v2', name: "Elite Rolling Pin", price: 1100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/rollingpin/600/600" },
+  { id: 'fw-coasters-v2', name: "Artisan Coasters", price: 1200, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/coasters/600/600" },
+  { id: 'fw-set-v2', name: "Kitchen Node Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
+  { id: 'fw-block-v2', name: "Magnetic Knife Node", price: 3800, category: "Fine Wood Kitchen", image: "/artisankniveblock.jpg" },
 
-  // PHONES & ACCESSORIES (16 Items)
-  { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg" },
-  { id: 'ph-powerbank-node', name: "Premium Powerbank Node", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg" },
+  // PHONE ACCESSORIES
   { id: 'ph-cable', name: "Ultra-Sync Data Cable", price: 800, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600" },
   { id: 'ph-earbuds', name: "Wireless Earbuds HD", price: 4500, category: "Phone Accessories", image: "https://picsum.photos/seed/earbuds/600/600" },
   { id: 'ph-case', name: "Titanium Phone Case", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/case/600/600" },
   { id: 'ph-mount', name: "Magnetic Car Mount", price: 1500, category: "Phone Accessories", image: "https://picsum.photos/seed/mount/600/600" },
   { id: 'ph-screen-guard', name: "Universal Screen Guard", price: 500, category: "Phone Accessories", image: "https://picsum.photos/seed/guard/600/600" },
   { id: 'ph-charger', name: "Travel Fast Charger", price: 2200, category: "Phone Accessories", image: "https://picsum.photos/seed/charger/600/600" },
-  { id: 'ph-privacy', name: "Privacy Screen Filter", price: 1100, category: "Phone Accessories", image: "https://picsum.photos/seed/privacy/600/600" },
-  { id: 'ph-selfie', name: "Bluetooth Selfie Stick", price: 1800, category: "Phone Accessories", image: "https://picsum.photos/seed/selfie/600/600" },
-  { id: 'ph-desk-stand', name: "Aluminum Desk Stand", price: 1400, category: "Phone Accessories", image: "https://picsum.photos/seed/deskstand/600/600" },
-  { id: 'ph-vr', name: "Mobile VR Headset", price: 6500, category: "Phone Accessories", image: "https://picsum.photos/seed/vr/600/600" },
-  { id: 'ph-watch-strap', name: "Sport Watch Strap", price: 900, category: "Phone Accessories", image: "https://picsum.photos/seed/watchstrap/600/600" },
-  { id: 'ph-tablet-case', name: "Rugged Tablet Case", price: 2500, category: "Phone Accessories", image: "https://picsum.photos/seed/tabletcase/600/600" },
-  { id: 'ph-keyboard', name: "Wireless Keyboard Node", price: 4200, category: "Phone Accessories", image: "https://picsum.photos/seed/keyboard/600/600" },
-  { id: 'ph-mouse-pad', name: "Gamer Mouse Pad", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/mousepad/600/600" },
+  { id: 'ph-node-v2', name: "Elite Docking Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg" },
+  { id: 'ph-power-v2', name: "Titan Powerbank 20k", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg" },
+  { id: 'ph-privacy-v2', name: "Privacy Guard XL", price: 1100, category: "Phone Accessories", image: "https://picsum.photos/seed/privacy/600/600" },
+  { id: 'ph-stick-v2', name: "Pro Selfie Node", price: 1800, category: "Phone Accessories", image: "https://picsum.photos/seed/selfie/600/600" },
+  { id: 'ph-stand-v2', name: "Desktop Node Stand", price: 1400, category: "Phone Accessories", image: "https://picsum.photos/seed/deskstand/600/600" },
+  { id: 'ph-vr-v2', name: "HD Mobile VR Node", price: 6500, category: "Phone Accessories", image: "https://picsum.photos/seed/vr/600/600" },
+  { id: 'ph-strap-v2', name: "Sport Watch Node", price: 900, category: "Phone Accessories", image: "https://picsum.photos/seed/watchstrap/600/600" },
+  { id: 'ph-tablet-v2', name: "Rugged Tablet Node", price: 2500, category: "Phone Accessories", image: "https://picsum.photos/seed/tabletcase/600/600" },
+  { id: 'ph-kb-v2', name: "Wireless Data Node", price: 4200, category: "Phone Accessories", image: "https://picsum.photos/seed/keyboard/600/600" },
+  { id: 'ph-pad-v2', name: "Precision Surface Node", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/mousepad/600/600" },
 ];
 
 export default function HomePage() {
@@ -206,7 +206,7 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
-      {/* Promotional Banner Node - Full Width */}
+      {/* Promotional Banner Node */}
       <div className="w-full px-0 mb-6 mt-24 md:mt-32">
         <div className="relative w-full h-[180px] md:h-[320px] lg:h-[400px] rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
@@ -294,37 +294,30 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* HIGH DENSITY ADAPTIVE GRID: 3 mobile, 6 tablet, 8 laptop */}
-              <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-0 w-full md:border-l md:border-t lg:border-l lg:border-t overflow-hidden">
-                {category.id === 'Grocery' ? (
-                  <>
-                    {categoryProducts.map((product) => (
-                      <div key={product.id} className="min-w-0 w-full" onClick={() => window.location.href = `/products/${product.id}`}>
-                        <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
-                      </div>
-                    ))}
-                    <div className="relative aspect-square rounded-none overflow-hidden bg-black shadow-none group border-b border-r border-gray-100 min-w-0 w-full">
-                       <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
-                          <source src="/video.mp4" type="video/mp4" />
-                       </video>
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                       <div className="absolute bottom-2 left-2 flex items-center gap-1">
-                          <div className="w-4 h-4 rounded-full bg-primary flex items-center justify-center animate-pulse">
-                             <Play className="w-2 h-2 text-white fill-current ml-0.5" />
-                          </div>
-                          <div>
-                             <p className="text-[7px] font-black text-white uppercase tracking-tighter leading-none">Fresh Market</p>
-                             <p className="text-[6px] font-bold text-primary uppercase tracking-widest">Delivered Fresh</p>
-                          </div>
-                       </div>
-                    </div>
-                  </>
-                ) : (
-                  categoryProducts.map((product) => (
-                    <div key={product.id} className="min-w-0 w-full" onClick={() => window.location.href = `/products/${product.id}`}>
-                      <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
-                    </div>
-                  ))
+              {/* UPDATED ADAPTIVE GRID: 2 mobile, 6 tablet, 8 laptop */}
+              <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-0 w-full md:border-l md:border-t lg:border-l lg:border-t overflow-hidden">
+                {categoryProducts.map((product) => (
+                  <div key={product.id} className="min-w-0 w-full" onClick={() => window.location.href = `/products/${product.id}`}>
+                    <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
+                  </div>
+                ))}
+                
+                {category.id === 'Grocery' && (
+                  <div className="relative aspect-square rounded-none overflow-hidden bg-black shadow-none group border-b border-r border-gray-100 min-w-0 w-full">
+                     <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
+                        <source src="/video.mp4" type="video/mp4" />
+                     </video>
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                     <div className="absolute bottom-2 left-2 flex items-center gap-1">
+                        <div className="w-4 h-4 rounded-full bg-primary flex items-center justify-center animate-pulse">
+                           <Play className="w-2 h-2 text-white fill-current ml-0.5" />
+                        </div>
+                        <div>
+                           <p className="text-[7px] font-black text-white uppercase tracking-tighter leading-none">Fresh Market</p>
+                           <p className="text-[6px] font-bold text-primary uppercase tracking-widest">Delivered Fresh</p>
+                        </div>
+                     </div>
+                  </div>
                 )}
               </div>
             </section>
@@ -355,24 +348,35 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   return (
     <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border-b border-r border-gray-100 shadow-none hover:bg-gray-50 transition-all duration-300 rounded-none bg-white min-w-0">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
-        <Image src={getSafeUrl(product.image)} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 33vw, (max-width: 1024px) 16vw, 12vw" quality={100} unoptimized={true} />
+        <Image 
+          src={getSafeUrl(product.image)} 
+          alt={product.name} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-105" 
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 16vw, 12vw" 
+          quality={100} 
+          unoptimized={true} 
+        />
         {product.isHalal && (
-          <div className="absolute top-1 left-1 z-10 w-6 h-6 md:w-10 md:h-10 rounded-full overflow-hidden border border-white shadow-lg bg-white">
+          <div className="absolute top-2 left-2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border border-white shadow-lg bg-white">
             <Image src="/images (45).jpg" alt="Halal Certified" fill className="object-contain p-0.5" />
           </div>
         )}
-        <button onClick={onAdd} className="absolute bottom-1 right-1 w-6 h-6 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100">
-          <Plus className="w-3 h-3 md:w-5 md:h-5 stroke-[3px]" />
+        <button 
+          onClick={onAdd} 
+          className="absolute bottom-2 right-2 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100"
+        >
+          <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
-      <div className="p-2 md:p-4 flex-grow flex flex-col justify-between space-y-1 min-w-0">
+      <div className="p-3 md:p-4 flex-grow flex flex-col justify-between space-y-1.5 min-w-0">
         <div className="space-y-0.5 min-w-0">
-          <p className="text-[10px] md:text-[13px] font-black uppercase tracking-tighter truncate leading-tight group-hover:text-primary transition-colors">{product.name}</p>
-          <p className="text-[7px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
+          <p className="text-[13px] md:text-[13px] font-black uppercase tracking-tighter truncate leading-tight group-hover:text-primary transition-colors">{product.name}</p>
+          <p className="text-[10px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
         </div>
-        <div className="flex items-center gap-1 min-w-0 overflow-hidden">
-          <p className="text-[11px] md:text-[16px] font-black text-black whitespace-nowrap">KES {product.price.toLocaleString()}</p>
-          {product.hasTax && <span className="text-[6px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter shrink-0">+ TAX</span>}
+        <div className="flex items-center gap-1.5 min-w-0 overflow-hidden">
+          <p className="text-[15px] md:text-[16px] font-black text-black whitespace-nowrap">KES {product.price.toLocaleString()}</p>
+          {product.hasTax && <span className="text-[8px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter shrink-0">+ TAX</span>}
         </div>
       </div>
     </Card>
