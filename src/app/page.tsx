@@ -205,9 +205,9 @@ export default function HomePage() {
   if (!isMounted) return null;
 
   return (
-    <main className="min-h-screen bg-white w-full max-w-full overflow-x-hidden">
+    <div className="w-full max-w-full overflow-x-hidden bg-white">
       {/* Promotional Banner Node */}
-      <div className="w-full px-0 mb-6 mt-24 md:mt-32">
+      <div className="w-full px-0 mb-4 mt-20 md:mt-24">
         <div className="relative w-full h-[180px] md:h-[320px] lg:h-[400px] rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
@@ -244,66 +244,59 @@ export default function HomePage() {
       </div>
 
       {/* Sticky Header Node */}
-      <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-0 py-4 md:py-6">
-        <div className="w-full mx-auto space-y-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-             <div className="relative flex-grow max-w-none px-4 md:px-6">
-                <Search className="absolute left-8 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+      <div className="sticky top-20 md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-0 py-3 md:py-6">
+        <div className="w-full mx-auto space-y-4 md:space-y-6 px-4 md:px-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+             <div className="relative flex-grow max-w-none">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-gray-400" />
                 <input 
                   placeholder="Search network..." 
-                  className="w-full h-12 md:h-14 pl-12 pr-4 bg-gray-50 border-none rounded-2xl text-[14px] md:text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
+                  className="w-full h-10 md:h-14 pl-11 pr-4 bg-gray-50 border-none rounded-xl md:rounded-2xl text-[13px] md:text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
              </div>
              
-             <div className="relative group px-4 md:px-6">
+             <div className="relative group overflow-hidden">
                 <div 
                   ref={scrollRef}
-                  className="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 md:mx-0 scroll-smooth"
+                  className="flex gap-2 overflow-x-auto no-scrollbar pb-1 scroll-smooth"
                 >
                   <CategoryTab label="All Dispatches" isActive={activeTab === 'All'} onClick={() => scrollToSection('All')} />
                   {CATEGORIES.map(cat => (
                     <CategoryTab key={cat.id} label={cat.label} isActive={activeTab === cat.id} onClick={() => scrollToSection(cat.id)} />
                   ))}
                 </div>
-
-                <button onClick={() => scrollTabs('left')} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -ml-2">
-                  <ChevronLeft className="w-4 h-4 text-primary" />
-                </button>
-                <button onClick={() => scrollTabs('right')} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full border shadow-lg md:hidden -mr-2">
-                  <ChevronRight className="w-4 h-4 text-primary" />
-                </button>
              </div>
           </div>
         </div>
       </div>
 
       {/* Main Marketplace Grid - Edge to Edge Mobile 2 Column */}
-      <div className="w-full mx-auto px-0 mt-6 space-y-10 md:space-y-12 pb-20 overflow-hidden">
+      <div className="w-full mx-auto px-0 mt-2 space-y-8 md:space-y-12 pb-24 overflow-hidden">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
 
           return (
-            <section key={category.id} id={category.id} className="space-y-3 md:space-y-4 scroll-mt-40">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-2 px-4 md:px-6">
+            <section key={category.id} id={category.id} className="scroll-mt-40">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-2 px-4 md:px-6 mb-1">
                 <h2 className="text-[10px] md:text-[12px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
                   <category.icon className="w-3 h-3 md:w-4 md:h-4 text-primary" /> {category.id}
                 </h2>
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* TRUE FLUSH GRID: No horizontal overflow, exactly 2 items on mobile, 6 on tablet, 8 on desktop */}
-              <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-0 w-full md:border-l md:border-t lg:border-l lg:border-t overflow-hidden">
+              {/* TRUE FLUSH FLEX GRID: Absolute 2 products per row on mobile, precisely edge-to-edge */}
+              <div className="flex flex-wrap w-full border-t border-l border-gray-100 overflow-hidden">
                 {categoryProducts.map((product) => (
-                  <div key={product.id} className="min-w-0 w-full" onClick={() => window.location.href = `/products/${product.id}`}>
+                  <div key={product.id} className="w-1/2 md:w-1/6 lg:w-[12.5%] min-w-0 border-b border-r border-gray-100" onClick={() => window.location.href = `/products/${product.id}`}>
                     <ProductCard product={product} onAdd={(e) => { e.stopPropagation(); handleAdd(product); }} />
                   </div>
                 ))}
                 
                 {category.id === 'Grocery' && (
-                  <div className="relative aspect-square rounded-none overflow-hidden bg-black shadow-none group border-b border-r border-gray-100 min-w-0 w-full">
+                  <div className="w-1/2 md:w-1/6 lg:w-[12.5%] relative aspect-square rounded-none overflow-hidden bg-black border-b border-r border-gray-100">
                      <video ref={videoRef} autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover opacity-80">
                         <source src="/video.mp4" type="video/mp4" />
                      </video>
@@ -326,13 +319,13 @@ export default function HomePage() {
       </div>
 
       <Footer />
-    </main>
+    </div>
   );
 }
 
 function CategoryTab({ label, isActive, onClick }: { label: string, isActive: boolean, onClick: () => void }) {
   return (
-    <button onClick={onClick} className={cn("px-4 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shrink-0 whitespace-nowrap", isActive ? "bg-black text-white shadow-lg" : "bg-gray-50 text-gray-400 hover:text-black")}>
+    <button onClick={onClick} className={cn("px-4 h-9 md:h-10 rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all shrink-0 whitespace-nowrap", isActive ? "bg-black text-white shadow-lg" : "bg-gray-50 text-gray-400 hover:text-black")}>
       {label}
     </button>
   );
@@ -346,7 +339,7 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   };
 
   return (
-    <Card className="w-full h-full flex flex-col group cursor-pointer overflow-hidden border-b border-r border-gray-100 shadow-none hover:bg-gray-50 transition-all duration-300 rounded-none bg-white min-w-0">
+    <div className="w-full h-full flex flex-col group cursor-pointer overflow-hidden transition-all duration-300 bg-white hover:bg-gray-50">
       <div className="aspect-square relative bg-gray-50 overflow-hidden shrink-0">
         <Image 
           src={getSafeUrl(product.image)} 
@@ -358,28 +351,27 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           unoptimized={true} 
         />
         {product.isHalal && (
-          <div className="absolute top-2 left-2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border border-white shadow-lg bg-white">
+          <div className="absolute top-2 left-2 z-10 w-7 h-7 md:w-10 md:h-10 rounded-full overflow-hidden border border-white shadow-lg bg-white">
             <Image src="/images (45).jpg" alt="Halal Certified" fill className="object-contain p-0.5" />
           </div>
         )}
         <button 
           onClick={onAdd} 
-          className="absolute bottom-2 right-2 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100"
+          className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100"
         >
           <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
       <div className="p-3 md:p-4 flex-grow flex flex-col justify-between space-y-1.5 min-w-0">
         <div className="space-y-0.5 min-w-0">
-          <p className="text-[13px] md:text-[13px] font-black uppercase tracking-tighter truncate leading-tight group-hover:text-primary transition-colors">{product.name}</p>
-          <p className="text-[10px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
+          <p className="text-[12px] md:text-[13px] font-black uppercase tracking-tighter truncate leading-tight group-hover:text-primary transition-colors">{product.name}</p>
+          <p className="text-[9px] md:text-[9px] text-gray-400 font-bold uppercase tracking-widest truncate">{product.category}</p>
         </div>
         <div className="flex items-center gap-1.5 min-w-0 overflow-hidden">
-          <p className="text-[15px] md:text-[16px] font-black text-black whitespace-nowrap">KES {product.price.toLocaleString()}</p>
-          {product.hasTax && <span className="text-[8px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter shrink-0">+ TAX</span>}
+          <p className="text-[14px] md:text-[16px] font-black text-black whitespace-nowrap">KES {product.price.toLocaleString()}</p>
+          {product.hasTax && <span className="text-[7px] md:text-[8px] font-black text-gray-300 uppercase tracking-tighter shrink-0">+ TAX</span>}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
-
