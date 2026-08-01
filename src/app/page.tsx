@@ -36,7 +36,7 @@ const CATEGORIES = [
 ];
 
 const ALL_PRODUCTS = [
-  // RAW MEAT
+  // RAW MEAT (16 Items)
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", hasTax: true, isHalal: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", hasTax: true, isHalal: true },
   { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", hasTax: true, isHalal: true },
@@ -54,7 +54,7 @@ const ALL_PRODUCTS = [
   { id: 'p-lamb-chops', name: "Prime Lamb Chops", price: 1300, category: "Raw Meat", image: "/primelambchopsraw.jpg", isHalal: true },
   { id: 'p-steak-v2', name: "Select Beef Slice", price: 1050, category: "Raw Meat", image: "/shortribsraw.jpg", hasTax: true, isHalal: true },
   
-  // COOKED MEAT
+  // COOKED MEAT (16 Items)
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
   { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", isHalal: true },
   { id: 'c-goat-choma-1kg', name: "Goat Choma 1kg", price: 1400, category: "Cooked Meat", image: "/goatchoma.jpg", isHalal: true },
@@ -72,7 +72,7 @@ const ALL_PRODUCTS = [
   { id: 'c-mguu-cow', name: "Full Mguu Cow", price: 400, category: "Cooked Meat", image: "/images (46).jpg", isHalal: true },
   { id: 'c-kichwa-goat', name: "Full Kichwa Goat", price: 800, category: "Cooked Meat", image: "/goatchoma.jpg", isHalal: true },
   
-  // GROCERY
+  // GROCERY (16 Items)
   { id: 'g-onions', name: "Red Onions 1kg", price: 150, category: "Grocery", image: "/redonion.jpg" },
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600" },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "/freshgarlic.jpg" },
@@ -90,7 +90,7 @@ const ALL_PRODUCTS = [
   { id: 'g-basket-v2', name: "Season Fruit Pack", price: 600, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600" },
   { id: 'g-veg-v2', name: "Soup Mix Box", price: 450, category: "Grocery", image: "/greencabbage.jpg" },
 
-  // SODAS
+  // SODAS (16 Items)
   { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/images (54).jpg", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange Take Away", price: 150, category: "Sodas", image: "/fantafgdf.jpg", isHalal: true },
   { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "/keringetwater.jpg" },
@@ -108,7 +108,7 @@ const ALL_PRODUCTS = [
   { id: 'd-pepsi', name: "Pepsi Classic", price: 150, category: "Sodas", image: "/pepsiclassic.jpg" },
   { id: 'd-diet-coke', name: "Diet Coke 500ml", price: 150, category: "Sodas", image: "/dietcoke.jpg" },
 
-  // FINE WOOD KITCHEN
+  // FINE WOOD KITCHEN (16 Items)
   { id: 'fw-cutting-board', name: "Artisan Cutting Board", price: 1800, category: "Fine Wood Kitchen", image: "/artisancutting.jpg" },
   { id: 'fw-salad-bowl', name: "Hand-Carved Salad Bowl", price: 2500, category: "Fine Wood Kitchen", image: "/handcraftedbowl.jpg" },
   { id: 'fw-utensil-set', name: "5-Piece Utensil Set", price: 1500, category: "Fine Wood Kitchen", image: "/5-pieces utensil set.jpg" },
@@ -126,7 +126,7 @@ const ALL_PRODUCTS = [
   { id: 'fw-set-v2', name: "Kitchen Node Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
   { id: 'fw-block-v2', name: "Magnetic Knife Node", price: 3800, category: "Fine Wood Kitchen", image: "/artisankniveblock.jpg" },
 
-  // PHONE ACCESSORIES
+  // PHONE ACCESSORIES (16 Items)
   { id: 'ph-cable', name: "Ultra-Sync Data Cable", price: 800, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600" },
   { id: 'ph-earbuds', name: "Wireless Earbuds HD", price: 4500, category: "Phone Accessories", image: "https://picsum.photos/seed/earbuds/600/600" },
   { id: 'ph-case', name: "Titanium Phone Case", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/case/600/600" },
@@ -279,7 +279,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid - Edge to Edge */}
+      {/* Main Marketplace Grid - Edge to Edge Mobile 2 Column */}
       <div className="w-full mx-auto px-0 mt-6 space-y-10 md:space-y-12 pb-20 overflow-hidden">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
@@ -294,7 +294,7 @@ export default function HomePage() {
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* UPDATED ADAPTIVE GRID: 2 mobile, 6 tablet, 8 laptop */}
+              {/* TRUE FLUSH GRID: No horizontal overflow, exactly 2 items on mobile, 6 on tablet, 8 on desktop */}
               <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-0 w-full md:border-l md:border-t lg:border-l lg:border-t overflow-hidden">
                 {categoryProducts.map((product) => (
                   <div key={product.id} className="min-w-0 w-full" onClick={() => window.location.href = `/products/${product.id}`}>
@@ -382,3 +382,4 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
     </Card>
   );
 }
+
