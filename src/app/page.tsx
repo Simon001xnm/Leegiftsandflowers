@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useRef, useEffect } from "react";
@@ -35,7 +36,7 @@ const CATEGORIES = [
 ];
 
 const ALL_PRODUCTS = [
-  // RAW MEAT
+  // RAW MEAT (16 Items)
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", hasTax: true, isHalal: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", hasTax: true, isHalal: true },
   { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", hasTax: true, isHalal: true },
@@ -48,8 +49,12 @@ const ALL_PRODUCTS = [
   { id: 'p-short-ribs', name: "Beef Short Ribs", price: 1150, category: "Raw Meat", image: "https://picsum.photos/seed/ribs/600/600", isHalal: true },
   { id: 'p-mince-premium', name: "Premium Beef Mince", price: 950, category: "Raw Meat", image: "https://picsum.photos/seed/mince/600/600", isHalal: true },
   { id: 'p-mutton-chops', name: "Mutton Chops", price: 1100, category: "Raw Meat", image: "https://picsum.photos/seed/mutton/600/600", isHalal: true },
+  { id: 'p-mutton-ribs', name: "Mutton Ribs", price: 1050, category: "Raw Meat", image: "https://picsum.photos/seed/muttonribs/600/600", isHalal: true },
+  { id: 'p-beef-tongue-raw', name: "Beef Tongue Raw", price: 850, category: "Raw Meat", image: "https://picsum.photos/seed/tongue/600/600", isHalal: true },
+  { id: 'p-pork-sausage-raw', name: "Pork Sausages Raw", price: 750, category: "Raw Meat", image: "https://picsum.photos/seed/rawsaus/600/600", isHalal: false },
+  { id: 'p-lamb-chops', name: "Prime Lamb Chops", price: 1300, category: "Raw Meat", image: "https://picsum.photos/seed/lambchops/600/600", isHalal: true },
   
-  // COOKED MEAT
+  // COOKED MEAT (16 Items)
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", isHalal: true },
   { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", isHalal: true },
   { id: 'c-goat-choma-1kg', name: "Goat Choma 1kg", price: 1400, category: "Cooked Meat", image: "/goatchoma.jpg", isHalal: true },
@@ -62,15 +67,31 @@ const ALL_PRODUCTS = [
   { id: 'c-matumbo-wet', name: "Matumbo Wet Fry", price: 900, category: "Cooked Meat", image: "https://picsum.photos/seed/matumbo/600/600", isHalal: true },
   { id: 'c-sausage-platter', name: "Sausage Platter", price: 800, category: "Cooked Meat", image: "https://picsum.photos/seed/sausage/600/600", isHalal: true },
   { id: 'c-pork-dry-fry', name: "Pork Dry Fry 1kg", price: 1300, category: "Cooked Meat", image: "https://picsum.photos/seed/porkfry/600/600", isHalal: false },
+  { id: 'c-kuku-14', name: "Kuku Choma 1/4", price: 350, category: "Cooked Meat", image: "https://picsum.photos/seed/kuku/600/600", isHalal: true },
+  { id: 'c-beef-stew', name: "Beef Stew Node", price: 1200, category: "Cooked Meat", image: "https://picsum.photos/seed/stew/600/600", isHalal: true },
+  { id: 'c-githeri-node', name: "Traditional Githeri", price: 400, category: "Cooked Meat", image: "https://picsum.photos/seed/githeri/600/600", isHalal: true },
+  { id: 'c-matumbo-dry', name: "Matumbo Dry Fry", price: 900, category: "Cooked Meat", image: "https://picsum.photos/seed/matumbodry/600/600", isHalal: true },
   
-  // GROCERY
+  // GROCERY (16 Items)
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", isHalal: true },
   { id: 'g-onions', name: "Red Onions 1kg", price: 150, category: "Grocery", image: "https://picsum.photos/seed/onions/600/600" },
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600" },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/garlic/600/600" },
+  { id: 'g-cabbage', name: "Green Cabbage", price: 80, category: "Grocery", image: "https://picsum.photos/seed/cabbage/600/600" },
+  { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "https://picsum.photos/seed/sukuma/600/600" },
+  { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "https://picsum.photos/seed/spinach/600/600" },
+  { id: 'g-carrots', name: "Carrots 1kg", price: 120, category: "Grocery", image: "https://picsum.photos/seed/carrots/600/600" },
+  { id: 'g-potatoes', name: "Potatoes 5kg Bag", price: 650, category: "Grocery", image: "https://picsum.photos/seed/potatoes/600/600" },
+  { id: 'g-ginger', name: "Ginger Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/ginger/600/600" },
+  { id: 'g-avocado', name: "Ripe Avocado", price: 50, category: "Grocery", image: "https://picsum.photos/seed/avocado/600/600" },
+  { id: 'g-lemons', name: "Lemons Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/lemons/600/600" },
+  { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 350, category: "Grocery", image: "https://picsum.photos/seed/eggs/600/600" },
+  { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "https://picsum.photos/seed/milk/600/600" },
+  { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "https://picsum.photos/seed/bread/600/600" },
+  { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "https://picsum.photos/seed/sugar/600/600" },
   
-  // SODAS
-  { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", isHalal: true },
+  // SODAS (16 Items)
+  { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/images (54).jpg", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange Take Away", price: 150, category: "Sodas", image: "/fantafgdf.jpg", isHalal: true },
   { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "https://picsum.photos/seed/water/600/600" },
   { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Sodas", image: "https://picsum.photos/seed/sprite/600/600" },
@@ -78,16 +99,34 @@ const ALL_PRODUCTS = [
   { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "/images (53).jpg" },
   { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "/images (54).jpg" },
   { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "/images (55).jpg", isHalal: true },
+  { id: 'd-stoney-500', name: "Stoney 500ml", price: 80, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600" },
+  { id: 'd-sprite-zero', name: "Sprite Zero 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/spritezero/600/600" },
+  { id: 'd-schweppes', name: "Schweppes Tonic", price: 150, category: "Sodas", image: "https://picsum.photos/seed/tonic/600/600" },
+  { id: 'd-mountain-dew', name: "Mountain Dew", price: 150, category: "Sodas", image: "https://picsum.photos/seed/dew/600/600" },
+  { id: 'd-7up', name: "7UP Lemon Lime", price: 150, category: "Sodas", image: "https://picsum.photos/seed/7up/600/600" },
+  { id: 'd-mirinda', name: "Mirinda Fruity", price: 150, category: "Sodas", image: "https://picsum.photos/seed/mirinda/600/600" },
+  { id: 'd-pepsi', name: "Pepsi Classic", price: 150, category: "Sodas", image: "https://picsum.photos/seed/pepsi/600/600" },
+  { id: 'd-diet-coke', name: "Diet Coke 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/dietcoke/600/600" },
 
-  // FINE WOOD KITCHEN
+  // FINE WOOD KITCHEN (16 Items)
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg" },
   { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
   { id: 'fw-cutting-board', name: "Artisan Cutting Board", price: 1800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/board/600/600" },
   { id: 'fw-salad-bowl', name: "Hand-Carved Salad Bowl", price: 2500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/bowl/600/600" },
   { id: 'fw-utensil-set', name: "5-Piece Utensil Set", price: 1500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/utensils/600/600" },
   { id: 'fw-spice-rack', name: "Wooden Spice Rack", price: 3500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/spicerack/600/600" },
+  { id: 'fw-coasters', name: "Wooden Coasters Node", price: 1200, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/coasters/600/600" },
+  { id: 'fw-napkin', name: "Artisan Napkin Holder", price: 950, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/napkin/600/600" },
+  { id: 'fw-fruit-stand', name: "Handcrafted Fruit Stand", price: 2800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/fruit/600/600" },
+  { id: 'fw-bread-box', name: "Artisan Bread Box", price: 3200, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/breadbox/600/600" },
+  { id: 'fw-knife-block', name: "Elite Knife Block", price: 4500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/knifeblock/600/600" },
+  { id: 'fw-rolling-pin', name: "Premium Rolling Pin", price: 1100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/rollingpin/600/600" },
+  { id: 'fw-mortar', name: "Wood Mortar & Pestle", price: 1600, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/mortar/600/600" },
+  { id: 'fw-serving-tray', name: "Gourmet Serving Tray", price: 2100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/tray/600/600" },
+  { id: 'fw-wall-shelf', name: "Kitchen Wall Shelf", price: 5500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/wallshelf/600/600" },
+  { id: 'fw-wood-spoons', name: "Carved Wood Spoons", price: 800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/woodspoons/600/600" },
 
-  // PHONES & ACCESSORIES
+  // PHONES & ACCESSORIES (16 Items)
   { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg" },
   { id: 'ph-powerbank-node', name: "Premium Powerbank Node", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg" },
   { id: 'ph-cable', name: "Ultra-Sync Data Cable", price: 800, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600" },
@@ -96,6 +135,14 @@ const ALL_PRODUCTS = [
   { id: 'ph-mount', name: "Magnetic Car Mount", price: 1500, category: "Phone Accessories", image: "https://picsum.photos/seed/mount/600/600" },
   { id: 'ph-screen-guard', name: "Universal Screen Guard", price: 500, category: "Phone Accessories", image: "https://picsum.photos/seed/guard/600/600" },
   { id: 'ph-charger', name: "Travel Fast Charger", price: 2200, category: "Phone Accessories", image: "https://picsum.photos/seed/charger/600/600" },
+  { id: 'ph-privacy', name: "Privacy Screen Filter", price: 1100, category: "Phone Accessories", image: "https://picsum.photos/seed/privacy/600/600" },
+  { id: 'ph-selfie', name: "Bluetooth Selfie Stick", price: 1800, category: "Phone Accessories", image: "https://picsum.photos/seed/selfie/600/600" },
+  { id: 'ph-desk-stand', name: "Aluminum Desk Stand", price: 1400, category: "Phone Accessories", image: "https://picsum.photos/seed/deskstand/600/600" },
+  { id: 'ph-vr', name: "Mobile VR Headset", price: 6500, category: "Phone Accessories", image: "https://picsum.photos/seed/vr/600/600" },
+  { id: 'ph-watch-strap', name: "Sport Watch Strap", price: 900, category: "Phone Accessories", image: "https://picsum.photos/seed/watchstrap/600/600" },
+  { id: 'ph-tablet-case', name: "Rugged Tablet Case", price: 2500, category: "Phone Accessories", image: "https://picsum.photos/seed/tabletcase/600/600" },
+  { id: 'ph-keyboard', name: "Wireless Keyboard Node", price: 4200, category: "Phone Accessories", image: "https://picsum.photos/seed/keyboard/600/600" },
+  { id: 'ph-mouse-pad', name: "Gamer Mouse Pad", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/mousepad/600/600" },
 ];
 
 export default function HomePage() {

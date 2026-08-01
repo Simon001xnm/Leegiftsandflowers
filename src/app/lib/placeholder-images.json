@@ -132,6 +132,114 @@
       "description": "Travel Fast Charger",
       "imageUrl": "https://picsum.photos/seed/charger/600/600",
       "imageHint": "wall charger"
+    },
+    {
+      "id": "raw-mutton-ribs",
+      "description": "Premium Mutton Ribs",
+      "imageUrl": "https://picsum.photos/seed/muttonribs/600/600",
+      "imageHint": "raw meat"
+    },
+    {
+      "id": "raw-tongue",
+      "description": "Raw Beef Tongue",
+      "imageUrl": "https://picsum.photos/seed/tongue/600/600",
+      "imageHint": "beef meat"
+    },
+    {
+      "id": "raw-sausage",
+      "description": "Beef Sausages Raw",
+      "imageUrl": "https://picsum.photos/seed/rawsaus/600/600",
+      "imageHint": "raw sausages"
+    },
+    {
+      "id": "raw-lamb-chops",
+      "description": "Prime Lamb Chops",
+      "imageUrl": "https://picsum.photos/seed/lambchops/600/600",
+      "imageHint": "lamb meat"
+    },
+    {
+      "id": "cooked-kuku",
+      "description": "Kuku Choma 1/4",
+      "imageUrl": "https://picsum.photos/seed/kuku/600/600",
+      "imageHint": "grilled chicken"
+    },
+    {
+      "id": "cooked-stew",
+      "description": "Beef Stew Node",
+      "imageUrl": "https://picsum.photos/seed/stew/600/600",
+      "imageHint": "meat stew"
+    },
+    {
+      "id": "cooked-githeri",
+      "description": "Traditional Githeri",
+      "imageUrl": "https://picsum.photos/seed/githeri/600/600",
+      "imageHint": "cooked corn"
+    },
+    {
+      "id": "cooked-matumbo-dry",
+      "description": "Matumbo Dry Fry",
+      "imageUrl": "https://picsum.photos/seed/matumbodry/600/600",
+      "imageHint": "fried meat"
+    },
+    {
+      "id": "grocery-cabbage",
+      "description": "Green Cabbage",
+      "imageUrl": "https://picsum.photos/seed/cabbage/600/600",
+      "imageHint": "cabbage"
+    },
+    {
+      "id": "grocery-sukuma",
+      "description": "Sukuma Wiki",
+      "imageUrl": "https://picsum.photos/seed/sukuma/600/600",
+      "imageHint": "kale"
+    },
+    {
+      "id": "grocery-avocado",
+      "description": "Ripe Avocado",
+      "imageUrl": "https://picsum.photos/seed/avocado/600/600",
+      "imageHint": "avocado"
+    },
+    {
+      "id": "grocery-eggs",
+      "description": "Farm Fresh Eggs",
+      "imageUrl": "https://picsum.photos/seed/eggs/600/600",
+      "imageHint": "eggs"
+    },
+    {
+      "id": "soda-sprite-zero",
+      "description": "Sprite Zero",
+      "imageUrl": "https://picsum.photos/seed/spritezero/600/600",
+      "imageHint": "sprite"
+    },
+    {
+      "id": "soda-pepsi",
+      "description": "Pepsi 500ml",
+      "imageUrl": "https://picsum.photos/seed/pepsi/600/600",
+      "imageHint": "pepsi"
+    },
+    {
+      "id": "wood-coasters",
+      "description": "Wooden Coasters",
+      "imageUrl": "https://picsum.photos/seed/coasters/600/600",
+      "imageHint": "wood coasters"
+    },
+    {
+      "id": "wood-bread-box",
+      "description": "Artisan Bread Box",
+      "imageUrl": "https://picsum.photos/seed/breadbox/600/600",
+      "imageHint": "bread box"
+    },
+    {
+      "id": "ph-vr",
+      "description": "Mobile VR Headset",
+      "imageUrl": "https://picsum.photos/seed/vr/600/600",
+      "imageHint": "vr headset"
+    },
+    {
+      "id": "ph-keyboard",
+      "description": "Wireless Keyboard",
+      "imageUrl": "https://picsum.photos/seed/keyboard/600/600",
+      "imageHint": "keyboard"
     }
   ]
 }

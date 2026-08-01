@@ -1,3 +1,4 @@
+
 'use client';
 
 import { use, useEffect, useState } from "react";
@@ -12,6 +13,7 @@ import { createClient } from "@/lib/supabase/client";
 
 // SYNCED NETWORK CATALOG
 const STATIC_PRODUCTS = [
+  // RAW MEAT (16 Items)
   { id: 'p-fillet', name: "Beef Fillet", price: 1100, category: "Raw Meat", image: "/beef fillet raw.jpg", description: "Exclusive Extra HD Beef Fillet. Prime cut with maximum marbling and tenderness.", hasTax: true, isHalal: true },
   { id: 'p-tbone', name: "Beef T-Bone", price: 1000, category: "Raw Meat", image: "/tbone.webp", description: "Exclusive Extra HD Beef T-Bone. Iconic cut featuring both sirloin and fillet with a characteristic T-shaped bone.", hasTax: true, isHalal: true },
   { id: 'p-cubes', name: "Beef Cubes", price: 1000, category: "Raw Meat", image: "/images (34).jpg", description: "Exclusive Extra HD Beef Cubes. Perfectly diced for stews and slow cooking.", hasTax: true, isHalal: true },
@@ -24,8 +26,12 @@ const STATIC_PRODUCTS = [
   { id: 'p-short-ribs', name: "Beef Short Ribs", price: 1150, category: "Raw Meat", image: "https://picsum.photos/seed/ribs/600/600", description: "Premium Beef Short Ribs, perfect for slow roasting or braising.", isHalal: true },
   { id: 'p-mince-premium', name: "Premium Beef Mince", price: 950, category: "Raw Meat", image: "https://picsum.photos/seed/mince/600/600", description: "Lean and high-quality ground beef for all your kitchen needs.", isHalal: true },
   { id: 'p-mutton-chops', name: "Mutton Chops", price: 1100, category: "Raw Meat", image: "https://picsum.photos/seed/mutton/600/600", description: "Tender and flavorful mutton chops, freshly sourced from local farms.", isHalal: true },
+  { id: 'p-mutton-ribs', name: "Mutton Ribs", price: 1050, category: "Raw Meat", image: "https://picsum.photos/seed/muttonribs/600/600", description: "Extra-tender mutton ribs, ideal for slow-cooked traditional dishes.", isHalal: true },
+  { id: 'p-beef-tongue-raw', name: "Beef Tongue Raw", price: 850, category: "Raw Meat", image: "https://picsum.photos/seed/tongue/600/600", description: "Premium raw beef tongue, freshly cleaned and prepared for dispatch.", isHalal: true },
+  { id: 'p-pork-sausage-raw', name: "Pork Sausages Raw", price: 750, category: "Raw Meat", image: "https://picsum.photos/seed/rawsaus/600/600", description: "Artisan-crafted raw pork sausages, made from select cuts for elite kitchen sync.", isHalal: false },
+  { id: 'p-lamb-chops', name: "Prime Lamb Chops", price: 1300, category: "Raw Meat", image: "https://picsum.photos/seed/lambchops/600/600", description: "Elite-grade prime lamb chops, expertly butchered for maximum flavor node retrieval.", isHalal: true },
   
-  // COOKED MEAT
+  // COOKED MEAT (16 Items)
   { id: 'c-beef-wet-1kg', name: "Beef Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (41).jpg", description: "Expertly spiced beef, wet-fried to tender perfection. A Nairobi West signature dish.", isHalal: true },
   { id: 'c-goat-wet-1kg', name: "Goat Wet Fry 1kg", price: 1400, category: "Cooked Meat", image: "/images (43).jpg", description: "Expertly spiced goat meat, wet-fried to tender perfection. A Nairobi West signature dish.", isHalal: true },
   { id: 'c-goat-choma-1kg', name: "Goat Choma 1kg", price: 1400, category: "Cooked Meat", image: "/goatchoma.jpg", description: "Tender flame-grilled goat meat, expertly seasoned for a signature Nairobi West taste.", isHalal: true },
@@ -38,15 +44,31 @@ const STATIC_PRODUCTS = [
   { id: 'c-matumbo-wet', name: "Matumbo Wet Fry", price: 900, category: "Cooked Meat", image: "https://picsum.photos/seed/matumbo/600/600", description: "Traditional Matumbo wet-fried with fresh spices and herbs.", isHalal: true },
   { id: 'c-sausage-platter', name: "Sausage Platter", price: 800, category: "Cooked Meat", image: "https://picsum.photos/seed/sausage/600/600", description: "A delicious platter of grilled beef and chicken sausages.", isHalal: true },
   { id: 'c-pork-dry-fry', name: "Pork Dry Fry 1kg", price: 1300, category: "Cooked Meat", image: "https://picsum.photos/seed/porkfry/600/600", description: "Spiced dry-fried pork cuts, prepared for rapid dispatch.", isHalal: false },
+  { id: 'c-kuku-14', name: "Kuku Choma 1/4", price: 350, category: "Cooked Meat", image: "https://picsum.photos/seed/kuku/600/600", description: "Flame-grilled quarter chicken, expertly basted with signature Steak West marinade.", isHalal: true },
+  { id: 'c-beef-stew', name: "Beef Stew Node", price: 1200, category: "Cooked Meat", image: "https://picsum.photos/seed/stew/600/600", description: "Rich and hearty beef stew node, slow-cooked with fresh farm vegetables.", isHalal: true },
+  { id: 'c-githeri-node', name: "Traditional Githeri", price: 400, category: "Cooked Meat", image: "https://picsum.photos/seed/githeri/600/600", description: "Hearty traditional githeri, boiled to perfection and expertly seasoned.", isHalal: true },
+  { id: 'c-matumbo-dry', name: "Matumbo Dry Fry", price: 900, category: "Cooked Meat", image: "https://picsum.photos/seed/matumbodry/600/600", description: "Crispy and spiced matumbo dry-fry, a favorite for rapid dispatch snacking.", isHalal: true },
   
-  // GROCERY
+  // GROCERY (16 Items)
   { id: 'g3', name: "Fresh Farm Basket", price: 850, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600", description: "A seasonal selection of farm-fresh vegetables, hand-picked for quality.", isHalal: true },
   { id: 'g-onions', name: "Red Onions 1kg", price: 150, category: "Grocery", image: "https://picsum.photos/seed/onions/600/600", description: "Fresh farm red onions, sorted for quality." },
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600", description: "Grade A tomatoes, picked fresh from the fields." },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/garlic/600/600", description: "Pungent and high-quality garlic bulbs." },
+  { id: 'g-cabbage', name: "Green Cabbage", price: 80, category: "Grocery", image: "https://picsum.photos/seed/cabbage/600/600", description: "Freshly harvested green cabbage from the central grocery node." },
+  { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "https://picsum.photos/seed/sukuma/600/600", description: "Premium pre-cut sukuma wiki (kale) for rapid kitchen preparation." },
+  { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "https://picsum.photos/seed/spinach/600/600", description: "Vibrant green spinach leaves, washed and ready for culinary dispatch." },
+  { id: 'g-carrots', name: "Carrots 1kg", price: 120, category: "Grocery", image: "https://picsum.photos/seed/carrots/600/600", description: "Sweet and crunchy farm-fresh carrots." },
+  { id: 'g-potatoes', name: "Potatoes 5kg Bag", price: 650, category: "Grocery", image: "https://picsum.photos/seed/potatoes/600/600", description: "Large 5kg bag of premium white potatoes, ideal for large household sync." },
+  { id: 'g-ginger', name: "Ginger Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/ginger/600/600", description: "High-potency raw ginger for flavor node enhancement." },
+  { id: 'g-avocado', name: "Ripe Avocado", price: 50, category: "Grocery", image: "https://picsum.photos/seed/avocado/600/600", description: "Perfectly ripe buttery avocado from local farm nodes." },
+  { id: 'g-lemons', name: "Lemons Pack", price: 100, category: "Grocery", image: "https://picsum.photos/seed/lemons/600/600", description: "Fresh and juicy lemons for acidity node balancing." },
+  { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 350, category: "Grocery", image: "https://picsum.photos/seed/eggs/600/600", description: "Elite-grade farm fresh eggs, delivered in protective dispatch packaging." },
+  { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "https://picsum.photos/seed/milk/600/600", description: "Pure dairy node output, fresh 1L milk pack." },
+  { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "https://picsum.photos/seed/bread/600/600", description: "Soft and nutritious whole grain bread loaf." },
+  { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "https://picsum.photos/seed/sugar/600/600", description: "Pure local cane sugar, 1kg dispatch node." },
   
-  // SODAS
-  { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/c9f7fbad3126b7db778cc14a426d18a3.jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
+  // SODAS (16 Items)
+  { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/images (54).jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
   { id: 'd2-fanta-orange', name: "Fanta Orange Take Away", price: 150, category: "Sodas", image: "/fantafgdf.jpg", description: "Chilled Fanta Orange take away bottle.", isHalal: true },
   { id: 'd-water-500', name: "Keringet Water 500ml", price: 70, category: "Sodas", image: "https://picsum.photos/seed/water/600/600", description: "Mineral water, chilled for refreshment." },
   { id: 'd-sprite-takeaway', name: "Sprite Take Away", price: 150, category: "Sodas", image: "https://picsum.photos/seed/sprite/600/600", description: "Chilled Sprite take away bottle." },
@@ -54,16 +76,34 @@ const STATIC_PRODUCTS = [
   { id: 'd-krest', name: "Krest Bitter Lemon", price: 150, category: "Sodas", image: "/images (53).jpg", description: "Refreshing bitter lemon soda, perfect for pairing with nyama choma." },
   { id: 'd-coke-zero', name: "Coke Zero 500ml", price: 150, category: "Sodas", image: "/images (54).jpg", description: "Great Coke taste, zero sugar. Chilled for maximum refreshment." },
   { id: 'd-fanta-blackcurrant', name: "Fanta Blackcurrant", price: 150, category: "Sodas", image: "/images (55).jpg", description: "Sweet and tangy blackcurrant fanta.", isHalal: true },
+  { id: 'd-stoney-500', name: "Stoney 500ml", price: 80, category: "Sodas", image: "https://picsum.photos/seed/stoney/600/600", description: "Compact Stoney Tangawizi dispatch node." },
+  { id: 'd-sprite-zero', name: "Sprite Zero 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/spritezero/600/600", description: "Zero sugar lemon-lime refreshment." },
+  { id: 'd-schweppes', name: "Schweppes Tonic", price: 150, category: "Sodas", image: "https://picsum.photos/seed/tonic/600/600", description: "Premium tonic water for elite refreshment sync." },
+  { id: 'd-mountain-dew', name: "Mountain Dew", price: 150, category: "Sodas", image: "https://picsum.photos/seed/dew/600/600", description: "High-energy citrus soda dispatch node." },
+  { id: 'd-7up', name: "7UP Lemon Lime", price: 150, category: "Sodas", image: "https://picsum.photos/seed/7up/600/600", description: "Classic lemon-lime refreshment." },
+  { id: 'd-mirinda', name: "Mirinda Fruity", price: 150, category: "Sodas", image: "https://picsum.photos/seed/mirinda/600/600", description: "Vibrant fruity orange soda." },
+  { id: 'd-pepsi', name: "Pepsi Classic", price: 150, category: "Sodas", image: "https://picsum.photos/seed/pepsi/600/600", description: "Classic Pepsi-Cola node." },
+  { id: 'd-diet-coke', name: "Diet Coke 500ml", price: 150, category: "Sodas", image: "https://picsum.photos/seed/dietcoke/600/600", description: "Low-calorie cola refreshment node." },
 
-  // FINE WOOD KITCHEN
+  // FINE WOOD KITCHEN (16 Items)
   { id: 'fw-artisan-node', name: "Fine Wood Artisan Node", price: 2200, category: "Fine Wood Kitchen", image: "/kitchen2.jpg", description: "Handcrafted artisan kitchenware from the Fine Wood collection. Durable, antimicrobial, and elegant." },
   { id: 'fw-gourmet-set', name: "Fine Wood Gourmet Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg", description: "Elite gourmet kitchen tools, expertly crafted from premium wood nodes. Perfect for precision cooking." },
   { id: 'fw-cutting-board', name: "Artisan Cutting Board", price: 1800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/board/600/600", description: "Durable, high-quality wooden cutting board handcrafted for the elite kitchen node." },
   { id: 'fw-salad-bowl', name: "Hand-Carved Salad Bowl", price: 2500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/bowl/600/600", description: "Beautiful hand-carved wooden salad bowl, perfect for serving fresh farm baskets." },
   { id: 'fw-utensil-set', name: "5-Piece Utensil Set", price: 1500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/utensils/600/600", description: "Set of 5 handcrafted wooden kitchen utensils for precision culinary dispatch." },
   { id: 'fw-spice-rack', name: "Wooden Spice Rack", price: 3500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/spicerack/600/600", description: "Handcrafted wooden spice rack to organize your flavor nodes with elite precision." },
+  { id: 'fw-coasters', name: "Wooden Coasters Node", price: 1200, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/coasters/600/600", description: "Set of 4 artisan wood coasters, protecting your nodes with style." },
+  { id: 'fw-napkin', name: "Artisan Napkin Holder", price: 950, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/napkin/600/600", description: "Sleek wooden napkin holder for the modern dining node." },
+  { id: 'fw-fruit-stand', name: "Handcrafted Fruit Stand", price: 2800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/fruit/600/600", description: "Multi-tier wooden fruit stand for high-density grocery storage." },
+  { id: 'fw-bread-box', name: "Artisan Bread Box", price: 3200, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/breadbox/600/600", description: "Ventilated wood bread box to maintain bakery node freshness." },
+  { id: 'fw-knife-block', name: "Elite Knife Block", price: 4500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/knifeblock/600/600", description: "Safe and stylish storage for your high-performance culinary blades." },
+  { id: 'fw-rolling-pin', name: "Premium Rolling Pin", price: 1100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/rollingpin/600/600", description: "Smooth wood rolling pin for precision dough node manipulation." },
+  { id: 'fw-mortar', name: "Wood Mortar & Pestle", price: 1600, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/mortar/600/600", description: "Traditional wood mortar and pestle for artisanal spice grinding." },
+  { id: 'fw-serving-tray', name: "Gourmet Serving Tray", price: 2100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/tray/600/600", description: "Large wood serving tray for elite hospitality dispatch." },
+  { id: 'fw-wall-shelf', name: "Kitchen Wall Shelf", price: 5500, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/wallshelf/600/600", description: "Solid wood wall shelf for inventory node display." },
+  { id: 'fw-wood-spoons', name: "Carved Wood Spoons", price: 800, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/woodspoons/600/600", description: "Set of 3 uniquely carved wooden spoons." },
 
-  // PHONES & ACCESSORIES
+  // PHONES & ACCESSORIES (16 Items)
   { id: 'ph-accessory-node', name: "Elite Phone Accessory Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg", description: "Premium selection of high-clarity phone accessories, curated for the modern digital workspace." },
   { id: 'ph-powerbank-node', name: "Premium Powerbank Node", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg", description: "High-capacity elite powerbank for sustained mobile node endurance. Rapid dispatch ready." },
   { id: 'ph-cable', name: "Ultra-Sync Data Cable", price: 800, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600", description: "High-speed USB-C data and charging cable. Reinforced fiber for maximum node durability." },
@@ -72,6 +112,14 @@ const STATIC_PRODUCTS = [
   { id: 'ph-mount', name: "Magnetic Car Mount", price: 1500, category: "Phone Accessories", image: "https://picsum.photos/seed/mount/600/600", description: "Powerful magnetic car mount for secure hands-free navigation during dispatch." },
   { id: 'ph-screen-guard', name: "Universal Screen Guard", price: 500, category: "Phone Accessories", image: "https://picsum.photos/seed/guard/600/600", description: "High-clarity tempered glass screen protector. Oleophobic coating for smudge-free operation." },
   { id: 'ph-charger', name: "Travel Fast Charger", price: 2200, category: "Phone Accessories", image: "https://picsum.photos/seed/charger/600/600", description: "Compact 65W fast charger node. Dual-port support for simultaneous device synchronization." },
+  { id: 'ph-privacy', name: "Privacy Screen Filter", price: 1100, category: "Phone Accessories", image: "https://picsum.photos/seed/privacy/600/600", description: "Specialized screen filter to protect your sensitive data nodes from lateral viewing." },
+  { id: 'ph-selfie', name: "Bluetooth Selfie Stick", price: 1800, category: "Phone Accessories", image: "https://picsum.photos/seed/selfie/600/600", description: "Extendable Bluetooth selfie stick for elite content node capture." },
+  { id: 'ph-desk-stand', name: "Aluminum Desk Stand", price: 1400, category: "Phone Accessories", image: "https://picsum.photos/seed/deskstand/600/600", description: "Premium aluminum stand for stable mobile node positioning." },
+  { id: 'ph-vr', name: "Mobile VR Headset", price: 6500, category: "Phone Accessories", image: "https://picsum.photos/seed/vr/600/600", description: "Immersive mobile VR headset node for high-fidelity digital synchronization." },
+  { id: 'ph-watch-strap', name: "Sport Watch Strap", price: 900, category: "Phone Accessories", image: "https://picsum.photos/seed/watchstrap/600/600", description: "Durable silicone strap for elite smartwatch node synchronization." },
+  { id: 'ph-tablet-case', name: "Rugged Tablet Case", price: 2500, category: "Phone Accessories", image: "https://picsum.photos/seed/tabletcase/600/600", description: "Heavy-duty protective case for larger mobile tablet nodes." },
+  { id: 'ph-keyboard', name: "Wireless Keyboard Node", price: 4200, category: "Phone Accessories", image: "https://picsum.photos/seed/keyboard/600/600", description: "Compact Bluetooth keyboard for rapid mobile data entry dispatch." },
+  { id: 'ph-mouse-pad', name: "Gamer Mouse Pad", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/mousepad/600/600", description: "Extra-large tracking surface for precision cursor node movement." },
 ];
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
