@@ -73,7 +73,7 @@ const ALL_PRODUCTS = [
   
   // GROCERY (16 Items)
   { id: 'g-onions', name: "Red Onions 1kg", price: 150, category: "Grocery", image: "/redonion.jpg" },
-  { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "https://picsum.photos/seed/tomatoes/600/600" },
+  { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "/freshtomatoes.jpg" },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "/freshgarlic.jpg" },
   { id: 'g-cabbage', name: "Green Cabbage", price: 80, category: "Grocery", image: "/greencabbage.jpg" },
   { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "https://picsum.photos/seed/sukuma/600/600" },
@@ -86,7 +86,7 @@ const ALL_PRODUCTS = [
   { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 350, category: "Grocery", image: "/farmfresheggs.jpg" },
   { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "/freshmilk1l.jpg" },
   { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "/localsugar.jpg" },
-  { id: 'g-basket-v2', name: "Season Fruit Pack", price: 600, category: "Grocery", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600" },
+  { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "/wholegrainbread.jpg" },
   { id: 'g-veg-v2', name: "Soup Mix Box", price: 450, category: "Grocery", image: "/greencabbage.jpg" },
 
   // SODAS (16 Items)
@@ -119,9 +119,9 @@ const ALL_PRODUCTS = [
   { id: 'fw-wall-shelf', name: "Kitchen Wall Shelf", price: 5500, category: "Fine Wood Kitchen", image: "/kitchenwallshelf.jpg" },
   { id: 'fw-wood-spoons', name: "Carved Wood Spoons", price: 800, category: "Fine Wood Kitchen", image: "/curvedwoodspoon.jpg" },
   { id: 'fw-tray-v2', name: "Serving Tray XL", price: 2100, category: "Fine Wood Kitchen", image: "/gourmentserving.jpg" },
-  { id: 'fw-mortar-v2', name: "Artisan Mortar", price: 1600, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/mortar/600/600" },
+  { id: 'fw-mortar-v2', name: "Artisan Mortar", price: 1600, category: "Fine Wood Kitchen", image: "/woodenmortaland pestele.jpg" },
   { id: 'fw-pin-v2', name: "Elite Rolling Pin", price: 1100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/rollingpin/600/600" },
-  { id: 'fw-coasters-v2', name: "Artisan Coasters", price: 1200, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/coasters/600/600" },
+  { id: 'fw-coasters-v2', name: "Artisan Coasters", price: 1200, category: "Fine Wood Kitchen", image: "/woodencoaster.jpg" },
   { id: 'fw-set-v2', name: "Kitchen Node Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
   { id: 'fw-block-v2', name: "Magnetic Knife Node", price: 3800, category: "Fine Wood Kitchen", image: "/artisankniveblock.jpg" },
 
