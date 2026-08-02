@@ -18,7 +18,7 @@ export default function ContactPage() {
             </header>
 
             <div className="space-y-8">
-              <ContactLink icon={Phone} title="Call us" value="0722522346" href="tel:0722522346" />
+              <ContactLink icon={Phone} title="Call us" value="0722524141" href="tel:0722524141" />
               <ContactLink icon={Mail} title="Email support" value="Info@steakwestbutchery.co.ke" href="mailto:Info@steakwestbutchery.co.ke" />
               <ContactLink icon={Box} title="Mailing address" value="P. O Box 7144- 00200" />
               <ContactLink icon={MapPin} title="Main node" value="Nairobi West, Nairobi" />

@@ -31,7 +31,7 @@ export default function CheckoutPage({ params }: { params: Promise<{ id: string 
 
   const handleWhatsAppCheckout = () => {
     setLoading(true);
-    const phone = "254722522346";
+    const phone = "254722524141";
     const itemsList = orderItems.map(i => `- ${i.name} (${i.quantity}x)`).join('\n');
     const message = `*STEAK WEST VENDOR ORDER*\n\nVendor: ${restaurant?.name}\n\nItems:\n${itemsList}\n\n*Total: KES ${total.toLocaleString()}*\n\n_Please confirm my order for dispatch._`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');

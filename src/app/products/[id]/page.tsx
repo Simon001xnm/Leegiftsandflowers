@@ -60,7 +60,7 @@ const STATIC_PRODUCTS = [
   { id: 'g-ginger', name: "Ginger Pack", price: 100, category: "Grocery", image: "/gingerpack.jpg", description: "High-potency raw ginger for flavor node enhancement." },
   { id: 'g-avocado', name: "Ripe Avocado", price: 50, category: "Grocery", image: "/ripeavocado.jpg", description: "Perfectly ripe buttery avocado from local farm nodes." },
   { id: 'g-lemons', name: "Lemons Pack", price: 100, category: "Grocery", image: "/lemonspack.jpg", description: "Fresh and juicy lemons for acidity node balancing." },
-  { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 350, category: "Grocery", image: "/farmfresheggs.jpg", description: "Elite-grade farm fresh eggs, delivered in protective dispatch packaging." },
+  { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 550, category: "Grocery", image: "/farmfresheggs.jpg", description: "Elite-grade farm fresh eggs, delivered in protective dispatch packaging." },
   { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "/freshmilk1l.jpg", description: "Pure dairy node output, fresh 1L milk pack." },
   { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "/localsugar.jpg", description: "Pure local cane sugar, 1kg dispatch node." },
   { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "/wholegrainbread.jpg", description: "Soft and nutritious whole grain bread loaf." },
@@ -177,7 +177,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   const handleWhatsAppBuy = () => {
     if (!product) return;
-    const phone = "254722522346";
+    const phone = "254722524141";
     const message = `*INSTANT DISPATCH REQUEST*\n\nHello Steak West! I'd like to order this item immediately:\n\n- ${product.name} (1x)\n*Price:* KES ${product.price.toLocaleString()}\n\n_Please confirm availability for immediate delivery._`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
   };

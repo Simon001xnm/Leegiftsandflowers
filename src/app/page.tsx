@@ -76,7 +76,7 @@ const ALL_PRODUCTS = [
   { id: 'g-ginger', name: "Ginger Pack", price: 100, category: "Grocery", image: "/gingerpack.jpg" },
   { id: 'g-avocado', name: "Ripe Avocado", price: 50, category: "Grocery", image: "/ripeavocado.jpg" },
   { id: 'g-lemons', name: "Lemons Pack", price: 100, category: "Grocery", image: "/lemonspack.jpg" },
-  { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 350, category: "Grocery", image: "/farmfresheggs.jpg" },
+  { id: 'g-eggs', name: "Farm Fresh Eggs 15pk", price: 550, category: "Grocery", image: "/farmfresheggs.jpg" },
   { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "/freshmilk1l.jpg" },
   { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "/localsugar.jpg" },
   { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "/wholegrainbread.jpg" },

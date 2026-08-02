@@ -41,7 +41,7 @@ export default function GlobalCheckoutPage() {
 
   const handleWhatsAppCheckout = () => {
     setLoading(true);
-    const phone = "254722522346";
+    const phone = "254722524141";
     const itemsList = cart.map(i => `- ${i.item.name} (${i.quantity}x @ KES ${i.item.price.toLocaleString()})`).join('\n');
     const message = `*STEAK WEST DISPATCH REQUEST*\n\nHello Steak West! I'd like to place the following order:\n\n${itemsList}\n\n*Subtotal:* KES ${subtotal.toLocaleString()}\n*VAT (16%):* KES ${taxTotal.toLocaleString()}\n*Delivery:* KES ${deliveryFee.toLocaleString()}\n\n*TOTAL: KES ${total.toLocaleString()}*\n\n_Please confirm availability and delivery time._`;
     
