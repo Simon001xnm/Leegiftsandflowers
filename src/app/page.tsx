@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useRef, useEffect } from "react";
@@ -9,15 +10,11 @@ import {
   Utensils, 
   Zap, 
   Coffee, 
-  Smartphone, 
   ChefHat, 
   Tag, 
-  ArrowRight,
-  Play,
-  ShoppingCart
+  ArrowRight
 } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
@@ -128,21 +125,12 @@ export default function HomePage() {
   const [search, setSearch] = useState("");
   const [isMounted, setIsMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const { addToCart } = useCart();
   const { toast } = useToast();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  useEffect(() => {
-    if (isMounted && videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.warn("Autoplay was prevented", error);
-      });
-    }
-  }, [isMounted]);
 
   const handleAdd = (p: any) => {
     addToCart({ 
@@ -166,7 +154,7 @@ export default function HomePage() {
     }
     const el = document.getElementById(id);
     if (el) {
-      const offset = 120; // Reduced offset for compact mobile header
+      const offset = 120;
       const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
@@ -177,8 +165,8 @@ export default function HomePage() {
   return (
     <div className="w-full max-w-full overflow-x-hidden bg-white">
       {/* Promotional Banner Node */}
-      <div className="w-full px-0 mb-4 mt-[60px] md:mt-24">
-        <div className="relative w-full h-[140px] md:h-[320px] lg:h-[400px] rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
+      <div className="w-full px-0 mb-2 mt-[60px] md:mt-24">
+        <div className="relative w-full h-[120px] md:h-[320px] lg:h-[400px] rounded-none overflow-hidden bg-black shadow-2xl group cursor-pointer">
           <Image 
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
             alt="Promotional Banner" 
@@ -190,38 +178,38 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
           
-          <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-16 z-20 w-16 h-16 md:w-48 md:h-48 rounded-full overflow-hidden border-2 md:border-8 border-white shadow-2xl bg-white flex items-center justify-center animate-in zoom-in duration-700 delay-500">
+          <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-16 z-20 w-12 h-12 md:w-48 md:h-48 rounded-full overflow-hidden border-2 md:border-8 border-white shadow-2xl bg-white flex items-center justify-center">
             <Image 
               src="/images (45).jpg" 
               alt="100% Halal Certified" 
               fill 
-              className="object-contain p-1.5 md:p-6"
+              className="object-contain p-1 md:p-6"
             />
           </div>
 
           <div className="absolute inset-0 flex flex-col items-start justify-center p-4 md:p-16 text-left">
-            <div className="inline-flex items-center gap-2 bg-primary text-white px-2 py-0.5 md:px-4 md:py-1.5 rounded-full text-[7px] md:text-[11px] font-black uppercase tracking-widest mb-2 md:mb-4">
+            <div className="inline-flex items-center gap-2 bg-primary text-white px-2 py-0.5 md:px-4 md:py-1.5 rounded-full text-[7px] md:text-[11px] font-black uppercase tracking-widest mb-1 md:mb-4">
               <Tag className="w-2.5 h-2.5 md:w-4 h-4" /> Special Offer
             </div>
-            <h2 className="text-lg md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-2">
+            <h2 className="text-sm md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-1">
               STEAK WEST BUTCHERY
             </h2>
-            <p className="text-[8px] md:text-lg font-bold text-white/70 uppercase tracking-widest flex items-center gap-2">
-              Premium Dispatch <ArrowRight className="w-3 h-3 md:w-5 md:h-5 text-primary" />
+            <p className="text-[7px] md:text-lg font-bold text-white/70 uppercase tracking-widest flex items-center gap-2">
+              Premium Dispatch <ArrowRight className="w-2.5 h-2.5 md:w-5 md:h-5 text-primary" />
             </p>
           </div>
         </div>
       </div>
 
-      {/* Sticky Header Node - Compact 60px height logic applied in Navigation component */}
-      <div className="sticky top-[60px] md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-0 py-2 md:py-6">
-        <div className="w-full mx-auto space-y-3 md:space-y-6 px-3 md:px-6">
+      {/* Sticky Header Node */}
+      <div className="sticky top-[60px] md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-0 py-2">
+        <div className="w-full mx-auto space-y-2 px-3 md:px-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
              <div className="relative flex-grow max-w-none">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 md:w-5 md:h-5 text-gray-400" />
                 <input 
-                  placeholder="Search network..." 
-                  className="w-full h-10 md:h-14 pl-10 pr-4 bg-gray-50 border-none rounded-xl md:rounded-2xl text-[12px] md:text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
+                  placeholder="Search products..." 
+                  className="w-full h-10 md:h-14 pl-10 pr-4 bg-gray-50 border-none rounded-xl text-[12px] md:text-[15px] font-bold outline-none focus:ring-4 focus:ring-primary/5 transition-all"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -242,23 +230,23 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid - Professional Alibaba Sizing */}
-      <div className="w-full mx-auto px-3 md:px-6 mt-4 space-y-8 md:space-y-12 pb-24 overflow-hidden">
+      {/* Main Marketplace Grid - Alibaba High-Density Architecture */}
+      <div className="w-full mx-auto px-3 md:px-6 mt-4 space-y-6 md:space-y-12 pb-24 overflow-hidden">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
 
           return (
             <section key={category.id} id={category.id} className="scroll-mt-32">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-2 mb-3">
-                <h2 className="text-[12px] md:text-[14px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2">
-                  <category.icon className="w-4 h-4 text-primary" /> {category.id}
+              <div className="flex items-center justify-between border-b border-gray-100 pb-1 mb-2">
+                <h2 className="text-[10px] md:text-[14px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-1.5">
+                  <category.icon className="w-3.5 h-3.5 text-primary" /> {category.id}
                 </h2>
-                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
+                <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* BREAKPOINT GRID: 2 Mobile, 3 Large Phone, 4 Tablet, 5 Laptop, 6 Desktop */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
+              {/* SURGICAL DENSITY GRID */}
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-1.5 md:gap-4">
                 {categoryProducts.map((product) => (
                   <div 
                     key={product.id} 
@@ -295,9 +283,9 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   };
 
   return (
-    <div className="w-full h-[220px] sm:h-auto flex flex-col group cursor-pointer overflow-hidden rounded-[12px] bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-      {/* FIXED 120PX IMAGE NODE ON MOBILE */}
-      <div className="h-[120px] md:aspect-square md:h-auto relative bg-gray-50 overflow-hidden shrink-0">
+    <div className="w-full h-[165px] sm:h-[170px] md:h-[180px] lg:h-[220px] xl:h-[250px] flex flex-col group cursor-pointer overflow-hidden rounded-[12px] bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+      {/* SURGICAL IMAGE NODE: 90px on mobile, proportional on larger */}
+      <div className="h-[90px] sm:h-[95px] md:h-[100px] lg:h-[130px] xl:h-[150px] relative bg-gray-50 overflow-hidden shrink-0">
         <Image 
           src={getSafeUrl(product.image)} 
           alt={product.name} 
@@ -308,35 +296,29 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
           unoptimized={true} 
         />
         {product.isHalal && (
-          <div className="absolute top-1.5 left-1.5 z-10 w-5 h-5 rounded-full overflow-hidden border border-white shadow-sm bg-white">
+          <div className="absolute top-1 left-1 z-10 w-4 h-4 rounded-full overflow-hidden border border-white shadow-sm bg-white">
             <Image src="/images (45).jpg" alt="Halal" fill className="object-contain p-0.5" />
           </div>
         )}
         
-        {/* COMPACT 44PX TOUCH TARGET BUTTON */}
+        {/* COMPACT 32PX INTERACTION NODE */}
         <button 
           onClick={onAdd} 
-          className="absolute bottom-2 right-2 w-[36px] h-[36px] md:w-11 md:h-11 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100"
+          className="absolute bottom-1.5 right-1.5 w-8 h-8 md:w-10 md:h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100"
         >
-          <Plus className="w-4 h-4 md:w-5 md:h-5 stroke-[3px]" />
+          <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
 
-      <div className="p-2 md:p-3 flex-grow flex flex-col justify-between space-y-1 min-w-0">
-        <div className="space-y-0.5 min-w-0">
-          <p className="text-[11px] md:text-[12px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">
-            {product.category}
-          </p>
-          <h4 className="text-[13px] md:text-[14px] font-semibold text-black tracking-tight leading-snug line-clamp-2 min-h-[32px] md:min-h-[40px]">
-            {product.name}
-          </h4>
-        </div>
-        <div className="flex items-center justify-between min-w-0">
-          <p className="text-[16px] md:text-[18px] font-black text-black whitespace-nowrap">
-            <span className="text-[10px] md:text-[12px] font-bold text-gray-400 mr-0.5">KES</span>
-            {product.price.toLocaleString()}
-          </p>
-        </div>
+      {/* LEFT-ALIGNED TEXT NODE: No Category waste, maximum density */}
+      <div className="p-[6px] md:p-3 flex-grow flex flex-col justify-start space-y-0.5 min-w-0 text-left">
+        <h4 className="text-[12px] md:text-[13px] font-semibold text-black tracking-tight leading-[1.2] line-clamp-2 min-h-[28px] uppercase">
+          {product.name}
+        </h4>
+        <p className="text-[15px] md:text-[16px] font-bold text-black whitespace-nowrap mt-auto">
+          <span className="text-[9px] md:text-[11px] font-bold text-gray-400 mr-0.5">KES</span>
+          {product.price.toLocaleString()}
+        </p>
       </div>
     </div>
   );
