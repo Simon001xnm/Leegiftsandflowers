@@ -29,7 +29,6 @@ const CATEGORIES = [
   { id: 'Grocery', icon: ShoppingBag, label: "Grocery" },
   { id: 'Sodas', icon: Coffee, label: "Sodas" },
   { id: 'Fine Wood Kitchen', icon: ChefHat, label: "Fine Wood" },
-  { id: 'Phone Accessories', icon: Smartphone, label: "Phones" },
 ];
 
 const ALL_PRODUCTS = [
@@ -122,24 +121,6 @@ const ALL_PRODUCTS = [
   { id: 'fw-coasters-v2', name: "Artisan Coasters", price: 1200, category: "Fine Wood Kitchen", image: "/woodencoaster.jpg" },
   { id: 'fw-set-v2', name: "Kitchen Node Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg" },
   { id: 'fw-block-v2', name: "Magnetic Knife Node", price: 3800, category: "Fine Wood Kitchen", image: "/artisankniveblock.jpg" },
-
-  // PHONE ACCESSORIES (16 Items)
-  { id: 'ph-cable', name: "Ultra-Sync Data Cable", price: 800, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600" },
-  { id: 'ph-earbuds', name: "Wireless Earbuds HD", price: 4500, category: "Phone Accessories", image: "https://picsum.photos/seed/earbuds/600/600" },
-  { id: 'ph-case', name: "Titanium Phone Case", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/case/600/600" },
-  { id: 'ph-mount', name: "Magnetic Car Mount", price: 1500, category: "Phone Accessories", image: "https://picsum.photos/seed/mount/600/600" },
-  { id: 'ph-screen-guard', name: "Universal Screen Guard", price: 500, category: "Phone Accessories", image: "https://picsum.photos/seed/guard/600/600" },
-  { id: 'ph-charger', name: "Travel Fast Charger", price: 2200, category: "Phone Accessories", image: "https://picsum.photos/seed/charger/600/600" },
-  { id: 'ph-node-v2', name: "Elite Docking Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg" },
-  { id: 'ph-power-v2', name: "Titan Powerbank 20k", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg" },
-  { id: 'ph-privacy-v2', name: "Privacy Guard XL", price: 1100, category: "Phone Accessories", image: "https://picsum.photos/seed/privacy/600/600" },
-  { id: 'ph-stick-v2', name: "Pro Selfie Node", price: 1800, category: "Phone Accessories", image: "https://picsum.photos/seed/selfie/600/600" },
-  { id: 'ph-stand-v2', name: "Desktop Node Stand", price: 1400, category: "Phone Accessories", image: "https://picsum.photos/seed/deskstand/600/600" },
-  { id: 'ph-vr-v2', name: "HD Mobile VR Node", price: 6500, category: "Phone Accessories", image: "https://picsum.photos/seed/vr/600/600" },
-  { id: 'ph-strap-v2', name: "Sport Watch Node", price: 900, category: "Phone Accessories", image: "https://picsum.photos/seed/watchstrap/600/600" },
-  { id: 'ph-tablet-v2', name: "Rugged Tablet Node", price: 2500, category: "Phone Accessories", image: "https://picsum.photos/seed/tabletcase/600/600" },
-  { id: 'ph-kb-v2', name: "Wireless Data Node", price: 4200, category: "Phone Accessories", image: "https://picsum.photos/seed/keyboard/600/600" },
-  { id: 'ph-pad-v2', name: "Precision Surface Node", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/mousepad/600/600" },
 ];
 
 export default function HomePage() {
@@ -232,7 +213,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Sticky Header Node - Compact 60px height logic applied in Navigation component, here we align content */}
+      {/* Sticky Header Node - Compact 60px height logic applied in Navigation component */}
       <div className="sticky top-[60px] md:top-24 z-30 bg-white/95 backdrop-blur-xl border-b px-0 py-2 md:py-6">
         <div className="w-full mx-auto space-y-3 md:space-y-6 px-3 md:px-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">

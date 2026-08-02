@@ -1,4 +1,3 @@
-
 'use client';
 
 import { use, useEffect, useState } from "react";
@@ -97,29 +96,11 @@ const STATIC_PRODUCTS = [
   { id: 'fw-wall-shelf', name: "Kitchen Wall Shelf", price: 5500, category: "Fine Wood Kitchen", image: "/kitchenwallshelf.jpg", description: "Solid wood wall shelf for inventory node display." },
   { id: 'fw-wood-spoons', name: "Carved Wood Spoons", price: 800, category: "Fine Wood Kitchen", image: "/curvedwoodspoon.jpg", description: "Set of 3 uniquely carved wooden spoons." },
   { id: 'fw-tray-v2', name: "Serving Tray XL", price: 2100, category: "Fine Wood Kitchen", image: "/gourmentserving.jpg", description: "Large wood serving tray for elite hospitality dispatch." },
-  { id: 'fw-mortar-v2', name: "Artisan Mortar", price: 1600, category: "Fine Wood Kitchen", image: "/woodenmortaland pestele.jpg", description: "Traditional wood mortar and pestle for artisanal spice grinding." },
+  { id: 'fw-mortar-v2', name: "Artisan Mortar", price: 1600, category: "Fine Wood Kitchen", image: "/woodenmortaland pestele.jpg", description: "Artisan wood mortar and pestle for artisanal spice grinding." },
   { id: 'fw-pin-v2', name: "Elite Rolling Pin", price: 1100, category: "Fine Wood Kitchen", image: "https://picsum.photos/seed/rollingpin/600/600", description: "Smooth wood rolling pin for precision dough node manipulation." },
   { id: 'fw-coasters-v2', name: "Artisan Coasters", price: 1200, category: "Fine Wood Kitchen", image: "/woodencoaster.jpg", description: "Set of 4 artisan wood coasters, protecting your nodes with style." },
   { id: 'fw-set-v2', name: "Kitchen Node Set", price: 3100, category: "Fine Wood Kitchen", image: "/kitchen3.jpg", description: "Elite gourmet kitchen tools, expertly crafted from premium wood nodes." },
   { id: 'fw-block-v2', name: "Magnetic Knife Node", price: 3800, category: "Fine Wood Kitchen", image: "/artisankniveblock.jpg", description: "Safe and stylish storage for your high-performance culinary blades." },
-
-  // PHONES & ACCESSORIES (16 Items)
-  { id: 'ph-cable', name: "Ultra-Sync Data Cable", price: 800, category: "Phone Accessories", image: "https://picsum.photos/seed/cable/600/600", description: "High-speed USB-C data and charging cable. Reinforced fiber for maximum node durability." },
-  { id: 'ph-earbuds', name: "Wireless Earbuds HD", price: 4500, category: "Phone Accessories", image: "https://picsum.photos/seed/earbuds/600/600", description: "Premium wireless earbuds with active noise cancellation and elite audio clarity." },
-  { id: 'ph-case', name: "Titanium Phone Case", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/case/600/600", description: "Ultra-slim titanium-grade protective case. Shockproof engineering for the elite mobile operator." },
-  { id: 'ph-mount', name: "Magnetic Car Mount", price: 1500, category: "Phone Accessories", image: "https://picsum.photos/seed/mount/600/600", description: "Powerful magnetic car mount for secure hands-free navigation during dispatch." },
-  { id: 'ph-screen-guard', name: "Universal Screen Guard", price: 500, category: "Phone Accessories", image: "https://picsum.photos/seed/guard/600/600", description: "High-clarity tempered glass screen protector. Oleophobic coating for smudge-free operation." },
-  { id: 'ph-charger', name: "Travel Fast Charger", price: 2200, category: "Phone Accessories", image: "https://picsum.photos/seed/charger/600/600", description: "Compact 65W fast charger node. Dual-port support for simultaneous device synchronization." },
-  { id: 'ph-node-v2', name: "Elite Docking Node", price: 3500, category: "Phone Accessories", image: "/phoneaccessories.jpg", description: "Premium selection of high-clarity phone accessories, curated for the modern digital workspace." },
-  { id: 'ph-power-v2', name: "Titan Powerbank 20k", price: 5500, category: "Phone Accessories", image: "/powerbank.jpg", description: "High-capacity elite powerbank for sustained mobile node endurance. Rapid dispatch ready." },
-  { id: 'ph-privacy-v2', name: "Privacy Screen Filter", price: 1100, category: "Phone Accessories", image: "https://picsum.photos/seed/privacy/600/600", description: "Specialized screen filter to protect your sensitive data nodes from lateral viewing." },
-  { id: 'ph-stick-v2', name: "Bluetooth Selfie Stick", price: 1800, category: "Phone Accessories", image: "https://picsum.photos/seed/selfie/600/600", description: "Extendable Bluetooth selfie stick for elite content node capture." },
-  { id: 'ph-stand-v2', name: "Aluminum Desk Stand", price: 1400, category: "Phone Accessories", image: "https://picsum.photos/seed/deskstand/600/600", description: "Premium aluminum stand for stable mobile node positioning." },
-  { id: 'ph-vr-v2', name: "Mobile VR Headset", price: 6500, category: "Phone Accessories", image: "https://picsum.photos/seed/vr/600/600", description: "Immersive mobile VR headset node for high-fidelity digital synchronization." },
-  { id: 'ph-strap-v2', name: "Sport Watch Strap", price: 900, category: "Phone Accessories", image: "https://picsum.photos/seed/watchstrap/600/600", description: "Durable silicone strap for elite smartwatch node synchronization." },
-  { id: 'ph-tablet-v2', name: "Rugged Tablet Case", price: 2500, category: "Phone Accessories", image: "https://picsum.photos/seed/tabletcase/600/600", description: "Heavy-duty protective case for larger mobile tablet nodes." },
-  { id: 'ph-kb-v2', name: "Wireless Keyboard Node", price: 4200, category: "Phone Accessories", image: "https://picsum.photos/seed/keyboard/600/600", description: "Compact Bluetooth keyboard for rapid mobile data entry dispatch." },
-  { id: 'ph-pad-v2', name: "Gamer Mouse Pad", price: 1200, category: "Phone Accessories", image: "https://picsum.photos/seed/mousepad/600/600", description: "Extra-large tracking surface for precision cursor node movement." },
 ];
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
