@@ -46,7 +46,7 @@ const STATIC_PRODUCTS = [
   { id: 'c-beef-stew', name: "Beef Stew Node", price: 1200, category: "Cooked Meat", image: "/beefsoup.jpg", description: "Rich and hearty beef stew node, slow-cooked with fresh farm vegetables.", isHalal: true },
   { id: 'c-matumbo-dry', name: "Matumbo Dry Fry", price: 900, category: "Cooked Meat", image: "/matumbofry.jpg", description: "Crispy and spiced matumbo dry-fry, a favorite for rapid dispatch snacking.", isHalal: true },
   { id: 'c-mguu-cow', name: "Full Mguu Cow", price: 400, category: "Cooked Meat", image: "/images (46).jpg", description: "Prime boiled cow leg, a high-collagen nutritional node.", isHalal: true },
-  { id: 'c-kichwa-goat', name: "Full Kichwa Goat", price: 800, category: "Cooked Meat", image: "/goatchoma.jpg", description: "Traditional full goat head, expertly prepared at our Nairobi West node.", isHalal: true },
+  { id: 'c-kichwa-goat', name: "Full Kichwa Goat", price: 800, category: "Cooked Meat", image: "/fullkichwagoat.jpg", description: "Traditional full goat head, expertly prepared at our Nairobi West node.", isHalal: true },
   
   // GROCERY (16 Items)
   { id: 'g-onions', name: "Red Onions 1kg", price: 150, category: "Grocery", image: "/redonion.jpg", description: "Fresh farm red onions, sorted for quality." },
