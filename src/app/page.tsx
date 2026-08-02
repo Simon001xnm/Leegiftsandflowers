@@ -77,7 +77,7 @@ const ALL_PRODUCTS = [
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "/freshgarlic.jpg" },
   { id: 'g-cabbage', name: "Green Cabbage", price: 80, category: "Grocery", image: "/greencabbage.jpg" },
   { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "/sukumawiki.jpg" },
-  { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "https://picsum.photos/seed/spinach/600/600" },
+  { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "/sukumawiki.jpg" },
   { id: 'g-carrots', name: "Carrots 1kg", price: 120, category: "Grocery", image: "/carrots1kg.jpg" },
   { id: 'g-potatoes', name: "Potatoes 5kg Bag", price: 650, category: "Grocery", image: "/potatoesraw.jpg" },
   { id: 'g-ginger', name: "Ginger Pack", price: 100, category: "Grocery", image: "/gingerpack.jpg" },
@@ -367,4 +367,3 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
     </div>
   );
 }
-

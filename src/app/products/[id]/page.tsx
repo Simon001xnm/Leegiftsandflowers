@@ -55,7 +55,7 @@ const STATIC_PRODUCTS = [
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "/freshgarlic.jpg", description: "Pungent and high-quality garlic bulbs." },
   { id: 'g-cabbage', name: "Green Cabbage", price: 80, category: "Grocery", image: "/greencabbage.jpg", description: "Freshly harvested green cabbage from the central grocery node." },
   { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "/sukumawiki.jpg", description: "Premium pre-cut sukuma wiki (kale) for rapid kitchen preparation." },
-  { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "https://picsum.photos/seed/spinach/600/600", description: "Vibrant green spinach leaves, washed and ready for culinary dispatch." },
+  { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "/sukumawiki.jpg", description: "Vibrant green spinach leaves, washed and ready for culinary dispatch." },
   { id: 'g-carrots', name: "Carrots 1kg", price: 120, category: "Grocery", image: "/carrots1kg.jpg", description: "Sweet and crunchy farm-fresh carrots." },
   { id: 'g-potatoes', name: "Potatoes 5kg Bag", price: 650, category: "Grocery", image: "/potatoesraw.jpg", description: "Large 5kg bag of premium white potatoes, ideal for large household sync." },
   { id: 'g-ginger', name: "Ginger Pack", price: 100, category: "Grocery", image: "/gingerpack.jpg", description: "High-potency raw ginger for flavor node enhancement." },
