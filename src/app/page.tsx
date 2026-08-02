@@ -76,7 +76,7 @@ const ALL_PRODUCTS = [
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "/freshtomatoes.jpg" },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "/freshgarlic.jpg" },
   { id: 'g-cabbage', name: "Green Cabbage", price: 80, category: "Grocery", image: "/greencabbage.jpg" },
-  { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "https://picsum.photos/seed/sukuma/600/600" },
+  { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "/sukumawiki.jpg" },
   { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "https://picsum.photos/seed/spinach/600/600" },
   { id: 'g-carrots', name: "Carrots 1kg", price: 120, category: "Grocery", image: "/carrots1kg.jpg" },
   { id: 'g-potatoes', name: "Potatoes 5kg Bag", price: 650, category: "Grocery", image: "/potatoesraw.jpg" },
@@ -87,7 +87,7 @@ const ALL_PRODUCTS = [
   { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "/freshmilk1l.jpg" },
   { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "/localsugar.jpg" },
   { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "/wholegrainbread.jpg" },
-  { id: 'g-veg-v2', name: "Soup Mix Box", price: 450, category: "Grocery", image: "/greencabbage.jpg" },
+  { id: 'g-veg-v2', name: "Cabbage", price: 450, category: "Grocery", image: "/greencabbage.jpg" },
 
   // SODAS (16 Items)
   { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/images (54).jpg", isHalal: true },
@@ -368,3 +368,4 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
     </div>
   );
 }
+

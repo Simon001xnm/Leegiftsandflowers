@@ -54,7 +54,7 @@ const STATIC_PRODUCTS = [
   { id: 'g-tomatoes', name: "Fresh Tomatoes 1kg", price: 200, category: "Grocery", image: "/freshtomatoes.jpg", description: "Grade A tomatoes, picked fresh from the fields." },
   { id: 'g-garlic', name: "Garlic Pack", price: 100, category: "Grocery", image: "/freshgarlic.jpg", description: "Pungent and high-quality garlic bulbs." },
   { id: 'g-cabbage', name: "Green Cabbage", price: 80, category: "Grocery", image: "/greencabbage.jpg", description: "Freshly harvested green cabbage from the central grocery node." },
-  { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "https://picsum.photos/seed/sukuma/600/600", description: "Premium pre-cut sukuma wiki (kale) for rapid kitchen preparation." },
+  { id: 'g-sukuma', name: "Sukuma Wiki", price: 50, category: "Grocery", image: "/sukumawiki.jpg", description: "Premium pre-cut sukuma wiki (kale) for rapid kitchen preparation." },
   { id: 'g-spinach', name: "Fresh Spinach", price: 60, category: "Grocery", image: "https://picsum.photos/seed/spinach/600/600", description: "Vibrant green spinach leaves, washed and ready for culinary dispatch." },
   { id: 'g-carrots', name: "Carrots 1kg", price: 120, category: "Grocery", image: "/carrots1kg.jpg", description: "Sweet and crunchy farm-fresh carrots." },
   { id: 'g-potatoes', name: "Potatoes 5kg Bag", price: 650, category: "Grocery", image: "/potatoesraw.jpg", description: "Large 5kg bag of premium white potatoes, ideal for large household sync." },
@@ -65,7 +65,7 @@ const STATIC_PRODUCTS = [
   { id: 'g-milk', name: "Fresh Milk 1L", price: 100, category: "Grocery", image: "/freshmilk1l.jpg", description: "Pure dairy node output, fresh 1L milk pack." },
   { id: 'g-sugar', name: "Local Sugar 1kg", price: 180, category: "Grocery", image: "/localsugar.jpg", description: "Pure local cane sugar, 1kg dispatch node." },
   { id: 'g-bread', name: "Whole Grain Bread", price: 85, category: "Grocery", image: "/wholegrainbread.jpg", description: "Soft and nutritious whole grain bread loaf." },
-  { id: 'g-veg-v2', name: "Soup Mix Box", price: 450, category: "Grocery", image: "/greencabbage.jpg", description: "Assorted seasonal vegetables for soup node preparation." },
+  { id: 'g-veg-v2', name: "Cabbage", price: 450, category: "Grocery", image: "/greencabbage.jpg", description: "Freshly harvested whole cabbage node." },
   
   // SODAS (16 Items)
   { id: 'd1-coke-150', name: "Coca-Cola Take Away", price: 150, category: "Sodas", image: "/images (54).jpg", description: "Chilled Coca-Cola take away bottle.", isHalal: true },
