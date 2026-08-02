@@ -171,10 +171,10 @@ export default function HomePage() {
             src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=2000" 
             alt="Promotional Banner" 
             fill 
-            className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
-            priority
-            data-ai-hint="grilling meat"
-            unoptimized={true}
+            className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105" 
+            priority 
+            data-ai-hint="grilling meat" 
+            unoptimized={true} 
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80" />
           
@@ -230,23 +230,23 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Marketplace Grid - Alibaba High-Density Architecture */}
-      <div className="w-full mx-auto px-3 md:px-6 mt-4 space-y-6 md:space-y-12 pb-24 overflow-hidden">
+      {/* Main Marketplace Grid - ALIBABA EXTREME DENSITY ARCHITECTURE (5 COL MOBILE) */}
+      <div className="w-full mx-auto px-1 md:px-6 mt-4 space-y-4 md:space-y-12 pb-24 overflow-hidden">
         {CATEGORIES.map((category) => {
           const categoryProducts = ALL_PRODUCTS.filter(p => p.category === category.id && p.name.toLowerCase().includes(search.toLowerCase()));
           if (categoryProducts.length === 0) return null;
 
           return (
             <section key={category.id} id={category.id} className="scroll-mt-32">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-1 mb-2">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-1 mb-2 px-2 md:px-0">
                 <h2 className="text-[10px] md:text-[14px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-1.5">
                   <category.icon className="w-3.5 h-3.5 text-primary" /> {category.id}
                 </h2>
                 <span className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{categoryProducts.length} Items</span>
               </div>
               
-              {/* SURGICAL DENSITY GRID */}
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-1.5 md:gap-4">
+              {/* EXTREME DENSITY GRID: 5 COL MOBILE, 6 COL TABLET, 10 COL DESKTOP */}
+              <div className="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-[2px] md:gap-4">
                 {categoryProducts.map((product) => (
                   <div 
                     key={product.id} 
@@ -283,40 +283,40 @@ function ProductCard({ product, onAdd }: { product: any, onAdd: (e: React.MouseE
   };
 
   return (
-    <div className="w-full h-[165px] sm:h-[170px] md:h-[180px] lg:h-[220px] xl:h-[250px] flex flex-col group cursor-pointer overflow-hidden rounded-[12px] bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
-      {/* SURGICAL IMAGE NODE: 90px on mobile, proportional on larger */}
-      <div className="h-[90px] sm:h-[95px] md:h-[100px] lg:h-[130px] xl:h-[150px] relative bg-gray-50 overflow-hidden shrink-0">
+    <div className="w-full h-[115px] md:h-[220px] lg:h-[250px] flex flex-col group cursor-pointer overflow-hidden rounded-[4px] md:rounded-[12px] bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+      {/* EXTREME DENSITY IMAGE NODE: 60px on mobile */}
+      <div className="h-[60px] md:h-[130px] lg:h-[150px] relative bg-gray-50 overflow-hidden shrink-0">
         <Image 
           src={getSafeUrl(product.image)} 
           alt={product.name} 
           fill 
           className="object-cover transition-transform duration-700 group-hover:scale-105" 
-          sizes="(max-width: 576px) 50vw, (max-width: 1024px) 25vw, 16vw" 
+          sizes="(max-width: 480px) 20vw, (max-width: 1024px) 16vw, 10vw" 
           quality={80} 
           unoptimized={true} 
         />
         {product.isHalal && (
-          <div className="absolute top-1 left-1 z-10 w-4 h-4 rounded-full overflow-hidden border border-white shadow-sm bg-white">
+          <div className="absolute top-0.5 left-0.5 z-10 w-2.5 h-2.5 md:w-4 md:h-4 rounded-full overflow-hidden border border-white shadow-sm bg-white">
             <Image src="/images (45).jpg" alt="Halal" fill className="object-contain p-0.5" />
           </div>
         )}
         
-        {/* COMPACT 32PX INTERACTION NODE */}
+        {/* SURGICAL INTERACTION NODE: 20px on mobile */}
         <button 
           onClick={onAdd} 
-          className="absolute bottom-1.5 right-1.5 w-8 h-8 md:w-10 md:h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100"
+          className="absolute bottom-1 right-1 w-5 h-5 md:w-10 md:h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center text-primary shadow-lg transition-all z-20 active:scale-90 border border-gray-100"
         >
-          <Plus className="w-3.5 h-3.5 md:w-5 md:h-5 stroke-[3px]" />
+          <Plus className="w-2.5 h-2.5 md:w-5 md:h-5 stroke-[3px]" />
         </button>
       </div>
 
-      {/* LEFT-ALIGNED TEXT NODE: No Category waste, maximum density */}
-      <div className="p-[6px] md:p-3 flex-grow flex flex-col justify-start space-y-0.5 min-w-0 text-left">
-        <h4 className="text-[12px] md:text-[13px] font-semibold text-black tracking-tight leading-[1.2] line-clamp-2 min-h-[28px] uppercase">
+      {/* LEFT-ALIGNED TEXT NODE: Extreme scaling for 5-col mobile */}
+      <div className="p-[2px] md:p-3 flex-grow flex flex-col justify-start space-y-0 min-w-0 text-left">
+        <h4 className="text-[8px] md:text-[13px] font-semibold text-black tracking-tight leading-tight line-clamp-2 min-h-[20px] md:min-h-[28px] uppercase">
           {product.name}
         </h4>
-        <p className="text-[15px] md:text-[16px] font-bold text-black whitespace-nowrap mt-auto">
-          <span className="text-[9px] md:text-[11px] font-bold text-gray-400 mr-0.5">KES</span>
+        <p className="text-[10px] md:text-[16px] font-bold text-black whitespace-nowrap mt-auto">
+          <span className="text-[7px] md:text-[11px] font-bold text-gray-400 mr-0.5">KES</span>
           {product.price.toLocaleString()}
         </p>
       </div>
