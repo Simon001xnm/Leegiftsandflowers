@@ -13,6 +13,7 @@ import { createClient } from '@/lib/supabase/client';
  * PRODUCTION-READY ROLE-BASED LAYOUT
  * Orchestrates navigation based on real Supabase roles.
  * Updated: Reduced bottom padding on mobile to optimize vertical efficiency.
+ * Removed top-padding from main for the new sticky nav height logic.
  */
 export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -43,7 +44,7 @@ export function AppLayoutWrapper({ children }: { children: React.ReactNode }) {
       <div className="flex flex-grow relative">
         {showSidebar && <SidebarNav />}
         <main className={cn(
-          "flex flex-grow transition-all duration-300 pb-16 md:pb-0", // Reduced global mobile bottom inset
+          "flex flex-grow transition-all duration-300 pb-16 md:pb-0", 
           showSidebar ? "lg:ml-64" : "ml-0"
         )}>
           {children}

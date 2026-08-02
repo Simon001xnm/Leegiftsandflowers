@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -12,8 +11,8 @@ import { cn } from "@/lib/utils";
 import { InstallAppButton } from "./InstallAppButton";
 
 /**
- * Unified sticky navigation
- * Logo and container optimized for mobile viewport constraints.
+ * ELITE TERMINAL NAVIGATION
+ * Height locked to 60px on mobile to maximize retail view.
  */
 export function Navigation() {
   const { itemCount } = useCart();
@@ -30,15 +29,15 @@ export function Navigation() {
 
   return (
     <nav className={cn(
-      "fixed top-0 z-50 w-full transition-all duration-500 h-20 md:h-24 flex items-center justify-between px-4 md:px-8 border-b",
+      "fixed top-0 z-50 w-full transition-all duration-500 h-[60px] md:h-24 flex items-center justify-between px-3 md:px-8 border-b",
       isScrolled 
         ? "bg-white/95 backdrop-blur-xl border-gray-100 shadow-lg" 
         : "bg-white border-transparent"
     )}>
       {/* Responsive Logo & Nav Node */}
-      <div className="flex items-center gap-4 lg:gap-10">
+      <div className="flex items-center gap-2 lg:gap-10">
         <Link href="/" className="flex items-center shrink-0">
-          <div className="relative h-10 w-40 md:h-16 md:w-64 lg:w-80">
+          <div className="relative h-8 w-32 md:h-16 md:w-64 lg:w-80">
             <Image 
               src="/WhatsApp_Image_2026-07-22_at_10.09.53-removebg-preview.png" 
               alt="Steak West Butchery" 
@@ -66,25 +65,25 @@ export function Navigation() {
         </div>
       </div>
 
-      <div className="flex items-center gap-3 md:gap-6">
-        <Link href="/checkout" className="relative p-2 text-black hover:text-red-600 transition-colors group">
+      <div className="flex items-center gap-2 md:gap-6">
+        <Link href="/checkout" className="relative p-1.5 md:p-2 text-black hover:text-red-600 transition-colors group">
           <ShoppingCart className="w-5 h-5 md:w-6 h-6 group-hover:scale-110 transition-transform" />
           {itemCount > 0 && (
-            <span className="absolute top-0 right-0 bg-red-600 text-white text-[9px] font-bold w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center border-2 border-white animate-in zoom-in">
+            <span className="absolute top-0 right-0 bg-red-600 text-white text-[8px] md:text-[9px] font-bold w-3.5 h-3.5 md:w-5 md:h-5 rounded-full flex items-center justify-center border-2 border-white animate-in zoom-in">
               {itemCount}
             </span>
           )}
         </Link>
 
         <Link href={user ? "/profile" : "/login"}>
-          <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white rounded-full px-4 md:px-8 h-9 md:h-10 font-bold text-[10px] md:text-[12px] shadow-xl shadow-red-600/20 transition-all active:scale-95">
+          <Button variant="default" className="bg-red-600 hover:bg-red-700 text-white rounded-full px-3 md:px-8 h-8 md:h-10 font-bold text-[9px] md:text-[12px] shadow-xl shadow-red-600/20 transition-all active:scale-95">
             {user ? (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <User className="w-3 h-3 md:w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Account</span>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <LogIn className="w-3 h-3 md:w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Authorize</span>
               </div>
