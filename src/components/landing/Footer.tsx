@@ -13,7 +13,7 @@ export function Footer() {
     <footer className="relative w-full bg-black overflow-hidden">
       <div className="relative w-full h-[100px] md:h-[250px] lg:h-[350px]">
         <Image 
-          src="/footer.jpeg" 
+          src="/footerf.jpeg" 
           alt="Steak West Terminal Dispatch" 
           fill 
           className="object-cover object-center"
